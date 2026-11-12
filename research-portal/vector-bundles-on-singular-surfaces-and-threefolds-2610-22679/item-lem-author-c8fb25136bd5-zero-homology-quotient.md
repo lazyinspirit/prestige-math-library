@@ -2,7 +2,7 @@
 title: The degree-zero homology quotient
 status: published
 research_item: lem-author-c8fb25136bd5-zero-homology-quotient
-dependency_level: 6
+dependency_level: 7
 ---
 
 PDF p. 13: CH3 identification and degree seven vanishing
@@ -12,6 +12,7 @@ PDF p. 13: CH3 identification and degree seven vanishing
 - [def-bloch-higher-cycle-complex](item-def-bloch-higher-cycle-complex)
 - [lem-author-c8fb25136bd5-degree-zero-cycles](item-lem-author-c8fb25136bd5-degree-zero-cycles)
 - [lem-author-c8fb25136bd5-one-boundaries](item-lem-author-c8fb25136bd5-one-boundaries)
+
 
 ## Statement
 Under the hypotheses of [lem-author-c8fb25136bd5-degree-zero-cycles](item-lem-author-c8fb25136bd5-degree-zero-cycles), there is a canonical identification $H_0z^r(X,\bullet)=Z^r(X)/B^r(X)$, where $B^r(X)$ is the subgroup in [lem-author-c8fb25136bd5-one-boundaries](item-lem-author-c8fb25136bd5-one-boundaries).

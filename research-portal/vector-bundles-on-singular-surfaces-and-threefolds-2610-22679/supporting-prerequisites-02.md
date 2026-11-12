@@ -3,13 +3,77 @@ title: Supporting prerequisites · 02 — Exact objectwise cofiber bound for the
   canonical source composite
 description: Presents 28 supporting prerequisites, covering dependency levels 1–11.
 status: published
-dependency_level: 11
-item_count: 28
+dependency_level: 4
+item_count: 26
 ---
 
-## Exact objectwise cofiber bound for the canonical source composite
+## The normalized class detects the actual Picard-space map on smooth schemes
 
-[Open item](item-thm-author-e71ff76fe904-objectwise-range-input) · level 1
+[Open item](item-lem-adjudicate-6e70d30b9793-picard-map-detection) · level 1
+
+## Classical and derived smooth Zariski sites over a classical base
+
+[Open item](item-lem-adjudicate-7e43085ab36e-classical-smooth-site) · level 1
+
+## Derived free sheaf chains and unbounded Eilenberg targets
+
+[Open item](item-lem-adjudicate-992e776cd750-sheaf-chain-adjunction) · level 1
+
+## Truncation and closure of the native derived smooth Zariski site
+
+[Open item](item-lem-adjudicate-cc64bae62648-derived-zariski-site-closure) · level 1
+
+## Derived finite coefficients preserve mapping cones
+
+[Open item](item-lem-author-4b6f215bcf3b-quotient-cofiber) · level 1
+
+## Integer multiplication on rational complexes
+
+[Open item](item-lem-author-4b6f215bcf3b-rational-complex-multiplication) · level 1
+
+## Affine bundle classes are actual projective-module classes
+
+[Open item](item-lem-author-7dc5154c7a6f-module-classes) · level 1
+
+## A torsion kernel in a uniquely divisible group vanishes
+
+[Open item](item-lem-author-b87d598e83f3-torsion-kernel-injective) · level 1
+
+## Affine bundle classes are actual projective-module classes
+
+[Open item](item-lem-author-f08c343a07fc-cancel-module-classes) · level 1
+
+## Local simplicial sheaf and additive chain model interfaces
+
+[Open item](item-thm-adjudicate-8ea8635dc870-local-linear-model-input) · level 1
+
+## External symmetric P¹ model, orientation criterion and fundamental stabilization
+
+[Open item](item-thm-author-32887006bdff-p1-spectrum-input) · level 1
+
+## External non-A¹ projective-relation filtered and Whitney theorem
+
+[Open item](item-thm-author-4f94f7982b0d-non-a1-whitney-input) · level 1
+
+## Exact linear hyperdescent and derived-localization input
+
+[Open item](item-thm-author-58e57d689702-linear-hyperdescent-input) · level 1
+
+## Exact linear hyperdescent and derived-localization input
+
+[Open item](item-thm-author-7113c087ecba-linear-input) · level 1
+
+## Exact valuation inputs for the topology comparison
+
+[Open item](item-thm-author-7113c087ecba-valuative-input) · level 1
+
+## Classical-base comparison of the native smooth site and bundle constructions
+
+[Open item](item-lem-adjudicate-a0c3ec58d5af-classical-smooth-site) · level 2
+
+## Compactness of the smooth Zariski stack coefficients
+
+[Open item](item-lem-adjudicate-ac7b69b92374-zariski-coefficient-compactness) · level 2
 
 ## Finite derived quotients of rational complexes vanish
 
@@ -31,90 +95,18 @@ item_count: 28
 
 [Open item](item-lem-author-f08c343a07fc-cancel-module-stabilization) · level 2
 
+## External non-A¹ projective-relation filtered and Whitney theorem
+
+[Open item](item-thm-author-32887006bdff-non-a1-whitney-input) · level 2
+
+## Cochain shifts preserve coherent limits and colimits
+
+[Open item](item-lem-adjudicate-b9c9b8f0a8b2-coherent-cochain-shifts) · level 4
+
 ## Cofiber bounds imply low-degree cohomology isomorphisms
 
 [Open item](item-lem-author-13e6fe931c45-cone-low-degrees) · level 4
 
-## External dimension criterion for a cdh-acyclic Nisnevich sheaf
+## External spectral pairings and the integer sphere-interchange sign
 
-[Open item](item-thm-author-0bac6b264f4a-motivic-dim-dimension-criterion-input) · level 4
-
-## Exact range of a cofiber connectivity bound
-
-[Open item](item-lem-author-13e6fe931c45-cone-exact-range) · level 5
-
-## Perfect determinant with true-triangle additivity: precise external input
-
-[Open item](item-thm-adjudicate-a8dfc5e2f7fe-perfect-determinant-true-triangle-input) · level 5
-
-## A sheaf restricts injectively to a covering singleton
-
-[Open item](item-lem-author-60d95bfb692a-cover-restriction-injective) · level 6
-
-## External valuative dimension comparison on locally Noetherian schemes
-
-[Open item](item-thm-author-0cc80c1b5792-valuation-input) · level 6
-
-## Completely decomposed proper maps are abstract-blowup covers
-
-[Open item](item-lem-adjudicate-57a7caabd963-cdp-abstract-generation) · level 8
-
-## Finite subintegral maps are cdh covers
-
-[Open item](item-lem-author-60d95bfb692a-finite-subintegral-cdh-cover) · level 8
-
-## External prime-field cdh comparison and cdh dimension bound
-
-[Open item](item-thm-author-0bac6b264f4a-motivic-dim-cdh-interface-input) · level 8
-
-## Flag detection over an arbitrary field by prime-field restriction
-
-[Open item](item-lem-adjudicate-6cf37231df39-arbitrary-field-flag-detection) · level 9
-
-## The diagonal of a finite subintegral map is a cdh cover
-
-[Open item](item-lem-author-60d95bfb692a-subintegral-diagonal-cover) · level 9
-
-## External geometric properties of the actual motivic comparison fiber
-
-[Open item](item-thm-author-0bac6b264f4a-motivic-dim-relative-package-input) · level 9
-
-## Exact natural regular motivic-to-cdh comparison
-
-[Open item](item-thm-author-149a02132c3b-em-regular-input) · level 9
-
-## External EM multiplicative motivic complexes and actual Chern map
-
-[Open item](item-thm-author-79117e1d72ed-em-multiplication-c1) · level 9
-
-## Exact natural regular motivic-to-cdh comparison
-
-[Open item](item-thm-author-8a080e7d9445-em-regular-input) · level 9
-
-## External EM affine syntomic filtration and actual obstruction map
-
-[Open item](item-thm-author-c5b0693f4fc3-top-torsion-em-syntomic) · level 9
-
-## Sections match across a finite subintegral cover
-
-[Open item](item-lem-author-60d95bfb692a-subintegral-matching) · level 10
-
-## Affine characteristic-p syntomic amplitude without regularity
-
-[Open item](item-lem-author-c5b0693f4fc3-top-torsion-syntomic-bound) · level 10
-
-## Exact arbitrary-field open-natural classical cycle interface
-
-[Open item](item-thm-author-149a02132c3b-open-natural-classical-input) · level 10
-
-## External EM projective bundle equivalence with its specified components
-
-[Open item](item-thm-author-79117e1d72ed-em-complex-pbf) · level 10
-
-## Fixed-site classical cycle comparison on every smooth ambient
-
-[Open item](item-thm-author-8a080e7d9445-open-natural-classical-input) · level 10
-
-## Full affine K-space comparison and its sheafification
-
-[Open item](item-lem-adjudicate-10deda40f9da-affine-k-space-sheafification) · level 11
+[Open item](item-thm-adjudicate-ff468282ce0d-spectral-pairing-sign) · level 4

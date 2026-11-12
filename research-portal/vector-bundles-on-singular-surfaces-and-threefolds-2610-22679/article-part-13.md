@@ -3,123 +3,119 @@ title: Article items · 13 — Supported RR and the actual support-to-global app
 description: Presents 29 items from the article and its immediate prerequisites,
   covering dependency levels 24–36.
 status: published
-dependency_level: 12
+dependency_level: 7
 research_article_page: true
-item_count: 29
+item_count: 28
 ---
 
-## Supported RR and the actual support-to-global application
+## The hypercomplete derived-localization model on the actual general site
 
-[Open item](item-lem-author-d026a7b99ace-rr-and-global-square) · level 24
+[Open item](item-lem-author-7113c087ecba-general-localization) · level 11
 
-## First projection is first Chern class
+## A coherent comparison of the particular open restriction
 
-[Open item](item-lem-first-projection-chern) · level 24
+[Open item](item-lem-author-8a080e7d9445-restriction-diagram) · level 11
 
-## Reduced bundle class identities
+## Constant integer coefficients and exact derived evaluation
 
-[Open item](item-lem-reduced-bundle-class-identities) · level 24
+[Open item](item-lem-author-dcdf962edbda-constant-sections) · level 11
 
-## Second Chern additivity on the second piece
+## Prime-field restriction and the intrinsic étale coefficient complex
 
-[Open item](item-lem-second-chern-additive) · level 24
+[Open item](item-lem-author-e71ff76fe904-prime-field-coefficients) · level 11
 
-## Rank and determinant on the second piece
+## Units and Picard groups in Nisnevich degree zero and one
 
-[Open item](item-lem-second-piece-rank-determinant) · level 24
+[Open item](item-lem-nisnevich-line-bundle-torsors) · level 11
 
-## Unique divisibility of the smooth-point subgroup
+## Finite refinement for integer cdh sections
 
-[Open item](item-prop-smooth-cycle-unique-divisibility) · level 24
+[Open item](item-prop-cdh-cover-refinement) · level 11
 
-## Line bundles and first motivic Chern class
+## Representable cdh sheaves and seminormalization
 
-[Open item](item-thm-line-bundle-first-chern-classification) · level 24
+[Open item](item-prop-cdh-representable-seminormalization) · level 11
 
-## The first two perfect Chern classes vanish on the third image piece in full scope
+## External BEM big-site finite Beilinson–Lichtenbaum comparison
 
-[Open item](item-lem-author-9b6cb358ddc9-lower-vanishing) · level 25
+[Open item](item-thm-author-2ac325480ae8-bem-finite-comparison) · level 11
 
-## Murthy splitting input in rank three
+## External classical coefficient, derived Yoneda and effective-localization interface
 
-[Open item](item-prop-murthy-k-theoretic-splitting) · level 25
+[Open item](item-thm-author-59b1a831fe59-classical-derived-input) · level 11
 
-## Factor two in the supported third Chern map
+## External affine étale vanishing at invertible primes
 
-[Open item](item-prop-smooth-point-third-chern-factor) · level 25
+[Open item](item-thm-author-c5b0693f4fc3-top-torsion-artin-affine) · level 11
 
-## Degree-three coefficient algebra on the lower-Chern kernel
+## External canonical top-weight motivic-to-syntomic comparison
 
-[Open item](item-lem-author-9b6cb358ddc9-coefficient-algebra) · level 26
+[Open item](item-thm-author-c5b0693f4fc3-top-torsion-topweight-comparison) · level 11
 
-## The low-dimensional quotient follows from the stage sequence
+## Affine perfect K zero and bundle K zero
 
-[Open item](item-lem-author-e216acade157-low-dimensional-quotient) · level 26
+[Open item](item-lem-affine-perfect-k-zero-bridge) · level 12
 
-## Third Chern additivity on the third piece
+## Combining the actual motivic and cdh outer-term bounds
 
-[Open item](item-lem-third-chern-additive) · level 27
+[Open item](item-lem-author-0bac6b264f4a-motivic-dim-prime-field-vanishing) · level 12
 
-## Second projection is minus second Chern class
+## Elmanto–Morrow weight-one comparison input
 
-[Open item](item-prop-second-projection-chern) · level 27
+[Open item](item-lem-author-13e6fe931c45-weight-one-external) · level 12
 
-## Chern classes of the alternating exterior class
+## The actual big cdh slice over a field
 
-[Open item](item-lem-exterior-square-chern-calculation) · level 28
+[Open item](item-lem-author-2ac325480ae8-slice-site) · level 12
 
-## Second Chern surjectivity in dimensions two and three
+## The actual cdh-localization unit is an equivalence
 
-[Open item](item-lem-second-chern-surjective-low-dimension) · level 28
+[Open item](item-lem-author-7113c087ecba-locality-unit) · level 12
 
-## Rank-three representatives with two zero Chern classes
+## Actual Chow localization gives surjectivity of the motivic arrow
 
-[Open item](item-lem-third-piece-representatives) · level 28
+[Open item](item-lem-author-8a080e7d9445-chow-restriction) · level 12
 
-## Curve-and-point support reduction
+## Characteristic-prime degree-five vanishing for singular affine threefolds
 
-[Open item](item-lem-bertini-support-reduction) · level 29
+[Open item](item-lem-author-c5b0693f4fc3-top-torsion-characteristic-prime) · level 12
 
-## Prescribing two surface Chern classes
+## Top-weight degree-five vanishing away from the characteristic
 
-[Open item](item-lem-surface-chern-prescription) · level 29
+[Open item](item-lem-author-c5b0693f4fc3-top-torsion-invertible-prime) · level 12
 
-## Removing isolated points from the support
+## Weight-zero sections and cohomology on the chosen general site
 
-[Open item](item-lem-point-correction-localization) · level 30
+[Open item](item-lem-author-dcdf962edbda-cohomology) · level 12
 
-## Motivic Chern classification on normal affine surfaces
+## Cofiber range gives natural truncation and cohomology comparison
 
-[Open item](item-thm-normal-surface-classification) · level 30
+[Open item](item-lem-author-e71ff76fe904-truncate-cohomology) · level 12
 
-## Independent determinant and second-Chern prescription
+## Determinant descends on the actual perfect K zero
 
-[Open item](item-cor-surface-determinant-prescription) · level 31
+[Open item](item-lem-author-ec13f1db88a5-perfect-determinant) · level 12
 
-## Lifting the corrected class to the curve-supported third stage
+## Finite constant cdh sections
 
-[Open item](item-lem-lift-curve-supported-filtration) · level 31
+[Open item](item-lem-finite-constant-cdh-sections) · level 12
 
-## Smooth points generate the third motivic piece
+## Perfect residue classes at smooth closed points
 
-[Open item](item-thm-smooth-point-generation) · level 32
+[Open item](item-lem-koszul-point-support-class) · level 12
 
-## Third Chern isomorphism
+## Open excision for a descent theory
 
-[Open item](item-cor-third-chern-isomorphism) · level 33
+[Open item](item-lem-open-excision-for-support-fibers) · level 12
 
-## Third Chern vanishing and a trivial summand
+## Rational splitting of the motivic tower
 
-[Open item](item-cor-rank-three-zero-chern-splitting) · level 34
+[Open item](item-prop-rational-weight-splitting-input) · level 12
 
-## Prescribing three Chern classes successively
+## External EM multiplicative motivic complexes and actual Chern map
 
-[Open item](item-lem-threefold-chern-prescription) · level 34
+[Open item](item-thm-author-79117e1d72ed-em-multiplication-c1) · level 12
 
-## Motivic Chern classification on normal affine threefolds
+## Elmanto–Morrow filtration input
 
-[Open item](item-thm-normal-threefold-classification) · level 35
-
-## Rank-two bundles with prescribed first two classes
-
-[Open item](item-cor-rank-two-threefold-existence) · level 36
+[Open item](item-thm-author-98a750efd0cc-motivic-filtration-input) · level 12

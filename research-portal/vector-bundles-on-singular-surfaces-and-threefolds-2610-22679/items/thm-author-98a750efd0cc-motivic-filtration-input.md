@@ -9,10 +9,14 @@ deps:
   - math:def-axiom-of-choice
   - def-nonconnective-k-spectrum-interface
   - def-multiplicative-filtered-spectrum
+  - math:def-scheme-over-base
+  - math:def-opposite-category
 dependency_roles:
   math:def-axiom-of-choice: mathematical-premise
   def-nonconnective-k-spectrum-interface: mathematical-premise
   def-multiplicative-filtered-spectrum: mathematical-premise
+  math:def-scheme-over-base: mathematical-premise
+  math:def-opposite-category: mathematical-premise
 provenance:
   statement: literature-derived
   proof: literature-derived
@@ -30,17 +34,17 @@ sources:
         quasi-compact and quasi-separated over that field. No
         finite-valuative-dimension hypothesis is used for the stated existence
         and zeroth-stage assertions.
-      reading_limits: "This adjudication read the retrieved v1 PDF text: title/date,
-        Theorem 1.1(1), section 2.2, Definitions 4.9/4.23 and the initial
-        assertions of Theorems 4.12/4.27. These passages establish the indexing,
-        filtered-algebra convention and existence scope used here. The PDF
-        header is dated 15 September 2023 and its internal title date is 18
-        September 2023. The HTML at the v1 URL displays 24 August 2026; this
-        record uses the dated PDF. No page-image inspection or reconstruction of
-        trace methods, descent foundations or deep proofs is claimed. Later
-        boundedness conclusions are outside this input."
+      reading_limits: "Read the primary v1 PDF text: Theorem 1.1(1), section 2.2,
+        Definitions 4.9/4.23, and the initial assertions of Theorems 4.12/4.27
+        at the recorded locators. These passages fix decreasing indexing,
+        coherent filtered-algebra structure, qcqs scope and the zeroth-stage
+        identification. The PDF header is dated 15 September 2023; the internal
+        title date is 18 September 2023. No fresh HTML-date check, byte-pinned
+        download, page-image inspection or reconstruction of trace methods,
+        descent foundations or deep proofs is claimed. Later boundedness
+        conclusions are outside this input."
 proof_strategy: direct
-dependency_level: 10
+dependency_level: 12
 local_argument_provenance: ai-altered
 ---
 
@@ -50,6 +54,10 @@ Assume the Axiom of Choice for the selected local perfect-complex $K$-theory rea
 ## Statement references
 
 [[def-multiplicative-filtered-spectrum]]
+
+[[math:def-scheme-over-base]]
+
+[[math:def-opposite-category]]
 
 ## External input
 This is the existence and zeroth-stage part of the cited Elmanto–Morrow results. It is imported as literature, not proved by the local formal lemmas. The source's later boundedness and convergence assertions require additional hypotheses and are not imported here. The nonconnective $K$-theory is used through the perfect-complex interface of [[def-nonconnective-k-spectrum-interface]], under its stated Choice assumption. This assumption belongs to the selected local realization; it is not an additional geometric hypothesis attributed to Elmanto–Morrow.

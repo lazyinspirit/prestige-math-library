@@ -13,6 +13,10 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 dependency_level: 1
+formulation_deps:
+  - def-bigraded-oriented-theory
+argument_deps:
+  - def-bigraded-oriented-theory
 ---
 
 ## Statement

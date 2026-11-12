@@ -2,7 +2,7 @@
 title: Rank-two bundles with prescribed first two classes
 status: published
 research_item: cor-rank-two-threefold-existence
-dependency_level: 36
+dependency_level: 39
 ---
 
 PDF p. 1: Abstract; PDF p. 3: Corollary D; PDF p. 17: Corollary 6.10

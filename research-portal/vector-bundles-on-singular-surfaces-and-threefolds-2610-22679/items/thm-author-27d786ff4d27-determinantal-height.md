@@ -4,40 +4,130 @@ kind: theorem
 title: External maximal-minor height bound for the component-scope example
 status: published
 domain: mathematics
-deps: []
-dependency_roles: {}
+deps:
+  - math:def-noetherian-ring-and-module
+  - math:def-matrices-over-a-commutative-ring
+  - math:def-determinant-of-a-square-matrix
+  - math:def-generated-and-principal-ideals
+  - math:def-prime-and-maximal-ideals
+  - math:def-height-of-a-prime-ideal
+  - math:def-ring-matrix-product-identity-and-transpose
+  - math:thm-determinant-of-transpose
+  - math:def-localisation-at-a-prime-ideal
+  - math:def-krull-dimension-of-a-ring
+  - math:cor-primes-of-a-prime-local-ring
+dependency_roles:
+  math:def-noetherian-ring-and-module: mathematical-premise
+  math:def-matrices-over-a-commutative-ring: mathematical-premise
+  math:def-determinant-of-a-square-matrix: mathematical-premise
+  math:def-generated-and-principal-ideals: mathematical-premise
+  math:def-prime-and-maximal-ideals: mathematical-premise
+  math:def-height-of-a-prime-ideal: mathematical-premise
+  math:def-ring-matrix-product-identity-and-transpose: mathematical-premise
+  math:thm-determinant-of-transpose: mathematical-premise
+  math:def-localisation-at-a-prime-ideal: mathematical-premise
+  math:def-krull-dimension-of-a-ring: mathematical-premise
+  math:cor-primes-of-a-prime-local-ring: mathematical-premise
 provenance:
-  statement: literature-derived
-  proof: literature-derived
-external_input: true
+  statement: ai-altered
+  proof: ai-generated
 sources:
   references:
-    - title: Winfried Bruns and Udo Vetter, Determinantal Rings, LNM1327, Springer1988
+    - title: Winfried Bruns and Udo Vetter, Determinantal Rings, Lecture Notes in
+        Mathematics 1327, Springer, 1988
       url: https://www.home.uni-osnabrueck.de/wbruns/brunsw/detrings.pdf
-      locator: Section2.A, Theorem(2.1), printed p10/PDF18, and proof; Lemma(2.3),
-        printed p11/PDF19.
-      statement: For a Noetherian ring and proper t-minor ideal of an m by n matrix,
-        its height is at most(m−t+1)(n−t+1).
-      hypotheses: Noetherian ring; the ideal must be proper. Apply with A=k[x,y,z],
-        m=2,n=3,t=2.
-      reading_limits: Read the actual full theorem and proof and the complete
-        supporting Lemma(2.3) proof in the author-hosted PDF. No full-book
-        reading or reconstruction of earlier principal-ideal/dimension inputs is
-        claimed.
+      locator: Section 1.A, printed p. 1 (PDF p. 9), ring conventions; Section 1.B,
+        printed p. 3 (PDF p. 11), minor ideals; Section 2.A opening convention
+        and Theorem (2.1) with its proof, printed p. 10 (PDF p. 18); supporting
+        Lemma (2.3) with its proof, printed p. 11 (PDF p. 19). PDF page numbers
+        are one-based.
+      statement: For a matrix U with r rows and s columns, r <= s, the proper t-minor
+        ideal has height at most (r-t+1)(s-t+1). The printed proof bounds every
+        prime minimal over this ideal. The extension to reversed dimensions is
+        proved locally below, not attributed to this source statement.
+      hypotheses: A is a commutative Noetherian ring with identity; 1 <= r <= s; 1 <=
+        t <= r; U is an r by s matrix over A; I_t(U) != A. No domain or
+        genericity condition. The intended case is r=2, s=3, t=2.
+      reading_limits: For this proposal, read the ring-convention paragraph,
+        minor-ideal definitions, Section 2.A opening, full Theorem (2.1)
+        statement/proof and full Lemma (2.3) statement/proof in the online
+        author-hosted PDF text. Earlier dimension-theory inputs and the rest of
+        the book were not reconstructed. Transposition, the nonzero-localization
+        check using the published prime-correspondence interface, and the final
+        prime-existence deduction are local arguments.
 dependency_level: 0
+proof_strategy: direct
+formulation_deps:
+  - math:def-noetherian-ring-and-module
+  - math:def-matrices-over-a-commutative-ring
+  - math:def-determinant-of-a-square-matrix
+  - math:def-generated-and-principal-ideals
+  - math:def-prime-and-maximal-ideals
+  - math:def-height-of-a-prime-ideal
+  - math:def-localisation-at-a-prime-ideal
+  - math:def-krull-dimension-of-a-ring
+  - math:cor-primes-of-a-prime-local-ring
+argument_deps:
+  - math:def-noetherian-ring-and-module
+  - math:def-matrices-over-a-commutative-ring
+  - math:def-determinant-of-a-square-matrix
+  - math:def-generated-and-principal-ideals
+  - math:def-prime-and-maximal-ideals
+  - math:def-height-of-a-prime-ideal
+  - math:def-ring-matrix-product-identity-and-transpose
+  - math:thm-determinant-of-transpose
+  - math:def-localisation-at-a-prime-ideal
+  - math:def-krull-dimension-of-a-ring
+  - math:cor-primes-of-a-prime-local-ring
 ---
 
 ## Statement
-For a matrix $M$ of size $m\times n$ over a Noetherian ring and proper ideal $I_t(M)$ of its $t$-minors,
+Let $A$ be a commutative Noetherian ring with identity, let $m,n$ be positive integers, let $M\in M_{m\times n}(A)$, and let $1\leq t\leq\min(m,n)$. For increasing row indices $i_1<\cdots<i_t$ and column indices $j_1<\cdots<j_t$, a $t$-minor is the determinant of the square submatrix $(M_{i_a j_b})_{1\leq a,b\leq t}$. Define $I_t(M)$ to be the ideal generated by all these determinants. Assume that $I_t(M)$ is proper, meaning $I_t(M)\ne A$.
+
+For a proper ideal $J\subsetneq A$, use the convention
+$$\operatorname{ht}J:=\inf\{\operatorname{ht}\mathfrak p:\mathfrak p\text{ is a prime ideal of }A,\ J\subseteq\mathfrak p\},$$
+with $\inf\varnothing=+\infty$; prime height is $\operatorname{ht}\mathfrak p=\dim A_{\mathfrak p}$. Then
 $$\operatorname{ht}I_t(M)\leq(m-t+1)(n-t+1).$$
-In particular a proper maximal-minor ideal for a $2\times3$ matrix has a prime over it of height at most two. This input is used only to establish the precise disconnected fixed-pair counterexample.
+In fact every prime minimal over $I_t(M)$ satisfies this bound, where minimal means minimal under inclusion among primes containing $I_t(M)$. In particular, a proper maximal-minor ideal for a $2\times3$ matrix (so $t=2$) has a prime over it of height at most two. This input is used only to establish the precise disconnected fixed-pair counterexample.
 
-## Source contract
-**Given:** The stated Noetherian ring, matrix and proper determinantal ideal.
+## Statement references
+[[math:def-noetherian-ring-and-module]]
 
-**Goal:** Import the exact height bound needed for that example.
+[[math:def-matrices-over-a-commutative-ring]]
 
-[F1] Bruns–Vetter, Determinantal Rings, section2.A, Theorem(2.1), with Lemma(2.3) used in its printed proof.
+[[math:def-determinant-of-a-square-matrix]]
+
+[[math:def-generated-and-principal-ideals]]
+
+[[math:def-prime-and-maximal-ideals]]
+
+[[math:def-height-of-a-prime-ideal]]
+
+[[math:def-localisation-at-a-prime-ideal]]
+
+[[math:def-krull-dimension-of-a-ring]]
+
+[[math:cor-primes-of-a-prime-local-ring]]
+
+## Facts & Assumptions
+**Given:** The ring, positive matrix sizes, valid minor index and proper ideal specified in the Statement. Only the finitely-generated-ideals definition of Noetherian is used.
+
+**Goal:** Retain the height bound for both dimension orders and its stated minimal-prime and $2\times3$ consequences.
+
+[F1] The cited Bruns–Vetter input in External input is used with ordered dimensions $1\leq r\leq s$, $1\leq t\leq r$, and $I_t(U)\ne A$.
+
+[F2] [[math:def-ring-matrix-product-identity-and-transpose]] defines $M^{\mathsf T}\in M_{n\times m}(A)$ by $(M^{\mathsf T})_{ji}=M_{ij}$.
+
+[F3] [[math:thm-determinant-of-transpose]] gives $\det(B^{\mathsf T})=\det(B)$ for every positive-size square matrix $B$ over a commutative ring.
+
+[F4] [[math:def-determinant-of-a-square-matrix]] and [[math:def-generated-and-principal-ideals]] give the determinant and generated-ideal constructions used for the minors in the Statement. Equal sets of generators define equal ideals.
+
+[F5] [[math:def-localisation-at-a-prime-ideal]] defines $A_{\mathfrak p}=(A\setminus\mathfrak p)^{-1}A$. [[math:cor-primes-of-a-prime-local-ring]] gives an inclusion-preserving bijection between the prime ideals of $A_{\mathfrak p}$ and the prime ideals of $A$ contained in $\mathfrak p$. [[math:def-krull-dimension-of-a-ring]] defines the dimension of a nonzero commutative ring as the supremum of its finite strict prime-chain lengths, allowing an infinite supremum.
 
 ## External input
-Import [F1], with its exact source record. No arbitrary prime-avoidance or expected-height assertion is substituted for this bound.
+The sole imported height result is Bruns–Vetter, Section 2.A, Theorem (2.1) and its printed minimal-prime argument, with the source's opening convention $r\leq s$; the exact hypotheses and reading limits are recorded in the source reference. It supplies both the ideal-height inequality and the bound for every minimal prime in these ordered dimensions. The proof below supplies the extension to arbitrary dimension order. The source's supporting dimension theory is not proved here.
+
+## Proof
+1.1 For any increasing row list $I=(i_1,\ldots,i_t)$ and column list $J=(j_1,\ldots,j_t)$ of $M$, write $M_{I,J}=(M_{i_a j_b})_{1\leq a,b\leq t}$. By [F2], $(M^{\mathsf T})_{J,I}=(M_{I,J})^{\mathsf T}$, so [F3] equates their determinants. Exchanging the two lists is a bijection between the indexed $t$-minors of $M$ and $M^{\mathsf T}$. Thus their sets of generators coincide, and [F4] gives $I_t(M^{\mathsf T})=I_t(M)$. In particular properness and the containing primes, including minimal ones, are identical. [F2, F3, F4, given]
+
+2.1 If $m\leq n$, apply [F1] to $U=M$ with $(r,s)=(m,n)$; if $m>n$, apply it to $U=M^{\mathsf T}$ with $(r,s)=(n,m)$. In both cases $1\leq t\leq r$, and the minor ideal is proper by the hypothesis and step 1.1. Since $(r-t+1)(s-t+1)=(m-t+1)(n-t+1)$, [F1] and step 1.1 give the asserted ideal-height inequality and the bound on every minimal prime. For any prime $\mathfrak p$ of $A$, [F5] applied to $\mathfrak p\subseteq\mathfrak p$ supplies a prime ideal in $A_{\mathfrak p}$. Since a prime ideal is proper, $A_{\mathfrak p}$ is nonzero, and that prime itself is a chain of length zero. Thus the dimension definition in [F5] applies to a nonempty set of nonnegative integer chain lengths: its supremum, and hence $\operatorname{ht}\mathfrak p$, is a nonnegative integer or $+\infty$. For $m=2,n=3,t=2$ the bound is two. If no prime containing $I_2(M)$ had height at most two, all such heights would therefore be at least three; the infimum in the Statement would then be at least three (also for an empty set). This contradicts the height inequality. Hence the required containing prime exists. [F1, F5, step 1.1, given, algebra] ∎

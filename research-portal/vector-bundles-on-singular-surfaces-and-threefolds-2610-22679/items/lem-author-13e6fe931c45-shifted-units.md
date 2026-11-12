@@ -14,7 +14,7 @@ provenance:
   statement: ai-generated
   proof: ai-generated
 proof_strategy: direct
-dependency_level: 14
+dependency_level: 12
 ---
 
 ## Statement

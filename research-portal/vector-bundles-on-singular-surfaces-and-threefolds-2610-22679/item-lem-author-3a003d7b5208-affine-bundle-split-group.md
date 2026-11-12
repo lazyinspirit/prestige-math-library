@@ -12,6 +12,10 @@ PDF p. 12: Bundle classes in spectral K zero
 - [lem-affine-bundle-module-interface](item-lem-affine-bundle-module-interface)
 - [lem-author-3a003d7b5208-split-group-equivalence](item-lem-author-3a003d7b5208-split-group-equivalence)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
+- [math:def-affine-scheme](https://alphabetamath.cc/item/def-affine-scheme)
+- [math:def-associated-sheaf-module-affine-scheme](https://alphabetamath.cc/item/def-associated-sheaf-module-affine-scheme)
+- [math:def-additive-category](https://alphabetamath.cc/item/def-additive-category)
+- [math:def-exact-sequence-sheaves](https://alphabetamath.cc/item/def-exact-sequence-sheaves)
 
 
 ## Statement
@@ -28,11 +32,16 @@ A finitely generated projective module is a finitely generated module with the l
 
 [F1] Associated sheaf is an additive equivalence from finite projective modules to vector bundles on $X$, and every short exact sequence of these bundles splits. [lem-affine-bundle-module-interface](item-lem-affine-bundle-module-interface)
 
-[F2] An additive equivalence induces an isomorphism on split Grothendieck groups. [lem-author-3a003d7b5208-split-group-equivalence](item-lem-author-3a003d7b5208-split-group-equivalence)
+[F2] An additive equivalence of essentially small additive categories induces an isomorphism on split Grothendieck groups, carrying each object class to its image class. Here essentially small means that a set of objects represents every isomorphism class. The split group is the free abelian group on these classes modulo the direct-sum relations. [lem-author-3a003d7b5208-split-group-equivalence](item-lem-author-3a003d7b5208-split-group-equivalence)
+
+
+[F3] The affine scheme has underlying space $\operatorname{Spec}A$ and structure sheaf $\mathcal O_X$. The associated-sheaf construction sends an $A$-module $P$ to the module sheaf $\widetilde P$, functorially in module maps. Exactness for module sheaves means equality of the image sheaf and kernel sheaf; a short exact sequence has zero terms at both ends. [math:def-affine-scheme](https://alphabetamath.cc/item/def-affine-scheme) [math:def-associated-sheaf-module-affine-scheme](https://alphabetamath.cc/item/def-associated-sheaf-module-affine-scheme) [math:def-exact-sequence-sheaves](https://alphabetamath.cc/item/def-exact-sequence-sheaves)
+
+[F4] An additive category has abelian groups of morphisms with bilinear composition, a zero object, and finite biproducts. [math:def-additive-category](https://alphabetamath.cc/item/def-additive-category)
 
 ## Proof
 **Proof technique:** Split the exact-sequence relations and transport the presentation.
 
-1.1 Every direct sum $E'\oplus E''$ gives a split short exact sequence, so each split relation is an exact-sequence relation. Conversely, by [F1] under [A1], any short exact sequence of vector bundles identifies its middle term with $E'\oplus E''$, so its relation is a split relation. The two relation subgroups coincide. [A1, F1, construct]
+1.1 The two categories in [F1] satisfy the hypotheses of [F2]. For smallness, a finitely generated module $M$ has a finite generating list $m_1,\ldots,m_n$, so the map $q:A^n\to M$ given by $q(a_1,\ldots,a_n)=\sum_i a_i m_i$ is surjective. Here $A^n$ is the module of $n$-tuples with coordinatewise operations, including $A^0=0$. If $N=\ker q$, the map $A^n/N\to M$ sending $a+N$ to $q(a)$ is well-defined, injective and surjective: equality of images is exactly membership of their difference in $N$. For all finite $n$, the submodules $N\subseteq A^n$ form a set, being subsets of a fixed set. Thus the quotients $A^n/N$ form a set of representatives for finitely generated modules; retaining the projective quotients gives one for finite projectives. By [F1] under [A1], their associated sheaves represent all bundles. Morphisms form sets: module homomorphisms are functions satisfying linearity, and sheaf morphisms are families of section maps indexed by the set of opens. In both categories morphisms add pointwise and composition is bilinear. The zero module or sheaf is a zero object; finite direct sums with their inclusions and projections are biproducts. Finite sums of finite projectives remain finitely generated and projective: concatenate their generators and lift each summand map through a surjection, then add the lifts. Finite sums of bundles are finite locally free by intersecting finitely many local free charts. Hence both categories are additive by [F4] and essentially small as required by [F2]. [A1, F1, F2, F4, construct]
 
-2.1 The associated-sheaf equivalence in [F1] induces an isomorphism of split groups by [F2]. Composing with the identification in step 1.1 gives the stated isomorphism, carrying $[P]$ to $[\widetilde{P}]$. [A1, F1, F2, step 1.1] ∎
+2.1 Every direct sum $E'\oplus E''$ gives a short exact sequence with inclusion into the first factor and projection onto the second. Indeed the inclusion has zero kernel, the projection has image $E''$, and its kernel equals the image of the inclusion, as module sheaves in [F3]. Thus each split relation is an exact-sequence relation. Conversely, [F1] under [A1] identifies the middle term of every short exact sequence of bundles with $E'\oplus E''$, so its relation is a split relation. Both presentations use the same isomorphism classes, and their relation subgroups therefore coincide. The associated-sheaf equivalence in [F1] induces an isomorphism of split groups by [F2], whose hypotheses were verified in step 1.1. Composing with the equality of the bundle presentations gives the stated isomorphism, carrying $[P]$ to $[\widetilde P]$ for the construction in [F3]. [A1, F1, F2, F3, step 1.1, construct] ∎

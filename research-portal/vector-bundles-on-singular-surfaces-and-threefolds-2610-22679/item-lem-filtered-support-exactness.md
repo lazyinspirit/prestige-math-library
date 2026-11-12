@@ -12,9 +12,12 @@ PDF p. 6: Supported filtered objects; PDF p. 16: Lifting to the supported third 
 - [def-stable-spectra-interface](item-def-stable-spectra-interface)
 - [def-decreasing-filtered-spectrum](item-def-decreasing-filtered-spectrum)
 - [lem-fiber-sequence-homotopy-exactness](item-lem-fiber-sequence-homotopy-exactness)
+- [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
+- [math:def-open-immersion-schemes](https://alphabetamath.cc/item/def-open-immersion-schemes)
+- [math:def-affine-open-subscheme](https://alphabetamath.cc/item/def-affine-open-subscheme)
 
 ## Statement
-Let $U\subset X$ be an open immersion, write $T=X\setminus U$, and let $E$ be a presheaf of decreasing filtered spectra. Thus restriction gives a coherently compatible map of augmented towers $F^jE(X)\to F^jE(U)$ and a map $E(X)\to E(U)$. Here a presheaf means a contravariant coherent functor on a category containing this open immersion; no descent property is assumed. Put
+Assume the Axiom of Choice and the fixed compatible universe and smallness conventions of the stable spectra interface. Let $U\subset X$ be an open immersion, write $T=X\setminus U$, and let $E$ be a presheaf of decreasing filtered spectra. Thus restriction gives a coherently compatible map of augmented towers $F^jE(X)\to F^jE(U)$ and a map $E(X)\to E(U)$. Here a presheaf means a contravariant coherent functor on a category containing this open immersion; no descent property is assumed. Put
 
 $$F^j_T E(X)=\operatorname{fib}(F^jE(X)\to F^jE(U)),\qquad E_T(X)=\operatorname{fib}(E(X)\to E(U)).$$
 
@@ -30,7 +33,9 @@ In particular, every element in the kernel of the last displayed map lifts to $\
 
 ## Facts & Assumptions
 
-**Given:** A coherent presheaf of decreasing filtered spectra, an open immersion $U\subset X$, and integers $i,j$.
+[A1] Assume [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice) and the fixed compatible universe and smallness conventions of [def-stable-spectra-interface](item-def-stable-spectra-interface). These retain the ZFC and nested-universe premises of its stable enhancement whenever its spectra, coherent diagrams, limits, cofibers and homotopy groups are used below. Existence of the required universes is a separate size assumption, not a consequence of Choice. The finite formal arguments introduce no additional selection principle.
+
+**Given:** A coherent presheaf of decreasing filtered spectra, an open immersion $U\subset X$, and integers $i,j$. Work under [A1].
 
 **Goal:** Construct the supported filtration and graded fiber sequence, and prove the exactness and lifting assertions with their stated hypotheses.
 
@@ -40,13 +45,15 @@ In particular, every element in the kernel of the last displayed map lifts to $\
 
 [F3] [lem-fiber-sequence-homotopy-exactness](item-lem-fiber-sequence-homotopy-exactness) gives the natural long exact homotopy sequence of any fiber sequence of spectra.
 
+[F4] An open immersion identifies its source with an open subscheme carrying the restricted structure sheaf, as in [math:def-open-immersion-schemes](https://alphabetamath.cc/item/def-open-immersion-schemes) and [math:def-affine-open-subscheme](https://alphabetamath.cc/item/def-affine-open-subscheme). The argument uses its restriction arrow in the given presheaf diagram; it requires no geometric descent or support-category comparison.
+
 ## Proof
 
 **Proof technique:** Apply the fiber construction to the diagram of filtration stages and use stability to compare its cofibers.
 
-1.1 Restriction and the transition maps form a coherent diagram of arrows $F^jE(X)\to F^jE(U)$. Taking the pullback over zero at every stage is functorial, producing transition maps $F^{j+1}_T E(X)\to F^j_T E(X)$ with all composition coherences. The compatible augmentation maps to $E(X)\to E(U)$ likewise induce compatible maps $F^j_T E(X)\to E_T(X)$. This is the asserted augmented decreasing tower. [F1, F2, given]
+1.1 Restriction and the transition maps form a coherent diagram of arrows $F^jE(X)\to F^jE(U)$. Taking the pullback over zero at every stage is functorial, producing transition maps $F^{j+1}_T E(X)\to F^j_T E(X)$ with all composition coherences. The compatible augmentation maps to $E(X)\to E(U)$ likewise induce compatible maps $F^j_T E(X)\to E_T(X)$. This is the asserted augmented decreasing tower. [A1, F1, F2, given]
 
-2.1 For a coherent square of arrows of spectra, taking fibers preserves its finite limits: each fiber is itself a pullback, and the universal property of limits identifies an iterated finite limit with the limit over the corresponding product diagram. Limits of arrow diagrams are computed at their source and target. The zero arrow has zero fiber. In particular, if a square of arrows is pointwise a pushout, stability makes it pointwise a pullback; after taking fibers it is again a pullback and hence a pushout. Thus taking fibers carries pointwise cofiber squares of arrows to cofiber squares of spectra. [F1, step 1.1]
+2.1 For a coherent square of arrows of spectra, taking fibers preserves its finite limits: each fiber is itself a pullback, and the universal property of limits identifies an iterated finite limit with the limit over the corresponding product diagram. Limits of arrow diagrams are computed at their source and target. The zero arrow has zero fiber. In particular, if a square of arrows is pointwise a pushout, stability makes it pointwise a pullback; after taking fibers it is again a pullback and hence a pushout. Thus taking fibers carries pointwise cofiber squares of arrows to cofiber squares of spectra. [A1, F1, step 1.1]
 
 3.1 Apply step 2.1 to the map of arrows from $F^{j+1}E(X)\to F^{j+1}E(U)$ to $F^jE(X)\to F^jE(U)$. Its pointwise cofiber is the arrow $\operatorname{gr}^jE(X)\to\operatorname{gr}^jE(U)$. The cofiber of its map of fibers is therefore naturally equivalent to the fiber of that graded arrow. By the definition of the supported graded spectrum, this is precisely the displayed graded fiber sequence. The construction uses the coherent diagram and universal properties, so it is natural in maps of such filtered presheaves and open pairs. [F1, F2, step 1.1, step 2.1]
 

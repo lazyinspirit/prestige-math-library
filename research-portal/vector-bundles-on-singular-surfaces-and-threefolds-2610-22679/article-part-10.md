@@ -3,119 +3,119 @@ title: Article items · 10 — The support long exact sequence kills degree seve
 description: Presents 28 items from the article and its immediate prerequisites,
   covering dependency levels 15–17.
 status: published
-dependency_level: 9
+dependency_level: 4
 research_article_page: true
 item_count: 28
 ---
 
-## The support long exact sequence kills degree seven
+## Bloch cycle complexes and higher Chow groups
 
-[Open item](item-lem-author-8a080e7d9445-degree-seven-les) · level 15
+[Open item](item-def-bloch-higher-cycle-complex) · level 4
 
-## Unique lifting from vanishing groups yields the Chern classification
+## Decreasing spectral filtrations and associated graded
 
-[Open item](item-lem-author-9b282fc59773-unique-lifting-criterion) · level 15
+[Open item](item-def-decreasing-filtered-spectrum) · level 4
 
-## The actual first EM stage is the rank-zero K space on all qcqs schemes
+## A coherent spectral realization of derived abelian complexes
 
-[Open item](item-lem-author-ec13f1db88a5-rank-zero-stage) · level 15
+[Open item](item-lem-adjudicate-d5306176fce5-coherent-realization) · level 4
 
-## Generic rank and point-supported classes on a curve
+## Gluing upper bounds through an actual fiber sequence
 
-[Open item](item-lem-curve-generic-rank-localization) · level 15
+[Open item](item-lem-author-0bac6b264f4a-motivic-dim-cohomological-glueing) · level 4
 
-## Rank-two uniqueness on singular threefolds
+## Cohomology of equivalent derived complexes
 
-[Open item](item-op-rank-two-threefold-uniqueness) · level 15
+[Open item](item-lem-author-91088613574d-quasi-isomorphism) · level 4
 
-## Excision and K theory purity at a smooth closed point
+## Functorial finite coefficients for derived complexes
 
-[Open item](item-prop-smooth-point-excision-purity) · level 15
+[Open item](item-lem-author-b747b28c359f-derived-finite-coefficients) · level 4
 
-## Murthy splitting criterion for the exterior-dual obstruction
+## Surface existence from rank-three existence on the cylinder
 
-[Open item](item-thm-author-394a5b71198d-murthy-module-splitting-input) · level 15
+[Open item](item-lem-author-f08c343a07fc-local-surface-existence-reduction) · level 4
 
-## Classical smooth critical-rank classifications
+## Surface uniqueness from the cylinder and cancellation
 
-[Open item](item-thm-smooth-critical-rank-classifications) · level 15
+[Open item](item-lem-author-f08c343a07fc-local-surface-uniqueness-reduction) · level 4
 
-## Smooth-point K theory class map
+## One nonempty parameter open gives smooth-locus avoidance and transversality
 
-[Open item](item-def-smooth-point-cycle-map) · level 16
+[Open item](item-lem-author-fc2380accb47-simultaneous-good-parameters) · level 4
 
-## Excision and the exact fixed-support cycle fiber
+## Homotopy exactness of a spectral fiber sequence
 
-[Open item](item-lem-author-149a02132c3b-support-fiber) · level 16
+[Open item](item-lem-fiber-sequence-homotopy-exactness) · level 4
 
-## The actual supported Euler class has the generic length coordinate
+## Smooth-locus restriction properties
 
-[Open item](item-lem-author-16f30f6b95cb-supported-euler-generic-coordinate) · level 16
+[Open item](item-lem-normal-smooth-locus-restriction) · level 4
 
-## Componentwise curve construction and the scope of global irreducibility
+## Nonconnective K theory in degree zero
 
-[Open item](item-lem-author-27d786ff4d27-clopen-scope) · level 16
+[Open item](item-thm-author-3a003d7b5208-nonconnective-k-zero-input) · level 4
 
-## Actual EM orientation and projective bundle maps on that model
+## Multiplicative filtrations and graded products
 
-[Open item](item-lem-author-4f94f7982b0d-actual-orientation) · level 16
+[Open item](item-def-multiplicative-filtered-spectrum) · level 5
 
-## Cancellation at the required dimension-bounded evaluation objects
+## Scheme sites and sheafification
 
-[Open item](item-lem-author-58e57d689702-evaluation-equivalence) · level 16
+[Open item](item-def-scheme-sites-and-sheafification) · level 5
 
-## Point-supported cycles give all-weight chain purity and low-weight zero
+## Valuative dimension and degreewise bounded towers
 
-[Open item](item-lem-author-59b1a831fe59-cycle-complex) · level 16
+[Open item](item-def-valuative-dimension-and-boundedness) · level 5
 
-## The identified support fiber is the classical relative Hom before Gysin
+## Cycle-complex degree translation
 
-[Open item](item-lem-author-59b1a831fe59-relative-gysin) · level 16
+[Open item](item-lem-author-91088613574d-cycle-reindex) · level 5
 
-## Identifying all spectral-sequence pages with the source multiplicative pages
+## Images of filtration stages
 
-[Open item](item-lem-author-74a9c17e63f1-page-product-transport) · level 16
+[Open item](item-lem-author-98a750efd0cc-filtration-image) · level 5
 
-## Supported degree-seven vanishing
+## Finite derived products and motivic coefficient operations
 
-[Open item](item-lem-curve-supported-degree-seven-vanishing) · level 16
+[Open item](item-lem-author-ab0a6fc202cb-finite-derived-products) · level 5
 
-## Eventual homotopy vanishing of the motivic tower
+## Bockstein obstruction to prime torsion
 
-[Open item](item-prop-filtration-eventual-vanishing) · level 16
+[Open item](item-lem-author-c5b0693f4fc3-top-torsion-bockstein) · level 5
 
-## Motivic weight one
+## The selected zero fibers are finite etale schemes
 
-[Open item](item-prop-motivic-weight-one) · level 16
+[Open item](item-lem-author-fc2380accb47-finite-etale-zero-fibers) · level 5
 
-## Smooth threefold rank-two classification
+## Complex shifts and spectral homotopy indices
 
-[Open item](item-thm-smooth-threefold-rank-two-classification) · level 16
+[Open item](item-lem-eilenberg-maclane-shift-index) · level 5
 
-## Smooth critical-rank splitting criterion
+## Stage projections, kernels and image groups
 
-[Open item](item-thm-smooth-top-chern-splitting) · level 16
+[Open item](item-lem-filtered-stage-exact-sequence) · level 5
 
-## The divisor presentation and actual Picard surjection
+## Support fibers commute with graded triangles
 
-[Open item](item-lem-author-149a02132c3b-normalization-surjection) · level 17
+[Open item](item-lem-filtered-support-exactness) · level 5
 
-## Actual first-Chern and determinant maps of the first EM layer
+## Roots of unity and étale Tate twists
 
-[Open item](item-lem-author-16f30f6b95cb-lowweight-first-chern-and-k-one-determinant) · level 17
+[Open item](item-def-etale-tate-coefficients) · level 6
 
-## Positive generic cycles determine the curve-supported homomorphism
+## Nisnevich covers and distinguished squares
 
-[Open item](item-lem-author-16f30f6b95cb-positive-generic-cycle-detection) · level 17
+[Open item](item-def-nisnevich-covering-interface) · level 6
 
-## The source Chern classes are the supplied projective-relation classes
+## Perfect complexes on schemes and their support
 
-[Open item](item-lem-author-32887006bdff-relation-comparison) · level 17
+[Open item](item-def-scheme-perfect-complexes) · level 6
 
-## The source Chern classes are the supplied projective-relation classes
+## A perfect affine module sheaf admits a finite projective resolution
 
-[Open item](item-lem-author-4f94f7982b0d-relation-comparison) · level 17
+[Open item](item-lem-adjudicate-8da4ac7e2794-affine-perfect-module-resolution) · level 6
 
-## Affine Artin bound and its consequence after localization
+## Filtered equivalences preserve image filtrations
 
-[Open item](item-lem-author-58e57d689702-affine-vanishing) · level 17
+[Open item](item-lem-author-91088613574d-filtered-images) · level 6

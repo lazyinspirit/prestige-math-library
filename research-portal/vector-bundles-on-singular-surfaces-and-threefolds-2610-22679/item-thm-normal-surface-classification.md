@@ -2,7 +2,29 @@
 title: Motivic Chern classification on normal affine surfaces
 status: published
 research_item: thm-normal-surface-classification
-dependency_level: 30
+dependency_level: 33
+sources:
+  references:
+    - title: Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and
+        threefolds
+      url: https://arxiv.org/abs/2610.22679v1
+      locator: Abstract; PDF p. 2, Theorem A and following paragraph; p. 12, proof of
+        Theorem A
+      statement: On a normal affine surface over an algebraically closed field the
+        first and second motivic Chern classes classify rank-two vector bundles.
+      hypotheses: The article conventions make affine schemes finite type over the
+        standing algebraically closed field.
+      reading_limits: "Historical reading record retained from the incoming generated
+        item: The theorem and the displayed proof passage in the supplied
+        extracted article text were read. The declared supplier interfaces are
+        used for the underlying filtration, prescription and cancellation
+        results; their external proofs are not reconstructed here. The current
+        repair checked the abstract, Theorem A and following paragraph, the p. 3
+        conventions, and the p. 12 proof in the frozen article extraction; it
+        checked supplier applications without reauditing their upstream
+        literature. This maintenance pass read the current consumer and declared
+        supplier interfaces; it claims no fresh primary-source or page-image
+        reading and no independent acceptance."
 ---
 
 PDF p. 1: Abstract; PDF p. 2: Theorem A; PDF p. 12: Proof of Theorem A
@@ -22,7 +44,14 @@ PDF p. 1: Abstract; PDF p. 2: Theorem A; PDF p. 12: Proof of Theorem A
 - [thm-critical-rank-cancellation](item-thm-critical-rank-cancellation)
 - [thm-line-bundle-first-chern-classification](item-thm-line-bundle-first-chern-classification)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
-- [Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · Abstract; PDF p. 2, Theorem A and following paragraph; p. 12, proof of Theorem A](https://arxiv.org/abs/2610.22679v1)
+- [def-article-conventions](item-def-article-conventions)
+- [math:def-affine-scheme](https://alphabetamath.cc/item/def-affine-scheme)
+- [math:lem-field-is-noetherian](https://alphabetamath.cc/item/lem-field-is-noetherian)
+- [math:cor-finite-type-algebra-over-noetherian-ring-is-noetherian](https://alphabetamath.cc/item/cor-finite-type-algebra-over-noetherian-ring-is-noetherian)
+- [math:def-locally-noetherian-and-noetherian-scheme](https://alphabetamath.cc/item/def-locally-noetherian-and-noetherian-scheme)
+- [math:cor-affine-scheme-quasi-compact](https://alphabetamath.cc/item/cor-affine-scheme-quasi-compact)
+- [math:thm-affine-schemes-quasi-separated](https://alphabetamath.cc/item/thm-affine-schemes-quasi-separated)
+- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · Abstract; PDF p. 2, Theorem A and following paragraph; p. 12, proof of Theorem A `](https://arxiv.org/abs/2610.22679v1)
 
 ## Statement
 Assume the Axiom of Choice and the site-size and universe bounds required for the specified motivic and perfect K-theory constructions. Let $k$ be an algebraically closed field and let $X$ be a normal affine finite-type $k$-scheme of Krull dimension two. The map
@@ -51,11 +80,13 @@ A vector bundle is a finite locally free $\mathcal O_X$-module; rank two means t
 
 [F7] Two rank-two bundles on this nonempty affine surface are isomorphic exactly when their classes in the specified perfect $K_0(X)$ agree. The first Chern class identifies the Picard group with $H^{2,1}_{\mathrm{mot}}(X,\mathbb Z)$ and sends the determinant to the first Chern class of the bundle. [thm-critical-rank-cancellation](item-thm-critical-rank-cancellation) [thm-line-bundle-first-chern-classification](item-thm-line-bundle-first-chern-classification) [lem-first-projection-chern](item-lem-first-projection-chern)
 
+[F8] The article conventions define algebraic closure, schemes over $k$, finite generation of the affine coordinate $k$-algebra, and chain dimension (with $\dim\varnothing=-\infty$). Affineness gives $X\cong\operatorname{Spec}A$. A field is noetherian, and a finite-type commutative algebra over a noetherian ring is noetherian. A scheme with a finite affine open cover by spectra of noetherian rings is noetherian. Affine schemes are quasi-compact under Choice and are quasi-separated. [def-article-conventions](item-def-article-conventions) [math:def-affine-scheme](https://alphabetamath.cc/item/def-affine-scheme) [math:lem-field-is-noetherian](https://alphabetamath.cc/item/lem-field-is-noetherian) [math:cor-finite-type-algebra-over-noetherian-ring-is-noetherian](https://alphabetamath.cc/item/cor-finite-type-algebra-over-noetherian-ring-is-noetherian) [math:def-locally-noetherian-and-noetherian-scheme](https://alphabetamath.cc/item/def-locally-noetherian-and-noetherian-scheme) [math:cor-affine-scheme-quasi-compact](https://alphabetamath.cc/item/cor-affine-scheme-quasi-compact) [math:thm-affine-schemes-quasi-separated](https://alphabetamath.cc/item/thm-affine-schemes-quasi-separated) [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
+
 ## Proof
 
 **Proof technique:** Compare the difference of two bundle classes successively with the first three filtration stages, and use the separate prescription theorem for surjectivity.
 
-1.1 The given finite-type scheme is noetherian and, because its dimension is two, nonempty. Chern classes are invariant under bundle isomorphism, so the displayed assignment is well-defined on $\mathrm{Vect}_2(X)$. The target groups and bundle classes use the constructions and assumptions in [F1]–[F4]. [F1, F4, given]
+1.1 Write $X\cong\operatorname{Spec}A$ as in [F8]. The field $k$ is noetherian, so its finite-type algebra $A$ is noetherian. This single affine chart is a finite affine cover by a noetherian spectrum; hence $X$ is noetherian. It is qcqs by the affine compactness and quasi-separatedness assertions in [F8], using the assumed Choice for compactness. Since $\dim X=2$ and $\dim\varnothing=-\infty$, it is nonempty. Thus the stated hypotheses and size bounds meet the supplied constructions' contracts. Chern classes are invariant under bundle isomorphism, so the displayed assignment is well-defined on $\mathrm{Vect}_2(X)$. The target groups and bundle classes use the constructions and assumptions in [F1]–[F4]. [F1, F4, F8, given]
 
 1.2 Let rank-two bundles $E$ and $F$ have equal first and second Chern classes, and put $x=[E]-[F]\in K_0(X)$. Both bundles have rank two at every point, so $p_0(x)=0$ by [F3]. Exactness in [F2] therefore gives $x\in F^1K_0(X)$. [F1, F2, F3, given, construct]
 

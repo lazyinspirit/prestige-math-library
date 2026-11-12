@@ -23,8 +23,33 @@ sources:
     - title: Aravind Asok and Jean Fasel, A cohomological classification of vector
         bundles on smooth affine threefolds
       url: https://arxiv.org/pdf/1204.0770v5
-      locator: Theorem 1, p. 2; §6, pp. 22–26
-dependency_level: 16
+      locator: Theorem 1 and preceding notation, printed p. 2 (PDF page 2); lift-fiber
+        discussion, pp. 23–24; Proposition 6.2, p. 24; Propositions 6.3 and 6.5,
+        p. 25; Theorem 6.6 and its complete proof, p. 26.
+      statement: Rank-two vector-bundle isomorphism classes are in pointed bijection
+        with Pic(X) × CH²(X) via the first two Chern invariants. The determinant
+        is the first coordinate; the second-stage comparison is compatible with
+        ordinary c₂. The cited lifting and vanishing passages support the
+        declared comparison supplier, which supplies the substantial imported
+        premise of the local two-step application.
+      hypotheses: X is a smooth affine scheme of finite type of pure dimension three
+        over an algebraically closed field k with characteristic different from
+        two. Bundle classes are unframed; the determinant line bundle is
+        arbitrary. The local Choice and universe conventions are separately
+        inherited from the declared Chern-map supplier.
+      reading_limits: For this scoped repair, read the PDF-extracted text of Theorem 1
+        and its preceding rank-n bundle notation (p. 2), the lift-fiber
+        discussion and Proposition 6.2 with its proof (pp. 23–24), Propositions
+        6.3 and 6.5 with their surrounding discussion (p. 25), and Theorem 6.6
+        with its complete proof (p. 26). These readings check the
+        classification, hypotheses, coordinate compatibility and application of
+        the supplied lifting interface. No visual inspection of this PDF,
+        reconstruction of motivic representability or the deeper sheaf
+        computations, or independent reading of Morel Remark 7.22, the Bloch
+        identification or the zero-cycle divisibility theorem is claimed. The
+        local proof remains an application of the declared comparison and
+        lifting suppliers.
+dependency_level: 18
 ---
 
 ## Statement
@@ -48,8 +73,10 @@ Here the first coordinate is $[\det E]$ in $\operatorname{Pic}(X)$, equivalently
 
 [F3] Compatible presentation maps with this lifting and vanishing interface imply singleton Chern fibers and bijectivity. [[lem-author-9b282fc59773-unique-lifting-criterion]]
 
+[F4] Choice is inherited for the set of bundle isomorphism classes, affine quasi-compactness and the Chern-class construction in the Chern-map supplier. The stated universe-existence convention is a separate assumption, not a consequence of Choice. The present application makes no additional selection. [[def-author-9b282fc59773-chern-map-and-fibers]] [[math:def-axiom-of-choice]]
+
 ## Proof
-1.1 The field and scheme satisfy all hypotheses of [F2]: algebraic closure, characteristic different from two, smoothness, affineness, and dimension three. Apply that input to $X$. It gives bijections $v$ and $b$, a surjective $t$, the equality $b t v=C_X$, and, over every second-stage class, the exact sequence and zero end groups required by [F3]. No assertion about arbitrary singular threefolds or characteristic two is used. [given, F1, F2]
+1.1 The field and scheme satisfy all hypotheses of [F2]: algebraic closure, characteristic different from two, smoothness, affineness, and dimension three. Apply that input to $X$. It gives bijections $v$ and $b$, a surjective $t$, the equality $b t v=C_X$, and, over every second-stage class, the exact sequence, zero end groups and nonempty lift-fiber surjections required by [F3]. No assertion about arbitrary singular threefolds or characteristic two is used. [given, F1, F2, F4]
 
 2.1 Applying [F3] to these actual maps makes $C_X$ a bijection, with one bundle isomorphism class for every pair. By [F2] this is precisely the displayed pair of Chern classes, and by [F1] it preserves the specified basepoints. This proves the full stated classification. [F1, F2, F3, step 1.1] ∎
 

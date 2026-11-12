@@ -2,7 +2,25 @@
 title: Isomorphism classes of vector bundles
 status: published
 research_item: def-vector-bundle-classes
-dependency_level: 11
+dependency_level: 13
+sources:
+  references:
+    - title: Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and
+        threefolds
+      url: https://arxiv.org/abs/2610.22679v1
+      locator: p. 2, paragraph before Theorem A; p. 11, proof of Proposition 5.5
+      statement: The article uses Vect_n(X) for rank-n bundle isomorphism classes on
+        p. 2 and writes 1 for the class of the structure sheaf in K_0(X) in the
+        proof of Proposition 5.5 on p. 11.
+      hypotheses: The article's scheme conventions apply to its notation. The qcqs,
+        Choice and universe assumptions and the affine spectral comparison in
+        this item are supplied by the declared local interfaces.
+      reading_limits: Read the frozen article text at p. 2 immediately before Theorem
+        A and p. 11 at the start of the proof of Proposition 5.5. These passages
+        support the notation only. The set construction is a locally authored
+        argument using the published module-sheaf gluing interface; no
+        original-author defect or fresh review of the upstream K-theory
+        literature is asserted.
 ---
 
 PDF p. 2: Paragraph before Theorem A; PDF p. 11: Proof of Proposition 5.5, notation for the unit
@@ -16,6 +34,15 @@ PDF p. 2: Paragraph before Theorem A; PDF p. 11: Proof of Proposition 5.5, notat
 - [thm-author-3a003d7b5208-nonconnective-k-zero-input](item-thm-author-3a003d7b5208-nonconnective-k-zero-input)
 - [lem-affine-perfect-k-zero-bridge](item-lem-affine-perfect-k-zero-bridge)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
+- [math:thm-gluing-sheaves](https://alphabetamath.cc/item/thm-gluing-sheaves)
+- [math:def-scheme](https://alphabetamath.cc/item/def-scheme)
+- [math:def-module-on-ringed-space](https://alphabetamath.cc/item/def-module-on-ringed-space)
+- [math:def-exact-sequence-sheaves](https://alphabetamath.cc/item/def-exact-sequence-sheaves)
+- [math:def-grothendieck-universe-closure-convention](https://alphabetamath.cc/item/def-grothendieck-universe-closure-convention)
+- [math:def-commutative-ring](https://alphabetamath.cc/item/def-commutative-ring)
+- [math:def-affine-scheme](https://alphabetamath.cc/item/def-affine-scheme)
+- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · p. 2, paragraph before Theorem A; p. 11, proof of Proposition 5.5 `](https://arxiv.org/abs/2610.22679v1)
+
 
 ## Definition
 Assume the Axiom of Choice and the suitable universes used for the supplied perfect K-theory construction. Let $X$ be a quasi-compact, quasi-separated scheme and $n$ a nonnegative integer. A **vector bundle** on $X$ is a finite locally free $\mathcal O_X$-module: each point has an open neighbourhood on which it is isomorphic to a finite direct sum of copies of $\mathcal O_X$. It has **rank $n$** if every point has such a neighbourhood with exactly $n$ copies. An isomorphism of vector bundles is an invertible $\mathcal O_X$-linear morphism. Write $\mathrm{Vect}_n(X)$ for the set of their isomorphism classes and $[E]_{\mathrm{iso}}$ for the class of a rank-$n$ bundle $E$ in that set.
@@ -39,9 +66,11 @@ If $X=\operatorname{Spec}A$ for a commutative unital ring $A$, the supplied affi
 
 [F5] The article conventions define qcqs schemes and use finite locally free sheaves as vector bundles. [def-article-conventions](item-def-article-conventions), [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
 
+[F6] On a fixed ringed space, local module sheaves with overlap isomorphisms satisfying identity and cocycle conditions glue to a module sheaf. The glued object with its prescribed local identifications is unique up to unique compatible isomorphism. The theorem constructs its sections as compatible families of local sections. [math:thm-gluing-sheaves](https://alphabetamath.cc/item/thm-gluing-sheaves)
+
+[F7] Schemes carry an underlying topology and structure sheaf; module-sheaf morphisms are linear on sections and commute with restrictions. Exactness of module sheaves means equality of image and kernel sheaves. The commutative unital ring and affine-scheme conventions apply to $X=\operatorname{Spec}A$. Suitable universes use the supplied closure convention; their existence is assumed separately from Choice. [math:def-scheme](https://alphabetamath.cc/item/def-scheme), [math:def-module-on-ringed-space](https://alphabetamath.cc/item/def-module-on-ringed-space), [math:def-exact-sequence-sheaves](https://alphabetamath.cc/item/def-exact-sequence-sheaves), [math:def-commutative-ring](https://alphabetamath.cc/item/def-commutative-ring), [math:def-affine-scheme](https://alphabetamath.cc/item/def-affine-scheme), [math:def-grothendieck-universe-closure-convention](https://alphabetamath.cc/item/def-grothendieck-universe-closure-convention)
+
 ## Justification
-1.1 The open subsets of $X$ form a set. For each indexed open cover drawn from that set, rank-$n$ bundles trivialized on the cover are described up to isomorphism by transition matrices in $\operatorname{GL}_n(\mathcal O_X(U\cap V))$ satisfying the identity, inverse and cocycle conditions. These matrices form a set; changing trivializations acts by a set of invertible matrices, and its equivalence classes form a set. Taking the union over covers and identifying data defining isomorphic sheaves gives a set of isomorphism classes. Every rank-$n$ bundle occurs by its local triviality, and an isomorphism preserves local rank. Thus $\mathrm{Vect}_n(X)$ is well-defined, including when $X$ is empty. [F1, F5, construct]
+1.1 Let $T$ be the set of open subsets of $X$. Use only covers $C\subseteq T$ with $\bigcup_{U\in C}U=X$; these covers form a subset of the power set of $T$. On each cover take the local sheaves $\mathcal O_U^n$ and matrices $g_{UV}$ with entries in $\mathcal O_X(U\cap V)$, having two-sided matrix inverses, such that $g_{UU}=I_n$ and $g_{VW}g_{UV}=g_{UW}$ after restriction to triple overlaps. Each matrix acts on local sections by multiplication and commutes with restrictions, so these are precisely module-sheaf gluing data. Conversely a map between free rank-$n$ sheaves is determined by the images of its standard basis sections, giving its matrix; an isomorphism gives an inverse matrix. The families of matrices on each cover form a set, and their union over the indicated set of covers is a set $D$. For $d\in D$, use the specific compatible-family construction of [F6]: on an open $W$, take families $s_U\in\mathcal O_X(W\cap U)^n$ with $s_V=g_{UV}s_U$ on overlaps, restricting componentwise. By [F6] this gives a module sheaf $M_d$ with the prescribed local free charts. It is a specified construction, so no choice from a class of possible glued sheaves is used. Define $d\sim d'$ when $M_d$ and $M_{d'}$ are isomorphic as module sheaves. These isomorphisms are families of linear section maps indexed by the set $T$ and compatible with restrictions; thus their existence defines a relation on the set $D$, and identities, inverses and composition show it is an equivalence relation. The quotient $D/{\sim}$ is a set. Every rank-$n$ bundle $E$ is represented: its trivializing opens form a cover $C\subseteq T$, and Choice selects one trivialization from the nonempty set of trivializations on each $U\in C$. Their overlap maps give the matrices above, and the uniqueness assertion of [F6], with those charts fixed, identifies $E$ with $M_d$. Changing trivializations or covers therefore gives the same quotient element exactly when the bundles are isomorphic. This realizes $\mathrm{Vect}_n(X)$ as $D/{\sim}$, and [F1] ensures rank invariance. For $n=0$ the same construction uses empty matrices and gives the zero sheaf. For empty $X$, the empty cover gives the unique module sheaf; it satisfies every rank-$n$ local condition vacuously, so each $\mathrm{Vect}_n(\varnothing)$ is a singleton. [F1, F5, F6, F7, construct]
 
-2.1 By local freeness, $E[0]$ is locally a bounded complex of finite locally free sheaves, so it is an object of $\operatorname{Perf}(X)$. The object-class map in [F3] assigns it a well-defined element of $\pi_0K(X)$, invariant under isomorphism. The unit statement in [F3] identifies the multiplicative unit with the class of $\mathcal O_X[0]$. [F2, F3, step 1.1]
-
-3.1 If $X=\operatorname{Spec}A$ as stated, the hypotheses of [F4] hold; its comparison identifies the spectral and vector-bundle classes on every generator. This establishes the stated notation and affine comparison. No corresponding identification with coherent G-theory is used. [F4, step 2.1] ∎
+2.1 By [F2], the complex $E[0]$, meaning $E$ in degree zero and zero elsewhere, is locally a bounded complex of finite locally free sheaves and hence belongs to $\operatorname{Perf}(X)$. Under the assumed Choice and universe bounds, [F3] supplies an essentially small stable idempotent-complete perfect category and invariance under equivalent small presentations. Apply its object-class comparison on a small presentation; the resulting class in $\pi_0K(X)$ is independent of that presentation and invariant under isomorphism. Its unit assertion gives $1=[\mathcal O_X[0]]$. If $X=\operatorname{Spec}A$ for the stated commutative unital ring, [F4] applies under the same Choice and universe assumptions and identifies these spectral object classes with the bundle generators of the Grothendieck group with its short-exact-sequence relations, interpreted by [F7]. Thus both meanings of $[E]$ agree on affines. No comparison with coherent-sheaf G-theory is used. [F2, F3, F4, F5, F7, step 1.1] ∎

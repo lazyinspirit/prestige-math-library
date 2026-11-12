@@ -9,37 +9,142 @@ deps:
   - thm-author-7ef3227685d9-supported-k0-abelian-devissage-input
   - lem-author-7ef3227685d9-supported-k0-postnikov
   - math:def-axiom-of-choice
+  - math:def-grothendieck-universe-closure-convention
+  - math:def-locally-noetherian-and-noetherian-scheme
+  - math:def-regular-local-ring-geometric-point
+  - math:def-closed-immersion-schemes
+  - math:def-dimension-noetherian-topological-space
+  - math:def-coherent-module-scheme
+  - math:def-support-module-sheaf
+  - math:def-abelian-category
+  - math:def-exact-sequence-and-short-exact-sequence-in-an-abelian-category
+  - math:def-exact-functor-between-abelian-categories
+  - math:def-subcategory-and-full-subcategory
+  - math:def-subobject-and-quotient-object
+  - math:def-equivalence-and-adjoint-equivalence-of-categories
 dependency_roles:
   lem-author-7ef3227685d9-supported-k0-ideal-filtration: mathematical-premise
   thm-author-7ef3227685d9-supported-k0-abelian-devissage-input: mathematical-premise
   lem-author-7ef3227685d9-supported-k0-postnikov: mathematical-premise
   math:def-axiom-of-choice: mathematical-premise
+  math:def-grothendieck-universe-closure-convention: mathematical-premise
+  math:def-locally-noetherian-and-noetherian-scheme: mathematical-premise
+  math:def-regular-local-ring-geometric-point: mathematical-premise
+  math:def-closed-immersion-schemes: mathematical-premise
+  math:def-dimension-noetherian-topological-space: mathematical-premise
+  math:def-coherent-module-scheme: mathematical-premise
+  math:def-support-module-sheaf: mathematical-premise
+  math:def-abelian-category: mathematical-premise
+  math:def-exact-sequence-and-short-exact-sequence-in-an-abelian-category: mathematical-premise
+  math:def-exact-functor-between-abelian-categories: mathematical-premise
+  math:def-subcategory-and-full-subcategory: mathematical-premise
+  math:def-subobject-and-quotient-object: mathematical-premise
+  math:def-equivalence-and-adjoint-equivalence-of-categories: mathematical-premise
 provenance:
   statement: ai-generated
   proof: ai-generated
 proof_strategy: direct
-dependency_level: 13
+dependency_level: 15
+formulation_deps:
+  - lem-author-7ef3227685d9-supported-k0-ideal-filtration
+  - thm-author-7ef3227685d9-supported-k0-abelian-devissage-input
+  - lem-author-7ef3227685d9-supported-k0-postnikov
+  - math:def-axiom-of-choice
+  - math:def-grothendieck-universe-closure-convention
+  - math:def-locally-noetherian-and-noetherian-scheme
+  - math:def-regular-local-ring-geometric-point
+  - math:def-closed-immersion-schemes
+  - math:def-dimension-noetherian-topological-space
+  - math:def-coherent-module-scheme
+  - math:def-support-module-sheaf
+  - math:def-abelian-category
+  - math:def-exact-sequence-and-short-exact-sequence-in-an-abelian-category
+  - math:def-exact-functor-between-abelian-categories
+  - math:def-subcategory-and-full-subcategory
+  - math:def-subobject-and-quotient-object
+  - math:def-equivalence-and-adjoint-equivalence-of-categories
+argument_deps:
+  - lem-author-7ef3227685d9-supported-k0-ideal-filtration
+  - thm-author-7ef3227685d9-supported-k0-abelian-devissage-input
+  - lem-author-7ef3227685d9-supported-k0-postnikov
+  - math:def-axiom-of-choice
+  - math:def-grothendieck-universe-closure-convention
+  - math:def-locally-noetherian-and-noetherian-scheme
+  - math:def-regular-local-ring-geometric-point
+  - math:def-closed-immersion-schemes
+  - math:def-dimension-noetherian-topological-space
+  - math:def-coherent-module-scheme
+  - math:def-support-module-sheaf
+  - math:def-abelian-category
+  - math:def-exact-sequence-and-short-exact-sequence-in-an-abelian-category
+  - math:def-exact-functor-between-abelian-categories
+  - math:def-subcategory-and-full-subcategory
+  - math:def-subobject-and-quotient-object
+  - math:def-equivalence-and-adjoint-equivalence-of-categories
 ---
 
 ## Statement
-Assume AC and the fixed universe bounds. For $i:T\hookrightarrow U$ as above, closed direct image induces a canonical isomorphism
+Assume the Axiom of Choice and fixed suitable Grothendieck universes containing $\omega$ and the scheme data, with the enlargements required by the supported perfect and nonconnective constructions. Let $U$ be a regular Noetherian finite-dimensional scheme and $i:T\hookrightarrow U$ a closed subscheme with coherent defining ideal $\mathcal I=\ker(\mathcal O_U\to i_*\mathcal O_T)$. Write $\mathrm{Coh}(X)$ for coherent $\mathcal O_X$-modules and all their module-sheaf morphisms. Let $\mathcal A_T$ be the full subcategory of $\mathrm{Coh}(U)$ whose objects have zero stalks outside $|T|$, and $\mathcal B_T$ its full subcategory of objects annihilated by $\mathcal I$. For an essentially small abelian category $\mathcal A$, let $G_0(\mathcal A)$ be the group on isomorphism classes with relations $[M]=[M']+[M'']$ for short exact sequences $0\to M'\to M\to M''\to0$, using an equivalent small presentation; set $G_0(X)=G_0(\mathrm{Coh}(X))$.
+
+Closed direct image induces a canonical isomorphism
 $$d:G_0(T)\xrightarrow{\sim}G_0(\mathcal A_T).$$
-Its inverse sends $[M]$ to $\sum_{r=0}^{N-1}[\mathcal I^rM/\mathcal I^{r+1}M]$, with each quotient regarded as a coherent sheaf on $T$. This sum is independent of $N$ and of the permitted filtration. Under forgetting support $G_0(\mathcal A_T)\to G_0(U)$, the composite with $d$ is exactly coherent pushforward $i_*:G_0(T)\to G_0(U)$. The analogous square after the regular perfect comparisons into the specified spectral groups also commutes.
+For $M\in\mathcal A_T$, its inverse sends $[M]$ to $\sum_{r=0}^{N-1}[\mathcal I^rM/\mathcal I^{r+1}M]$, where $N\geq1$ is any integer with $\mathcal I^NM=0$ and each quotient is regarded as a coherent sheaf on $T$. Here $\mathcal I^0M=M$ and $\mathcal I^rM$ is the subsheaf locally generated by products of $r$ ideal sections acting on $M$. This sum is independent of $N$ and equals the quotient sum for any finite decreasing filtration of $M$ by coherent subobjects ending at zero with quotients annihilated by $\mathcal I$.
+
+Let $v:G_0(\mathcal A_T)\to G_0(U)$ forget support. Then $v\circ d=i_*:G_0(T)\to G_0(U)$, where coherent pushforward is induced by the exact closed direct-image functor. For the specified supported and global nonconnective K-theory groups, let $q_T:G_0(\mathcal A_T)\xrightarrow{\sim}\pi_0K_{|T|}(U)$ and $q_U:G_0(U)\xrightarrow{\sim}\pi_0K(U)$ be the inverses of the coherent-Euler comparisons, sending $[M]$ to $[M[0]]$. If $c:\pi_0K_{|T|}(U)\to\pi_0K(U)$ is induced by the actual support inclusion, then $c\circ q_T\circ d=q_U\circ i_*$. No regularity of $T$ is assumed.
+
+## Statement references
+[[lem-author-7ef3227685d9-supported-k0-ideal-filtration]]
+
+[[thm-author-7ef3227685d9-supported-k0-abelian-devissage-input]]
+
+[[lem-author-7ef3227685d9-supported-k0-postnikov]]
+
+[[math:def-axiom-of-choice]]
+
+[[math:def-grothendieck-universe-closure-convention]]
+
+[[math:def-locally-noetherian-and-noetherian-scheme]]
+
+[[math:def-regular-local-ring-geometric-point]]
+
+[[math:def-closed-immersion-schemes]]
+
+[[math:def-dimension-noetherian-topological-space]]
+
+[[math:def-coherent-module-scheme]]
+
+[[math:def-support-module-sheaf]]
+
+[[math:def-abelian-category]]
+
+[[math:def-exact-sequence-and-short-exact-sequence-in-an-abelian-category]]
+
+[[math:def-exact-functor-between-abelian-categories]]
+
+[[math:def-subcategory-and-full-subcategory]]
+
+[[math:def-subobject-and-quotient-object]]
+
+[[math:def-equivalence-and-adjoint-equivalence-of-categories]]
 
 ## Facts & Assumptions
-**Given:** AC, the fixed universe bounds, and the coherent categories $\mathcal A_T$ and $\mathcal B_T\simeq\mathrm{Coh}(T)$ and the finite ideal-power filtrations.
+**Given:** $U,T,i,\mathcal I,\mathcal A_T,\mathcal B_T$ as in the Statement, the Axiom of Choice and the stated suitable universes. Use the actual supported perfect category and nonconnective construction of [F3].
 
-**Goal:** Check the abelian dévissage theorem and identify the actual support-to-global map.
+**Goal:** Check the abelian dévissage hypotheses and identify the actual support-to-global map.
 
-[F1] [[lem-author-7ef3227685d9-supported-k0-ideal-filtration]] supplies exactness, closure under subobjects/quotients and finite filtrations.
+[F1] [[lem-author-7ef3227685d9-supported-k0-ideal-filtration]] supplies the abelian supported coherent categories, the exact equivalence $i_*:\mathrm{Coh}(T)\simeq\mathcal B_T$, exact inclusion $\mathcal B_T\hookrightarrow\mathcal A_T$, closure under ambient subobjects and quotients, and finite ideal-power filtrations with coherent quotients annihilated by $\mathcal I$. Its ideal-power and coherent-sheaf constructions are those in the Statement. Closed direct image is $(i_*F)(V)=F(i^{-1}V)$ with the induced structure-sheaf action; the support-forgetting inclusion retains the same module sheaf and is exact. Extension-closure of $\mathcal B_T$ in $\mathcal A_T$ is not needed.
 
-[F2] [[thm-author-7ef3227685d9-supported-k0-abelian-devissage-input]] gives the degree-zero isomorphism and inverse formula, including filtration independence.
+[F2] [[thm-author-7ef3227685d9-supported-k0-abelian-devissage-input]] gives the degree-zero isomorphism for an essentially small full exact abelian inclusion closed under ambient subobjects and quotients, with finite filtrations having quotients in the subcategory. It gives the inverse quotient-sum formula, filtration independence and additivity, and the short-exact group presentation used in the Statement. Essentially small means equivalent to a category whose objects and morphisms form sets. The imported theorem is used only after its hypotheses have been checked; this item proves its geometric application and naturality locally.
 
-[F3] [[lem-author-7ef3227685d9-supported-k0-postnikov]] gives the natural supported/global comparisons with the specified nonconnective $\pi_0$ by object classes. Its construction uses the essentially small supported perfect category and its coherent heart. These same supplied models provide the essential-smallness premise used in step 1.1; that premise is not supplied by the ordinary ideal-filtration argument in [F1].
+[F3] [[lem-author-7ef3227685d9-supported-k0-postnikov]] gives the natural supported/global coherent-Euler isomorphisms and their inverses $q_T,q_U$ by actual object classes. It fixes the supported perfect category $\operatorname{Perf}_{|T|}(U)$ and the specified nonconnective groups $\pi_0K_{|T|}(U)$ and $\pi_0K(U)$ and their actual support inclusion $c$. Its supplied realization has an essentially small supported perfect category with heart $\mathcal A_T$ and, for $T=U$, coherent heart $\mathrm{Coh}(U)$. These supply the essential-smallness premise in step 1.1; that premise is not supplied by the ordinary ideal-filtration argument in [F1].
 
-[A1] The already assumed [[math:def-axiom-of-choice]] and fixed universes are used in step 1.1 to select equivalent small presentations and discharge the essentially-small abelian dévissage input [F2]. They are also retained when invoking the selected perfect-category realization and nonconnective comparison [F3] in steps 1.1–2.1. Computing the finite quotient sums requires no further choice.
+[F4] The geometric formulation uses [[math:def-locally-noetherian-and-noetherian-scheme]], [[math:def-regular-local-ring-geometric-point]] and [[math:def-dimension-noetherian-topological-space]]: $U$ has a finite affine Noetherian cover, every local ring is regular, and lengths of strict chains of nonempty irreducible closed subsets are bounded, including the empty-space convention. [[math:def-closed-immersion-schemes]] specifies $i$ as a homeomorphism onto a closed subset with surjective structure-sheaf map. [[math:def-coherent-module-scheme]] specifies the coherent modules used here, and [[math:def-support-module-sheaf]] specifies support by nonzero stalks. These are precisely the geometric objects required by [F1] and [F3]; regularity is absolute local-ring regularity, without a base-field smoothness assumption.
+
+[F5] Abelian categories are those of [[math:def-abelian-category]], and the short exact sequences defining the relations of $G_0$ are those of [[math:def-exact-sequence-and-short-exact-sequence-in-an-abelian-category]]. Exact functors between these abelian categories are understood in the additive, left-exact and right-exact sense of [[math:def-exact-functor-between-abelian-categories]]; in particular they preserve the short exact sequences used in steps 1.1 and 2.1. Full subcategories are those of [[math:def-subcategory-and-full-subcategory]], so they retain every ambient morphism between their objects. Subobjects and quotient objects in the filtration and closure hypotheses have the meaning of [[math:def-subobject-and-quotient-object]]; here coherent subsheaf inclusions and their quotient maps are representatives. Equivalence and quasi-inverse have the meaning of [[math:def-equivalence-and-adjoint-equivalence-of-categories]]. The geometric exact equivalence and exact inclusions used in step 1.1 are supplied by [F1], and the induced homomorphisms on the short-exact group presentations are those in [F2].
+
+[A1] The assumed [[math:def-axiom-of-choice]] is used in step 1.1 to select equivalent small presentations for [F2] and is retained for the selected perfect-category realization and nonconnective comparison [F3] in steps 1.1–2.1. The fixed universes satisfy [[math:def-grothendieck-universe-closure-convention]], contain $\omega$ and the scheme data, and permit the enlargements required by [F3]; their existence is a standing size assumption separate from Choice. Computing the finite quotient sums requires no further choice.
 
 ## Proof
-1.1 Both categories are essentially small: in the supported perfect-category realization used by [F3], $\mathcal A_T$ is the heart of the essentially small perfect category, and $\mathrm{Coh}(T)$ is equivalent to its full subcategory $\mathcal B_T$ by [F1]. Choose equivalent small presentations under [A1]. The exactness, subobject/quotient closure and finite-filtration hypotheses of [F2] are supplied by [F1], and essential smallness was just checked. Thus exact inclusion $\mathcal B_T\hookrightarrow\mathcal A_T$ induces an isomorphism. Precompose with the exact equivalence $i_*$ of [F1]. This is precisely $d$, and its inverse is the displayed quotient sum by [F2]. The theorem’s independence statement also shows that any exponent which annihilates $M$ gives the same answer. [A1, F1, F2, F3, construct]
+1.1 The hypotheses in Given and [F4] allow [F1] and [F3] to be applied. Use the categorical conventions of [F5]. Both abelian categories in the dévissage inclusion are essentially small: by [F3], $\mathcal A_T$ is the heart of the essentially small supported perfect category, and its full subcategory $\mathcal B_T$ is therefore essentially small; [F1] identifies $\mathrm{Coh}(T)$ with $\mathcal B_T$. Choose equivalent small presentations under [A1]. The exactness, fullness, ambient subobject/quotient closure and finite-filtration hypotheses of [F2] are supplied by [F1]. Thus exact inclusion $\mathcal B_T\hookrightarrow\mathcal A_T$ induces an isomorphism. The exact equivalence $i_*$ in [F1] induces an isomorphism on the short-exact group presentations: an exact quasi-inverse gives its inverse on sheaf classes and relations. Precomposing with it gives precisely $d$. The inverse formula is the ideal-power quotient sum by [F2], with each quotient transported through the equivalence in [F1]. The independence statement of [F2] applies to every permitted coherent filtration, and in particular to every annihilating exponent $N\geq1$. [A1, F1, F2, F3, F4, F5, construct]
 
-2.1 On a generator $[F]\in G_0(T)$, $d$ sends it to $[i_*F]$ in $G_0(\mathcal A_T)$. Forgetting support sends this to the same coherent sheaf class in $G_0(U)$, which is the definition of closed coherent pushforward. Since the groups are generated by these classes, this proves the first square. By [F3], their images in the supported and global spectral groups are exactly the object classes of $i_*F[0]$ and the actual inclusion sends one to the other. Thus the square after the regular perfect comparisons also commutes. [A1, F1, F3, step 1.1] ∎
+2.1 On a generator $[F]\in G_0(T)$, $d$ sends it to $[i_*F]$ in $G_0(\mathcal A_T)$. The exact support-forgetting inclusion of [F1] sends this to the same coherent sheaf class in $G_0(U)$, which is the definition of closed coherent pushforward. The short-exact group presentation of [F2] therefore gives $v\circ d=i_*$ on the entire group. By [F3], $q_T$ and $q_U$ send these sheaf classes to the classes of the actual perfect objects $i_*F[0]$, and the actual support inclusion sends one to the other. Thus $c\circ q_T\circ d=q_U\circ i_*$ on generators and hence on the entire group, proving the spectral compatibility as well. [A1, F1, F2, F3, F5, step 1.1] ∎

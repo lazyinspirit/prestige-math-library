@@ -11,8 +11,12 @@ PDF p. 10: Equation (4.3)
 
 - [def-multiplicative-filtered-spectrum](item-def-multiplicative-filtered-spectrum)
 - [lem-filtered-stage-exact-sequence](item-lem-filtered-stage-exact-sequence)
+- [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
+
 
 ## Statement
+Assume the Axiom of Choice and the compatible nested Grothendieck universes $U\in V\in W$, with $\omega\in U$, stipulated by the supplied stable spectra and filtration constructions. All indexing diagrams and objects obey those size bounds.
+
 Let $F$ be a multiplicative decreasing filtration on a commutative ring spectrum $E$. For integers $i,j,a,b$, write
 $$q_{i,a}:\pi_aF^i\longrightarrow\pi_aE,\qquad p_{i,a}:\pi_aF^i\longrightarrow\pi_a\operatorname{gr}^iF$$
 for the maps induced by the augmentation and the cofiber projection, respectively, and set $F^i\pi_aE=\operatorname{im}q_{i,a}$. Then
@@ -26,7 +30,6 @@ for $u\in F^i\pi_aE$ and $v\in F^j\pi_bE$. Injectivity of each relevant $q_{r,n}
 A decreasing filtration here is a coherent tower of spectra $F^r$ with maps $F^{r+1}\to F^r$ and compatible maps $F^r\to E$. Its graded piece is the cofiber $\operatorname{gr}^rF=\operatorname{cofib}(F^{r+1}\to F^r)$. Multiplicativity supplies compatible maps $F^i\wedge F^j\to F^{i+j}$ and $\operatorname{gr}^iF\wedge\operatorname{gr}^jF\to\operatorname{gr}^{i+j}$, and makes the augmentation compatible with multiplication on $E$. Products in homotopy groups are those induced by these maps and the canonical smash pairing of sphere spectra. An image filtration consists of the subgroups $F^r\pi_nE$ just defined; a stage lift of an element of one of these subgroups is a preimage under $q_{r,n}$.
 
 ## Facts & Assumptions
-
 **Given:** A multiplicative decreasing filtration $F$ on a commutative ring spectrum $E$ and integers $i,j,a,b$.
 
 **Goal:** Prove the product containment and the projection identity for stage lifts, and prove the stated conditional identity on image groups.
@@ -35,8 +38,9 @@ A decreasing filtration here is a coherent tower of spectra $F^r$ with maps $F^{
 
 [F2] For each $(r,n)$, the stage projection $p_{r,n}$ factors uniquely through the image of $q_{r,n}$ exactly when $\ker q_{r,n}\subseteq\ker p_{r,n}$. In particular, injectivity of $q_{r,n}$ implies this condition. [lem-filtered-stage-exact-sequence](item-lem-filtered-stage-exact-sequence)
 
-## Proof
+[A1] Retain the classical foundations and compatible universe bounds of the supplied constructions, including the Axiom of Choice and $\omega\in U$ for fixed $U\in V\in W$. These are premises of the selected framework; the algebraic image and product arguments below assert no necessity of Choice for the corresponding abstract group facts. [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
 
+## Proof
 **Proof technique:** Apply the augmentation and cofiber compatibilities to representatives, then use the image-factorization criterion.
 
 1.1 Let $u\in F^i\pi_aE$ and $v\in F^j\pi_bE$. By the definition of image, choose $x\in\pi_aF^i$ and $y\in\pi_bF^j$ with $q_{i,a}(x)=u$ and $q_{j,b}(y)=v$. The stage multiplication gives $xy\in\pi_{a+b}F^{i+j}$. Compatibility of multiplication with the augmentation gives $q_{i+j,a+b}(xy)=uv$. Hence $uv$ is in $F^{i+j}\pi_{a+b}E$, proving the containment. [F1, given, construct]

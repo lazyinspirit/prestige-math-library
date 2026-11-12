@@ -2,7 +2,21 @@
 title: Generic localization detects the point subgroup
 status: published
 research_item: lem-supported-generic-rank-kernel
-dependency_level: 20
+dependency_level: 23
+sources:
+  references:
+    - title: Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and
+        threefolds
+      url: https://arxiv.org/abs/2610.22679v1
+      locator: p. 16, final paragraph of the proof of Theorem 6.7
+      reading_limits: For this repair, the supplied extracted text of p. 16, final
+        supported exact sequence and concluding paragraph of Theorem 6.7, was
+        read. It states the article-context generic-localization and
+        smooth-point conclusion over an algebraically closed field. The present
+        perfect-field formulation and its hypothesis checks are justified by the
+        declared suppliers and local argument; this bibliographical reference is
+        not an additional imported premise or a claim to have reconstructed the
+        comparison proofs.
 ---
 
 PDF p. 16: Final paragraph of Theorem 6.7 proof
@@ -16,6 +30,21 @@ PDF p. 16: Final paragraph of Theorem 6.7 proof
 - [lem-koszul-point-support-class](item-lem-koszul-point-support-class)
 - [prop-perfect-k-localization-input](item-prop-perfect-k-localization-input)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
+- [math:thm-regular-equals-smooth-over-perfect-field](https://alphabetamath.cc/item/thm-regular-equals-smooth-over-perfect-field)
+- [math:cor-field-finite-type-over-a-field-is-a-finite-extension](https://alphabetamath.cc/item/cor-field-finite-type-over-a-field-is-a-finite-extension)
+- [math:def-locally-finite-type-and-finite-type-morphism](https://alphabetamath.cc/item/def-locally-finite-type-and-finite-type-morphism)
+- [math:def-locally-noetherian-and-noetherian-scheme](https://alphabetamath.cc/item/def-locally-noetherian-and-noetherian-scheme)
+- [math:thm-noetherian-ring-has-noetherian-spectrum](https://alphabetamath.cc/item/thm-noetherian-ring-has-noetherian-spectrum)
+- [math:lem-noetherian-subspaces-and-compact-opens](https://alphabetamath.cc/item/lem-noetherian-subspaces-and-compact-opens)
+- [math:def-quasi-compact-and-quasi-separated-scheme](https://alphabetamath.cc/item/def-quasi-compact-and-quasi-separated-scheme)
+- [math:lem-closed-immersion-affine-quotient-and-base-change](https://alphabetamath.cc/item/lem-closed-immersion-affine-quotient-and-base-change)
+- [math:thm-noetherian-ring-quotients-and-localisations](https://alphabetamath.cc/item/thm-noetherian-ring-quotients-and-localisations)
+- [math:cor-closed-points-of-spectrum-are-maximal-ideals](https://alphabetamath.cc/item/cor-closed-points-of-spectrum-are-maximal-ideals)
+- [math:def-residue-field-scheme-point](https://alphabetamath.cc/item/def-residue-field-scheme-point)
+- [math:def-affine-open-subscheme](https://alphabetamath.cc/item/def-affine-open-subscheme)
+- [math:def-smooth-morphism-classical](https://alphabetamath.cc/item/def-smooth-morphism-classical)
+- [math:thm-finite-field-extensions-are-algebraic](https://alphabetamath.cc/item/thm-finite-field-extensions-are-algebraic)
+
 
 ## Statement
 Assume the Axiom of Choice and the fixed universe bounds of the completed comparison suppliers. Let $k$ be a perfect field, $U$ a smooth finite-type $k$-scheme of pure dimension three, and $i:C\hookrightarrow U$ an integral closed curve of codimension two, with generic point $\eta$. No smoothness or normality of $C$ is assumed. Use the actual Elmanto–Morrow filtered nonconnective perfect-complex $K$-theory and write $K_C(U)=\operatorname{fib}(K(U)\to K(U\setminus C))$ and $F_C^jK(U)=\operatorname{fib}(F^jK(U)\to F^jK(U\setminus C))$.
@@ -42,12 +71,27 @@ Here integral means reduced and irreducible; a curve is one-dimensional. A perfe
 
 [F4] [lem-koszul-point-support-class](item-lem-koszul-point-support-class) proves under AC that the residue sheaf of a closed smooth point of a finite-type scheme over a perfect field is perfect and supported at that point, using a local Koszul resolution.
 
+
+[F5] Under AC, [math:thm-regular-equals-smooth-over-perfect-field](https://alphabetamath.cc/item/thm-regular-equals-smooth-over-perfect-field) says that a smooth finite-type scheme over a perfect field is regular, including local Noetherianity. [math:def-locally-finite-type-and-finite-type-morphism](https://alphabetamath.cc/item/def-locally-finite-type-and-finite-type-morphism) supplies quasi-compactness and affine neighbourhoods with finitely generated coordinate algebras. [math:def-locally-noetherian-and-noetherian-scheme](https://alphabetamath.cc/item/def-locally-noetherian-and-noetherian-scheme) identifies local Noetherianity plus quasi-compactness with Noetherianity and a finite affine Noetherian cover.
+
+[F6] [math:thm-noetherian-ring-has-noetherian-spectrum](https://alphabetamath.cc/item/thm-noetherian-ring-has-noetherian-spectrum) makes each Noetherian affine chart topologically Noetherian. Under AC, [math:lem-noetherian-subspaces-and-compact-opens](https://alphabetamath.cc/item/lem-noetherian-subspaces-and-compact-opens) makes every subspace of a Noetherian space Noetherian and quasi-compact. [math:def-quasi-compact-and-quasi-separated-scheme](https://alphabetamath.cc/item/def-quasi-compact-and-quasi-separated-scheme) defines the two qcqs conditions, including quasi-compactness of intersections of affine opens. [math:lem-closed-immersion-affine-quotient-and-base-change](https://alphabetamath.cc/item/lem-closed-immersion-affine-quotient-and-base-change) identifies the inverse image of an affine chart under a closed immersion with a quotient spectrum and retains the homeomorphism onto a closed subset. [math:thm-noetherian-ring-quotients-and-localisations](https://alphabetamath.cc/item/thm-noetherian-ring-quotients-and-localisations) makes these quotient rings Noetherian.
+
+[F7] [math:cor-closed-points-of-spectrum-are-maximal-ideals](https://alphabetamath.cc/item/cor-closed-points-of-spectrum-are-maximal-ideals) identifies closed affine points with maximal ideals. [math:def-residue-field-scheme-point](https://alphabetamath.cc/item/def-residue-field-scheme-point) gives $\kappa(\mathfrak p)=\operatorname{Frac}(A/\mathfrak p)$ on $\operatorname{Spec}A$, and hence $\kappa(\mathfrak m)=A/\mathfrak m$ for a maximal ideal. [math:cor-field-finite-type-over-a-field-is-a-finite-extension](https://alphabetamath.cc/item/cor-field-finite-type-over-a-field-is-a-finite-extension) makes a field finitely generated as a $k$-algebra finite over $k$. [math:thm-finite-field-extensions-are-algebraic](https://alphabetamath.cc/item/thm-finite-field-extensions-are-algebraic) says that every element of such a finite extension is a root of a nonzero polynomial over $k$. [math:def-affine-open-subscheme](https://alphabetamath.cc/item/def-affine-open-subscheme) supplies the restricted structure sheaf on an open subscheme, so its stalks and residue fields agree with those in the ambient scheme. [math:def-smooth-morphism-classical](https://alphabetamath.cc/item/def-smooth-morphism-classical) supplies the local standard-smooth meaning of smoothness and its locality on the source.
+
+[A1] [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice) is assumed through the regularity theorem in [F5], the Noetherian compactness and closed-immersion results in [F6], the affine closed-point and smoothness interfaces in [F7], and the supported-category, coherent-group and generic-rank comparisons in [F1]–[F4]. The fixed compatible site and universe bounds are precisely those of [F1]–[F2]; no universe existence is deduced from Choice. The finite cover and finite algebra calculations below require no additional choice assumption. The perfect-field convention and point-residue objects are specified in [F4]; the integral-curve, length and coherent-group conventions are specified in [F2]–[F3].
+
 ## Proof
 
-1.1 A finite-type scheme over a field is Noetherian, quasi-compact and quasi-separated; $U\setminus C$ is quasi-compact because $U$ is Noetherian. Smoothness over the perfect field makes $U$ regular, and its dimension is finite. Thus the hypotheses of [F2] hold. Its localization equivalence identifies the actual fiber $K_C(U)$ with the $K$-spectrum of the full category of perfect complexes supported on $C$. The degree-zero comparison and triangle presentation in the supported dévissage identify its $\pi_0$ with the stated Grothendieck group and canonically with $G_0(C)$. [given, F2]
+1.1 By [F5], $U$ is regular and locally Noetherian. Its finite-type structure morphism is quasi-compact, so $U$ is quasi-compact; hence it is Noetherian and has a finite affine Noetherian cover. By [F6] the spectra in this cover are topologically Noetherian. A descending chain of closed subsets of $U$ stabilizes on each member of the finite cover, and therefore stabilizes globally by taking the largest of their finitely many stabilization indices. Thus $|U|$ is Noetherian. By [F6], $U\setminus C$ and every intersection of affine opens of $U$ are quasi-compact, so $U$ is qcqs. Its dimension is three by hypothesis, in particular finite. [given, F5, F6]
 
-2.1 The pair $C\subset U$ satisfies all hypotheses of [F1]. Transporting the supported graded exact sequence along the actual augmentation $\epsilon_2$ gives the displayed sequence. By [F1] its second arrow takes $[E]$ to the alternating generic-length coefficient times $[C]$, with positive generator. By [F3], under the specific $G_0(C)$ comparison of step 1.1 this coefficient is generic rank, equivalently localization to the generic point in the stated filtered-limit sense. This identifies the actual arrow, rather than inferring it from an abstract isomorphism of its target with $\mathbb Z$. [F1, F3, step 1.1]
+2.1 Pull the finite affine Noetherian cover of $U$ back to $C$. By the closed-immersion quotient description in [F6], these inverse images are affine spectra of quotients of the Noetherian chart rings. Those quotients are Noetherian by [F6]. The inverse images form a finite cover, so [F5] makes $C$ a Noetherian scheme. It is integral and one-dimensional by hypothesis. Thus the curve hypotheses of [F3], as well as the ambient hypotheses of [F2], hold. [given, F5, F6, step 1.1]
 
-3.1 By [F3], the kernel of generic rank on $G_0(C)$ is generated by $[\kappa(x)]$ for closed points $x$ of $C$. Since $C$ is closed in $U$, each such $x$ is closed in $U$. The inverse in [F2] sends $[\kappa(x)]$ to the class of the same residue sheaf, viewed as a perfect complex on $U$ in degree zero. It is supported at $x$; [F4] independently supplies its local perfectness. Consequently the kernel is generated by these point classes. Conversely every perfect complex supported at a closed point has zero stalk at $\eta$, so its alternating generic length is zero. Hence the subgroup generated by all such complexes is exactly the kernel. Exactness in step 2.1 identifies this kernel with the image of $\pi_0F_C^3K(U)$. [F2, F3, F4, step 2.1]
+2.2 The localization equivalence in [F2] now identifies the actual fiber $K_C(U)$ with the $K$-spectrum of the full category of perfect complexes supported on $C$. The degree-zero comparison and triangle presentation in the supported dévissage identify its $\pi_0$ with the stated Grothendieck group and canonically with $G_0(C)$. [F2, step 1.1]
 
-4.1 Suppose $U$ is open in a finite-type $k$-scheme $X$. A closed point of the finite-type $k$-scheme $U$ has residue field finite over $k$. Its image in $X$ is therefore a closed point: on an affine neighbourhood its prime has field quotient finite over $k$, hence is maximal. Since $U$ is smooth over $k$, $X$ is smooth over $k$ at each such point by locality of smoothness on the source. Thus all generators in step 3.1 are supported at closed smooth points of $X$. This proves the final assertion and the lemma. [given, step 3.1] ∎
+3.1 The pair $C\subset U$ satisfies all hypotheses of [F1]. Transporting the supported graded exact sequence along the actual augmentation $\epsilon_2$ gives the displayed sequence. By [F1] its second arrow takes $[E]$ to the alternating generic-length coefficient times $[C]$, with positive generator. By [F3], under the specific $G_0(C)$ comparison of step 2.2 this coefficient is generic rank, equivalently localization to the generic point in the stated filtered-limit sense. This identifies the actual arrow, rather than inferring it from an abstract isomorphism of its target with $\mathbb Z$. [F1, F3, step 2.1, step 2.2]
+
+4.1 By [F3], the kernel of generic rank on $G_0(C)$ is generated by $[\kappa(x)]$ for closed points $x$ of $C$. Since $C$ is closed in $U$, each such $x$ is closed in $U$. The inverse in [F2] sends $[\kappa(x)]$ to the class of the same residue sheaf, viewed as a perfect complex on $U$ in degree zero. It is supported at $x$; [F4] independently supplies its local perfectness. Consequently the kernel is generated by these point classes. Conversely every perfect complex supported at a closed point has zero stalk at $\eta$, so its alternating generic length is zero. Hence the subgroup generated by all such complexes is exactly the kernel. Exactness in step 3.1 identifies this kernel with the image of $\pi_0F_C^3K(U)$. [F2, F3, F4, step 3.1]
+
+5.1 Suppose $U$ is open in a finite-type $k$-scheme $X$, and let $x$ be one of the closed points in step 3.1. By [F5], there is an affine neighbourhood $V=\operatorname{Spec}B$ of $x$ in $U$ with $B$ a finitely generated $k$-algebra. Since $x$ is closed in $U$, it is closed in $V$; by [F7] its ideal $\mathfrak m$ is maximal, and $\kappa(x)=B/\mathfrak m$. This field is a finitely generated $k$-algebra, so [F7] makes $\kappa(x)/k$ finite. The open-subscheme identification in [F7] gives the same residue field when $x$ is viewed in $X$. [given, F5, F7, step 4.1]
+
+6.1 To prove global closedness, let $y\in\overline{\{x\}}$ in $X$ and choose an affine neighbourhood $W=\operatorname{Spec}A$ of $y$. Every open neighbourhood of this specialization contains $x$, so $x\in W$, corresponding to a prime $\mathfrak p$. By [F7], $A/\mathfrak p$ embeds as a $k$-subalgebra in $\kappa(x)=\operatorname{Frac}(A/\mathfrak p)$. By step 5.1 and the finite-extension algebraicity in [F7], every nonzero $a\in A/\mathfrak p$ has a nonzero polynomial relation over $k$. Remove the highest common power of its variable from such a polynomial; since $a\ne0$ in a field, the remaining relation is $c_0+c_1a+\cdots+c_da^d=0$ with $c_0\ne0$ and $d\geq1$. It gives $a^{-1}=-c_0^{-1}(c_1+\cdots+c_da^{d-1})\in A/\mathfrak p$. Thus $A/\mathfrak p$ is a field, $\mathfrak p$ is maximal, and [F7] makes $x$ closed in $W$. As $y$ is still a specialization in $W$, $y=x$. This proves that $x$ is closed in $X$. Finally the smooth affine neighbourhoods in $U$ are also neighbourhoods in $X$ with the same structure sheaves; the source-local smoothness convention in [F7] therefore makes $X$ smooth over $k$ at $x$. All generators in step 4.1 are consequently supported at closed smooth points of $X$, proving the final assertion and the lemma. [given, F7, step 4.1, step 5.1, algebra] ∎

@@ -9,6 +9,7 @@ dependency_level: 4
 
 - [def-stable-spectra-interface](item-def-stable-spectra-interface)
 
+
 ## Statement
 For spectra $A$ and $B$, the cofiber of the canonical inclusion $A\to A\oplus B$ is naturally equivalent to $B$. Under this equivalence the cofiber map is the projection $A\oplus B\to B$, and the connecting map $B\to A[1]$ is zero. Here $\oplus$ denotes the finite coproduct, which is also a product in the stable category.
 

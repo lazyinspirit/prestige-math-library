@@ -14,7 +14,9 @@ PDF p. 4: Motivic dimension vanishing
 
 
 ## Statement
-Let $A\to B\to C$ be a fiber sequence in $D(\mathbb Z)$, and let $N\in\mathbb Z$. If $A$ is supported in cohomological degrees $\leq N$, then $H^N(B)\to H^N(C)$ is surjective and $H^i(B)\to H^i(C)$ is an isomorphism for every $i>N$. If in addition $C$ is supported in degrees $\leq N$, then so is $B$.
+Work in the derived category $D(\mathbb Z)$ of cochain complexes of abelian groups, with its standard shift $[1]$, distinguished triangles and cohomology functors $H^i$. Here a fiber sequence $A\to B\to C$ means a composable pair admitting a morphism $C\to A[1]$ for which $A\to B\to C\to A[1]$ is a distinguished triangle. An object $T$ is supported in cohomological degrees $\leq N$ if $H^i(T)=0$ for every integer $i>N$.
+
+Let $A\to B\to C$ be such a fiber sequence, and let $N\in\mathbb Z$. If $A$ is supported in cohomological degrees $\leq N$, then $H^N(B)\to H^N(C)$ is surjective and $H^i(B)\to H^i(C)$ is an isomorphism for every $i>N$. If in addition $C$ is supported in degrees $\leq N$, then so is $B$.
 
 ## Facts & Assumptions
 **Given:** The specified fiber sequence and integer $N$.
@@ -26,6 +28,6 @@ Let $A\to B\to C$ be a fiber sequence in $D(\mathbb Z)$, and let $N\in\mathbb Z$
 [F2] In the standard derived triangulated structure, distinguished triangles are the triangles isomorphic to localized mapping-cone triangles, and each gives the long exact cohomology sequence. Use the usual fixed-universe size convention for complexes of abelian groups. [math:thm-the-derived-category-inherits-a-triangulated-structure](https://alphabetamath.cc/item/thm-the-derived-category-inherits-a-triangulated-structure)
 
 ## Proof
-1.1 The given fiber sequence extends to its distinguished triangle $A\to B\to C\to A[1]$ in the standard derived structure. Applying [F2] and the cohomology functors [F1], its long exact sequence contains $H^i(A)\to H^i(B)\to H^i(C)\to H^{i+1}(A)$. At $i=N$ the last group is zero, which gives the stated surjectivity. At $i>N$ both outer groups are zero, so the middle arrow is an isomorphism. [F1, F2, given]
+1.1 By the definition of fiber sequence in the statement, choose a completing distinguished triangle $A\to B\to C\to A[1]$ in the standard derived structure. Applying [F2] and the cohomology functors [F1], its long exact sequence contains $H^i(A)\to H^i(B)\to H^i(C)\to H^{i+1}(A)$. At $i=N$ the last group is zero, which gives the stated surjectivity. At $i>N$ both outer groups are zero, so the middle arrow is an isomorphism. [F1, F2, given]
 
 2.1 If $H^i(C)=0$ for $i>N$, the isomorphism in step 1.1 gives $H^i(B)=0$ for those same degrees. This proves the middle upper bound without any splitting or identification of unrelated groups. [F1, step 1.1] ∎

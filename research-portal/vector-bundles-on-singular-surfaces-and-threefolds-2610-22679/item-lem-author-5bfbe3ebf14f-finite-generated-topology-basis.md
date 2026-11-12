@@ -14,6 +14,7 @@ PDF p. 5: Finite refinements and integer sections
 - [def-scheme-sites-and-sheafification](item-def-scheme-sites-and-sheafification)
 - [def-cdh-topology-interface](item-def-cdh-topology-interface)
 
+
 ## Statement
 Let $B$ consist of finite families obtained from finite Nisnevich families and singleton cdp maps by finitely many covering-family compositions, including identities and the empty family over the empty scheme. A sieve is cdh covering exactly when it contains a family in $B$. In particular every covering sieve contains a finite covering family of arrows individually belonging to it. A sieve is closed under precomposition; it is not assumed closed under taking coproducts of arrows.
 

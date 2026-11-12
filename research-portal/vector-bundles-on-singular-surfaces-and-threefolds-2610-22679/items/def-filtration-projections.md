@@ -11,6 +11,10 @@ deps:
   - lem-author-e216acade157-split-determinant-fiber
   - lem-filtered-stage-exact-sequence
   - math:def-axiom-of-choice
+  - math:def-algebraically-closed-field
+  - math:def-quasi-compact-and-quasi-separated-scheme
+  - math:def-integral-closure-and-integrally-closed-domain
+  - math:def-derived-category-of-an-abelian-category
 dependency_roles:
   def-motivic-filtration: mathematical-premise
   def-motivic-cohomology: mathematical-premise
@@ -18,6 +22,10 @@ dependency_roles:
   lem-author-e216acade157-split-determinant-fiber: mathematical-premise
   lem-filtered-stage-exact-sequence: mathematical-premise
   math:def-axiom-of-choice: mathematical-premise
+  math:def-algebraically-closed-field: mathematical-premise
+  math:def-quasi-compact-and-quasi-separated-scheme: mathematical-premise
+  math:def-integral-closure-and-integrally-closed-domain: mathematical-premise
+  math:def-derived-category-of-an-abelian-category: mathematical-premise
 provenance:
   statement: ai-altered
   proof: ai-generated
@@ -28,18 +36,66 @@ sources:
       url: https://arxiv.org/abs/2610.22679v1
       locator: PDF p. 3, conventions; pp. 8–9, Lemma 4.1; p. 10, Section 5 opening;
         pp. 12–13, Section 6 opening
+      statement: The article uses stage-to-graded projections on zeroth homotopy,
+        transports them to image filtration groups in stages zero through two
+        using Lemma 4.1 on normal schemes, and retains the stage domain for the
+        third projection in Section 6.
+      hypotheses: The standing base field is algebraically closed and schemes are
+        qcqs. The low-stage image identification assumes normality. The later
+        third-stage isomorphism in Section 6 assumes a normal threefold and is
+        not imported into this definition.
+      reading_limits: The preceding repair's source record reports reading the frozen
+        article extraction at the p. 3 conventions, pp. 8–9 Lemma 4.1 and its
+        proof, p. 10 Section 5 opening, and pp. 12–13 Section 6 opening. No
+        fresh page-image inspection or original-author defect adjudication is
+        claimed. The local low-stage justification uses the declared
+        determinant-fiber supplier rather than reconstructing the article
+        argument.
     - title: Elden Elmanto and Matthew Morrow, Motivic cohomology of
         equicharacteristic schemes
       url: https://arxiv.org/pdf/2309.08463v1
       locator: arXiv:2309.08463v1 (arXiv stamp 15 September 2023; title-page date 18
         September 2023), printed pp. 21–22 and 27–28, Definitions 4.9/4.23 and
         Theorems 4.10(1)–(2)/4.24(1)–(2)
-      reading_limits: Read the version-specific primary PDF extraction at these
-        definitions, theorem clauses and immediate graded-piece arguments. The
-        trace and descent constructions are imported through the named external
-        supplier; no reconstruction or page-image inspection is claimed.
+      reading_limits: The preceding repair's source record reports reading the
+        version-specific primary PDF extraction at Definitions 4.9/4.23,
+        Theorems 4.10(1)–(2)/4.24(1)–(2), and their immediate graded-piece
+        arguments, on printed pp. 21–22 and 27–28. The trace and descent
+        constructions are imported through the declared source-multiplicative
+        supplier. No reconstruction of those deep proofs or fresh page-image
+        inspection is claimed.
+      statement: Definitions 4.9 and 4.23 construct the actual filtered algebra and
+        define the weight-i complex as its i-th graded cofiber shifted by -2i.
+        Theorems 4.10(1)–(2) and 4.24(1)–(2), with their immediate arguments,
+        identify these as derived complexes and give the natural graded
+        comparison used here.
+      hypotheses: X is a qcqs scheme over Q in Definition 4.9 and Theorem 4.10, or
+        over F_p for a prime p in Definition 4.23 and Theorem 4.24; i is
+        nonnegative here. No finite-type, normality, dimension or convergence
+        hypothesis is used for the graded comparison. Choice and compatible
+        universes are retained as explicit local foundational assumptions.
 proof_strategy: direct
-dependency_level: 19
+dependency_level: 21
+formulation_deps:
+  - def-motivic-filtration
+  - def-motivic-cohomology
+  - thm-author-74a9c17e63f1-source-multiplicative-input
+  - lem-author-e216acade157-split-determinant-fiber
+  - lem-filtered-stage-exact-sequence
+  - math:def-axiom-of-choice
+  - math:def-algebraically-closed-field
+  - math:def-quasi-compact-and-quasi-separated-scheme
+  - math:def-integral-closure-and-integrally-closed-domain
+  - math:def-derived-category-of-an-abelian-category
+argument_deps:
+  - def-motivic-filtration
+  - def-motivic-cohomology
+  - thm-author-74a9c17e63f1-source-multiplicative-input
+  - lem-author-e216acade157-split-determinant-fiber
+  - lem-filtered-stage-exact-sequence
+  - math:def-axiom-of-choice
+  - math:def-quasi-compact-and-quasi-separated-scheme
+  - math:def-derived-category-of-an-abelian-category
 ---
 
 ## Definition
@@ -63,6 +119,14 @@ For $i=3$ the stage projection has domain $\pi_0F^3_{\mathrm{mot}}K(X)$. The low
 
 [[lem-author-e216acade157-split-determinant-fiber]]
 
+[[math:def-algebraically-closed-field]]
+
+[[math:def-quasi-compact-and-quasi-separated-scheme]]
+
+[[math:def-integral-closure-and-integrally-closed-domain]]
+
+[[math:def-derived-category-of-an-abelian-category]]
+
 ## Facts & Assumptions
 **Given:** A field $k$, a qcqs $k$-scheme $X$, Choice, compatible site and universe size bounds, and $i\geq0$. For the image-domain convention in stages one and two, also assume that $k$ is algebraically closed and $X$ is normal.
 
@@ -76,18 +140,25 @@ For $i=3$ the stage projection has domain $\pi_0F^3_{\mathrm{mot}}K(X)$. The low
 
 [F4] [[lem-filtered-stage-exact-sequence]] gives homotopy exactness and the criterion for a stage projection to descend to its image: the kernel of the augmentation must lie in the kernel of the projection. In particular an injective augmentation suffices.
 
+[F5] [[math:def-algebraically-closed-field]] defines the algebraic-closure condition in the stated normal special case. [[math:def-quasi-compact-and-quasi-separated-scheme]] defines the two scheme conditions in qcqs, and [[math:def-integral-closure-and-integrally-closed-domain]] defines integrally closed domains in the inline normality convention. [[math:def-derived-category-of-an-abelian-category]] fixes the cochain shift $C[n]^a=C^{a+n}$ with differential $(-1)^n d_C^{a+n}$, so $H^0(C[n])=H^n(C)$.
+
+## External input
+The graded-comparison premise documented in reference 1 is used through [[thm-author-74a9c17e63f1-source-multiplicative-input]] in [F2], on the actual tower and complexes of [F1]. Prime-field restriction and the stage-to-image transport below are local arguments. Reference 0 records the original projection convention and its original normal scope; it supplies no additional third-stage injectivity premise.
+
 ## Justification
 1.1 Let $\mathbb F$ be the prime field of $k$. Forgetting to $\mathbb F$ preserves the underlying qcqs scheme and takes each $k$-morphism to an $\mathbb F$-morphism. Under the Choice and size assumptions in [F1], restrict the natural graded equivalence in [F2] along this forgetful functor. By the definitions in [F1], its source and target are exactly the specified tower's graded cofiber and the specified shifted motivic complex on $X$. This applies over every field $k$ without a finite-type or convergence hypothesis. [F1, F2, given]
 
-1.2 Apply [F3] to the given qcqs $X$. Evaluating $d\kappa\simeq\mathrm{id}$ at $X$ makes $\pi_1S(X)\to\pi_1B(X)$ surjective. The actual fiber sequence therefore has zero boundary into $\pi_0T(X)$, and its transition $\pi_0F^2_{\mathrm{mot}}K(X)\to\pi_0F^1_{\mathrm{mot}}K(X)$ is injective. The first-stage augmentation is injective by the rank-fiber assertion in [F3]. Their composite is the second-stage augmentation by [F1], so it too is injective. Stage zero has its augmentation equivalence. Thus every $q_i$ for $0\leq i\leq2$ is injective and is surjective onto its image by definition; in particular this applies on the stated normal qcqs schemes. [F1, F3, F4, given]
+1.2 Apply the two injections supplied by [F3] to the given qcqs $X$: the second-stage-to-first-stage map on $\pi_0$ and the first-stage augmentation into $K_0(X)$ are injective. By the compatible augmentations in [F1], their composite is the second-stage augmentation, so it too is injective. Stage zero has its augmentation equivalence by [F1]. Thus every $q_i$ for $0\leq i\leq2$ is injective and is surjective onto its image by definition; in particular this applies on the stated normal qcqs schemes. [F1, F3, given]
 
-2.1 The cofiber sequence $F^{i+1}_{\mathrm{mot}}K(X)\to F^i_{\mathrm{mot}}K(X)\to\operatorname{gr}^iF_{\mathrm{mot}}K(X)$ and step 1.1 give the stage-to-complex map. Applying $\pi_0$ identifies its target with $H^0(\mathbb Z(i)_{\mathrm{mot}}(X)[2i])=H^{2i,i}_{\mathrm{mot}}(X,\mathbb Z)$. This defines the displayed homomorphism for every $i\geq0$, naturally under pullback. [F1, F2, F4, step 1.1]
+2.1 The cofiber sequence $F^{i+1}_{\mathrm{mot}}K(X)\to F^i_{\mathrm{mot}}K(X)\to\operatorname{gr}^iF_{\mathrm{mot}}K(X)$ and step 1.1 give the stage-to-complex map. Applying $\pi_0$ and the cochain shift convention in [F5] identifies its target with $H^0(\mathbb Z(i)_{\mathrm{mot}}(X)[2i])=H^{2i,i}_{\mathrm{mot}}(X,\mathbb Z)$. This defines the displayed homomorphism for every $i\geq0$, naturally under pullback. [F1, F2, F4, F5, step 1.1]
 
 3.1 Each $q_i$ in step 1.2 is an isomorphism of abelian groups. Compose its inverse with the projection in step 2.1 to obtain the displayed image-domain homomorphism. It is the unique map whose composite with $q_i$ is the stage projection, since $q_i$ is surjective. Equivalently, [F4]'s kernel criterion holds because the augmentation is injective. The construction is natural and agrees with the same transport in the finite-type special case. [F1, F4, step 2.1, step 1.2]
 
 4.1 Step 1.2 identifies only the augmentations in stages zero, one and two. It gives no third-stage injectivity, so $p_3$ retains the stage domain of step 2.1 until a separate result supplies image-domain identification or descent. This establishes all stated conventions. [step 2.1, step 1.2, step 3.1] ∎
 
-The supplied article PDF text was read at its conventions on p. 3, Lemma 4.1 and proof on pp. 8–9, Section 5 opening on p. 10, and Section 6 opening on pp. 12–13. The version-specific Elmanto–Morrow reading is recorded in the reference above. The current definitions, graded source input, stage-exactness argument, determinant-fiber proof and its rank-zero and global-Picard suppliers were inspected for these applications. Their underlying motivic, determinant and descent constructions are used through those contracts, not reconstructed here. The exact outside-resolution packet, its low-filtration proposal and the relevant genuine rejected response were consulted as proposals and historical evidence; they confer no acceptance. The separate finite-type low-homotopy lemma remains unchanged.
-
 ## Reading limits
-The supplied article PDF text was read at its conventions on p. 3, Lemma 4.1 and proof on pp. 8–9, Section 5 opening on p. 10, and Section 6 opening on pp. 12–13. The version-specific Elmanto–Morrow reading is recorded in the reference above. The current definitions, graded source input, stage-exactness argument, determinant-fiber proof and its rank-zero and global-Picard suppliers were inspected for these applications. Their underlying motivic, determinant and descent constructions are used through those contracts, not reconstructed here. The exact outside-resolution packet, its low-filtration proposal and the relevant genuine rejected response were consulted as proposals and historical evidence; they confer no acceptance. The separate finite-type low-homotopy lemma remains unchanged.
+For this adjudication, read the complete current assigned body and all ten direct supplier bodies. In particular, the determinant-fiber supplier's Statement explicitly supplies both component injections, and its Proof step 2.1 obtains the first injection from a pointed retraction. The repaired step 1.2 uses those supplied injections directly, without a new space-level exactness argument. The other declared contracts supply the actual filtered spectrum, motivic cohomology, graded comparison, cochain shift, image-group transport and formulation conditions. Their prerequisite chains are not audited here.
+
+Read the mathematical bodies of all eight current direct consumers: the surface classification, zeroth- and first-projection lemmas, second-piece rank/determinant lemma, second-projection proposition, exterior-square calculation, perfect-image formula and low-dimensional quotient. Their projection uses remain compatible. The Definition, hypotheses, stage domains and dependency edges are unchanged, so this argument-only repair requests no consumer edit or further interface propagation.
+
+The citation reading limits in the frontmatter are historical records of the preceding repair, not fresh reading credit for this adjudication. No PDF, page image or new external statement was read or imported in this round. The actual graded comparison and determinant constructions are used through their current declared supplier contracts. No original-author defect finding, independent repair acceptance, prerequisite-source audit or library publication is claimed. Central rendering and changed-item rejudgment remain controller tasks.

@@ -8,10 +8,12 @@ deps:
   - def-author-cf6ede58b450-site-plus-data
   - lem-author-cf6ede58b450-plus-presheaf
   - lem-author-cf6ede58b450-plus-separated
+  - math:def-natural-transformation
 dependency_roles:
   def-author-cf6ede58b450-site-plus-data: mathematical-premise
   lem-author-cf6ede58b450-plus-presheaf: mathematical-premise
   lem-author-cf6ede58b450-plus-separated: mathematical-premise
+  math:def-natural-transformation: mathematical-premise
 provenance:
   statement: ai-generated
   proof: ai-generated
@@ -27,11 +29,13 @@ For a presheaf F and a sheaf G of sets on a small site, composition with $\eta_F
 
 [F2] The plus construction and its unit are natural by [[lem-author-cf6ede58b450-plus-presheaf]]; local equality of F-sections implies equality of their unit images by [[lem-author-cf6ede58b450-plus-separated]].
 
+[F3] Natural maps mean natural transformations, with components commuting with every restriction, as defined in [[math:def-natural-transformation]].
+
 ## Proof
 **Given:** A natural map u: F → G with G a sheaf.
 
 **Goal:** Construct its unique extension over $\eta_F$ and prove naturality.
 
-1.1 For a representative (R,s) of an element of F+(X), the values $u(s_f)$ form a matching family in G on R. The sheaf condition gives a unique section of G(X) restricting to them. Equivalent representatives give the same section because their glued sections agree on a common covering sieve. Pullback and uniqueness show that this assignment is natural and extends u. [F1, F2, given]
+1.1 For a representative (R,s) of an element of F+(X), the values $u(s_f)$ form a matching family in G on R. The sheaf condition gives a unique section of G(X) restricting to them. Equivalent representatives give the same section because their glued sections agree on a common covering sieve. Pullback and uniqueness show that this assignment is natural and extends u. [F1, F2, F3, given]
 
-2.1 If v: F+ → G also extends u, then on each f in R its value on the class of (R,s) restricts to $u(s_f)$: the restricted class equals $\eta_F(s_f)$, because these representatives agree on $f^*R$. The sheaf condition therefore forces v to equal the extension from step 1.1. Uniqueness also makes the bijection natural in F and G. [F1, F2, step 1.1] ∎
+2.1 If v: F+ → G also extends u, then on each f in R its value on the class of (R,s) restricts to $u(s_f)$: the restricted class equals $\eta_F(s_f)$, because these representatives agree on $f^*R$. The sheaf condition therefore forces v to equal the extension from step 1.1. Uniqueness also makes the bijection natural in F and G. [F1, F2, F3, step 1.1] ∎

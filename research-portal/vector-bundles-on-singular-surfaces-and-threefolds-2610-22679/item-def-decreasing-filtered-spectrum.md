@@ -11,6 +11,7 @@ PDF p. 3: FilSp and the image filtration
 
 - [def-stable-spectra-interface](item-def-stable-spectra-interface)
 
+
 ## Definition
 Let $E$ be a spectrum. A **decreasing filtration on $E$** consists of spectra $F^jE$, indexed by $j\in\mathbb Z$, and a coherent diagram whose transition maps $F^jE\to F^kE$ are defined whenever $j\geq k$, together with a coherent compatible family of maps $F^jE\to E$. Thus the composite $F^{j+1}E\to F^jE\to E$ is identified with the given map $F^{j+1}E\to E$. Coherent means that the maps, their composition identifications, and all higher compatibility data form a diagram and a cone in the infinity-category of spectra.
 

@@ -2,7 +2,7 @@
 title: One coherent K-flat family and its supplied perfect fibers
 status: published
 research_item: lem-author-c5bc2838d897-kcoherent-kflat-enhancement-comparison
-dependency_level: 5
+dependency_level: 7
 ---
 
 PDF p. 3: Nonconnective algebraic K theory: enhanced prerequisite interface
@@ -16,6 +16,8 @@ PDF p. 3: Nonconnective algebraic K theory: enhanced prerequisite interface
 - [def-scheme-perfect-complexes](item-def-scheme-perfect-complexes)
 - [lem-author-c5bc2838d897-kflat-addendum-localization-equivalence](item-lem-author-c5bc2838d897-kflat-addendum-localization-equivalence)
 - [lem-author-c5bc2838d897-monoidal-transport-product-family](item-lem-author-c5bc2838d897-monoidal-transport-product-family)
+- [math:def-quasi-compact-and-quasi-separated-scheme](https://alphabetamath.cc/item/def-quasi-compact-and-quasi-separated-scheme)
+
 
 ## Statement
 Assume AC and use schemes and sheaves in a fixed universe, with larger universes for their categories. There is one coherent diagram
@@ -29,9 +31,11 @@ whose fibers are stable, whose tensor is exact separately in each variable, whos
 
 **Goal:** Construct the family before identifying its fibers, and verify every family-localization hypothesis.
 
+[A1] Retain [AC](https://alphabetamath.cc/item/def-axiom-of-choice) for the imported K-flat resolutions and choices of representatives, cocartesian lifts and localization presentations in [F1], [F2] and [F4]. All choices range over sets in the chosen larger universes. Use the nested Grothendieck-universe convention in the Definition of [F2]; their existence is a separate standing size assumption, not a consequence of AC.
+
 [F1] [thm-author-c5bc2838d897-kcoherent-kflat-sheaf-input](item-thm-author-c5bc2838d897-kcoherent-kflat-sheaf-input) supplies K-flat resolutions, closure under shifts/cones/tensor, and preservation of K-flat objects and their quasi-isomorphisms by degreewise pullback.
 
-[F2] [thm-author-c5bc2838d897-kcoherent-enhanced-localization-input](item-thm-author-c5bc2838d897-kcoherent-enhanced-localization-input) imports Hinich's functorial/family localization, its marked-cocartesian hypotheses and symmetric monoidal universal property; it also imports the nerve/opfibration, chain-interval and stable-Verdier comparisons.
+[F2] [thm-author-c5bc2838d897-kcoherent-enhanced-localization-input](item-thm-author-c5bc2838d897-kcoherent-enhanced-localization-input) imports Hinich's functorial/family localization, its marked-cocartesian hypotheses and symmetric monoidal universal property; it also imports the nerve/opfibration, chain-interval and stable-Verdier comparisons. Its Definition fixes the universe, ordinary nerve, infinity-category, marked localization, cocartesian fibration, stable/exact and finite-pointed-set conventions used here. Write $\operatorname{CAlg}(\operatorname{Cat}_{\infty})$ for symmetric monoidal infinity-categories and strong symmetric monoidal functors, modeled by the Segal/unit families and transports of [F5].
 
 [F3] [thm-author-4f716d60801a-derived-enhancement-input](item-thm-author-4f716d60801a-derived-enhancement-input) identifies the supplied 𝒟(X) with localization of all sheaf complexes. [def-scheme-perfect-complexes](item-def-scheme-perfect-complexes) defines its full perfect fibers but chooses no scheme-indexed pullback or tensor diagram.
 
@@ -39,8 +43,10 @@ whose fibers are stable, whose tensor is exact separately in each variable, whos
 
 [F5] [lem-author-c5bc2838d897-monoidal-transport-product-family](item-lem-author-c5bc2838d897-monoidal-transport-product-family) converts an actual product-base cocartesian family with pointwise Segal/unit equivalences into coherent strong symmetric monoidal transports by straightening and currying.
 
+[F6] [math:def-quasi-compact-and-quasi-separated-scheme](https://alphabetamath.cc/item/def-quasi-compact-and-quasi-separated-scheme) defines quasi-compact and quasi-separated schemes. Here $\operatorname{Sch}_{qcqs}$ has those schemes in the fixed universe as objects and all scheme morphisms between them as arrows, as in the size and scheme convention of [F2].
+
 ## Proof
-1.1 Construct an ordinary Grothendieck opfibration E→B₀, where B₀=Sch_qcqs^op×Fin_*. Its objects over (X,⟨n⟩) are n-tuples of objects of F(X). For a base map (Y,⟨n⟩)→(X,⟨m⟩) given by f:X→Y and α:⟨n⟩→⟨m⟩, transport sends ($P_i$) to (⊗_{α(i)=j}f*$P_i$)_{1≤j≤m}, with the empty tensor $O_X$. A morphism over this base map is a tuple of chain maps from that transported tuple to the target tuple. Compose using composition of chain maps, canonical pullback-composition isomorphisms and the signed tensor associativity/symmetry. These comparison isomorphisms form an ordinary pseudofunctor: inverse-image composition and relative tensor associativity follow from their universal properties, and all paths give the same maps on elementary local tensors; the Koszul sign rule supplies the same permutation sign. Hence their unit, pentagon, symmetry and interchange equations hold before localization. The Grothendieck construction therefore is an ordinary category with associative composition, and the displayed identity maps from each transported tuple are its opcartesian arrows. By [F2], N(E)→N(B₀) is a cocartesian fibration. This encodes the entire scheme/tensor diagram, rather than isolated functors. [F1, F2, construct]
+1.1 Construct an ordinary Grothendieck opfibration E→B₀, where B₀=Sch_qcqs^op×Fin_*. Its objects over (X,⟨n⟩) are n-tuples of objects of F(X). For a base map (Y,⟨n⟩)→(X,⟨m⟩) given by f:X→Y and α:⟨n⟩→⟨m⟩, transport sends ($P_i$) to (⊗_{α(i)=j}f*$P_i$)_{1≤j≤m}, with the empty tensor $O_X$. A morphism over this base map is a tuple of chain maps from that transported tuple to the target tuple. Compose using composition of chain maps, canonical pullback-composition isomorphisms and the signed tensor associativity/symmetry. These comparison isomorphisms form an ordinary pseudofunctor: inverse-image composition and relative tensor associativity follow from their universal properties, and all paths give the same maps on elementary local tensors; the Koszul sign rule supplies the same permutation sign. Hence their unit, pentagon, symmetry and interchange equations hold before localization. The Grothendieck construction therefore is an ordinary category with associative composition, and the displayed identity maps from each transported tuple are its opcartesian arrows. By [F2], N(E)→N(B₀) is a cocartesian fibration. This encodes the entire scheme/tensor diagram, rather than isolated functors. [A1, F1, F2, F6, construct]
 
 2.1 Mark only equivalences in the base. In each fiber mark componentwise quasi-isomorphisms, and in E mark a map over a base equivalence exactly when its vertical component after an opcartesian lift is componentwise a quasi-isomorphism. To justify the saturation requirement, first view the same actual transport formulas as a pseudofunctor of pairs (F(X)^n,$W_X^n$). The fiber markings are saturated, since quasi-isomorphisms are the inverse images of isomorphisms under cohomology; every transport preserves them. The Grothendieck construction for the wide subcategories $W_X^n$ and its inclusion into E give a natural diagram of these saturated pairs, hence a functor B→Cat_∞^+. Every base equivalence is carried to an equivalence of pairs. Hinich Lemma 2.1.6, with Remark 2.1.2, therefore equips E→B with the saturated total marking just described. This invokes the marked-family classification, rather than trying to infer saturation from two-out-of-three alone. The four hypotheses of Hinich Definition 2.1.1 now hold. The underlying map is cocartesian by step 1.1; lifts of marked base edges have identity vertical components; every transport preserves markings because f* preserves K-flat quasi-isomorphisms and tensoring K-flat complexes preserves quasi-isomorphisms; and transports over base equivalences are relative equivalences, hence equivalences after localization. For active Fin_* maps the same tensor argument verifies the additional hypothesis of Hinich Proposition 3.2.2; inert transports merely select coordinates. No morphism over a noninvertible scheme or Fin_* map is marked. [F1, F2, step 1.1]
 

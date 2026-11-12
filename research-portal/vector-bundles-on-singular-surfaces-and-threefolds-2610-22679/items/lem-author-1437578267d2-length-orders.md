@@ -7,18 +7,89 @@ domain: mathematics
 deps:
   - math:def-composition-series-and-length-of-a-module
   - math:cor-length-is-additive-in-short-exact-sequences
-  - math:thm-dimension-formula-for-affine-domains
+  - math:def-integral-scheme
+  - math:def-locally-finite-type-and-finite-type-morphism
+  - math:def-dimension-noetherian-topological-space
+  - lem-adjudicate-b5ccab493b5a-curve-local-rings
+  - math:lem-integral-finite-type-scheme-function-field
+  - math:def-principal-distinguished-subset-of-spectrum
+  - math:lem-zariski-closed-set-axioms
+  - math:lem-curve-closed-subsets-finite
+  - math:thm-radical-as-intersection-of-primes
   - math:def-axiom-of-choice
+  - math:def-algebraic-cycle-and-cycle-group
+  - math:def-valuation-on-a-field
+  - math:def-discrete-valuation
+  - math:def-quotient-module
+  - math:def-exact-and-short-exact-sequences-of-modules
+  - math:def-sum-and-product-of-ideals
+  - math:thm-sum-and-product-of-ideals-are-ideals
+  - math:thm-generated-ideal-description-in-a-commutative-ring
+  - math:lem-hh-finite-spanning-list-contains-a-basis
+  - math:def-vector-space
 dependency_roles:
+  math:def-vector-space: mathematical-premise
   math:def-composition-series-and-length-of-a-module: mathematical-premise
   math:cor-length-is-additive-in-short-exact-sequences: mathematical-premise
-  math:thm-dimension-formula-for-affine-domains: mathematical-premise
+  math:def-integral-scheme: mathematical-premise
+  math:def-locally-finite-type-and-finite-type-morphism: mathematical-premise
+  math:def-dimension-noetherian-topological-space: mathematical-premise
+  lem-adjudicate-b5ccab493b5a-curve-local-rings: mathematical-premise
+  math:lem-integral-finite-type-scheme-function-field: mathematical-premise
+  math:def-principal-distinguished-subset-of-spectrum: mathematical-premise
+  math:lem-curve-closed-subsets-finite: mathematical-premise
+  math:thm-radical-as-intersection-of-primes: mathematical-premise
   math:def-axiom-of-choice: mathematical-premise
+  math:def-algebraic-cycle-and-cycle-group: mathematical-premise
+  math:def-valuation-on-a-field: mathematical-premise
+  math:def-discrete-valuation: mathematical-premise
+  math:def-quotient-module: mathematical-premise
+  math:def-exact-and-short-exact-sequences-of-modules: mathematical-premise
+  math:def-sum-and-product-of-ideals: mathematical-premise
+  math:thm-sum-and-product-of-ideals-are-ideals: mathematical-premise
+  math:thm-generated-ideal-description-in-a-commutative-ring: mathematical-premise
+  math:lem-hh-finite-spanning-list-contains-a-basis: mathematical-premise
+  math:lem-zariski-closed-set-axioms: mathematical-premise
 proof_strategy: direct
 provenance:
   statement: ai-generated
   proof: ai-generated
-dependency_level: 0
+dependency_level: 1
+formulation_deps:
+  - math:def-composition-series-and-length-of-a-module
+  - math:def-integral-scheme
+  - math:def-locally-finite-type-and-finite-type-morphism
+  - math:def-dimension-noetherian-topological-space
+  - lem-adjudicate-b5ccab493b5a-curve-local-rings
+  - math:lem-integral-finite-type-scheme-function-field
+  - math:def-axiom-of-choice
+  - math:def-algebraic-cycle-and-cycle-group
+  - math:def-valuation-on-a-field
+  - math:def-discrete-valuation
+  - math:def-quotient-module
+argument_deps:
+  - math:def-composition-series-and-length-of-a-module
+  - math:cor-length-is-additive-in-short-exact-sequences
+  - math:def-integral-scheme
+  - math:def-locally-finite-type-and-finite-type-morphism
+  - math:def-dimension-noetherian-topological-space
+  - lem-adjudicate-b5ccab493b5a-curve-local-rings
+  - math:lem-integral-finite-type-scheme-function-field
+  - math:def-principal-distinguished-subset-of-spectrum
+  - math:lem-zariski-closed-set-axioms
+  - math:lem-curve-closed-subsets-finite
+  - math:thm-radical-as-intersection-of-primes
+  - math:def-axiom-of-choice
+  - math:def-algebraic-cycle-and-cycle-group
+  - math:def-valuation-on-a-field
+  - math:def-discrete-valuation
+  - math:def-quotient-module
+  - math:def-exact-and-short-exact-sequences-of-modules
+  - math:def-sum-and-product-of-ideals
+  - math:thm-sum-and-product-of-ideals-are-ideals
+  - math:thm-generated-ideal-description-in-a-commutative-ring
+  - math:lem-hh-finite-spanning-list-contains-a-basis
+  - math:def-vector-space
 ---
 
 ## Statement
@@ -29,15 +100,25 @@ Assume AC. Let $T$ be an integral finite-type curve over a field, $K=k(T)$, and 
 
 **Goal:** Establish the length formula and divisor homomorphism.
 
-[F1] Module length counts the factors of a composition series and is additive in short exact sequences of finite-length modules. [[math:def-composition-series-and-length-of-a-module]], [[math:cor-length-is-additive-in-short-exact-sequences]]
+[F1] Module length counts the simple factors of a composition series, is independent of the chosen series, and is additive in short exact sequences; the middle module has finite length if and only if both end modules do. [[math:def-composition-series-and-length-of-a-module]], [[math:cor-length-is-additive-in-short-exact-sequences]]
 
-[F2] Closed-point local rings of a finite-type integral curve are one-dimensional noetherian local domains, and a proper closed subset of such a curve is finite. [[math:thm-dimension-formula-for-affine-domains]], [[math:def-axiom-of-choice]]
+[F2] A curve here has chain dimension one. Integral means nonempty, reduced and irreducible; finite type means locally of finite type and quasi-compact. For each closed $x$, $R=\mathcal O_{T,x}$ is a Noetherian local domain with a nonzero maximal ideal $\mathfrak m$, residue field $\kappa(x)=R/\mathfrak m$, and only the primes $(0)$ and $\mathfrak m$. All its ideals are finitely generated. Restriction embeds $R$ into $K$ and identifies $\operatorname{Frac}R=K$; every closed point has an affine neighbourhood $U=\operatorname{Spec}A$ with $A$ a finite-type algebra over the base field. On any such finite-type affine chart at a closed point, $a/s$ is a unit exactly when its numerator is outside the prime of that point. [[math:def-integral-scheme]], [[math:def-locally-finite-type-and-finite-type-morphism]], [[math:def-dimension-noetherian-topological-space]], [[lem-adjudicate-b5ccab493b5a-curve-local-rings]]
+
+[F3] On every nonempty affine open $U=\operatorname{Spec}A\subset T$, $K=k(T)=\mathcal O_{T,\eta}$ is canonically $\operatorname{Frac}A$, and $\eta$ corresponds to $(0)$. The sets $V(I)$ are Zariski closed in $\operatorname{Spec}A$, so the principal distinguished subset $D(c)=\{\mathfrak p:c\notin\mathfrak p\}$, the complement of $V((c))$, is open in $U$. Every proper closed subset of $T$ is a finite set of closed points. [[math:lem-integral-finite-type-scheme-function-field]], [[lem-adjudicate-b5ccab493b5a-curve-local-rings]], [[math:def-principal-distinguished-subset-of-spectrum]], [[math:lem-zariski-closed-set-axioms]], [[math:lem-curve-closed-subsets-finite]]
+
+[F4] For an ideal $I$ of a commutative ring, $\sqrt I=\{r:r^n\in I\text{ for some }n\ge1\}$ is the intersection of the primes containing $I$. AC is assumed and used through this radical theorem and through the curve and local-ring suppliers; the remaining choices below are finite. [[math:thm-radical-as-intersection-of-primes]], [[math:def-axiom-of-choice]], [[math:lem-curve-closed-subsets-finite]], [[lem-adjudicate-b5ccab493b5a-curve-local-rings]]
+
+[F5] The zero-cycle group is $Z_0(T)=\bigoplus_{x\in T\text{ closed}}\mathbb Z[x]$, with $[x]$ the reduced closed-point cycle. Its elements are finite formal integer sums. [[math:def-algebraic-cycle-and-cycle-group]]
+
+[F6] In the DVR clause, a uniformizer $\pi$ is a nonzero nonunit generating the maximal ideal, and every nonzero element is a unit times a nonnegative power of $\pi$. The normalized valuation assigns $r-s$ to $u\pi^r/(v\pi^s)$ for units $u,v$. A valuation is multiplicative in additive notation and satisfies the inequality for sums; it is discrete when its values on nonzero elements are all of $\mathbb Z$. [[math:def-valuation-on-a-field]], [[math:def-discrete-valuation]]
+
+[F7] Quotients such as $R/aR$ are quotient modules with their induced scalar action. Short exact means that the first map is injective, the last is surjective, and the image of the first equals the kernel of the last. Sums and products of ideals are ideals, with products consisting of finite sums of products; write $\mathfrak m^0=R$ and $\mathfrak m^{j+1}=\mathfrak m^j\mathfrak m$. An ideal generated by a finite list consists of its finite linear combinations. A vector space over a field is an abelian group with a scalar action satisfying both distributive laws, associativity of the scalar action and the identity-scalar law. A finite spanning list in a vector space contains a basis. [[math:def-quotient-module]], [[math:def-exact-and-short-exact-sequences-of-modules]], [[math:def-sum-and-product-of-ideals]], [[math:thm-sum-and-product-of-ideals-are-ideals]], [[math:thm-generated-ideal-description-in-a-commutative-ring]], [[math:def-vector-space]], [[math:lem-hh-finite-spanning-list-contains-a-basis]]
 
 ## Proof
-1.1 For nonzero $a\in R$, if $a$ is not a unit, the only prime containing $(a)$ is the maximal ideal $\mathfrak m$. Choose generators $u_i$ of $\mathfrak m$ and exponents $e_i>0$ with $u_i^{e_i}\in(a)$. A sufficiently high power of $\mathfrak m$ lies in $(a)$. The successive quotients of the resulting finite filtration of $R/aR$ are finite-dimensional over $R/\mathfrak m$, and hence have finite composition series. The unit case gives the zero module. [F1, F2, algebra]
+1.1 Let $0\ne a\in R$ be a nonunit. By F2 the only prime containing $(a)$ is $\mathfrak m$, so F4 gives $\sqrt{(a)}=\mathfrak m$. Write $\mathfrak m=(u_1,\ldots,u_r)$ and choose integers $e_i\ge1$ with $u_i^{e_i}\in(a)$. For $N=1+\sum_i(e_i-1)$, each degree-$N$ monomial in the $u_i$ contains some $u_i^{e_i}$. Expanding products using F7 therefore gives $\mathfrak m^N\subseteq(a)$. The filtration of $R/aR$ by $M_j=(\mathfrak m^j+(a))/(a)$ for $0\le j\le N$ ends in zero. Each $M_j/M_{j+1}$ is annihilated by $\mathfrak m$ and generated by the finitely many degree-$j$ monomials in the $u_i$. Put $Q_j=M_j/M_{j+1}$ and define $(r+\mathfrak m)q=rq$ for $q\in Q_j$. If $r-r'\in\mathfrak m$, then $(r-r')q=0$, so this action is independent of the scalar representative; the quotient-module action already makes it independent of the representative of $q$. The additive group is abelian, and both distributive laws, associativity of scalar multiplication and the identity-scalar law are inherited from the $R$-module laws. Thus $Q_j$ is a vector space over the residue field $\kappa(x)$ in the sense of F7. Reducing the coefficients of its finite $R$-spanning list modulo $\mathfrak m$ shows that the same list spans over $\kappa(x)$; F7 therefore supplies a finite basis. The flag of spans of its successive basis vectors is a composition series over $R$: its one-dimensional factors are simple because the scalar map $R\to\kappa(x)$ is surjective. Applying F1 successively to $0\to M_{j+1}\to M_j\to M_j/M_{j+1}\to0$ proves finite length. If $a$ is a unit, the quotient is zero and has length zero. [F1, F2, F4, F7, algebra]
 
-2.1 For nonzero $a,c\in R$, cancellation gives the exact sequence $0\to R/aR\xrightarrow{c}R/acR\to R/cR\to0$. Length additivity therefore gives $\ell(R/acR)=\ell(R/aR)+\ell(R/cR)$. If $a/b=c/d$, then $ad=bc$, proving independence of the displayed difference. The same product formula proves additivity. [F1, step 1.1, algebra]
+2.1 For nonzero $a,c\in R$, multiplication by $c$ and quotient give $0\to R/aR\xrightarrow{c}R/acR\to R/cR\to0$. The first map is well defined and injective by cancellation in $R$, and its image $cR/acR$ is the kernel of the surjective quotient map. Thus F1 gives $\ell_R(R/acR)=\ell_R(R/aR)+\ell_R(R/cR)$. By F2 every $f\in K^\times$ is $a/b$ with $a,b\ne0$ in $R$. If $a/b=c/d$, then $ad=bc$, and the product formula gives $\ell_R(R/aR)-\ell_R(R/bR)=\ell_R(R/cR)-\ell_R(R/dR)$. The same formula applied to $ac/bd$ proves additivity under multiplication. [F1, F2, F7, step 1.1, algebra]
 
-3.1 On each member of a finite affine cover write $f=a/b$ with nonzero regular $a,b$. Its order vanishes where both are units. The exceptional set is a proper closed subset of the curve, hence finite by [F2]. The finite sum is therefore defined, and step 2.1 makes it a homomorphism. [F2, step 2.1]
+3.1 Choose a finite-type affine neighbourhood $U=\operatorname{Spec}A\subset T$ of the fixed closed point $x$ using F2, and write $f=a/b$ in $K=\operatorname{Frac}A$, with $a,b\ne0$. By F3 the subset $D(ab)$ is open in $U$, hence in $T$, and contains the generic point. Its complement in $T$ is consequently a proper closed subset, finite by F3. At each closed point $y$ of $D(ab)$, this same $U$ is a finite-type affine neighbourhood of $y$. Since $ab\notin\mathfrak p_y$, neither $a$ nor $b$ belongs to $\mathfrak p_y$; hence both are units in $\mathcal O_{T,y}$ by F2, so the two quotient lengths are zero. Thus all nonzero orders lie in that finite complement. The sum defines an element of $Z_0(T)$ by F5, and step 2.1 proves that $\operatorname{div}_T$ is a homomorphism. [F2, F3, F5, step 1.1, step 2.1]
 
-4.1 The regular and unit assertions follow by taking denominator one. In a DVR the filtration of $R/(\pi^n)$ by powers of a uniformizer has $n$ residue-field factors; subtracting numerator and denominator exponents gives the normalized valuation. [F1, step 2.1, step 3.1] ∎
+4.1 A nonzero function regular near $x$ gives an element of $R$; taking denominator one proves the regular and unit assertions. In the DVR clause of F6, multiplication by $\pi^j$ identifies $(\pi^j)/(\pi^{j+1})$ with $R/(\pi)=R/\mathfrak m$, by domain cancellation. Hence $R/(\pi^n)$ has length $n$, including $n=0$. Units leave principal ideals unchanged, so the length order of $u\pi^r/(v\pi^s)$ is $r-s$. The exponent is unique: equality of unit multiples of different powers, after cancellation, would make a positive power of the nonunit $\pi$ invertible. To check the valuation inequality, write two nonzero fractions as $u\pi^r$ and $v\pi^s$ with integers $r\le s$; their sum is $\pi^r(u+v\pi^{s-r})$, whose parenthesized factor is in $R$. If the sum is nonzero, its exponent is at least $r$; set the value at zero to $\infty$. Multiplicativity follows from step 2.1, and the powers of $\pi$ give all integer values with value one at $\pi$. This proves that the order is the normalized discrete valuation. No step uses normality of $T$. [F1, F2, F6, F7, step 2.1, step 3.1, algebra] ∎

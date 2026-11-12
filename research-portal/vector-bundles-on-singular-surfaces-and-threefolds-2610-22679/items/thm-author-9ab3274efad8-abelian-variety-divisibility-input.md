@@ -5,8 +5,20 @@ title: Divisibility of rational points of an abelian variety
 status: published
 domain: mathematics
 external_input: true
-deps: []
-dependency_roles: {}
+deps:
+  - math:def-algebraically-closed-field
+  - math:def-group-scheme-over-a-field
+  - math:def-proper-morphism
+  - math:def-geometrically-reduced-integral-connected-fibre
+  - math:def-group
+  - math:def-ring-characteristic
+dependency_roles:
+  math:def-algebraically-closed-field: mathematical-premise
+  math:def-group-scheme-over-a-field: mathematical-premise
+  math:def-proper-morphism: mathematical-premise
+  math:def-geometrically-reduced-integral-connected-fibre: mathematical-premise
+  math:def-group: mathematical-premise
+  math:def-ring-characteristic: mathematical-premise
 provenance:
   statement: literature-derived
   proof: literature-derived
@@ -14,15 +26,17 @@ sources:
   references:
     - title: "The Stacks Project, Proposition 39.9.11: Abelian varieties"
       url: https://stacks.math.columbia.edu/tag/03RP
-      locator: Proposition 39.9.11, parts (3)–(4), and opening proof of part (4)
+      locator: Proposition 39.9.11, parts (2)–(4), and opening proof of part (4)
       statement: For an abelian variety A over an algebraically closed field k, A(k)
         is a divisible abelian group; multiplication by every positive integer
         is surjective as a morphism.
       hypotheses: A is an abelian variety over the algebraically closed field k; no
         restriction on the characteristic or on the positive integer is imposed.
-      reading_limits: Read the proposition statement and the opening proof explaining
-        part (4) from part (3); the proof of the preceding multiplication
-        theorem was not reconstructed here.
+      reading_limits: Checked Proposition 39.9.11(2)–(4) and the opening proof
+        deriving (4) from (3), and Definition 39.9.1 in the linked parent
+        section. The earlier multiplication theorem and its supporting results
+        were not reconstructed; the divisibility conclusion is imported, not
+        locally proved.
 dependency_level: 0
 ---
 

@@ -11,6 +11,7 @@ PDF p. 8: Injective pullback in the splitting principle
 
 - [def-bigraded-oriented-theory](item-def-bigraded-oriented-theory)
 
+
 ## Statement
 Assume the Axiom of Choice and let $H^{*,*}$ be an additively oriented bigraded theory with the projective bundle contract on a category $\mathcal C$ as specified in the contract. For a finite locally free $\mathcal O_X$-module $E$ of constant rank $r>0$, the pullback $\pi^*:H^{*,*}(X)\to H^{*,*}(\mathbb P_X(E))$ along the projective bundle projection is injective. Under the contract's direct-sum isomorphism, $\pi^*$ is the map from the summand indexed by zero. Consequently, pullback along any finite composite of such projective-bundle projections is injective. This conclusion does not assert injectivity for arbitrary pullbacks.
 

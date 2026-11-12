@@ -36,7 +36,7 @@ sources:
         6.10 and its proof was read. The classification and splitting arguments
         are used through the named completed suppliers, not independently
         reconstructed here.
-dependency_level: 36
+dependency_level: 39
 ---
 
 ## Statement

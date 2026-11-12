@@ -12,9 +12,17 @@ dependency_roles:
   def-vector-bundle-classes: mathematical-premise
   def-exterior-determinant-bundles: mathematical-premise
   math:def-axiom-of-choice: mathematical-premise
+formulation_deps:
+  - def-vector-bundle-classes
+  - def-exterior-determinant-bundles
+  - math:def-axiom-of-choice
+argument_deps:
+  - def-vector-bundle-classes
+  - def-exterior-determinant-bundles
+  - math:def-axiom-of-choice
 proof_strategy: direct
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: ai-generated
 sources:
   references:
@@ -22,7 +30,24 @@ sources:
         threefolds
       url: https://arxiv.org/abs/2610.22679v1
       locator: PDF p. 17, proof of Corollary 6.10
-dependency_level: 12
+      statement: The proof introduces beta(E) as the structure-sheaf class minus the
+        bundle class plus the second exterior-power class minus the determinant
+        class in K_0(X).
+      hypotheses: In the cited proof X is an affine normal threefold over an
+        algebraically closed field and E is a rank-three vector bundle, chosen
+        there with zero third Chern class. The present definition of the
+        expression requires neither normality nor affineness nor Chern-class
+        vanishing; its qcqs extension is justified locally by the declared
+        bundle-class and exterior-power suppliers under their Choice and
+        universe assumptions.
+      reading_limits: Read the frozen original PDF p. 17, Corollary 6.10 and its
+        proof, and checked the corresponding extracted text. The citation
+        supports the four-term expression in that context. It does not supply
+        the qcqs generalization or the lambda notation. The two justification
+        steps are locally authored from the declared supplier interfaces; no
+        reconstruction of the article's Chern or splitting arguments is claimed
+        here.
+dependency_level: 14
 ---
 
 ## Definition

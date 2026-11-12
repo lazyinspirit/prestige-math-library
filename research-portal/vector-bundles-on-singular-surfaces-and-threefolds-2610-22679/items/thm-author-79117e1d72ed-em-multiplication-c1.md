@@ -7,9 +7,21 @@ domain: mathematics
 deps:
   - def-motivic-cohomology
   - def-multiplicative-filtered-spectrum
+  - math:def-picard-group-scheme
+  - math:def-locally-free-sheaf-finite-rank
+  - def-derived-sections-on-sites
+  - lem-nisnevich-line-bundle-torsors
+  - math:def-smooth-morphism-schemes
+  - math:def-axiom-of-choice
 dependency_roles:
   def-motivic-cohomology: mathematical-premise
   def-multiplicative-filtered-spectrum: mathematical-premise
+  math:def-picard-group-scheme: mathematical-premise
+  math:def-locally-free-sheaf-finite-rank: mathematical-premise
+  def-derived-sections-on-sites: mathematical-premise
+  lem-nisnevich-line-bundle-torsors: mathematical-premise
+  math:def-smooth-morphism-schemes: mathematical-premise
+  math:def-axiom-of-choice: mathematical-premise
 provenance:
   statement: literature-derived
   proof: literature-derived
@@ -19,33 +31,67 @@ sources:
     - title: Elden Elmanto and Matthew Morrow, Motivic cohomology of
         equicharacteristic schemes (arXiv v1)
       url: https://arxiv.org/pdf/2309.08463v1
-      locator: §2.2, pp.11–12; Definitions4.9/4.23, pp.21/27–28;
-        Theorems4.10(1)/4.24(1); Lemma5.1 and its proof and Definition5.2,
-        pp.33–34; multiplication and (5.2), p.34; line convention immediately
-        before Theorem5.24, p.43
-      hypotheses: F is a prime field Q or F_p; X any qcqs F-scheme; weights
-        nonnegative, with negative pieces zero. No Noetherianity, finite
-        dimension, regularity, reducedness or algebraic closure assumption.
-      statement: Multiplicative means coherent unital commutative algebra object, not
-        a bare binary pairing. The graded pieces G_b=Z(b)_mot[2b] carry their
-        actual induced graded products. There is the natural complex-valued
-        first Chern map RΓ_Nis(G_m)[−1]→Z(1)_mot, inducing Pic→H²; multiplying
-        with it defines the explicit maps used in the projective bundle theorem.
-      reading_limits: Directly read §2.2 multiplicativity conventions,
-        Definitions4.9/4.23, Theorems4.10/4.24 negative-weight assertions and
-        their relevant proofs, full Lemma5.1 proof/Definition5.2 and displayed
-        map(5.2), and line-convention paragraph p43. Trace filtrations, all
-        higher-category constructions and the full P¹ theorem foundations are
-        imported rather than reconstructed.
-dependency_level: 9
+      locator: Section 2.2, printed pp. 11–12; Definition 4.9 and Theorem 4.10(1), pp.
+        21–22; Definition 4.23 and Theorem 4.24(1), pp. 27–28; Lemma 5.1
+        (including proof), Definition 5.2 and (5.2), pp. 33–34; component maps
+        and line-subbundle convention preceding Theorem 5.24, p. 43.
+      hypotheses: F is the prime field Q or F_p, with p prime; X is a quasi-compact
+        quasi-separated F-scheme. All integer weights are allowed in the
+        construction, with negative pieces zero. The projectivization convention
+        concerns a finite locally free sheaf of positive constant rank. No
+        Noetherianity, finite dimension, regularity, reducedness or algebraic
+        closure is assumed.
+      statement: The specified motivic filtration is a filtered commutative algebra
+        and its shifted graded pieces carry the induced coherent unital
+        products. Negative weights vanish. Lemma 5.1 and Definition 5.2 supply
+        the natural complex-valued first Chern map, its comparison with the
+        classical class on smooth F-schemes, and its Picard-group map. The
+        projective-bundle components use this map and multiplication. The
+        convention preceding Theorem 5.24 uses the scheme classifying rank-one
+        subbundles, its tautological O(-1), and its dual O(1).
+      reading_limits: Freshly read the versioned primary PDF text at Section 2.2,
+        Definitions 4.9/4.23, the negative-weight assertions and corresponding
+        proof paragraphs of Theorems 4.10/4.24, the full Lemma 5.1 proof and
+        Definition 5.2, (5.2) and its negative-weight convention, and the
+        component maps and line convention before Theorem 5.24. These checks
+        used the PDF text extraction, not page images. The trace filtrations,
+        higher-categorical foundations, classical comparison foundations, and
+        construction of projective bundles are imported, not reconstructed. No
+        fresh reading of the complete projective-bundle theorem proof is
+        claimed.
+dependency_level: 12
 ---
 
 ## Statement
-Let $F=\mathbb Q$ or $\mathbb F_p$. The supplied EM complexes $C_b(X)=\mathbb Z(b)_{\rm mot}(X)$ on qcqs $F$-schemes are the shifted graded pieces of the specified multiplicative filtration. In the terminology of EM §2.2, the graded spectra $G_b=C_b[2b]$ form a natural commutative algebra object for graded Day convolution: there are coherent associative symmetric unital products $G_b\wedge G_d\to G_{b+d}$ and unit $\mathbb S\to G_0$, and pullbacks preserve this data. Equivalently these induce the usual motivic cup products, with even weight shifts. The negative graded pieces vanish, so $C_b=0$ for $b<0$.
-There is the actual natural map of complex-valued presheaves
+Work in ZFC and the fixed universe bounds of the supplied multiplicative-filtration and derived-sections interfaces. Let $F=\mathbb Q$ or $\mathbb F_p$, with $p$ prime, and let $X$ be a quasi-compact quasi-separated $F$-scheme. The supplied EM complexes $C_b(X)=\mathbb Z(b)_{\rm mot}(X)$ are the shifted graded pieces of the EM motivic filtration of Definitions 4.9/4.23. For every integer $b$, the underlying spectrum of $C_b(X)[2b]$ is denoted by $G_b(X)$. In the terminology of EM §2.2, these spectra form a natural commutative algebra object for graded Day convolution: there are coherent associative symmetric unital products $G_b\wedge G_d\to G_{b+d}$ and unit $\mathbb S\to G_0$, and pullbacks preserve this data. Equivalently these induce the usual motivic cup products, with even weight shifts. The negative graded pieces vanish, so $C_b=0$ for $b<0$; the nonnegative complexes are exactly the supplied ones.
+
+On the small Nisnevich site of $X$, let $\mathbb G_m$ be the abelian sheaf $U\mapsto\Gamma(U,\mathcal O_U)^\times$, and let $R\Gamma_{\rm Nis}$ denote derived global sections on that site. The cochain shift is $A[n]^q=A^{q+n}$ with differential $(-1)^n d_A$, so $H^q(A[n])=H^{q+n}(A)$. There is the actual natural map of complex-valued presheaves
 $$c_1:R\Gamma_{\rm Nis}(X,\mathbb G_m)[-1]\longrightarrow C_1(X)$$
-of Lemma5.1/Definition5.2. Its degree-two source is $\operatorname{Pic}(X)$ with tensor-product group law. It agrees with the classical class on smooth $F$-schemes. The maps denoted $c_1(\mathcal O(1))^m\pi^*$ in §5 are defined using this class and the multiplication just specified.
-EM writes $P_X^{\rm lin}(V)$ for the projectivization classifying rank-one subbundles of $V$, with tautological subbundle $\mathcal O(-1)$ and its dual $\mathcal O(1)$.
+of Lemma 5.1/Definition 5.2. Here $\operatorname{Pic}(X)$ is the group of isomorphism classes of invertible $\mathcal O_X$-modules, with tensor-product group law, identity $[\mathcal O_X]$ and inverse given by the dual line bundle. The source in degree two is identified with this group by $H^2(R\Gamma_{\rm Nis}(X,\mathbb G_m)[-1])=H^1_{\rm Nis}(X,\mathbb G_m)\cong\operatorname{Pic}(X)$. Thus the induced first Chern map has target $H^2(C_1(X))$. On smooth $F$-schemes it agrees with the classical class through the comparison of Lemma 5.1.
+
+For a finite locally free $\mathcal O_X$-module $V$ of constant rank $r>0$, EM writes $\pi:P_X^{\rm lin}(V)\to X$ for the projectivization classifying rank-one subbundles of $V$. Explicitly, over a test scheme $g:T\to X$ a subbundle is an inclusion of an invertible $\mathcal O_T$-module $L\hookrightarrow g^*V$ whose cokernel is locally free, taken up to isomorphism of inclusions. The universal inclusion is $\mathcal O(-1)\hookrightarrow\pi^*V$, and $\mathcal O(1)=\mathcal O(-1)^\vee$. The maps denoted $c_1(\mathcal O(1))^m\pi^*$ in EM §5, for nonnegative integers $m$, are pullback followed by multiplication by the $m$-th power of this class, using the multiplication just specified.
+
+## Statement references
+
+[[def-motivic-cohomology]]
+
+[[def-multiplicative-filtered-spectrum]]
+
+[[math:def-picard-group-scheme]]
+
+[[math:def-locally-free-sheaf-finite-rank]]
+
+[[def-derived-sections-on-sites]]
+
+[[lem-nisnevich-line-bundle-torsors]]
+
+[[math:def-smooth-morphism-schemes]]
+
+[[math:def-axiom-of-choice]]
 
 ## External input
-These are the stated construction and conventions at the exact locators in the source reference, restricted to the completed motivic-complex supplier. Definitions4.9/4.23 take pullbacks in filtered E∞-algebras; §2.2 gives the symmetric monoidal associated-graded construction. Definition5.2 supplies the complex map, rather than a class chosen from group agreement. Import those established foundations. Restriction along the prime-field forgetful functor supplies the same interface on qcqs schemes over any field. No replacement of the supplied motivic theory or K-theory model is made.
+Reference 0 imports the specified EM construction: Definitions 4.9/4.23 take pullbacks in filtered E∞-algebras, and §2.2 supplies the symmetric monoidal associated-graded construction. The definitions identify the complexes with the shifted graded pieces, and Theorems 4.10(1)/4.24(1) give negative-weight vanishing. The supplied motivic-complex interface fixes the nonnegative pieces; no replacement of that theory or its K-theory model is made.
+
+Reference 0 also imports the actual complex map of Lemma 5.1/Definition 5.2 and its smooth-scheme comparison, together with the component maps of (5.2) and the paragraph before Theorem 5.24. This includes the line-subbundle projectivization and its tautological line convention. The derived-sections and Nisnevich line-bundle suppliers fix the meaning of $R\Gamma_{\rm Nis}(X,\mathbb G_m)$ and its degree-one Picard identification. The Picard and finite-local-freeness definitions fix the group law and bundle types. The stated ZFC and size conventions retain the assumptions of these suppliers; no further choice of Chern class is made.
+
+Restriction along the forgetful functor from schemes over a field to schemes over its prime subfield supplies the same natural interface on quasi-compact quasi-separated schemes over any field. This is restriction of the specified functors and maps, not a new motivic theory. The substantial cited constructions are imported with the reading limits in Reference 0; no local reconstruction of their proofs is claimed.

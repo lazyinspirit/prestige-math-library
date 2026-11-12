@@ -14,6 +14,13 @@ deps:
   - prop-chern-whitney-identities
   - prop-motivic-projective-bundle-formula
   - math:def-axiom-of-choice
+  - def-scheme-perfect-complexes
+  - def-nonconnective-k-spectrum-interface
+  - def-adjudicate-c387df8ff29b-non-a1-spectrum-framework
+  - thm-repair-72891dd58cd0-universal-chern-derived-limit-input
+  - math:thm-formal-power-series-ring-and-polynomial-embedding
+  - math:thm-formal-power-series-unit-criterion
+  - lem-adjudicate-2ec9cc32fdc8-qcqs-perfect-cartan
 dependency_roles:
   lem-author-3cde9692a7e9-local-free-test: mathematical-premise
   lem-author-3cde9692a7e9-derived-chain-detection: mathematical-premise
@@ -24,11 +31,46 @@ dependency_roles:
   prop-chern-whitney-identities: mathematical-premise
   prop-motivic-projective-bundle-formula: mathematical-premise
   math:def-axiom-of-choice: mathematical-premise
+  def-scheme-perfect-complexes: mathematical-premise
+  def-nonconnective-k-spectrum-interface: mathematical-premise
+  def-adjudicate-c387df8ff29b-non-a1-spectrum-framework: mathematical-premise
+  thm-repair-72891dd58cd0-universal-chern-derived-limit-input: mathematical-premise
+  math:thm-formal-power-series-ring-and-polynomial-embedding: mathematical-premise
+  math:thm-formal-power-series-unit-criterion: mathematical-premise
+  lem-adjudicate-2ec9cc32fdc8-qcqs-perfect-cartan: mathematical-premise
+formulation_deps:
+  - def-scheme-perfect-complexes
+  - def-nonconnective-k-spectrum-interface
+  - thm-author-d026a7b99ace-universal-chern-space
+  - lem-author-32887006bdff-em-p1-model
+  - def-adjudicate-c387df8ff29b-non-a1-spectrum-framework
+  - lem-author-3cde9692a7e9-local-free-test
+  - prop-motivic-projective-bundle-formula
+  - math:def-axiom-of-choice
+  - math:thm-formal-power-series-ring-and-polynomial-embedding
+  - lem-adjudicate-2ec9cc32fdc8-qcqs-perfect-cartan
+argument_deps:
+  - lem-author-3cde9692a7e9-local-free-test
+  - lem-author-3cde9692a7e9-derived-chain-detection
+  - thm-author-3cde9692a7e9-universal-grass-input
+  - thm-author-d026a7b99ace-universal-chern-space
+  - lem-author-32887006bdff-em-p1-model
+  - lem-author-32887006bdff-actual-orientation
+  - prop-chern-whitney-identities
+  - prop-motivic-projective-bundle-formula
+  - math:def-axiom-of-choice
+  - def-scheme-perfect-complexes
+  - def-nonconnective-k-spectrum-interface
+  - def-adjudicate-c387df8ff29b-non-a1-spectrum-framework
+  - thm-repair-72891dd58cd0-universal-chern-derived-limit-input
+  - math:thm-formal-power-series-ring-and-polynomial-embedding
+  - math:thm-formal-power-series-unit-criterion
+  - lem-adjudicate-2ec9cc32fdc8-qcqs-perfect-cartan
 provenance:
   statement: ai-generated
   proof: ai-generated
 proof_strategy: direct
-dependency_level: 21
+dependency_level: 26
 ---
 
 ## Statement
@@ -39,24 +81,36 @@ $$C_i\circ\mu\simeq\sum_{a+b=i}\cup\circ(C_a\times C_b),$$
 where $\mu$ is actual K-space addition and the right side uses the actual graded motivic cup product and additive target operation. Consequently, on every noetherian finite-dimensional $X/k$, the actual perfect operations give a natural total-series homomorphism $c_t^{\rm perf}:K_0(X)\to\{1+\sum_{i\geq1}a_it^i:a_i\in H^{2i,i}(X)\}$ under formal series multiplication. This is a coefficientwise Cartan homotopy/identity; no unproved stronger assertion about a chosen coherent E∞ map of total-series objects is made.
 
 ## Facts & Assumptions
+[A1] Assume the Axiom of Choice as formulated in [[math:def-axiom-of-choice]] and the fixed compatible universe and site-size bounds. These are inherited by the actual coefficient and perfect K-space constructions in [F0]–[F3] and the countable derived-limit input [F4], used in steps 1.1–3.1. The finite coefficient convolutions and recursive inversion in step 4.1 add no choice principle.
 
-[A1] Assume the Axiom of Choice as formulated in [[math:def-axiom-of-choice]] and the stated universe and site-size bounds. They are inherited from the universal-operation construction in [F2] at steps 1.1 and 3.1, and the local free-class/derived-chain comparisons in [F3] at step 3.1. The finite coefficient and formal-series arguments introduce no additional choice principle.
+[F0] Here $X/k$ includes a specified structure map to the spectrum of the field $k$. Noetherian means quasi-compact with an affine cover by spectra of noetherian rings (every ideal is finitely generated). Finite dimension means a finite bound on lengths of strict chains of nonempty irreducible closed subsets, with empty-space dimension $-\infty$. These are the scheme-scope conventions of [F3]. A perfect complex is locally equivalent to a bounded complex of finite locally free sheaves, and $\operatorname{Perf}(X)$ retains the supplied coherent enhancement, as in [[def-scheme-perfect-complexes]]. Use precisely $K(X)=\mathbb K(\operatorname{Perf}(X))$ and $K_0(X)=\pi_0K(X)$ of [[def-nonconnective-k-spectrum-interface]]. Write $P$ for the perfect K-space presheaf and $P^{\rm sh}$ for its ordinary sheafification. The actual universal construction [[thm-author-d026a7b99ace-universal-chern-space]] first gives $C_i^{\rm ord}:P^{\rm sh}\to Y_i$, where $Y_i(T)=\Omega^\infty H(\mathbb Z(i)_{\rm mot}(T)[2i])$. The coefficient model [[lem-author-32887006bdff-em-p1-model]] fixes these original coefficient levels and products, with $\pi_0Y_i(T)=H^{2i,i}(T)$. In the Statement's local pointed homotopy category, $\mathcal K$ and $K(\mathbb Z(i)_{\rm mot},2i)$ mean the further stalkwise localizations of this source and target, and $C_i$ is the localized operation. Evaluation in the original coefficient groups uses $C_i^{\rm ord}$ composed with the ordinary source unit $P\to P^{\rm sh}$. No equality of original and hypercompleted coefficient sections is assumed.
 
-[F1] [[thm-author-3cde9692a7e9-universal-grass-input]] supplies the actual Vect/Grass comparison and universal-class detection for the completed non-A¹ EM ring model over base $X$. The theory has explicit zero negative weights in every degree, as in [[prop-motivic-projective-bundle-formula]].
+[F1] [[thm-author-3cde9692a7e9-universal-grass-input]] supplies the actual Vect/Grass comparison, two-factor universal-class detection and stabilization of mapping homotopy groups in degrees zero and one for this completed EM model. Its all-degree negative-weight vanishing is for the represented coefficient model, not merely a convention setting negative-weight symbols to zero. [[lem-author-32887006bdff-actual-orientation]] supplies the actual linear orientation and projective bundle formula needed to apply that comparison over $X$.
 
-[F2] [[prop-chern-whitney-identities]] supplies actual bundle Whitney on all smooth finite Grassmannian pairs over $X$; no smoothness of $X/k$ is needed. [[thm-author-d026a7b99ace-universal-chern-space]] constructs the actual stable universal Chern K-space maps from precisely these bundle classes, naturally in coefficients.
+[F2] [[prop-chern-whitney-identities]] supplies actual bundle Whitney on all smooth finite Grassmannian pairs over $X$; no smoothness of $X/k$ is needed. [[thm-author-d026a7b99ace-universal-chern-space]] constructs the actual stable universal Chern K-space maps from precisely these bundle classes, naturally in coefficients, and projects away the trivial-rank factor. Its positive operations are pointed; $C_0=1$ is separately an unpointed constant, used only as the multiplicative unit in Cartan's endpoint terms.
 
-[F3] [[lem-author-3cde9692a7e9-local-free-test]] gives the block-sum/free-class comparison for actual addition, and [[lem-author-3cde9692a7e9-derived-chain-detection]] detects identities in the local homotopy category by its product.
+[F3] [[lem-author-3cde9692a7e9-local-free-test]] gives the map $j:\underline{\mathbb Z}\times BGL\to\mathcal K$, the block-sum/free-class comparison for actual addition, and the local integral homology equivalence of $j\times j$. Here $\underline{\mathbb Z}$ is the locally constant rank sheaf. Work on the small Nisnevich site with qcqs étale test schemes and covers having a residue-field-preserving lift over every point. [[lem-author-3cde9692a7e9-derived-chain-detection]] supplies map detection into these derived Eilenberg targets after $j\times j$, in its local injective simplicial-sheaf model, where weak equivalences induce isomorphisms on every homotopy sheaf and derived sections use local fibrant replacement.
+
+[F4] [[def-adjudicate-c387df8ff29b-non-a1-spectrum-framework]] supplies the smooth Zariski stack category, its colimit-preserving coefficient action, suspension and spectrum-valued mapping convention. Write $BGL_n$ for the local classifying stack of rank-$n$ bundles, pointed by $\mathcal O^n$: equivalently it is the stack associated to the nerve of the invertible-matrix group $GL_n$. The bundle stack $\mathrm{Vect}_n$ is this same local classifying object, since bundles admit local frames and their frame changes are invertible matrices. Stabilization adds a trivial line. Use the derived colimit of these classifying stacks, whose mapping-colimit convention and comparison with the local stable $BGL$ are supplied by [F1] and [F3]. In particular we do not identify a colimit of homotopy classes with a classifying object. The canonical local replacements and restriction to the sites on which $j$ is defined are those of [F0] and [F3]. [[thm-repair-72891dd58cd0-universal-chern-derived-limit-input]] supplies the countable mapping-spectrum Milnor sequence, with kernel $R^1\varprojlim\pi_1$, and its vanishing for an eventually isomorphic tower. Its coherent tower and product-existence hypotheses are checked in step 1.2.
+
+[F5] [[prop-motivic-projective-bundle-formula]] supplies the actual bigraded cup-product ring with sign given by the first cohomological degrees. Thus $R_X=\bigoplus_{i\geq0}H^{2i,i}(X)$ is commutative. [[math:thm-formal-power-series-ring-and-polynomial-embedding]] supplies Cauchy multiplication in $R_X\llbracket t\rrbracket$, and [[math:thm-formal-power-series-unit-criterion]] supplies its inverse recursion for constant coefficient one. The target in the Statement consists of coefficient sequences homogeneous in weight: its degree-$i$ coefficient lies in $H^{2i,i}(X)$. No convergence or choice of a numerical value of $t$ is involved.
+
+[F6] [[lem-adjudicate-2ec9cc32fdc8-qcqs-perfect-cartan]] supplies Cartan for the specified operations before hypercompletion, and its total-series homomorphism in the original coefficient values on every qcqs field-scheme. It also identifies the localized operations with the same stable universal classes. Its construction uses rank reduction on the ordinary K-stack before coherent affine extension; it does not apply the conditional native Gillet formula to the actual EM coefficients. Restrict this interface to the stated noetherian finite-dimensional schemes. The domain verification in Proof 1.1 of [[lem-author-3cde9692a7e9-local-free-test]] proves that these schemes are qcqs, including the empty scheme and without separatedness. The original-coefficient conclusion in step 4.1 uses this ordinary identity, not an inference back from local-model equality.
 
 ## Proof
-**Given:** The actual EM model and K-space operation on the stated site. Assume Choice and the universe and site-size bounds in [A1].
+**Given:** The actual EM model and K-space operation on the stated site. Assume Choice and the compatible universe and site-size bounds in [A1].
 
-**Goal:** Establish Cartan for these maps on all perfect classes, not just for bundle-representable classes.
+**Goal:** Establish Cartan for these actual maps on all perfect classes, retaining the specified global evaluation.
 
-1.1 On $\mathrm{Vect}_n\times\mathrm{Vect}_m$, form the Cartan difference of the two universal bundle classes. Pull back to the finite Grassmannian approximations of the two factors. Those schemes are smooth qcqs over $X$ and carry the actual universal bundles. Their completed Whitney identity [F2] makes the difference zero. The faithful comparison in [F1] therefore proves the universal Cartan identity on this product stack, hence a homotopy of its classifying maps into the indicated Eilenberg target. [F1, F2]
+1.1 On $\mathrm{Vect}_n\times\mathrm{Vect}_m$, form the Cartan difference of the two universal bundle classes. Pull back to the finite Grassmannian approximations of the two factors. Those schemes are smooth qcqs over $X$ and carry the actual universal bundles. Their completed Whitney identity [F2] makes the difference zero. The faithful two-factor comparison in [F1] therefore proves the universal Cartan identity on this product stack. Positive Chern classes vanish on the trivial bundle pair; the terms with $a=0$ or $b=0$ use only multiplication by the unpointed unit $C_0=1$. Hence the difference is a pointed map to the indicated abelian Eilenberg target. [A1, F0, F1, F2, F4]
 
-2.1 These identities stabilize without a phantom ambiguity. For a fixed Chern weight $i$, [F1] expresses the relevant cohomology in universal variables with their Chern weights. A monomial of total weight $d>i$ has coefficient in weight $i-d<0$, which is zero in every cohomological degree. Thus both the degree-zero and degree-one homotopy groups of the relevant mapping-space systems stabilize once each rank is at least $i$; their potentially contributing variables have indices at most $i$. The Milnor $\lim^1$ of the degree-one groups is therefore zero. Applying the mapping-space inverse limit to the stabilized universal classes gives the identity on stable $BGL\times BGL$, not merely identities on its finite pieces. This uses all-degree negative-weight vanishing, not just vanishing of diagonal Chow groups. [F1, step 1.1]
+1.2 Fix $i\geq1$. The two-factor rank system has a countable cofinal diagonal $BGL_r\times BGL_r$: for any pair $(n,m)$ the diagonal objects receiving it form the tail $r\geq\max\{n,m\}$, with a least element. Cartesian product of stacks preserves colimits separately, as supplied explicitly in [F1], so the product of the two stable classifying objects is the colimit of this diagonal. This uses a colimit in the supplied category of stacks, rather than a colimit of homotopy classes. Suspension preserves this colimit. Consequently its defining mapping universal property identifies the mapping spectrum from $BGL\times BGL$ into the weight-$i$ coefficient target with $\operatorname{holim}_r T_r$, where $T_r=\operatorname{Map}(\Sigma^\infty_{\mathbb P^1}(BGL_r\times BGL_r)_+,\Sigma^i_{\mathbb P^1}\widehat{\mathcal E}_X)$, where $\widehat{\mathcal E}_X$ is the spectrum-valued lift of the actual oriented model supplied in [F1]. The actual stabilization maps make $T_r$ a coherent countable tower of spectra; its countable products exist. Its homotopy groups are $\pi_uT_r=\mathcal E_X^{2i-u,i}(BGL_r\times BGL_r)$ for $u=0,1$. The coefficient-stabilization equivalence for this oriented model in [F1], together with the level/evaluation identification in [F0], gives the actual derived Eilenberg mapping spaces. The construction can be made first on the smooth Zariski site of [F4]; the canonical local-replacement functors of [F0] carry the resulting maps and homotopies to the compatible local models of [F3]. Thus no identification of ordinary and hypercomplete localizations is used. [A1, F0, F1, F3, F4]
 
-3.1 The actual $C_i$ restrict along $j$ to those stable universal classes by their specified completion construction, and ignore the trivial-rank summand. Addition restricts to block sum by [F3]. Thus the Cartan difference on $\mathcal K\times\mathcal K$ pulls back to zero along $j\times j$. Apply map detection [F3] to conclude that it is zero as the claimed natural map. This identifies the homotopy class of the actual operations, not a new extension selected by equality on affine $K_0$. [F2, F3, step 2.1, A1]
+2.1 In [F1]'s universal coordinates, a monomial of total Chern weight $d$ in $\pi_uT_r$ has coefficient $\mathcal E_X^{2(i-d)-u,i-d}(X)$. This is zero for $d>i$, for both $u=0,1$. Once $r\geq i$, every surviving variable has index at most $i$, and stabilization preserves its universal class; newly introduced higher variables have zero coefficient. Thus the two homotopy-group towers are eventually isomorphic, exactly as in [F1]. Apply [F4]'s Milnor sequence to the coherent spectrum tower of step 1.2. Its kernel $R^1\varprojlim_r\pi_1T_r$ is zero, so a class vanishing on every finite rank product vanishes on the stable product. To retain pointed homotopies, evaluation at the trivial bundle pair has the natural constant-map section; it splits each unreduced mapping spectrum into its reduced mapping fiber and the coefficient spectrum. This splitting commutes with rank transitions, so the same injectivity holds for the reduced summands. Step 1.1 therefore proves the pointed stable Cartan identity, with no phantom ambiguity. [A1, F1, F4, step 1.1, step 1.2]
 
-4.1 Evaluate at $X$ and take $\pi_0$. The coefficientwise identities give $c_t^{\rm perf}(x+y)=c_t^{\rm perf}(x)c_t^{\rm perf}(y)$. The operations are pointed for $i>0$, so $c_t^{\rm perf}(0)=1$. The target is an abelian group: the coefficient first degrees are even, multiplication uses finite convolutions, and inverses are defined recursively. Naturality follows from that of the actual operations. This proves the formal total identity for arbitrary perfect classes. [F2, step 3.1] ∎
+3.1 The actual $C_i$ restrict along $j$ to the stable universal classes computed in step 2.1. For their independence of the integer-rank component use the actual rank-reduced stack construction in [F2], with the ordinary comparison retained in [F6], before its affine extension and further localization. Rank reduction subtracts the trivial-rank section; translating by that section therefore leaves the reduced class unchanged. This is not an application of the separately conditional native completion formula. Addition restricts to block sum by [F3]. On every rank-component pair the Cartan difference consequently pulls back to zero along $j\times j$ by step 2.1. The rank sheaf is the sheaf coproduct of integer-labelled points, so mapping out of its product with the stable classifying object gives the product of the component mapping spaces. The component identities therefore give the identity on the whole sheaf product. Apply the local map detection in [F3] to conclude that the difference on $\mathcal K\times\mathcal K$ is zero as the claimed pointed local natural map. [A1, F0, F2, F3, F6, step 2.1]
+
+4.1 For the conclusion in the original motivic groups, apply the ordinary Cartan identity of [F6] to $C_i^{\rm ord}$ and compose with the ordinary source unit in [F0]. Its hypotheses hold on the stated noetherian finite-dimensional field-schemes, with the same Choice and size bounds. Taking components at $X$ gives the coefficientwise identities in $\pi_0Y_i(X)=H^{2i,i}(X)$, hence $c_t^{\rm perf}(x+y)=c_t^{\rm perf}(x)c_t^{\rm perf}(y)$ on the specified perfect $K_0$. This argument does not identify hypercompleted coefficient sections with these original groups. Positive operations are pointed, giving $c_t^{\rm perf}(0)=1$. By [F5] the target is an abelian group: multiplication is finite convolution and the inverse coefficients are $b_0=1$ and $b_n=-\sum_{r=1}^n a_rb_{n-r}$. Induction puts $b_n$ in $H^{2n,n}(X)$, so inversion preserves the required homogeneous subgroup of $R_X\llbracket t\rrbracket$. Naturality follows from the ordinary operations and their units. Together with step 3.1 this proves both the local Cartan identity and the claimed original-coefficient total-series homomorphism, without a chosen coherent total-series map. [A1, F0, F2, F5, F6, step 3.1, algebra] ∎
+
+## Reading limits
+This maintenance read the complete eight assigned bodies and the actual declared supplier interfaces, including the universal operation's distinction between ordinary and hypercompleted targets and the current qcqs Cartan proof. The original Statement is unchanged. The stable-class calculation and local detection argument are retained; the original-coefficient conclusion now has its own exact ordinary supplier. No original PDF or external paper was freshly read for this repair, no new literature premise is imported, and no independent acceptance is asserted. The dependency graph has no cycle from the added supplier. The four existing direct consumers retain the same supplied statement: lem-surface-chern-prescription, cor-third-chern-isomorphism, lem-author-d026a7b99ace-positive-rr-coefficient and lem-author-e216acade157-bundle-calculation. No interface change is proposed.

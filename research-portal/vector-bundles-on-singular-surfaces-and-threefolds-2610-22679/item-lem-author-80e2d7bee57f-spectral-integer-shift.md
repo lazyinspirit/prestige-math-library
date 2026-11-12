@@ -11,6 +11,7 @@ PDF p. 4: Shift [2j] in equation (2.1)
 
 - [def-stable-spectra-interface](item-def-stable-spectra-interface)
 
+
 ## Statement
 For a spectrum $E$ in the stable spectra interface and integers $i,k$, there is a natural isomorphism $\pi_i(E[k])\cong\pi_{i-k}(E)$, where $[1]$ is suspension and $[-1]$ its inverse.
 

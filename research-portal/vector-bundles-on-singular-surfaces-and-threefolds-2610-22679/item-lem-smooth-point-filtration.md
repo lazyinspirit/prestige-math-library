@@ -2,7 +2,40 @@
 title: Smooth point classes lie in the top filtration piece
 status: published
 research_item: lem-smooth-point-filtration
-dependency_level: 19
+dependency_level: 21
+sources:
+  references:
+    - title: Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and
+        threefolds
+      url: https://arxiv.org/abs/2610.22679v1
+      locator: Printed p. 3, Notation and conventions; p. 7, opening perfect-field
+        paragraph, equation (2.8), Lemma 2.9 and its proof including the final
+        square
+      reading_limits: Read the frozen article text at the p. 3 conventions and the
+        full p. 7 passage through Lemma 2.9; inspected the supplied PDF images
+        page-3.png and page-7.png. Read the current declared local supplier
+        bodies and the added published mathematical definition interfaces, and
+        checked the coherent-realization supplier used by the support
+        definition. The stage lifting and image argument below are local
+        compositions of those interfaces. Their substantial external K-theory,
+        motivic and stable-category proofs were not freshly read or
+        reconstructed. The explicit arbitrary-open extension and expanded
+        formulation are local adaptations; no independent acceptance or
+        original-author defect is claimed.
+      statement: Lemma 2.9 states that the image K_0({x};X) of the smooth-point
+        support group lies in F^d_mot K_0(X). Its proof uses lower-weight
+        supported motivic vanishing, exactness of the filtration-stage
+        sequences, surjectivity from supported stage d to supported K_0, and the
+        final support-to-global commutative square. Equation (2.8) supplies the
+        point-class homomorphism into that image subgroup.
+      hypotheses: The paragraph on p. 7 assumes X is qcqs over a perfect field k and x
+        is a closed point of its smooth locus; Lemma 2.9 additionally assumes
+        pure dimension d. The standing p. 3 convention assumes k algebraically
+        closed and affine schemes finite type, while the p. 7 paragraph
+        explicitly uses a perfect field. The local finite-dimension, Choice and
+        size conventions, and the explicit arbitrary-open extension, are
+        recorded in the generated formulation and its suppliers, rather than
+        attributed as additional hypotheses or constructions in the article.
 ---
 
 PDF p. 7: Lemma 2.9 and final square
@@ -19,6 +52,14 @@ PDF p. 7: Lemma 2.9 and final square
 - [lem-filtered-support-exactness](item-lem-filtered-support-exactness)
 - [def-stable-spectra-interface](item-def-stable-spectra-interface)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
+- [math:def-field](https://alphabetamath.cc/item/def-field)
+- [math:def-scheme-over-base](https://alphabetamath.cc/item/def-scheme-over-base)
+- [math:def-quasi-compact-and-quasi-separated-scheme](https://alphabetamath.cc/item/def-quasi-compact-and-quasi-separated-scheme)
+- [math:def-smooth-morphism-schemes](https://alphabetamath.cc/item/def-smooth-morphism-schemes)
+- [math:def-separable-elements-and-separable-extensions](https://alphabetamath.cc/item/def-separable-elements-and-separable-extensions)
+- [math:def-grothendieck-universe-closure-convention](https://alphabetamath.cc/item/def-grothendieck-universe-closure-convention)
+- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · Printed p. 3, Notation and conventions; p. 7, opening perfect-field paragraph, equation (2.8), Lemma 2.9 and its proof including the final square `](https://arxiv.org/abs/2610.22679v1)
+
 
 ## Statement
 Assume the Axiom of Choice and the size conventions of the support construction. Let $k$ be a perfect field, let $X$ be a quasi-compact quasi-separated $k$-scheme of pure finite dimension $d$, and let $x$ be a closed point in the smooth locus of $X\to\operatorname{Spec}k$. Put $U=X\setminus\{x\}$. A perfect field is one whose algebraic extensions are separable; smoothness at $x$ means that $x$ has a neighbourhood smooth over $k$.
@@ -42,12 +83,16 @@ In particular, the smooth-point class map of [def-smooth-point-cycle-map](item-d
 
 [F4] [lem-filtered-stage-exact-sequence](item-lem-filtered-stage-exact-sequence) gives exactness of $\pi_0F^{j+1}_T K(X)\to\pi_0F^j_T K(X)\to\pi_0\operatorname{gr}^j_TK(X)$. [def-support-image-groups](item-def-support-image-groups) and [def-smooth-point-cycle-map](item-def-smooth-point-cycle-map) specify the global image subgroup and the smooth-point map.
 
+[F5] [math:def-field](https://alphabetamath.cc/item/def-field) supplies the field structure, [math:def-scheme-over-base](https://alphabetamath.cc/item/def-scheme-over-base) the structure morphism of a $k$-scheme, and [math:def-quasi-compact-and-quasi-separated-scheme](https://alphabetamath.cc/item/def-quasi-compact-and-quasi-separated-scheme) the qcqs conditions on its underlying scheme and affine opens. [math:def-smooth-morphism-schemes](https://alphabetamath.cc/item/def-smooth-morphism-schemes) supplies smooth morphisms; the perfect-field definition in the Statement uses separable algebraic extensions in the sense of [math:def-separable-elements-and-separable-extensions](https://alphabetamath.cc/item/def-separable-elements-and-separable-extensions). A closed point means that its singleton is closed in the underlying topology, so $U$ is open and carries the restricted scheme structure of the support construction. A nonempty closed subset is irreducible if it is not the union of two proper closed subsets; an irreducible component is a maximal such subset. Dimension is the supremum of lengths of chains of distinct nonempty irreducible closed subsets; pure dimension $d$ means that each irreducible component has dimension $d$. Since $x\in X$ and $d$ is finite, the filtration index $d$ is a nonnegative integer.
+
+[A1] The assumed [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice) discharges the inherited Choice hypotheses of [F1]–[F4], including the selected perfect-$K$ and spectral realizations and smooth-point purity. Use compatible nested Grothendieck universes, with $\omega$ in the smallest and containing the scheme and open-index data, and larger universes for categories, as required by the support and purity interfaces. Their closure convention is [math:def-grothendieck-universe-closure-convention](https://alphabetamath.cc/item/def-grothendieck-universe-closure-convention); existence of sufficiently large compatible bounds is assumed, not deduced from Choice. All restriction diagrams and limits below use these bounds. The finite composite and the single-element lifts require no additional choice principle.
+
 ## Proof
 **Proof technique:** Use lower-weight supported motivic vanishing to lift successively through the finite sequence of filtration stages, then apply the natural support-to-global square.
 
 1.1 For each $j\geq0$, the natural graded triangle in [F2] applies on $X$ and on every quasi-compact open $V\subseteq U$. Taking the homotopy limit of the triangles over these $V$ preserves fiber sequences: limits commute with the finite limits defining fibers, and in spectra cofibers and fibers differ by suspension. Thus the graded triangle also holds for the explicitly extended values on $U$. Taking the fiber of the graded restriction arrow, [F2] identifies $\operatorname{gr}^j_TK(X)$ with the shifted supported weight-$j$ motivic spectrum. Hence
 $$\pi_0\operatorname{gr}^j_TK(X)\cong H^{2j,j}_{\mathrm{mot},T}(X,\mathbb Z).$$
-The identification uses the actual coherent restriction maps, not merely separate isomorphisms of groups. [F1, F2, given]
+The identification uses the actual coherent restriction maps, not merely separate isomorphisms of groups. [A1, F1, F2, F5, given]
 
 2.1 For $0\leq j<d$, [F3] makes the right side in step 1.1 zero. Exactness in [F4] therefore makes each transition $\pi_0F^{j+1}_T K(X)\to\pi_0F^j_T K(X)$ surjective. [F3, F4, step 1.1]
 

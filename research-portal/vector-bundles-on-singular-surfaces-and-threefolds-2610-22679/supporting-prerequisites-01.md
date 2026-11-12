@@ -5,12 +5,44 @@ description: Presents 28 supporting prerequisites, covering published library
   prerequisites and dependency levels 0–1.
 status: published
 dependency_level: 1
-item_count: 28
+item_count: 26
 ---
 
 ## Published prerequisite
 
 [math:lem-chow-localization-and-vector-bundle-homotopy](https://alphabetamath.cc/item/lem-chow-localization-and-vector-bundle-homotopy)
+
+## Source-specific non-A¹ motivic spectrum framework and hypotheses
+
+[Open item](item-def-adjudicate-c387df8ff29b-non-a1-spectrum-framework) · level 0
+
+## Noetherian schemes belong to the qcqs domain
+
+[Open item](item-lem-adjudicate-7110d94407d7-noetherian-schemes-qcqs) · level 0
+
+## Equal value groups preserve valuation rank
+
+[Open item](item-lem-adjudicate-8e6efd435bbb-equal-value-group-rank) · level 0
+
+## Normalized free chains preserve products of homology equivalences
+
+[Open item](item-lem-adjudicate-992e776cd750-normalized-product-chains) · level 0
+
+## Polynomial lifting on punctured affine three-space
+
+[Open item](item-lem-adjudicate-c48bc07f0450-punctured-affine-lifting) · level 0
+
+## Closed immersions preserve residue fields
+
+[Open item](item-lem-adjudicate-dba56f870de6-closed-immersion-residue-fields) · level 0
+
+## Valuation-overring chains compute Krull valuative dimension
+
+[Open item](item-lem-adjudicate-ec5e8f9ed7c3-valuation-chain-dimension) · level 0
+
+## Integral components of a smooth affine pure-dimensional scheme
+
+[Open item](item-lem-adjudicate-f63a33a7279d-smooth-affine-components) · level 0
 
 ## Integer multiplication on rational vector spaces
 
@@ -44,78 +76,38 @@ item_count: 28
 
 [Open item](item-thm-adjudicate-6e70d30b9793-oriented-field-map-input) · level 0
 
+## Filtered colimits of spaces and based loops
+
+[Open item](item-thm-adjudicate-992e776cd750-filtered-space-colimits-input) · level 0
+
 ## Full projective Quillen–Waldhausen comparison and the local free-class map
 
 [Open item](item-thm-adjudicate-9ead0798f06a-projective-q-w-comparison) · level 0
 
-## External symmetric P¹ model, orientation criterion and fundamental stabilization
+## External maximal-minor height bound for the component-scope example
 
-[Open item](item-thm-author-32887006bdff-p1-spectrum-input) · level 0
+[Open item](item-thm-author-27d786ff4d27-determinantal-height) · level 0
+
+## External relative Jacobian criterion and openness of smooth maps
+
+[Open item](item-thm-author-27d786ff4d27-relative-jacobian-openness) · level 0
+
+## External Swan finite controlling-family Bertini theorem
+
+[Open item](item-thm-author-27d786ff4d27-swan-controlled-bertini) · level 0
 
 ## External symmetric P¹ model, orientation criterion and fundamental stabilization
 
 [Open item](item-thm-author-4f94f7982b0d-p1-spectrum-input) · level 0
 
-## Exact linear hyperdescent and derived-localization input
+## External perfect-field Tate cancellation
 
-[Open item](item-thm-author-58e57d689702-linear-hyperdescent-input) · level 0
+[Open item](item-thm-author-59b1a831fe59-perfect-cancellation) · level 0
 
-## Exact hypercomplete arc descent for finite constructible coefficients
+## The native smooth site over an ordinary base and transport of coefficients
 
-[Open item](item-thm-author-7113c087ecba-arc-input) · level 0
-
-## Exact linear hyperdescent and derived-localization input
-
-[Open item](item-thm-author-7113c087ecba-linear-input) · level 0
-
-## Exact valuation inputs for the topology comparison
-
-[Open item](item-thm-author-7113c087ecba-valuative-input) · level 0
-
-## Exact source weight-zero and constant-sheaf input
-
-[Open item](item-thm-author-dcdf962edbda-source-input) · level 0
-
-## Exact cdh factorization inputs for the source étale map
-
-[Open item](item-thm-author-e71ff76fe904-cdh-factorization-input) · level 0
-
-## Universal Chern cohomology and countable derived limits
-
-[Open item](item-thm-repair-72891dd58cd0-universal-chern-derived-limit-input) · level 0
+[Open item](item-lem-adjudicate-112a302cd08b-ordinary-base-smooth-site) · level 1
 
 ## A unit-induced integral field coefficient zigzag
 
 [Open item](item-lem-adjudicate-6e70d30b9793-field-unit-zigzag) · level 1
-
-## The normalized class detects the actual Picard-space map on smooth schemes
-
-[Open item](item-lem-adjudicate-6e70d30b9793-picard-map-detection) · level 1
-
-## Derived finite coefficients preserve mapping cones
-
-[Open item](item-lem-author-4b6f215bcf3b-quotient-cofiber) · level 1
-
-## Integer multiplication on rational complexes
-
-[Open item](item-lem-author-4b6f215bcf3b-rational-complex-multiplication) · level 1
-
-## Affine bundle classes are actual projective-module classes
-
-[Open item](item-lem-author-7dc5154c7a6f-module-classes) · level 1
-
-## A torsion kernel in a uniquely divisible group vanishes
-
-[Open item](item-lem-author-b87d598e83f3-torsion-kernel-injective) · level 1
-
-## Affine bundle classes are actual projective-module classes
-
-[Open item](item-lem-author-f08c343a07fc-cancel-module-classes) · level 1
-
-## External non-A¹ projective-relation filtered and Whitney theorem
-
-[Open item](item-thm-author-32887006bdff-non-a1-whitney-input) · level 1
-
-## External non-A¹ projective-relation filtered and Whitney theorem
-
-[Open item](item-thm-author-4f94f7982b0d-non-a1-whitney-input) · level 1

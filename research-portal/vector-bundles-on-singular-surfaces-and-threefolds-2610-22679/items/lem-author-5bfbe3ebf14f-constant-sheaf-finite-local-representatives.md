@@ -7,21 +7,23 @@ domain: mathematics
 deps:
   - lem-author-5bfbe3ebf14f-finite-generated-topology-basis
   - def-scheme-sites-and-sheafification
+  - def-cdh-topology-interface
 dependency_roles:
   lem-author-5bfbe3ebf14f-finite-generated-topology-basis: mathematical-premise
   def-scheme-sites-and-sheafification: mathematical-premise
+  def-cdh-topology-interface: mathematical-premise
+dependency_level: 10
 provenance:
   statement: ai-generated
   proof: ai-generated
 proof_strategy: direct
-dependency_level: 10
 ---
 
 ## Statement
-For any set $A$, let $P_A$ be the constant presheaf and $aA=aP_A$ its cdh sheafification on the specified site. For every $s\in(aA)(X)$, the sieve of arrows $f:Y\to X$ for which $s|_Y$ is the image of some $a\in A$ is covering. Hence $s$ has a finite cdh covering family of constant representatives $a_1,\ldots,a_m$. For $A=\mathbb Z$, setting $D=\{a_1,\ldots,a_m\}\subset\mathbb Z$ yields a section of the finite constant-set sheaf $aD$ whose image in $a\mathbb Z$ is $s$. This is the precise finite-values assertion; it does not posit an unproved interpretation of arbitrary cdh sections as ordinary point functions.
+Fix a field $k$ and the cdh site on a suitably small category equivalent to the category of separated finite-type $k$-schemes, with its represented fibre products and the universe conventions for scheme sites. For any set $A$ in the fixed larger universe, define the constant presheaf $P_A$ by $P_A(U)=A$ for every object $U$, including the empty scheme, with identity restriction maps along every arrow. Write $aA=aP_A$ for its set-valued cdh sheafification. For every $s\in(aA)(X)$, the sieve of arrows $f:Y\to X$ for which $s|_Y$ is the image of some $a\in A$ is covering. Hence $s$ has a finite cdh covering family of constant representatives $a_1,\ldots,a_m$. For $A=\mathbb Z$, setting $D=\{a_1,\ldots,a_m\}\subset\mathbb Z$ yields a section of the finite constant-set sheaf $aD$ whose image in $a\mathbb Z$ is $s$. This is the precise finite-values assertion; it does not posit an unproved interpretation of arbitrary cdh sections as ordinary point functions.
 
 ## Facts & Assumptions
-**Given:** A constant presheaf and a section of its sheafification.
+**Given:** The field and cdh site in the Statement, the explicitly defined constant presheaf $P_A$, and a section $s$ of its set-valued sheafification over an object $X$.
 
 **Goal:** Produce finitely many constant representatives, and a finite constant-set factorization.
 
@@ -29,7 +31,9 @@ For any set $A$, let $P_A$ be the constant presheaf and $aA=aP_A$ its cdh sheafi
 
 [F2] Every covering sieve contains a finite $B$-family. [[lem-author-5bfbe3ebf14f-finite-generated-topology-basis]]
 
-## Proof
-1.1 Represent $s$ by a matching $P_A^+$-family on a covering sieve $R$ using [F1]. Each of its entries in turn is represented by a matching $P_A$-family on a covering sieve of its source. On each arrow of this second sieve, the restriction of $s$ is the image of an actual element of $A$. The sieve $L$ of all arrows having such representatives is closed under precomposition because restrictions of constants remain constant. For each arrow of $R$, its pullback of $L$ contains the corresponding second covering sieve, so it covers. Transitivity therefore shows $L$ covers $X$. Apply [F2] to choose a finite family in $L$ and representatives $a_i$ for it. [F1, F2]
+[F3] The site is the category of separated finite-type $k$-schemes with represented fibre products, equipped with the cdh topology. Thus overlaps of arrows to $X$ are represented by their fibre products over $X$. [[def-cdh-topology-interface]]
 
-2.1 Sheafification preserves a presheaf injection: if two matching families from $P$ become equal in $Q^+$ under an injection $P\hookrightarrow Q$, they agree on a common covering refinement in $Q$, hence there in $P$; thus $P^+\to Q^+$ is injective, and applying this twice proves the assertion. Consequently $aD\to aA$ is a monomorphism for the subset $D=\{a_i\}$. The local sections $a_i$ in $aD$ have equal restrictions on every pairwise overlap, since their images are the restrictions of $s$ and the map is injective. They glue uniquely to a section of $aD$ by the sheaf condition. Its image is $s$ by uniqueness of gluing in $aA$. The empty-scheme case uses the empty family and the unique empty-domain section. This proves the finite-values formulation, in particular for integers. [F1, step 1.1] ∎
+## Proof
+1.1 Represent $s$ by a matching $P_A^+$-family on a covering sieve $R$ using [F1]. For each arrow $f:Y\to X$ in $R$, its entry has a representing matching $P_A$-family on a covering sieve of $Y$. On each arrow of such a representing sieve, the restriction of $s$ is the image of an actual element of $A$. The sieve $L$ of all arrows having such representatives is closed under precomposition because the restriction maps of $P_A$ are identities. For each $f$ in $R$, its pullback of $L$ contains a representing covering sieve, so it covers by upward closure. Here upward closure follows from transitivity: the pullback of a larger sieve along each arrow of a contained covering sieve is maximal. Transitivity therefore shows $L$ covers $X$. Apply [F2] to obtain a finite family $\{U_i\to X\}_{i=1}^m$ in $L$ and choose its representatives $a_i\in A$; this last choice is finite. [F1, F2, given]
+
+2.1 Sheafification preserves an objectwise injective presheaf map: if matching families from $P$ become equal in $Q^+$ under such a map $P\hookrightarrow Q$, they agree on a common covering refinement in $Q$, hence there in $P$. Thus $P^+\to Q^+$ is objectwise injective, and applying this twice proves the assertion by [F1]. For $D=\{a_1,\ldots,a_m\}\subseteq A$, the inclusion defines an objectwise injective map $P_D\to P_A$ by the identity restriction convention, so $aD\to aA$ is objectwise injective. The sections of $aD$ represented by the $a_i$ have equal restrictions on $U_i\times_X U_j$, which exist in the site by [F3]: their images are the restrictions of $s$, and the map is injective there. Consequently these sections define a matching family on the covering sieve generated by the $U_i\to X$. Indeed, on an arrow factoring through $U_i$, use the restriction of $a_i$; two factorizations give the same section by their induced map to $U_i\times_X U_j$. The sheaf condition in [F1] now glues this family uniquely to a section of $aD$. Its image is $s$ by uniqueness of gluing in $aA$. If the family is empty, its generated sieve is covering and the same sheaf condition gives the unique amalgamations; in particular this handles the empty-scheme case and $D=\varnothing$. This proves the finite constant-set factorization, in particular for $A=\mathbb Z$, while retaining the finite covering family of representatives. [F1, F3, given, step 1.1] ∎

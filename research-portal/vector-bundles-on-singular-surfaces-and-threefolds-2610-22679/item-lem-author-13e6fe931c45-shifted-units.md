@@ -2,7 +2,7 @@
 title: Cohomology of shifted Nisnevich units
 status: published
 research_item: lem-author-13e6fe931c45-shifted-units
-dependency_level: 14
+dependency_level: 12
 ---
 
 PDF p. 4: Property (2)

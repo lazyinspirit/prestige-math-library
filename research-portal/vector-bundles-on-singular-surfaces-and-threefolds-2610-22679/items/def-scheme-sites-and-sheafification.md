@@ -11,6 +11,16 @@ deps:
   - lem-author-cf6ede58b450-plus-separated
   - lem-author-cf6ede58b450-separated-plus-sheaf
   - lem-author-cf6ede58b450-plus-universal
+  - math:def-scheme
+  - math:def-morphism-of-schemes
+  - math:def-etale-morphism-schemes
+  - math:def-grothendieck-universe-closure-convention
+  - math:def-category
+  - math:def-functor-and-contravariant-functor
+  - math:def-natural-transformation
+  - math:def-equivalence-relation
+  - math:def-adjunction-by-unit-counit-and-triangle-identities
+  - math:thm-the-adjunction-hom-set-bijection-under-local-smallness
 dependency_roles:
   math:def-scheme-over-base: mathematical-premise
   def-author-cf6ede58b450-site-plus-data: mathematical-premise
@@ -18,6 +28,16 @@ dependency_roles:
   lem-author-cf6ede58b450-plus-separated: mathematical-premise
   lem-author-cf6ede58b450-separated-plus-sheaf: mathematical-premise
   lem-author-cf6ede58b450-plus-universal: mathematical-premise
+  math:def-scheme: mathematical-premise
+  math:def-morphism-of-schemes: mathematical-premise
+  math:def-etale-morphism-schemes: mathematical-premise
+  math:def-grothendieck-universe-closure-convention: mathematical-premise
+  math:def-category: mathematical-premise
+  math:def-functor-and-contravariant-functor: mathematical-premise
+  math:def-natural-transformation: mathematical-premise
+  math:def-equivalence-relation: mathematical-premise
+  math:def-adjunction-by-unit-counit-and-triangle-identities: mathematical-premise
+  math:thm-the-adjunction-hom-set-bijection-under-local-smallness: mathematical-premise
 provenance:
   statement: ai-generated
   proof: not-applicable
@@ -36,5 +56,25 @@ A big site over a base S has a specified category of S-schemes as its objects; a
 
 [[def-author-cf6ede58b450-site-plus-data]]
 
+[[math:def-scheme]]
+
+[[math:def-morphism-of-schemes]]
+
+[[math:def-etale-morphism-schemes]]
+
+[[math:def-grothendieck-universe-closure-convention]]
+
+[[math:def-category]]
+
+[[math:def-functor-and-contravariant-functor]]
+
+[[math:def-natural-transformation]]
+
+[[math:def-equivalence-relation]]
+
+[[math:def-adjunction-by-unit-counit-and-triangle-identities]]
+
+[[math:thm-the-adjunction-hom-set-bijection-under-local-smallness]]
+
 ## Justification
-The size hypotheses make the sets of sieves, matching families and equivalence classes legitimate V-small sets. The plus construction is a presheaf and its unit is natural by [[lem-author-cf6ede58b450-plus-presheaf]]. It is separated by [[lem-author-cf6ede58b450-plus-separated]], so its second application is a sheaf by [[lem-author-cf6ede58b450-separated-plus-sheaf]]. For every sheaf G, applying [[lem-author-cf6ede58b450-plus-universal]] successively to F and F+ gives natural bijections Hom((F+)+,G) ≅ Hom(F+,G) ≅ Hom(F,G). This proves the stated adjunction and identifies its unit. The definitions of the scheme categories require the separately specified topology and size bound; they do not claim that every possible category of schemes is U-small.
+The size hypotheses make the sets of sieves, matching families and equivalence classes legitimate V-small sets. Here universe closure means transitivity, pairing, power-set closure and indexed-union closure as in [[math:def-grothendieck-universe-closure-convention]]; relative smallness and the plus-construction data are as in [[def-author-cf6ede58b450-site-plus-data]], and equivalence classes and quotient sets have the meaning in [[math:def-equivalence-relation]]. The plus construction is a presheaf and its unit is natural by [[lem-author-cf6ede58b450-plus-presheaf]]. It is separated by [[lem-author-cf6ede58b450-plus-separated]], so its second application is a sheaf by [[lem-author-cf6ede58b450-separated-plus-sheaf]]. For every sheaf G, applying [[lem-author-cf6ede58b450-plus-universal]] successively to F and F+ gives natural bijections Hom((F+)+,G) ≅ Hom(F+,G) ≅ Hom(F,G). Here Hom denotes natural transformations in the sense of [[math:def-natural-transformation]]; presheaf morphisms have componentwise identities and composition, and the category of sheaves has the same morphisms between sheaves. For two presheaves F and G, such a transformation is a family of functions F(X) → G(X) indexed by the U-small object set of C; these families form a V-small set by universe closure, and the naturality equations select a subset. Thus these categories have set-valued Hom collections. The natural bijections therefore give the stated adjunction in the sense of [[math:def-adjunction-by-unit-counit-and-triangle-identities]] by the converse direction of [[math:thm-the-adjunction-hom-set-bijection-under-local-smallness]]. Since the bijections are composition with F → F+ → (F+)+, they identify this composite as the unit. The definitions of the scheme categories require the separately specified topology and size bound; they do not claim that every possible category of schemes is U-small.

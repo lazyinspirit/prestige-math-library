@@ -10,6 +10,7 @@ dependency_level: 2
 - [def-author-cf6ede58b450-site-plus-data](item-def-author-cf6ede58b450-site-plus-data)
 - [lem-author-cf6ede58b450-cover-intersections](item-lem-author-cf6ede58b450-cover-intersections)
 
+
 ## Statement
 For every set-valued presheaf on a small site, the relation and restriction maps in the plus construction are well defined; they give a presheaf F+ and a natural map η_F: F → F+. A natural map F → G induces a natural map F+ → G+.
 

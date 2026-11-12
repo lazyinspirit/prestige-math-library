@@ -7,14 +7,154 @@ domain: mathematics
 deps:
   - def-nisnevich-covering-interface
   - def-cdh-topology-interface
+  - math:def-locally-finite-type-and-finite-type-morphism
+  - math:def-quasi-compact-and-quasi-separated-morphism
+  - math:cor-finite-type-algebra-over-noetherian-ring-is-noetherian
+  - math:def-locally-noetherian-and-noetherian-scheme
+  - math:def-dimension-noetherian-topological-space
+  - thm-adjudicate-d1c21a67502d-reduced-closed-subscheme-input
+  - math:def-reduction-of-scheme
+  - math:def-irreducible-component-scheme
+  - math:def-integral-scheme
+  - math:def-residue-field-scheme-point
+  - math:def-etale-morphism-schemes
+  - math:def-locally-finite-presentation-morphism
+  - math:lem-base-change-locally-finite-type-presentation
+  - math:def-finite-type-and-module-finite-algebras
+  - math:thm-affine-scheme-ring-anti-equivalence
+  - math:thm-field-of-fractions-is-a-field-and-the-domain-embeds
+  - math:thm-universal-property-of-localisation
+  - math:lem-spectrum-localization-open-immersion
+  - math:thm-universal-property-of-a-polynomial-ring-on-a-family
+  - math:thm-quotient-ring-universal-property
+  - math:lem-ring-homomorphism-of-fields-is-a-field-homomorphism
+  - math:def-topological-space
+  - math:def-subspace-topology-top
+  - math:def-irreducible-topological-space-and-subset
 dependency_roles:
   def-nisnevich-covering-interface: mathematical-premise
   def-cdh-topology-interface: mathematical-premise
+  math:def-locally-finite-type-and-finite-type-morphism: mathematical-premise
+  math:def-quasi-compact-and-quasi-separated-morphism: mathematical-premise
+  math:cor-finite-type-algebra-over-noetherian-ring-is-noetherian: mathematical-premise
+  math:def-locally-noetherian-and-noetherian-scheme: mathematical-premise
+  math:def-dimension-noetherian-topological-space: mathematical-premise
+  thm-adjudicate-d1c21a67502d-reduced-closed-subscheme-input: mathematical-premise
+  math:def-reduction-of-scheme: mathematical-premise
+  math:def-irreducible-component-scheme: mathematical-premise
+  math:def-integral-scheme: mathematical-premise
+  math:def-residue-field-scheme-point: mathematical-premise
+  math:def-etale-morphism-schemes: mathematical-premise
+  math:def-locally-finite-presentation-morphism: mathematical-premise
+  math:lem-base-change-locally-finite-type-presentation: mathematical-premise
+  math:def-finite-type-and-module-finite-algebras: mathematical-premise
+  math:thm-affine-scheme-ring-anti-equivalence: mathematical-premise
+  math:thm-field-of-fractions-is-a-field-and-the-domain-embeds: mathematical-premise
+  math:thm-universal-property-of-localisation: mathematical-premise
+  math:lem-spectrum-localization-open-immersion: mathematical-premise
+  math:thm-universal-property-of-a-polynomial-ring-on-a-family: mathematical-premise
+  math:thm-quotient-ring-universal-property: mathematical-premise
+  math:lem-ring-homomorphism-of-fields-is-a-field-homomorphism: mathematical-premise
+  math:def-topological-space: mathematical-premise
+  math:def-subspace-topology-top: mathematical-premise
+  math:def-irreducible-topological-space-and-subset: mathematical-premise
 provenance:
   statement: ai-generated
   proof: ai-generated
 proof_strategy: direct
 dependency_level: 8
+sources:
+  references:
+    - title: The Stacks Project, Noetherian schemes
+      url: https://stacks.math.columbia.edu/tag/01OU
+      locator: Lemmas 28.5.5, 28.5.6 and 28.5.7 (tags 01OZ, 02IK and 0BA8), statements
+        and displayed proofs/hint
+      statement: A Noetherian scheme has Noetherian underlying space and finitely many
+        irreducible components; every locally closed subscheme of a Noetherian
+        scheme is Noetherian.
+      hypotheses: A Noetherian scheme, and for inheritance a locally closed subscheme;
+        applied to X and its reduced closed subschemes. No reducedness or
+        finite-dimensionality is required by these lemmas.
+      reading_limits: Read the three statements and their displayed proofs or
+        omitted-proof hint in Section 28.5. The cited topology and
+        commutative-algebra lemmas were not independently reconstructed. These
+        geometric premises are imported; no library review or foundational
+        choice analysis is claimed.
+    - title: The Stacks Project, generic points of schemes
+      url: https://stacks.math.columbia.edu/tag/01IS
+      locator: Lemma 26.11.1, statement and two-paragraph proof
+      statement: Every nonempty irreducible closed subset of a scheme has a unique
+        generic point.
+      hypotheses: An arbitrary scheme and an irreducible closed subset, with
+        irreducible meaning nonempty; no Noetherian hypothesis.
+      reading_limits: Read the exact statement and affine-chart proof. Its cited
+        correspondence between prime ideals and irreducible closed subsets is
+        not re-proved here.
+    - title: The Stacks Project, dimension of locally algebraic schemes
+      url: https://stacks.math.columbia.edu/tag/0A21
+      locator: Lemma 33.20.3(8), statement and paragraph headed Proof of (8);
+        terminology in Definition 33.20.1 at tag 06LF
+      statement: For a scheme locally of finite type over a field k, its dimension is
+        the supremum of the transcendence degrees over k of the residue fields
+        at its component generic points.
+      hypotheses: Any field k and a locally algebraic k-scheme, meaning locally of
+        finite type over k. Applied only to the finite-type scheme X; no
+        smoothness, integrality, equidimensionality or algebraic-closedness
+        assumption is needed.
+      reading_limits: Read Definition 33.20.1, the statement of Lemma 33.20.3, and its
+        proof paragraphs for (6) and (8). The reduction to the cited
+        commutative-algebra dimension theorem is imported rather than
+        reconstructed. Only clause (8) is used; the finite bound and
+        closed-complement dimension decrease are explained locally.
+    - title: The Stacks Project, transcendence bases and transcendence degree
+      url: https://stacks.math.columbia.edu/tag/030D
+      locator: Definitions 9.26.1 and 9.26.4; Lemma 9.26.3, the
+        basis-between-independent-and-generating-sets construction, specialized
+        to a finite generating set
+      statement: A transcendence basis is an algebraically independent set over which
+        the extension is algebraic; its cardinality is transcendence degree. A
+        field extension generated by a finite set G has a transcendence basis
+        contained in G, so its transcendence degree is finite and at most the
+        size of G.
+      hypotheses: A field extension K/k with a specified finite field-generating set
+        G; use the empty independent set in the basis construction. Only this
+        finite generating case is applied.
+      reading_limits: Read the two definitions and the proof of Lemma 9.26.3,
+        including its basis construction and finite-basis cardinality argument.
+        For finite G the maximal independent subset is selected from a finite
+        collection, so the general Zorn selection in the construction is
+        unnecessary. No assertion about bases of arbitrary infinitely generated
+        extensions is used.
+formulation_deps:
+  - def-nisnevich-covering-interface
+  - def-cdh-topology-interface
+argument_deps:
+  - def-nisnevich-covering-interface
+  - def-cdh-topology-interface
+  - math:def-locally-finite-type-and-finite-type-morphism
+  - math:def-quasi-compact-and-quasi-separated-morphism
+  - math:cor-finite-type-algebra-over-noetherian-ring-is-noetherian
+  - math:def-locally-noetherian-and-noetherian-scheme
+  - math:def-dimension-noetherian-topological-space
+  - thm-adjudicate-d1c21a67502d-reduced-closed-subscheme-input
+  - math:def-reduction-of-scheme
+  - math:def-irreducible-component-scheme
+  - math:def-integral-scheme
+  - math:def-residue-field-scheme-point
+  - math:def-etale-morphism-schemes
+  - math:def-locally-finite-presentation-morphism
+  - math:lem-base-change-locally-finite-type-presentation
+  - math:def-finite-type-and-module-finite-algebras
+  - math:thm-affine-scheme-ring-anti-equivalence
+  - math:thm-field-of-fractions-is-a-field-and-the-domain-embeds
+  - math:thm-universal-property-of-localisation
+  - math:lem-spectrum-localization-open-immersion
+  - math:thm-universal-property-of-a-polynomial-ring-on-a-family
+  - math:thm-quotient-ring-universal-property
+  - math:lem-ring-homomorphism-of-fields-is-a-field-homomorphism
+  - math:def-topological-space
+  - math:def-subspace-topology-top
+  - math:def-irreducible-topological-space-and-subset
 ---
 
 ## Statement
@@ -25,11 +165,30 @@ In the specified category of separated finite-type schemes over a field $k$, eve
 
 **Goal:** Obtain a finite subfamily with that same pointwise lifting property.
 
-[F1] The completed interfaces specify these schemes and étale covering morphisms. Finite-type schemes over a field are Noetherian of finite dimension; closed reduced subschemes have finitely many irreducible components. [[def-cdh-topology-interface]], [[def-nisnevich-covering-interface]]
+[F1] The site and covering condition are those of [[def-cdh-topology-interface]] and [[def-nisnevich-covering-interface]]. A finite-type structural map is locally of finite type and quasi-compact: its affine charts over $k$ have finitely generated coordinate algebras, and a finite number cover $X$. A field is Noetherian since its only ideals are zero and the whole field. The finite-type algebra theorem therefore makes these chart rings Noetherian, so $X$ is a Noetherian scheme. [[math:def-locally-finite-type-and-finite-type-morphism]], [[math:def-quasi-compact-and-quasi-separated-morphism]], [[math:cor-finite-type-algebra-over-noetherian-ring-is-noetherian]], [[math:def-locally-noetherian-and-noetherian-scheme]]
 
-[F2] On an integral affine scheme $Z=\operatorname{Spec}A$, a morphism from its generic point into a finite-type $Z$-scheme extends over a nonempty open: choose an affine target neighbourhood over $Z$, write its coordinate ring using finitely many $A$-algebra generators and relations, and clear the finitely many denominators of their images in $\operatorname{Frac}A$. The resulting homomorphism into $A[1/a]$ is the required extension. Relations hold there because $A[1/a]\hookrightarrow\operatorname{Frac}A$ is injective. This argument proves the fact rather than importing a rational-section theorem.
+[F2] The imported Noetherian-scheme facts give a Noetherian underlying space and finitely many irreducible components for $X$ and each closed subscheme. Each component has a unique generic point, by the imported generic-point theorem. Dimension means the supremum of lengths of strict chains of nonempty irreducible closed subsets, with empty-space dimension $-\infty$. The imported dimension formula gives a finite bound for $\dim X$: for each of the finitely many generic points choose one of the finite-type affine charts from F1, with ring $B$ and corresponding prime $\mathfrak p$. Its residue field is $\operatorname{Frac}(B/\mathfrak p)$, generated as a field by the images of a finite algebra generating list. Here a transcendence basis is an algebraically independent set over which the field extension is algebraic; algebraic means each element satisfies a nonzero polynomial over the base field, and algebraic independence means no nonzero polynomial relation among the chosen elements. Transcendence degree is the size of such a basis. The finite-generator form of the imported transcendence-basis theorem gives a basis inside the specified finite field-generating set, hence finite transcendence degree. Every closed subset has dimension at most $\dim X$, since its irreducible closed chains are also chains in $X$. [[math:def-dimension-noetherian-topological-space]], [[math:def-residue-field-scheme-point]] The four precise imported premises are recorded in External input.
+
+[F3] Every closed subset has its unique reduced induced closed subscheme structure by [[thm-adjudicate-d1c21a67502d-reduced-closed-subscheme-input]]. A component is equipped with that structure and is integral: it is nonempty, irreducible and reduced, so its nonempty affine opens have domain coordinate rings. The reduction $X_{\mathrm{red}}$ has the same underlying points as $X$. A closed immersion induces an isomorphism on residue fields, as proved in the Justification of the Nisnevich interface; this applies to reductions and to components. Thus all their pointwise lifts can be compared with lifts over $X$. A generic point $\eta$ of a component $C$ means $\overline{\{\eta\}}=C$; every nonempty open of $C$ contains it. [[math:def-irreducible-component-scheme]], [[math:def-integral-scheme]], [[math:def-reduction-of-scheme]], [[def-nisnevich-covering-interface]]
+
+[F4] An étale morphism is locally of finite presentation and hence locally of finite type, since a finite presentation has finitely many generators. Arbitrary base change preserves the latter property. Thus $U_i\times_X C\to C$ is locally of finite type, and at a point above a component generic point one may choose witnessing affine charts $\operatorname{Spec}B\to\operatorname{Spec}A$ with $B$ a finitely generated $A$-algebra. The Nisnevich interface supplies existence and the universal property of the scheme fibre product. [[math:def-etale-morphism-schemes]], [[math:def-locally-finite-presentation-morphism]], [[math:lem-base-change-locally-finite-type-presentation]], [[math:def-locally-finite-type-and-finite-type-morphism]], [[def-nisnevich-covering-interface]]
+
+[F5] Finite generation permits a presentation $B=A[t_1,\ldots,t_n]/J$ with an arbitrary ideal $J$, without a claim that $J$ is finitely generated. Polynomial evaluation is a ring map and a map annihilating $J$ factors through the quotient. Affine scheme maps correspond contravariantly to ring maps. For a domain $A$, its fraction field contains $A$ injectively; for $a\ne0$ the localization maps into that field by $b/a^m\mapsto b/a^m$, injectively by the domain fraction equality criterion. Its spectrum is the open $D(a)$. At the generic point $(0)$ of $\operatorname{Spec}A$ the residue field is $\operatorname{Frac}A$. [[math:def-finite-type-and-module-finite-algebras]], [[math:thm-universal-property-of-a-polynomial-ring-on-a-family]], [[math:thm-quotient-ring-universal-property]], [[math:thm-affine-scheme-ring-anti-equivalence]], [[math:thm-field-of-fractions-is-a-field-and-the-domain-embeds]], [[math:thm-universal-property-of-localisation]], [[math:lem-spectrum-localization-open-immersion]], [[math:def-residue-field-scheme-point]]
+
+[F6] Here is the local spreading argument used below. Let $C$ be integral and let $Y\to C$ be locally of finite type with a section over its generic point. Choose the affine charts of F4 around the image of this section, so $A$ is a domain and the section gives an $A$-algebra map $B\to K=\operatorname{Frac}A$. For the presentation in F5, choose $0\ne a\in A$ equal to a product of denominators of the finitely many images of the $t_j$ (use $a=1$ for an empty list). Evaluation then maps $A[t_1,\ldots,t_n]$ to $A[1/a]$. Every element of $J$ maps to zero in $K$, hence already in $A[1/a]$ by injectivity. The quotient property gives an $A$-algebra map $B\to A[1/a]$ and therefore a section over the nonempty open $D(a)\subset C$, extending the prescribed generic section. There is no finite-relations assumption. Also, a retraction $K\to L\to K$ of field maps makes $K\to L$ an isomorphism: the second map is injective and its image contains all of $K$, so both are inverse isomorphisms. Field-map injectivity is supplied by [[math:lem-ring-homomorphism-of-fields-is-a-field-homomorphism]]. These are local arguments using F4 and F5, not an imported rational-section theorem.
+
+[F7] Open and closed sets obey the topology axioms; finite unions of closed sets are closed. On a subset, open and closed sets are traces of ambient open and closed sets. A nonempty space is irreducible if it cannot be written as a union of two proper closed subsets, and an irreducible subset carries the subspace topology. For $A\subseteq Z$, write $\overline A$ for the intersection of all closed subsets of $Z$ containing $A$. This family contains $Z$, so the intersection is closed, contains $A$, and lies in every closed set containing $A$. A component means a maximal nonempty irreducible closed subset, as in F3. These conventions suffice for the local containment and coverage argument in step 1.1; no arbitrary-space component-existence theorem is assumed. [[math:def-topological-space]], [[math:def-subspace-topology-top]], [[math:def-irreducible-topological-space-and-subset]], [[math:def-irreducible-component-scheme]]
+
+## External input
+Import the underlying-space, closed-subscheme inheritance and component-finiteness facts in F2 from [Stacks, Lemmas 28.5.5–28.5.7](https://stacks.math.columbia.edu/tag/01OU). F1 verifies their Noetherian hypothesis for $X$; inheritance applies at every closed-complement stage.
+
+Import generic-point existence and uniqueness in F2 from [Stacks, Lemma 26.11.1](https://stacks.math.columbia.edu/tag/01IS), applied to the nonempty irreducible closed components.
+
+Import only the dimension formula in F2 from [Stacks, Lemma 33.20.3(8)](https://stacks.math.columbia.edu/tag/0A21). Its locally algebraic hypothesis means locally of finite type over the field, satisfied by $X$. The finite bound in F2 and the induction below are local deductions.
+
+The field terminology and finite-generator basis premise in F2 are from [Stacks, Definitions 9.26.1, 9.26.4 and the finite-generator case of Lemma 9.26.3](https://stacks.math.columbia.edu/tag/030D). It applies to each specified finite generating list for $\operatorname{Frac}(B/\mathfrak p)$. Only a maximal subset of a finite generating set is needed in this application. These imports do not make the finite-subfamily conclusion an external input.
 
 ## Proof
-1.1 For a nonempty reduced closed subscheme $Z\subset X$ and each of its finitely many generic points $\eta$, choose a residue-preserving lift in one of the $U_i$. This gives a generic section of $U_i\times_X Z_\eta\to Z_\eta$, where $Z_\eta$ is the corresponding integral component. By [F2] it extends over a dense open of that component. Shrink this open to avoid the other components. It is then open also in $Z$. Finitely many such opens have union $O\subset Z$ containing all generic points of $Z$; the finitely many chosen maps provide residue-preserving lifts over $O$. A section preserves residue fields because the induced field maps $\kappa(z)\to\kappa(u)\to\kappa(z)$ have composite identity, so the middle field is the base field. [F1, F2, given]
+1.1 Let $Z\subset X$ be any nonempty reduced closed subscheme. First establish component containment and coverage using F2, F3 and F7. Given a nonempty irreducible closed subset $H\subseteq Z$, the lengths of strict irreducible closed chains starting at $H$ form a nonempty subset of the finite set $\{0,\ldots,\dim X\}$. Choose a chain of greatest length. Its last member $C$ cannot be properly contained in another irreducible closed subset, since appending that subset would give a longer chain starting at $H$; thus $C$ is a component containing $H$. For each point $z\in Z$, its closure $H=\overline{\{z\}}$ is nonempty and irreducible: if $H=E_1\cup E_2$ with $E_1,E_2$ closed in $H$, F7 makes them closed in $Z$ because $H$ is closed, and $z\in E_j$ for some $j$ forces $H\subseteq E_j$ by the defining closure property. Hence $H=E_j$. Applying containment to this $H$ puts $z$ in a component, proving that the components cover $Z$. By F2 and F3 these finitely many components $C$ are integral and have generic points $\eta$. For each choose an original index $i$ and a residue-field-preserving lift of $\eta$ in $U_i$. The residue fields of $C,Z,X$ at this point agree by F3. The corresponding map $\operatorname{Spec}\kappa(\eta)\to U_i$ is constructed on an affine neighbourhood by its coordinate-ring map to that residue field; the affine correspondence in F5 and the fibre-product universal property give a generic section of $U_i\times_X C\to C$. By F4 and F6 it extends over a nonempty open $V_C\subset C$. Remove from $V_C$ all other components. The resulting open $V'_C$ still contains $\eta$, since distinct maximal irreducible components do not contain each other's generic points. It is open also in $Z$: if $V_C=C\cap W_C$ for an open $W_C\subset Z$, then $V'_C=W_C\cap(Z\setminus\bigcup_{C'\ne C}C')$, because the components cover $Z$. Their finite union $O$ is open in $Z$ and contains every component generic point. The sections give points in the original $U_i$ above every point of $O$. At such a point $z$ the section followed by projection to $U_i$ gives field maps $\kappa(z)\to\kappa(u)\to\kappa(z)$ with identity composite, hence an isomorphism by F6; F3 identifies the base residue field with that in $X$. Thus finitely many original indices provide Nisnevich lifts over $O$. All choices here are finite. [F1, F2, F3, F4, F5, F6, F7, given]
 
-2.1 The closed reduced complement $Z\setminus O$ has strictly smaller dimension than $Z$. Repeat step 1.1 there. Induction on the finite dimension terminates, and at each stage only finitely many original indices are selected. Thus their union is finite and provides residue-preserving lifts at every point of $X$. Each selected original map remains étale, so it is a Nisnevich subfamily. Nilpotents do not change points or residue fields; starting with $X_{\mathrm{red}}$ therefore proves the claim for $X$ as well. No lifting-locus openness has been asserted. [F1, step 1.1] ∎
+2.1 Put $T=(Z\setminus O)_{\mathrm{red}}$, which exists by F3. If it is nonempty, any chain of nonempty irreducible closed subsets of $T$ is a chain in $Z$ by F7, since $T$ is closed in $Z$; its largest member is contained in a component $C$ of $Z$ by the containment argument of step 1.1. That containment is strict because $T$ omits the generic point of $C$. Appending $C$ lengthens the chain by one, so $\dim T\le\dim Z-1$. The finite bound in F2 now permits induction on $\dim Z$: the empty complement needs no indices, and otherwise apply the induction hypothesis to $T$ with the original family, whose pointwise lifts remain available by F3. Together with the indices of step 1.1 this gives finitely many original indices lifting every point of $Z$. At dimension zero the complement must be empty, providing the base case. Apply the result to $Z=X_{\mathrm{red}}$; F3 identifies all points and residue fields with those of $X$. Each selected original map remains étale, hence this finite subfamily is Nisnevich. If $X$ is empty, choose the empty family. No openness of a whole residue-field-lifting locus was used. [F1, F2, F3, F7, step 1.1] ∎

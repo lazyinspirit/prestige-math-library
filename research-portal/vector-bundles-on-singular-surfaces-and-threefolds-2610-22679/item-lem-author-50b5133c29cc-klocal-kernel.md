@@ -2,7 +2,7 @@
 title: The exact restriction kernel and its denominators
 status: published
 research_item: lem-author-50b5133c29cc-klocal-kernel
-dependency_level: 10
+dependency_level: 12
 ---
 
 PDF p. 7: Zariski locality; PDF p. 15: Localization diagram

@@ -4,119 +4,119 @@ title: Article items · 05 — External BEM big-site finite Beilinson–Lichtenb
 description: Presents 28 items from the article and its immediate prerequisites,
   covering dependency levels 6–9.
 status: published
-dependency_level: 4
+dependency_level: 0
 research_article_page: true
 item_count: 28
 ---
 
-## External BEM big-site finite Beilinson–Lichtenbaum comparison
+## Published prerequisite
 
-[Open item](item-thm-author-2ac325480ae8-bem-finite-comparison) · level 6
+[math:def-topological-space](https://alphabetamath.cc/item/def-topological-space)
 
-## Completely decomposed proper covers and the cdh topology
+## Published prerequisite
 
-[Open item](item-def-cdh-topology-interface) · level 7
+[math:def-variety-scheme-theoretic](https://alphabetamath.cc/item/def-variety-scheme-theoretic)
 
-## Milnor K symbols and the Nisnevich sheaf
+## Published prerequisite
 
-[Open item](item-def-milnor-k-sheaf-interface) · level 7
+[math:def-weil-divisor-normal-noetherian-scheme](https://alphabetamath.cc/item/def-weil-divisor-normal-noetherian-scheme)
 
-## Cycle complexes with fixed support
+## Published prerequisite
 
-[Open item](item-def-supported-higher-cycle-complex) · level 7
+[math:ex-integers-under-addition](https://alphabetamath.cc/item/ex-integers-under-addition)
 
-## The local valuative convention matches the source convention
+## Published prerequisite
 
-[Open item](item-lem-author-0cc80c1b5792-valuative-conventions) · level 7
+[math:ex-localization-etale-open-immersion](https://alphabetamath.cc/item/ex-localization-etale-open-immersion)
 
-## The actual big cdh slice over a field
+## Published prerequisite
 
-[Open item](item-lem-author-2ac325480ae8-slice-site) · level 7
+[math:ex-noetherian-integers-and-fields](https://alphabetamath.cc/item/ex-noetherian-integers-and-fields)
 
-## Every qcqs cdh generator is an arc covering family
+## Published prerequisite
 
-[Open item](item-lem-author-7113c087ecba-generators-arc) · level 7
+[math:lem-affine-finite-type-scheme-coordinate-ring-finitely-generated](https://alphabetamath.cc/item/lem-affine-finite-type-scheme-coordinate-ring-finitely-generated)
 
-## The actual smooth open pair and its Nisnevich square
+## Published prerequisite
 
-[Open item](item-lem-author-8a080e7d9445-geometry) · level 7
+[math:lem-base-change-open-closed-immersions](https://alphabetamath.cc/item/lem-base-change-open-closed-immersions)
 
-## Elmanto–Morrow motivic complex input
+## Published prerequisite
 
-[Open item](item-lem-author-b747b28c359f-elmanto-morrow-complexes) · level 7
+[math:lem-canonical-truncation-is-a-complex-and-has-the-claimed-cohomology](https://alphabetamath.cc/item/lem-canonical-truncation-is-a-complex-and-has-the-claimed-cohomology)
 
-## Degree zero and negative homology of the cycle complex
+## Published prerequisite
 
-[Open item](item-lem-bloch-chow-and-negative-range) · level 7
+[math:lem-chain-dimension-open-cover](https://alphabetamath.cc/item/lem-chain-dimension-open-cover)
 
-## Motivic complexes and cohomology
+## Published prerequisite
 
-[Open item](item-def-motivic-cohomology) · level 8
+[math:lem-characteristic-and-additive-order](https://alphabetamath.cc/item/lem-characteristic-and-additive-order)
 
-## Elmanto–Morrow weight-one comparison input
+## Published prerequisite
 
-[Open item](item-lem-author-13e6fe931c45-weight-one-external) · level 8
+[math:lem-clopen-subset-gives-idempotent-decomposition](https://alphabetamath.cc/item/lem-clopen-subset-gives-idempotent-decomposition)
 
-## Bottom supported Bloch groups on a codimension two curve
+## Published prerequisite
 
-[Open item](item-lem-author-16f30f6b95cb-curve-supported-bloch-bottom) · level 8
+[math:lem-closed-immersion-affine-quotient-and-base-change](https://alphabetamath.cc/item/lem-closed-immersion-affine-quotient-and-base-change)
 
-## A chosen root trivializes the actual Tate coefficient on the slice
+## Published prerequisite
 
-[Open item](item-lem-author-2ac325480ae8-chosen-root) · level 8
+[math:lem-dimension-finite-union-components](https://alphabetamath.cc/item/lem-dimension-finite-union-components)
 
-## Restriction to the slice commutes with big-site localization
+## Published prerequisite
 
-[Open item](item-lem-author-2ac325480ae8-slice-localization) · level 8
+[math:lem-distinguished-open-refinement-at-a-point](https://alphabetamath.cc/item/lem-distinguished-open-refinement-at-a-point)
 
-## Pullback and composition of the cdh generating families
+## Published prerequisite
 
-[Open item](item-lem-author-5bfbe3ebf14f-cdh-generators-pullback-composition) · level 8
+[math:lem-distinguished-opens-cover-every-open](https://alphabetamath.cc/item/lem-distinguished-opens-cover-every-open)
 
-## Finite subfamilies of Nisnevich covers on the finite-type site
+## Published prerequisite
 
-[Open item](item-lem-author-5bfbe3ebf14f-finite-nisnevich-subfamily) · level 8
+[math:lem-every-zariski-closed-set-has-a-radical-defining-ideal](https://alphabetamath.cc/item/lem-every-zariski-closed-set-has-a-radical-defining-ideal)
 
-## Restriction of hyperdescent and arbitrary abstract blowup squares
+## Published prerequisite
 
-[Open item](item-lem-author-7113c087ecba-cdh-hyperdescent) · level 8
+[math:lem-fibre-product-open-restriction](https://alphabetamath.cc/item/lem-fibre-product-open-restriction)
 
-## Finite valuative dimension for noetherian and finite type schemes
+## Published prerequisite
 
-[Open item](item-thm-author-14463ef2f4e5-finite-valuative-dimension) · level 8
+[math:lem-field-is-noetherian](https://alphabetamath.cc/item/lem-field-is-noetherian)
 
-## External MVW proper-cover identification and two-stage refinement
+## Published prerequisite
 
-[Open item](item-thm-author-5bfbe3ebf14f-mvw-finite-type-cdh-two-stage-input) · level 8
+[math:lem-finite-type-local-on-source-and-target](https://alphabetamath.cc/item/lem-finite-type-local-on-source-and-target)
 
-## Huber–Kelly representable cdh sheafification input
+## Published prerequisite
 
-[Open item](item-thm-author-60d95bfb692a-huber-kelly-representable-input) · level 8
+[math:lem-finite-variable-polynomial-algebras-over-fields-are-noetherian-direct](https://alphabetamath.cc/item/lem-finite-variable-polynomial-algebras-over-fields-are-noetherian-direct)
 
-## Nonconnective K theory of perfect complexes
+## Published prerequisite
 
-[Open item](item-def-nonconnective-k-spectrum-interface) · level 9
+[math:lem-group-homomorphism-basic-properties](https://alphabetamath.cc/item/lem-group-homomorphism-basic-properties)
 
-## Prime-field evaluation and compatibility with the standing theory
+## Published prerequisite
 
-[Open item](item-lem-author-0bac6b264f4a-motivic-dim-general-interface) · level 9
+[math:lem-inverse-of-bijective-group-homomorphism](https://alphabetamath.cc/item/lem-inverse-of-bijective-group-homomorphism)
 
-## Restriction of the base field for weight one
+## Published prerequisite
 
-[Open item](item-lem-author-13e6fe931c45-prime-field-restriction) · level 9
+[math:lem-noetherian-open-subsets-are-quasi-compact](https://alphabetamath.cc/item/lem-noetherian-open-subsets-are-quasi-compact)
 
-## Elmanto–Morrow rational comparison cofiber
+## Published prerequisite
 
-[Open item](item-lem-author-4b6f215bcf3b-em-rational-comparison-cofiber) · level 9
+[math:lem-noetherian-space-has-finitely-many-irreducible-components](https://alphabetamath.cc/item/lem-noetherian-space-has-finitely-many-irreducible-components)
 
-## A finite-family basis for the generated cdh topology
+## Published prerequisite
 
-[Open item](item-lem-author-5bfbe3ebf14f-finite-generated-topology-basis) · level 9
+[math:lem-noetherian-subspaces-and-compact-opens](https://alphabetamath.cc/item/lem-noetherian-subspaces-and-compact-opens)
 
-## Constant cdh sections on the two article sites
+## Published prerequisite
 
-[Open item](item-lem-author-a279c89ed6c8-cdh-zero-site-comparison) · level 9
+[math:lem-projective-space-finite-type-over-base](https://alphabetamath.cc/item/lem-projective-space-finite-type-over-base)
 
-## Prime-field restriction preserves actual comparison diagrams
+## Published prerequisite
 
-[Open item](item-lem-author-dcdf962edbda-restriction) · level 9
+[math:lem-spectrum-localization-open-immersion](https://alphabetamath.cc/item/lem-spectrum-localization-open-immersion)

@@ -10,12 +10,42 @@ deps:
   - math:lem-noetherian-space-has-finitely-many-irreducible-components
   - math:thm-stalk-structure-sheaf-prime-localization
   - math:def-axiom-of-choice
+  - math:def-scheme
+  - math:def-affine-open-subscheme
+  - math:def-affine-scheme-spectrum
+  - math:def-locally-free-sheaf-finite-rank
+  - math:cor-affine-scheme-quasi-compact
+  - math:lem-intersection-affine-opens-covered-principal-opens
+  - math:thm-sections-basic-open-affine-scheme
+  - math:def-multiplicative-subset-and-localisation
+  - math:thm-noetherian-ring-quotients-and-localisations
+  - math:lem-distinguished-subset-cover-detects-radical
+  - math:ex-spectrum-product-ring-disjoint-union
+  - math:thm-affine-scheme-ring-anti-equivalence
+  - math:thm-noetherian-ring-has-noetherian-spectrum
+  - math:def-sheaf-on-topological-space
+  - math:def-module-on-ringed-space
 dependency_roles:
   lem-author-a9a51f3554f8-normal-ring-product: mathematical-premise
   math:def-normal-noetherian-ring: mathematical-premise
   math:lem-noetherian-space-has-finitely-many-irreducible-components: mathematical-premise
   math:thm-stalk-structure-sheaf-prime-localization: mathematical-premise
   math:def-axiom-of-choice: mathematical-premise
+  math:def-scheme: mathematical-premise
+  math:def-affine-open-subscheme: mathematical-premise
+  math:def-affine-scheme-spectrum: mathematical-premise
+  math:def-locally-free-sheaf-finite-rank: mathematical-premise
+  math:cor-affine-scheme-quasi-compact: mathematical-premise
+  math:lem-intersection-affine-opens-covered-principal-opens: mathematical-premise
+  math:thm-sections-basic-open-affine-scheme: mathematical-premise
+  math:def-multiplicative-subset-and-localisation: mathematical-premise
+  math:thm-noetherian-ring-quotients-and-localisations: mathematical-premise
+  math:lem-distinguished-subset-cover-detects-radical: mathematical-premise
+  math:ex-spectrum-product-ring-disjoint-union: mathematical-premise
+  math:thm-affine-scheme-ring-anti-equivalence: mathematical-premise
+  math:thm-noetherian-ring-has-noetherian-spectrum: mathematical-premise
+  math:def-sheaf-on-topological-space: mathematical-premise
+  math:def-module-on-ringed-space: mathematical-premise
 provenance:
   statement: ai-generated
   proof: ai-generated
@@ -34,15 +64,35 @@ Here a scheme is noetherian if it has a finite affine open cover by spectra of n
 
 [[math:def-normal-noetherian-ring]]
 
+[[math:def-scheme]]
+
+[[math:def-affine-open-subscheme]]
+
+[[math:def-locally-free-sheaf-finite-rank]]
+
 ## Facts & Assumptions
 
-[F1] Under the Axiom of Choice, a normal noetherian ring is a finite product of noetherian integrally closed domains ([[lem-author-a9a51f3554f8-normal-ring-product]]).
+[F1] Under the Axiom of Choice, a normal noetherian ring is a finite product of noetherian integrally closed domains; the zero ring is the empty product. Here noetherian means that every ideal is finitely generated, and a domain has nonzero identity and no zero divisors ([[lem-author-a9a51f3554f8-normal-ring-product]]).
 
-[F2] Under the Axiom of Choice, a noetherian topological space is a finite union of its irreducible closed components ([[math:lem-noetherian-space-has-finitely-many-irreducible-components]]).
+[F2] On an affine scheme $\operatorname{Spec} A$, the stalk at a prime $\mathfrak p$ is $A_{\mathfrak p}$ ([[math:thm-stalk-structure-sheaf-prime-localization]]). A noetherian ring is normal when all these localizations are integrally closed domains ([[math:def-normal-noetherian-ring]]).
 
-[F3] On an affine scheme $\operatorname{Spec} A$, the stalk at a prime $\mathfrak p$ is $A_{\mathfrak p}$ ([[math:thm-stalk-structure-sheaf-prime-localization]]). A noetherian ring is normal when all these localizations are integrally closed domains ([[math:def-normal-noetherian-ring]]).
+[F3] Schemes are locally ringed spaces covered by affine open neighborhoods ([[math:def-scheme]]). An open subscheme has the restricted structure sheaf ([[math:def-affine-open-subscheme]]). The points of $\operatorname{Spec} A$ are proper prime ideals, its basic opens are $D(f)=\{\mathfrak p:f\notin\mathfrak p\}$, and the zero ring has empty spectrum ([[math:def-affine-scheme-spectrum]]).
 
-[A1] The Axiom of Choice is assumed; it supplies the choice used by [F1] and [F2] ([[math:def-axiom-of-choice]]).
+[F4] Under AC, every affine scheme is quasi-compact ([[math:cor-affine-scheme-quasi-compact]]). Given affine opens $U,V$ and $x\in U\cap V$, the common-principal construction in the proof of [[math:lem-intersection-affine-opens-covered-principal-opens]] supplies a neighborhood of $x$ which is principal in both $U$ and $V$.
+
+[F5] The sections on $D(f)\subseteq\operatorname{Spec} A$ are $A_f$, with the canonical localization restriction maps, including the zero ring of sections on an empty basic open ([[math:thm-sections-basic-open-affine-scheme]]). Fractions satisfy $a/s=b/t$ exactly when some allowed denominator $u$ satisfies $u(at-bs)=0$ ([[math:def-multiplicative-subset-and-localisation]]).
+
+[F6] Localizations of noetherian rings are noetherian ([[math:thm-noetherian-ring-quotients-and-localisations]]). Under AC, if a nonempty finite family of $D(f_j)$ covers $\operatorname{Spec} A$, then $(f_1,\ldots,f_s)=A$: apply the radical criterion to $D(1)$ and use $1^n=1$. The same applies to arbitrary positive powers of the $f_j$, since their distinguished opens are unchanged ([[math:lem-distinguished-subset-cover-detects-radical]]).
+
+[F7] The spectrum of a binary product of rings is the disjoint union of the factor spectra as locally ringed spaces ([[math:ex-spectrum-product-ring-disjoint-union]]). Ring isomorphisms induce isomorphisms of affine schemes ([[math:thm-affine-scheme-ring-anti-equivalence]]).
+
+[F8] Under AC, the spectrum of a noetherian ring is a noetherian topological space, meaning that descending chains of closed sets stabilize ([[math:thm-noetherian-ring-has-noetherian-spectrum]]). A noetherian topological space has finitely many irreducible closed components, which cover it ([[math:lem-noetherian-space-has-finitely-many-irreducible-components]]).
+
+[F9] Sheaves satisfy locality and unique gluing for every open cover, including the empty cover of the empty set ([[math:def-sheaf-on-topological-space]]). A sheaf of modules has sectionwise module operations compatible with restrictions, and its morphisms are sectionwise linear sheaf maps ([[math:def-module-on-ringed-space]]). For an open subspace $C$, restriction of a sheaf $\mathcal G$ means $(\mathcal G|_C)(W)=\mathcal G(W)$ for $W\subseteq C$ open. Functions on $W$ mean sections of $\mathcal O_X(W)$, and units mean those sections admitting multiplicative inverses.
+
+[F10] A finite-rank vector bundle is a finite locally free sheaf of modules, and a line bundle has rank one. Its rank is independent of the trivializing chart and locally constant, and restriction to an open subscheme preserves local freeness ([[math:def-locally-free-sheaf-finite-rank]]).
+
+[A1] The Axiom of Choice is assumed ([[math:def-axiom-of-choice]]). It supplies the choice assumptions in [F1], [F4], [F6] and [F8].
 
 ## Proof
 
@@ -50,10 +100,6 @@ Here a scheme is noetherian if it has a finite affine open cover by spectra of n
 
 **Goal:** Prove the finite open-and-closed integral normal decomposition and its stated componentwise consequences.
 
-1.1 Every affine open $U=\operatorname{Spec} A$ has $A$ noetherian: a finite cover of $X$ by noetherian affine opens refines the quasi-compact open $U$ by finitely many principal opens whose coordinate rings are localizations of noetherian rings; the ascending-chain condition on ideals can then be checked after these finitely many localizations, where equality of localized ideals implies equality on $U$. By [F3] and normality of $X$, every prime localization of $A$ is an integrally closed domain. Thus [F1] writes $A$ as a finite product of noetherian integrally closed domains. The corresponding spectra are disjoint open-and-closed subschemes of $U$; each is irreducible and reduced, since it is the spectrum of a domain. In particular, every point of $X$ has an integral affine open neighborhood. [F1, F3, A1, given]
+1.1 Fix an affine open $U=\operatorname{Spec} A$. If $U$ is empty, [F5] applied to $D(1)$ gives $A=0$, which is noetherian and the empty product in [F1]. Otherwise take a finite noetherian affine cover $V_i=\operatorname{Spec} B_i$ of $X$. By [F4], the intersections $U\cap V_i$ have common principal neighborhoods; quasi-compactness of $U$ gives finitely many of them covering $U$, say $D_U(f_j)=D_{V_{i(j)}}(g_j)$. Their section rings satisfy $A_{f_j}\cong(B_{i(j)})_{g_j}$ by [F5], so are noetherian by [F6]. To prove $A$ noetherian, fix an ideal $I\subseteq A$. Choose finitely many generators of each $IA_{f_j}$ and represent them by fractions whose numerators belong to $I$. Let $J\subseteq I$ be the ideal generated by all these finitely many numerators. Then $JA_{f_j}=IA_{f_j}$. For any $a\in I$, clearing denominators using [F5] gives integers $m_j\ge1$ with $f_j^{m_j}a\in J$. The opens $D(f_j^{m_j})$ still cover $U$, so [F6] gives $1=\sum_j c_j f_j^{m_j}$ for some $c_j\in A$. Multiplying by $a$ gives $a\in J$. Thus $I=J$ is finitely generated, and $A$ is noetherian. Normality of $X$ and [F2] now give the hypotheses of [F1], hence $A$ is a finite product of noetherian integrally closed domains. By [F7], transporting this ring isomorphism to spectra and iterating the binary-product isomorphism yields disjoint open-and-closed factor subschemes of $U$. For a domain $B$, the zero prime belongs to every nonempty basic open of $\operatorname{Spec} B$, so every nonempty open contains that point, proving irreducibility. Its sections on every nonempty basic open are localizations at nonzero elements, which are domains by the fraction relation in [F5]; hence nilpotent sections vanish on a basic open cover and vanish by [F9]. Thus each factor is integral. Every point of $X$ therefore has an integral affine open neighborhood. [F1, F2, F3, F4, F5, F6, F7, F9, A1, given]
 
-2.1 The underlying topological space of $X$ is noetherian: each member of a finite noetherian affine cover has descending-chain condition on closed sets, and a descending chain of closed subsets of $X$ stabilizes once its restrictions to these finitely many opens stabilize. By [F2], $X$ is the union of finitely many irreducible closed components. If such a component $C$ contains $x$, choose an integral open neighborhood $U$ of $x$ from step 1.1. The nonempty open subset $C\cap U$ is dense in $C$; its closure is contained in the irreducible closure $\overline U$. Maximality of $C$ therefore gives $C=\overline U$. Consequently two components containing $x$ are equal. The finitely many components are thus pairwise disjoint, and each is open as the complement of the union of the others. The empty scheme corresponds to the empty union. [F2, A1, step 1.1]
-
-3.1 Give each open-and-closed component $C$ the restricted structure sheaf. It is irreducible by construction. It is reduced because the integral affine neighborhoods from step 1.1 cover $X$, and nilpotence and vanishing of sections can be checked locally. Its local rings are those of $X$, so they are integrally closed domains; hence $C$ is normal and integral. This proves the decomposition and the affine-ring assertion. [step 1.1, step 2.1, given]
-
-4.1 For a finite disjoint open cover $X=\coprod_i C_i$, restriction and gluing give an equivalence between sheaves on $X$ and tuples of sheaves on the $C_i$: overlaps between different components are empty, so there are no compatibility conditions. Applied to the structure sheaf and its invertible sections, this gives functions and units componentwise; applied to locally free sheaves, it gives line bundles and finite-rank vector bundles componentwise. The rank is locally constant by local freeness; on an irreducible space two disjoint nonempty open rank loci cannot occur, so it is constant on each $C_i$. [step 2.1, step 3.1] ∎
+2.1 The finite noetherian affine cover of $X$ has noetherian underlying spaces by [F8]. A descending chain of closed subsets of $X$ stabilizes when its restrictions to these finitely many opens stabilize, so $X$ is topologically noetherian. By [F8], it is covered by finitely many irreducible closed components. If a component $C$ contains $x$, choose an integral open neighborhood $U$ of $x$ from step 1.1. The nonempty open subset $C\cap U$ is dense in $C$: otherwise it and $C\setminus\overline{C\cap U}$ would be disjoint nonempty open subsets of the irreducible space $C$. Also $\overline U$ is irreducible, since a cover of it by two closed sets restricts to such a cover of $U$, forcing $U$ and then its closure into one of them. Thus $C\subseteq\overline U$, and maximality gives $C=\overline U$. Two components containing $x$ must therefore coincide. The finitely many components are pairwise disjoint, and each is open because its complement is the finite union of the others. Give each $C_i$ its restricted structure sheaf, as in [F3]. It is irreducible, reduced by the integral neighborhoods and locality in [F9], and normal because its local rings equal those of $X$. This proves the stated decomposition. For a tuple of sheaves $\mathcal G_i$ on the components, define $\mathcal G(W)=\prod_i\mathcal G_i(W\cap C_i)$ for every open $W\subseteq X$, with coordinatewise restrictions. By [F9] this is a sheaf; restriction recovers $\mathcal G_i$, while locality and gluing identify any sheaf on $X$ with this product of its restrictions. The same formulas apply to morphisms and, using sectionwise scalar restriction, to sheaves of modules. In particular $\mathcal O_X(W)\cong\prod_i\mathcal O_{C_i}(W\cap C_i)$, with inverses of units computed componentwise. Local freeness is checked on neighborhoods within the open $C_i$, so [F10] and this construction specify line bundles and finite-rank vector bundles componentwise, including their morphisms. By [F10] the rank function is well-defined and locally constant. On an irreducible component any two nonempty trivializing open neighborhoods intersect, so their ranks agree; hence the rank is constant on that component. For $X=\varnothing$ the decomposition is the empty union and these constructions use empty products, giving the unique sheaves and the zero ring of functions. [F3, F8, F9, F10, A1, step 1.1] ∎

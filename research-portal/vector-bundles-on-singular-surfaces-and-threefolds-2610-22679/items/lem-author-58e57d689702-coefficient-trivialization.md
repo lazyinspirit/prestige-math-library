@@ -10,42 +10,132 @@ deps:
   - def-etale-tate-coefficients
   - def-derived-sections-on-sites
   - prop-etale-cdh-descent
+  - def-scheme-sites-and-sheafification
+  - thm-author-58e57d689702-linear-hyperdescent-input
+  - math:def-canonical-truncation-of-a-complex
+  - math:lem-canonical-truncation-is-a-complex-and-has-the-claimed-cohomology
+  - math:def-slice-category-and-the-pullback-functor
+  - math:def-quasi-compact-and-quasi-separated-scheme
+  - math:def-quasi-compact-and-quasi-separated-morphism
+  - math:thm-fibre-products-of-schemes-exist
+  - math:cor-affine-scheme-quasi-compact
+  - math:lem-diagonal-quasi-compact-iff-quasi-separated
+  - math:lem-base-change-quasi-compact-morphisms
+  - math:def-grothendieck-universe-closure-convention
+  - math:def-adjunction-by-unit-counit-and-triangle-identities
+  - math:def-algebraically-closed-field
+  - math:def-prime-subfield
+  - math:thm-prime-subfield-classification
+  - lem-adjudicate-278bae1a6e9e-coherent-tate-sections
 dependency_roles:
   math:def-axiom-of-choice: mathematical-premise
   lem-author-dcdf962edbda-qcqs-site: mathematical-premise
   def-etale-tate-coefficients: mathematical-premise
   def-derived-sections-on-sites: mathematical-premise
   prop-etale-cdh-descent: mathematical-premise
+  def-scheme-sites-and-sheafification: mathematical-premise
+  thm-author-58e57d689702-linear-hyperdescent-input: mathematical-premise
+  math:def-canonical-truncation-of-a-complex: mathematical-premise
+  math:lem-canonical-truncation-is-a-complex-and-has-the-claimed-cohomology: mathematical-premise
+  math:def-slice-category-and-the-pullback-functor: mathematical-premise
+  math:def-quasi-compact-and-quasi-separated-scheme: mathematical-premise
+  math:def-quasi-compact-and-quasi-separated-morphism: mathematical-premise
+  math:thm-fibre-products-of-schemes-exist: mathematical-premise
+  math:cor-affine-scheme-quasi-compact: mathematical-premise
+  math:lem-diagonal-quasi-compact-iff-quasi-separated: mathematical-premise
+  math:lem-base-change-quasi-compact-morphisms: mathematical-premise
+  math:def-grothendieck-universe-closure-convention: mathematical-premise
+  math:def-adjunction-by-unit-counit-and-triangle-identities: mathematical-premise
+  math:def-algebraically-closed-field: mathematical-premise
+  math:def-prime-subfield: mathematical-premise
+  math:thm-prime-subfield-classification: mathematical-premise
+  lem-adjudicate-278bae1a6e9e-coherent-tate-sections: mathematical-premise
 provenance:
   statement: ai-generated
   proof: ai-generated
 proof_strategy: direct
-dependency_level: 15
+dependency_level: 14
+formulation_deps:
+  - math:def-axiom-of-choice
+  - lem-author-dcdf962edbda-qcqs-site
+  - def-etale-tate-coefficients
+  - def-derived-sections-on-sites
+  - prop-etale-cdh-descent
+  - def-scheme-sites-and-sheafification
+  - thm-author-58e57d689702-linear-hyperdescent-input
+  - math:def-canonical-truncation-of-a-complex
+  - math:lem-canonical-truncation-is-a-complex-and-has-the-claimed-cohomology
+  - math:def-slice-category-and-the-pullback-functor
+  - math:def-quasi-compact-and-quasi-separated-scheme
+  - math:def-quasi-compact-and-quasi-separated-morphism
+  - math:thm-fibre-products-of-schemes-exist
+  - math:cor-affine-scheme-quasi-compact
+  - math:lem-diagonal-quasi-compact-iff-quasi-separated
+  - math:lem-base-change-quasi-compact-morphisms
+  - math:def-grothendieck-universe-closure-convention
+  - math:def-adjunction-by-unit-counit-and-triangle-identities
+  - math:def-algebraically-closed-field
+  - math:def-prime-subfield
+  - math:thm-prime-subfield-classification
+  - lem-adjudicate-278bae1a6e9e-coherent-tate-sections
+argument_deps:
+  - math:def-axiom-of-choice
+  - lem-author-dcdf962edbda-qcqs-site
+  - def-etale-tate-coefficients
+  - def-derived-sections-on-sites
+  - prop-etale-cdh-descent
+  - def-scheme-sites-and-sheafification
+  - thm-author-58e57d689702-linear-hyperdescent-input
+  - math:def-canonical-truncation-of-a-complex
+  - math:lem-canonical-truncation-is-a-complex-and-has-the-claimed-cohomology
+  - math:def-slice-category-and-the-pullback-functor
+  - math:def-quasi-compact-and-quasi-separated-scheme
+  - math:def-quasi-compact-and-quasi-separated-morphism
+  - math:thm-fibre-products-of-schemes-exist
+  - math:cor-affine-scheme-quasi-compact
+  - math:lem-diagonal-quasi-compact-iff-quasi-separated
+  - math:lem-base-change-quasi-compact-morphisms
+  - math:def-grothendieck-universe-closure-convention
+  - math:def-adjunction-by-unit-counit-and-triangle-identities
+  - math:def-algebraically-closed-field
+  - math:def-prime-subfield
+  - math:thm-prime-subfield-classification
+  - lem-adjudicate-278bae1a6e9e-coherent-tate-sections
 ---
 
 ## Statement
-Assume the Axiom of Choice and the fixed universe and site-size bounds of the supplied derived-localization constructions. Let $k$ be algebraically closed, $p$ invertible in $k$, and $X/k$ qcqs, with the fixed choice and universe conventions. On $\mathcal C_F$ use the qcqs prime-field cdh site, and on $\mathcal C_F/X$ its induced slice topology. In this item $L^F_{\mathrm{cdh}}=L^{o,F}_{\mathrm{cdh}}$ and $L_{\mathrm{cdh},X}=L^o_{\mathrm{cdh},X}$ mean ordinary covering-family/Čech sheafification of $D(\mathbb Z)$-valued presheaves. With $r_XP(U\to X)=P(U)$, restriction commutes with this localization, including its units:
+Assume the Axiom of Choice and the fixed universe and site-size bounds of the supplied derived-localization constructions. Let $k$ be algebraically closed, $p$ an invertible prime in $k$, $F$ the prime subfield of $k$, and $X/k$ qcqs. On $\mathcal C_F$ use the qcqs prime-field cdh site, with representative-based evaluation of schemes within its size bound. The slice $\mathcal C_F/X$ has objects $U\to X$ and commuting triangles as morphisms; a sieve on $U\to X$ covers exactly when its underlying sieve on $U$ covers in $\mathcal C_F$. All constructions use these representative conventions.
+
+Write $D(\mathbb Z)$ for the unbounded derived category of abelian groups. In this item $L^F_{\mathrm{cdh}}=L^{o,F}_{\mathrm{cdh}}$ and $L_{\mathrm{cdh},X}=L^o_{\mathrm{cdh},X}$ mean ordinary covering-family/Čech localization of derived presheaves, equivalently localization at all integer shifts of linearized covering-sieve inclusions. With $r_XP(U\to X)=P(U)$, restriction commutes with this localization, including its units:
 $$r_XL^{o,F}_{\mathrm{cdh}}P\simeq L^o_{\mathrm{cdh},X}r_XP.$$
-Choose a primitive $p$th root $\zeta\in k$. Its pullbacks give a natural coefficient equivalence $r_XB\simeq r_XB_3$, where $B=R\Gamma_{\mathrm{et}}(-,\mathbb Z/p)$ and $B_3=R\Gamma_{\mathrm{et}}(-,\mu_p^{\otimes3})$. Both restricted targets are ordinary local. Consequently, at the terminal slice object $X\to X$, the actual maps $L^{o,F}_{\mathrm{cdh}}\tau^{\leq3}B\to B$ and $L^{o,F}_{\mathrm{cdh}}\tau^{\leq3}B_3\to B_3$ correspond under these equivalences. No root over $F$ or equality of ordinary and hypercomplete reflectors on arbitrary inputs is assumed.
+Here $\tau^{\leq3}$ is objectwise canonical cohomological truncation, with its natural map to the original derived presheaf.
+
+Choose a primitive $p$th root $\zeta\in k$. Its pullbacks give a natural coefficient equivalence $r_XB\simeq r_XB_3$, where $B=R\Gamma_{\mathrm{et}}(-,\mathbb Z/p)$ and $B_3=R\Gamma_{\mathrm{et}}(-,\mu_p^{\otimes3})$. Both restricted targets are ordinary local. The slice maps induced by truncation and the ordinary units therefore correspond under this equivalence. At the terminal slice object $X\to X$ these are the actual maps
+$$(L^{o,F}_{\mathrm{cdh}}\tau^{\leq3}B)(X)\longrightarrow B(X),\qquad (L^{o,F}_{\mathrm{cdh}}\tau^{\leq3}B_3)(X)\longrightarrow B_3(X).$$
+The twisted map here is constructed on the slice and then evaluated; its construction requires only slice locality of $B_3$. No root over $F$ or equality of ordinary and hypercomplete reflectors on arbitrary inputs is assumed.
 
 ## Facts & Assumptions
 
-[A1] Choice and the stated bounds are inherited through the finite-coefficient locality, ordinary slice localization and derived-evaluation suppliers used below. [[math:def-axiom-of-choice]]
-**Given:** The stated field, prime, scheme and fixed choice/universe conventions.
+**Given:** The field, prime, scheme, Choice and fixed universe conventions in the statement.
 
 **Goal:** Compare ordinary localization units and the actual coefficient maps on the slice.
 
-[F1] [[lem-author-dcdf962edbda-qcqs-site]] fixes the actual site. Its generating Nisnevich and finitely presented abstract blowup covers are stable under base change. Ordinary sheafification is the reflective localization into covering-family/Čech descent objects.
+[A1] Choice is inherited through the affine quasi-compactness, derived-evaluation and ordinary-localization suppliers. The fixed universe bounds may be enlarged once to contain both sites and their presheaf values in the inner universe of the arbitrary-small-site localization supplier. Universe closure keeps the products, slice arrows, sieve sets and set-indexed sums below within these bounds. [[math:def-axiom-of-choice]] [[math:def-grothendieck-universe-closure-convention]]
 
-[F2] [[def-etale-tate-coefficients]] gives the primitive-root coefficient isomorphism on every small étale site over $k$. [[def-derived-sections-on-sites]] fixes its derived evaluation.
+[F1] [[lem-author-dcdf962edbda-qcqs-site]] fixes the actual qcqs site, its generators and evaluation on representatives. [[def-scheme-sites-and-sheafification]] supplies pullback stability of covering sieves as a Grothendieck-topology axiom. The slice category uses [[math:def-slice-category-and-the-pullback-functor]]; its topology is the one explicitly defined in the statement. This uses pullback of covering sieves, without assuming an additional assertion about base-change stability of the specified generator class.
 
-[F3] [[prop-etale-cdh-descent]] proves hypercomplete and hence ordinary locality of $B$ on the whole prime-field site. Only its ordinary consequence is needed here.
+[F2] [[thm-author-58e57d689702-linear-hyperdescent-input]], Localization convention and Proof 2.1, supplies ordinary localization on every small Grothendieck site with these size and Choice conventions, applied with coefficient ring $\mathbb Z$ to both sites. If $h_V$ is the representable presheaf $\operatorname{Hom}(-,V)$ and $S\subset h_V$ is a covering sieve, the generators are $\mathbb Z[S][n]\to\mathbb Z[h_V][n]$ for $n\in\mathbb Z$; brackets denote the usual cochain shift and $\mathbb Z[S]$ is the objectwise free abelian presheaf. Locality is tested by derived Hom into every shift. The supplier proves equivalence with ordinary derived Čech descent and existence of the reflector, with its universal unit; it does not identify this reflector with hypercompletion on arbitrary inputs.
+
+[F3] [[math:def-canonical-truncation-of-a-complex]] defines the kernel truncation and its natural map. [[math:lem-canonical-truncation-is-a-complex-and-has-the-claimed-cohomology]] proves functoriality and preservation of quasi-isomorphisms, including descent to derived categories. Applied objectwise, these give the truncation of derived presheaves used here.
+
+[F4] The prime subfield is the intersection of all subfields of $k$, a subfield closed under inversion of its nonzero elements, by [[math:def-prime-subfield]]. [[math:thm-prime-subfield-classification]] identifies it with $\mathbb Q$ or a prime finite field, preserving $1$, as required by the site supplier. The integer $p$ belongs to it and is nonzero since $p$ is invertible in $k$; its inverse therefore lies in $F$. Thus $p$ is invertible on every $F$-scheme. [[def-etale-tate-coefficients]] supplies the coefficient sheaves and the root maps, and [[def-derived-sections-on-sites]] fixes derived evaluation. [[lem-adjudicate-278bae1a6e9e-coherent-tate-sections]] supplies the ambient strict derived presheaves for these Tate coefficients and the actual root-induced natural equivalence on the slice, applied with $n=p$ and $j=3$. Its weight-zero comparison identifies $B$ with the same constant-coefficient model used by [[prop-etale-cdh-descent]], which supplies ordinary locality on the entire prime-field site.
+
+[F5] The qcqs scheme and morphism criteria are [[math:def-quasi-compact-and-quasi-separated-scheme]] and [[math:def-quasi-compact-and-quasi-separated-morphism]]. [[math:thm-fibre-products-of-schemes-exist]] supplies scheme fibre products with their affine tensor-product charts; [[math:cor-affine-scheme-quasi-compact]] makes those charts quasi-compact under [A1]. [[math:lem-diagonal-quasi-compact-iff-quasi-separated]] is the diagonal criterion, and [[math:lem-base-change-quasi-compact-morphisms]] supplies stability of quasi-compact morphisms under base change.
+
+[F6] Adjunction units, counits and their triangle identities use [[math:def-adjunction-by-unit-counit-and-triangle-identities]]. Algebraic closure means that every nonconstant polynomial has a root in $k$, as in [[math:def-algebraically-closed-field]].
 
 ## Proof
-1.1 Define $R_XQ(V)=Q(V\times_FX\to X)$. These products remain qcqs. There is an adjunction $r_X\dashv R_X$: a map $r_XP\to Q$ gives $P(V)\to P(V\times_FX)\to Q(V\times_FX\to X)$; conversely a map $P\to R_XQ$ restricts along the graph $U\to U\times_FX$ for every $U\to X$. The projection–graph identities make the constructions inverse, naturally on mapping spaces. [F1, construct, A1]
 
-2.1 Restriction preserves ordinary sheaves because covers and their Čech diagrams over $(U\to X)$ are exactly those over $U$. The functor $R_X$ also preserves them: base change by $X$ carries the generators in [F1], their iterated pullbacks and their Čech diagrams to the same kind of covering diagrams on the slice. For an ordinary local equivalence $v$ and any slice sheaf $Q$, adjunction identifies $\operatorname{Map}(r_Xv,Q)$ with $\operatorname{Map}(v,R_XQ)$, an equivalence. Thus $r_X$ preserves ordinary local equivalences as well as local objects. [F1, step 1.1]
+1.1 Sieves on $(U,f)$ identify with ambient sieves on $U$, since every arrow $g:V\to U$ has the unique composite $f\circ g$ to $X$. Under this identification maximality, pullback and transitivity are exactly the ambient topology axioms, so the specified slice is a small Grothendieck site under [A1]. First the products $V\times_FX$ needed below remain in the qcqs category. Finite affine covers of $V$ and $X$ give a finite affine tensor-product cover of this product by [F5], so it is quasi-compact. The two relative diagonals over the affine base $\operatorname{Spec}F$ are quasi-compact by the same fact's diagonal criterion. After reordering factors, the diagonal of $V\times_FX$ is their product; it factors as two base changes of these diagonals. Base change preserves quasi-compactness, and composition does too, since inverse images of quasi-compact opens are successively quasi-compact. The diagonal criterion therefore makes the product quasi-separated. The construction stays within [A1]'s bounds and is transported to representatives by [F1]. Define $R_XQ(V)=Q(V\times_FX\to X)$ and $S_XQ(V)=\bigoplus_{f:V\to X}Q(V,f)$, with restrictions taking the $f$-summand to the $f\circ g$-summand along $g:W\to V$. There are adjunctions $S_X\dashv r_X\dashv R_X$. The first is the direct-sum universal property: a map $S_XQ\to P$ is precisely a compatible family $Q(V,f)\to P(V)$. For the second, a map $r_XP\to Q$ gives $P(V)\to P(V\times_FX)\to Q(V\times_FX\to X)$; conversely restrict a map $P\to R_XQ$ along each graph $U\to U\times_FX$. Naturality and the projection–graph identities make these constructions inverse and give the triangle identities of [F6]. All three functors preserve objectwise quasi-isomorphisms: $r_X,R_X$ are precomposition, while cohomology commutes with these direct sums because cycles and boundaries have finite support. Thus these adjunctions, units and counits descend to derived presheaves. For a slice covering sieve $T$ on $(U,f)$, its arrows identify with an ambient covering sieve $T_0$ on $U$, and $S_X\mathbb Z[T]=\mathbb Z[T_0]$, $S_X\mathbb Z[h_{(U,f)}]=\mathbb Z[h_U]$. For an ambient covering sieve $S$ on $V$, the identifications $r_Xh_V=h_{(V\times_FX,\mathrm{pr}_X)}$ and $r_XS=\mathrm{pr}_V^*S$ identify its restriction with a covering sieve on that slice object: an arrow $W\to V\times_FX$ belongs exactly when its composite to $V$ lies in $S$. This sieve covers by [F1]'s pullback axiom. Apply the two derived adjunctions to the shifted sieve generators in [F2]. They show that $r_X$ takes ambient local objects to slice local objects and $R_X$ takes slice local objects to ambient local objects. If $v$ is any ambient ordinary local equivalence and $Q$ is slice local, the second adjunction identifies mapping $r_Xv$ into every shift of $Q$ with mapping $v$ into the corresponding shift of the local object $R_XQ$. Hence $r_Xv$ is a slice local equivalence. [A1, F1, F2, F5, F6, construct]
 
-3.1 Restrict $P\to L^{o,F}_{\mathrm{cdh}}P$. By step 2.1 this is a local equivalence into a slice sheaf, so the reflective universal property identifies it with the slice localization unit. The resulting equivalence is natural and respects all maps induced by that unit. Evaluation at $X\to X$ is evaluation of the ambient presheaf at $X$. [F1, step 2.1]
-
-4.1 Pull back $\zeta$ to every scheme over $X$. By [F2] these maps give the actual natural equivalence $r_XB\simeq r_XB_3$. By [F3] and step 2.1, $r_XB$ is ordinary local; its equivalent target $r_XB_3$ is therefore ordinary local too. Truncation, localization and the naturality of the units in step 3.1 now conjugate the two induced maps from localized truncations into those local targets. Evaluate at the terminal object to obtain the claimed actual comparison. [F2, F3, step 2.1, step 3.1] ∎
+2.1 Restrict the ordinary unit $P\to L^{o,F}_{\mathrm{cdh}}P$. By step 1.1 it is a slice local equivalence into a slice local object. The reflector's universal property in [F2] identifies it, naturally in $P$ and compatibly with its unit, with $r_XP\to L^o_{\mathrm{cdh},X}r_XP$. This proves the displayed localization equivalence. The objectwise truncation of [F3] commutes with $r_X$ because both evaluate at the same underlying object, and its natural map descends because it preserves objectwise quasi-isomorphisms. To choose the root, the polynomial $1+T+\cdots+T^{p-1}$ has a root $\zeta\in k$ by [F6]. Its value at $1$ is the nonzero element $p$, so $\zeta\ne1$ and $\zeta^p=1$. The least positive exponent giving $1$ divides $p$ by Euclidean division, hence equals $p$. The coherent Tate-sections supplier in [F4], with $n=p$ and $j=3$, constructs both ambient derived presheaves and gives $r_XB\simeq r_XB_3$ as an equivalence of the whole slice diagrams induced by this root. Its formation requires no root over $F$. The same fact makes $B$ ordinary local; step 1.1 makes $r_XB$ ordinary local and hence so is its equivalent target $r_XB_3$. For either local target $T$, its truncation map $\tau^{\leq3}T\to T$ therefore has the unique factorization through the ordinary unit, in the reflector's derived universal property. Naturality of truncation, of the coefficient equivalence and of the unit comparison just proved conjugates these two actual slice maps. Evaluation at $X\to X$ identifies their sources with $(L^{o,F}_{\mathrm{cdh}}\tau^{\leq3}B)(X)$ and $(L^{o,F}_{\mathrm{cdh}}\tau^{\leq3}B_3)(X)$ and their targets with $B(X)$ and $B_3(X)$. This proves the claimed evaluation comparison with the original Choice and size scope, without identifying the two kinds of reflector. [A1, F1, F2, F3, F4, F6, step 1.1, choose] ∎

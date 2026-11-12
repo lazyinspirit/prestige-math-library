@@ -12,6 +12,9 @@ deps:
   - lem-author-a279c89ed6c8-cdh-zero-site-comparison
   - math:def-axiom-of-choice
   - lem-author-ec13f1db88a5-rank-zero-stage
+  - lem-adjudicate-60a5a67fb86d-finite-type-clopen-components
+  - math:def-quasi-compact-and-quasi-separated-scheme
+  - math:def-algebraically-closed-field
 dependency_roles:
   def-filtration-projections: mathematical-premise
   def-motivic-filtration: mathematical-premise
@@ -20,20 +23,61 @@ dependency_roles:
   lem-author-a279c89ed6c8-cdh-zero-site-comparison: mathematical-premise
   math:def-axiom-of-choice: mathematical-premise
   lem-author-ec13f1db88a5-rank-zero-stage: mathematical-premise
+  lem-adjudicate-60a5a67fb86d-finite-type-clopen-components: mathematical-premise
+  math:def-quasi-compact-and-quasi-separated-scheme: mathematical-premise
+  math:def-algebraically-closed-field: mathematical-premise
 proof_strategy: direct
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: ai-generated
 sources:
   references:
     - title: Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and
         threefolds
       url: https://arxiv.org/abs/2610.22679v1
-      locator: PDF p. 10, Lemma 5.1 and proof; p. 5, Lemma 2.4
-      reading_limits: The supplied article text at these locations was read. The proof
-        below uses the named completed suppliers and explicitly compares their
-        site conventions.
-dependency_level: 20
+      locator: PDF p. 3, Notation and conventions; p. 5, Lemma 2.4 and proof; p. 10,
+        Lemma 5.1 and proof
+      reading_limits: Read the frozen supplied article extraction at PDF p. 3
+        conventions, p. 5 Lemma 2.4 and its proof, and p. 10 Lemma 5.1 and its
+        proof. No fresh PDF-image inspection or reconstruction of the deep
+        motivic constructions is claimed. The proof below uses the declared
+        current supplier interfaces and compares their site conventions
+        explicitly.
+      statement: Lemma 5.1 identifies the zeroth filtration projection with rank for
+        seminormal X, referring to the component-section isomorphism of Lemma
+        2.4. Lemma 2.4 identifies H^0_cdh(X,Z) with integer-valued functions on
+        connected components for separated seminormal finite-type schemes over
+        the algebraically closed base field.
+      hypotheses: The article conventions on PDF p. 3 use qcqs schemes over an
+        algebraically closed field, and affine schemes are finite type. Lemma
+        5.1 states seminormality and invokes Lemma 2.4; the latter additionally
+        states separatedness and finite type. The arbitrary-field qcqs rank
+        equality in this generated item is a local consequence of the
+        rank-zero-stage supplier, not an imported assertion of these article
+        lemmas.
+dependency_level: 22
+formulation_deps:
+  - def-filtration-projections
+  - def-motivic-filtration
+  - prop-motivic-weight-zero
+  - lem-cdh-integer-sections
+  - lem-author-a279c89ed6c8-cdh-zero-site-comparison
+  - math:def-axiom-of-choice
+  - lem-author-ec13f1db88a5-rank-zero-stage
+  - lem-adjudicate-60a5a67fb86d-finite-type-clopen-components
+  - math:def-quasi-compact-and-quasi-separated-scheme
+  - math:def-algebraically-closed-field
+argument_deps:
+  - def-filtration-projections
+  - def-motivic-filtration
+  - prop-motivic-weight-zero
+  - lem-cdh-integer-sections
+  - lem-author-a279c89ed6c8-cdh-zero-site-comparison
+  - math:def-axiom-of-choice
+  - lem-author-ec13f1db88a5-rank-zero-stage
+  - lem-adjudicate-60a5a67fb86d-finite-type-clopen-components
+  - math:def-quasi-compact-and-quasi-separated-scheme
+  - math:def-algebraically-closed-field
 ---
 
 ## Statement
@@ -57,6 +101,12 @@ The spectrum $K(X)$ is the specified nonconnective K-theory of perfect complexes
 
 [[lem-cdh-integer-sections]]
 
+[[lem-adjudicate-60a5a67fb86d-finite-type-clopen-components]]
+
+[[math:def-quasi-compact-and-quasi-separated-scheme]]
+
+[[math:def-algebraically-closed-field]]
+
 ## Facts & Assumptions
 
 **Given:** A field $k$, a qcqs $k$-scheme $X$, Choice and compatible site and universe bounds. For the final specialization also assume the separated seminormal finite-type and algebraically closed hypotheses.
@@ -71,7 +121,12 @@ The spectrum $K(X)$ is the specified nonconnective K-theory of perfect complexes
 
 [F3] [[lem-author-a279c89ed6c8-cdh-zero-site-comparison]] gives the natural comparison with separated finite-type $k$-site sections when $X$ is separated finite type. [[lem-cdh-integer-sections]] identifies the latter with $\mathbb Z^{\pi_0(X)}$ under the additional seminormal and algebraically closed hypotheses.
 
+[F4] [[lem-adjudicate-60a5a67fb86d-finite-type-clopen-components]] supplies Noetherianity, finitely many clopen connected components, and the natural identification of locally constant integers with functions on those components for every finite-type field-scheme. It applies under [A1] without separatedness or seminormality.
 
+[F5] Quasi-compactness and quasi-separatedness have the scheme definitions in [[math:def-quasi-compact-and-quasi-separated-scheme]]. The algebraically closed hypothesis in the specialization means that every nonconstant polynomial over $k$ has a root in $k$, as in [[math:def-algebraically-closed-field]]. The separatedness, finite-type and seminormality conventions and the component set in that specialization are those of [F3].
+
+## External input
+Reference 0 records the original article Lemmas 5.1 and 2.4 with their respective hypotheses. It documents the original claim represented here; the proof below is a local deduction from [F1]–[F4], rather than an import of the article's smooth-locus argument in unrestricted qcqs scope.
 
 ## Proof
 
@@ -79,7 +134,7 @@ The spectrum $K(X)$ is the specified nonconnective K-theory of perfect complexes
 
 2.1 The rank in step 1.1 is computed on local bounded finite locally free representatives. Those ranks are locally constant, compatible with restrictions, and additive in exact triangles, as in [F2]. Hence this is a natural homomorphism on all perfect classes, including those without a global vector-bundle presentation. On the empty scheme the locally constant-function group is zero and the same identity applies. [F2, step 1.1]
 
-3.1 Now impose the original separated seminormal finite-type and algebraically closed hypotheses. Apply the natural site comparison and component-section calculation in [F3] to the same weight-zero group. The finite connected components of this noetherian scheme are clopen, so their integer values describe exactly its locally constant functions. These identifications take the map in step 1.1 to the original componentwise rank map and give the second display. Thus every original finite-type assertion and the broader qcqs rank equality hold with their respective precise site conventions. [A1, F1, F3, step 1.1, step 2.1] ∎
+3.1 Now impose the original separated seminormal finite-type and algebraically closed hypotheses. Apply the natural site comparison and component-section calculation in [F3] to the same weight-zero group. By [F4], this finite-type scheme is Noetherian with finitely many clopen connected components, and their integer values describe exactly its locally constant functions. These identifications take the map in step 1.1 to the original componentwise rank map and give the second display. Thus every original finite-type assertion and the broader qcqs rank equality hold with their respective precise site conventions. [A1, F1, F3, F4, F5, step 1.1, step 2.1] ∎
 
 ## Maintenance scope and reading limits
-The supplied article v1 text was read at its qcqs conventions on p. 3, Lemma 2.4 on p. 5 and Lemma 5.1 on p. 10. The current rank-zero-stage argument and weight-zero, stage-projection, site-comparison and integer-section contracts supply this deduction; their deep constructions are not independently reconstructed or accepted here. The original unrestricted smooth-locus proof premise remains a separate article defect. The four direct consumers were inspected: they use the rank identity on normal affine finite-type schemes and need no edits. Original coverage is unchanged.
+Read the complete assigned body, the declared rank, weight-zero, stage-projection, site-comparison and integer-section interfaces, the existing finite-constant-map lemma, and the mathematical suppliers of the new finite-type component helper. The article reading is limited to the text passages recorded in reference 0. The deep motivic constructions are used through their supplied contracts and are not reconstructed or accepted here. This patch preserves the entire Statement verbatim and all original coverage; its new helper closes the finite-type component argument. Read the complete bodies of the four direct consumers: the surface and threefold classification theorems, threefold Chern prescription, and exterior-square Chern calculation. Each uses the rank equality within its existing hypotheses and needs no change for this repair. No independent repair acceptance or original-author defect adjudication is claimed.

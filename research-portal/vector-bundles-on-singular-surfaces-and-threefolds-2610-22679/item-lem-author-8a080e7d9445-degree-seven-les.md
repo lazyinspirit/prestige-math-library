@@ -2,7 +2,7 @@
 title: The support long exact sequence kills degree seven
 status: published
 research_item: lem-author-8a080e7d9445-degree-seven-les
-dependency_level: 15
+dependency_level: 16
 ---
 
 PDF p. 13: Proposition 6.1 support argument
@@ -14,6 +14,11 @@ PDF p. 13: Proposition 6.1 support argument
 - [lem-author-8a080e7d9445-chow-restriction](item-lem-author-8a080e7d9445-chow-restriction)
 - [prop-smooth-motivic-comparison](item-prop-smooth-motivic-comparison)
 - [lem-fiber-sequence-homotopy-exactness](item-lem-fiber-sequence-homotopy-exactness)
+- [lem-author-8a080e7d9445-geometry](item-lem-author-8a080e7d9445-geometry)
+- [def-cohomology-with-support](item-def-cohomology-with-support)
+- [def-motivic-cohomology](item-def-motivic-cohomology)
+- [def-article-conventions](item-def-article-conventions)
+- [math:def-smooth-locus-morphism](https://alphabetamath.cc/item/def-smooth-locus-morphism)
 
 
 ## Statement
@@ -24,13 +29,19 @@ Assume the Axiom of Choice and the fixed universe and site-size bounds of the su
 
 **Goal:** Construct the stated actual maps and prove their consequence.
 
-[F1] [lem-author-8a080e7d9445-support-fiber](item-lem-author-8a080e7d9445-support-fiber), [lem-author-8a080e7d9445-chow-restriction](item-lem-author-8a080e7d9445-chow-restriction) and [lem-fiber-sequence-homotopy-exactness](item-lem-fiber-sequence-homotopy-exactness).
+[F1] The actual support-fiber equivalence and excision are supplied by [lem-author-8a080e7d9445-support-fiber](item-lem-author-8a080e7d9445-support-fiber). Surjectivity of the actual motivic restriction in degree six is supplied by [lem-author-8a080e7d9445-chow-restriction](item-lem-author-8a080e7d9445-chow-restriction). The natural long exact sequence of the homotopy groups of a spectral fiber sequence is supplied by [lem-fiber-sequence-homotopy-exactness](item-lem-fiber-sequence-homotopy-exactness); exactness means image equals kernel.
 
-[F2] [prop-smooth-motivic-comparison](item-prop-smooth-motivic-comparison), applied to the actual smooth $U$.
+[F2] [prop-smooth-motivic-comparison](item-prop-smooth-motivic-comparison) gives $H^{7,3}_{\mathrm{mot}}(U,\mathbb Z)=0$ for the smooth finite-type $U$: the higher Chow index is $2\cdot3-7=-1$, and negative cycle homology is zero.
 
-[F3] The assumed Axiom of Choice, [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice), discharges the foundational hypotheses of the support and Chow suppliers in [F1] and the smooth comparison in [F2], invoked in step 1.1. The following exact-sequence deduction makes no additional choice.
+[F3] The assumed Axiom of Choice, [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice), discharges the foundational hypotheses of the support and Chow suppliers in [F1], the smooth comparison in [F2], the geometry in [F4] and the support definition in [F6], invoked in step 1.1. The following exact-sequence deduction makes no additional choice.
+
+[F4] [lem-author-8a080e7d9445-geometry](item-lem-author-8a080e7d9445-geometry) establishes that $X,U,V,W$ are qcqs, that $U,V$ are smooth separated finite type over $k$, and that $U,V,W$ have their open subscheme structures. It also supplies the reduced induced structure on $T$ when needed and verifies local finite presentation of $X\to\operatorname{Spec}k$.
+
+[F5] [def-article-conventions](item-def-article-conventions) supplies the algebraically closed field, affine finite-type scheme and chain-dimension conventions. The notation $X_{\mathrm{smooth}/k}$ denotes the smooth locus of $X\to\operatorname{Spec}k$ in [math:def-smooth-locus-morphism](https://alphabetamath.cc/item/def-smooth-locus-morphism); its local finite-presentation hypothesis and open scheme structure are supplied by [F4].
+
+[F6] [def-motivic-cohomology](item-def-motivic-cohomology) defines $H^{a,3}_{\mathrm{mot}}(Y,\mathbb Z)=H^a(\mathbb Z(3)_{\mathrm{mot}}(Y))$ and its restriction maps. Write $M_3(Y)$ for the unshifted Eilenberg–Mac Lane realization of this complex. [def-cohomology-with-support](item-def-cohomology-with-support) identifies $\pi_{-a}M_3(Y)$ with this global group on qcqs schemes and defines $H^{a,3}_{\mathrm{mot},T}(U,\mathbb Z)=\pi_{-a}\operatorname{fib}(M_3(U)\to M_3(V))$. Its support-to-global map is the first fiber arrow. The fixed universe and site-size bounds are those of these supplied interfaces; only qcqs opens occur here.
 
 ## Proof
-1.1 Apply the long exact cohomology sequence of the actual support fiber to obtain $H^{6,3}_{\mathrm{mot}}(U)\to H^{6,3}_{\mathrm{mot}}(V)\to H^{7,3}_{\mathrm{mot},T}(U)\to H^{7,3}_{\mathrm{mot}}(U)$. The first arrow is surjective by the preceding local Chow-restriction lemma. The last group is zero by the completed smooth comparison: $2\cdot3-7=-1$ and the cycle complex has no negative homology. [F1, F2, F3]
+1.1 By [F4] and [F5], the actual schemes $U,V$ are smooth finite type over $k$ and all the schemes used are qcqs. With the inherited assumptions in [F3], form $S=\operatorname{fib}(M_3(U)\to M_3(V))$ as in [F6]. Apply spectral exactness [F1] to $S\to M_3(U)\to M_3(V)$, using $i=-6$ and $\pi_{-a}=H^{a,3}$ from [F6]. This gives $H^{6,3}_{\mathrm{mot}}(U,\mathbb Z)\to H^{6,3}_{\mathrm{mot}}(V,\mathbb Z)\to H^{7,3}_{\mathrm{mot},T}(U,\mathbb Z)\to H^{7,3}_{\mathrm{mot}}(U,\mathbb Z)$ for the actual restriction and support maps. The first arrow is surjective by the Chow-restriction supplier in [F1], and the last group is zero by [F2]. [given, F1, F2, F3, F4, F5, F6]
 
-2.1 Exactness gives zero for the middle supported group: its map to the zero last group has kernel equal to the image of the preceding zero connecting map. The support-fiber lemma gives the actual excision equivalence to support on $X$, proving the claim there as well. [F1, F2, step 1.1] ∎
+2.1 Surjectivity of the first arrow and exactness at $H^{6,3}_{\mathrm{mot}}(V,\mathbb Z)$ make the connecting homomorphism zero. The map from $H^{7,3}_{\mathrm{mot},T}(U,\mathbb Z)$ to the zero last group has the whole supported group as its kernel; exactness identifies that kernel with the zero image of the connecting homomorphism. Thus the supported group on $U$ is zero. The actual excision equivalence in [F1] identifies it with $H^{7,3}_{\mathrm{mot},T}(X,\mathbb Z)$, proving the claim on $X$ as well. [F1, F6, step 1.1] ∎

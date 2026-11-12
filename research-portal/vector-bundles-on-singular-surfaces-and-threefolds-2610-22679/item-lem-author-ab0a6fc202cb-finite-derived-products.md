@@ -11,6 +11,15 @@ PDF p. 8: Computations after the splitting principle
 
 - [lem-author-b747b28c359f-derived-cohomology](item-lem-author-b747b28c359f-derived-cohomology)
 - [lem-author-b747b28c359f-derived-finite-coefficients](item-lem-author-b747b28c359f-derived-finite-coefficients)
+- [math:def-derived-category-of-an-abelian-category](https://alphabetamath.cc/item/def-derived-category-of-an-abelian-category)
+- [math:thm-abelian-groups-form-an-abelian-category](https://alphabetamath.cc/item/thm-abelian-groups-form-an-abelian-category)
+- [math:def-cochain-complex-in-an-abelian-category](https://alphabetamath.cc/item/def-cochain-complex-in-an-abelian-category)
+- [math:def-cohomology-object-of-a-cochain-complex](https://alphabetamath.cc/item/def-cohomology-object-of-a-cochain-complex)
+- [math:def-mapping-cone-of-a-chain-map](https://alphabetamath.cc/item/def-mapping-cone-of-a-chain-map)
+- [math:prop-the-canonical-functor-from-complexes-to-the-homotopy-category-is-additive](https://alphabetamath.cc/item/prop-the-canonical-functor-from-complexes-to-the-homotopy-category-is-additive)
+- [math:lem-quasi-isomorphisms-admit-the-roof-calculus-in-the-homotopy-category](https://alphabetamath.cc/item/lem-quasi-isomorphisms-admit-the-roof-calculus-in-the-homotopy-category)
+- [math:lem-addition-of-roofs-makes-an-additive-localization](https://alphabetamath.cc/item/lem-addition-of-roofs-makes-an-additive-localization)
+
 
 ## Statement
 For a finite family $C_\alpha\in D(\mathbb Z)$ and $i\in\mathbb Z$,
@@ -21,18 +30,24 @@ These equivalences are induced by the coordinate projections. Consequently a fin
 
 ## Facts & Assumptions
 
-**Given:** A finite family of derived complexes, an integer $i$, and $n>0$.
+**Given:** A finite index set $A$, a family $(C_\alpha)_{\alpha\in A}$ of objects of $D(\mathbb Z)$, an integer $i$, and $n>0$.
 
-**Goal:** Prove compatibility with cohomology and derived finite coefficients.
+**Goal:** Prove the two projection-induced comparisons and joint injectivity, including $A=\varnothing$.
 
 [F1] Cohomology is functorial on $D(\mathbb Z)$. [lem-author-b747b28c359f-derived-cohomology](item-lem-author-b747b28c359f-derived-cohomology)
 
-[F2] Derived tensor with $\mathbb Z/n$ is the mapping cone of multiplication by $n$ and is functorial. [lem-author-b747b28c359f-derived-finite-coefficients](item-lem-author-b747b28c359f-derived-finite-coefficients)
+[F2] The functor $C\mapsto C/n=C\otimes^{\mathbf L}_{\mathbb Z}\mathbb Z/n$ is computed on any cochain representative by the cone of multiplication by $n$, without boundedness assumptions. [lem-author-b747b28c359f-derived-finite-coefficients](item-lem-author-b747b28c359f-derived-finite-coefficients)
+
+[F3] Use the same-object localization $D(\mathbb Z)=K(\operatorname{Ab})[\mathrm{qis}^{-1}]$ and its standing size conventions. The category $\operatorname{Ab}$ is abelian. A cochain complex has groups $C^d$ and homomorphisms $d^d:C^d\to C^{d+1}$ with $d^{d+1}d^d=0$. [math:def-derived-category-of-an-abelian-category](https://alphabetamath.cc/item/def-derived-category-of-an-abelian-category), [math:thm-abelian-groups-form-an-abelian-category](https://alphabetamath.cc/item/thm-abelian-groups-form-an-abelian-category), [math:def-cochain-complex-in-an-abelian-category](https://alphabetamath.cc/item/def-cochain-complex-in-an-abelian-category)
+
+[F4] The canonical functor from complexes to their homotopy category is additive, under the cochain reindexing $C^\sharp_d=C^{-d}$. Quasi-isomorphisms in $K(\operatorname{Ab})$ form a two-sided multiplicative system. With the size conventions in [F3], addition of roofs makes its localization additive; localization preserves zero objects and finite biproducts. A finite biproduct has inclusions $j_\alpha$ and projections $p_\alpha$ satisfying $p_\alpha j_\beta=\delta_{\alpha\beta}$ and $\sum_\alpha j_\alpha p_\alpha=1$, where the first right-hand side is the identity for equal indices and the zero morphism otherwise. [math:prop-the-canonical-functor-from-complexes-to-the-homotopy-category-is-additive](https://alphabetamath.cc/item/prop-the-canonical-functor-from-complexes-to-the-homotopy-category-is-additive), [math:lem-quasi-isomorphisms-admit-the-roof-calculus-in-the-homotopy-category](https://alphabetamath.cc/item/lem-quasi-isomorphisms-admit-the-roof-calculus-in-the-homotopy-category), [math:lem-addition-of-roofs-makes-an-additive-localization](https://alphabetamath.cc/item/lem-addition-of-roofs-makes-an-additive-localization)
+
+[F5] Write $Z^d(C)=\ker d^d$, $B^d(C)=\operatorname{im}d^{d-1}$ and $H^d(C)=Z^d(C)/B^d(C)$. [math:def-cohomology-object-of-a-cochain-complex](https://alphabetamath.cc/item/def-cohomology-object-of-a-cochain-complex)
+
+[F6] For a cochain map $f:C\to D$, use $\operatorname{Cone}(f)^d=D^d\oplus C^{d+1}$ with differential $(y,x)\mapsto(d_Dy+f x,-d_Cx)$. This is the chain-cone convention reindexed by $C^\sharp_d=C^{-d}$; the cochain-map condition makes its differential square zero. [math:def-mapping-cone-of-a-chain-map](https://alphabetamath.cc/item/def-mapping-cone-of-a-chain-map)
 
 ## Proof
 
-1.1 Represent each $C_\alpha$ by a cochain complex. Their finite degreewise direct sum is also their finite product. Products of finitely many abelian groups are exact: a coordinatewise surjection lifts a tuple by finitely many lifts, and kernels are computed coordinatewise. Hence this degreewise product preserves quasi-isomorphisms and represents the derived product. Its cycles and boundaries in every degree are the respective finite products of the coordinate cycles and boundaries, proving the first isomorphism. [F1, construct, algebra]
+1.1 In the same-object model [F3], choose cochain representatives and set $P^d=\prod_{\alpha\in A}C_\alpha^d$ with coordinatewise differential. Finite direct sums and products of abelian groups coincide, so the coordinate inclusions and projections are cochain maps satisfying the identities in [F4]. Those identities persist under the two additive functors from complexes through $K(\operatorname{Ab})$ to $D(\mathbb Z)$. For every object $T$ and tuple of derived morphisms $f_\alpha:T\to C_\alpha$, the morphism $f=\sum_\alpha j_\alpha f_\alpha:T\to P$ satisfies $p_\alpha f=f_\alpha$. If $g$ has these same coordinates, then $g=(\sum_\alpha j_\alpha p_\alpha)g=\sum_\alpha j_\alpha f_\alpha=f$. This is exactly the categorical product universal property in the derived category. By [F5], $Z^d(P)=\prod_\alpha Z^d(C_\alpha)$ and $B^d(P)=\prod_\alpha B^d(C_\alpha)$: the boundary equality follows by lifting finitely many image elements to preimages. The map from $Z^d(P)$ to $\prod_\alpha(Z^d(C_\alpha)/B^d(C_\alpha))$ is surjective by finitely many choices of representatives and has kernel $B^d(P)$. It therefore induces the first displayed isomorphism, with components $H^d(p_\alpha)$ by [F1]. This also shows that finite degreewise products preserve quasi-isomorphisms. If $A$ is empty, $P$ is the zero complex; the functors in [F4] preserve its zero-object property, so it is terminal and represents the empty product, with zero cohomology. All selections here are finite. [given, F1, F3, F4, F5, construct, algebra]
 
-2.1 Multiplication by $n$ on this product is coordinatewise. Its cone has in degree $d$ the sum of the product in degree $d$ with that in degree $d+1$, with the usual coordinatewise cone differential. Finite sums commute with finite products, so this cone is canonically the finite product of the individual cones. By [F2] this is exactly the second displayed equivalence. [F2, step 1.1, algebra]
-
-3.1 Apply [F1] and step 1.1 to step 2.1. An element whose every product coordinate is zero is zero, yielding the claimed detection for both coefficient choices. With no indices every complex and group displayed is zero, and the same conclusions hold. [F1, step 1.1, step 2.1] ∎
+2.1 Multiplication by $n$ on $P$ is coordinatewise. By [F6], the map $\operatorname{Cone}(n:P\to P)^d\to\prod_\alpha\operatorname{Cone}(n:C_\alpha\to C_\alpha)^d$ sends $((y_\alpha)_\alpha,(x_\alpha)_\alpha)$ to $((y_\alpha,x_\alpha))_\alpha$. It is an isomorphism in each degree and respects the differentials $(y,x)\mapsto(dy+nx,-dx)$, so it is an isomorphism of cochain complexes. By [F2] and the product universal property in step 1.1, this is the second displayed equivalence in $D(\mathbb Z)$; its components are precisely the coefficient functor applied to $p_\alpha$. Applying [F1] and the first comparison of step 1.1 gives the corresponding finite-coefficient cohomology isomorphism. If $C\xrightarrow{\sim}\prod_\alpha C_\alpha$ is a finite-product decomposition, functoriality transports both comparisons to the joint maps from $C$, integrally and after applying $-/n$. A tuple is zero exactly when every coordinate is zero, so those joint cohomology maps are injective. For the empty family the cone and all cohomology groups are zero, and these conclusions still hold. [F1, F2, F6, step 1.1, algebra] ∎

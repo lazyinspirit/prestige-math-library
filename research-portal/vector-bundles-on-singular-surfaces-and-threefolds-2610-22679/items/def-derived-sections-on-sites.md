@@ -9,15 +9,40 @@ deps:
   - def-scheme-sites-and-sheafification
   - lem-author-a44f2061570d-site-derived-input
   - lem-author-a44f2061570d-nonnegative-resolution
+  - math:def-cochain-complex-in-an-abelian-category
+  - math:thm-abelian-groups-form-an-abelian-category
+  - math:prop-cohomology-factors-through-the-derived-category
+  - def-adjudicate-0a21e0b4be3b-general-scheme-topologies
 dependency_roles:
   math:def-axiom-of-choice: mathematical-premise
   def-scheme-sites-and-sheafification: mathematical-premise
   lem-author-a44f2061570d-site-derived-input: mathematical-premise
   lem-author-a44f2061570d-nonnegative-resolution: mathematical-premise
+  math:def-cochain-complex-in-an-abelian-category: mathematical-premise
+  math:thm-abelian-groups-form-an-abelian-category: mathematical-premise
+  math:prop-cohomology-factors-through-the-derived-category: mathematical-premise
+  def-adjudicate-0a21e0b4be3b-general-scheme-topologies: mathematical-premise
 provenance:
   statement: ai-generated
   proof: not-applicable
-dependency_level: 11
+dependency_level: 10
+formulation_deps:
+  - math:def-axiom-of-choice
+  - def-scheme-sites-and-sheafification
+  - lem-author-a44f2061570d-site-derived-input
+  - math:def-cochain-complex-in-an-abelian-category
+  - math:thm-abelian-groups-form-an-abelian-category
+  - math:prop-cohomology-factors-through-the-derived-category
+  - def-adjudicate-0a21e0b4be3b-general-scheme-topologies
+argument_deps:
+  - math:def-axiom-of-choice
+  - def-scheme-sites-and-sheafification
+  - lem-author-a44f2061570d-site-derived-input
+  - lem-author-a44f2061570d-nonnegative-resolution
+  - math:def-cochain-complex-in-an-abelian-category
+  - math:thm-abelian-groups-form-an-abelian-category
+  - math:prop-cohomology-factors-through-the-derived-category
+  - def-adjudicate-0a21e0b4be3b-general-scheme-topologies
 ---
 
 ## Definition
@@ -28,11 +53,23 @@ An abelian sheaf is a contravariant functor from the site to abelian groups whos
 For an ordinary abelian sheaf $F$ regarded as a complex concentrated in degree zero, $H^n_\tau(X,F)=0$ for $n<0$. This convention does not assert a comparison between the three topologies or an identification between sheafification and derived localization.
 
 ## Definition references
+[[def-adjudicate-0a21e0b4be3b-general-scheme-topologies]]
+
 [[def-scheme-sites-and-sheafification]]
 
 [[lem-author-a44f2061570d-site-derived-input]]
 
+[[math:def-cochain-complex-in-an-abelian-category]]
+
+[[math:thm-abelian-groups-form-an-abelian-category]]
+
+[[math:prop-cohomology-factors-through-the-derived-category]]
+
 ## Justification
+The three named topologies have the generator conventions of [[def-adjudicate-0a21e0b4be3b-general-scheme-topologies]], applied to each specified scheme category separately. In particular the general cdh convention retains finite presentation on its proper generators; the finite-type-field cdh interface is not used as a definition on arbitrary schemes. The small and big étale categories remain separate choices. This supplies the named-topology formulation input without changing the derived-evaluation construction.
+
 The already stated Choice premise is inherited by the selected K-injective construction and its derived evaluation. [[math:def-axiom-of-choice]]
+
+Cochain complexes and their differentials have the meaning of [[math:def-cochain-complex-in-an-abelian-category]]. The source category of abelian sheaves is abelian by [[lem-author-a44f2061570d-site-derived-input]], and the target category of abelian groups is abelian by [[math:thm-abelian-groups-form-an-abelian-category]]. Applying [[math:prop-cohomology-factors-through-the-derived-category]] to these abelian categories makes the cohomology used to define quasi-isomorphisms invariant under derived isomorphism and makes $H^n(R\Gamma_\tau(X,C))$ a well-defined abelian group, independent of the chosen representative complex. The cohomology formula in the Definition is the formula on such a representative.
 
 The chosen site and object make evaluation meaningful, and the size bounds specify the ambient categories. [[lem-author-a44f2061570d-site-derived-input]] supplies the abelian category, existence and choice-independent derived-functor interpretation of K-injective evaluation, and a nonnegative injective resolution computing the value for $F[0]$. Applying [[lem-author-a44f2061570d-nonnegative-resolution]] to that resolution proves the negative-degree assertion. These inputs apply to each chosen topology separately; no comparison among them is used.

@@ -11,6 +11,7 @@ PDF p. 5: HK18 Theorem 1.4
 
 - [def-scheme-sites-and-sheafification](item-def-scheme-sites-and-sheafification)
 
+
 ## Statement
 Let $F$ be a set-valued sheaf on a scheme site, and suppose $u:U\to V$ generates a covering sieve. Then the restriction $F(V)\to F(U)$ is injective. A sheaf has unique amalgamations of compatible sections on each covering sieve.
 

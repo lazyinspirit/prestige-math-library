@@ -2,7 +2,25 @@
 title: Motivic projective bundle formula
 status: published
 research_item: prop-motivic-projective-bundle-formula
-dependency_level: 13
+dependency_level: 16
+sources:
+  references:
+    - title: Fasel–Yakerson, Vector bundles on singular surfaces and threefolds
+      url: https://arxiv.org/abs/2610.22679v1
+      locator: p. 2, introductory projective-bundle property; p. 8, Section 3 opening,
+        immediately before Theorem 3.1
+      reading_limits: Read the frozen article text at the introductory property on p.
+        2 and the Section 3 opening on p. 8; visually inspected the frozen PDF
+        image page-8.png, which cites [EM23, Theorem 1.1(7)]. This source
+        supplies the article attribution only. The stronger any-field,
+        all-integer-degree statement and its proof use the declared local
+        suppliers, whose current interfaces were inspected. No fresh reading or
+        reconstruction of the Elmanto–Morrow paper is claimed in this repair.
+      statement: Motivic cohomology satisfies a projective bundle formula, cited there
+        to Elmanto–Morrow Theorem 1.1(7); this permits motivic Chern classes.
+      hypotheses: The article uses qcqs schemes over its algebraically closed base
+        field. The all-field and all-integer-degree contract here is supplied by
+        the declared EM and convention lemmas, with AC and their size bounds.
 ---
 
 PDF p. 2: Motivic projective bundle property; PDF p. 8: Orientation for the splitting principle
@@ -18,10 +36,11 @@ PDF p. 2: Motivic projective bundle property; PDF p. 8: Orientation for the spli
 - [lem-author-79117e1d72ed-all-bidegrees](item-lem-author-79117e1d72ed-all-bidegrees)
 - [lem-author-79117e1d72ed-base-change](item-lem-author-79117e1d72ed-base-change)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
+- [` Fasel–Yakerson, Vector bundles on singular surfaces and threefolds · p. 2, introductory projective-bundle property; p. 8, Section 3 opening, immediately before Theorem 3.1 `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Statement
-Assume AC. On the article category of qcqs $k$-schemes, the supplied motivic cohomology, with $H^{a,b}(X)=0$ explicitly for $b<0$, is an additively oriented bigraded theory satisfying the projective bundle contract. This holds over any field $k$ (hence in particular the article’s algebraically closed base), without smoothness, reducedness, Noetherianity or dimension hypotheses. Its ring is the actual EM graded cup-product ring and its orientation is EM Definition5.2. For a bundle $E$ of constant rank $r>0$, the quotient convention $\mathbb P_X(E)=\operatorname{Proj}_X\operatorname{Sym}(E)$ with $\xi=c_1(\mathcal O(1))$ gives, for every $(a,b)\in\mathbb Z^2$,
+Assume AC and the fixed compatible universe and site-size bounds of the supplied motivic constructions. On the article category of qcqs $k$-schemes, the supplied motivic cohomology, with $H^{a,b}(X)=0$ explicitly for $b<0$, is an additively oriented bigraded theory satisfying the projective bundle contract. This holds over any field $k$ (hence in particular the article’s algebraically closed base), without smoothness, reducedness, Noetherianity or dimension hypotheses. Its ring is the actual EM graded cup-product ring and its orientation is EM Definition5.2. For a bundle $E$ of constant rank $r>0$, the quotient convention $\mathbb P_X(E)=\operatorname{Proj}_X\operatorname{Sym}(E)$ with $\xi=c_1(\mathcal O(1))$ gives, for every $(a,b)\in\mathbb Z^2$,
 $$\bigoplus_{m=0}^{r-1}H^{a-2m,b-m}(X)\xrightarrow{\ \sum_m\pi^*(-)\xi^m\ } H^{a,b}(\mathbb P_X(E)),$$
 a natural isomorphism. No rank-zero projective-bundle assertion is required.
 
@@ -30,6 +49,8 @@ a natural isomorphism. No rank-zero projective-bundle assertion is required.
 
 ## Facts & Assumptions
 [A1] Assume the Axiom of Choice, as formulated in [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice). It discharges the choice hypotheses of the projective-bundle contract in steps 1.1–1.2 and of all three projective-bundle suppliers in [F3] in step 2.1.
+
+[A2] Retain the nested-universe and site-size assumptions of [def-motivic-cohomology](item-def-motivic-cohomology) and the graded-ring supplier in [F1] throughout steps 1.1–2.1. Universe existence is an additional size assumption; the finite projective-bundle decomposition does not establish it.
 
 [F1] [def-motivic-cohomology](item-def-motivic-cohomology) fixes the groups in nonnegative weight. [lem-author-79117e1d72ed-bigraded-ring](item-lem-author-79117e1d72ed-bigraded-ring) supplies the extension, natural ring and first-degree sign.
 
@@ -40,7 +61,7 @@ a natural isomorphism. No rank-zero projective-bundle assertion is required.
 [F4] [def-bigraded-oriented-theory](item-def-bigraded-oriented-theory) lists the four clauses of the contract.
 
 ## Proof
-**Given:** The stated scheme category, AC and motivic suppliers.
+**Given:** The stated scheme category, AC, the fixed compatible universe and site-size bounds, and the motivic suppliers.
 
 **Goal:** Exhibit all four clauses with the actual source maps.
 

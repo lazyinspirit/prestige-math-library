@@ -13,6 +13,8 @@ deps:
   - lem-curve-supported-degree-six-divisible
   - lem-divisible-quotient-torsion-free
   - math:def-axiom-of-choice
+  - def-article-conventions
+  - lem-author-149a02132c3b-geometry
 dependency_roles:
   def-motivic-cohomology: mathematical-premise
   def-cohomology-with-support: mathematical-premise
@@ -22,6 +24,8 @@ dependency_roles:
   lem-curve-supported-degree-six-divisible: mathematical-premise
   lem-divisible-quotient-torsion-free: mathematical-premise
   math:def-axiom-of-choice: mathematical-premise
+  def-article-conventions: mathematical-premise
+  lem-author-149a02132c3b-geometry: mathematical-premise
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -32,11 +36,43 @@ sources:
         threefolds
       url: https://arxiv.org/abs/2610.22679v1
       locator: PDF p. 13, Proposition 6.1 and proof
-      reading_limits: The proposition and its proof in the supplied article text were
-        read. The support calculations and characteristic-independent top
-        torsion-freeness are used through the separately authored suppliers, not
-        reconstructed here.
-dependency_level: 20
+      reading_limits: Read the complete Proposition 6.1 statement and proof in the
+        frozen article text and inspected supplied PDF image page-13.png for
+        this repair. This reference attributes the formulation and argument
+        pattern; it is not a new imported proof premise. The actual support
+        calculations and characteristic-independent top torsion-freeness are
+        used through the declared local suppliers. Their underlying external
+        comparison, normalization and Picard-divisibility sources were not
+        freshly reconstructed or source-audited in this assignment.
+      statement: Proposition 6.1 asserts torsion-freeness of integral motivic
+        cohomology in degree six and weight three on the complement of an
+        integral curve in the smooth locus of an affine threefold over an
+        algebraically closed field. Its proof uses the support exact sequence,
+        degree-seven supported vanishing, divisibility of the degree-six
+        support-to-global image, and the divisible-subgroup quotient argument.
+      hypotheses: X is an affine threefold over an algebraically closed field k and T
+        is an integral curve in its smooth locus. The local item explicitly
+        takes T closed in X, makes the standing finite-type convention explicit,
+        and carries Choice and compatible size bounds from its declared
+        suppliers. The proposition imposes no normality, irreducibility,
+        reducedness or smoothness hypothesis on X.
+dependency_level: 21
+formulation_deps:
+  - def-motivic-cohomology
+  - def-cohomology-with-support
+  - math:def-axiom-of-choice
+  - def-article-conventions
+argument_deps:
+  - def-motivic-cohomology
+  - def-cohomology-with-support
+  - lem-fiber-sequence-homotopy-exactness
+  - prop-top-motivic-torsion-free
+  - lem-curve-supported-degree-seven-vanishing
+  - lem-curve-supported-degree-six-divisible
+  - lem-divisible-quotient-torsion-free
+  - math:def-axiom-of-choice
+  - def-article-conventions
+  - lem-author-149a02132c3b-geometry
 ---
 
 ## Statement
@@ -52,6 +88,10 @@ A threefold here is a finite-type $k$-scheme of dimension three; no reducedness,
 
 **Goal:** Prove that $H^{6,3}_{\mathrm{mot}}(X\setminus T,\mathbb Z)$ is torsion-free.
 
+[A1] Assume [[math:def-axiom-of-choice]] and the compatible size bounds of [[def-cohomology-with-support]]. These discharge the inherited Choice and size premises of the support construction in [F1], the top torsion-freeness supplier in [F2], the supported-cohomology suppliers in [F3], and the geometry supplier in [F5]. No additional choice is made in the exact-sequence deduction.
+
+[F0] [[def-article-conventions]] supplies the $k$-scheme, algebraically closed field, affine finite-type and chain-dimension conventions. Quasi-compact means that every open cover has a finite subcover, and quasi-separated means that intersections of two affine open subschemes are quasi-compact; qcqs means both.
+
 [F1] [[def-cohomology-with-support]] defines the weight-three support spectrum as the fiber of restriction from $X$ to $X\setminus T$, with supported cohomology $H^{a,3}_{\mathrm{mot},T}(X,\mathbb Z)=\pi_{-a}M_3(X/(X\setminus T))$. On the qcqs schemes in this statement, [[def-motivic-cohomology]] identifies the corresponding ordinary groups with cohomology of the evaluated motivic complexes. [[lem-fiber-sequence-homotopy-exactness]] supplies the long exact homotopy sequence of this actual fiber sequence.
 
 [F2] [[prop-top-motivic-torsion-free]] says that $H^{6,3}_{\mathrm{mot}}(X,\mathbb Z)$ is torsion-free for an affine finite-type threefold over an algebraically closed field, without extra hypotheses on $X$.
@@ -60,11 +100,13 @@ A threefold here is a finite-type $k$-scheme of dimension three; no reducedness,
 
 [F4] [[lem-divisible-quotient-torsion-free]] says that in a short exact sequence $0\to D\to G\to A\to0$ of abelian groups, if $D$ is divisible and $G$ is torsion-free, then $A$ is torsion-free. Short exact means that the first map is injective, the second is surjective, and the image of the first equals the kernel of the second.
 
+[F5] Under the given hypotheses and [A1], [[lem-author-149a02132c3b-geometry]] supplies the smooth locus with its open subscheme structure and proves that $X$ and $X\setminus T$, with its open subscheme structure, are qcqs. Its closed-support convention is the reduced induced structure, which agrees with the given integral curve. Only this open-pair conclusion is needed here.
+
 ## Proof
 
 **Proof technique:** Apply the support long exact sequence and the divisible-quotient lemma.
 
-1.1 Put $V=X\setminus T$. Since $X$ is noetherian, its open subset $V$ is quasi-compact; both are quasi-separated. The fiber sequence of [F1], followed by its long exact homotopy sequence with the given indexing, yields the exact segment $H^{6,3}_{\mathrm{mot},T}(X,\mathbb Z)\longrightarrow H^{6,3}_{\mathrm{mot}}(X,\mathbb Z)\xrightarrow{\rho}H^{6,3}_{\mathrm{mot}}(V,\mathbb Z)\longrightarrow H^{7,3}_{\mathrm{mot},T}(X,\mathbb Z).$ The first map is support-to-global and $\rho$ is restriction. [F1, given]
+1.1 Put $V=X\setminus T$. Apply [F5] under [A1] to the given $X$, $k$ and $T$: both $X$ and $V$, with its open subscheme structure, are qcqs. Thus the actual fiber sequence and the global-group identifications of [F1] apply to this pair. The fiber sequence of [F1], followed by its long exact homotopy sequence with the given indexing, yields the exact segment $H^{6,3}_{\mathrm{mot},T}(X,\mathbb Z)\longrightarrow H^{6,3}_{\mathrm{mot}}(X,\mathbb Z)\xrightarrow{\rho}H^{6,3}_{\mathrm{mot}}(V,\mathbb Z)\longrightarrow H^{7,3}_{\mathrm{mot},T}(X,\mathbb Z).$ The first map is support-to-global and $\rho$ is restriction. [A1, F0, F1, F5, given]
 
 2.1 The hypotheses of both suppliers in [F3] hold for the given $X$, $k$ and $T$, with the stated choice and size conventions. Thus the last group in step 1.1 is zero, and the image $D$ of the first map is divisible. Exactness makes $\rho$ surjective and identifies its kernel with $D$. [F3, step 1.1, given]
 

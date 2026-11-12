@@ -9,11 +9,57 @@ deps:
   - lem-surjection-kernel-bundle
   - thm-author-fc2380accb47-finite-type-geometric-input
   - math:def-axiom-of-choice
+  - math:def-affine-scheme
+  - math:def-locally-finite-type-and-finite-type-morphism
+  - math:def-finite-type-and-module-finite-algebras
+  - math:def-locally-closed-immersion
+  - math:def-closed-immersion-schemes
+  - math:def-smooth-morphism-schemes
+  - math:def-relative-dimension-smooth-morphism
+  - math:def-locally-free-sheaf-finite-rank
+  - math:def-sheaf-relative-differentials
+  - math:def-relative-cotangent-space
+  - math:def-fibre-of-module-at-point
+  - math:def-pullback-module-ringed-spaces
+  - math:def-sheaf-tensor-product
+  - math:thm-gluing-sheaves
+  - math:thm-differentials-smooth-locally-free
+  - math:thm-cotangent-space-maximal-ideal-quotient
+  - math:lem-sheaf-nakayama-fibre-detects-generation
+  - math:cor-finite-type-algebra-over-noetherian-ring-is-noetherian
+  - math:def-locally-noetherian-and-noetherian-scheme
+  - math:def-coherent-module-scheme
+  - math:thm-coherent-sheaves-abelian-noetherian-scheme
+  - math:thm-support-finite-type-qc-closed
+  - math:def-kernel-cokernel-image-sheaves
 dependency_roles:
   lem-affine-coherent-global-generation: mathematical-premise
   lem-surjection-kernel-bundle: mathematical-premise
   thm-author-fc2380accb47-finite-type-geometric-input: mathematical-premise
   math:def-axiom-of-choice: mathematical-premise
+  math:def-affine-scheme: mathematical-premise
+  math:def-locally-finite-type-and-finite-type-morphism: mathematical-premise
+  math:def-finite-type-and-module-finite-algebras: mathematical-premise
+  math:def-locally-closed-immersion: mathematical-premise
+  math:def-closed-immersion-schemes: mathematical-premise
+  math:def-smooth-morphism-schemes: mathematical-premise
+  math:def-relative-dimension-smooth-morphism: mathematical-premise
+  math:def-locally-free-sheaf-finite-rank: mathematical-premise
+  math:def-sheaf-relative-differentials: mathematical-premise
+  math:def-relative-cotangent-space: mathematical-premise
+  math:def-fibre-of-module-at-point: mathematical-premise
+  math:def-pullback-module-ringed-spaces: mathematical-premise
+  math:def-sheaf-tensor-product: mathematical-premise
+  math:thm-gluing-sheaves: mathematical-premise
+  math:thm-differentials-smooth-locally-free: mathematical-premise
+  math:thm-cotangent-space-maximal-ideal-quotient: mathematical-premise
+  math:lem-sheaf-nakayama-fibre-detects-generation: mathematical-premise
+  math:cor-finite-type-algebra-over-noetherian-ring-is-noetherian: mathematical-premise
+  math:def-locally-noetherian-and-noetherian-scheme: mathematical-premise
+  math:def-coherent-module-scheme: mathematical-premise
+  math:thm-coherent-sheaves-abelian-noetherian-scheme: mathematical-premise
+  math:thm-support-finite-type-qc-closed: mathematical-premise
+  math:def-kernel-cokernel-image-sheaves: mathematical-premise
 provenance:
   statement: ai-generated
   proof: ai-generated
@@ -22,24 +68,36 @@ dependency_level: 1
 ---
 
 ## Statement
-Assume AC. Let $X=\operatorname{Spec}A$ be finite type over an algebraically closed field, let $E$ be a rank-three bundle, and let $W\hookrightarrow X$ be a locally closed smooth $k$-subscheme of pure dimension three. Choose $k$-algebra generators $f_1,\ldots,f_d$ of $A$ and generators $\phi_1,\ldots,\phi_m$ of the coherent bundle $E$. The finite indexed family
+Assume AC. Let $X=\operatorname{Spec}A$ be finite type over an algebraically closed field $k$, let $E$ be a rank-three bundle, and let $i:W\hookrightarrow X$ be a locally closed smooth $k$-subscheme of pure dimension three. Choose $k$-algebra generators $f_1,\ldots,f_d$ of $A$ and global generators $\phi_1,\ldots,\phi_m$ of the coherent bundle $E$. The finite indexed family
 $$\phi_i,\ f_l\phi_i\quad(1\leq i\leq m,\ 1\leq l\leq d)$$
-defines a parameter space $T=\mathbb A_k^N$, where $N=m(d+1)$; linear relations among the listed sections are permitted. The evaluation $\mathcal O_X^N\twoheadrightarrow E$ is surjective. On $W$ its first-jet map $j:\mathcal O_W^N\twoheadrightarrow J^1(E|_W)$ is also surjective, and $J^1(E|_W)$ has rank twelve.
+defines a parameter space $T=\mathbb A_k^N=\operatorname{Spec}k[t_1,\ldots,t_N]$, where $N=m(d+1)$; linear relations among the listed sections are permitted. The evaluation $\mathcal O_X^N\twoheadrightarrow E$ is surjective. On $W$ its first-jet map $j:\mathcal O_W^N\twoheadrightarrow J^1(E|_W)$ is also surjective, and $J^1(E|_W)$ has rank twelve.
 
-Here the first-jet bundle is defined by local pairs $(v,\omega)$ in $E\oplus(\Omega^1_{W/k}\otimes E)$. Under a change of frame $G$ the pair transforms by $(v,\omega)\mapsto(Gv,G\omega+(dG)v)$. The product rule verifies the cocycle law and invertibility, so these charts define a vector bundle with exact sequence $0\to\Omega^1_{W/k}\otimes E\to J^1E\to E\to0$. The jet of a section with coefficient column $a$ is $(a,da)$. Thus at a closed point $x\in W$ the jet fiber is $(E|_W)_x/\mathfrak m_{W,x}^2(E|_W)_x$ over $k$, where both the stalk and maximal ideal are on $W$.
+Here $E|_W=i^*E$ denotes pullback to the locally closed subscheme; in the following jet charts $E$ abbreviates this pullback. The first-jet bundle is defined by local pairs $(v,\omega)$ in $E\oplus(\Omega^1_{W/k}\otimes_{\mathcal O_W} E)$. Under a change of coefficient frame $a\mapsto Ga$ the pair transforms by $(v,\omega)\mapsto(Gv,G\omega+(dG)v)$. The product rule verifies the cocycle law and invertibility, so these charts define a vector bundle with exact sequence $0\to\Omega^1_{W/k}\otimes E\to J^1E\to E\to0$. The jet of a section with coefficient column $a$ is $(a,da)$. The map $j$ is the $\mathcal O_W$-linear map taking each standard basis vector to the jet of its indexed section; the operation taking an arbitrary section to its jet is only $k$-linear. At a closed point $x\in W$ the jet fiber is canonically the $k$-vector space $(E|_W)_x/\mathfrak m_{W,x}^2(E|_W)_x$, where both the stalk and maximal ideal are on $W$.
 
 ## Facts & Assumptions
-**Given:** The stated affine scheme and bundles. Generators exist by [[lem-affine-coherent-global-generation]] applied to $E$, with AC.
+**Given:** AC, the stated affine scheme, locally closed subscheme and bundles. A vector bundle means a finite locally free module sheaf. Finite algebra generation means $A=k[f_1,\ldots,f_d]$; global sheaf generation means that the associated map from a finite free sheaf is surjective on stalks.
 
 **Goal:** Obtain actual first-order separation, beyond fiberwise generation.
 
-[F1] The completed affine-generation and kernel lemmas give the finite generators and local splittings of surjections between bundles. [[lem-affine-coherent-global-generation]], [[lem-surjection-kernel-bundle]], [[math:def-axiom-of-choice]]
+[F1] On a noetherian affine scheme every coherent module has finitely many global generators, and a surjection between finite locally free sheaves splits locally. We retain the Axiom of Choice used by affine global generation and the other suppliers below; no further infinite simultaneous selection is made. [[lem-affine-coherent-global-generation]] [[lem-surjection-kernel-bundle]] [[math:def-axiom-of-choice]]
 
-[F2] Finite-type $k$-schemes are Jacobson and their closed points are $k$-rational. A coherent sheaf with no closed points in its support is zero. [[thm-author-fc2380accb47-finite-type-geometric-input]]
+[F2] Schemes locally of finite type over $k$ are Jacobson, meaning that closed points are dense in every closed subset, and their closed-point residue fields are algebraic over $k$. Since $k$ is algebraically closed these residue fields equal $k$. We use precisely this closed-point part of [[thm-author-fc2380accb47-finite-type-geometric-input]].
+
+[F3] Smoothness includes local finite presentation and hence local finite type. Relative dimension for a smooth field scheme is the common local dimension of its geometric fibers; taking the extension $k/k$ shows that this value is three on the given pure three-dimensional $W$. The sheaf $\Omega^1_{W/k}$ carries the universal $k$-derivation $d$, which is additive, kills constants and satisfies $d(ab)=a\,db+b\,da$. Under AC, smoothness of pure relative dimension three makes this sheaf locally free of rank three. [[math:def-smooth-morphism-schemes]] [[math:def-relative-dimension-smooth-morphism]] [[math:def-sheaf-relative-differentials]] [[math:thm-differentials-smooth-locally-free]]
+
+[F4] For a module sheaf $F$, write $F(x)=F_x\otimes_{\mathcal O_{W,x}}\kappa(x)=F_x/\mathfrak m_{W,x}F_x$. The cotangent space is $\Omega^1_{W/k}(x)$. At a $k$-rational point, the map $\mathfrak m_{W,x}/\mathfrak m_{W,x}^2\to\Omega^1_{W/k}(x)$ sending $[a]$ to $da(x)$ is an isomorphism. [[math:def-fibre-of-module-at-point]] [[math:def-relative-cotangent-space]] [[math:thm-cotangent-space-maximal-ideal-quotient]]
+
+[F5] A field is noetherian since its only ideals are $0$ and $k$. Every finite-type algebra over a noetherian ring is noetherian; thus $X$ and the finite-type affine charts of $W$ are locally noetherian, and $X$ is noetherian. On a locally noetherian scheme, finite-type quasi-coherent sheaves are coherent and cokernels of maps of coherent sheaves are coherent. In particular finite locally free sheaves are coherent. [[math:cor-finite-type-algebra-over-noetherian-ring-is-noetherian]] [[math:def-locally-noetherian-and-noetherian-scheme]] [[math:def-coherent-module-scheme]] [[math:thm-coherent-sheaves-abelian-noetherian-scheme]]
+
+[F6] Affine schemes carry their spectrum structure sheaves and have their indicated coordinate rings. Finite-type scheme morphisms are locally given by finite-type algebra maps. A locally closed immersion factors as a closed immersion into an open subscheme; the closed immersion has a surjective structure-sheaf map, so its local rings are quotients of the ambient local rings. Pullback of a module is extension of scalars after inverse image. A pulled-back free frame remains a free frame, by $B\otimes_R R^r=B^r$, so $E|_W$ is locally free of rank three. [[math:def-affine-scheme]] [[math:def-locally-finite-type-and-finite-type-morphism]] [[math:def-finite-type-and-module-finite-algebras]] [[math:def-locally-closed-immersion]] [[math:def-closed-immersion-schemes]] [[math:def-pullback-module-ringed-spaces]] [[math:def-locally-free-sheaf-finite-rank]]
+
+[F7] The tensor product of module sheaves is the sheafification of their sectionwise tensor product; on free charts the tensor product of ranks $r,s$ has the basis $e_i\otimes e_j$, of rank $rs$. Compatible sheaves of modules on an open cover glue when their overlap maps satisfy the cocycle and identity conditions. [[math:def-sheaf-tensor-product]] [[math:thm-gluing-sheaves]]
+
+[F8] Cokernels of module sheaves are sheafified sectionwise cokernels. For a finite-type quasi-coherent sheaf, geometric Nakayama says a zero fiber implies vanishing on a neighborhood, and its support $\{x:F_x\ne0\}$ is closed. These two results assume AC. [[math:def-kernel-cokernel-image-sheaves]] [[math:lem-sheaf-nakayama-fibre-detects-generation]] [[math:thm-support-finite-type-qc-closed]]
 
 ## Proof
-1.1 Evaluation is surjective because the listed sections already include the generators $\phi_i$. The transition formula in the Statement follows by differentiating $Ga$; the product rule also shows that its composition for two frame changes equals the formula for their product. It therefore constructs $J^1E$ and the global $\mathcal O_W$-linear jet evaluation map from the indexed list. Since $W$ is smooth three-dimensional, $\Omega^1_{W/k}$ has rank three; the exact sequence gives rank $3+9=12$. [F1, given, construct]
+1.1 By [F3], [F5] and [F6], the affine-generation hypotheses in [F1] apply to $E$, so its finite global generators exist. Evaluation is surjective because the indexed family already contains them, and their values still generate after pullback: on a stalk, tensoring a surjection with the target ring is surjective, as every tensor has a lift of its module entry. Pull back frames of $E$ as in [F6]. Differentiating $Ga$ gives $d(Ga)=G\,da+(dG)a$ by [F3]. For two changes $G,H$, the identity $d(HG)=H\,dG+(dH)G$ gives exactly the stated composite overlap map; the identity frame change acts identically and the inverse change is the formula for $G^{-1}$. These maps are $\mathcal O_W$-linear in the independent pair $(v,\omega)$, so [F7] glues the jet charts and the jets of every fixed indexed section. Their $\mathcal O_W$-linear extension is $j$. Projection to $v$ is compatible with overlaps, its kernel has transition $\omega\mapsto G\omega$, and on every chart the projection has the section $v\mapsto(v,0)$. Thus the stated sequence is locally split and exact, and its ranks are $3+3\cdot3=12$ by [F3] and [F7]. [F1, F3, F5, F6, F7, given, construct]
 
-2.1 Fix a closed $x\in W$. The elements $f_l-f_l(x)$ generate the maximal ideal of $x$ in $A$, because $A$ is generated by the $f_l$ and its residue map is evaluation at their $k$-values. The immersion induces a surjection $\mathfrak m_{X,x}/\mathfrak m_{X,x}^2\twoheadrightarrow\mathfrak m_{W,x}/\mathfrak m_{W,x}^2$: locally a locally closed immersion is a quotient of the ambient local ring. Consequently the restrictions of those differences span the latter cotangent space. The values of the $\phi_i$ span the three-dimensional bundle fiber. Constants times $\phi_i$ can consequently realize an arbitrary prescribed value at $x$. Each section $(f_l-f_l(x))\phi_i$ is in the $k$-linear span of our indexed family, vanishes at $x$, and has first-order class $d f_l\otimes\phi_i(x)$. These classes span the entire kernel $(\mathfrak m_{W,x}/\mathfrak m_{W,x}^2)\otimes_k E(x)$ of the jet-to-value map. Adjusting the initial chosen section by their linear combinations therefore realizes any prescribed first jet. [F1, F2, step 1.1, algebra]
+2.1 Fix a closed point $x\in W$. It is $k$-rational by [F2], since $W$ is locally of finite type by [F3]. The composite evaluation $A\to\kappa(x)=k$ is surjective and has maximal kernel generated by $f_l-f_l(x)$: for every polynomial $p$, successive substitutions of the constants $f_l(x)$ express $p(f_1,\ldots,f_d)-p(f_1(x),\ldots,f_d(x))$ as a sum of multiples of these differences. Thus the image point in $X$ is closed with this maximal ideal. The quotient of local rings in [F6] induces a surjection $\mathfrak m_{X,x}/\mathfrak m_{X,x}^2\twoheadrightarrow\mathfrak m_{W,x}/\mathfrak m_{W,x}^2$, so the restricted differences span the latter space. By [F4] their differentials $df_l(x)$ span $\Omega^1_{W/k}(x)$. To verify the asserted jet-fiber interpretation as well, on a frame send a coefficient germ modulo $\mathfrak m_{W,x}^2$ to $(a(x),da(x))$. This is well defined by the product rule; both its projection to the value fiber and its map on the value-zero kernel are isomorphisms, the latter being exactly [F4] tensored with $k^3$. Hence it is an isomorphism, and its change-of-frame formula is the jet formula, giving the canonical identification claimed in the Statement. The values $\phi_i(x)$ span $E(x)$, so constants times $\phi_i$ realize any prescribed value. Each $(f_l-f_l(x))\phi_i$ belongs to the $k$-linear span of the indexed family and has zero value and first-order class $df_l(x)\otimes\phi_i(x)$. These tensors span the entire kernel of the jet-to-value map by [F4] and [F7]. Adjusting a section with the prescribed value by a linear combination of these zero-value sections therefore realizes every first jet at $x$. [F1, F2, F3, F4, F6, F7, step 1.1, algebra]
 
-3.1 The jet-evaluation cokernel is coherent. Step 2.1 makes its fiber zero at every closed point, and Nakayama's lemma makes its stalk zero there. Its support is closed and cannot be nonempty by the Jacobson property in [F2]. It is zero, so $j$ is a bundle surjection everywhere, not just on the closed points. It splits locally by [F1]. All constructions use ordinary products and derivatives, with no division by a positive integer. [F1, F2, step 2.1] ∎
+3.1 By [F5], the jet-evaluation cokernel $C$ is coherent on the locally noetherian scheme $W$, and in particular is quasi-coherent of finite type. Step 2.1 implies $C(x)=0$ for every closed $x$: at a stalk its fiber is explicitly the quotient of the target stalk by the sum of the image of $j_x$ and the maximal ideal times the target stalk, so fiber surjectivity makes this quotient zero. Geometric Nakayama in [F8] applies to $C$ and makes its stalk zero there. By [F8] its support is closed; if nonempty, this support would contain a closed point by [F2], a contradiction. Thus all stalks of $C$ vanish, and $C=0$ since a section whose every germ vanishes is zero by the sheaf axiom. Consequently $j$ is surjective everywhere. It splits locally by [F1], with kernel of rank $N-12$ on nonempty $W$. All constructions use ordinary products and derivatives, with no division by a positive integer; the conclusion therefore holds in every characteristic. If $W$ is empty, the jet assertions hold vacuously. [F1, F2, F5, F8, step 1.1, step 2.1] ∎

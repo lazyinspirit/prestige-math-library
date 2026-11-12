@@ -25,6 +25,19 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 dependency_level: 4
+formulation_deps:
+  - lem-author-fc2380accb47-normal-smooth-strata
+  - lem-author-fc2380accb47-coordinate-first-jets
+  - lem-regular-section-parameter-family
+  - math:def-axiom-of-choice
+argument_deps:
+  - lem-author-fc2380accb47-normal-smooth-strata
+  - lem-author-fc2380accb47-coordinate-first-jets
+  - lem-author-fc2380accb47-nontransverse-incidence
+  - lem-regular-section-parameter-family
+  - lem-surjection-kernel-bundle
+  - thm-author-fc2380accb47-finite-type-geometric-input
+  - math:def-axiom-of-choice
 ---
 
 ## Statement

@@ -6,8 +6,18 @@ status: published
 domain: mathematics
 deps:
   - lem-author-b87d598e83f3-unique-roots-torsion
+  - math:def-group
+  - math:def-group-homomorphism
+  - math:def-kernel-and-image-of-group-homomorphism
+  - math:def-injection-surjection-bijection
+  - math:lem-group-homomorphism-basic-properties
 dependency_roles:
   lem-author-b87d598e83f3-unique-roots-torsion: mathematical-premise
+  math:def-group: mathematical-premise
+  math:def-group-homomorphism: mathematical-premise
+  math:def-kernel-and-image-of-group-homomorphism: mathematical-premise
+  math:def-injection-surjection-bijection: mathematical-premise
+  math:lem-group-homomorphism-basic-properties: mathematical-premise
 provenance:
   statement: ai-generated
   proof: ai-generated
@@ -23,9 +33,19 @@ Let $f:G\to H$ be a homomorphism of abelian groups. If multiplication by each po
 
 **Goal:** Prove injectivity.
 
-[F1] [[lem-author-b87d598e83f3-unique-roots-torsion]] proves that $G$ is torsion-free under the stated hypothesis.
+[F1] [[lem-author-b87d598e83f3-unique-roots-torsion]] proves that $G$ is torsion-free under the stated bijectivity hypothesis: $nx=0$ for a positive integer $n$ implies $x=0$.
+
+[F2] [[math:def-group]] supplies the abelian group laws, additive identities $0$ and inverses $-x$ in $G$ and $H$. We write $a-b=a+(-b)$, and for a positive integer $n$ write $nx$ for the sum of $n$ copies of $x$; closure under addition makes this an element of the same group. An element is called torsion here precisely when some such $nx$ equals $0$.
+
+[F3] [[math:def-group-homomorphism]] supplies $f(a+b)=f(a)+f(b)$ for $a,b\in G$.
+
+[F4] [[math:def-kernel-and-image-of-group-homomorphism]] defines $\ker f=\{x\in G:f(x)=0\}$, where the zero on the right is the identity of $H$.
+
+[F5] [[math:def-injection-surjection-bijection]] defines bijective as injective and surjective, and injective as $f(a)=f(b)$ implying $a=b$ for all domain elements.
+
+[F6] [[math:lem-group-homomorphism-basic-properties]] gives $f(0)=0$ and $f(-b)=-f(b)$ for the group homomorphism $f$.
 
 ## Proof
-1.1 Every element of $\ker f$ is torsion by hypothesis, so [F1] makes it zero. Thus $\ker f=0$. [F1, given]
+1.1 For any $x\in\ker f$, the hypothesis supplies a positive integer $n$ with $nx=0$. The bijectivity hypothesis allows [F1] to give $x=0$. Conversely, [F6] gives $f(0)=0$, so $0\in\ker f$ by [F4]. Thus $\ker f=\{0\}$. [given, F1, F2, F4, F6]
 
-2.1 If $f(a)=f(b)$, then $a-b\in\ker f=0$ by step 1.1, hence $a=b$. Therefore $f$ is injective. [step 1.1, algebra] ∎
+2.1 Let $a,b\in G$ satisfy $f(a)=f(b)$. By [F3] and [F6], $f(a-b)=f(a)+f(-b)=f(a)-f(b)=0$, using the additive inverse law in $H$ from [F2]. Hence $a-b\in\ker f$ by [F4], so step 1.1 gives $a-b=0$. The group laws in [F2] yield $a=(a-b)+b=b$. This proves injectivity in the sense of [F5]. [F2, F3, F4, F5, F6, step 1.1] ∎

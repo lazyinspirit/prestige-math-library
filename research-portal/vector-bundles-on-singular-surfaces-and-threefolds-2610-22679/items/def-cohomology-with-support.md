@@ -14,6 +14,16 @@ deps:
   - def-stable-spectra-interface
   - def-scheme-sites-and-sheafification
   - math:def-axiom-of-choice
+  - def-nisnevich-covering-interface
+  - thm-adjudicate-d1c21a67502d-reduced-closed-subscheme-input
+  - thm-adjudicate-d5306176fce5-abelian-sheaf-input
+  - lem-adjudicate-d5306176fce5-coherent-realization
+  - lem-author-b747b28c359f-elmanto-morrow-complexes
+  - math:cor-affine-scheme-quasi-compact
+  - math:def-open-immersion-schemes
+  - math:def-affine-open-subscheme
+  - math:lem-distinguished-open-refinement-at-a-point
+  - math:lem-spectrum-localization-open-immersion
 dependency_roles:
   def-article-conventions: mathematical-premise
   def-motivic-filtration: mathematical-premise
@@ -24,9 +34,19 @@ dependency_roles:
   def-stable-spectra-interface: mathematical-premise
   def-scheme-sites-and-sheafification: mathematical-premise
   math:def-axiom-of-choice: mathematical-premise
+  def-nisnevich-covering-interface: mathematical-premise
+  thm-adjudicate-d1c21a67502d-reduced-closed-subscheme-input: mathematical-premise
+  thm-adjudicate-d5306176fce5-abelian-sheaf-input: mathematical-premise
+  lem-adjudicate-d5306176fce5-coherent-realization: mathematical-premise
+  lem-author-b747b28c359f-elmanto-morrow-complexes: mathematical-premise
+  math:cor-affine-scheme-quasi-compact: mathematical-premise
+  math:def-open-immersion-schemes: mathematical-premise
+  math:def-affine-open-subscheme: mathematical-premise
+  math:lem-distinguished-open-refinement-at-a-point: mathematical-premise
+  math:lem-spectrum-localization-open-immersion: mathematical-premise
 proof_strategy: direct-proof
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: ai-generated
 sources:
   references:
@@ -34,23 +54,79 @@ sources:
         threefolds
       url: https://arxiv.org/abs/2610.22679v1
       locator: PDF p. 6, Definition 2.7
-      reading_limits: Definition 2.7 was read in the supplied article text. The
-        definition below makes its open-complement and spectral-indexing
-        conventions explicit; no comparison theorem for a separately constructed
-        quotient evaluation is claimed.
-dependency_level: 13
+      reading_limits: "Historical reading record retained from the incoming generated
+        item: In this repair, read Definition 2.7 in the frozen article text and
+        inspected the supplied PDF image page-6.png. Checked its hypotheses, two
+        fiber sequences, both supported definitions and the subsequent
+        image-in-global definitions. The coherent spectral realization, abelian
+        sheafification details, size-bound choice, arbitrary-open extension and
+        explicit 2j-shift are supplied here through declared inputs and local
+        arguments; no independently constructed quotient-evaluation comparison
+        is imported. Current maintenance read the assigned body and current
+        supplier interfaces; no fresh primary-source or page-image reading,
+        independent review or acceptance is claimed."
+      statement: Definition 2.7 introduces the closed pair (X,Y), its reduced support,
+        the Nisnevich quotient notation Z[X/U], restriction fiber sequences,
+        supported filtered K image groups and the printed motivic homotopy
+        indexing. The separate image-in-global groups are retained in
+        def-support-image-groups.
+      hypotheses: X is a qcqs k-scheme under the article conventions, Y is a closed
+        subset with reduced induced structure, U is its open complement, j is
+        nonnegative and i is an integer. The generated size bounds,
+        arbitrary-open extension and explicit spectral shift below are
+        additional conventions, not claims extracted from Definition 2.7.
+dependency_level: 14
+formulation_deps:
+  - def-article-conventions
+  - def-motivic-filtration
+  - def-motivic-cohomology
+  - def-supported-complex-indexing
+  - def-stable-spectra-interface
+  - def-scheme-sites-and-sheafification
+  - math:def-axiom-of-choice
+  - def-nisnevich-covering-interface
+  - thm-adjudicate-d1c21a67502d-reduced-closed-subscheme-input
+  - thm-adjudicate-d5306176fce5-abelian-sheaf-input
+  - lem-adjudicate-d5306176fce5-coherent-realization
+  - lem-author-b747b28c359f-elmanto-morrow-complexes
+  - math:def-open-immersion-schemes
+  - math:def-affine-open-subscheme
+argument_deps:
+  - def-article-conventions
+  - def-motivic-filtration
+  - def-motivic-cohomology
+  - def-supported-complex-indexing
+  - lem-eilenberg-maclane-shift-index
+  - lem-filtered-support-exactness
+  - def-stable-spectra-interface
+  - def-scheme-sites-and-sheafification
+  - math:def-axiom-of-choice
+  - def-nisnevich-covering-interface
+  - thm-adjudicate-d1c21a67502d-reduced-closed-subscheme-input
+  - thm-adjudicate-d5306176fce5-abelian-sheaf-input
+  - lem-adjudicate-d5306176fce5-coherent-realization
+  - lem-author-b747b28c359f-elmanto-morrow-complexes
+  - math:cor-affine-scheme-quasi-compact
+  - math:def-open-immersion-schemes
+  - math:def-affine-open-subscheme
+  - math:lem-distinguished-open-refinement-at-a-point
+  - math:lem-spectrum-localization-open-immersion
 ---
 
 ## Definition
-Fix a field $k$ and the category $\mathrm{Sch}_k$ of quasi-compact quasi-separated $k$-schemes from [[def-article-conventions]], together with the Axiom of Choice and the size conventions of the cited interfaces. Let $X$ be an object of this category, let $Y$ be a closed subset of $X$ equipped with its reduced induced closed-subscheme structure, and put $U=X\setminus Y$. The reduced structure has the same underlying closed subset and has no nonzero nilpotent local sections.
+Fix a field $k$ and the category $\mathrm{Sch}_k$ of quasi-compact quasi-separated $k$-schemes with the article conventions, together with the Axiom of Choice and the size conventions of the cited interfaces. Let $X$ be an object of this category, let $Y$ be a closed subset of $X$ equipped with its reduced induced closed-subscheme structure, and put $U=X\setminus Y$. This is the unique reduced closed subscheme supported on $Y$; its local rings have no nonzero nilpotent elements. Each open subset $W$ is equipped with the restricted structure sheaf: for an open $A\subseteq W$, $\mathcal O_W(A)=\mathcal O_X(A)$, with the same restriction maps.
 
-For the quotient notation, let $h_X(T)=\operatorname{Hom}_k(T,X)$ and let $h_U(T)$ be the subset of maps whose image lies in $U$, for $T\in\mathrm{Sch}_k$. On a size-bounded big Nisnevich site with these objects, let $\mathbb Z[h_X]$ and $\mathbb Z[h_U]$ denote the sheafifications of the presheaves of free abelian groups on these sets. Define the **quotient sheaf** $\mathbb Z[X/U]$ as the cokernel of $\mathbb Z[h_U]\to\mathbb Z[h_X]$, regarded when needed as a complex concentrated in degree zero. Here a cokernel is the quotient of the target sheaf by the image sheaf. This notation records the pair $(X,U)$; the support objects below are defined directly as fibers.
+For the quotient notation, fix compatible nested universes $\mathscr U\in\mathscr V\in\mathscr W$, with $k,X$ and their open subschemes represented by $\mathscr U$-small data. Take $\mathcal C_k$ to be the full category of such $\mathscr U$-small qcqs $k$-schemes and all their $k$-morphisms. This is a $\mathscr V$-small category; use $\mathscr W$ for sheaf values and enlarge the supplied derived and spectral interfaces compatibly. Equip $\mathcal C_k$ with the topology generated by its Nisnevich covering families: étale maps for which each target point has a lift with isomorphic residue field. This is the size-bounded big Nisnevich site used here.
+
+Let $h_X(T)=\operatorname{Hom}_k(T,X)$ and let $h_U(T)$ be the subset of maps whose image lies in $U$, for $T\in\mathcal C_k$. Such maps factor uniquely through the open subscheme $U$, even when $U$ is not an object of $\mathcal C_k$. Let $\mathbb Z[h_X]$ and $\mathbb Z[h_U]$ denote the associated abelian sheaves of the objectwise free abelian presheaves. Define the **quotient sheaf** $\mathbb Z[X/U]$ as their sheaf cokernel. Explicitly, it is the associated abelian sheaf of $T\mapsto\mathbb Z[h_X](T)/\operatorname{im}(\mathbb Z[h_U](T)\to\mathbb Z[h_X](T))$. Regard it when needed as a complex with this sheaf in degree zero, zero in every other degree and zero differential. This notation records the pair $(X,U)$; the support objects below are defined directly as fibers.
+
+For each $j\geq0$, use the specified coherent motivic-complex functor $\widetilde C_j:\mathcal C_k^{\mathrm{op}}\to\mathcal D(\mathbb Z)$ whose underlying homotopy-category values are $C_j(V)=\mathbb Z(j)_{\mathrm{mot}}(V)$. Fix the realization functor $\mathcal H$ of the coherent-realization interface and write $HC_j(V):=\mathcal H(\widetilde C_j(V))$. The entire restriction diagram is obtained by this composition, including all higher coherences; it is not obtained by choosing representatives of individual ordinary derived-category arrows.
 
 The supplied functors are defined on qcqs schemes. To cover an arbitrary open $U$, use the following explicit extension convention. For any such open $W\subseteq X$, let $\mathcal Q(W)$ be the poset of quasi-compact open subsets of $W$. For $j\geq0$, put
 $$F^jK(W):=\operatorname*{holim}_{V\in\mathcal Q(W)^{\mathrm{op}}}F^j_{\mathrm{mot}}K(V),\qquad K(W):=\operatorname*{holim}_{V\in\mathcal Q(W)^{\mathrm{op}}}K(V),$$
-and, writing $C_j(V)=\mathbb Z(j)_{\mathrm{mot}}(V)$ and $HC_j(V)$ for its Eilenberg–Mac Lane spectrum,
+and put
 $$M_j(W):=\operatorname*{holim}_{V\in\mathcal Q(W)^{\mathrm{op}}}HC_j(V).$$
-The arrows in each inverse diagram are restrictions. Homotopy limits are limits in the stable category of spectra. When $W$ is qcqs, its identity open is terminal in $\mathcal Q(W)$, and these expressions recover the supplied values. For arbitrary $W$, these formulas specify an extension; they do not assert its comparison with any independently constructed theory on non-qcqs schemes.
+The arrows in each inverse diagram are restrictions. Homotopy limits are coherent limits in the stable infinity-category of spectra. The poset $\mathcal Q(W)$ is small in the chosen universes. For an inclusion $W_1\subseteq W_2$, restrict the limiting cone along $\mathcal Q(W_1)^{\mathrm{op}}\to\mathcal Q(W_2)^{\mathrm{op}}$ and use its universal property to obtain the restriction to $W_1$; these maps include their coherent composition data. When $W$ is qcqs, its identity open is terminal in $\mathcal Q(W)$, and these expressions recover the supplied values. For arbitrary $W$, these formulas specify an extension; they do not assert its comparison with any independently constructed theory on non-qcqs schemes.
 
 Define the **filtered support spectrum**, the **K-theory support fiber**, and the **motivic support spectrum** by
 $$F^j_{\mathrm{mot}}K(X/U):=\operatorname{fib}(F^jK(X)\to F^jK(U)),\quad K(X/U):=\operatorname{fib}(K(X)\to K(U)),$$
@@ -63,25 +139,66 @@ Equivalently, define the shifted support spectrum $\mathbb Z(j)^{\mathrm{shift}}
 $$H^{2j-i,j}_{\mathrm{mot},Y}(X,\mathbb Z)=\pi_i\bigl(\mathbb Z(j)^{\mathrm{shift}}_{\mathrm{mot}}(X/U)\bigr).$$
 The support-to-global maps are the first arrows of the defining fiber sequences. The image groups obtained after applying those maps are separate from the supported groups defined here.
 
+## Definition references
+[[def-article-conventions]]
+
+[[def-motivic-filtration]]
+
+[[def-motivic-cohomology]]
+
+[[def-supported-complex-indexing]]
+
+[[lem-eilenberg-maclane-shift-index]]
+
+[[lem-filtered-support-exactness]]
+
+[[def-stable-spectra-interface]]
+
+[[def-scheme-sites-and-sheafification]]
+
+[[math:def-axiom-of-choice]]
+
+[[def-nisnevich-covering-interface]]
+
+[[thm-adjudicate-d1c21a67502d-reduced-closed-subscheme-input]]
+
+[[thm-adjudicate-d5306176fce5-abelian-sheaf-input]]
+
+[[lem-adjudicate-d5306176fce5-coherent-realization]]
+
+[[lem-author-b747b28c359f-elmanto-morrow-complexes]]
+
+[[math:cor-affine-scheme-quasi-compact]]
+
+[[math:def-open-immersion-schemes]]
+
+[[math:def-affine-open-subscheme]]
+
+[[math:lem-distinguished-open-refinement-at-a-point]]
+
+[[math:lem-spectrum-localization-open-immersion]]
+
 ## Facts & Assumptions
 **Given:** $k$, $X$, $Y$, $U$, $j\geq0$, and integers $i,a$ as above, with the stated choice and size conventions.
 
 **Goal:** Justify the quotient notation, the support fibers and their maps, the image group, and the displayed indexing without assuming injectivity or a comparison with an independently constructed quotient evaluation.
 
-[F1] [[def-scheme-sites-and-sheafification]] supplies the site and sheafification conventions; [[def-article-conventions]] specifies qcqs schemes and their category.
+[F1] [[def-article-conventions]] specifies the scheme category. [[def-scheme-sites-and-sheafification]] supplies the small-site and universe conventions; [[def-nisnevich-covering-interface]] supplies precisely the covering families and generated topology used above. [[thm-adjudicate-d1c21a67502d-reduced-closed-subscheme-input]] supplies the unique reduced closed structure on $Y$.
 
-[F2] The already assumed Axiom of Choice, [[math:def-axiom-of-choice]], discharges the explicit Choice hypothesis when invoking the perfect-complex $K$-theory and filtration interface in [[def-motivic-filtration]]. That interface supplies the coherent restriction maps and stage-to-$K$ maps on qcqs schemes. [[def-motivic-cohomology]] supplies the complex-valued restriction functor and identifies global $H^{a,j}$ with $H^a(C_j)$.
+[F2] [[thm-adjudicate-d5306176fce5-abelian-sheaf-input]] supplies associated abelian sheaves, free abelian sheaves on presheaves and the sheaf cokernel formula. [[math:def-affine-open-subscheme]] supplies the open-subscheme structure by restricting the sheaf, and [[math:def-open-immersion-schemes]] specifies its inclusion.
 
-[F3] [[def-stable-spectra-interface]] supplies homotopy limits, fibers, suspension and the abelian groups $\pi_i$. [[lem-filtered-support-exactness]] gives the stagewise support construction for a coherent filtered restriction diagram.
+[F3] The assumed Axiom of Choice, [[math:def-axiom-of-choice]], discharges the Choice hypotheses of the supplied perfect-complex filtration and spectral realization. [[def-motivic-filtration]] supplies the coherent filtered restriction functor and stage-to-$K$ maps on qcqs schemes. [[def-motivic-cohomology]] defines global $H^{a,j}=H^a(C_j)$; [[lem-author-b747b28c359f-elmanto-morrow-complexes]] supplies its actual enhanced functor $\widetilde C_j$, including restrictions on the chosen category.
 
-[F4] [[lem-eilenberg-maclane-shift-index]] gives $\pi_iHC\cong H^{-i}(C)$ and $\pi_i(E[2j])\cong\pi_{i-2j}E$ in the stated convention. [[def-supported-complex-indexing]] distinguishes unshifted support from its $2j$-shift.
+[F4] [[lem-adjudicate-d5306176fce5-coherent-realization]] supplies the fixed coherent $\mathcal H$, its natural formula $\pi_i\mathcal H(C)=H^{-i}(C)$ up to the specified isomorphism, and its compatibility with fibers and shifts. In particular it applies to whole enhanced motivic diagrams, not just individual complexes.
+
+[F5] [[def-stable-spectra-interface]] supplies coherent limits, fibers, suspension and the abelian groups $\pi_i$. [[lem-filtered-support-exactness]] supplies the stagewise support construction for a coherent filtered restriction diagram. [[lem-eilenberg-maclane-shift-index]] supplies the integer spectral-shift index formula; [[def-supported-complex-indexing]] distinguishes unshifted support from its $2j$-shift.
+
+[F6] [[math:cor-affine-scheme-quasi-compact]] gives quasi-compactness of affine schemes under the already assumed Choice. [[math:lem-distinguished-open-refinement-at-a-point]] refines an open neighbourhood inside an affine chart to a distinguished open. [[math:lem-spectrum-localization-open-immersion]] identifies that distinguished open, with its restricted sheaf, as an affine scheme. Quasi-separatedness has the affine-intersection meaning stated in [[def-article-conventions]].
 
 ## Justification
-1.1 The subfunctor $h_U\subseteq h_X$ is stable under precomposition, so the induced map of free abelian presheaves and its sheafification are defined; the cokernel defines the stated quotient sheaf. Every open subset of a scheme is the union of its affine open subsets, and each affine open is quasi-compact. Since $X$ is quasi-separated, a quasi-compact open $V\subseteq X$ is quasi-separated as well; hence each $V\in\mathcal Q(W)$ belongs to $\mathrm{Sch}_k$. The restriction maps in [F2] therefore form the indicated coherent inverse diagrams, whose homotopy limits exist by [F3]. If $W$ itself is quasi-compact, its membership in $\mathcal Q(W)$ makes it initial in the opposite indexing category, so the limit is its supplied value. [F1, F2, F3, given]
+1.1 By [F1], the reduced support exists uniquely and the specified category and Nisnevich topology define a small site in the chosen larger universe. By [F2], a scheme map with image in $U$ factors uniquely through its restricted structure: the continuous map has this unique factorization, and on every open of $U$ the sheaf map is the original sheaf map on that same open of $X$. Its stalk maps remain local. Precomposition preserves this property. Thus $h_U\subseteq h_X$ is a subpresheaf and its free abelian sheaf map and cokernel exist with exactly the sheafified formula stated above. For each point of an open $W\subseteq X$, take an affine chart of $X$ and use [F6] to find a distinguished open inside its intersection with $W$. By [F6] this open, with its restricted sheaf, is affine. These neighbourhoods show that $W$ is a scheme and is covered by affine opens, each quasi-compact by [F6]. Any quasi-compact open $V\subseteq X$ is also quasi-separated: two affine opens of $V$ are affine opens of $X$, so their intersection is quasi-compact by quasi-separatedness of $X$. Hence each $V\in\mathcal Q(W)$ is in the supplied qcqs category. By [F3] and [F4], the filtered, underlying-$K$ and realized motivic diagrams are coherent, and their limits exist by [F5] in the chosen size bounds. If $W$ is quasi-compact, it is initial in $\mathcal Q(W)^{\mathrm{op}}$; a cone is then determined by its component at $W$, so the limit is naturally equivalent to the supplied value there. Restricting cones along the displayed inclusions gives the stated restriction maps. The universal property of limits gives their compatibility with composition, including higher coherences. [F1, F2, F3, F4, F5, F6, given]
 
-2.1 Inclusions of open subsets induce restriction maps between these limits, and the coherent maps from filtration stages to $K$ induce a map of the two restriction arrows. Taking fibers produces the displayed support spectra and the map between them; the two sequences are fiber sequences by definition. The induced homomorphism on $\pi_i$ has a well-defined image subgroup. This is the stagewise construction of [F3], applied to the restriction diagram with the stated extension convention. [F2, F3, step 1.1]
-
-3.1 By [F4], the shifted support spectrum has $\pi_i(M_j(X/U)[2j])\cong\pi_{i-2j}M_j(X/U)$, which is the definition of $H^{2j-i,j}_{\mathrm{mot},Y}(X,\mathbb Z)$. For a qcqs global scheme, the same indexing lemma identifies $\pi_{-a}M_j(X)$ with $H^a(C_j(X))$; hence the first fiber arrow induces the degree-preserving support-to-global map. The construction does not require that the supported image map be injective. This justifies the definitions and their stated maps. [F2, F3, F4, step 2.1] ∎
+2.1 The coherent stage-to-$K$ maps in [F3] induce maps of the limiting restriction arrows. Taking their fibers gives the stated support spectra, stage augmentations and fiber projections, by [F5] and its stagewise support construction. On homotopy groups these are homomorphisms; their images are subgroups because $f(x)-f(y)=f(x-y)$. By [F5], $\pi_i(M_j(X/U)[2j])\cong\pi_{i-2j}M_j(X/U)=H^{2j-i,j}_{\mathrm{mot},Y}(X,\mathbb Z)$. By [F4], $\pi_{-a}M_j(X)\cong H^a(C_j(X))$ for qcqs $X$, naturally in its actual restriction arrows. Thus the fiber projection induces the degree-preserving support-to-global homomorphism with the stated global target. Realization preserves fibers, so for a qcqs complement this is also the realization of the unshifted enhanced cohomological support fiber, compatibly with its projection. The two indexing conventions remain distinct as in [F5]. No injectivity of a support-to-global map or independently constructed quotient-evaluation comparison is used. [F3, F4, F5, step 1.1] ∎
 
 ## Source notation and scope
 The article prints $H^{2j-i,j}_{\mathrm{mot},Y}(X,\mathbb Z):=\pi_i(\mathbb Z(j)_{\mathrm{mot}}(X/U))$ at Definition 2.7. The formula above specifies a $2j$-shift on the spectrum occurring on the right so that it is compatible with the cohomological convention of [[def-motivic-cohomology]]. The unshifted realization instead has $\pi_i=H^{-i}$; the printed notation alone does not specify the comparison between these two conventions. The quotient sheaf and fiber definitions retain the article's pair and fiber sequences, but no identification of the displayed fibers with an independently defined evaluation on that sheaf is asserted here. In particular, $K(X/U)$ is not identified here with the K-theory of the category of perfect complexes supported on $Y$; such an identification needs a localization input with its own hypotheses.

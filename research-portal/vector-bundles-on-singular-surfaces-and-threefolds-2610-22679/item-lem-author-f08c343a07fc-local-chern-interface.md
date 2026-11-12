@@ -2,7 +2,7 @@
 title: The ordinary Chow Chern map on isomorphism classes
 status: published
 research_item: lem-author-f08c343a07fc-local-chern-interface
-dependency_level: 12
+dependency_level: 14
 ---
 
 ## Prerequisites
@@ -10,22 +10,44 @@ dependency_level: 12
 - [def-vector-bundle-classes](item-def-vector-bundle-classes)
 - [math:def-chern-classes-of-a-vector-bundle](https://alphabetamath.cc/item/def-chern-classes-of-a-vector-bundle)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
+- [math:def-grothendieck-universe-closure-convention](https://alphabetamath.cc/item/def-grothendieck-universe-closure-convention)
+- [math:def-chow-group-of-cycles-mod-rational-equivalence](https://alphabetamath.cc/item/def-chow-group-of-cycles-mod-rational-equivalence)
+- [math:def-projective-bundle-scheme](https://alphabetamath.cc/item/def-projective-bundle-scheme)
+- [math:def-symmetric-algebra-qc-module](https://alphabetamath.cc/item/def-symmetric-algebra-qc-module)
+- [math:def-relative-proj-quasi-coherent-graded-algebra](https://alphabetamath.cc/item/def-relative-proj-quasi-coherent-graded-algebra)
+- [math:def-intersection-with-a-cartier-divisor-and-first-chern-class](https://alphabetamath.cc/item/def-intersection-with-a-cartier-divisor-and-first-chern-class)
+- [math:thm-projective-bundle-formula-for-chow-groups](https://alphabetamath.cc/item/thm-projective-bundle-formula-for-chow-groups)
+- [math:thm-intersection-product-and-chow-ring-of-a-smooth-scheme](https://alphabetamath.cc/item/thm-intersection-product-and-chow-ring-of-a-smooth-scheme)
+- [math:def-smooth-morphism-schemes](https://alphabetamath.cc/item/def-smooth-morphism-schemes)
+- [math:def-locally-finite-type-and-finite-type-morphism](https://alphabetamath.cc/item/def-locally-finite-type-and-finite-type-morphism)
+- [lem-adjudicate-febd1cc3219d-finite-type-field-qcqs](item-lem-adjudicate-febd1cc3219d-finite-type-field-qcqs)
+
 
 ## Statement
-Assume AC. For a smooth equidimensional finite-type scheme $X$ over a field and $r\geq1$, write $\mathrm{CH}^i(X)=A^i(X)$ for the group of codimension-$i$ cycles modulo rational equivalence. The tuple map $C_r:\mathrm{Vect}_r(X)\to\prod_{i=1}^r\mathrm{CH}^i(X)$ sends $[E]_{\mathrm{iso}}$ to $(c_i(E))_i$. It is well-defined and uses the quotient-projective-bundle convention: if $\xi=c_1(\mathcal O(1))$, its coefficients satisfy $\xi^r+\sum_{i=1}^r(-1)^i\pi^*c_i(E)\xi^{r-i}=0$. Equality of total Chern polynomials $1+\sum c_i(E)t^i$ is exactly equality of these tuples.
+Assume AC and the suitable universes required by the supplied bundle-class and perfect K-theory interface. Let $k$ be a field, let $X$ be a smooth equidimensional finite-type $k$-scheme, and let $r\geq1$ be an integer. Write $\mathrm{CH}^i(X)=A^i(X)$ for the codimension-$i$ Chow group of cycles modulo rational equivalence. The tuple map $C_r:\mathrm{Vect}_r(X)\to\prod_{i=1}^r\mathrm{CH}^i(X)$ sends $[E]_{\mathrm{iso}}$ to $(c_i(E))_{i=1}^r$. It is well-defined and uses the quotient-projective-bundle convention: for $\pi_E:\mathbb P_X(E)\to X$ and $\xi_E=c_1(\mathcal O_{\mathbb P_X(E)}(1))$, its coefficients satisfy $\xi_E^r+\sum_{i=1}^r(-1)^i\pi_E^*c_i(E)\xi_E^{r-i}=0$ in the Chow ring of $\mathbb P_X(E)$. For two rank-$r$ bundles, equality of total Chern polynomials $c_t(E)=1+\sum_{i=1}^r c_i(E)t^i$ is exactly equality of their tuples. Here a polynomial in the formal variable $t$ is a finite coefficient sequence in the Chow ring, with equality defined coefficientwise. For empty $X$, all its Chow groups are zero and the same assertions apply.
 
 ## Facts & Assumptions
 
-**Given:** The data and hypotheses in the statement.
+**Given:** The field $k$, smooth equidimensional finite-type $k$-scheme $X$, positive integer $r$, AC and suitable universes as in the statement.
 
-**Goal:** Establish the stated conclusion.
+**Goal:** Define the tuple map on bundle isomorphism classes, verify its quotient-projective-bundle normalization, and identify equality of its tuples with equality of total Chern polynomials.
 
-[F1] Bundle isomorphism classes are a set. [def-vector-bundle-classes](item-def-vector-bundle-classes)
+[F1] For qcqs $X$, assuming AC and the suitable universes of its perfect K-theory construction, $\mathrm{Vect}_r(X)$ is the set of isomorphism classes of finite locally free $\mathcal O_X$-modules of rank $r$; $[E]_{\mathrm{iso}}$ denotes such a class. These are not K-zero classes. Universe existence is assumed separately from AC, with the supplied closure convention. [def-vector-bundle-classes](item-def-vector-bundle-classes), [math:def-grothendieck-universe-closure-convention](https://alphabetamath.cc/item/def-grothendieck-universe-closure-convention), [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
 
-[F2] The Chow Chern classes are the unique coefficients of the quotient-projective-bundle relation and lie in $A^i(X)$. [math:def-chern-classes-of-a-vector-bundle](https://alphabetamath.cc/item/def-chern-classes-of-a-vector-bundle)
+[F2] For an equidimensional finite-type scheme of dimension $n$, $A^i(X)=A_{n-i}(X)$ is the cycle group modulo the subgroup generated by principal-divisor cycles of rational functions on integral closed subschemes of dimension $n-i+1$. This is the codimension grading of the Chow groups. For the empty scheme there are no integral cycles, hence every such group is zero. [math:def-chow-group-of-cycles-mod-rational-equivalence](https://alphabetamath.cc/item/def-chow-group-of-cycles-mod-rational-equivalence)
+
+[F3] The quotient projective bundle is $\mathbb P_X(E)=\operatorname{Proj}_X\operatorname{Sym}(E)$ with projection $\pi_E$ and tautological quotient $\pi_E^*E\to\mathcal O(1)$. The symmetric algebra has the universal extension of linear maps to commutative-algebra maps. Relative Proj and its twists are constructed from affine graded algebras and their shifted modules, compatibly with restriction to the base. [math:def-projective-bundle-scheme](https://alphabetamath.cc/item/def-projective-bundle-scheme), [math:def-symmetric-algebra-qc-module](https://alphabetamath.cc/item/def-symmetric-algebra-qc-module), [math:def-relative-proj-quasi-coherent-graded-algebra](https://alphabetamath.cc/item/def-relative-proj-quasi-coherent-graded-algebra)
+
+[F4] On smooth equidimensional finite-type schemes, the ordinary Chow Chern classes are the unique coefficients of the stated quotient-projective-bundle relation, with $c_i(E)\in A^i(X)$ and $c_0(E)=1$. The first Chern class of an invertible sheaf depends only on its isomorphism class and commutes with flat pullback; this supplies the invariance of the tautological first Chern class independently of the higher-class invariance being proved. [math:def-chern-classes-of-a-vector-bundle](https://alphabetamath.cc/item/def-chern-classes-of-a-vector-bundle), [math:def-intersection-with-a-cartier-divisor-and-first-chern-class](https://alphabetamath.cc/item/def-intersection-with-a-cartier-divisor-and-first-chern-class)
+
+[F5] For rank $r\geq1$, the projective bundle over smooth equidimensional $X$ is again smooth equidimensional. Its projection is smooth of relative dimension $r-1$ and is projective; in particular the total space is finite type over $k$ here. [math:thm-projective-bundle-formula-for-chow-groups](https://alphabetamath.cc/item/thm-projective-bundle-formula-for-chow-groups)
+
+[F6] A smooth equidimensional finite-type scheme has its codimension-graded Chow ring with unit; morphisms of smooth schemes have ring pullback compatible with composition and with flat pullback when the morphism is flat. First Chern cap action agrees with multiplication by its ring class. [math:thm-intersection-product-and-chow-ring-of-a-smooth-scheme](https://alphabetamath.cc/item/thm-intersection-product-and-chow-ring-of-a-smooth-scheme)
+
+[F7] Smoothness means smoothness of the structural morphism to the field, and finite type means locally of finite type and quasi-compact. The declared geometric hypotheses are exactly the scope of the Chow Chern suppliers. Under AC every finite-type scheme over a field is qcqs. [math:def-smooth-morphism-schemes](https://alphabetamath.cc/item/def-smooth-morphism-schemes), [math:def-locally-finite-type-and-finite-type-morphism](https://alphabetamath.cc/item/def-locally-finite-type-and-finite-type-morphism), [lem-adjudicate-febd1cc3219d-finite-type-field-qcqs](item-lem-adjudicate-febd1cc3219d-finite-type-field-qcqs)
 
 ## Proof
 
-1.1 An isomorphism $E\cong F$ identifies their quotient projective bundles, projections and tautological quotient lines. The projective relations therefore identify, and coefficient uniqueness gives $c_i(E)=c_i(F)$. The tuple consequently descends to the set in [F1]. [F1, F2]
+1.1 By [F7], $X$ is qcqs, so [F1] applies under the stated AC and universe assumptions. Let $\alpha:E\xrightarrow{\sim}F$ be an isomorphism of rank-$r$ bundles. By the symmetric-algebra universal property in [F3], $\alpha$ and $\alpha^{-1}$ extend to mutually inverse graded-algebra maps, since their composites fix degree one and scalars. Relative Proj gives an isomorphism $h:\mathbb P_X(F)\xrightarrow{\sim}\mathbb P_X(E)$ over $X$, carrying the tautological quotient line for $E$ to that for $F$. Concretely the graded isomorphism identifies homogeneous primes and the degree-zero localized chart rings; applying the same maps to the degree-shifted modules identifies $h^*\mathcal O_{\mathbb P_X(E)}(1)$ with $\mathcal O_{\mathbb P_X(F)}(1)$. These chart identifications commute with restriction and give the asserted identification of projections and twists in [F3]. Both total spaces satisfy the Chow-ring hypotheses by [F5]. Thus [F4] and [F6], applied to the flat isomorphism $h$, give $h^*\xi_E=\xi_F$ and $h^*\pi_E^*=\pi_F^*$. Pulling back the defining relation for $E$ therefore makes the classes $c_i(E)$ a coefficient tuple for the defining relation on $\mathbb P_X(F)$. Coefficient uniqueness in [F4] yields $c_i(E)=c_i(F)$ for every $1\leq i\leq r$. These classes lie in the groups of [F2], so the tuple descends to the set of classes in [F1]. [F1, F2, F3, F4, F5, F6, F7]
 
-2.1 For a formal variable $t$, a polynomial is its finite list of coefficients. Thus equality of the total polynomials is equivalent to equality in each degree $1,\ldots,r$, precisely equality of $C_r$. This fixes the actual operation and its sign normalization. [F2, step 1.1] ∎
+2.1 The finite polynomial convention in the statement makes equality of $c_t(E)$ and $c_t(F)$ equivalent to equality of all their coefficients. Both constant terms are $1$ and there are no terms above degree $r$, so this is exactly $c_i(E)=c_i(F)$ for $1\leq i\leq r$, or equality of their $C_r$ tuples. The relation in [F4] gives the asserted signs and quotient normalization. For empty $X$, [F1] gives a singleton of bundle classes and [F2] gives zero Chow groups, so well-definedness and the coefficientwise assertion hold there too. [F1, F2, F4, step 1.1] ∎

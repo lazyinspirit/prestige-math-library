@@ -12,6 +12,11 @@ deps:
   - def-motivic-filtration
   - def-multiplicative-filtered-spectrum
   - def-stable-spectra-interface
+  - math:def-scheme
+  - math:def-quasi-compact-and-quasi-separated-scheme
+  - math:def-module-on-ringed-space
+  - math:def-cochain-complex-in-an-abelian-category
+  - math:def-sheaf-on-topological-space
 dependency_roles:
   math:def-axiom-of-choice: mathematical-premise
   def-scheme-perfect-complexes: mathematical-premise
@@ -20,6 +25,11 @@ dependency_roles:
   def-motivic-filtration: mathematical-premise
   def-multiplicative-filtered-spectrum: mathematical-premise
   def-stable-spectra-interface: mathematical-premise
+  math:def-scheme: mathematical-premise
+  math:def-quasi-compact-and-quasi-separated-scheme: mathematical-premise
+  math:def-module-on-ringed-space: mathematical-premise
+  math:def-cochain-complex-in-an-abelian-category: mathematical-premise
+  math:def-sheaf-on-topological-space: mathematical-premise
 provenance:
   statement: ai-generated
   proof: ai-generated
@@ -36,12 +46,14 @@ sources:
         K-theory.
       hypotheses: A small stable infinity-category; for an idempotent-complete
         category the completion is unnecessary.
-      reading_limits: Read the January 29, 2019 arXiv v2 extracted PDF text, Section
-        2.1 formula (2.6) and Section 2.2 immediately before Lemma 2.12. The
-        recalled general comparison is imported, not reconstructed. The existing
-        supplier's MPG URL returned HTTP 403; no reading of that version is
-        claimed.
-dependency_level: 12
+      reading_limits: Freshly read the primary arXiv v2 extracted PDF text at Section
+        2.1 (printed pp. 2–3), especially formula (2.6), and the opening
+        paragraph of Section 2.2 (printed p. 4) immediately before Lemma 2.12.
+        Use only the recalled nonconnective functor and cofiber-group comparison
+        for the small zero stable category. Their foundational proofs are
+        imported through the declared supplier, not reconstructed. No fresh
+        reading of the earlier carrier’s inaccessible MPG mirror is claimed.
+dependency_level: 14
 ---
 
 ## Statement
@@ -58,7 +70,12 @@ This includes the source filtration over either prime field and its restriction 
 
 [F2] [[def-motivic-filtration]] identifies stage zero with $K$ and supplies the integer-indexed actual tower. [[def-multiplicative-filtered-spectrum]] supplies the unit $\eta:\mathbb S\to F^0$ and the unital action $F^0\wedge F^r\to F^r$. [[def-stable-spectra-interface]] identifies $\pi_0E$ with homotopy classes of maps $\mathbb S\to E$ and supplies smash, its zero object and unit constraints.
 
-## Proof
-1.1 A sheaf of modules on the empty scheme has only its forced zero value on the empty open set. Thus all complexes and their derived images are equivalent to zero, and the full perfect category is equivalent to the zero stable category. It is idempotent complete. Its cofiber Grothendieck group has only the generator $[0]$, and the cofiber sequence $0\to0\to0$ imposes $[0]=[0]+[0]$, so this group is zero. Applying [F1] under Choice gives $\pi_0K(\varnothing)=0$. [F1, given]
+[F3] [[math:def-scheme]] includes the empty scheme. Under [[math:def-quasi-compact-and-quasi-separated-scheme]], it is qcqs: its underlying space and all intersections of affine opens are empty, and every open cover of the empty space admits the empty finite subcover. [[math:def-module-on-ringed-space]] specifies module sheaves and their morphisms, and [[math:def-cochain-complex-in-an-abelian-category]] specifies the complexes used in [F1]. The sheaf axiom in [[math:def-sheaf-on-topological-space]] applies also to the empty cover: every compatible family of local sections, including the empty family, has a unique glued section.
 
-2.1 By [F2], $\pi_0F^0=0$, so the unit $\eta:\mathbb S\to F^0$ is nullhomotopic. For any integer $r$, the unit law identifies the composite $F^r\simeq\mathbb S\wedge F^r\xrightarrow{\eta\wedge1}F^0\wedge F^r\to F^r$ with $1_{F^r}$. The composite is nullhomotopic because smash preserves zero maps. Hence $1_{F^r}=0$ in the homotopy category, so the zero maps between $F^r$ and the zero spectrum are inverse there, and $F^r\simeq0$. This holds for all integers $r$. [F2, step 1.1] ∎
+## External input
+Reference 0 records the comparison used through [F1]: the cofiber Grothendieck group of the idempotent completion of a small stable infinity-category is its degree-zero nonconnective K-group. We apply it only to the one-object zero stable category, which is already idempotent complete. The actual perfect-complex realization and invariance under its equivalent small presentation come from the declared nonconnective K-theory interface; the comparison is imported, while its application and the unital argument below are local.
+
+## Proof
+1.1 The empty scheme lies in the qcqs domain by [F3]. Apply the sheaf axiom to the empty cover of its only open set, the empty set: the empty compatible family glues uniquely. Thus a module sheaf has exactly one section there, necessarily its zero section. Every module sheaf is therefore zero, and there is a unique module-sheaf morphism between any two. The cochain-complex category and its derived localization in [F1] are consequently equivalent to the one-object zero category. Every complex is perfect since the local condition is vacuous. Use the one-object small presentation of this zero stable category; it is idempotent complete. Its cofiber Grothendieck group has only the generator $[0]$, and the cofiber sequence $0\to0\to0$ imposes $[0]=[0]+[0]$, so this group is zero. Applying [F1] under Choice gives $\pi_0K(\varnothing)=0$. [F1, F3, given]
+
+2.1 By [F2], $\pi_0F^0=0$, so the unit $\eta:\mathbb S\to F^0$ is nullhomotopic. For any integer $r$, the unit law identifies the composite $F^r\simeq\mathbb S\wedge F^r\xrightarrow{\eta\wedge1}F^0\wedge F^r\to F^r$ with $1_{F^r}$. The composite is nullhomotopic: the zero map smashed with $F^r$ factors through $0\wedge F^r\simeq0$, since smash preserves the zero object. Hence $1_{F^r}=0$ in the homotopy category, so the zero maps between $F^r$ and the zero spectrum are inverse there, and $F^r\simeq0$. This holds for all integers $r$. [F2, step 1.1] ∎

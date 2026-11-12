@@ -11,6 +11,7 @@ dependency_level: 3
 - [lem-author-cf6ede58b450-cover-intersections](item-lem-author-cf6ede58b450-cover-intersections)
 - [lem-author-cf6ede58b450-plus-presheaf](item-lem-author-cf6ede58b450-plus-presheaf)
 
+
 ## Statement
 For every set-valued presheaf F on a small site, F+ is separated. Moreover, if two sections of F agree after restriction along every arrow of a covering sieve, their images in F+ agree.
 

@@ -36,7 +36,24 @@ sources:
         appeal to MVW12.28 and the claim of a finite Nisnevich refinement. The
         assigned proposition extracts this finite-refinement input; it does not
         reproduce the separate seminormal representability theorem.
+      statement: The proof of Lemma 2.4 asserts finite local integer representatives
+        after a proper/cdh and Nisnevich refinement.
+      hypotheses: The article passage assumes a separated seminormal finite-type
+        scheme over an algebraically closed field. The arbitrary-field sieve
+        refinement here is a local composition of the separately declared
+        finite-type suppliers, not attributed to that passage.
 dependency_level: 11
+formulation_deps:
+  - def-cdh-topology-interface
+  - def-scheme-sites-and-sheafification
+argument_deps:
+  - lem-author-5bfbe3ebf14f-finite-nisnevich-subfamily
+  - lem-author-5bfbe3ebf14f-cdh-generators-pullback-composition
+  - lem-author-5bfbe3ebf14f-finite-generated-topology-basis
+  - lem-author-5bfbe3ebf14f-finite-coproduct-sieve-refinement
+  - lem-author-5bfbe3ebf14f-constant-sheaf-finite-local-representatives
+  - thm-author-5bfbe3ebf14f-mvw-finite-type-cdh-two-stage-input
+  - def-scheme-sites-and-sheafification
 ---
 
 ## Statement

@@ -16,7 +16,15 @@ provenance:
   statement: ai-generated
   proof: ai-generated
 proof_strategy: direct
-dependency_level: 6
+dependency_level: 7
+formulation_deps:
+  - def-bloch-higher-cycle-complex
+  - lem-author-c8fb25136bd5-degree-zero-cycles
+  - lem-author-c8fb25136bd5-one-boundaries
+argument_deps:
+  - def-bloch-higher-cycle-complex
+  - lem-author-c8fb25136bd5-degree-zero-cycles
+  - lem-author-c8fb25136bd5-one-boundaries
 ---
 
 ## Statement

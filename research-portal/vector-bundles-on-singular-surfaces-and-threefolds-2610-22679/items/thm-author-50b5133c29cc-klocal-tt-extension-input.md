@@ -6,10 +6,14 @@ status: published
 domain: mathematics
 deps:
   - def-scheme-perfect-complexes
-  - math:def-axiom-of-choice
+  - math:def-quasi-compact-and-quasi-separated-scheme
+  - math:def-thick-subcategory
+  - math:def-localization-of-a-category-at-a-class-of-morphisms
 dependency_roles:
   def-scheme-perfect-complexes: mathematical-premise
-  math:def-axiom-of-choice: mathematical-premise
+  math:def-quasi-compact-and-quasi-separated-scheme: mathematical-premise
+  math:def-thick-subcategory: mathematical-premise
+  math:def-localization-of-a-category-at-a-class-of-morphisms: mathematical-premise
 provenance:
   statement: literature-derived
   proof: literature-derived
@@ -34,13 +38,18 @@ sources:
         are the unrestrained-support clauses 5.2.2(a), 5.2.3(a), 5.2.4(a); set
         the additional Z of 5.1 equal to X. No ample-family, noetherian,
         regularity or resolution-property assumption survives 5.6.3.
-      reading_limits: Read full statements on printed pp. 337–339, the equalizer proof
-        5.2.6 p. 339, general-qcqs Lemma 5.6.2 statement and start of proof p.
-        348, and closeout 5.6.3 p. 350. Read Euler relations 1.5.6–1.5.7 p. 261.
-        The lengthy extension/approximation proofs in 5.3–5.6 remain imported.
-        Only ordinary perfect complexes and actual derived restriction are
-        imported here; neither TT K^B nor a comparison of K-theory models is
-        used.
+      reading_limits: This repair inspected the source text on printed pp. 337–339
+        (the hypotheses of 5.1, the statements 5.2.2–5.2.4 and the equalizer
+        argument 5.2.6), p. 348 (Lemma 5.6.2 and the beginning of its proof), p.
+        350 (the closeout 5.6.3), and p. 261 (1.5.6–1.5.7). The Rochester
+        endpoint was unavailable in this round; the same paper was read in the
+        hosted scan at
+        https://www.preschema.com/teaching/2020-ss/kdescent/refs/Thomason-Trobaugh%20-%20Higher%20algebraic%20K-theory%20of%20schemes.pdf
+        (PDF pages 91–93, 102, 104 and 15, one-based). The lengthy approximation
+        and extension proofs in 5.3–5.6 were not independently reconstructed.
+        Only the ordinary perfect-complex extension and morphism inputs and
+        classical Euler relations are imported; no comparison with this
+        collection’s K spectrum is asserted.
     - title: The Stacks Project, Derived Categories
       url: https://stacks.math.columbia.edu/tag/05RA
       locator: Lemma 13.6.6 and Definition 13.6.7 (05RI)
@@ -49,11 +58,13 @@ sources:
         admits the usual calculus of fractions.
       hypotheses: A full triangulated subcategory; thickness ensures saturation. Apply
         to the kernel of an exact restriction functor.
-      reading_limits: Read the full lemma statement and its displayed proof at 05RA,
-        and the exact quotient definition at 05RI. General categorical fraction
-        construction is imported; the application proof explicitly checks
-        fullness and faithfulness.
-dependency_level: 5
+      reading_limits: This repair read the statement and displayed proof of Lemma
+        13.6.6 in Section 13.6 at 05RA and the quotient definition at
+        https://stacks.math.columbia.edu/tag/05RI. The multiplicative-system and
+        quotient construction are imported. This item contains no local proof of
+        full faithfulness or essential surjectivity for restriction, and does
+        not reconstruct the general localization construction.
+dependency_level: 7
 ---
 
 ## Statement
@@ -67,8 +78,29 @@ Let $X$ be qcqs and $j:U\hookrightarrow X$ a quasi-compact open. In the ordinary
 
 The Euler group here is the classical perfect-complex Grothendieck group, with $[B]=[A]+[C]$ for triangles and $[F[1]]=-[F]$. This is a source-side extension criterion, not an identification with $\pi_0$ of the K spectrum defined in this run. Verdier quotient by a full thick triangulated subcategory is localization at maps with cone in it.
 
+
+## Statement references
+
+[[def-scheme-perfect-complexes]]
+
+[[math:def-quasi-compact-and-quasi-separated-scheme]]
+
+[[math:def-thick-subcategory]]
+
+[[math:def-localization-of-a-category-at-a-class-of-morphisms]]
+
 ## Source contract
 **Given:** qcqs $X$, quasi-compact open $U$, and ordinary derived categories of sheaf complexes with locally bounded finite locally free representatives.
+
+Here qcqs means quasi-compact and quasi-separated; quasi-compactness of the open is quasi-compactness of the open subscheme $U$. [[math:def-quasi-compact-and-quasi-separated-scheme]]
+
+Use the foundational choice and universe conventions inherited from [[def-scheme-perfect-complexes]]; no independent local choice argument is asserted.
+
+The ordinary perfect category, its shifts, triangles and restriction are those of [[def-scheme-perfect-complexes]]. An extension of $F$ means a perfect $E$ on $X$ together with an isomorphism $j^*E\simeq F$ in the ordinary derived category.
+
+The classical Euler group is the abelian group on isomorphism classes of perfect objects, modulo the displayed triangle relations; restriction acts by $[E]\mapsto[j^*E]$. The Euler relations in [F2] are imported for this source-side group.
+
+A full thick triangulated subcategory has the inherited triangulated structure and is closed under direct summands. [[math:def-thick-subcategory]] supplies this formulation. [[math:def-localization-of-a-category-at-a-class-of-morphisms]] supplies the meaning of localization; [F2] supplies the cone criterion and the multiplicative-system assertion, rather than a local construction of them.
 
 **Goal:** Import exactly the established extension/roof inputs needed before applying enhanced localization.
 

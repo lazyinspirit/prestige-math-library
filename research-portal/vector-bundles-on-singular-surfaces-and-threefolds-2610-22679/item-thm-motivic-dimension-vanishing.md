@@ -3,6 +3,36 @@ title: Motivic dimension vanishing
 status: published
 research_item: thm-motivic-dimension-vanishing
 dependency_level: 13
+sources:
+  references:
+    - title: Elden Elmanto and Matthew Morrow, Motivic cohomology of
+        equicharacteristic schemes
+      url: https://arxiv.org/pdf/2309.08463v1
+      locator: v1, Theorem 1.13, printed p. 8; Theorem 8.1, printed p. 53;
+        introduction footnote 1, printed p. 2
+      statement: For j≥0 and finite-dimensional Noetherian equicharacteristic X,
+        motivic cohomology vanishes in degrees i>j+dimX.
+      hypotheses: Global equicharacteristic factorization through SpecQ or SpecF_p; X
+        Noetherian and finite-dimensional; j≥0.
+      reading_limits: For this repair, read the versioned PDF extraction of both
+        complete theorem statements and the equicharacteristic footnote. The
+        local two-step argument applies the inspected current prime-field,
+        shifted-hypothesis, fiber-bound and cohomological-gluing suppliers; it
+        does not reconstruct the geometric proofs or review their upstream
+        sources. Choice and universe assumptions are inherited from those
+        current local interfaces, not asserted as additional geometric
+        hypotheses of the published theorem.
+    - title: Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and
+        threefolds
+      url: https://arxiv.org/abs/2610.22679v1
+      locator: p. 4, property (3), referring to EM23 Theorem 1.13
+      statement: The article invokes the full motivic dimension vanishing bound.
+      hypotheses: The precise theorem hypotheses are retained from the referenced EM
+        theorem.
+      reading_limits: For this repair, read property (3) and the surrounding
+        Definition 2.2 in the frozen article text. This verifies the retained
+        vanishing claim and attribution only; no original-author defect or new
+        review of the article proofs is asserted.
 ---
 
 PDF p. 4: Motivic dimension vanishing
@@ -17,13 +47,23 @@ PDF p. 4: Motivic dimension vanishing
 - [lem-author-0bac6b264f4a-motivic-dim-fiber-bound](item-lem-author-0bac6b264f4a-motivic-dim-fiber-bound)
 - [lem-author-0bac6b264f4a-motivic-dim-cohomological-glueing](item-lem-author-0bac6b264f4a-motivic-dim-cohomological-glueing)
 - [lem-author-0bac6b264f4a-motivic-dim-prime-field-vanishing](item-lem-author-0bac6b264f4a-motivic-dim-prime-field-vanishing)
-- [Elden Elmanto and Matthew Morrow, Motivic cohomology of equicharacteristic schemes · Theorem1.13 p.8 and Theorem8.1 p.53](https://arxiv.org/pdf/2309.08463v1)
-- [Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · p.4 property(3), referring to EM23 Theorem1.13](https://arxiv.org/abs/2610.22679v1)
+- [math:def-locally-noetherian-and-noetherian-scheme](https://alphabetamath.cc/item/def-locally-noetherian-and-noetherian-scheme)
+- [math:def-dimension-noetherian-topological-space](https://alphabetamath.cc/item/def-dimension-noetherian-topological-space)
+- [math:def-scheme-over-base](https://alphabetamath.cc/item/def-scheme-over-base)
+- [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
+- [math:def-grothendieck-universe-closure-convention](https://alphabetamath.cc/item/def-grothendieck-universe-closure-convention)
+- [` Elden Elmanto and Matthew Morrow, Motivic cohomology of equicharacteristic schemes · v1, Theorem 1.13, printed p. 8; Theorem 8.1, printed p. 53; introduction footnote 1, printed p. 2 `](https://arxiv.org/pdf/2309.08463v1)
+- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · p. 4, property (3), referring to EM23 Theorem 1.13 `](https://arxiv.org/abs/2610.22679v1)
+
 
 ## Statement
-Let $X$ be a Noetherian equicharacteristic scheme of finite dimension $d$, and let $j\geq0$. Then
-$$H^{i,j}_{\mathrm{mot}}(X,\mathbb Z)=0\qquad\text{for every }i>j+d.$$
-Here equicharacteristic has the precise EM meaning: the structure map $X\to\operatorname{Spec}\mathbb Z$ factors through $\operatorname{Spec}F$ for a prime field $F=\mathbb Q$ or $\mathbb F_p$. For such $X$ the groups mean $H^i(M_{j,F}(X))$ in the general prime-field interface. If $X$ is over the standing field $k$, this interface is exactly the theory already defined on $\mathrm{Sch}_k$, by restriction along its prime subfield. The theorem does not require that every $X$ be over that one standing field.
+Assume the Axiom of Choice and fix Grothendieck universes $U\in V\in W$ with $\omega\in U$, with all field and scheme data below in $U$. Universe existence is a separate size assumption. Use the supplied unbounded derived enhancement of complexes of $V$-small abelian groups, considered in $W$, and its ordinary derived homotopy category $D(\mathbb Z)$.
+
+Let $X$ be a Noetherian equicharacteristic scheme of finite dimension $d$, and let $j\geq0$ be an integer. Then, for every integer $i$,
+$$H^{i,j}_{\mathrm{mot}}(X,\mathbb Z)=0\qquad\text{if }i>j+d.$$
+Here Noetherian means locally Noetherian and quasi-compact, equivalently admitting a finite affine open cover by spectra of Noetherian rings. For nonempty $X$, $d=\dim |X|$ is the supremum of lengths $s$ of strict chains $Z_0\subsetneq\cdots\subsetneq Z_s$ of nonempty irreducible closed subsets of the underlying space; a one-member chain has length zero. Irreducible means not a union of two proper closed subsets. Set $\dim\varnothing=-\infty$ and $j+(-\infty)=-\infty$; the empty case means vanishing in every integer degree, and the finite-dimensional hypothesis imposes a finite nonnegative integer bound when $X$ is nonempty.
+
+Equicharacteristic has the precise EM meaning: the structure map $X\to\operatorname{Spec}\mathbb Z$ factors through $\operatorname{Spec}F$ for a prime field $F=\mathbb Q$ or $\mathbb F_p$ with $p$ prime. An $F$-scheme here is a scheme equipped with that structure morphism to $\operatorname{Spec}F$. For such $X$ the groups mean $H^i(M_{j,F}(X))$ in the general prime-field interface, with $H^i$ the cochain cohomology functor on $D(\mathbb Z)$. If $X$ is over the standing field $k$, this interface is exactly the theory already defined on $\mathrm{Sch}_k$, by restriction along its prime subfield. The theorem does not require that every $X$ be over that one standing field.
 
 ## Statement references
 [def-motivic-cohomology](item-def-motivic-cohomology)
@@ -32,18 +72,37 @@ Here equicharacteristic has the precise EM meaning: the structure map $X\to\oper
 
 [lem-author-0bac6b264f4a-motivic-dim-prime-field-vanishing](item-lem-author-0bac6b264f4a-motivic-dim-prime-field-vanishing)
 
+[math:def-locally-noetherian-and-noetherian-scheme](https://alphabetamath.cc/item/def-locally-noetherian-and-noetherian-scheme)
+
+[math:def-dimension-noetherian-topological-space](https://alphabetamath.cc/item/def-dimension-noetherian-topological-space)
+
+[math:def-scheme-over-base](https://alphabetamath.cc/item/def-scheme-over-base)
+
+[math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
+
+[math:def-grothendieck-universe-closure-convention](https://alphabetamath.cc/item/def-grothendieck-universe-closure-convention)
+
 ## Facts & Assumptions
-**Given:** The stated Noetherian finite-dimensional globally equicharacteristic scheme, nonnegative weight and the compatible actual EM interface.
+**Given:** The stated Choice and universe assumptions, Noetherian finite-dimensional globally equicharacteristic scheme, nonnegative integer weight and compatible actual EM interface.
 
 **Goal:** Prove the unrestricted prime-field statement and identify its standing fixed-field specialization.
 
-[F1] [lem-author-0bac6b264f4a-motivic-dim-general-interface](item-lem-author-0bac6b264f4a-motivic-dim-general-interface) defines the actual general EM groups and proves compatibility with the completed fixed-field definition.
+[A1] [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice) and [math:def-grothendieck-universe-closure-convention](https://alphabetamath.cc/item/def-grothendieck-universe-closure-convention) specify the foundational assumptions. Choice is inherited through the supplied unbounded derived enhancement and the actual comparison-fiber and outer-bound interfaces in [F1]–[F3]; universe existence is assumed separately. The present application introduces no further choice of resolutions or cones.
 
-[F2] [lem-author-0bac6b264f4a-motivic-dim-shifted-hypotheses](item-lem-author-0bac6b264f4a-motivic-dim-shifted-hypotheses) and [lem-author-0bac6b264f4a-motivic-dim-fiber-bound](item-lem-author-0bac6b264f4a-motivic-dim-fiber-bound) check and apply the imported geometric dimension criterion to the actual shifted comparison fiber.
+[F1] [lem-author-0bac6b264f4a-motivic-dim-general-interface](item-lem-author-0bac6b264f4a-motivic-dim-general-interface) defines the actual general EM groups and proves compatibility with the completed fixed-field definition, including pullbacks and zero values at the empty scheme.
 
-[F3] [lem-author-0bac6b264f4a-motivic-dim-cohomological-glueing](item-lem-author-0bac6b264f4a-motivic-dim-cohomological-glueing) and [lem-author-0bac6b264f4a-motivic-dim-prime-field-vanishing](item-lem-author-0bac6b264f4a-motivic-dim-prime-field-vanishing) combine the actual fiber bound with the precise cdh outer bound through the long exact sequence.
+[F2] [lem-author-0bac6b264f4a-motivic-dim-shifted-hypotheses](item-lem-author-0bac6b264f4a-motivic-dim-shifted-hypotheses) and [lem-author-0bac6b264f4a-motivic-dim-fiber-bound](item-lem-author-0bac6b264f4a-motivic-dim-fiber-bound) check and apply the imported geometric dimension criterion to the actual shifted comparison fiber, under [A1].
+
+[F3] [lem-author-0bac6b264f4a-motivic-dim-cohomological-glueing](item-lem-author-0bac6b264f4a-motivic-dim-cohomological-glueing) and [lem-author-0bac6b264f4a-motivic-dim-prime-field-vanishing](item-lem-author-0bac6b264f4a-motivic-dim-prime-field-vanishing) combine the actual fiber bound with the precise cdh outer bound through the long exact sequence. The prime-field supplier's nonempty conclusion applies to every Noetherian prime-field scheme of finite integer dimension; its empty case gives zero complexes in every degree.
+
+[F4] [math:def-locally-noetherian-and-noetherian-scheme](https://alphabetamath.cc/item/def-locally-noetherian-and-noetherian-scheme), [math:def-dimension-noetherian-topological-space](https://alphabetamath.cc/item/def-dimension-noetherian-topological-space) and [math:def-scheme-over-base](https://alphabetamath.cc/item/def-scheme-over-base) give the Noetherian, chain-dimension (including $\dim\varnothing=-\infty$), and structure-morphism conventions used in the Statement.
+
+[F5] [lem-author-b747b28c359f-elmanto-morrow-complexes](item-lem-author-b747b28c359f-elmanto-morrow-complexes) supplies the actual prime-field motivic sheaf, its field restriction and empty-cover descent; [lem-author-b747b28c359f-derived-cohomology](item-lem-author-b747b28c359f-derived-cohomology) supplies functorial cohomology on its derived homotopy category. [def-motivic-cohomology](item-def-motivic-cohomology) is the standing fixed-field definition used in [F1].
+
+## External input
+Reference 0 records the published vanishing statement in Elmanto–Morrow v1, Theorems 1.13 and 8.1, with the global equicharacteristic convention of its introduction footnote 1. Reference 1 records the original article's use of that statement at p. 4, property (3). The geometric inputs are used through [F1]–[F3] with their own explicit import limits; the application and fixed-field identification below are local deductions, not a reconstruction of the published geometric proofs. The foundational assumptions in [A1] come from the current local supplier contracts.
 
 ## Proof
-1.1 If $X$ is nonempty, its assumed equicharacteristic factorization makes it a scheme over the corresponding prime field $F$. The Noetherian and finite-dimensional assumptions are exactly those of [F2]–[F3]. Apply [F3] to obtain $H^i(M_{j,F}(X))=0$ whenever $i>j+d$. By [F1] these are the claimed general motivic groups. For the empty scheme the complexes vanish by empty-cover descent, so the assertion is immediate. [F1, F2, F3]
+1.1 Work under [A1]. If $X$ is nonempty, its assumed equicharacteristic factorization equips it with an $F$-scheme structure as in [F4]. Its Noetherian and finite-dimensional hypotheses give a finite integer $d\geq0$ in precisely the convention of [F2]–[F4]. Apply [F3], using the fiber bound checked in [F2], to obtain $H^i(M_{j,F}(X))=0$ whenever $i>j+d$. By [F1] and [F5] these are the claimed general motivic groups. For the empty scheme [F1] and [F5] give the zero complex by empty-cover descent, so all integer-degree groups vanish, agreeing with the convention in [F4]. [A1, F1, F2, F3, F4, F5]
 
-2.1 When $X$ additionally carries the standing $k$-structure, [F1] identifies this very complex and its pullbacks with those of the standing definition by actual restriction, so step 1.1 gives its stated specialization. No finite-type, smoothness, regularity or fixed-$k$ restriction has replaced the original Noetherian equicharacteristic hypotheses. This proves the theorem for exactly the defined range $j\geq0$. [F1, F3, step 1.1] ∎
+2.1 When $X$ additionally carries the standing $k$-structure, [F1] identifies this very complex and its pullbacks with those of the standing definition in [F5] by actual restriction, so step 1.1 gives its stated specialization under the same foundational assumptions. No finite-type, smoothness, regularity or fixed-$k$ restriction has replaced the original Noetherian equicharacteristic hypotheses. This proves the theorem for exactly the defined range $j\geq0$. [A1, F1, F3, F5, step 1.1] ∎

@@ -18,7 +18,17 @@ provenance:
   statement: ai-generated
   proof: ai-generated
 proof_strategy: direct
-dependency_level: 10
+dependency_level: 12
+formulation_deps:
+  - math:def-axiom-of-choice
+  - def-scheme-perfect-complexes
+  - def-nonconnective-k-spectrum-interface
+  - thm-author-4f716d60801a-derived-enhancement-input
+argument_deps:
+  - math:def-axiom-of-choice
+  - def-scheme-perfect-complexes
+  - def-nonconnective-k-spectrum-interface
+  - thm-author-4f716d60801a-derived-enhancement-input
 ---
 
 ## Statement

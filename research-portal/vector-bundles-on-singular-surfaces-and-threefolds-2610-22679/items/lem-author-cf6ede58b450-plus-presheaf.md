@@ -15,6 +15,11 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 dependency_level: 2
+formulation_deps:
+  - def-author-cf6ede58b450-site-plus-data
+argument_deps:
+  - def-author-cf6ede58b450-site-plus-data
+  - lem-author-cf6ede58b450-cover-intersections
 ---
 
 ## Statement

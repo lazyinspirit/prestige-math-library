@@ -4,123 +4,119 @@ title: Article items · 11 — Stage bounds imply completeness and finite
 description: Presents 29 items from the article and its immediate prerequisites,
   covering dependency levels 17–20.
 status: published
-dependency_level: 10
+dependency_level: 5
 research_article_page: true
-item_count: 29
+item_count: 28
 ---
 
-## Stage bounds imply completeness and finite multiplicative convergence
+## Extending a nonnegative filtration to integer indices
 
-[Open item](item-lem-author-74a9c17e63f1-bounded-convergence) · level 17
+[Open item](item-lem-author-98a750efd0cc-filtration-extension) · level 6
 
-## Normal dimension strata and the actual residue class model
+## Naturality of image filtrations
 
-[Open item](item-lem-author-80f982ded420-normal-point-strata) · level 17
+[Open item](item-lem-author-98a750efd0cc-filtration-naturality) · level 6
 
-## The globally normalized first-layer Picard map is determinant
+## Nesting of image filtration groups
 
-[Open item](item-lem-author-ec13f1db88a5-global-picard-projection) · level 17
+[Open item](item-lem-author-98a750efd0cc-filtration-nesting) · level 6
 
-## Motivic purity and lower-weight vanishing at a smooth closed point
+## Products of filtration images
 
-[Open item](item-lem-smooth-point-motivic-purity) · level 17
+[Open item](item-lem-author-98a750efd0cc-filtration-products) · level 6
 
-## Bertini curve functional with a prescribed avoidance locus
+## Image filtration for a split tower
 
-[Open item](item-prop-bertini-curve-section) · level 17
+[Open item](item-lem-author-9f61e4df2141-split-image-filtration) · level 6
 
-## External formal universal Chern maps and supported construction
+## Products and projections on image filtrations
 
-[Open item](item-thm-author-d026a7b99ace-universal-chern-space) · level 17
+[Open item](item-lem-image-filtration-products) · level 6
 
-## Divisibility survives the quotient and the support image
+## Spectral sequence of a tower
 
-[Open item](item-lem-author-149a02132c3b-divisible-image) · level 18
+[Open item](item-prop-tower-exact-couple-interface) · level 6
 
-## Actual exact-sequence Whitney and filtered-root formula on singular qcqs schemes
+## Abelian sheafification and quotient sheaves on a site
 
-[Open item](item-lem-author-32887006bdff-actual-whitney) · level 18
+[Open item](item-thm-adjudicate-d5306176fce5-abelian-sheaf-input) · level 6
 
-## Levine–Weibel relations split on clopen pure-dimensional components
+## Completely decomposed proper covers and the cdh topology
 
-[Open item](item-lem-author-80f982ded420-clopen-quotients) · level 18
+[Open item](item-def-cdh-topology-interface) · level 7
 
-## Positive supported coordinates at a smooth threefold point
+## Milnor K symbols and the Nisnevich sheaf
 
-[Open item](item-lem-author-d026a7b99ace-positive-coordinates) · level 18
+[Open item](item-def-milnor-k-sheaf-interface) · level 7
 
-## The actual determinant fiber is a natural retract of the rank-zero K-space
+## The local valuative convention matches the source convention
 
-[Open item](item-lem-author-e216acade157-split-determinant-fiber) · level 18
+[Open item](item-lem-author-0cc80c1b5792-valuative-conventions) · level 7
 
-## Smooth rank, first Chern, determinant and supported positive leading cycle
+## Finite type algebras over fields have bounded dimension
 
-[Open item](item-lem-smooth-leading-cycle-normalization) · level 18
+[Open item](item-lem-author-14463ef2f4e5-finite-type-dimension) · level 7
 
-## Affine étale vanishing and the actual localized evaluation
+## The actual smooth open pair and its Nisnevich square
 
-[Open item](item-prop-affine-artin-vanishing) · level 18
+[Open item](item-lem-author-8a080e7d9445-geometry) · level 7
 
-## Motivic graded pieces and spectral sequence
+## Derived Nisnevich descent on a finite clopen partition
 
-[Open item](item-prop-motivic-graded-spectral-sequence) · level 18
+[Open item](item-lem-author-ab0a6fc202cb-clopen-derived-descent) · level 7
 
-## Graded filtration projections
+## Elmanto–Morrow motivic complex input
 
-[Open item](item-def-filtration-projections) · level 19
+[Open item](item-lem-author-b747b28c359f-elmanto-morrow-complexes) · level 7
 
-## Clopen rank extension and genuine representative independence
+## The source qcqs cdh site
 
-[Open item](item-lem-author-32887006bdff-virtual-independence) · level 19
+[Open item](item-lem-author-dcdf962edbda-qcqs-site) · level 7
 
-## Clopen rank extension and genuine representative independence
+## Motivic complexes and cohomology
 
-[Open item](item-lem-author-4f94f7982b0d-virtual-independence) · level 19
+[Open item](item-def-motivic-cohomology) · level 8
 
-## Finite clopen restrictions split the actual motivic image filtration
+## Cycle complexes with fixed support
 
-[Open item](item-lem-author-80f982ded420-clopen-filtered-products) · level 19
+[Open item](item-def-supported-higher-cycle-complex) · level 8
 
-## Divisibility of curve-supported top cohomology
+## Finite-clopen motivic restriction over every field
 
-[Open item](item-lem-curve-supported-degree-six-divisible) · level 19
+[Open item](item-lem-adjudicate-e61a86f4a27f-all-field-clopen-restriction) · level 8
 
-## Second stage with integral curve support
+## Smooth affine components and gluing a trivial line
 
-[Open item](item-lem-curve-supported-second-stage) · level 19
+[Open item](item-lem-author-394a5b71198d-components) · level 8
 
-## High filtration vanishing
+## Pullback and composition of the cdh generating families
 
-[Open item](item-lem-high-filtration-vanishing) · level 19
+[Open item](item-lem-author-5bfbe3ebf14f-cdh-generators-pullback-composition) · level 8
 
-## Weight-one K-one projection is determinant
+## Finite subfamilies of Nisnevich covers on the finite-type site
 
-[Open item](item-lem-k-one-projection-determinant) · level 19
+[Open item](item-lem-author-5bfbe3ebf14f-finite-nisnevich-subfamily) · level 8
 
-## Smooth point classes lie in the top filtration piece
+## Every qcqs cdh generator is an arc covering family
 
-[Open item](item-lem-smooth-point-filtration) · level 19
+[Open item](item-lem-author-7113c087ecba-generators-arc) · level 8
 
-## Filtration projections and multiplication
+## Degree zero and negative homology of the cycle complex
 
-[Open item](item-prop-filtration-product-projection) · level 19
+[Open item](item-lem-bloch-chow-and-negative-range) · level 8
 
-## Subgroup generated by smooth closed points
+## Finite valuative dimension for noetherian and finite type schemes
 
-[Open item](item-def-smooth-point-filtration) · level 20
+[Open item](item-thm-author-14463ef2f4e5-finite-valuative-dimension) · level 8
 
-## Total Chern series for actual and virtual bundles
+## Huber–Kelly representable cdh sheafification input
 
-[Open item](item-def-total-chern-class) · level 20
+[Open item](item-thm-author-60d95bfb692a-huber-kelly-representable-input) · level 8
 
-## Low-stage homotopy equals its image
+## Exact hypercomplete arc descent for finite constructible coefficients
 
-[Open item](item-lem-low-filtration-homotopy) · level 20
+[Open item](item-thm-author-7113c087ecba-arc-input) · level 8
 
-## Generic localization detects the point subgroup
+## Prime-field evaluation and compatibility with the standing theory
 
-[Open item](item-lem-supported-generic-rank-kernel) · level 20
-
-## Third-stage graded isomorphism
-
-[Open item](item-lem-third-graded-isomorphism) · level 20
+[Open item](item-lem-author-0bac6b264f4a-motivic-dim-general-interface) · level 9

@@ -2,7 +2,7 @@
 title: Perfect complexes on schemes and their support
 status: published
 research_item: def-scheme-perfect-complexes
-dependency_level: 4
+dependency_level: 6
 ---
 
 PDF p. 16: Perfect complexes with support
@@ -16,6 +16,24 @@ PDF p. 16: Perfect complexes with support
 - [lem-author-4f716d60801a-lifted-affine-equivalence](item-lem-author-4f716d60801a-lifted-affine-equivalence)
 - [math:def-perfect-complex-over-a-ring](https://alphabetamath.cc/item/def-perfect-complex-over-a-ring)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
+- [math:def-scheme](https://alphabetamath.cc/item/def-scheme)
+- [math:def-associated-sheaf-module-affine-scheme](https://alphabetamath.cc/item/def-associated-sheaf-module-affine-scheme)
+- [math:def-grothendieck-universe-closure-convention](https://alphabetamath.cc/item/def-grothendieck-universe-closure-convention)
+- [math:def-module-on-ringed-space](https://alphabetamath.cc/item/def-module-on-ringed-space)
+- [math:def-cochain-complex-in-an-abelian-category](https://alphabetamath.cc/item/def-cochain-complex-in-an-abelian-category)
+- [math:def-stalk-of-presheaf](https://alphabetamath.cc/item/def-stalk-of-presheaf)
+- [math:def-restriction-sheaf-open-subspace](https://alphabetamath.cc/item/def-restriction-sheaf-open-subspace)
+- [math:def-open-immersion-schemes](https://alphabetamath.cc/item/def-open-immersion-schemes)
+- [math:def-quasi-coherent-module-scheme](https://alphabetamath.cc/item/def-quasi-coherent-module-scheme)
+- [math:def-commutative-ring](https://alphabetamath.cc/item/def-commutative-ring)
+- [math:def-left-and-right-modules](https://alphabetamath.cc/item/def-left-and-right-modules)
+- [math:def-projective-module](https://alphabetamath.cc/item/def-projective-module)
+- [math:def-generated-cyclic-finitely-generated-and-free-modules](https://alphabetamath.cc/item/def-generated-cyclic-finitely-generated-and-free-modules)
+- [math:def-affine-scheme](https://alphabetamath.cc/item/def-affine-scheme)
+- [math:def-affine-scheme-spectrum](https://alphabetamath.cc/item/def-affine-scheme-spectrum)
+- [math:thm-structure-sheaf-affine-scheme](https://alphabetamath.cc/item/thm-structure-sheaf-affine-scheme)
+- [math:cor-spectrum-with-structure-sheaf-locally-ringed](https://alphabetamath.cc/item/cor-spectrum-with-structure-sheaf-locally-ringed)
+
 
 ## Definition
 Assume the Axiom of Choice and fix suitable universes. Let $X$ be any scheme. Let $\mathcal D(X)$ be the stable derived infinity-category obtained from cochain complexes of Zariski $\mathcal O_X$-modules by inverting quasi-isomorphisms. A quasi-isomorphism induces an isomorphism on every cohomology sheaf. Its homotopy category is the ordinary unbounded derived category $D(\mathcal O_X)$.

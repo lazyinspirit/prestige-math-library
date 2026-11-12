@@ -6,9 +6,11 @@ status: published
 domain: mathematics
 deps:
   - def-scheme-perfect-complexes
+  - math:def-quasi-compact-and-quasi-separated-scheme
   - math:def-axiom-of-choice
 dependency_roles:
   def-scheme-perfect-complexes: mathematical-premise
+  math:def-quasi-compact-and-quasi-separated-scheme: mathematical-premise
   math:def-axiom-of-choice: mathematical-premise
 provenance:
   statement: literature-derived
@@ -33,7 +35,7 @@ sources:
         and Koszul prerequisites are imported, not reconstructed. This is used
         only for object smallness, never to infer a coherent enhancement or
         monoidal equivalence.
-dependency_level: 5
+dependency_level: 7
 ---
 
 ## Statement

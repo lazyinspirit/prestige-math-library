@@ -15,6 +15,8 @@ deps:
   - lem-k-one-projection-determinant
   - lem-filtered-stage-exact-sequence
   - math:def-axiom-of-choice
+  - math:def-integral-closure-and-integrally-closed-domain
+  - lem-author-74a9c17e63f1-index-calculation
 dependency_roles:
   def-article-conventions: mathematical-premise
   def-motivic-filtration: mathematical-premise
@@ -26,6 +28,8 @@ dependency_roles:
   lem-k-one-projection-determinant: mathematical-premise
   lem-filtered-stage-exact-sequence: mathematical-premise
   math:def-axiom-of-choice: mathematical-premise
+  math:def-integral-closure-and-integrally-closed-domain: mathematical-premise
+  lem-author-74a9c17e63f1-index-calculation: mathematical-premise
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -35,8 +39,54 @@ sources:
     - title: Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and
         threefolds
       url: https://arxiv.org/abs/2610.22679v1
-      locator: PDF pp. 8–9, Lemma 4.1 and its proof
-dependency_level: 20
+      locator: PDF p. 3, Notation and conventions and filtration image definition; pp.
+        8–9, Section 4 opening and Lemma 4.1 with its proof
+      statement: For a normal scheme X under the standing article conventions, the
+        canonical homomorphism from the jth homotopy group of motivic filtration
+        stage i to its image in K_j(X) is an isomorphism for every 0 <= i <= 2
+        and j >= 0. The Section 4 opening defines the target through the image
+        of the stage-to-K map.
+      hypotheses: X is normal and is a quasi-compact quasi-separated scheme over the
+        standing algebraically closed field k. The article separately assumes
+        finite type for schemes called affine, rather than for all qcqs schemes.
+        The explicit Axiom of Choice and compatible site/universe bounds in this
+        generated item are retained local-supplier assumptions, not additional
+        assumptions stated in Lemma 4.1.
+      reading_limits: "Historical reading record retained from the incoming generated
+        item: For this repair, read the frozen article extraction and inspected
+        the supplied PDF page images at pp. 3, 8 and 9, including the Lemma 4.1
+        statement, exact row and two comparison diagrams. These passages support
+        attribution of the stated low-stage claim and its scheme/index
+        conventions. The generated proof below is a local exact-sequence
+        argument using the declared graded, low-weight and
+        determinant-projection suppliers; it is not attributed to the article
+        and does not reuse its smooth-locus restriction argument. No fresh
+        reading or reconstruction of Elmanto–Morrow, the determinant
+        construction, or the deep inputs behind those suppliers is claimed. This
+        maintenance pass read the current consumer and declared supplier
+        interfaces; it claims no fresh primary-source or page-image reading and
+        no independent acceptance."
+dependency_level: 22
+formulation_deps:
+  - def-article-conventions
+  - def-motivic-filtration
+  - def-motivic-cohomology
+  - def-derived-sections-on-sites
+  - math:def-axiom-of-choice
+  - math:def-integral-closure-and-integrally-closed-domain
+argument_deps:
+  - def-article-conventions
+  - def-motivic-filtration
+  - def-motivic-cohomology
+  - def-derived-sections-on-sites
+  - prop-motivic-graded-spectral-sequence
+  - prop-motivic-weight-zero
+  - prop-motivic-weight-one
+  - lem-k-one-projection-determinant
+  - lem-filtered-stage-exact-sequence
+  - math:def-axiom-of-choice
+  - math:def-integral-closure-and-integrally-closed-domain
+  - lem-author-74a9c17e63f1-index-calculation
 ---
 
 ## Statement
@@ -52,9 +102,9 @@ Normal means that every local ring of $X$ is an integrally closed domain; quasi-
 
 **Goal:** Prove that the canonical stage-to-image map is an isomorphism.
 
-[F1] The specified filtration has $F^0_{\mathrm{mot}}K(X)=K(X)$, compatible transition maps, and image groups defined as in the statement. The given scheme is qcqs, so the stated suppliers apply ([[def-article-conventions]], [[def-motivic-filtration]]).
+[F1] The specified filtration has $F^0_{\mathrm{mot}}K(X)=K(X)$, compatible transition maps, and image groups defined as in the statement. The given scheme is qcqs, so the stated suppliers apply ([[def-article-conventions]], [[def-motivic-filtration]]). The integrally closed domain condition in the inline normality convention has the meaning of [[math:def-integral-closure-and-integrally-closed-domain]].
 
-[F2] For each $r\geq0$, the graded triangle is $F^{r+1}_{\mathrm{mot}}K(X)\to F^r_{\mathrm{mot}}K(X)\to\mathbb Z(r)_{\mathrm{mot}}(X)[2r]$. Its graded homotopy group in degree $n$ is $H^{2r-n,r}_{\mathrm{mot}}(X,\mathbb Z)$, where motivic cohomology is the cohomology of the specified motivic complex. The triangle gives the corresponding long exact homotopy sequence ([[prop-motivic-graded-spectral-sequence]], [[def-motivic-cohomology]], [[lem-filtered-stage-exact-sequence]]).
+[F2] For each $r\geq0$, the graded triangle is $F^{r+1}_{\mathrm{mot}}K(X)\to F^r_{\mathrm{mot}}K(X)\to\mathbb Z(r)_{\mathrm{mot}}(X)[2r]$ ([[prop-motivic-graded-spectral-sequence]]). Its last term is identified with the actual graded spectrum $\operatorname{gr}^rF_{\mathrm{mot}}K(X)$ by the source graded comparison. The Statement of [[lem-author-74a9c17e63f1-index-calculation]], with $a=r-n$ and $b=-r$, identifies its degree-$n$ homotopy group with $H^{2r-n,r}_{\mathrm{mot}}(X,\mathbb Z)$: indeed $-a-b=n$ and $a-b=2r-n$. This is the actual graded comparison of that supplier, for the same motivic tower and complex; its Choice and compatible size hypotheses are assumed here. Motivic cohomology is the cohomology of the specified motivic complex ([[def-motivic-cohomology]]). Applying [[lem-filtered-stage-exact-sequence]] to this tower gives the corresponding long exact homotopy sequence.
 
 [F3] Weight-zero motivic cohomology vanishes in negative cohomological degrees. Under Choice and the stated site-size bounds, weight-one motivic cohomology vanishes in degrees at most zero and $H^{1,1}_{\mathrm{mot}}(X,\mathbb Z)$ is naturally the group of global units ([[prop-motivic-weight-zero]], [[prop-motivic-weight-one]], [[def-derived-sections-on-sites]]).
 
@@ -75,7 +125,9 @@ Normal means that every local ring of $X$ is an integrally closed domain; quasi-
 4.1 Steps 1.1 through 3.2 establish injectivity of each relevant stage-to-$K$ map. Its corestriction is surjective onto the image by definition, hence is an isomorphism for all stated $i$ and $j$. [F1, step 1.1, step 2.1, step 3.1, step 3.2] ∎
 
 ## Reading limits
-The article's Lemma 4.1 and its proof on PDF pages 8–9 were read. The determinant identification and the motivic graded and low-weight results are used through the completed suppliers named above; their underlying constructions are not reconstructed here.
+Historical source-reading records in the retained reference describe earlier passes; they are not fresh primary-source or page-image reading in this repair.
+
+This repair read the current assigned body, all twelve resulting direct supplier bodies, and the sole direct consumer, second-Chern surjectivity in dimensions two and three. The integral-closure definition supplies the normality terminology. The actual graded-index supplier's Statement supplies the graded homotopy calculation by the explicit substitution in [F2]. The separate shift-index lemma and actual graded-comparison lemma were also read to check the realization distinction; they are not additional direct premises of this item. The low-weight and determinant results are used through their stated interfaces, with Choice and compatible site/universe bounds retained. No new external result is imported, and no underlying motivic or determinant construction is reconstructed or independently accepted.
 
 ## Qcqs maintenance
 The original normal qcqs scope of Lemma 4.1 is retained for every stated nonnegative homotopy degree, using the current qcqs determinant-projection lemma in [F4]. No dimension, Noetherian or finite-type hypothesis is used in this argument. The sole direct consumer, second-Chern surjectivity in dimensions two and three, was inspected: its finite-type application and Choice/size premises satisfy the extended contract, so it requires no edit. No new external-source reading or independent acceptance is asserted.

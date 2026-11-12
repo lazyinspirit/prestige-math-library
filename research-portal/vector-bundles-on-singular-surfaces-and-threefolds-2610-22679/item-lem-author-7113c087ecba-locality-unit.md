@@ -2,34 +2,45 @@
 title: The actual cdh-localization unit is an equivalence
 status: published
 research_item: lem-author-7113c087ecba-locality-unit
-dependency_level: 13
+dependency_level: 12
 ---
 
 PDF p. 6: Proposition 2.6 proof
 
 ## Prerequisites
 
+- [math:def-commutative-ring](https://alphabetamath.cc/item/def-commutative-ring)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
 - [lem-author-7113c087ecba-general-localization](item-lem-author-7113c087ecba-general-localization)
 - [lem-author-7113c087ecba-cdh-hyperdescent](item-lem-author-7113c087ecba-cdh-hyperdescent)
 - [def-derived-sections-on-sites](item-def-derived-sections-on-sites)
+- [lem-adjudicate-430d6b729af8-etale-presheaf-model](item-lem-adjudicate-430d6b729af8-etale-presheaf-model)
+- [lem-author-dcdf962edbda-qcqs-site](item-lem-author-dcdf962edbda-qcqs-site)
 
 
 ## Statement
-Assume the Axiom of Choice and the fixed universe and site-size bounds of the derived-sections and general-localization suppliers. Write $L^{h,F}_{\mathrm{cdh}}=Ri\,a$ for the hypercomplete reflector denoted $L^F_{\mathrm{cdh}}$ by the general-localization supplier, and $L^{o,F}_{\mathrm{cdh}}$ for ordinary source sheafification. For a finite commutative ring $\Lambda$, the canonical unit $E_\Lambda\to L^{h,F}_{\mathrm{cdh}}E_\Lambda$ is an equivalence on the exact qcqs prime-field cdh site. Its evaluation gives natural equivalences
+Assume the Axiom of Choice and the fixed universe and site-size bounds of the derived-sections and general-localization suppliers, with the auxiliary big étale site contained in the enlarged bounds of the compatible-model supplier. Let $F=\mathbb Q$ or $F=\mathbb F_p$, with $p$ prime, and use the fixed qcqs prime-field cdh skeleton $\mathcal C_F$. Write $L^{h,F}_{\mathrm{cdh}}=Ri\,a$ for the hypercomplete reflector denoted $L^F_{\mathrm{cdh}}$ by the general-localization supplier, and $L^{o,F}_{\mathrm{cdh}}$ for ordinary source sheafification of $D(\mathbb Z)$-valued presheaves. For a finite commutative unital ring $\Lambda$ (with finite underlying set), represent the underlying abelian étale derived-section functor $E_\Lambda$ by the compatible-model supplier's strict presheaf complex $C_\Lambda(X)=I^\bullet(X)$, with its specified coherent identification with actual derived pullbacks. In $E_\Lambda\to L^{h,F}_{\mathrm{cdh}}E_\Lambda$, localization of $E_\Lambda$ means application to this representative, transported along that identification. This canonical unit is an equivalence on the exact qcqs prime-field cdh site. Its evaluation gives natural equivalences
 $$R\Gamma_{\mathrm{et}}(X,\Lambda)\simeq(L^{h,F}_{\mathrm{cdh}}E_\Lambda)(X).$$
-This is derived locality with respect to all sheafified-cohomology equivalences, and in particular implies ordinary locality. Thus the ordinary source unit $E_\Lambda\to L^{o,F}_{\mathrm{cdh}}E_\Lambda$ is also an equivalence.
+The displayed equivalence is in the underlying abelian derived category and uses the supplied representative convention for $X$ outside the skeleton. This is derived locality with respect to all sheafified-cohomology equivalences, and in particular implies ordinary locality. Thus the ordinary source unit $E_\Lambda\to L^{o,F}_{\mathrm{cdh}}E_\Lambda$ is also an equivalence.
 
 ## Facts & Assumptions
+**Given:** The hypotheses and compatible representative specified in the statement.
 
-[A1] Choice and the stated bounds are inherited from the K-injective localization and derived-evaluation constructions. [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
-**Given:** The hypotheses in the statement.
+**Goal:** Prove both unit equivalences and their natural derived-section evaluation.
 
-**Goal:** Establish the stated exact map or descent conclusion.
+[A1] Choice and the enlarged bounds are used for the compatible model, the K-injective localization and derived evaluation. [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
 
-[F1] [lem-author-7113c087ecba-general-localization](item-lem-author-7113c087ecba-general-localization) and [lem-author-7113c087ecba-cdh-hyperdescent](item-lem-author-7113c087ecba-cdh-hyperdescent).
+[F0] Coefficient rings use [math:def-commutative-ring](https://alphabetamath.cc/item/def-commutative-ring); finiteness refers to their underlying sets.
+
+[F1] The strict presheaf complex and its equivalence with the coherent actual derived-section functor, including all pullbacks and hypercover diagrams, are supplied by [lem-adjudicate-430d6b729af8-etale-presheaf-model](item-lem-adjudicate-430d6b729af8-etale-presheaf-model).
+
+[F2] On this exact small site, hypercover-descent presheaf complexes are local for $Ri\,a$, hence have invertible unit; ordinary sheafification has the stated covering-family/Čech meaning. [lem-author-7113c087ecba-general-localization](item-lem-author-7113c087ecba-general-localization)
+
+[F3] The actual finite-coefficient functor satisfies every cdh hypercover comparison on the entire qcqs prime-field site. [lem-author-7113c087ecba-cdh-hyperdescent](item-lem-author-7113c087ecba-cdh-hyperdescent)
+
+[F4] Derived evaluation is that of [def-derived-sections-on-sites](item-def-derived-sections-on-sites), and the exact site, its size bounds and its functorial representative convention are fixed by [lem-author-dcdf962edbda-qcqs-site](item-lem-author-dcdf962edbda-qcqs-site).
 
 ## Proof
-1.1 The preceding hyperdescent lemma verifies every hypercover required by the linear criterion in the general-localization lemma. That criterion identifies $E_\Lambda$ as a local object of $Ri\,a$. An object in the essential image of a reflective localization has invertible unit, by full faithfulness of its right adjoint. Therefore the hypercomplete unit is an equivalence. Hypercover descent includes covering-family/Čech descent, so $E_\Lambda$ is also an ordinary sheaf and its ordinary localization unit is an equivalence by the same reflective universal property. [F1, A1]
+1.1 Fix the coefficient ring of [F0], and use [F1] to choose $C_\Lambda$ under [A1]. The coherent diagram of $C_\Lambda$ is equivalent to the underlying abelian diagram of the actual $D(\Lambda)$-valued $E_\Lambda$ of [F3]. The scalar-restriction comparison in [F3] preserves family products and cosimplicial limits, so its hypercover comparisons remain equivalences in $D(\mathbb Z)$. Thus [F3] transfers hyperdescent to this presheaf-complex model, including the augmentation maps. Products give the values on formal families in the localization criterion. Apply [F2] to $C_\Lambda$ itself, rather than to a collection of derived-category values: its unit $C_\Lambda\to Ri\,aC_\Lambda$ is an objectwise quasi-isomorphism. Transport this natural unit along the coherent equivalence of [F1] to obtain the asserted canonical hypercomplete unit equivalence for $E_\Lambda$. The localization is unchanged on objectwise quasi-isomorphic representatives by its derived-functor definition in [F2]. Hypercover descent includes covering-family/Čech descent, so the same coherent presheaf is an ordinary sheaf; its ordinary sheafification unit is consequently also an equivalence. [A1, F0, F1, F2, F3]
 
-2.1 Evaluate this actual natural unit at $X$ and use the chosen derived-evaluation model. Evaluation preserves equivalences, so the displayed equivalence follows and is compatible with every pullback. In particular it is valid at the article’s affine threefold, without any change to the chosen big site. [F1, step 1.1] ∎
+2.1 Evaluate the unit at $X$ using [F4]. Its source $C_\Lambda(X)$ is identified by [F1] with the actual underlying abelian complex $R\Gamma_{\mathrm{et}}(X,\Lambda)$, and its target is by definition $(L^{h,F}_{\mathrm{cdh}}E_\Lambda)(X)$. The objectwise equivalence from step 1.1 therefore gives the displayed equivalence. Both the unit and the identification in [F1] are natural coherent maps, so this equivalence respects every pullback. The representative convention of [F4] gives the same assertion for all qcqs $F$-schemes in the stated bounds, in particular the article's affine threefold, on the original qcqs cdh site. [F1, F4, step 1.1] ∎

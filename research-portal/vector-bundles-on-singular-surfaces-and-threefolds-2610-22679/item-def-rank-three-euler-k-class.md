@@ -2,7 +2,30 @@
 title: Rank-three alternating exterior class
 status: published
 research_item: def-rank-three-euler-k-class
-dependency_level: 12
+dependency_level: 14
+sources:
+  references:
+    - title: Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and
+        threefolds
+      url: https://arxiv.org/abs/2610.22679v1
+      locator: PDF p. 17, proof of Corollary 6.10
+      statement: The proof introduces beta(E) as the structure-sheaf class minus the
+        bundle class plus the second exterior-power class minus the determinant
+        class in K_0(X).
+      hypotheses: In the cited proof X is an affine normal threefold over an
+        algebraically closed field and E is a rank-three vector bundle, chosen
+        there with zero third Chern class. The present definition of the
+        expression requires neither normality nor affineness nor Chern-class
+        vanishing; its qcqs extension is justified locally by the declared
+        bundle-class and exterior-power suppliers under their Choice and
+        universe assumptions.
+      reading_limits: Read the frozen original PDF p. 17, Corollary 6.10 and its
+        proof, and checked the corresponding extracted text. The citation
+        supports the four-term expression in that context. It does not supply
+        the qcqs generalization or the lambda notation. The two justification
+        steps are locally authored from the declared supplier interfaces; no
+        reconstruction of the article's Chern or splitting arguments is claimed
+        here.
 ---
 
 PDF p. 17: Proof of Corollary 6.10, definition of beta
@@ -12,6 +35,7 @@ PDF p. 17: Proof of Corollary 6.10, definition of beta
 - [def-vector-bundle-classes](item-def-vector-bundle-classes)
 - [def-exterior-determinant-bundles](item-def-exterior-determinant-bundles)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
+- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 17, proof of Corollary 6.10 `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Definition

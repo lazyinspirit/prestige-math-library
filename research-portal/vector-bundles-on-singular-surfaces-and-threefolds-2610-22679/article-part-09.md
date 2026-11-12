@@ -4,119 +4,119 @@ title: Article items · 09 — A rank-two family avoids each prescribed
 description: Presents 28 items from the article and its immediate prerequisites,
   covering dependency levels 14–15.
 status: published
-dependency_level: 8
+dependency_level: 3
 research_article_page: true
 item_count: 28
 ---
 
-## A rank-two family avoids each prescribed codimension-two locus
+## Chern coefficients of the projective relation
 
-[Open item](item-lem-author-27d786ff4d27-fixed-locus-avoidance) · level 14
+[Open item](item-lem-chern-relation-uniqueness) · level 1
 
-## Determinants detect vanishing of the rank-one exterior-dual class
+## Determinants and exact sequences
 
-[Open item](item-lem-author-394a5b71198d-line-determinant) · level 14
+[Open item](item-lem-determinants-of-short-exact-sequences) · level 1
 
-## A split trivial line annihilates the exterior and top Chow classes
+## Finite projective complements
 
-[Open item](item-lem-author-394a5b71198d-split-vanishing) · level 14
+[Open item](item-lem-finite-projective-complements) · level 1
 
-## A smooth point has the exact finite-type excision pair
+## Flag towers with line-bundle quotients
 
-[Open item](item-lem-author-59b1a831fe59-neighborhood) · level 14
+[Open item](item-lem-flag-tower-line-quotients) · level 1
 
-## Cohomological indexing of the actual graded groups
+## Normal noetherian schemes reduce to integral components
 
-[Open item](item-lem-author-74a9c17e63f1-index-calculation) · level 14
+[Open item](item-lem-normal-scheme-component-reduction) · level 1
 
-## Excision and the exact fixed-support cycle fiber
+## Extending a Whitney class to K zero
 
-[Open item](item-lem-author-8a080e7d9445-support-fiber) · level 14
+[Open item](item-lem-virtual-chern-extension-interface) · level 1
 
-## Surface existence from rank-three existence on the cylinder
+## Seminormality and seminormalization
 
-[Open item](item-lem-author-f08c343a07fc-local-surface-existence-reduction) · level 14
+[Open item](item-def-seminormal-scheme-interface) · level 2
 
-## Surface uniqueness from the cylinder and cancellation
+## Picard group of an affine curve through its boundary
 
-[Open item](item-lem-author-f08c343a07fc-local-surface-uniqueness-reduction) · level 14
+[Open item](item-lem-affine-curve-picard-boundary) · level 2
 
-## Integer cdh sections on seminormal schemes
+## Iterating a conditional free-summand criterion
 
-[Open item](item-lem-cdh-integer-sections) · level 14
+[Open item](item-lem-author-3af31ead36fb-iteration) · level 2
 
-## Étale derived cdh locality on the actual qcqs site
+## Finite clopen common rank strata
 
-[Open item](item-prop-etale-cdh-descent) · level 14
+[Open item](item-lem-author-ab0a6fc202cb-finite-common-rank-strata) · level 2
 
-## Prime-to-characteristic étale comparison
+## Matrix completion detects the actual nontrivial bundle
 
-[Open item](item-prop-motivic-etale-comparison) · level 14
+[Open item](item-lem-author-b02e51f9da03-matrix-completion) · level 2
 
-## Motivic weight zero on all qcqs schemes
+## Divisibility of an image with torsion kernel
 
-[Open item](item-prop-motivic-weight-zero) · level 14
+[Open item](item-lem-author-b87d598e83f3-cycle-image-roots) · level 2
 
-## Perfect K theory localization and open excision
+## Functions extend across codimension two
 
-[Open item](item-prop-perfect-k-localization-input) · level 14
+[Open item](item-lem-codimension-two-extension) · level 2
 
-## Gysin purity for a smooth closed pair
+## Exterior-square line factors on a flag space
 
-[Open item](item-prop-smooth-pair-gysin-input) · level 14
+[Open item](item-lem-exterior-square-root-formula) · level 2
 
-## Dévissage of K zero with regular ambient support
+## Equality in affine K zero and stable isomorphism
 
-[Open item](item-prop-supported-k-zero-devissage) · level 14
+[Open item](item-lem-k-zero-stable-equivalence) · level 2
 
-## Murthy top Chow cycle comparison with its actual exterior-dual map
+## Smooth density and normal codimension over a perfect field
 
-[Open item](item-thm-author-394a5b71198d-murthy-chow-to-k-input) · level 14
+[Open item](item-lem-perfect-base-smooth-density) · level 2
 
-## Critical-rank cancellation used in the article
+## Finite-dimensional families of generated bundle functionals
 
-[Open item](item-thm-critical-rank-cancellation) · level 14
+[Open item](item-lem-regular-section-parameter-family) · level 2
 
-## Motivic splitting principle
+## Formal Chern arithmetic through degree three
 
-[Open item](item-thm-motivic-splitting-principle) · level 14
+[Open item](item-lem-third-order-chern-inversion) · level 2
 
-## Degreewise boundedness and finite collections of eventual vanishings
+## A rank-two bundle with a trivial quotient and determinant
 
-[Open item](item-lem-author-0cc80c1b5792-finite-degrees) · level 15
+[Open item](item-lem-trivial-determinant-rank-two-kernel) · level 2
 
-## Low-degree consequences of a weight-one comparison
+## Stable spectra and exact triangles
 
-[Open item](item-lem-author-13e6fe931c45-weight-one-identifications) · level 15
+[Open item](item-def-stable-spectra-interface) · level 3
 
-## A coherent comparison of the particular open restriction
+## Rational cofiber implies finite-coefficient equivalence
 
-[Open item](item-lem-author-149a02132c3b-restriction-diagram) · level 15
+[Open item](item-lem-author-4b6f215bcf3b-rational-cofiber-comparison) · level 3
 
-## The supported second stage has the actual augmentation inverse
+## Cohomology descends to the derived category
 
-[Open item](item-lem-author-16f30f6b95cb-supported-second-stage-inverse) · level 15
+[Open item](item-lem-author-b747b28c359f-derived-cohomology) · level 3
 
-## Swan chartwise integrality glues on the actual quasi-affine open
+## Chern data survive addition of trivial bundles
 
-[Open item](item-lem-author-27d786ff4d27-chartwise-integrality) · level 15
+[Open item](item-lem-author-f08c343a07fc-local-stabilized-chern) · level 3
 
-## The actual first Chern map is the Picard isomorphism on an affine curve
+## The scheme of nontransverse zero jets has small dimension
 
-[Open item](item-lem-author-394a5b71198d-curve-picard) · level 15
+[Open item](item-lem-author-fc2380accb47-nontransverse-incidence) · level 3
 
-## An actual non-A¹ P¹-spectrum for the supplied EM complexes
+## Line bundles are detected off codimension two
 
-[Open item](item-lem-author-4f94f7982b0d-em-p1-model) · level 15
+[Open item](item-lem-codimension-two-picard-restriction) · level 3
 
-## Slice localization and the actual root-of-unity coefficient map
+## Divisibility of the Picard group of an affine curve
 
-[Open item](item-lem-author-58e57d689702-coefficient-trivialization) · level 15
+[Open item](item-prop-affine-curve-picard-divisible) · level 3
 
-## The actual smooth restriction arrow gives the point-supported cycle fiber
+## Mohan Kumar existence of a nontrivial stably trivial bundle on a complex affine fourfold
 
-[Open item](item-lem-author-59b1a831fe59-actual-support) · level 15
+[Open item](item-thm-author-b02e51f9da03-mohan-kumar-existence-input) · level 3
 
-## The product on graded motivic groups is the source cup product
+## Serre splitting above the dimension
 
-[Open item](item-lem-author-74a9c17e63f1-graded-products) · level 15
+[Open item](item-thm-serre-affine-splitting) · level 3

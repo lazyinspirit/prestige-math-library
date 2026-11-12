@@ -6,8 +6,26 @@ status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice
+  - math:def-abelian-category
+  - math:def-subcategory-and-full-subcategory
+  - math:def-exact-functor-between-abelian-categories
+  - math:def-increasing-and-decreasing-filtration-of-an-object
+  - math:def-exact-sequence-and-short-exact-sequence-in-an-abelian-category
+  - math:def-subobject-and-quotient-object
+  - math:def-small-locally-small-and-large-category
+  - math:def-equivalence-and-adjoint-equivalence-of-categories
+  - math:def-grothendieck-group-of-an-essentially-small-abelian-category
 dependency_roles:
   math:def-axiom-of-choice: mathematical-premise
+  math:def-abelian-category: mathematical-premise
+  math:def-subcategory-and-full-subcategory: mathematical-premise
+  math:def-exact-functor-between-abelian-categories: mathematical-premise
+  math:def-increasing-and-decreasing-filtration-of-an-object: mathematical-premise
+  math:def-exact-sequence-and-short-exact-sequence-in-an-abelian-category: mathematical-premise
+  math:def-subobject-and-quotient-object: mathematical-premise
+  math:def-small-locally-small-and-large-category: mathematical-premise
+  math:def-equivalence-and-adjoint-equivalence-of-categories: mathematical-premise
+  math:def-grothendieck-group-of-an-essentially-small-abelian-category: mathematical-premise
 provenance:
   statement: literature-derived
   proof: literature-derived
@@ -18,39 +36,68 @@ sources:
     - title: "Charles A. Weibel, The K-book: An Introduction to Algebraic K-theory,
         Chapter II: The Grothendieck Group K_0"
       url: https://sites.math.rutgers.edu/~weibel/Kbook/Kbook.II.pdf
-      locator: §II.6, Dévissage Theorem 6.3, printed and PDF p. 50; proof on the same
-        page
-      statement: If B⊂A is an exact abelian full subcategory of small abelian
-        categories, closed under subobjects and quotients in A, and every object
-        of A has a finite filtration with quotients in B, inclusion induces
-        K_0(B)≅K_0(A). The inverse sends an object to the sum of the classes of
-        any such filtration quotients.
-      hypotheses: B need not be extension-closed in A; exact inclusion,
-        subobject/quotient closure and finite filtration are the actual
-        hypotheses. Use equivalent small presentations of the essentially small
-        coherent categories.
-      reading_limits: Read Theorem II.6.3 and its complete proof on printed and PDF p.
-        50 of the online Chapter II PDF at the cited URL, consulted 2026-11-10.
-        The proof establishes filtration independence using equivalent
-        refinements and additivity by concatenated filtrations. Its invoked
-        common-refinement result (Exercise 6.2) was not independently
-        reconstructed. This item imports the categorical theorem; it contains no
-        geometric application or ideal-power filtration construction. No
-        higher-K devissage theorem is imported.
+      locator: §II.6, Dévissage Theorem 6.3 and its complete proof, printed/PDF p. 50;
+        Definition 6.1.1 and Universal Property 6.1.2, p. 46; size convention
+        6.1.3 and exact abelian subcategories in 6.1.5, p. 47
+      statement: For a full exact abelian inclusion B⊂A of small abelian categories,
+        closure under ambient subobjects and quotients and finite filtrations
+        A=A_0⊇A_1⊇⋯⊇A_n=0 with quotients in B imply that inclusion induces
+        K_0(B)≅K_0(A). Its inverse is the filtration-quotient sum, independent
+        of filtration and additive on short exact sequences. The source defines
+        these groups for skeletally small categories using equivalent small
+        categories and identifies the groups under equivalences.
+      hypotheses: The source requires exact inclusion of a full abelian subcategory,
+        closure under ambient subobjects and quotients, and finite filtrations
+        from the object to zero with quotients in the subcategory. It does not
+        require extension-closure. For the stated essentially small version use
+        equivalent small presentations, as in §6.1.3; AC is explicitly retained
+        for the choices made in this item.
+      reading_limits: "Read the frozen cached Chapter II PDF at
+        tmp/a1-local-plus/Kbook.II.pdf in this article workflow context on
+        2026-11-12: Definition 6.1.1 and Universal Property 6.1.2 on printed/PDF
+        p. 46, size convention 6.1.3 and exact inclusion discussion 6.1.5 on p.
+        47, and Theorem 6.3 with its complete proof on p. 50. The live chapter
+        URL could not be fetched in this turn; no live-version comparison is
+        claimed. The theorem proof uses common refinements (Exercise 6.2) for
+        independence and concatenated filtrations for additivity. Exercise 6.2
+        was not independently reconstructed. This imports the categorical
+        degree-zero result only; no geometric application, ideal-power
+        construction or higher-K dévissage theorem is imported."
 dependency_level: 0
 ---
 
 ## Statement
-Assume the Axiom of Choice. Let $\mathcal B\subseteq\mathcal A$ be essentially small abelian categories, with $\mathcal B$ full, inclusion exact, and $\mathcal B$ closed under subobjects and quotients taken in $\mathcal A$. Assume every object of $\mathcal A$ has a finite filtration whose quotients belong to $\mathcal B$. The inclusion induces an isomorphism of Grothendieck groups
+Assume the Axiom of Choice. Let $\mathcal B\subseteq\mathcal A$ be essentially small abelian categories, with $\mathcal B$ full, inclusion exact, and $\mathcal B$ closed under subobjects and quotients taken in $\mathcal A$. Here essentially small means equivalent to a small category, whose objects and morphisms form sets. Assume every object $M$ of $\mathcal A$ has a finite decreasing filtration $M=M_0\supseteq M_1\supseteq\cdots\supseteq M_n=0$ by subobjects, with all quotients $M_r/M_{r+1}$ in $\mathcal B$. The inclusion induces an isomorphism of Grothendieck groups
 $$G_0(\mathcal B)\xrightarrow{\sim}G_0(\mathcal A).$$
-Here $G_0(\mathcal A)$ is generated by isomorphism classes of objects with $[M]=[M']+[M'']$ for every short exact sequence $0\to M'\to M\to M''\to0$. The inverse sends $[M]$ to the sum of the classes of the quotients of any permitted finite filtration. This sum is independent of filtration and is additive in short exact sequences. Extension-closure of $\mathcal B$ inside $\mathcal A$ is not a hypothesis.
+Here $G_0(\mathcal A)$ is the abelian group generated by isomorphism classes of objects with $[M]=[M']+[M'']$ for every short exact sequence $0\to M'\to M\to M''\to0$, using an equivalent small presentation. The inclusion map sends $[B]$ to the class of the same object in $\mathcal A$. Its inverse sends $[M]$ to $\sum_{r=0}^{n-1}[M_r/M_{r+1}]$ for any permitted finite filtration (the empty sum is zero). This sum is independent of filtration and is additive in short exact sequences. Extension-closure of $\mathcal B$ inside $\mathcal A$ is not a hypothesis.
+
+## Statement references
+[[math:def-axiom-of-choice]]
+
+[[math:def-abelian-category]]
+
+[[math:def-subcategory-and-full-subcategory]]
+
+[[math:def-exact-functor-between-abelian-categories]]
+
+[[math:def-increasing-and-decreasing-filtration-of-an-object]]
+
+[[math:def-exact-sequence-and-short-exact-sequence-in-an-abelian-category]]
+
+[[math:def-subobject-and-quotient-object]]
+
+[[math:def-small-locally-small-and-large-category]]
+
+[[math:def-equivalence-and-adjoint-equivalence-of-categories]]
+
+[[math:def-grothendieck-group-of-an-essentially-small-abelian-category]]
 
 ## Source contract
 **Given:** AC and the exact abelian inclusion and filtration hypotheses above, after choosing equivalent small presentations.
 
 **Goal:** Import the established degree-zero filtration theorem and its inverse formula.
 
-[F1] Weibel, The K-book, Dévissage Theorem II.6.3 with its proof supplies this exact assertion.
+[F1] Weibel, The K-book, Dévissage Theorem II.6.3 with its proof supplies the filtration isomorphism and inverse formula. Sections II.6.1.1–II.6.1.3 and II.6.1.5 supply the group presentation, passage to equivalent small categories and induced inclusion map, as recorded in the single source reference.
 
 [A1] Choice is assumed in selecting equivalent small presentations and, on a small presentation, a permitted finite filtration for each object as in the source proof ([[math:def-axiom-of-choice]]). Independence of these choices is part of [F1].
 

@@ -11,6 +11,16 @@ deps:
   - prop-first-chern-determinant
   - prop-chern-whitney-identities
   - math:def-axiom-of-choice
+  - def-vector-bundle-classes
+  - def-exterior-determinant-bundles
+  - lem-determinants-of-short-exact-sequences
+  - def-scheme-perfect-complexes
+  - def-nonconnective-k-spectrum-interface
+  - thm-author-3a003d7b5208-nonconnective-k-zero-input
+  - thm-author-4f716d60801a-derived-enhancement-input
+  - def-motivic-chern-classes
+  - math:def-field
+  - math:def-scheme-over-base
 dependency_roles:
   def-motivic-filtration: mathematical-premise
   lem-author-ec13f1db88a5-rank-zero-stage: mathematical-premise
@@ -18,6 +28,16 @@ dependency_roles:
   prop-first-chern-determinant: mathematical-premise
   prop-chern-whitney-identities: mathematical-premise
   math:def-axiom-of-choice: mathematical-premise
+  def-vector-bundle-classes: mathematical-premise
+  def-exterior-determinant-bundles: mathematical-premise
+  lem-determinants-of-short-exact-sequences: mathematical-premise
+  def-scheme-perfect-complexes: mathematical-premise
+  def-nonconnective-k-spectrum-interface: mathematical-premise
+  thm-author-3a003d7b5208-nonconnective-k-zero-input: mathematical-premise
+  thm-author-4f716d60801a-derived-enhancement-input: mathematical-premise
+  def-motivic-chern-classes: mathematical-premise
+  math:def-field: mathematical-premise
+  math:def-scheme-over-base: mathematical-premise
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -29,17 +49,59 @@ sources:
       url: https://arxiv.org/abs/2610.22679v1
       locator: v1, PDF p. 3 conventions; p. 8, Section 3; pp. 11–12, proof of
         Proposition 5.5
-      reading_limits: Read the supplied v1 extracted article text on pp. 3, 8 and
-        10–12, including the reduced-class, rank-two and induction calculations;
-        no visual PDF inspection is claimed. Read the current qcqs
-        rank-zero-stage, global-Picard-projection, split-determinant-fiber,
-        first-Chern-determinant and virtual-Whitney supplier arguments for these
-        applications. The arbitrary-field qcqs scope is a local deduction from
-        these current draft interfaces; the underlying external motivic and
-        determinant constructions were not reconstructed. Retained reduced-class
-        proposals and the low-filtration outside-resolution note were consulted
-        only for the assigned scope and rank concerns; they grant no acceptance.
-dependency_level: 24
+      reading_limits: "Read the frozen extracted article text at PDF pp. 3, 8, 11 and
+        12: conventions and filtration definition, Section 3 and Proposition
+        3.2, Lemma 5.3, and the proof of Proposition 5.5. No fresh visual PDF
+        inspection is claimed. Read the current named supplier interfaces and
+        their local arguments for this application, including the rank-zero and
+        determinant-fiber constructions, exact-sequence determinant, perfect
+        object-class relation, cone model, first-Chern comparison and virtual
+        Whitney formulas. The deep imported motivic, categorical and determinant
+        results are used through their existing local supplier contracts; their
+        underlying literature and proofs were not freshly audited or
+        reconstructed. No original-author defect, independent rejudgment or
+        acceptance is asserted."
+      statement: The article uses the motivic image filtration and total Chern series,
+        reduces equal-rank equal-determinant bundle differences to reduced
+        classes, expands the rank-two product, and gives the
+        direct-sum-by-a-line induction identity in the proof of Proposition 5.5.
+      hypotheses: The article convention is qcqs schemes over an algebraically closed
+        field, with affine schemes of finite type. Proposition 5.5 is stated for
+        normal schemes. The any-field qcqs extension and the explicit
+        bundle-versus-perfect-K-zero distinction here are local applications of
+        the declared supplier interfaces, not assertions attributed to these
+        article passages.
+dependency_level: 27
+formulation_deps:
+  - def-motivic-filtration
+  - lem-author-ec13f1db88a5-rank-zero-stage
+  - lem-author-e216acade157-split-determinant-fiber
+  - prop-chern-whitney-identities
+  - math:def-axiom-of-choice
+  - def-vector-bundle-classes
+  - def-exterior-determinant-bundles
+  - def-scheme-perfect-complexes
+  - def-nonconnective-k-spectrum-interface
+  - def-motivic-chern-classes
+  - math:def-field
+  - math:def-scheme-over-base
+argument_deps:
+  - def-motivic-filtration
+  - lem-author-ec13f1db88a5-rank-zero-stage
+  - lem-author-e216acade157-split-determinant-fiber
+  - prop-first-chern-determinant
+  - prop-chern-whitney-identities
+  - math:def-axiom-of-choice
+  - def-vector-bundle-classes
+  - def-exterior-determinant-bundles
+  - lem-determinants-of-short-exact-sequences
+  - def-scheme-perfect-complexes
+  - def-nonconnective-k-spectrum-interface
+  - thm-author-3a003d7b5208-nonconnective-k-zero-input
+  - thm-author-4f716d60801a-derived-enhancement-input
+  - def-motivic-chern-classes
+  - math:def-field
+  - math:def-scheme-over-base
 ---
 
 ## Statement
@@ -60,26 +122,28 @@ A vector bundle is a finite locally free $\mathcal O_X$-module; a line bundle ha
 
 **Goal:** Prove the second-filtration membership, both ring identities, the equal-rank comparison, and the virtual second-Chern identity.
 
-[F1] The zeroth filtration stage is $K(X)$ and the image groups are the images of the stage augmentations. On qcqs field-schemes, put $S=\Omega^\infty F^1_{\mathrm{mot}}K$ and $T=\Omega^\infty F^2_{\mathrm{mot}}K$. The actual first projection $d:S\to B\mathbb G_m$ is determinant, and $T$ is its homotopy fiber over the trivial line. Thus a first-stage point together with a trivialization of its determinant gives a second-stage lift. [[def-motivic-filtration]] [[lem-author-e216acade157-split-determinant-fiber]]
+[F1] The zeroth filtration stage is $K(X)$ and the image groups are the images of the stage augmentations. On qcqs field-schemes, put $S=\Omega^\infty F^1_{\mathrm{mot}}K$ and $T=\Omega^\infty F^2_{\mathrm{mot}}K$. The actual first projection $d:S\to B\mathbb G_m$ is determinant, and $T$ is its homotopy fiber over the trivial line. Thus a first-stage point together with a trivialization of its determinant gives a second-stage lift. Here $B\mathbb G_m(X)$ is the space of line bundles and their isomorphisms, pointed by $\mathcal O_X$; a path to that basepoint is an isomorphism to the trivial line. [[def-motivic-filtration]] [[lem-author-e216acade157-split-determinant-fiber]]
 
-[F2] For every qcqs scheme over a field, the actual first-stage augmentation identifies $\pi_0F^1_{\mathrm{mot}}K(X)$ injectively with the kernel of Euler rank on perfect $K_0(X)$. Hence every rank-zero perfect class has a unique first-stage class lifting it. [[lem-author-ec13f1db88a5-rank-zero-stage]]
+[F2] For every qcqs scheme over a field, the actual first-stage augmentation identifies $\pi_0F^1_{\mathrm{mot}}K(X)$ injectively with the kernel of Euler rank on perfect $K_0(X)$. Hence every rank-zero perfect class has a unique first-stage class lifting it. Euler rank is a homomorphism and on a rank-$n$ bundle in degree zero takes the value $n$. [[lem-author-ec13f1db88a5-rank-zero-stage]]
 
-[F3] The first perfect Chern class of a virtual bundle is the image of its determinant under the weight-one orientation; this agrees with the first coefficient of its virtual bundle Chern series. [[prop-first-chern-determinant]]
+[F3] The first perfect Chern class of a virtual bundle is the image of its determinant under the weight-one orientation; this agrees with the first coefficient of its virtual bundle Chern series. The perfect determinant is a homomorphism on the specified spectral $K_0$, agrees with exterior determinant on bundles, and sends virtual negatives to inverse lines. [[prop-first-chern-determinant]]
 
-[F4] The total Chern series is multiplicative for direct sums and virtual differences. For a line bundle $M$, $c_t(M)=1+c_1(M)t$, and $c_1(V)=c_1(\det V)$. The latter follows from [F3], while the line and virtual-series formulas are supplied by [[prop-chern-whitney-identities]].
+[F4] The total Chern series is multiplicative for direct sums and virtual differences, and is representative-independent on the vector-bundle Grothendieck group. For a line bundle $M$, $c_t(M)=1+c_1(M)t$, and $c_1(V)=c_1(\det V)$. The latter follows from [F3], while the line and virtual-series formulas are supplied by [[prop-chern-whitney-identities]]. In particular $c_1(\mathcal O_X)=0$: its tensor-square identity and additivity of line $c_1$ give $c_1(\mathcal O_X)=2c_1(\mathcal O_X)$. Thus $c_t(\mathcal O_X)=1$, including for virtual integer multiples.
 
-[F5] The Axiom of Choice is among the hypotheses of the cited filtration and Chern comparisons. [[math:def-axiom-of-choice]]
+[F5] The Axiom of Choice is among the hypotheses of the cited filtration, perfect K-theory, derived-enhancement and Chern comparisons. The fixed compatible site and universe bounds in the Statement are assumed separately from Choice and retained for all these applications. [[math:def-axiom-of-choice]]
+
+[F6] The class of a bundle $E$ is the object class of the perfect complex $E[0]$, concentrated in degree zero; the unit is $[\mathcal O_X]$. The perfect category is stable and idempotent complete with cofibers inherited from its sheaf-derived enhancement. Its essentially small coherent realization has the specified nonconnective spectrum and tensor-induced multiplication. The object-class comparison identifies its spectral $K_0$ with the abelian presentation by perfect objects and cofiber relations; it does not identify it with the bundle Grothendieck group on arbitrary $X$. For a cochain map $f:C\to E$, the complex $\operatorname{Cone}(f)^j=E^j\oplus C^{j+1}$ with differential $(e,c)\mapsto(d_Ee+fc,-d_Cc)$ represents its enhanced cofiber. [[def-vector-bundle-classes]] [[def-scheme-perfect-complexes]] [[def-nonconnective-k-spectrum-interface]] [[thm-author-3a003d7b5208-nonconnective-k-zero-input]] [[thm-author-4f716d60801a-derived-enhancement-input]]
+
+[F7] Exterior determinant has $\det E=\Lambda^{\operatorname{rank}E}E$, $\det0=\mathcal O_X$ and $\det L=L$ for a line, hence $\det\mathcal O_X=\mathcal O_X$. The exact-sequence determinant isomorphism gives $\det(E\oplus F)\cong\det E\otimes\det F$ by the split exact sequence with inclusion $e\mapsto(e,0)$ and projection $(e,f)\mapsto f$. Only the arbitrary-scheme isomorphism of that supplier is used; its separate locally Noetherian Grothendieck-group assertion is not invoked. The direct sum is the module sheaf $U\mapsto E(U)\oplus F(U)$, with componentwise restrictions and concatenated local frames, so it is again a bundle. [[def-exterior-determinant-bundles]] [[lem-determinants-of-short-exact-sequences]]
+
+[F8] A field has the commutative field operations, and a $k$-scheme means a scheme equipped with a structure morphism to $\operatorname{Spec}k$. The qcqs and finite locally free bundle meanings are those stated inline and in the bundle-class interface. [[math:def-field]] [[math:def-scheme-over-base]] [[def-vector-bundle-classes]]
+
+[F9] Actual Chern coefficients have $c_i(E)\in H^{2i,i}_{\mathrm{mot}}(X,\mathbb Z)$ and $c_0=1$. The coefficient ring for the formal series is $R_X=\bigoplus_{i\geq0}H^{2i,i}_{\mathrm{mot}}(X,\mathbb Z)$ with its motivic products; it is commutative in these even cohomological degrees. Products of series use finite coefficient convolution, so the inversions below assert no convergence. [[def-motivic-chern-classes]] [[prop-chern-whitney-identities]]
 
 ## Proof
 
-**Proof technique:** Lift the rank-zero class through the actual determinant fiber, then compute in the bundle Grothendieck ring and its virtual Chern series.
+**Proof technique:** Use the perfect object-class relation and actual determinant fiber, then compute the bundle identities and virtual Chern coefficient.
 
-1.1 The rank of $\delta(V)$ is $n-1-(n-1)=0$, including $n=0$. By [F2], it has a unique first-stage class $s\in\pi_0S(X)$ lifting it. Its virtual determinant is $\det V\otimes(\det V)^{-1}\otimes(\det\mathcal O_X)^{-(n-1)}\cong\mathcal O_X$, since the determinant of a virtual trivial bundle is trivial. By [F1], the image of $s$ under the actual determinant map is therefore the trivial line class. Represent $s$ by a point of $S(X)$ and choose a trivialization of its determinant; this is a path of its image to the basepoint of $B\mathbb G_m(X)$. The point and path define a point of the actual fiber $T(X)$ whose underlying perfect class is $\delta(V)$. By the image-group definition in [F1], this proves $\delta(V)\in F^2_{\mathrm{mot}}K_0(X)$. These suppliers apply throughout the stated qcqs scope under the assumed Choice and size bounds. [given, F1, F2, F5]
+1.1 First justify the direct-sum relation in the specified spectral group. For bundles $E,F$, the cone of $E[0]\to(E\oplus F)[0]$, $e\mapsto(e,0)$, has $E$ in degree $-1$, $E\oplus F$ in degree zero and differential $e\mapsto(e,0)$. Its projection to $F[0]$ is a quasi-isomorphism: its kernel is the two-term identity complex $E\xrightarrow{1}E$, with zero cohomology. By [F6], this is a cofiber sequence in the stable perfect category, and its object-class relation gives $[E\oplus F]=[E]+[F]$ on every stated $X$, without a global bundle presentation for all perfect classes. The tensor-induced multiplication likewise gives $[E][F]=[E\otimes F]$, since bundles are locally free and their derived tensor is their ordinary tensor. Now the rank of $\delta(V)$ is $n-1-(n-1)=0$ by [F2], including $n=0$. It has a unique first-stage class $s\in\pi_0S(X)$ lifting it. By [F3] and [F7], its virtual determinant is $\det V\otimes(\det V)^{-1}\otimes(\det\mathcal O_X)^{-(n-1)}\cong\mathcal O_X$, since $\det(\det V)=\det V$ and the determinant of a virtual trivial bundle is trivial. By [F1], the image of $s$ under the actual determinant map is therefore the trivial line class. Represent $s$ by a point of $S(X)$ and choose an isomorphism of its determinant with $\mathcal O_X$; this is a path of its image to the basepoint of $B\mathbb G_m(X)$. The point and path define a point of the actual fiber $T(X)$ whose underlying perfect class is $\delta(V)$. The image-group definition in [F1] proves $\delta(V)\in F^2_{\mathrm{mot}}K_0(X)$. These suppliers apply throughout the stated any-field qcqs scope with Choice and the fixed compatible size bounds. [given, F1, F2, F3, F5, F6, F7, F8]
 
-1.2 If $V$ and $W$ have the same rank and isomorphic determinants, subtracting their definitions of $\delta$ cancels the determinant and trivial-bundle terms. This gives $\delta(V)-\delta(W)=[V]-[W]$. [given, construct]
-
-1.3 For $V=L_1\oplus L_2$, its determinant is $L_1\otimes L_2$. Distributivity in $K_0(X)$ and the direct-sum relation give $([L_1]-1)([L_2]-1)=[L_1\otimes L_2]-[L_1]-[L_2]+1=[\det V]+1-[V].$ This calculation is performed on actual bundle classes and their images in perfect-complex $K_0$. [given, construct]
-
-1.4 Write $a=c_1(V)=c_1(\det V)$. By [F4], the total series of $\delta(V)$ is $c_t(V)(1+at)^{-1}$: the trivial-bundle factor has total class $1$, even when its coefficient in the virtual expression is negative. Through degree two, $c_t(V)(1+at)^{-1}=(1+at+c_2(V)t^2+\cdots)(1-at+a^2t^2+\cdots).$ The coefficient of $t^2$ is $c_2(V)-a^2+a^2=c_2(V)$. This proves the stated virtual identity without requiring a Chern-series operation on arbitrary perfect classes. [F3, F4, construct]
-
-2.1 For $D=\det V$, the determinant of $V\oplus L$ is $D\otimes L$. Therefore $\begin{aligned} \delta(V\oplus L)-\delta(V) &=[L]-[D\otimes L]+[D]-1\\ &=-([L]-1)([D]-1). \end{aligned}$ The equality uses distributivity and the tensor-product interpretation of multiplication. Together with steps 1.1 through 1.4 this proves all assertions. [given, construct, step 1.1, step 1.2, step 1.3, step 1.4] ∎
+2.1 If $V,W$ have the same rank and isomorphic determinants, subtracting their definitions of $\delta$ cancels the determinant and trivial-bundle terms, giving $\delta(V)-\delta(W)=[V]-[W]$. If $V=L_1\oplus L_2$, [F7] gives $\det V\cong L_1\otimes L_2$. Distributivity and the class relations proved in step 1.1 give $([L_1]-1)([L_2]-1)=[L_1\otimes L_2]-[L_1]-[L_2]+1=[\det V]+1-[V]$. For the virtual Chern identity, write $a=c_1(V)=c_1(\det V)$ by [F3] and [F7]. In the formal coefficient ring of [F9], [F4] gives $c_t(\delta(V))=c_t(V)(1+at)^{-1}$, because every virtual trivial-bundle factor has series one. Through degree two this is $(1+at+c_2(V)t^2+\cdots)(1-at+a^2t^2+\cdots)$; the $t^2$ coefficient is $c_2(V)-a^2+a^2=c_2(V)$. This evaluates the indicated virtual bundle expression, without a Chern-series operation on arbitrary perfect classes. Finally put $D=\det V$. By [F7], $\det(V\oplus L)\cong D\otimes L$. The relations of step 1.1 yield $\delta(V\oplus L)-\delta(V)=[L]-[D\otimes L]+[D]-1=-([L]-1)([D]-1)$. This proves every assertion, including rank zero. [given, F3, F4, F6, F7, F9, step 1.1, algebra] ∎

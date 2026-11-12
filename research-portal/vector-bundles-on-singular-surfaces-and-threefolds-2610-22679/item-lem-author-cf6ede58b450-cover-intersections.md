@@ -9,6 +9,7 @@ dependency_level: 1
 
 - [def-author-cf6ede58b450-site-plus-data](item-def-author-cf6ede58b450-site-plus-data)
 
+
 ## Statement
 On a small site, the intersection of two covering sieves on the same object is covering. Every sieve containing a covering sieve is covering.
 

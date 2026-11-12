@@ -2,7 +2,31 @@
 title: Elmanto–Morrow filtration input
 status: published
 research_item: thm-author-98a750efd0cc-motivic-filtration-input
-dependency_level: 10
+dependency_level: 12
+sources:
+  references:
+    - title: Motivic cohomology of equicharacteristic schemes
+      url: https://arxiv.org/pdf/2309.08463v1
+      locator: "Version 1 (15 September 2023; internal date 18 September 2023):
+        Theorem 1.1(1) p.3; Definition 4.9 p.21; Definition 4.23 pp.27–28;
+        initial assertions of Theorems 4.12 p.22 and 4.27 p.29; §2.2 pp.11–12"
+      statement: On qcqs schemes over a prime field there is a natural multiplicative
+        nonnegative motivic filtration on nonconnective algebraic K-theory,
+        whose zeroth stage is K.
+      hypotheses: The base prime field is Q or F_p for a prime p; schemes are
+        quasi-compact and quasi-separated over that field. No
+        finite-valuative-dimension hypothesis is used for the stated existence
+        and zeroth-stage assertions.
+      reading_limits: "Read the primary v1 PDF text: Theorem 1.1(1), section 2.2,
+        Definitions 4.9/4.23, and the initial assertions of Theorems 4.12/4.27
+        at the recorded locators. These passages fix decreasing indexing,
+        coherent filtered-algebra structure, qcqs scope and the zeroth-stage
+        identification. The PDF header is dated 15 September 2023; the internal
+        title date is 18 September 2023. No fresh HTML-date check, byte-pinned
+        download, page-image inspection or reconstruction of trace methods,
+        descent foundations or deep proofs is claimed. Later boundedness
+        conclusions are outside this input."
+external_input: true
 ---
 
 PDF p. 3: Section 2, Elmanto–Morrow filtration; PDF p. 4: After Definition 2.2: functorial multiplicative filtration; EM23 Theorem 1.1(1)
@@ -12,7 +36,10 @@ PDF p. 3: Section 2, Elmanto–Morrow filtration; PDF p. 4: After Definition 2.2
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
 - [def-nonconnective-k-spectrum-interface](item-def-nonconnective-k-spectrum-interface)
 - [def-multiplicative-filtered-spectrum](item-def-multiplicative-filtered-spectrum)
-- [Motivic cohomology of equicharacteristic schemes · Version 1 (15 September 2023; internal date 18 September 2023): Theorem 1.1(1) p.3; Definition 4.9 p.21; Definition 4.23 pp.27–28; initial assertions of Theorems 4.12 p.22 and 4.27 p.29; §2.2 pp.11–12](https://arxiv.org/pdf/2309.08463v1)
+- [math:def-scheme-over-base](https://alphabetamath.cc/item/def-scheme-over-base)
+- [math:def-opposite-category](https://alphabetamath.cc/item/def-opposite-category)
+- [` Motivic cohomology of equicharacteristic schemes · Version 1 (15 September 2023; internal date 18 September 2023): Theorem 1.1(1) p.3; Definition 4.9 p.21; Definition 4.23 pp.27–28; initial assertions of Theorems 4.12 p.22 and 4.27 p.29; §2.2 pp.11–12 `](https://arxiv.org/pdf/2309.08463v1)
+
 
 ## Statement
 Assume the Axiom of Choice for the selected local perfect-complex $K$-theory realization. Let $\mathbb F$ be $\mathbb Q$ or $\mathbb F_p$ for a prime $p$. On the opposite of the category of quasi-compact quasi-separated $\mathbb F$-schemes, nonconnective algebraic $K$-theory has a functorial, multiplicative, $\mathbb N$-indexed decreasing motivic filtration whose zeroth stage is naturally equivalent to $K$. In the terminology of coherently multiplicative filtered spectra, the imported multiplicative filtration includes coherent products, unit and transition compatibility; its maps to $K$ are induced through its zeroth stage.
@@ -20,6 +47,10 @@ Assume the Axiom of Choice for the selected local perfect-complex $K$-theory rea
 ## Statement references
 
 [def-multiplicative-filtered-spectrum](item-def-multiplicative-filtered-spectrum)
+
+[math:def-scheme-over-base](https://alphabetamath.cc/item/def-scheme-over-base)
+
+[math:def-opposite-category](https://alphabetamath.cc/item/def-opposite-category)
 
 ## External input
 This is the existence and zeroth-stage part of the cited Elmanto–Morrow results. It is imported as literature, not proved by the local formal lemmas. The source's later boundedness and convergence assertions require additional hypotheses and are not imported here. The nonconnective $K$-theory is used through the perfect-complex interface of [def-nonconnective-k-spectrum-interface](item-def-nonconnective-k-spectrum-interface), under its stated Choice assumption. This assumption belongs to the selected local realization; it is not an additional geometric hypothesis attributed to Elmanto–Morrow.

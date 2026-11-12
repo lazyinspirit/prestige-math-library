@@ -10,69 +10,167 @@ deps:
   - lem-author-b02e51f9da03-matrix-completion
   - def-stably-free-bundles
   - math:def-axiom-of-choice
+  - def-article-conventions
+  - math:def-affine-scheme
+  - math:def-variety-scheme-theoretic
+  - math:def-smooth-morphism-schemes
+  - math:def-relative-projective-space-standard-charts
+  - math:def-scheme-over-base
+  - math:def-fibre-product-schemes-universal-property
+  - math:thm-fibre-products-of-schemes-exist
+  - math:def-prime-spectrum-and-vanishing-sets
+  - math:def-open-immersion-schemes
+  - math:def-restriction-sheaf-open-subspace
+  - math:thm-the-complex-numbers-are-algebraically-closed
+  - math:thm-complex-numbers-form-a-field
 dependency_roles:
   lem-author-b02e51f9da03-matrix-kernel: mathematical-premise
   lem-author-b02e51f9da03-matrix-completion: mathematical-premise
   def-stably-free-bundles: mathematical-premise
   math:def-axiom-of-choice: mathematical-premise
+  def-article-conventions: mathematical-premise
+  math:def-affine-scheme: mathematical-premise
+  math:def-variety-scheme-theoretic: mathematical-premise
+  math:def-smooth-morphism-schemes: mathematical-premise
+  math:def-relative-projective-space-standard-charts: mathematical-premise
+  math:def-scheme-over-base: mathematical-premise
+  math:def-fibre-product-schemes-universal-property: mathematical-premise
+  math:thm-fibre-products-of-schemes-exist: mathematical-premise
+  math:def-prime-spectrum-and-vanishing-sets: mathematical-premise
+  math:def-open-immersion-schemes: mathematical-premise
+  math:def-restriction-sheaf-open-subspace: mathematical-premise
+  math:thm-the-complex-numbers-are-algebraically-closed: mathematical-premise
+  math:thm-complex-numbers-form-a-field: mathematical-premise
 provenance:
-  statement: literature-derived
-  proof: literature-derived
+  statement: ai-altered
+  proof: ai-generated
 proof_strategy: direct
-external_input: true
 sources:
   references:
     - title: Thomas Brazelton, Morgan Opie and Tariq Syed, On Algebraic Vector Bundles
         of Rank 2 over Smooth Affine Fourfolds
       url: https://tbrazel.github.io/assets/papers/fourfolds.pdf
-      locator: Example 6.6, printed/PDF pp. 33–34, opening existence assertion and p=2
-        geometric description; bibliography MK84/MK85, p. 36
-      statement: There exists a smooth complex affine fourfold carrying a nontrivial
-        but stably trivial algebraic vector bundle of rank two. The p=2 Mohan
-        Kumar variety is described as the complement of a union of three
-        hypersurfaces in P^3 x A^1.
-      hypotheses: Base field C, algebraic vector bundles, smooth affine variety of
-        complex algebraic dimension four, bundle of constant rank two. The
-        general construction is stated for a prime p over an algebraically
-        closed field; only the explicit p=2 complex case is imported here. C
-        satisfies the section-6 standing characteristic restriction.
-      reading_limits: Freshly downloaded the author-hosted 37-page PDF to
-        tmp/fourfolds-source.pdf in this run; SHA256
-        e7e83f41926c3b85502f5ca4e3b8f41e15f6945cd3d5746eece28afbd58f32ee. Read
-        the title/author identification, the section-6 base-field convention,
-        Example 6.6 on printed/PDF pp. 33–34, and the MK84/MK85 bibliography
-        entries on p. 36. Rendered p. 33 was also inspected. The exact existence
-        assertion and its p=2 geometric description are used as an authoritative
-        external input. The nontriviality claim itself is imported, not
-        established from an independently computed invariant here. Original
-        Mohan Kumar papers MK84 and MK85, their defining equations, and original
-        nontriviality proofs were not read. The Hermitian-K-theory discussion
-        continuing on p. 34 was read only as context and is not used as a
-        supplier; its cited Sye24 and the present paper's classification theorem
-        proofs were not reconstructed.
+      locator: Example 6.6, printed/PDF pp. 33–34 (existence and p=2
+        hypersurface-complement description); section-6 standing field
+        restriction, p. 32; MK84/MK85 references, p. 36
+      statement: A smooth affine complex fourfold carries a nontrivial stably trivial
+        algebraic rank-two bundle. For p=2 the Mohan Kumar variety is the
+        complement of three hypersurfaces in P^3 x A^1.
+      hypotheses: Algebraic bundles; algebraically closed base field of characteristic
+        different from 2 and 3 in section 6. Only the complex p=2 case is
+        imported.
+      reading_limits: "For this repair read the online author-hosted PDF text:
+        title/authors p. 1, introductory existence assertion p. 2, section-6
+        field restriction p. 32, Example 6.6 pp. 33–34 and MK84/MK85
+        bibliography p. 36. Import the stated existence and geometry; the
+        original Mohan Kumar papers, equations and nontriviality proofs were not
+        read or reconstructed. The Hermitian-K-theory continuation is not a
+        premise. The numbered matrix deduction is local and is not attributed to
+        this source."
 dependency_level: 3
+formulation_deps:
+  - lem-author-b02e51f9da03-matrix-kernel
+  - lem-author-b02e51f9da03-matrix-completion
+  - def-stably-free-bundles
+  - math:def-axiom-of-choice
+  - def-article-conventions
+  - math:def-affine-scheme
+  - math:def-variety-scheme-theoretic
+  - math:def-smooth-morphism-schemes
+  - math:def-relative-projective-space-standard-charts
+  - math:def-scheme-over-base
+  - math:def-fibre-product-schemes-universal-property
+  - math:thm-fibre-products-of-schemes-exist
+  - math:def-prime-spectrum-and-vanishing-sets
+  - math:def-open-immersion-schemes
+  - math:def-restriction-sheaf-open-subspace
+argument_deps:
+  - lem-author-b02e51f9da03-matrix-kernel
+  - lem-author-b02e51f9da03-matrix-completion
+  - def-stably-free-bundles
+  - math:def-axiom-of-choice
+  - def-article-conventions
+  - math:def-affine-scheme
+  - math:def-variety-scheme-theoretic
+  - math:def-smooth-morphism-schemes
+  - math:def-relative-projective-space-standard-charts
+  - math:def-scheme-over-base
+  - math:def-fibre-product-schemes-universal-property
+  - math:thm-fibre-products-of-schemes-exist
+  - math:def-prime-spectrum-and-vanishing-sets
+  - math:def-open-immersion-schemes
+  - math:def-restriction-sheaf-open-subspace
+  - math:thm-the-complex-numbers-are-algebraically-closed
+  - math:thm-complex-numbers-form-a-field
 ---
 
 ## Statement
-There exist a nonempty smooth affine complex algebraic variety $X$ of dimension four and a rank-two vector bundle $E$ with $E\not\cong\mathcal O_X^2$ but $E\oplus\mathcal O_X^N\cong\mathcal O_X^{2+N}$ for some integer $N\geq1$. The variety can be taken to be the complement of a union of three hypersurfaces in $\mathbb P^3_{\mathbb C}\times\mathbb A^1_{\mathbb C}$, as in Mohan Kumar\'s construction. No particular defining equations are selected in this input. On writing $X=\operatorname{Spec}A$, there is therefore a right-invertible matrix $q:A^{2+N}\to A^N$ whose associated kernel bundle is $E$ and which cannot be completed to an invertible $(2+N)\times(2+N)$ matrix.
+There exist a nonempty smooth affine complex algebraic variety $X$ of dimension four and a rank-two vector bundle $E$ with $E\not\cong\mathcal O_X^2$ but $E\oplus\mathcal O_X^N\cong\mathcal O_X^{2+N}$ for some integer $N\geq1$. The variety can be taken to be the complement of a union of three hypersurfaces in $\mathbb P^3_{\mathbb C}\times_{\operatorname{Spec}\mathbb C}\mathbb A^1_{\mathbb C}$, as in Mohan Kumar's construction. No particular defining equations are selected in this input. Assuming the Axiom of Choice (AC) for the matrix translation, write $X=\operatorname{Spec}A$. There is a right-invertible matrix $q:A^{2+N}\to A^N$ whose associated kernel bundle is $E$ and which cannot be completed to an invertible $(2+N)\times(2+N)$ matrix.
+
+Here a complex algebraic variety means an integral separated scheme of finite type over $\operatorname{Spec}\mathbb C$; smooth means that its structure morphism is smooth, and affine means isomorphic to the spectrum of its coordinate ring. Dimension is the chain dimension of the underlying space, as in the article conventions. A rank-two vector bundle means a finite locally free $\mathcal O_X$-module of constant rank two. The finite direct sums, trivial bundles and stable triviality have their usual sheaf meanings. A right-invertible matrix is the standard matrix of an $A$-linear map $q$ admitting an $A$-linear right inverse $j$, with $qj=\operatorname{id}_{A^N}$. Completion means that $q$ is the last $N$ rows of an invertible square matrix.
+
+The ambient spaces are the standard-chart projective space $\mathbb P^3_{\mathbb C}$ and the affine line $\mathbb A^1_{\mathbb C}=\operatorname{Spec}\mathbb C[t]$; their displayed product is the fibre product over $\operatorname{Spec}\mathbb C$. In this description a hypersurface means a closed algebraic subset which locally on affine opens $\operatorname{Spec}R$ is $V(f)$ for a nonzero $f\in R$, where $V(f)=\{\mathfrak p:f\in\mathfrak p\}$. Only these underlying closed subsets matter for the complement. Their union is removed with the induced open-subscheme structure, whose structure sheaf is the restriction of the ambient structure sheaf.
+
+## Statement references
+[[lem-author-b02e51f9da03-matrix-kernel]]
+
+[[lem-author-b02e51f9da03-matrix-completion]]
+
+[[def-stably-free-bundles]]
+
+[[math:def-axiom-of-choice]]
+
+[[def-article-conventions]]
+
+[[math:def-affine-scheme]]
+
+[[math:def-variety-scheme-theoretic]]
+
+[[math:def-smooth-morphism-schemes]]
+
+[[math:def-relative-projective-space-standard-charts]]
+
+[[math:def-scheme-over-base]]
+
+[[math:def-fibre-product-schemes-universal-property]]
+
+[[math:thm-fibre-products-of-schemes-exist]]
+
+[[math:def-prime-spectrum-and-vanishing-sets]]
+
+[[math:def-open-immersion-schemes]]
+
+[[math:def-restriction-sheaf-open-subspace]]
+
+[[math:thm-the-complex-numbers-are-algebraically-closed]]
+
+[[math:thm-complex-numbers-form-a-field]]
 
 ## External input
-The deep construction and the assertion of algebraic nontriviality are explicitly imported from the precise authoritative subsequent statement. The local numbered steps expand the definition and translate nontriviality into a matrix-completion obstruction. No equations for the hypersurfaces or entries of a matrix are invented, and no original Kumar proof or independent Hermitian-K-theory invariant computation is claimed. The five preceding fully authored prerequisites give the construction/application interface and the actual Chern-class consequences.
+The bundle existence, algebraic nontriviality and three-hypersurface description are imported from [Brazelton–Opie–Syed, Example 6.6](https://tbrazel.github.io/assets/papers/fourfolds.pdf), printed pp. 33–34, citing Mohan Kumar MK84/MK85. The numbered argument locally expands stable triviality and deduces the matrix obstruction. It neither reconstructs the deep existence proof nor supplies defining equations, matrix entries or an independently computed nontriviality invariant.
 
 ## Facts & Assumptions
 
-**Given:** The data and hypotheses in the statement, AC and the article's fixed universe bounds where its K-theory is used.
+**Given:** The complex base field and conventions in the statement. Assume AC for the two affine matrix interfaces below. No K-theory or universe-size premise is used in this argument.
 
-**Goal:** Establish the stated conclusion.
+**Goal:** Retain the imported existence and geometry and deduce the stated matrix obstruction.
 
-[F1] The exact established existence statement and the geometric description are imported from Brazelton–Opie–Syed Example 6.6, which attributes them to N. Mohan Kumar MK84/MK85.
+[A1] AC is the Axiom of Choice. It is inherited from the affine module–bundle equivalence and projective-module results used by the matrix suppliers in [F3]; its use here is exactly their application in step 2.1. [[math:def-axiom-of-choice]]
 
-[F2] Stable triviality means an actual finite free stabilization. [[def-stably-free-bundles]]
+[F1] Example 6.6 supplies a smooth affine complex fourfold and an algebraic rank-two bundle that is nontrivial but stably trivial, with the stated three-hypersurface description. This is the imported premise recorded in External input and the source reference, not a local existence proof.
 
-[F3] The local matrix-kernel construction and completion criterion are [[lem-author-b02e51f9da03-matrix-kernel]] and [[lem-author-b02e51f9da03-matrix-completion]].
+[F2] Stable triviality means an actual isomorphism $E\oplus\mathcal O_X^N\cong\mathcal O_X^{2+N}$ for some integer $N\geq0$. The zero-fold direct sum is zero, so $N=0$ would make $E$ trivial. [[def-stably-free-bundles]]
+
+[F3] Assuming AC, for a stably trivial rank-two bundle on an affine scheme the matrix-kernel construction supplies some integer $N\geq0$ and $A$-linear maps $q:A^{2+N}\to A^N$ and $j:A^N\to A^{2+N}$ with $qj=\operatorname{id}_{A^N}$ and associated kernel bundle isomorphic to $E$. Its splitting gives an actual isomorphism $E\oplus\mathcal O_X^N\cong\mathcal O_X^{2+N}$ for this same $N$. The completion criterion says that this $q$ is completable if and only if $E$ is trivial. The free modules have their standard coordinate bases, and completion uses the last $N$ rows. [[lem-author-b02e51f9da03-matrix-kernel]], [[lem-author-b02e51f9da03-matrix-completion]]
+
+[F4] Scheme dimension, finite type for affine schemes, and constant bundle rank follow the article conventions. Varieties, affine schemes and smoothness have the scheme meanings specified in the statement. [[def-article-conventions]], [[math:def-variety-scheme-theoretic]], [[math:def-affine-scheme]], [[math:def-smooth-morphism-schemes]]
+
+[F5] Projective space uses standard charts; affine space over a base gives $\mathbb A^1_{\mathbb C}=\operatorname{Spec}\mathbb C[t]$. The fibre product is defined by its universal property and exists for these schemes. The inline hypersurface convention uses affine vanishing sets, and the complement uses the open-subscheme structure and restricted structure sheaf. [[math:def-relative-projective-space-standard-charts]], [[math:def-scheme-over-base]], [[math:def-fibre-product-schemes-universal-property]], [[math:thm-fibre-products-of-schemes-exist]], [[math:def-prime-spectrum-and-vanishing-sets]], [[math:def-open-immersion-schemes]], [[math:def-restriction-sheaf-open-subspace]]
+
+[F6] The complex field is algebraically closed and contains the embedded real field. In particular $2$ and $3$ are nonzero in $\mathbb C$, so the section-6 characteristic restriction holds for this application of Example 6.6. [[math:thm-the-complex-numbers-are-algebraically-closed]], [[math:thm-complex-numbers-form-a-field]]
 
 ## Proof
 
-1.1 Apply the imported existence statement over the explicit base field $\mathbb C$. It supplies the smooth affine fourfold X and the rank-two nontrivial stably trivial bundle E, with the stated geometric description. Expanding stable triviality via [F2] supplies a finite N and an actual isomorphism. Since E is nontrivial, N cannot be zero. [F1, F2]
+1.1 Apply the imported existence statement [F1] over $\mathbb C$, whose field hypotheses hold by [F6], using the geometric conventions in [F4] and [F5]. It supplies $X$ and the nontrivial stably trivial bundle $E$ with the stated hypersurface-complement description. By [F2], this $E$ admits a finite free stabilization. [F1, F2, F4, F5, F6]
 
-2.1 Choose one such stable isomorphism. By [F3] it yields a right-invertible matrix q whose kernel sheaf is E. If q were completable, the completion criterion in [F3] would make E trivial, contradicting [F1]. Thus q is not completable. This matrix consequence is local algebra deduced from the imported bundle existence; it is not a claim that the source gives this matrix explicitly. [F1, F3, step 1.1] ∎
+2.1 Write $X=\operatorname{Spec}A$ using its affineness in [F4]. Apply the matrix-kernel construction [F3] to the stably trivial rank-two bundle $E$ from step 1.1, with AC as in [A1]. Choose the integer $N\geq0$ and maps $q,j$ supplied together by that construction. The associated splitting in [F3] gives $E\oplus\mathcal O_X^N\cong\mathcal O_X^{2+N}$ for this same $N$. If $N=0$, this isomorphism would make $E$ trivial by [F2], contradicting [F1]; hence $N\geq1$. If $q$ were completable, the completion criterion in [F3], applied to these maps and the isomorphism of their kernel bundle with $E$, would likewise make $E$ trivial. Thus $q$ is not completable. This is a local consequence of the imported bundle existence, not an assertion that the source explicitly computes $q$. [A1, F1, F2, F3, F4, step 1.1] ∎

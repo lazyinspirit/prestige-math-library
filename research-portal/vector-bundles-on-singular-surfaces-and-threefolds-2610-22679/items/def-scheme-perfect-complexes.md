@@ -12,6 +12,23 @@ deps:
   - lem-author-4f716d60801a-lifted-affine-equivalence
   - math:def-perfect-complex-over-a-ring
   - math:def-axiom-of-choice
+  - math:def-scheme
+  - math:def-associated-sheaf-module-affine-scheme
+  - math:def-grothendieck-universe-closure-convention
+  - math:def-module-on-ringed-space
+  - math:def-cochain-complex-in-an-abelian-category
+  - math:def-stalk-of-presheaf
+  - math:def-restriction-sheaf-open-subspace
+  - math:def-open-immersion-schemes
+  - math:def-quasi-coherent-module-scheme
+  - math:def-commutative-ring
+  - math:def-left-and-right-modules
+  - math:def-projective-module
+  - math:def-generated-cyclic-finitely-generated-and-free-modules
+  - math:def-affine-scheme
+  - math:def-affine-scheme-spectrum
+  - math:thm-structure-sheaf-affine-scheme
+  - math:cor-spectrum-with-structure-sheaf-locally-ringed
 dependency_roles:
   thm-author-4f716d60801a-derived-enhancement-input: mathematical-premise
   lem-author-4f716d60801a-local-perfect-qc: mathematical-premise
@@ -20,10 +37,27 @@ dependency_roles:
   lem-author-4f716d60801a-lifted-affine-equivalence: mathematical-premise
   math:def-perfect-complex-over-a-ring: mathematical-premise
   math:def-axiom-of-choice: mathematical-premise
+  math:def-scheme: mathematical-premise
+  math:def-associated-sheaf-module-affine-scheme: mathematical-premise
+  math:def-grothendieck-universe-closure-convention: mathematical-premise
+  math:def-module-on-ringed-space: mathematical-premise
+  math:def-cochain-complex-in-an-abelian-category: mathematical-premise
+  math:def-stalk-of-presheaf: mathematical-premise
+  math:def-restriction-sheaf-open-subspace: mathematical-premise
+  math:def-open-immersion-schemes: mathematical-premise
+  math:def-quasi-coherent-module-scheme: mathematical-premise
+  math:def-commutative-ring: mathematical-premise
+  math:def-left-and-right-modules: mathematical-premise
+  math:def-projective-module: mathematical-premise
+  math:def-generated-cyclic-finitely-generated-and-free-modules: mathematical-premise
+  math:def-affine-scheme: mathematical-premise
+  math:def-affine-scheme-spectrum: mathematical-premise
+  math:thm-structure-sheaf-affine-scheme: mathematical-premise
+  math:cor-spectrum-with-structure-sheaf-locally-ringed: mathematical-premise
 provenance:
   statement: ai-generated
   proof: not-applicable
-dependency_level: 4
+dependency_level: 6
 ---
 
 ## Definition

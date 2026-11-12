@@ -8,10 +8,26 @@ deps:
   - math:def-annihilator-and-torsion-of-a-module
   - math:def-exact-and-short-exact-sequences-of-modules
   - math:def-tensor-product-of-modules-by-generators-and-relations
+  - math:def-group
+  - math:prop-abelian-groups-are-z-modules
+  - math:def-rationals
+  - math:def-rat-operations
+  - math:thm-rat-field
+  - math:def-module-homomorphism-kernel-image-and-cokernel
+  - math:prop-elementary-tensor-formulas-descend-exactly-when-balanced
+  - math:prop-functoriality-of-module-tensor-products
 dependency_roles:
   math:def-annihilator-and-torsion-of-a-module: mathematical-premise
   math:def-exact-and-short-exact-sequences-of-modules: mathematical-premise
   math:def-tensor-product-of-modules-by-generators-and-relations: mathematical-premise
+  math:def-group: mathematical-premise
+  math:prop-abelian-groups-are-z-modules: mathematical-premise
+  math:def-rationals: mathematical-premise
+  math:def-rat-operations: mathematical-premise
+  math:thm-rat-field: mathematical-premise
+  math:def-module-homomorphism-kernel-image-and-cokernel: mathematical-premise
+  math:prop-elementary-tensor-formulas-descend-exactly-when-balanced: mathematical-premise
+  math:prop-functoriality-of-module-tensor-products: mathematical-premise
 provenance:
   statement: ai-generated
   proof: ai-generated
@@ -29,9 +45,25 @@ For an abelian group $G$, the kernel of the natural homomorphism $G\to G\otimes_
 
 [[math:def-tensor-product-of-modules-by-generators-and-relations]]
 
+[[math:def-group]]
+
+[[math:prop-abelian-groups-are-z-modules]]
+
+[[math:def-rationals]]
+
+[[math:def-rat-operations]]
+
+[[math:thm-rat-field]]
+
+[[math:def-module-homomorphism-kernel-image-and-cokernel]]
+
+[[math:prop-elementary-tensor-formulas-descend-exactly-when-balanced]]
+
+[[math:prop-functoriality-of-module-tensor-products]]
+
 ## Facts & Assumptions
 
-**Given:** Abelian groups, regarded as $\mathbb Z$-modules, and the homomorphisms in the statement.
+**Given:** Abelian groups, regarded as $\mathbb Z$-modules with integer multiplication as scalar action, and the homomorphisms in the statement. A homomorphism here preserves addition; its kernel is the set of elements sent to zero and its image is the set of its values. An isomorphism is a bijective homomorphism. When a right $\mathbb Z$-module is needed, use $mn:=nm$.
 
 **Goal:** Prove the kernel formula and exactness of rationalization, and deduce the injectivity and isomorphism assertions.
 
@@ -39,12 +71,18 @@ For an abelian group $G$, the kernel of the natural homomorphism $G\to G\otimes_
 
 [F2] Torsion means annihilation by a nonzero integer, and a group is torsion-free when only zero is torsion ([[math:def-annihilator-and-torsion-of-a-module]]). A short exact sequence $0\to A\xrightarrow{i}B\xrightarrow{p}C\to0$ has $i$ injective, $p$ surjective and $\operatorname{im}i=\ker p$ ([[math:def-exact-and-short-exact-sequences-of-modules]]).
 
+[F3] Abelian groups are commutative groups ([[math:def-group]]). Every abelian group has its unique integer-action $\mathbb Z$-module structure, and group homomorphisms are precisely $\mathbb Z$-linear maps ([[math:prop-abelian-groups-are-z-modules]]). Homomorphisms, isomorphisms, kernels and images have the module meanings specified in the Given ([[math:def-module-homomorphism-kernel-image-and-cokernel]]).
+
+[F4] A rational number is represented by $a/b$ with integers $a,b$ and $b\ne0$, and $a/b=c/d$ exactly when $ad=cb$ ([[math:def-rationals]]). Sums, products, negatives and reciprocals are given by the representative formulas ([[math:def-rat-operations]]), and these operations make $\mathbb Q$ a field, hence an additive abelian group ([[math:thm-rat-field]]). Thus [F3] makes $\mathbb Q$ a $\mathbb Z$-module; its integer action is repeated addition, equivalently multiplication by the corresponding integer rational. Replacing both numerator and denominator by their negatives permits positive denominators.
+
+[F5] A pairing from a right and a left $\mathbb Z$-module into an abelian group is balanced when it is additive in each variable and sends $(nm,q)$ and $(m,nq)$ to the same value for every integer $n$. Such a pairing extends uniquely to a homomorphism out of the tensor product ([[math:prop-elementary-tensor-formulas-descend-exactly-when-balanced]]). For a homomorphism $u:M\to N$, write $u\otimes\mathbb Q$ for $u\otimes\operatorname{id}_{\mathbb Q}$; it sends $m\otimes q$ to $u(m)\otimes q$ and respects identities and compositions ([[math:prop-functoriality-of-module-tensor-products]]).
+
 ## Proof
 
-1.1 For an abelian group $M$, form fractions $m/n$ with $m\in M$ and positive integer $n$, declaring $m/n=m'/n'$ exactly when some positive integer $k$ kills $n'm-nm'$. This is an equivalence relation: transitivity follows by multiplying the two annihilating equations by the other denominator and combining them. Addition $(m/n)+(m'/n')=(n'm+nm')/(nn')$ is independent of representatives by the same cross-multiplication, and gives an abelian group $L(M)$. For $q=a/b\in\mathbb Q$, with $b>0$, the assignment $(m,q)\mapsto am/b$ is well-defined and balanced: equality of rational representatives gives an equal cross-product, and the fraction addition formula proves additivity. Thus [F1] gives a homomorphism $M\otimes\mathbb Q\to L(M)$. Conversely send $m/n$ to $m\otimes(1/n)$. If $k(n'm-nm')=0$, then balancing gives $m\otimes(1/n)-m'\otimes(1/n')=k(n'm-nm')\otimes(1/(knn'))=0$, so this map is well-defined and additive. The two maps are inverse on fractions and elementary tensors, hence are inverse isomorphisms. Under this identification the natural map sends $m$ to $m/1$. [F1, construct, algebra]
+1.1 For an abelian group $M$, form fractions $m/n$ with $m\in M$ and positive integer $n$, declaring $m/n=m'/n'$ exactly when some positive integer $k$ kills $n'm-nm'$. This is an equivalence relation: transitivity follows by multiplying the two annihilating equations by the other denominator and combining them. Addition $(m/n)+(m'/n')=(n'm+nm')/(nn')$ is independent of representatives by the same cross-multiplication, and gives an abelian group $L(M)$: zero is $0/1$, the inverse of $m/n$ is $(-m)/n$, and the associative and commutative laws follow by putting the summands over a common denominator. For $q=a/b\in\mathbb Q$, with $b>0$, the assignment $(m,q)\mapsto am/b$ is well-defined and balanced: equality of rational representatives gives an equal cross-product, and the fraction addition formula proves additivity. Thus [F5] gives a homomorphism $M\otimes\mathbb Q\to L(M)$. Conversely send $m/n$ to $m\otimes(1/n)$. If $k(n'm-nm')=0$, then balancing gives $m\otimes(1/n)-m'\otimes(1/n')=k(n'm-nm')\otimes(1/(knn'))=0$, so this map is well-defined and additive. The two maps are inverse on fractions and elementary tensors, hence are inverse isomorphisms. Under this identification the natural map sends $m$ to $m/1$. [F1, F3, F4, F5, construct, algebra]
 
 2.1 By the fraction equivalence, $m/1=0/1$ exactly when some positive integer kills $m$. This is equivalent to being killed by a nonzero integer, so the kernel is precisely the torsion subgroup. [F2, step 1.1]
 
-2.2 Let $0\to A\xrightarrow{i}B\xrightarrow{p}C\to0$ be short exact. The fraction maps induced by $i$ and $p$ are well-defined by the defining equivalence. If $i(a)/n=0$, then $i(ka)=0$ for some positive $k$, so $ka=0$ by injectivity of $i$ and $a/n=0$. Thus $L(i)$ is injective. Every $c/n$ has a preimage $b/n$ because $p$ is surjective. If $p(b)/n=0$, then $p(kb)=0$ for some positive $k$; exactness gives $a\in A$ with $i(a)=kb$, and $b/n=i(a)/(kn)$ lies in the image of $L(i)$. The reverse inclusion follows from $pi=0$. Hence the fraction sequence is short exact. The isomorphisms of step 1.1 commute with the induced homomorphisms, so tensoring the original sequence with $\mathbb Q$ is short exact. [F2, step 1.1, algebra]
+2.2 Let $0\to A\xrightarrow{i}B\xrightarrow{p}C\to0$ be short exact. For any homomorphism $u:M\to N$, define $L(u)(m/n):=u(m)/n$. This is well-defined because $u$ preserves the annihilating relation, and additive by the fraction addition formula. In particular this gives maps $L(i)$ and $L(p)$. If $i(a)/n=0$, then $i(ka)=0$ for some positive $k$, so $ka=0$ by injectivity of $i$ and $a/n=0$. Thus $L(i)$ is injective. Every $c/n$ has a preimage $b/n$ because $p$ is surjective. If $p(b)/n=0$, then $p(kb)=0$ for some positive $k$; exactness gives $a\in A$ with $i(a)=kb$, and $b/n=i(a)/(kn)$ lies in the image of $L(i)$. The reverse inclusion follows from $pi=0$. Hence the fraction sequence is short exact. For any homomorphism $u:M\to N$, the isomorphism $\phi_M:M\otimes\mathbb Q\to L(M)$ of step 1.1 satisfies $\phi_N\circ(u\otimes\mathbb Q)=L(u)\circ\phi_M$: both sides send $m\otimes(a/b)$ to $a u(m)/b$, and [F1] says elementary tensors generate. Thus these isomorphisms commute with $i$ and $p$, and tensoring the original sequence with $\mathbb Q$ is short exact. [F1, F2, F3, F5, step 1.1, algebra]
 
-3.1 If $(f\otimes\mathbb Q)$ is injective and $f(g)=0$, naturality gives $(f\otimes\mathbb Q)(g\otimes1)=0$, so $g\otimes1=0$. If $G$ is torsion-free, steps 2.1 and [F2] give $g=0$; therefore $f$ is injective. If it is also surjective, its set-theoretic inverse is a homomorphism, since the preimages of sums are sums of preimages, and $f$ is an isomorphism. [F1, F2, step 2.1] ∎
+3.1 If $(f\otimes\mathbb Q)$ is injective and $f(g)=0$, naturality gives $(f\otimes\mathbb Q)(g\otimes1)=0$, so $g\otimes1=0$. If $G$ is torsion-free, steps 2.1 and [F2] give $g=0$; therefore $f$ is injective. If it is also surjective, its set-theoretic inverse is a homomorphism, since the preimages of sums are sums of preimages, and $f$ is an isomorphism. [F1, F2, F3, F5, step 2.1] ∎

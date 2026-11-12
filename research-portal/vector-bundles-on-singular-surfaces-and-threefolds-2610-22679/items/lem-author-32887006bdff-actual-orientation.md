@@ -9,16 +9,33 @@ deps:
   - thm-author-32887006bdff-em-graded-input
   - thm-author-32887006bdff-p1-spectrum-input
   - math:def-axiom-of-choice
+  - def-adjudicate-c387df8ff29b-non-a1-spectrum-framework
+  - lem-adjudicate-ac7b69b92374-zariski-coefficient-compactness
 dependency_roles:
   lem-author-32887006bdff-em-p1-model: mathematical-premise
   thm-author-32887006bdff-em-graded-input: mathematical-premise
   thm-author-32887006bdff-p1-spectrum-input: mathematical-premise
   math:def-axiom-of-choice: mathematical-premise
+  def-adjudicate-c387df8ff29b-non-a1-spectrum-framework: mathematical-premise
+  lem-adjudicate-ac7b69b92374-zariski-coefficient-compactness: mathematical-premise
 provenance:
   statement: ai-generated
   proof: ai-generated
 proof_strategy: direct
-dependency_level: 16
+dependency_level: 19
+formulation_deps:
+  - lem-author-32887006bdff-em-p1-model
+  - thm-author-32887006bdff-em-graded-input
+  - thm-author-32887006bdff-p1-spectrum-input
+  - math:def-axiom-of-choice
+  - def-adjudicate-c387df8ff29b-non-a1-spectrum-framework
+argument_deps:
+  - lem-author-32887006bdff-em-p1-model
+  - thm-author-32887006bdff-em-graded-input
+  - thm-author-32887006bdff-p1-spectrum-input
+  - math:def-axiom-of-choice
+  - def-adjudicate-c387df8ff29b-non-a1-spectrum-framework
+  - lem-adjudicate-ac7b69b92374-zariski-coefficient-compactness
 ---
 
 ## Statement
@@ -31,6 +48,8 @@ Assume the Axiom of Choice and the fixed compatible site and universe bounds of 
 
 [F2] [[thm-author-32887006bdff-p1-spectrum-input]] identifies a linear orientation with a Picard class lifting the unit along $[\mathcal O(1)]:\mathbb P^1\to\mathrm{Pic}$; orientable spectra are fundamental and their stable coefficient model has the same module/cohomology operations. [[lem-author-32887006bdff-em-p1-model]] supplies that model.
 
+[F3] Use the coefficient category $\mathrm{St}_S$ of ordinary space-valued Zariski sheaves on the smooth qcqs site in [[def-adjudicate-c387df8ff29b-non-a1-spectrum-framework]]. For every qcqs base $S$, [[lem-adjudicate-ac7b69b92374-zariski-coefficient-compactness]] proves that it is compactly generated and that both projective-line cotensors preserve filtered colimits. Its cartesian multiplicativity is the framework structure. These are the two additional coefficient hypotheses required by [F2] for fundamental stabilization; no hypercompletion is imposed.
+
 ## Proof
 **Given:** The model $\mathcal E_S$, the Axiom of Choice and the fixed compatible site and universe bounds.
 
@@ -40,4 +59,4 @@ Assume the Axiom of Choice and the fixed compatible site and universe bounds of 
 
 2.1 The actual complex PBF in [F1] is compatible with multiplication and the bonding class. Levelwise its reduced P-space formula is the source PBF for the stable coefficient model. Negative level indices that occur are zero: reduced weight-zero P¹ cohomology is zero by [F1], so looping $A_0$ by P¹ is zero, and further negative shifts remain zero. Thus the levelwise formulas also cover the low-level boundary, not only sufficiently large levels. [A1, F1, step 1.1]
 
-3.1 Orientability and [F2] identify the space and stable coefficient models on fundamental spectra, so the formula of step 2.1 is the required equivalence of oriented motivic modules. Its products and tautological class are those in step 1.1. The general bundle version follows from the source PBF or its local descent statement, preserving the same class. No affine-torsor detection or homotopy invariance has been assumed. [A1, F1, F2, step 1.1, step 2.1] ∎
+3.1 Apply [F3] to the actual coefficient category of the model. Its compact generation, projective-line cotensor compactness and multiplicativity discharge the fundamental-stabilization hypotheses of [F2]. The orientation in step 1.1 makes both the space and stable coefficient models fundamental, so that equivalence, with its module compatibility, transports the reduced PBF of step 2.1 to the required equivalence of oriented motivic modules. The products and tautological class remain those of step 1.1. The bundle extension in [F2] now applies at positive constant rank, since reduced PBF has already been verified. Rank-zero projectivization has no line quotient and is empty, giving the empty sum; pointed projective zero-space gives the empty reduced formula. For varying rank, apply the formula on the open-and-closed rank loci and glue by Zariski descent in the supplied stack framework. The model's diagonal identifications preserve its products and the actual first class, hence all these class-power maps. [A1, F1, F2, F3, step 1.1, step 2.1] ∎

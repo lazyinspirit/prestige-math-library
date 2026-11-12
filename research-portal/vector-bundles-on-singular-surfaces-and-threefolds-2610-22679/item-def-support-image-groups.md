@@ -2,7 +2,37 @@
 title: Images of support groups in global groups
 status: published
 research_item: def-support-image-groups
-dependency_level: 14
+dependency_level: 15
+sources:
+  references:
+    - title: Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and
+        threefolds
+      url: https://arxiv.org/abs/2610.22679v1
+      locator: PDF p. 3, Notation and conventions; p. 6, Definition 2.7, final two
+        displays; p. 7, opening paragraph through equation (2.8)
+      reading_limits: Read the supplied article extraction at the p. 3 conventions, p.
+        6 Definition 2.7, and p. 7 opening paragraph through (2.8); also
+        inspected the supplied PDF page images for pp. 6 and 7. The all-degree
+        presentation H^{a,j}_mot(Y;X), the notation K_0(Y;X) for arbitrary
+        closed Y, and the arbitrary-field scope are local adaptations using the
+        declared suppliers, not additional claims at these article locators. The
+        support spectra, extension to non-quasi-compact complements, and
+        explicit shifted indexing convention are those of
+        def-cohomology-with-support. No separate comparison with evaluation on
+        the quotient sheaf or with K-theory of supported perfect complexes is
+        asserted. The image-subgroup justification is local; no external purity
+        or localization proof is imported by this item.
+      statement: Definition 2.7 defines the filtered K-theory support-image group
+        F^j_mot K_i(Y;X) and the motivic cohomology support-image group
+        H^{2j-i,j}_mot(Y;X) as images of supported groups in the corresponding
+        global groups. Equation (2.8) uses K_0({x};X) as the target of the
+        smooth-point class homomorphism inside K_0(X). It does not explicitly
+        define K_0(Y;X) for every closed subset Y.
+      hypotheses: "Definition 2.7: X is a qcqs k-scheme, Y is closed with reduced
+        induced structure, U=X minus Y, j is nonnegative and i is an integer;
+        the standing convention on p. 3 assumes k algebraically closed. The
+        paragraph leading to (2.8) explicitly assumes a perfect field k, a qcqs
+        k-scheme X, and a smooth closed point x."
 ---
 
 PDF p. 6: Final two displays of Definition 2.7; PDF p. 7: Equation (2.8), K-zero support-image notation
@@ -13,6 +43,7 @@ PDF p. 6: Final two displays of Definition 2.7; PDF p. 7: Equation (2.8), K-zero
 - [def-motivic-filtration](item-def-motivic-filtration)
 - [def-motivic-cohomology](item-def-motivic-cohomology)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
+- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 3, Notation and conventions; p. 6, Definition 2.7, final two displays; p. 7, opening paragraph through equation (2.8) `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Definition

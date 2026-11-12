@@ -3,119 +3,119 @@ title: Article items · 04 — Perfect complexes on schemes and their support
 description: Presents 28 items from the article and its immediate prerequisites,
   covering dependency levels 4–6.
 status: published
-dependency_level: 3
+dependency_level: 0
 research_article_page: true
 item_count: 28
 ---
 
-## Perfect complexes on schemes and their support
+## Published prerequisite
 
-[Open item](item-def-scheme-perfect-complexes) · level 4
+[math:def-prime-subfield](https://alphabetamath.cc/item/def-prime-subfield)
 
-## Gluing upper bounds through an actual fiber sequence
+## Published prerequisite
 
-[Open item](item-lem-author-0bac6b264f4a-motivic-dim-cohomological-glueing) · level 4
+[math:def-principal-localisation](https://alphabetamath.cc/item/def-principal-localisation)
 
-## Smooth affine components and gluing a trivial line
+## Published prerequisite
 
-[Open item](item-lem-author-394a5b71198d-components) · level 4
+[math:def-projective-bundle-scheme](https://alphabetamath.cc/item/def-projective-bundle-scheme)
 
-## Cycle-complex degree translation
+## Published prerequisite
 
-[Open item](item-lem-author-91088613574d-cycle-reindex) · level 4
+[math:def-pullback-module-ringed-spaces](https://alphabetamath.cc/item/def-pullback-module-ringed-spaces)
 
-## Cohomology of equivalent derived complexes
+## Published prerequisite
 
-[Open item](item-lem-author-91088613574d-quasi-isomorphism) · level 4
+[math:def-quasi-compact-and-quasi-separated-scheme](https://alphabetamath.cc/item/def-quasi-compact-and-quasi-separated-scheme)
 
-## Functorial finite coefficients for derived complexes
+## Published prerequisite
 
-[Open item](item-lem-author-b747b28c359f-derived-finite-coefficients) · level 4
+[math:def-quasi-projective-morphism](https://alphabetamath.cc/item/def-quasi-projective-morphism)
 
-## One nonempty parameter open gives smooth-locus avoidance and transversality
+## Published prerequisite
 
-[Open item](item-lem-author-fc2380accb47-simultaneous-good-parameters) · level 4
+[math:def-regular-local-ring-geometric-point](https://alphabetamath.cc/item/def-regular-local-ring-geometric-point)
 
-## Homotopy exactness of a spectral fiber sequence
+## Published prerequisite
 
-[Open item](item-lem-fiber-sequence-homotopy-exactness) · level 4
+[math:def-regular-noetherian-ring](https://alphabetamath.cc/item/def-regular-noetherian-ring)
 
-## Smooth-locus restriction properties
+## Published prerequisite
 
-[Open item](item-lem-normal-smooth-locus-restriction) · level 4
+[math:def-relative-dimension-smooth-morphism](https://alphabetamath.cc/item/def-relative-dimension-smooth-morphism)
 
-## Multiplicative filtrations and graded products
+## Published prerequisite
 
-[Open item](item-def-multiplicative-filtered-spectrum) · level 5
+[math:def-relative-projective-space-standard-charts](https://alphabetamath.cc/item/def-relative-projective-space-standard-charts)
 
-## Scheme sites and sheafification
+## Published prerequisite
 
-[Open item](item-def-scheme-sites-and-sheafification) · level 5
+[math:def-repeated-root-and-separable-polynomial](https://alphabetamath.cc/item/def-repeated-root-and-separable-polynomial)
 
-## Valuative dimension and degreewise bounded towers
+## Published prerequisite
 
-[Open item](item-def-valuative-dimension-and-boundedness) · level 5
+[math:def-residue-field-scheme-point](https://alphabetamath.cc/item/def-residue-field-scheme-point)
 
-## Images of filtration stages
+## Published prerequisite
 
-[Open item](item-lem-author-98a750efd0cc-filtration-image) · level 5
+[math:def-restriction-sheaf-open-subspace](https://alphabetamath.cc/item/def-restriction-sheaf-open-subspace)
 
-## Bockstein obstruction to prime torsion
+## Published prerequisite
 
-[Open item](item-lem-author-c5b0693f4fc3-top-torsion-bockstein) · level 5
+[math:def-ring-characteristic](https://alphabetamath.cc/item/def-ring-characteristic)
 
-## The selected zero fibers are finite etale schemes
+## Published prerequisite
 
-[Open item](item-lem-author-fc2380accb47-finite-etale-zero-fibers) · level 5
+[math:def-scheme](https://alphabetamath.cc/item/def-scheme)
 
-## Complex shifts and spectral homotopy indices
+## Published prerequisite
 
-[Open item](item-lem-eilenberg-maclane-shift-index) · level 5
+[math:def-scheme-over-base](https://alphabetamath.cc/item/def-scheme-over-base)
 
-## Stage projections, kernels and image groups
+## Published prerequisite
 
-[Open item](item-lem-filtered-stage-exact-sequence) · level 5
+[math:def-scheme-theoretic-fibre](https://alphabetamath.cc/item/def-scheme-theoretic-fibre)
 
-## Support fibers commute with graded triangles
+## Published prerequisite
 
-[Open item](item-lem-filtered-support-exactness) · level 5
+[math:def-separable-elements-and-separable-extensions](https://alphabetamath.cc/item/def-separable-elements-and-separable-extensions)
 
-## Actual raw simplicial cycles satisfy descent without separatedness
+## Published prerequisite
 
-[Open item](item-lem-adjudicate-f6007757a8ac-raw-simplicial-descent) · level 6
+[math:def-separated-morphism-schemes](https://alphabetamath.cc/item/def-separated-morphism-schemes)
 
-## Filtered equivalences preserve image filtrations
+## Published prerequisite
 
-[Open item](item-lem-author-91088613574d-filtered-images) · level 6
+[math:def-sheaf-hom](https://alphabetamath.cc/item/def-sheaf-hom)
 
-## Extending a nonnegative filtration to integer indices
+## Published prerequisite
 
-[Open item](item-lem-author-98a750efd0cc-filtration-extension) · level 6
+[math:def-sheaf-on-topological-space](https://alphabetamath.cc/item/def-sheaf-on-topological-space)
 
-## Naturality of image filtrations
+## Published prerequisite
 
-[Open item](item-lem-author-98a750efd0cc-filtration-naturality) · level 6
+[math:def-sheaf-tensor-product](https://alphabetamath.cc/item/def-sheaf-tensor-product)
 
-## Nesting of image filtration groups
+## Published prerequisite
 
-[Open item](item-lem-author-98a750efd0cc-filtration-nesting) · level 6
+[math:def-smooth-locus-morphism](https://alphabetamath.cc/item/def-smooth-locus-morphism)
 
-## Products of filtration images
+## Published prerequisite
 
-[Open item](item-lem-author-98a750efd0cc-filtration-products) · level 6
+[math:def-smooth-morphism-classical](https://alphabetamath.cc/item/def-smooth-morphism-classical)
 
-## Image filtration for a split tower
+## Published prerequisite
 
-[Open item](item-lem-author-9f61e4df2141-split-image-filtration) · level 6
+[math:def-smooth-morphism-schemes](https://alphabetamath.cc/item/def-smooth-morphism-schemes)
 
-## The source qcqs cdh site
+## Published prerequisite
 
-[Open item](item-lem-author-dcdf962edbda-qcqs-site) · level 6
+[math:def-smooth-morphism-to-field-classical](https://alphabetamath.cc/item/def-smooth-morphism-to-field-classical)
 
-## Products and projections on image filtrations
+## Published prerequisite
 
-[Open item](item-lem-image-filtration-products) · level 6
+[math:def-subspace-topology-top](https://alphabetamath.cc/item/def-subspace-topology-top)
 
-## Spectral sequence of a tower
+## Published prerequisite
 
-[Open item](item-prop-tower-exact-couple-interface) · level 6
+[math:def-tensor-product-of-modules-by-generators-and-relations](https://alphabetamath.cc/item/def-tensor-product-of-modules-by-generators-and-relations)

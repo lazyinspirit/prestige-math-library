@@ -8,10 +8,24 @@ deps:
   - lem-author-ab0a6fc202cb-finite-common-rank-strata
   - lem-flag-tower-line-quotients
   - math:def-axiom-of-choice
+  - math:thm-exactness-of-sheaves-stalkwise
+  - math:thm-sheaf-morphism-isomorphism-stalkwise
+  - math:def-locally-free-sheaf-finite-rank
+  - math:def-restriction-sheaf-open-subspace
+  - math:def-pullback-module-ringed-spaces
+  - math:def-direct-image-sheaf
+  - math:def-fibre-of-module-at-point
 dependency_roles:
   lem-author-ab0a6fc202cb-finite-common-rank-strata: mathematical-premise
   lem-flag-tower-line-quotients: mathematical-premise
   math:def-axiom-of-choice: mathematical-premise
+  math:thm-exactness-of-sheaves-stalkwise: mathematical-premise
+  math:thm-sheaf-morphism-isomorphism-stalkwise: mathematical-premise
+  math:def-locally-free-sheaf-finite-rank: mathematical-premise
+  math:def-restriction-sheaf-open-subspace: mathematical-premise
+  math:def-pullback-module-ringed-spaces: mathematical-premise
+  math:def-direct-image-sheaf: mathematical-premise
+  math:def-fibre-of-module-at-point: mathematical-premise
 proof_strategy: direct
 provenance:
   statement: ai-generated
@@ -38,12 +52,24 @@ Each $j_{\alpha*}L$ has rank one on $Y_\alpha$ and zero elsewhere, so it is not 
 
 [F3] The defining relations of $K^0_{\mathrm{vb}}$ are those stated above; they apply to locally split filtrations. AC is inherited from the tower. [[math:def-axiom-of-choice]]
 
+[F4] A sequence of sheaves of abelian groups is exact if and only if its sequence on every stalk is exact. We apply this to the underlying abelian sheaves of the module sheaves. [[math:thm-exactness-of-sheaves-stalkwise]]
+
+[F5] A morphism of sheaves of sets is an isomorphism if and only if its map on every stalk is a bijection. For a module-linear morphism the inverse, when it exists, is also module-linear, since applying the original injective map checks addition and scalar multiplication. [[math:thm-sheaf-morphism-isomorphism-stalkwise]]
+
+[F6] A finite locally free sheaf has local charts $\mathcal O^r$ with chart-independent rank; a line bundle has rank one everywhere, and rank zero is the zero sheaf. [[math:def-locally-free-sheaf-finite-rank]]
+
+[F7] Restriction to an open $U$ evaluates a sheaf on the opens contained in $U$. Pullback along $f:T\to S$ is $f^*G=\mathcal O_T\otimes_{f^{-1}\mathcal O_S}f^{-1}G$; on a local free chart it gives the corresponding free chart on the inverse-image open, as used in [F2]. [[math:def-restriction-sheaf-open-subspace]], [[math:def-pullback-module-ringed-spaces]]
+
+[F8] Direct image along an inclusion $j:V\hookrightarrow Y$ has $(j_*L)(U)=L(U\cap V)$, with restrictions inherited from $L$. For an $\mathcal O_V$-module, the $\mathcal O_Y(U)$-action is through restriction to $U\cap V$. [[math:def-direct-image-sheaf]]
+
+[F9] The fibre of a module sheaf $G$ at $y$ is $G(y)=G_y\otimes_{\mathcal O_{Y,y}}\kappa(y)$, where $\kappa(y)$ is the residue field of the local stalk ring. On a free chart $\mathcal O^r$ this is $\kappa(y)^r$, so its dimension is the chart rank. [[math:def-fibre-of-module-at-point]]
+
 ## Proof
 
 1.1 For a stratum filtration $0=F_0\subset\cdots\subset F_r=q_\alpha^*E_i$ with quotients $L_s$, each short exact sequence $0\to F_{s-1}\to F_s\to L_s\to0$ gives $[F_s]=[F_{s-1}]+[L_s]$. Starting at $[F_0]=0$ and adding the finitely many relations proves the componentwise identity, including $r=0$. The same argument proves the global line-quotient sum when ranks are constant and [F2] gives a global filtration. [F2, F3, algebra]
 
-1.2 A sheaf extended by zero from $Y_\alpha$ is the given sheaf on that open and zero on its open complement. If the sheaf is finite locally free there, these descriptions are local free charts of its extension: the ranks are its original ranks on the stratum and zero elsewhere. Extension is exact, since on both pieces it is exact, and stalkwise exactness detects exactness of sheaves. Thus it induces a homomorphism on $K^0_{\mathrm{vb}}$. [F1, F3, construct]
+1.2 For $j_\alpha:Y_\alpha\hookrightarrow Y$, use the section formula of [F8] to define $j_{\alpha*}L$ and its module maps. This is a sheaf: a cover of an open $U$ intersects $Y_\alpha$ in a cover of $U\cap Y_\alpha$, and compatible sections glue uniquely there in $L$. On the open $Y_\alpha$ it is $L$, and on the open complement it is zero. If $L$ is finite locally free, these descriptions are local free charts of its extension, of the original ranks on the stratum and rank zero elsewhere by [F6]. Applied to a short exact sequence, extension has the original exact sequence on stalks in $Y_\alpha$ and the zero exact sequence on all other stalks. Thus [F4] proves exactness on the underlying abelian sheaves, hence exactness of the module sequence. Consequently extension preserves every relation of $K^0_{\mathrm{vb}}$ and induces a homomorphism on that group. [F1, F3, F4, F6, F8, construct]
 
-2.1 A finite locally free sheaf $G$ on $Y$ is canonically isomorphic to $\bigoplus_\alpha j_{\alpha*}(G|_{Y_\alpha})$: the natural map is an isomorphism on every stratum, hence on every stalk. This is a finite direct sum by [F1], so its class is the sum of the classes of those extensions. Apply it to $q^*E_i$, and then push forward the equalities of step 1.1 by the exact extensions of step 1.2. This proves the stated global equality with supported, possibly varying-rank bundles. [F1, F3, step 1.1, step 1.2]
+2.1 For a finite locally free sheaf $G$ on $Y$, define a module-linear map $\rho:G\to\bigoplus_\alpha j_{\alpha*}(G|_{Y_\alpha})$ by restricting sections to each component, using [F7] and [F8]. Here the finite direct sum is the sheaf whose sections are tuples of component sections, with componentwise operations and restrictions; the sheaf axiom holds coordinatewise. On the component $Y_\alpha$ only its own summand is nonzero, so $\rho$ is the identity there and is an isomorphism on every stalk. By [F5] it is an isomorphism of sheaves and its inverse is module-linear. This is a finite direct sum by [F1], so the split short exact sequences for successive partial sums and [F3] give $[G]=\sum_\alpha[j_{\alpha*}(G|_{Y_\alpha})]$. Apply this to $q^*E_i$, whose restriction to $Y_\alpha$ is $q_\alpha^*(E_i|_{X_\alpha})$ by the componentwise construction and the local pullback description in [F7]. Then push forward the equalities of step 1.1 by the exact extensions of step 1.2. This proves the stated global equality with supported, possibly varying-rank bundles, also for the empty partition. [F1, F3, F5, F7, F8, step 1.1, step 1.2, construct]
 
-3.1 Rank at a point defines a homomorphism $K^0_{\mathrm{vb}}(Y)\to\mathbb Z$: a short exact sequence of vector bundles splits locally by lifting a basis of its locally free quotient, so its fiber dimensions are additive. A sum of $N$ global line-bundle classes therefore has rank $N$ at every point. The displayed two-component bundle has ranks zero and one, so its class cannot equal such a sum. Any surjective componentwise tower has nonempty preimages of both components and preserves these two ranks, giving the same contradiction upstairs. This refutes the unqualified varying-rank line-sum assertion while retaining all valid identities above. [F2, F3, step 2.1, algebra] ∎
+3.1 Rank at a point defines a homomorphism $K^0_{\mathrm{vb}}(Y)\to\mathbb Z$. Indeed, for a short exact sequence of vector bundles, [F4] makes its stalk map onto the quotient surjective. Lift the finitely many elements of a local basis of the quotient to germs in the middle sheaf, represent them on neighbourhoods, and shrink to a common neighbourhood where their images are that basis. Extending linearly gives a local splitting. The middle fibre is therefore the direct sum of the outer fibres, so their dimensions, and hence their ranks by [F6] and [F9], add. A sum of $N$ global line-bundle classes has rank $N$ at every point. The displayed two-component bundle has ranks zero and one, so its class cannot equal such a sum. Pullback preserves ranks by [F7], and any surjective componentwise tower has nonempty preimages of both components, giving the same contradiction upstairs. This refutes the unqualified varying-rank line-sum assertion while retaining all valid identities above. [F2, F3, F4, F6, F7, F9, step 2.1, algebra] ∎

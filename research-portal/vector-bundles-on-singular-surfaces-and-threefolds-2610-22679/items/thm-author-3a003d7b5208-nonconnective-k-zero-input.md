@@ -5,59 +5,111 @@ title: Nonconnective K theory in degree zero
 status: published
 domain: mathematics
 external_input: true
-deps: []
-dependency_roles: {}
+deps:
+  - math:def-simplicial-set-homotopy-and-trivial-kan-fibration
+  - def-stable-spectra-interface
+dependency_roles:
+  math:def-simplicial-set-homotopy-and-trivial-kan-fibration: mathematical-premise
+  def-stable-spectra-interface: mathematical-premise
 sources:
   references:
     - title: Algebraic K-theory of stable ∞-categories via binary complexes
-      url: https://pure.mpg.de/rest/items/item_3150689_3/component/file_3150690/content
-      locator: Section 2.2, paragraph immediately preceding Lemma 2.12
-      statement: For a small stable infinity-category C, its cofiber Grothendieck
-        group after idempotent completion is naturally isomorphic to π₀ of its
-        nonconnective K-theory spectrum; in particular the completion can be
-        omitted when C is idempotent complete.
-      hypotheses: C is a small stable infinity-category; the stated specialization
-        assumes C is idempotent complete.
-      reading_limits: Read the source title, §2.1 identification of its nonconnective
-        functor with the BGT functor, and the stated paragraph in §2.2. The
-        underlying proofs of the recalled comparison were not reconstructed or
-        independently read in full.
+      url: https://arxiv.org/pdf/1805.06175v2
+      locator: §2.1, opening paragraph (printed p. 2) and formula (2.6) (p. 3); §2.2,
+        opening paragraph immediately before Lemma 2.12 (p. 4).
+      statement: For small stable infinity-categories, idempotent completion is stable
+        and left adjoint to inclusion of the idempotent-complete ones. The
+        cofiber Grothendieck group of the completion is naturally the
+        degree-zero group of BGT nonconnective K-theory, by object classes.
+      hypotheses: The category is small and stable; maps between stable categories are
+        exact. Omitting completion requires idempotent completeness.
+      reading_limits: Read these passages in the January 29, 2019 arXiv v2 PDF,
+        including the cofiber presentation and functor identification. The
+        former MPG URL returned HTTP 403; no fresh reading of that endpoint is
+        claimed. The recalled comparison and completion theorems are imported,
+        not reconstructed.
     - title: A universal characterization of higher algebraic K-theory
       url: https://www.math.columbia.edu/~thaddeus/blumberg/3.pdf
-      locator: Definition 9.6 and Remark 9.33
-      statement: Definition 9.6 constructs the nonconnective K-theory functor; Remark
-        9.33 records its degree-zero comparison with connective K-theory in the
-        stated Waldhausen setting.
-      hypotheses: The source's small stable infinity-category and Waldhausen
-        hypotheses apply in the respective passages.
-      reading_limits: Read the cited definition and remark only; this reference
-        identifies the functor and supplies context, not a claimed local proof
-        of the general comparison.
+      locator: "§2.2: paragraph before Proposition 2.10 (p. 748), functor-category
+        paragraph, Definition 2.12 and idempotent-completion paragraph (p. 749);
+        Definition 9.6 and Theorem 9.8 (p. 808); Remark 9.33 (p. 815)."
+      statement: The stable domain uses exact functors. Its idempotent-complete full
+        subcategory is reflective. Definition 9.6 specifies nonconnective
+        K-theory, identified by Theorem 9.8 with the localizing functor used by
+        Kasprowski–Winges. Remark 9.33 gives degree-zero agreement in its
+        Waldhausen setting.
+      hypotheses: The completion and functor statements concern small stable
+        infinity-categories. Remark 9.33 concerns the Waldhausen setting of
+        §9.3, with idempotent completeness needed for its degree-zero assertion;
+        it is contextual here, not the general comparison premise.
+      reading_limits: Read the indicated definitions, introductory paragraphs and
+        theorem/remark statements. The completion, corepresentability and
+        comparison proofs were not reconstructed. The general degree-zero
+        premise used here is the explicit Kasprowski–Winges statement.
+    - title: Jacob Lurie, Higher Topos Theory
+      url: https://arxiv.org/pdf/math/0608040
+      locator: Definition 1.1.2.4; §4.4.5 opening discussion, Definitions 4.4.5.2 and
+        4.4.5.4, Remark 4.4.5.3, and the paragraph defining effective
+        idempotents immediately before Corollary 4.4.5.14; Definition 5.1.4.1
+        and Proposition 5.1.4.2.
+      statement: Infinity-categories are simplicial sets with inner-horn fillers.
+        Coherent idempotents are diagrams indexed by the walking idempotent;
+        idempotent completeness means each has a colimit, equivalently a
+        coherent retract splitting. An idempotent completion is fully faithful
+        into an idempotent-complete category whose objects are retracts of image
+        objects, and it exists.
+      hypotheses: The definitions apply to infinity-categories. Size bounds are fixed
+        when discussing small categories, enlarging the ambient universe for
+        constructions if necessary.
+      reading_limits: Read the listed definitions, the coherent-idempotent/retract
+        explanation, the effective-idempotent paragraph, and the completion
+        statement and displayed construction in the PDF dated November 26, 2024.
+        No claim to have reconstructed the general higher-category theory or the
+        underlying proofs is made.
 provenance:
   statement: literature-derived
   proof: literature-derived
 proof_strategy: direct
-dependency_level: 0
+dependency_level: 4
+formulation_deps:
+  - math:def-simplicial-set-homotopy-and-trivial-kan-fibration
+  - def-stable-spectra-interface
+argument_deps:
+  - math:def-simplicial-set-homotopy-and-trivial-kan-fibration
+  - def-stable-spectra-interface
 ---
 
 ## Statement
-For a small idempotent-complete stable infinity-category C, the canonical map from the abelian group generated by equivalence classes of objects, subject to [Y]=[X]+[Z] for every cofiber sequence X→Y→Z, to π₀𝕂(C) is an isomorphism. Here 𝕂 is the nonconnective algebraic K-theory functor of Blumberg–Gepner–Tabuada. The isomorphism sends the generator of an object to its K-theory class.
+For a small idempotent-complete stable infinity-category C, the canonical map from the abelian group generated by equivalence classes of objects, subject to [Y]=[X]+[Z] for every cofiber sequence X→Y→Z, to π₀𝕂(C) is an isomorphism. Here 𝕂 is the nonconnective algebraic K-theory functor of Blumberg–Gepner–Tabuada. The isomorphism sends the generator of an object to its K-theory class. It is natural for exact functors.
 
-Idempotent complete means that every idempotent endomorphism splits. A cofiber sequence is a sequence X→Y→Z in which Z is the pushout of X→Y along X→0. The group is the cofiber Grothendieck group.
+Here an infinity-category is a quasicategory: a simplicial set $C$ such that every map $\Lambda_i[n]\to C$ extends to $\Delta[n]\to C$ for $0<i<n$. The inner horn $\Lambda_i[n]$ is the union of all faces of the standard simplex $\Delta[n]$ except its $i$th face. Small means that its simplices form sets in the fixed small universe. Objects are vertices; their equivalence classes identify objects isomorphic in the homotopy category, whose morphisms are homotopy classes of edges. Diagrams and their limits and colimits are homotopy-coherent: limits and colimits have the universal cone and cocone properties in mapping spaces. A stable infinity-category has all finite limits and colimits, and a square is a pushout exactly when it is a pullback. It has a zero object $0$, both initial and terminal. An exact functor preserves finite limits and colimits.
+
+For precision, let $I$ be the nerve of the ordinary category with one object and endomorphisms $1,e$, with $e^2=e$; the nerve has composable chains as simplices. A homotopy-coherent idempotent is a map $I\to C$. Idempotent complete means that each such diagram has a colimit, the coherent meaning of every idempotent splitting as a retract. A retract of $X$ is an object $Y$ with maps $i:Y\to X$, $r:X\to Y$ and a specified homotopy $ri\simeq1_Y$; the coherent idempotent and splitting include their higher coherences.
+
+A cofiber sequence $X\to Y\to Z$ includes the pushout square identifying $Z$ with $Y\sqcup_X0$, including its nullhomotopy. Its cofiber Grothendieck group, denoted $G(C)$ here, is the free abelian group on object equivalence classes modulo the subgroup generated by $[Y]-[X]-[Z]$ for these sequences. Smallness makes this a set-sized presentation. The notation $\pi_0$ is the degree-zero stable homotopy group of the supplied spectrum interface.
+
+## Statement references
+[[math:def-simplicial-set-homotopy-and-trivial-kan-fibration]]
+
+[[def-stable-spectra-interface]]
 
 ## External input
-This is the established degree-zero comparison recalled in Kasprowski–Winges, §2.2, applied to an idempotent-complete category. Their §2.1 identifies the nonconnective functor with the BGT localizing invariant. Only the passages specified in sources.references were read; no local reconstruction of this theorem is claimed.
+Kasprowski–Winges §2.2 supplies the object-class comparison $G(\operatorname{Idem}(C))\cong\pi_0\mathbb K(C)$. Their §2.1 and BGT §2.2 supply the stable idempotent-completion interface: an exact fully faithful map $j_C:C\to\operatorname{Idem}(C)$ into a small idempotent-complete stable infinity-category, with every object a retract of an image object. It is universal among exact maps into idempotent-complete stable categories: restriction along $j_C$ identifies the infinity-categories of exact functors $\operatorname{Idem}(C)\to D$ and $C\to D$ for every such $D$. In particular $j_C$ is an equivalence when $C$ is already idempotent complete. Here functor infinity-categories are the simplicial internal hom, whose $n$-simplices are maps $C\times\Delta[n]\to D$, restricted to exact functors when indicated.
+
+Lurie's specified passages supply the quasicategory and coherent-idempotent definitions above. BGT Definition 9.6 and Theorem 9.8 identify the nonconnective functor with the one in Kasprowski–Winges formula (2.6). BGT Remark 9.33 is contextual only; its Waldhausen hypotheses are not used as a substitute for the general comparison. Only the passages specified in sources.references were read; no local reconstruction of these imported results is claimed.
 
 ## Facts & Assumptions
-**Given:** A small idempotent-complete stable infinity-category C and the cited nonconnective functor.
+**Given:** A small idempotent-complete stable infinity-category C, in the preceding sense, and the cited BGT nonconnective functor, with degree-zero groups interpreted in [[def-stable-spectra-interface]]. The simplicial sets and standard simplices use [[math:def-simplicial-set-homotopy-and-trivial-kan-fibration]].
 
-**Goal:** Identify π₀𝕂(C) with the cofiber Grothendieck group, with the stated generator map.
+**Goal:** Identify π₀𝕂(C) with $G(C)$, with the stated generator map and naturality.
 
-[F1] The external input identifies π₀𝕂(C) with the cofiber Grothendieck group of the idempotent completion of C, naturally in C, by the object-class map.
+[F1] The imported comparison identifies $G(\operatorname{Idem}(C))$ with $\pi_0\mathbb K(C)$ naturally in exact functors, by the object-class map (Kasprowski–Winges §2.2).
+
+[F2] The imported completion interface supplies $j_C$, its exactness and its universal property; $j_C$ is an equivalence for idempotent-complete $C$ (Kasprowski–Winges §2.1; BGT §2.2). The coherent completeness convention is the one in the cited Lurie definitions, not ordinary preadditive completion.
 
 ## Proof
 **Proof technique:** Apply the imported comparison under its stated hypotheses.
 
-1.1 Since C is idempotent complete, its canonical inclusion into its idempotent completion is an equivalence. Thus the cofiber Grothendieck group appearing in [F1] is the group presented using the objects and cofiber sequences of C. [F1, assume-hyp]
+1.1 Since C is idempotent complete, [F2] makes $j_C$ an exact equivalence. It therefore identifies object equivalence classes and cofiber sequences in the two categories, so it induces an isomorphism $G(C)\xrightarrow{\sim}G(\operatorname{Idem}(C))$. Explicitly, equivalences preserve the defining pushout squares, and an inverse equivalence gives the inverse on presentations. [F2, given]
 
-2.1 Apply [F1] to C and use step 1.1. The resulting natural isomorphism sends each object generator to its K-theory class, as asserted. [F1, step 1.1] ∎
+2.1 Compose the isomorphism of step 1.1 with [F1]. The result is the asserted object-class isomorphism $G(C)\xrightarrow{\sim}\pi_0\mathbb K(C)$. Both maps are natural for exact functors by the completion interface and [F1]; on a generator their composite is its K-theory class. [F1, F2, step 1.1] ∎

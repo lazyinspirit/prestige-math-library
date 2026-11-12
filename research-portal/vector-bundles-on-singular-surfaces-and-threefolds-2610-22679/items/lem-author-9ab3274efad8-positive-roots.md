@@ -6,8 +6,10 @@ status: published
 domain: mathematics
 deps:
   - math:def-divisible-module-over-an-integral-domain
+  - math:def-group
 dependency_roles:
   math:def-divisible-module-over-an-integral-domain: mathematical-premise
+  math:def-group: mathematical-premise
 provenance:
   statement: ai-generated
   proof: ai-generated
@@ -22,7 +24,9 @@ An abelian group is written additively. Multiplication by n means repeated addit
 
 ## Facts & Assumptions
 
-[F1] A divisible abelian group is a divisible integer module: for every nonzero integer m and every element a, there is an element b with mb = a ([[math:def-divisible-module-over-an-integral-domain]]).
+[F1] An abelian group $A$ is divisible if and only if for every nonzero integer $m$ and every $a\in A$ there is $b\in A$ with $mb=a$ ([[math:def-divisible-module-over-an-integral-domain]]).
+
+[F2] An abelian group has an associative and commutative addition, an identity $0$, and for every element $b$ a unique additive inverse $-b$ with $b+(-b)=0$ ([[math:def-group]]).
 
 **Given:** An abelian group A.
 
@@ -32,4 +36,4 @@ An abelian group is written additively. Multiplication by n means repeated addit
 
 1.1 If A is divisible, apply [F1] with $m=n$ for each positive $n$ to obtain surjectivity. [F1, given]
 
-2.1 Conversely, assume each positive multiplication map is surjective. For nonzero m and a in A, choose b with $|m|b=a$. If m is positive use b; if m is negative use -b. In either case the chosen element maps to a under multiplication by m. Thus [F1] gives divisibility. [F1, given, choose] ∎
+2.1 Conversely, assume each positive multiplication map is surjective. Fix a nonzero integer $m$ and $a\in A$, set $n=|m|>0$, and choose $b\in A$ with $nb=a$. If $m>0$, then $mb=a$. If $m=-n<0$, associativity and commutativity allow pairing the $n$ copies of $b$ with the $n$ copies of $-b$, giving $nb+n(-b)=0$. Uniqueness of additive inverses gives $n(-b)=-(nb)$, so the definition of negative multiplication gives $m(-b)=-\bigl(n(-b)\bigr)=-(-(nb))=nb=a$. Thus every nonzero integer multiplication map is surjective, and [F1] implies divisibility. [F1, F2, given, choose, algebra] ∎

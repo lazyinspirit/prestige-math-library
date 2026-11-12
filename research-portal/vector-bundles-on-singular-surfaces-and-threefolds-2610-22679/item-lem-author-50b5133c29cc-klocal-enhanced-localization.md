@@ -2,7 +2,7 @@
 title: The actual enhanced restriction sequence and its K fiber
 status: published
 research_item: lem-author-50b5133c29cc-klocal-enhanced-localization
-dependency_level: 13
+dependency_level: 15
 ---
 
 PDF p. 7: Zariski locality; PDF p. 15: Localization diagram
@@ -16,6 +16,7 @@ PDF p. 7: Zariski locality; PDF p. 15: Localization diagram
 - [thm-author-50b5133c29cc-klocal-categorical-localizing-input](item-thm-author-50b5133c29cc-klocal-categorical-localizing-input)
 - [def-nonconnective-k-spectrum-interface](item-def-nonconnective-k-spectrum-interface)
 - [lem-author-c5bc2838d897-kcoherent-perfect-essential-smallness](item-lem-author-c5bc2838d897-kcoherent-perfect-essential-smallness)
+- [lem-fiber-sequence-homotopy-exactness](item-lem-fiber-sequence-homotopy-exactness)
 
 
 ## Statement
@@ -36,7 +37,9 @@ is exact: the induced enhanced Verdier quotient becomes equivalent to $\mathrm{P
 
 [F3] [thm-author-50b5133c29cc-klocal-categorical-localizing-input](item-thm-author-50b5133c29cc-klocal-categorical-localizing-input) imports BGT's enhanced criterion and the localizing property of the same $\mathbb K$ used in [def-nonconnective-k-spectrum-interface](item-def-nonconnective-k-spectrum-interface).
 
+[F4] [lem-fiber-sequence-homotopy-exactness](item-lem-fiber-sequence-homotopy-exactness) supplies the natural long exact homotopy sequence of a spectral fiber sequence in every integer degree, including its connecting homomorphisms.
+
 ## Proof
 1.1 Use equivalent small models, or the equivalent essentially small domain fixed by the supplied K interface. Apply BGT Proposition 5.15 with $\kappa=\omega$ to the actual sequence in [F1]. All categories are stable and therefore admit finite colimits; all functors are exact and preserve them. The composite is zero, the first arrow is fully faithful, and the triangulated quotient is an equivalence after idempotent completion by [F2]. Thus BGT yields the enhanced exact sequence and the claimed completion equivalence for its actual quotient functor. The use of homotopy categories is legitimate because an actual exact restriction functor was specified before applying the criterion. [A1, F1, F2, F3]
 
-2.1 By [F3], applying $\mathbb K$ yields a cofiber sequence, hence a fiber sequence in spectra. Its terms and maps are exactly $K_T(X)$, $K(X)$ and $K(U)$ by their supplied definitions. The construction is natural for restriction diagrams preserving the indicated supports, because quotient, $U_{\mathrm{loc}}$, and its mapping-spectrum description are functorial on the actual diagrams. No connective truncation is performed, so the fiber sequence and its long exact sequence retain all integer groups. [F1, F3, step 1.1] ∎
+2.1 By [F3], applying $\mathbb K$ yields a cofiber sequence, hence a fiber sequence in spectra. Its terms and maps are exactly $K_T(X)$, $K(X)$ and $K(U)$ by their supplied definitions. The construction is natural for restriction diagrams preserving the indicated supports, because quotient, $U_{\mathrm{loc}}$, and its mapping-spectrum description are functorial on the actual diagrams. Apply [F4] to this fiber sequence to obtain its natural long exact sequence of homotopy groups. No connective truncation is performed, so this exact sequence retains all integer groups. [F1, F3, F4, step 1.1] ∎

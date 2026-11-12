@@ -9,7 +9,17 @@ PDF p. 1: Serre splitting theorem
 
 ## Prerequisites
 
-None.
+- [math:def-commutative-ring](https://alphabetamath.cc/item/def-commutative-ring)
+- [math:def-left-and-right-modules](https://alphabetamath.cc/item/def-left-and-right-modules)
+- [math:def-generated-cyclic-finitely-generated-and-free-modules](https://alphabetamath.cc/item/def-generated-cyclic-finitely-generated-and-free-modules)
+- [math:def-finitely-presented-module-and-algebra](https://alphabetamath.cc/item/def-finitely-presented-module-and-algebra)
+- [math:def-free-module-on-a-set-and-standard-basis](https://alphabetamath.cc/item/def-free-module-on-a-set-and-standard-basis)
+- [math:def-module-homomorphism-kernel-image-and-cokernel](https://alphabetamath.cc/item/def-module-homomorphism-kernel-image-and-cokernel)
+- [math:def-exact-and-short-exact-sequences-of-modules](https://alphabetamath.cc/item/def-exact-and-short-exact-sequences-of-modules)
+- [math:def-projective-module](https://alphabetamath.cc/item/def-projective-module)
+- [math:thm-universal-property-of-free-modules](https://alphabetamath.cc/item/thm-universal-property-of-free-modules)
+- [math:thm-module-kernel-image-and-injectivity](https://alphabetamath.cc/item/thm-module-kernel-image-and-injectivity)
+
 
 ## Statement
 Let $A$ be a commutative unital ring and $P$ a finite projective $A$-module. Then $P$ is finitely presented: there is an exact sequence $A^m\to A^n\to P\to0$ with $m,n$ finite. Here finite projective means finitely generated and having the lifting property through surjective module maps.
@@ -20,8 +30,20 @@ Let $A$ be a commutative unital ring and $P$ a finite projective $A$-module. The
 
 **Goal:** Construct a finite presentation of $P$.
 
+[F1] Rings and modules have the unital conventions of [math:def-commutative-ring](https://alphabetamath.cc/item/def-commutative-ring) and [math:def-left-and-right-modules](https://alphabetamath.cc/item/def-left-and-right-modules).
+
+[F2] A generating set is contained in no proper submodule: the submodule it generates is the smallest submodule containing it. Finite generation means generation by a finite set; $A^n$ is the finite free module with indexed standard vectors $e_1,\ldots,e_n$, including $A^0=0$. [math:def-generated-cyclic-finitely-generated-and-free-modules](https://alphabetamath.cc/item/def-generated-cyclic-finitely-generated-and-free-modules) [math:def-free-module-on-a-set-and-standard-basis](https://alphabetamath.cc/item/def-free-module-on-a-set-and-standard-basis)
+
+[F3] A finite presentation consists of homomorphisms $A^m\xrightarrow{a}A^n\xrightarrow{q}P\to0$ with $q$ surjective and $\operatorname{im}a=\ker q$. [math:def-finitely-presented-module-and-algebra](https://alphabetamath.cc/item/def-finitely-presented-module-and-algebra) [math:def-module-homomorphism-kernel-image-and-cokernel](https://alphabetamath.cc/item/def-module-homomorphism-kernel-image-and-cokernel) [math:def-exact-and-short-exact-sequences-of-modules](https://alphabetamath.cc/item/def-exact-and-short-exact-sequences-of-modules)
+
+[F4] Projectivity means that for every surjective module homomorphism $u:M\to N$ and homomorphism $f:P\to N$ there is a homomorphism $v:P\to M$ with $uv=f$. [math:def-projective-module](https://alphabetamath.cc/item/def-projective-module)
+
+[F5] Assigning images to the indexed standard vectors of a free module extends uniquely to a module homomorphism, by taking the corresponding finite linear combinations. [math:thm-universal-property-of-free-modules](https://alphabetamath.cc/item/thm-universal-property-of-free-modules)
+
+[F6] The kernel and image of a homomorphism of left modules are submodules, with the inherited module operations. [math:thm-module-kernel-image-and-injectivity](https://alphabetamath.cc/item/thm-module-kernel-image-and-injectivity)
+
 ## Proof
 
-1.1 Choose finitely many generators of $P$ and let $q:A^n\to P$ be the resulting surjection. Projectivity lifts the identity of $P$ through $q$, giving a section $s:P\to A^n$. Thus $A^n=s(P)\oplus\ker q$. [given, choose, construct]
+1.1 Choose generators $p_1,\ldots,p_n$ of $P$. By [F5] the assignments $e_i\mapsto p_i$ define a homomorphism $q:A^n\to P$. Its image is a submodule by [F6] and contains every $p_i$, so it is all of $P$ by [F2]; thus $q$ is surjective. Apply [F4] to $q$ and $\operatorname{id}_P$ to obtain $s:P\to A^n$ with $qs=\operatorname{id}_P$; this is a section of $q$. Put $K=\ker q$. By [F6], $K$ and $s(P)=\operatorname{im}s$ are submodules of $A^n$; in particular, $K$ is an $A$-module. Define $\pi(x)=x-s(q(x))$. This is an $A$-linear map $A^n\to K$, since $q\pi(x)=q(x)-qsq(x)=0$, and $\pi(k)=k$ for $k\in K$. Thus $A^n=s(P)\oplus K$: every $x$ has the unique decomposition $s(q(x))+\pi(x)$ into these two submodules, because applying $q$ determines its $s(P)$ part. [given, F1, F2, F3, F4, F5, F6, choose, construct]
 
-2.1 The projection $A^n\to\ker q$ maps the standard basis to a finite generating set of $\ker q$. Mapping a finite free module onto that kernel and composing with its inclusion in $A^n$ gives the required presentation. [step 1.1, construct] ∎
+2.1 For $k\in K$, write $k=\sum_{i=1}^n a_i e_i$ by [F2]. Then $k=\pi(k)=\sum_{i=1}^n a_i\pi(e_i)$, so $K$ is generated by the finite indexed family $\pi(e_1),\ldots,\pi(e_n)$. By [F5], applied to the module $K$ established in step 1.1, these vectors define a homomorphism $b:A^n\to K$. It is surjective: the displayed expression gives $b(\sum_{i=1}^n a_i e_i)=k$. Compose $b$ with the inclusion $K\hookrightarrow A^n$ to obtain $a:A^n\to A^n$. Its image is $K=\ker q$, and $q$ is surjective; hence $A^n\xrightarrow{a}A^n\xrightarrow{q}P\to0$ is exact by [F3]. This is the required finite presentation, with $m=n$. The same construction allows $n=0$ and the zero ring; it selects only a finite generating family and one lift, so no Axiom of Choice is assumed. [F1, F2, F3, F5, step 1.1, construct] ∎

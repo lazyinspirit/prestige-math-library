@@ -9,19 +9,36 @@ PDF p. 4: Property (4): cycle-complex convention
 
 ## Prerequisites
 
-None.
+- [math:def-group](https://alphabetamath.cc/item/def-group)
+- [math:def-group-homomorphism](https://alphabetamath.cc/item/def-group-homomorphism)
+- [math:def-subgroup](https://alphabetamath.cc/item/def-subgroup)
+- [math:def-normal-subgroup](https://alphabetamath.cc/item/def-normal-subgroup)
+- [math:def-kernel-and-image-of-group-homomorphism](https://alphabetamath.cc/item/def-kernel-and-image-of-group-homomorphism)
+- [math:def-quotient-group](https://alphabetamath.cc/item/def-quotient-group)
+- [math:def-group-isomorphism-and-automorphism](https://alphabetamath.cc/item/def-group-isomorphism-and-automorphism)
+- [math:thm-image-subgroup-and-kernel-normal](https://alphabetamath.cc/item/thm-image-subgroup-and-kernel-normal)
+- [math:thm-quotient-group-laws](https://alphabetamath.cc/item/thm-quotient-group-laws)
+
 
 ## Statement
-Let C be a chain complex of abelian groups, with differential d from $C_n$ to $C_{n-1}$. Define the cochain complex $C^\vee$ by $(C^\vee)^q$ = $C_{-q}$, with differential d in each degree. Then $H^q(C^\vee)$ is canonically $H_{-q}(C)$.
+Write abelian groups additively. A chain complex $C$ consists of a family $(C_n)_{n\in\mathbb Z}$ of abelian groups and group homomorphisms $d_n:C_n\to C_{n-1}$ satisfying $d_{n-1}\circ d_n=0$ for every integer $n$, where $0$ denotes the zero homomorphism. Its cycles, boundaries and homology are $Z_n(C)=\ker d_n$, $B_n(C)=\operatorname{im}d_{n+1}$ and $H_n(C)=Z_n(C)/B_n(C)$, with the quotient-group operation induced by addition. A cochain complex $D$ similarly consists of abelian groups $D^q$ and homomorphisms $\delta^q:D^q\to D^{q+1}$ satisfying $\delta^{q+1}\circ\delta^q=0$; its cohomology is $H^q(D)=\ker\delta^q/\operatorname{im}\delta^{q-1}$.
 
-A chain complex has consecutive differentials whose composite is zero; its homology is the kernel modulo the image. A cochain complex is defined analogously, with differential increasing degree, and its cohomology is the corresponding kernel modulo image.
+For a chain complex $C$, define $C^\vee$ by $(C^\vee)^q=C_{-q}$ and $\delta^q=d_{-q}$. Then $C^\vee$ is a cochain complex, all the displayed homology and cohomology quotients are well defined abelian groups, and for every integer $q$ there is a canonical group isomorphism $H^q(C^\vee)\cong H_{-q}(C)$, given by the identity on the common quotient of cycles by boundaries.
 
 ## Facts & Assumptions
-**Given:** A chain complex C and an integer q.
+**Given:** A chain complex $C$ and an integer $q$ as specified in the Statement.
 
-**Goal:** Identify the cohomology of its reindexing with its homology.
+**Goal:** Verify the reindexing and identify its cohomology with the corresponding homology group.
+
+[F1] Abelian groups and group homomorphisms have the meanings of [math:def-group](https://alphabetamath.cc/item/def-group) and [math:def-group-homomorphism](https://alphabetamath.cc/item/def-group-homomorphism), in additive notation.
+
+[F2] Kernels and images are as in [math:def-kernel-and-image-of-group-homomorphism](https://alphabetamath.cc/item/def-kernel-and-image-of-group-homomorphism). The kernel and image of a group homomorphism are subgroups by [math:thm-image-subgroup-and-kernel-normal](https://alphabetamath.cc/item/thm-image-subgroup-and-kernel-normal). Subgroups inherit the ambient operation as in [math:def-subgroup](https://alphabetamath.cc/item/def-subgroup), and normality means invariance under conjugation as in [math:def-normal-subgroup](https://alphabetamath.cc/item/def-normal-subgroup).
+
+[F3] Quotients by normal subgroups have the coset operation of [math:def-quotient-group](https://alphabetamath.cc/item/def-quotient-group), which is well defined and gives a group by [math:thm-quotient-group-laws](https://alphabetamath.cc/item/thm-quotient-group-laws). In additive notation the operation is $(x+B)+(y+B)=(x+y)+B$.
+
+[F4] A group isomorphism is a bijective homomorphism, as in [math:def-group-isomorphism-and-automorphism](https://alphabetamath.cc/item/def-group-isomorphism-and-automorphism).
 
 ## Proof
-1.1 The reindexed differential goes from $C_{-q}$ to $C_{-q-1}$, and its square is zero because d squared is zero in C. Thus $C^\vee$ is a cochain complex. [given, construct]
+1.1 By [F2], $Z_n(C)$ and $B_n(C)$ are subgroups of $C_n$. The square-zero equation gives $B_n(C)\subseteq Z_n(C)$, since $d_n(d_{n+1}(x))=0$ for every $x\in C_{n+1}$. Their inherited operations make $B_n(C)$ a subgroup of $Z_n(C)$; moreover $z+b-z=b$ for $z\in Z_n(C)$ and $b\in B_n(C)$, so it is normal there by [F1] and [F2]. Thus [F3] makes $H_n(C)$ a well defined group, and its operation is commutative because addition in $C_n$ is commutative. The identical argument for any cochain complex, using $\delta^q\delta^{q-1}=0$, makes its cohomology a well defined abelian group. For the proposed $C^\vee$, the map $\delta^q=d_{-q}$ is a homomorphism from $C_{-q}$ to $C_{-q-1}=(C^\vee)^{q+1}$ and satisfies $\delta^{q+1}\delta^q=d_{-q-1}d_{-q}=0$. Hence it is a cochain complex. [given, F1, F2, F3, construct, algebra]
 
-2.1 Its degree-q kernel and incoming image are exactly the degree-(−q) cycles and boundaries of C. Their quotients are therefore identical, giving the claimed canonical isomorphism. [given, step 1.1] ∎
+2.1 The degree-$q$ cycles of $C^\vee$ are $\ker d_{-q}=Z_{-q}(C)$, and its incoming image is $\operatorname{im}d_{-q+1}=B_{-q}(C)$. The two groups in the conclusion are therefore the same quotient with the same operation from [F3]. The map sending each coset to itself is well defined, preserves addition and is bijective with itself as inverse; by [F4] it is the asserted canonical isomorphism. [given, F2, F3, F4, step 1.1] ∎

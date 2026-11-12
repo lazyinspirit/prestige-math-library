@@ -4,123 +4,119 @@ title: Article items · 03 — Coordinate multiples of dual generators span all
 description: Presents 29 items from the article and its immediate prerequisites,
   covering dependency levels 1–4.
 status: published
-dependency_level: 2
+dependency_level: 0
 research_article_page: true
-item_count: 29
+item_count: 28
 ---
 
-## Coordinate multiples of dual generators span all first jets
+## Published prerequisite
 
-[Open item](item-lem-author-fc2380accb47-coordinate-first-jets) · level 1
+[math:def-group-isomorphism-and-automorphism](https://alphabetamath.cc/item/def-group-isomorphism-and-automorphism)
 
-## Normal affine threefolds have controlled nonsmooth strata
+## Published prerequisite
 
-[Open item](item-lem-author-fc2380accb47-normal-smooth-strata) · level 1
+[math:def-group-power](https://alphabetamath.cc/item/def-group-power)
 
-## Chern coefficients of the projective relation
+## Published prerequisite
 
-[Open item](item-lem-chern-relation-uniqueness) · level 1
+[math:def-height-of-a-prime-ideal](https://alphabetamath.cc/item/def-height-of-a-prime-ideal)
 
-## Determinants and exact sequences
+## Published prerequisite
 
-[Open item](item-lem-determinants-of-short-exact-sequences) · level 1
+[math:def-integers](https://alphabetamath.cc/item/def-integers)
 
-## Finite projective complements
+## Published prerequisite
 
-[Open item](item-lem-finite-projective-complements) · level 1
+[math:def-integral-affine-scheme](https://alphabetamath.cc/item/def-integral-affine-scheme)
 
-## Flag towers with line-bundle quotients
+## Published prerequisite
 
-[Open item](item-lem-flag-tower-line-quotients) · level 1
+[math:def-integral-closure-and-integrally-closed-domain](https://alphabetamath.cc/item/def-integral-closure-and-integrally-closed-domain)
 
-## Extending a Whitney class to K zero
+## Published prerequisite
 
-[Open item](item-lem-virtual-chern-extension-interface) · level 1
+[math:def-integral-scheme](https://alphabetamath.cc/item/def-integral-scheme)
 
-## Seminormality and seminormalization
+## Published prerequisite
 
-[Open item](item-def-seminormal-scheme-interface) · level 2
+[math:def-invertible-sheaf-of-cartier-divisor](https://alphabetamath.cc/item/def-invertible-sheaf-of-cartier-divisor)
 
-## Picard group of an affine curve through its boundary
+## Published prerequisite
 
-[Open item](item-lem-affine-curve-picard-boundary) · level 2
+[math:def-irreducible-component-of-a-topological-space](https://alphabetamath.cc/item/def-irreducible-component-of-a-topological-space)
 
-## Iterating a conditional free-summand criterion
+## Published prerequisite
 
-[Open item](item-lem-author-3af31ead36fb-iteration) · level 2
+[math:def-irreducible-component-scheme](https://alphabetamath.cc/item/def-irreducible-component-scheme)
 
-## Matrix completion detects the actual nontrivial bundle
+## Published prerequisite
 
-[Open item](item-lem-author-b02e51f9da03-matrix-completion) · level 2
+[math:def-irreducible-topological-space-and-subset](https://alphabetamath.cc/item/def-irreducible-topological-space-and-subset)
 
-## Divisibility of an image with torsion kernel
+## Published prerequisite
 
-[Open item](item-lem-author-b87d598e83f3-cycle-image-roots) · level 2
+[math:def-kernel-cokernel-image-sheaves](https://alphabetamath.cc/item/def-kernel-cokernel-image-sheaves)
 
-## Functions extend across codimension two
+## Published prerequisite
 
-[Open item](item-lem-codimension-two-extension) · level 2
+[math:def-krull-dimension-of-a-ring](https://alphabetamath.cc/item/def-krull-dimension-of-a-ring)
 
-## Exterior-square line factors on a flag space
+## Published prerequisite
 
-[Open item](item-lem-exterior-square-root-formula) · level 2
+[math:def-locally-finite-presentation-morphism](https://alphabetamath.cc/item/def-locally-finite-presentation-morphism)
 
-## Equality in affine K zero and stable isomorphism
+## Published prerequisite
 
-[Open item](item-lem-k-zero-stable-equivalence) · level 2
+[math:def-locally-finite-type-and-finite-type-morphism](https://alphabetamath.cc/item/def-locally-finite-type-and-finite-type-morphism)
 
-## Smooth density and normal codimension over a perfect field
+## Published prerequisite
 
-[Open item](item-lem-perfect-base-smooth-density) · level 2
+[math:def-locally-free-sheaf-finite-rank](https://alphabetamath.cc/item/def-locally-free-sheaf-finite-rank)
 
-## Finite-dimensional families of generated bundle functionals
+## Published prerequisite
 
-[Open item](item-lem-regular-section-parameter-family) · level 2
+[math:def-locally-noetherian-and-noetherian-scheme](https://alphabetamath.cc/item/def-locally-noetherian-and-noetherian-scheme)
 
-## Formal Chern arithmetic through degree three
+## Published prerequisite
 
-[Open item](item-lem-third-order-chern-inversion) · level 2
+[math:def-module-homomorphism-kernel-image-and-cokernel](https://alphabetamath.cc/item/def-module-homomorphism-kernel-image-and-cokernel)
 
-## A rank-two bundle with a trivial quotient and determinant
+## Published prerequisite
 
-[Open item](item-lem-trivial-determinant-rank-two-kernel) · level 2
+[math:def-module-on-ringed-space](https://alphabetamath.cc/item/def-module-on-ringed-space)
 
-## Bloch cycle complexes and higher Chow groups
+## Published prerequisite
 
-[Open item](item-def-bloch-higher-cycle-complex) · level 3
+[math:def-morphism-of-schemes](https://alphabetamath.cc/item/def-morphism-of-schemes)
 
-## Stable spectra and exact triangles
+## Published prerequisite
 
-[Open item](item-def-stable-spectra-interface) · level 3
+[math:def-noetherian-ring-and-module](https://alphabetamath.cc/item/def-noetherian-ring-and-module)
 
-## Rational cofiber implies finite-coefficient equivalence
+## Published prerequisite
 
-[Open item](item-lem-author-4b6f215bcf3b-rational-cofiber-comparison) · level 3
+[math:def-noetherian-topological-space](https://alphabetamath.cc/item/def-noetherian-topological-space)
 
-## Cohomology descends to the derived category
+## Published prerequisite
 
-[Open item](item-lem-author-b747b28c359f-derived-cohomology) · level 3
+[math:def-open-immersion-schemes](https://alphabetamath.cc/item/def-open-immersion-schemes)
 
-## The scheme of nontransverse zero jets has small dimension
+## Published prerequisite
 
-[Open item](item-lem-author-fc2380accb47-nontransverse-incidence) · level 3
+[math:def-opposite-category](https://alphabetamath.cc/item/def-opposite-category)
 
-## Line bundles are detected off codimension two
+## Published prerequisite
 
-[Open item](item-lem-codimension-two-picard-restriction) · level 3
+[math:def-perfect-field](https://alphabetamath.cc/item/def-perfect-field)
 
-## Divisibility of the Picard group of an affine curve
+## Published prerequisite
 
-[Open item](item-prop-affine-curve-picard-divisible) · level 3
+[math:def-picard-group-scheme](https://alphabetamath.cc/item/def-picard-group-scheme)
 
-## Mohan Kumar existence of a nontrivial stably trivial bundle on a complex affine fourfold
+## Published prerequisite
 
-[Open item](item-thm-author-b02e51f9da03-mohan-kumar-existence-input) · level 3
+[math:def-prime](https://alphabetamath.cc/item/def-prime)
 
-## Serre splitting above the dimension
+## Published prerequisite
 
-[Open item](item-thm-serre-affine-splitting) · level 3
-
-## Decreasing spectral filtrations and associated graded
-
-[Open item](item-def-decreasing-filtered-spectrum) · level 4
+[math:def-prime-spectrum-and-vanishing-sets](https://alphabetamath.cc/item/def-prime-spectrum-and-vanishing-sets)

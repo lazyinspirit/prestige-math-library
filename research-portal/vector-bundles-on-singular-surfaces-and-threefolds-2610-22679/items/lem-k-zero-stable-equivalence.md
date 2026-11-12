@@ -9,11 +9,15 @@ deps:
   - lem-affine-bundle-module-interface
   - lem-finite-projective-complements
   - math:def-grothendieck-group-of-coherent-sheaves-and-vector-bundles-on-a-scheme
+  - math:def-affine-scheme
+  - math:def-locally-noetherian-and-noetherian-scheme
 dependency_roles:
   math:def-axiom-of-choice: mathematical-premise
   lem-affine-bundle-module-interface: mathematical-premise
   lem-finite-projective-complements: mathematical-premise
   math:def-grothendieck-group-of-coherent-sheaves-and-vector-bundles-on-a-scheme: mathematical-premise
+  math:def-affine-scheme: mathematical-premise
+  math:def-locally-noetherian-and-noetherian-scheme: mathematical-premise
 proof_strategy: direct
 provenance:
   statement: ai-generated
@@ -38,7 +42,9 @@ A **vector bundle** is a finite locally free $\mathcal O_X$-module: each point h
 
 [F2] Every finite projective $A$-module $P$ has a finite projective complement $Q$ with $P\oplus Q\cong A^N$ for some $N\geq0$. [[lem-finite-projective-complements]]
 
-[F3] Since $X$ is locally noetherian, the vector-bundle group has the generators and exact-sequence relations in the statement. Its bundle isomorphism classes form a set. [[math:def-grothendieck-group-of-coherent-sheaves-and-vector-bundles-on-a-scheme]]
+[F3] A noetherian scheme is locally noetherian and quasi-compact; locally noetherian means admitting an affine open cover by spectra of noetherian rings. Thus $X$ is locally noetherian, so the vector-bundle group has the generators and exact-sequence relations in the statement. Its bundle isomorphism classes form a set. [[math:def-locally-noetherian-and-noetherian-scheme]] [[math:def-grothendieck-group-of-coherent-sheaves-and-vector-bundles-on-a-scheme]]
+
+[F4] An affine scheme is a locally ringed space isomorphic to $(\operatorname{Spec}A,\mathcal O_{\operatorname{Spec}A})$ for a commutative ring $A$ with unit; the structure sheaf in this presentation is the $\mathcal O_X$ used here. [[math:def-affine-scheme]]
 
 ## Proof
 

@@ -4,123 +4,119 @@ title: Article items · 06 — The actual finite-quotient map to cdh-local motiv
 description: Presents 29 items from the article and its immediate prerequisites,
   covering dependency levels 9–11.
 status: published
-dependency_level: 5
+dependency_level: 0
 research_article_page: true
-item_count: 29
+item_count: 28
 ---
 
-## The actual finite-quotient map to cdh-local motivic cohomology
+## Published prerequisite
 
-[Open item](item-lem-author-e71ff76fe904-finite-quotient-comparison) · level 9
+[math:lem-spectrum-of-a-finite-product-ring-is-a-disjoint-union](https://alphabetamath.cc/item/lem-spectrum-of-a-finite-product-ring-is-a-disjoint-union)
 
-## Reported alternative argument in arbitrary dimension
+## Published prerequisite
 
-[Open item](item-rem-morrow-general-dimensional-comparison) · level 9
+[math:lem-zariski-closed-set-axioms](https://alphabetamath.cc/item/lem-zariski-closed-set-axioms)
 
-## External canonical field restriction identifies the BEM and EM cdh models
+## Published prerequisite
 
-[Open item](item-thm-author-2ac325480ae8-bem-field-model) · level 9
+[math:prop-a-map-of-exact-couples-induces-a-map-of-spectral-sequences](https://alphabetamath.cc/item/prop-a-map-of-exact-couples-induces-a-map-of-spectral-sequences)
 
-## Affine perfect K zero and bundle K zero
+## Published prerequisite
 
-[Open item](item-lem-affine-perfect-k-zero-bridge) · level 10
+[math:prop-abelian-groups-are-z-modules](https://alphabetamath.cc/item/prop-abelian-groups-are-z-modules)
 
-## Normalizing the comparison fiber for the dimension criterion
+## Published prerequisite
 
-[Open item](item-lem-author-0bac6b264f4a-motivic-dim-shifted-hypotheses) · level 10
+[math:prop-algebraically-closed-splitting-and-finite-extension-criteria](https://alphabetamath.cc/item/prop-algebraically-closed-splitting-and-finite-extension-criteria)
 
-## The restricted BEM complex and the supplied EM finite quotient
+## Published prerequisite
 
-[Open item](item-lem-author-2ac325480ae8-motivic-restriction-coefficients) · level 10
+[math:prop-cohomology-factors-through-the-derived-category](https://alphabetamath.cc/item/prop-cohomology-factors-through-the-derived-category)
 
-## An independent full equivalence into the truncated cdh localization
+## Published prerequisite
 
-[Open item](item-lem-author-58e57d689702-independent-gamma) · level 10
+[math:thm-abelian-groups-form-an-abelian-category](https://alphabetamath.cc/item/thm-abelian-groups-form-an-abelian-category)
 
-## Constant-sheaf sections have finite local representatives
+## Published prerequisite
 
-[Open item](item-lem-author-5bfbe3ebf14f-constant-sheaf-finite-local-representatives) · level 10
+[math:thm-affine-closed-immersions-quotient-rings](https://alphabetamath.cc/item/thm-affine-closed-immersions-quotient-rings)
 
-## Finite coproducts and refinement inside a sieve
+## Published prerequisite
 
-[Open item](item-lem-author-5bfbe3ebf14f-finite-coproduct-sieve-refinement) · level 10
+[math:thm-affine-scheme-ring-anti-equivalence](https://alphabetamath.cc/item/thm-affine-scheme-ring-anti-equivalence)
 
-## The actual EM first Chern class is additive and natural
+## Published prerequisite
 
-[Open item](item-lem-author-79117e1d72ed-additive-c1) · level 10
+[math:thm-affine-schemes-quasi-separated](https://alphabetamath.cc/item/thm-affine-schemes-quasi-separated)
 
-## Natural unital bigraded motivic ring with negative zero extension
+## Published prerequisite
 
-[Open item](item-lem-author-79117e1d72ed-bigraded-ring) · level 10
+[math:thm-coherent-sheaves-abelian-noetherian-scheme](https://alphabetamath.cc/item/thm-coherent-sheaves-abelian-noetherian-scheme)
 
-## Quotient and line projectivizations agree after dualizing
+## Published prerequisite
 
-[Open item](item-lem-author-79117e1d72ed-dual-conventions) · level 10
+[math:thm-evaluation-kernel-and-minimal-polynomial](https://alphabetamath.cc/item/thm-evaluation-kernel-and-minimal-polynomial)
 
-## Equivalence of the weight-zero pullback projection
+## Published prerequisite
 
-[Open item](item-lem-author-dcdf962edbda-pullback-projection) · level 10
+[math:thm-exactness-of-sheaves-stalkwise](https://alphabetamath.cc/item/thm-exactness-of-sheaves-stalkwise)
 
-## The actual composite and its objectwise cofiber
+## Published prerequisite
 
-[Open item](item-lem-author-e71ff76fe904-comparison-composite) · level 10
+[math:thm-fibre-products-of-schemes-exist](https://alphabetamath.cc/item/thm-fibre-products-of-schemes-exist)
 
-## Determinant descends on the actual perfect K zero
+## Published prerequisite
 
-[Open item](item-lem-author-ec13f1db88a5-perfect-determinant) · level 10
+[math:thm-finite-field-extensions-are-algebraic](https://alphabetamath.cc/item/thm-finite-field-extensions-are-algebraic)
 
-## Detection on a simultaneous flag tower
+## Published prerequisite
 
-[Open item](item-lem-flag-tower-cohomology-detection) · level 10
+[math:thm-first-isomorphism-theorem-modules](https://alphabetamath.cc/item/thm-first-isomorphism-theorem-modules)
 
-## Perfect residue classes at smooth closed points
+## Published prerequisite
 
-[Open item](item-lem-koszul-point-support-class) · level 10
+[math:thm-gluing-sheaves](https://alphabetamath.cc/item/thm-gluing-sheaves)
 
-## Finite-coefficient motivic to cdh comparison
+## Published prerequisite
 
-[Open item](item-prop-finite-coefficient-cdh-comparison) · level 10
+[math:thm-integers-modulo-n-basic-algebra](https://alphabetamath.cc/item/thm-integers-modulo-n-basic-algebra)
 
-## Rational splitting of the motivic tower
+## Published prerequisite
 
-[Open item](item-prop-rational-weight-splitting-input) · level 10
+[math:thm-irreducible-closed-subsets-and-prime-ideals](https://alphabetamath.cc/item/thm-irreducible-closed-subsets-and-prime-ideals)
 
-## Elmanto–Morrow filtration input
+## Published prerequisite
 
-[Open item](item-thm-author-98a750efd0cc-motivic-filtration-input) · level 10
+[math:thm-jacobian-criterion-smooth-morphism](https://alphabetamath.cc/item/thm-jacobian-criterion-smooth-morphism)
 
-## External canonical top-weight motivic-to-syntomic comparison
+## Published prerequisite
 
-[Open item](item-thm-author-c5b0693f4fc3-top-torsion-topweight-comparison) · level 10
+[math:thm-localisations-are-flat](https://alphabetamath.cc/item/thm-localisations-are-flat)
 
-## Derived global sections on a scheme site
+## Published prerequisite
 
-[Open item](item-def-derived-sections-on-sites) · level 11
+[math:thm-module-kernel-image-and-injectivity](https://alphabetamath.cc/item/thm-module-kernel-image-and-injectivity)
 
-## Motivic filtration and image groups
+## Published prerequisite
 
-[Open item](item-def-motivic-filtration) · level 11
+[math:thm-noetherian-ring-has-noetherian-spectrum](https://alphabetamath.cc/item/thm-noetherian-ring-has-noetherian-spectrum)
 
-## Isomorphism classes of vector bundles
+## Published prerequisite
 
-[Open item](item-def-vector-bundle-classes) · level 11
+[math:thm-noetherian-ring-ideal-characterisations](https://alphabetamath.cc/item/thm-noetherian-ring-ideal-characterisations)
 
-## The global dimension bound for the specified comparison fiber
+## Published prerequisite
 
-[Open item](item-lem-author-0bac6b264f4a-motivic-dim-fiber-bound) · level 11
+[math:thm-noetherian-ring-quotients-and-localisations](https://alphabetamath.cc/item/thm-noetherian-ring-quotients-and-localisations)
 
-## The full top-weight map with its exact factorization
+## Published prerequisite
 
-[Open item](item-lem-author-58e57d689702-topweight-map) · level 11
+[math:thm-prime-subfield-classification](https://alphabetamath.cc/item/thm-prime-subfield-classification)
 
-## Cdh sheaves invert finite subintegral maps
+## Published prerequisite
 
-[Open item](item-lem-author-60d95bfb692a-subintegral-sheaf-invariance) · level 11
+[math:thm-projective-bundle-represents-line-quotients](https://alphabetamath.cc/item/thm-projective-bundle-represents-line-quotients)
 
-## The exact projective bundle map in every integer bidegree
+## Published prerequisite
 
-[Open item](item-lem-author-79117e1d72ed-all-bidegrees) · level 11
-
-## A coherent comparison of the particular open restriction
-
-[Open item](item-lem-author-8a080e7d9445-restriction-diagram) · level 11
+[math:thm-proper-ideal-contained-in-maximal-ideal](https://alphabetamath.cc/item/thm-proper-ideal-contained-in-maximal-ideal)

@@ -12,6 +12,8 @@ deps:
   - prop-murthy-k-theoretic-splitting
   - prop-chern-whitney-identities
   - math:def-axiom-of-choice
+  - math:cor-affine-scheme-quasi-compact
+  - math:thm-affine-schemes-quasi-separated
 dependency_roles:
   def-rank-three-euler-k-class: mathematical-premise
   def-motivic-chern-classes: mathematical-premise
@@ -20,6 +22,8 @@ dependency_roles:
   prop-murthy-k-theoretic-splitting: mathematical-premise
   prop-chern-whitney-identities: mathematical-premise
   math:def-axiom-of-choice: mathematical-premise
+  math:cor-affine-scheme-quasi-compact: mathematical-premise
+  math:thm-affine-schemes-quasi-separated: mathematical-premise
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -30,11 +34,46 @@ sources:
         threefolds
       url: https://arxiv.org/abs/2610.22679v1
       locator: PDF p. 3, explanation after Corollary D; p. 17, proof of Corollary 6.10
-      reading_limits: The supplied extracted article text at the proof of Corollary
-        6.10 was read. The exterior-class calculation, third-Chern isomorphism
-        and Murthy criterion are used through the named completed suppliers;
-        their external inputs are not independently reconstructed here.
-dependency_level: 34
+      reading_limits: Freshly read the frozen extracted article text at PDF pp. 3 and
+        17 and independently extracted these two pages from the original PDF
+        with PyMuPDF; visually inspected PDF p. 17, including the full proof of
+        Corollary 6.10. These passages establish the forward-implication
+        provenance. Read the current direct supplier bodies and the direct
+        consumer for this application. The exterior-class calculation,
+        third-Chern isomorphism and Murthy criterion are used through their
+        declared current interfaces; no reconstruction or fresh reading of their
+        underlying external literature is claimed. The converse and the two-step
+        composition are locally authored. This is a repair proposal, not
+        supplier acceptance or independent rejudgment.
+      statement: The explanation after Corollary D invokes a trivial line summand for
+        a rank-three bundle with zero third motivic Chern class. The proof of
+        Corollary 6.10 obtains this summand by introducing the alternating
+        exterior class beta, proving that it lies in the third filtration piece
+        with c_3(beta)=-2c_3(E)=0, using injectivity of the third Chern
+        operation, and applying the cited Murthy criterion. The converse in this
+        generated corollary is a local deduction from Whitney and rank
+        vanishing, rather than a separately stated equivalence in those
+        passages.
+      hypotheses: In the cited passages X is a normal affine threefold over an
+        algebraically closed field and E is a rank-three vector bundle with zero
+        third motivic Chern class. Finite type follows the article conventions.
+        The generated item states its inherited Choice and site/universe
+        assumptions separately; the converse is proved here under the same
+        hypotheses.
+dependency_level: 37
+formulation_deps:
+  - def-motivic-chern-classes
+  - math:def-axiom-of-choice
+argument_deps:
+  - def-rank-three-euler-k-class
+  - def-motivic-chern-classes
+  - lem-exterior-square-chern-calculation
+  - cor-third-chern-isomorphism
+  - prop-murthy-k-theoretic-splitting
+  - prop-chern-whitney-identities
+  - math:def-axiom-of-choice
+  - math:cor-affine-scheme-quasi-compact
+  - math:thm-affine-schemes-quasi-separated
 ---
 
 ## Statement
@@ -50,28 +89,26 @@ Here algebraically closed means that every nonconstant polynomial over $k$ has a
 
 **Goal:** Prove both implications of the displayed equivalence.
 
+[A1] Assume the Axiom of Choice as formulated in [[math:def-axiom-of-choice]]. It discharges the inherited Choice hypotheses when applying [F0] and the constructions and results [F1]–[F5] below. The compatible site and universe bounds are separate inherited assumptions, not consequences of Choice; the finite sums and cancellation below use no additional choice.
+
+[F0] Since $X$ is affine, [[math:cor-affine-scheme-quasi-compact]] under [A1] makes it quasi-compact, and [[math:thm-affine-schemes-quasi-separated]] makes it quasi-separated. Here quasi-compact means that every open cover has a finite subcover, and quasi-separated means that intersections of affine open subschemes are quasi-compact. Thus $X$ satisfies the qcqs hypotheses of the alternating-class and Chern-class definitions and the actual Whitney identity in [F1] and [F5].
+
 [F1] [[def-rank-three-euler-k-class]] defines the alternating exterior class
 $$\beta(E)=[\mathcal O_X]-[E]+[\Lambda^2E]-[\det E]\in K_0(X),$$
-where $\det E=\Lambda^3E$ and $K_0(X)$ is the degree-zero K-theory group of perfect complexes. A perfect complex is locally quasi-isomorphic to a bounded complex of finite locally free sheaves.
+where $\Lambda^2E$ is the second exterior-power bundle, $\det E=\Lambda^3E$, and $[V]$ is the class of the bundle $V$ placed in cochain degree zero. The group $K_0(X)$ is the degree-zero K-theory group of perfect complexes. A perfect complex is locally quasi-isomorphic to a bounded complex of finite locally free sheaves.
 
-[F2] Under the given hypotheses, [[lem-exterior-square-chern-calculation]] proves that $\beta(E)$ lies in $F^3_{\mathrm{mot}}K_0(X)$ and that $c_3(\beta(E))=-2c_3(E)$. The group $F^3_{\mathrm{mot}}K_0(X)$ is the image in $K_0(X)$ of the degree-zero homotopy group of the third motivic filtration stage.
+[F2] Under the given field, normality, affine finite-type, dimension, rank and foundational hypotheses, [[lem-exterior-square-chern-calculation]] proves that $\beta(E)$ lies in $F^3_{\mathrm{mot}}K_0(X)$ and that $c_3(\beta(E))=-2c_3(E)$. The group $F^3_{\mathrm{mot}}K_0(X)$ is the image in $K_0(X)$ of the degree-zero homotopy group of the third motivic filtration stage.
 
-[F3] Under the same hypotheses, [[cor-third-chern-isomorphism]] says that the actual third Chern operation on perfect K-classes restricts to an isomorphism $c_3:F^3_{\mathrm{mot}}K_0(X)\to H^{6,3}_{\mathrm{mot}}(X,\mathbb Z)$. In particular this restriction is injective.
+[F3] Under the same hypotheses, [[cor-third-chern-isomorphism]] says that the actual third Chern operation on perfect K-classes restricts to an isomorphism $c_3:F^3_{\mathrm{mot}}K_0(X)\to H^{6,3}_{\mathrm{mot}}(X,\mathbb Z)$. In particular this restriction is an injective group homomorphism.
 
-[F4] [[prop-murthy-k-theoretic-splitting]] says that, under the given hypotheses, $\beta(E)=0$ in $K_0(X)$ implies $E\cong E'\oplus\mathcal O_X$ for a rank-two bundle $E'$.
+[F4] [[prop-murthy-k-theoretic-splitting]] says that, under the given hypotheses, $\beta(E)=0$ in $K_0(X)$ implies $E\cong E'\oplus\mathcal O_X$ for a rank-two bundle $E'$. Its ambient-$K_0$ implication applies also when $X$ has lower-dimensional components; no additional pure-dimensional hypothesis is imposed here.
 
-[F5] [[def-motivic-chern-classes]] defines the total Chern polynomial $c_t(V)=\sum_i c_i(V)t^i$ of a bundle $V$ and sets $c_i(V)=0$ for $i$ greater than its rank. [[prop-chern-whitney-identities]] gives $c_t(V\oplus W)=c_t(V)c_t(W)$; in particular a trivial line has total Chern polynomial $1$. [[math:def-axiom-of-choice]] states the Choice assumption used by these constructions.
+[F5] [[def-motivic-chern-classes]] defines the isomorphism-invariant classes $c_i(V)$ and total Chern polynomial $c_t(V)=\sum_{i\geq0}c_i(V)t^i$, with $c_0(V)=1$ and $c_i(V)=0$ above the rank. Here $t$ is a formal variable. [[prop-chern-whitney-identities]] gives $c_t(V\oplus W)=c_t(V)c_t(W)$ and $c_1(L\otimes M)=c_1(L)+c_1(M)$ for line bundles. The structure sheaf $\mathcal O_X$ is the trivial rank-one bundle. The notation $V\oplus W$ denotes the sheaf with sections $V(U)\oplus W(U)$ and componentwise restrictions; the sheaf condition holds componentwise and local frames concatenate, so this is a vector bundle. An isomorphism $E\cong E'\oplus\mathcal O_X$ is an invertible $\mathcal O_X$-linear sheaf map.
 
 ## Proof
 
-**Proof technique:** Apply the third-Chern isomorphism to the alternating exterior class, then use the splitting criterion; the converse follows from Whitney and rank vanishing.
+**Proof technique:** Apply the third-Chern isomorphism to the alternating exterior class, then use the splitting criterion; prove the converse by Whitney and rank vanishing.
 
-1.1 Suppose $c_3(E)=0$. By [F2], $\beta(E)$ belongs to the third motivic image piece and $c_3(\beta(E))=-2c_3(E)=0$. [given, F2]
+1.1 By [F0] and [A1], $X$ is qcqs, as required for [F1] and [F5]. Suppose $c_3(E)=0$, and form $\beta(E)$ by [F1]. The field, normality, affine finite-type, dimension, rank, Choice and size hypotheses of [F2]–[F4] are precisely those given. By [F2], $\beta(E)$ belongs to $F^3_{\mathrm{mot}}K_0(X)$ and $c_3(\beta(E))=-2c_3(E)=0$. Since the restricted $c_3$ in [F3] is an injective homomorphism, $\beta(E)=0$ in that subgroup and hence in its ambient group $K_0(X)$. Apply [F4] to obtain a rank-two bundle $E'$ and an isomorphism $E\cong E'\oplus\mathcal O_X$. This proves the forward implication without dividing by $2$. [given, A1, F0, F1, F2, F3, F4]
 
-2.1 The restricted third Chern operation in [F3] is injective. Since $\beta(E)$ lies in its domain and maps to zero, $\beta(E)=0$ in $F^3_{\mathrm{mot}}K_0(X)$ and hence in its ambient group $K_0(X)$. [F3, step 1.1]
-
-3.1 Apply [F4] to this vanishing. All its field, normality, finite-type, dimension, rank, Choice and size hypotheses are those given here. It yields a rank-two bundle $E'$ and an isomorphism $E\cong E'\oplus\mathcal O_X$. [given, F4, step 2.1]
-
-4.1 Conversely, suppose $E\cong E'\oplus\mathcal O_X$ with $E'$ of rank two. By [F5], $c_t(E)=c_t(E')c_t(\mathcal O_X)=c_t(E')$. The coefficient of $t^3$ on the right is zero because $E'$ has rank two. Thus $c_3(E)=0$. [given, F5, step 3.1]
-
-5.1 Steps 1.1–4.1 prove both implications and hence the stated equivalence. [step 3.1, step 4.1] ∎
+2.1 Conversely, suppose $E\cong E'\oplus\mathcal O_X$ with $E'$ of rank two. Use the qcqs conclusion of [F0] under [A1]. Multiplication gives $\mathcal O_X\otimes\mathcal O_X\cong\mathcal O_X$, with local inverse $a\mapsto a\otimes1$. Thus the line-bundle tensor identity and isomorphism invariance in [F5] give $c_1(\mathcal O_X)=2c_1(\mathcal O_X)$; cancellation in $H^{2,1}_{\mathrm{mot}}(X,\mathbb Z)$ yields $c_1(\mathcal O_X)=0$. Its higher classes vanish by rank and its constant class is $1$, so $c_t(\mathcal O_X)=1$. Again by [F5], $c_t(E)=c_t(E')c_t(\mathcal O_X)=c_t(E')$. The coefficient of $t^3$ on the right is zero because $E'$ has rank two. Therefore $c_3(E)=0$. Together with step 1.1 this proves the stated equivalence. [given, A1, F0, F5, step 1.1, algebra] ∎

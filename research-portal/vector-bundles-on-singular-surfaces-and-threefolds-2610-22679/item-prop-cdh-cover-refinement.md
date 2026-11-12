@@ -3,6 +3,22 @@ title: Finite refinement for integer cdh sections
 status: published
 research_item: prop-cdh-cover-refinement
 dependency_level: 11
+sources:
+  references:
+    - title: Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and
+        threefolds
+      url: https://arxiv.org/abs/2610.22679v1
+      locator: Lemma2.4 proof, printed p.5, final paragraph
+      reading_limits: Read the complete actual p.5 proof paragraph, including its
+        appeal to MVW12.28 and the claim of a finite Nisnevich refinement. The
+        assigned proposition extracts this finite-refinement input; it does not
+        reproduce the separate seminormal representability theorem.
+      statement: The proof of Lemma 2.4 asserts finite local integer representatives
+        after a proper/cdh and Nisnevich refinement.
+      hypotheses: The article passage assumes a separated seminormal finite-type
+        scheme over an algebraically closed field. The arbitrary-field sieve
+        refinement here is a local composition of the separately declared
+        finite-type suppliers, not attributed to that passage.
 ---
 
 PDF p. 5: Finite refinements and integer sections
@@ -17,6 +33,8 @@ PDF p. 5: Finite refinements and integer sections
 - [thm-author-5bfbe3ebf14f-mvw-finite-type-cdh-two-stage-input](item-thm-author-5bfbe3ebf14f-mvw-finite-type-cdh-two-stage-input)
 - [def-cdh-topology-interface](item-def-cdh-topology-interface)
 - [def-scheme-sites-and-sheafification](item-def-scheme-sites-and-sheafification)
+- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · Lemma2.4 proof, printed p.5, final paragraph `](https://arxiv.org/abs/2610.22679v1)
+
 
 ## Statement
 On the specified site of separated finite-type schemes over a field $k$, every cdh covering sieve $S$ on $X$ contains a finite covering family $\{U_i\to X\}$. Its finite coproduct $W=\coprod_iU_i\to X$ is a covering morphism and has an MVW two-stage refinement

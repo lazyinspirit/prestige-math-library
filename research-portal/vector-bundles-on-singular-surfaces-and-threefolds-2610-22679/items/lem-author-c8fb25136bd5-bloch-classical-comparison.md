@@ -10,12 +10,28 @@ deps:
   - lem-author-c8fb25136bd5-one-boundaries
   - thm-adjudicate-16c74c1a77ef-principal-divisor-input
   - thm-adjudicate-16c74c1a77ef-finite-type-cycle-geometry-input
+  - lem-adjudicate-e2821b68ac29-projective-line-projection
+  - math:ex-projective-line-by-gluing-affines
+  - math:def-axiom-of-choice
+  - math:lem-noetherian-space-has-finitely-many-irreducible-components
+  - math:thm-irreducible-components-and-minimal-primes
+  - math:thm-prime-spectrum-of-a-localisation-bijection
+  - math:thm-stalk-structure-sheaf-prime-localization
+  - lem-adjudicate-9ad726787189-finite-type-affine-line-geometry
 dependency_roles:
   def-bloch-higher-cycle-complex: mathematical-premise
   lem-author-c8fb25136bd5-degree-zero-cycles: mathematical-premise
   lem-author-c8fb25136bd5-one-boundaries: mathematical-premise
   thm-adjudicate-16c74c1a77ef-principal-divisor-input: mathematical-premise
   thm-adjudicate-16c74c1a77ef-finite-type-cycle-geometry-input: mathematical-premise
+  lem-adjudicate-e2821b68ac29-projective-line-projection: mathematical-premise
+  math:ex-projective-line-by-gluing-affines: mathematical-premise
+  math:def-axiom-of-choice: mathematical-premise
+  math:lem-noetherian-space-has-finitely-many-irreducible-components: mathematical-premise
+  math:thm-irreducible-components-and-minimal-primes: mathematical-premise
+  math:thm-prime-spectrum-of-a-localisation-bijection: mathematical-premise
+  math:thm-stalk-structure-sheaf-prime-localization: mathematical-premise
+  lem-adjudicate-9ad726787189-finite-type-affine-line-geometry: mathematical-premise
 provenance:
   statement: ai-generated
   proof: ai-generated
@@ -24,22 +40,50 @@ sources:
     - title: Mazza–Voevodsky–Weibel, Lecture notes on motivic cohomology, December
         2005 author PDF
       url: https://sites.math.rutgers.edu/~weibel/MVWnotes/xprova.pdf
-      locator: December 2005 xprova author PDF, printed p. 5 (PDF p. 16), Definition
-        17.1 and discussion, printed pp. 141–142 (PDF pp. 152–153); retrieved
-        2026-11-09
-      reading_limits: Read the separated convention, Definition 17.1 and its following
-        discussion through the endpoint description; also read Exercise 17.3.
-        The Clay 2006 edition was not independently read in this assignment. The
-        degree-zero comparison is stated within the separated convention, with a
-        reference to Exercise 17.3 rather than a complete general proof. The
-        broader statement here is proved by the graph-and-norm argument below,
-        not attributed to this source outside its scope.
+      locator: "December 2005 author PDF: printed p. 5 (PDF page 16), convention;
+        printed pp. 141–142 (PDF pages 152–153), Definition 17.1, following
+        comparison discussion and Exercise 17.3(a); live PDF text read
+        2026-11-12"
+      reading_limits: Read the separated convention, Definition 17.1, the following
+        degree-zero comparison and endpoint description, and Exercise 17.3(a),
+        in the live December 2005 author PDF text on 2026-11-12. No
+        Clay-edition, Bloch-paper or deeper cited-input reading is claimed. This
+        reference documents the separated comparison only; the broader assertion
+        is the local graph-and-norm deduction from the declared suppliers.
+      statement: The discussion after Definition 17.1 identifies degree-zero higher
+        Chow groups with classical Chow groups and describes the two endpoint
+        maps; Exercise 17.3(a) asks for the top-codimension comparison.
+      hypotheses: The text adopts separated schemes over k at printed p. 5. Definition
+        17.1 starts with equidimensional X; the following comparison discussion
+        says any scheme within that convention. No nonseparated comparison is
+        imported.
 proof_strategy: direct
-dependency_level: 6
+dependency_level: 7
+formulation_deps:
+  - def-bloch-higher-cycle-complex
+  - lem-author-c8fb25136bd5-degree-zero-cycles
+  - lem-author-c8fb25136bd5-one-boundaries
+  - thm-adjudicate-16c74c1a77ef-principal-divisor-input
+  - thm-adjudicate-16c74c1a77ef-finite-type-cycle-geometry-input
+  - math:def-axiom-of-choice
+argument_deps:
+  - def-bloch-higher-cycle-complex
+  - lem-author-c8fb25136bd5-degree-zero-cycles
+  - lem-author-c8fb25136bd5-one-boundaries
+  - thm-adjudicate-16c74c1a77ef-principal-divisor-input
+  - thm-adjudicate-16c74c1a77ef-finite-type-cycle-geometry-input
+  - lem-adjudicate-e2821b68ac29-projective-line-projection
+  - math:ex-projective-line-by-gluing-affines
+  - math:def-axiom-of-choice
+  - math:lem-noetherian-space-has-finitely-many-irreducible-components
+  - math:thm-irreducible-components-and-minimal-primes
+  - math:thm-prime-spectrum-of-a-localisation-bijection
+  - math:thm-stalk-structure-sheaf-prime-localization
+  - lem-adjudicate-9ad726787189-finite-type-affine-line-geometry
 ---
 
 ## Statement
-Let $k$ be a field, $X$ a smooth finite-type $k$-scheme, and $r\geq0$. Let $R^r(X)\subset Z^r(X)$ be the subgroup generated by principal divisors $\operatorname{div}_Y(f)$, for integral closed $Y\subset X$ of codimension $r-1$ and nonzero rational functions $f\in k(Y)^\times$; for $r=0$ this subgroup is zero. Here a principal divisor is the codimension-one cycle of orders of $f$, defined using lengths of local rings, pushed forward from $Y$ to $X$. Then $R^r(X)=B^r(X)$, with $B^r(X)=\operatorname{im}(\partial_1)$ the degree-zero boundary subgroup. The classical Chow group is $\mathrm{CH}^r(X)=Z^r(X)/R^r(X)$.
+Assume the Axiom of Choice. Let $k$ be a field, $X$ a smooth finite-type $k$-scheme, and $r\geq0$. Let $R^r(X)\subset Z^r(X)$ be the subgroup generated by principal divisors $\operatorname{div}_Y(f)$, for integral closed $Y\subset X$ of codimension $r-1$ and nonzero rational functions $f\in k(Y)^\times$; for $r=0$ this subgroup is zero. Here a principal divisor is the codimension-one cycle of orders of $f$, defined using lengths of local rings, pushed forward from $Y$ to $X$. Then $R^r(X)=B^r(X)$, with $B^r(X)=\operatorname{im}(\partial_1)$ the degree-zero boundary subgroup. The classical Chow group is $\mathrm{CH}^r(X)=Z^r(X)/R^r(X)$.
 
 ## Statement references
 
@@ -47,7 +91,9 @@ Let $k$ be a field, $X$ a smooth finite-type $k$-scheme, and $r\geq0$. Let $R^r(
 
 ## Facts & Assumptions
 
-**Given:** The field $k$, smooth finite-type scheme $X$ and $r\geq0$ in the statement; separatedness is not assumed.
+**Given:** The Axiom of Choice, the field $k$, smooth finite-type scheme $X$ and $r\geq0$ in the statement; separatedness is not assumed.
+
+[A1] Choice discharges the explicit assumptions of the Bloch-complex, principal-divisor, finite-component and projective-line suppliers used below. No claim of minimal choice is made. [[math:def-axiom-of-choice]]
 
 **Goal:** Prove both inclusions between the principal-divisor relations and the degree-one boundaries.
 
@@ -55,17 +101,21 @@ Let $k$ be a field, $X$ a smooth finite-type $k$-scheme, and $r\geq0$. Let $R^r(
 
 [F2] Proper generically finite pushforward carries a principal divisor to the divisor of its norm. Graph closure gives the zero-minus-pole formula, with the same local-length orders, without separatedness over the field. [[thm-adjudicate-16c74c1a77ef-principal-divisor-input]]
 
-[F3] A smooth finite-type scheme over a field is noetherian and regular and has finitely many disjoint integral open-and-closed components. Indeed it has finitely many irreducible components, and two cannot meet because every regular local ring is a domain. We may calculate cycles separately on these components. The finite-type dimension, codimension and Cartier-divisor formulas and regular-local-domain fact are imported with their exact hypotheses in [[thm-adjudicate-16c74c1a77ef-finite-type-cycle-geometry-input]]. In particular a proper dominant projection has dimension difference equal to its function-field transcendence degree. The regularity input there justifies the clopen decomposition without a perfect-field assumption.
+[F3] A finite-type scheme over a field has a Noetherian underlying space by [[lem-adjudicate-9ad726787189-finite-type-affine-line-geometry]]. Smoothness makes it regular. The finite-type dimension, codimension and Cartier-divisor formulas and the regular-local-domain assertion are supplied by [[thm-adjudicate-16c74c1a77ef-finite-type-cycle-geometry-input]]. Its underlying Noetherian space has finitely many irreducible components by [[math:lem-noetherian-space-has-finitely-many-irreducible-components]]. They cannot meet: on an affine neighborhood of an intersection, the two minimal primes defining distinct components would remain distinct primes after localization at that point, contradicting that the regular local ring is a domain. This uses [[math:thm-irreducible-components-and-minimal-primes]], [[math:thm-prime-spectrum-of-a-localisation-bijection]] and [[math:thm-stalk-structure-sheaf-prime-localization]]. Consequently each component is closed with closed complement, hence open; it is reduced and irreducible and therefore integral. We may calculate cycles separately on these finitely many clopen components. No perfect-field assumption is used.
+
+[F4] Use the reciprocal-chart projective line of [[math:ex-projective-line-by-gluing-affines]]. The reduced closure, proper projection, generic-fiber classification, dimension alternatives and product case are supplied by [[lem-adjudicate-e2821b68ac29-projective-line-projection]]. The same lemma verifies the coordinate isomorphism $t=u/(u-1)$ from the complement of $u=1$, including the scheme-theoretic endpoint fibers and their local equations.
+
+[F5] For an integral finite-type $k$-scheme $T$ of dimension $d$, the affine-line product $T\times_k\mathbf A^1$ is integral and finite type of dimension $d+1$, by [[lem-adjudicate-9ad726787189-finite-type-affine-line-geometry]]. Apply this together with [F3] before using any ambient dimension-difference formula.
 
 ## Proof
 
-1.1 Work on one integral component of $X$ of dimension $d$. Let $W\subset X\times\mathbf A^1_t$ be an admissible codimension-$r$ generator, so $\dim W=d-r+1$. Let $\overline W$ be its reduced closure in $X\times\mathbf P^1_t$ and let $Y\subset X$ be the reduced image under projection. The projection is proper, so $Y$ is closed and integral; its factorization through the reduced $Y$ is proper by base change along $Y\hookrightarrow X$. Its generic fiber is a closed integral subscheme of $\mathbf P^1_{k(Y)}$, and hence has dimension zero or one; these are also the possible transcendence degrees of $k(W)/k(Y)$. The dimension formula in [F3] gives $\dim Y=\dim W$ or $\dim W-1$. If the latter holds, $W$ is an integral closed subset of $Y\times\mathbf A^1$ of its full dimension, hence equals that product; its two face cycles are both $[Y]$, and its boundary is zero. This also handles every possible generator when $r=0$, since then $\dim W=d+1$. [F1, F3]
+1.1 Work on one integral component of $X$ of dimension $d$. By [F5], $X\times\mathbf A^1_t$ is integral and finite type of dimension $d+1$. Let $W\subset X\times\mathbf A^1_t$ be an admissible codimension-$r$ generator. The codimension formula of [F3] now gives $\dim W=(d+1)-r$. Let $\overline W$ be its reduced closure in $X\times\mathbf P^1_t$ and $Y\subset X$ its reduced projection image. By [F4], the map $\overline W\to Y$ is proper dominant and its generic fiber is either $\operatorname{Spec}L$ for a finite extension $L/k(Y)$, or $\mathbf P^1_{k(Y)}$. Accordingly $\dim Y=\dim W$ or $\dim W-1$. In the latter case [F4] gives $W=Y\times\mathbf A^1$; its two face cycles are both $[Y]$, since quotienting $\mathcal O_{Y\times\mathbf A^1,\eta_{Y\times\{a\}}}$ by $t-a$ gives $k(Y)$ of length one. Thus its boundary is zero. This handles all generators when $r=0$: then $\dim W=d+1$ whereas $\dim Y\leq d$. [A1, F1, F3, F4, F5]
 
-1.2 Conversely, for $r>0$ let $Y\subset X$ be integral of codimension $r-1$ and $f\in k(Y)^\times$. Form the graph closure $G\subset Y\times\mathbf P^1_u$ of [F2]. Remove the fiber $u=1$ and use $t=u/(u-1)$ to identify $\mathbf P^1_u\setminus\{1\}$ with $\mathbf A^1_t$. If $f\ne1$, this open part of $G$ is a nonempty integral closed codimension-$r$ subscheme of $X\times\mathbf A^1_t$. Its $t=0,1$ intersections are $G_0,G_\infty$. Each is empty or an effective Cartier divisor of pure codimension one on the integral finite-type $G$, so the cycle is admissible. Its boundary equals $\operatorname{div}_Y(f)$ by the graph formula. If $f=1$, the divisor is zero and no generator is needed. Thus every principal-divisor relation is a boundary. [F1, F2, F3]
+1.2 Conversely, for $r>0$ let $Y\subset X$ be integral of codimension $r-1$ and $f\in k(Y)^\times$. Form the graph closure $G\subset Y\times\mathbf P^1_u$ of [F2]. Remove the fiber $u=1$ and use $t=u/(u-1)$ to identify $\mathbf P^1_u\setminus\{1\}$ with $\mathbf A^1_t$. If $f\ne1$, this open part of $G$ is a nonempty integral closed subscheme of $X\times\mathbf A^1_t$. The proper birational graph projection in [F2] and [F3] give $\dim G=\dim Y=d-r+1$, and the same dimension holds on this nonempty open. The ambient space is integral of dimension $d+1$ by [F5], so [F3] gives codimension $r$. Its $t=0,1$ intersections are $G_0,G_\infty$. Each is empty or an effective Cartier divisor on the integral finite-type $G$; its components therefore have dimension $d-r$ by [F3] and codimension $r$ in the endpoint copy of $X$. Thus the cycle is admissible with the endpoint scheme structures and lengths of [F1]. Its boundary equals $\operatorname{div}_Y(f)$ by the graph formula. If $f=1$, the divisor is zero and no generator is needed. Thus every principal-divisor relation is a boundary. [A1, F1, F2, F3, F4, F5]
 
-2.1 For the equal-dimensional case of step 1.1 $\overline W\to Y$ is proper dominant generically finite and $Y$ has codimension $r-1$. The rational function $h=t/(t-1)$ on $\overline W$ is nonzero and defined as a rational function because admissibility excludes $W$ from either endpoint. Its divisor is the zero fiber minus the one fiber, with exactly the lengths in [F1]; it is invertible near infinity. By the norm formula, pushing this cycle to $X$ gives $\partial[W]=\operatorname{div}_Y(\operatorname{Nm}_{k(W)/k(Y)}h)$. Thus every boundary lies in $R^r(X)$, with zero as already shown in the product case. [F1, F2, step 1.1]
+2.1 For the equal-dimensional case of step 1.1 $\overline W\to Y$ is proper dominant generically finite and $Y$ has codimension $r-1$. The rational function $h=t/(t-1)$ on $\overline W$ is nonzero and defined as a rational function because admissibility excludes $W$ from either endpoint. Its divisor is the zero fiber minus the one fiber, with exactly the lengths in [F1]; it is invertible near infinity. By the norm formula, pushing this cycle to $X$ gives $\partial[W]=\operatorname{div}_Y(\operatorname{Nm}_{k(W)/k(Y)}h)$. Thus every boundary lies in $R^r(X)$, with zero as already shown in the product case. [F1, F2, F4, step 1.1]
 
 3.1 The two inclusions prove $R^r(X)=B^r(X)$ for $r>0$, and step 1.1 proves it for $r=0$ because $R^0(X)=0$. The finite clopen decomposition of [F3] gives the equality on $X$ and the stated ordinary rational-equivalence quotient. [F3, step 1.1, step 1.2, step 2.1] ∎
 
 ## Source notes
-The old MVW import covered separated schemes only. The current argument retains the original smooth finite-type scope by using precise proper-divisor formulas that impose no separatedness over the field. It does not invoke localization or an identification with a separately constructed motivic theory.
+MVW Definition 17.1 and its following discussion identify degree-zero higher Chow groups with the classical Chow group under the book's separated-scheme convention. The reference records that scope and the endpoint description, not a proof for nonseparated schemes. The current local graph-and-norm argument retains smooth finite-type schemes without separatedness, under the explicit Choice hypotheses of its suppliers. It does not invoke localization or an identification with a separately constructed motivic theory.

@@ -11,6 +11,7 @@ PDF p. 4: Exact triangles and ensuing exact sequences
 
 - [def-stable-spectra-interface](item-def-stable-spectra-interface)
 
+
 ## Statement
 For a fiber sequence $A\to B\to C$ of spectra there is a natural exact sequence of abelian groups
 

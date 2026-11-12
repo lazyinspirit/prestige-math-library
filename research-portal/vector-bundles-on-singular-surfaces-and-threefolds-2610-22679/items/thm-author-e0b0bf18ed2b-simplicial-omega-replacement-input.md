@@ -4,44 +4,94 @@ kind: theorem
 title: External sequential simplicial Omega replacement
 status: published
 domain: mathematics
-deps: []
-dependency_roles: {}
+deps:
+  - math:def-simplicial-set-homotopy-and-trivial-kan-fibration
+  - math:def-simplicial-horn-and-kan-fibration
+  - math:def-model-category-and-quillen-adjunction
+  - thm-adjudicate-0cc4fcf73566-pointed-simplicial-stable-model-input
+  - math:def-filtered-category-and-filtered-colimit
+  - math:thm-filtered-colimits-commute-with-finite-limits-in-set
+  - math:def-axiom-of-choice
+dependency_roles:
+  math:def-simplicial-set-homotopy-and-trivial-kan-fibration: mathematical-premise
+  math:def-simplicial-horn-and-kan-fibration: mathematical-premise
+  math:def-model-category-and-quillen-adjunction: mathematical-premise
+  thm-adjudicate-0cc4fcf73566-pointed-simplicial-stable-model-input: mathematical-premise
+  math:def-filtered-category-and-filtered-colimit: mathematical-premise
+  math:thm-filtered-colimits-commute-with-finite-limits-in-set: mathematical-premise
+  math:def-axiom-of-choice: mathematical-premise
 external_input: true
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: literature-derived
 sources:
   references:
     - title: Mark Hovey, Spectra and symmetric spectra in general model categories
       url: https://arxiv.org/pdf/math/0004051
-      locator: §4, Definition 4.2, Lemma 4.3, Proposition 4.4, Corollary 4.8 and
-        Theorem 4.9, PDF pp. 17–20
-      statement: For level-fibrant sequential spectra in pointed simplicial sets, R=sU
-        and Q=colim R^m give a level-fibrant Omega-spectrum; X→QX is a stable
-        equivalence, and (QX)_n=colim_m Ω^m X_{n+m}.
-      hypotheses: The general result assumes an almost finitely generated model
-        category, sequential colimits preserving finite products, and a right
-        adjoint U preserving sequential colimits. In pointed simplicial sets
-        these conditions hold for U=Map_*(Δ¹/∂Δ¹,−); level fibrancy means each
-        level is Kan.
-      reading_limits: The current author inspected Definition 4.2, Lemma 4.3,
-        Proposition 4.4, Corollary 4.8 and Theorem 4.9, including the proof of
-        Lemma 4.3 and the displayed proposition statement. The supplied
-        authoring assistance reports a broader reading of §§3–4. Model-category
-        foundations and verification of all general hypotheses are not
-        reconstructed here.
-dependency_level: 0
+      locator: Definition 1.1 and Corollary 1.6, pp. 5–6 (sequential spectra and
+        prolongation); Definition 3.7, p. 14 (tail); Definition 4.1 and
+        following discussion, pp. 15–17; Definition 4.2 and Lemma 4.3, p. 17;
+        Proposition 4.4, p. 18; Theorem 4.7 and Corollary 4.8, pp. 19–20;
+        Theorem 4.9, p. 20
+      statement: For circle suspension on pointed simplicial sets, the sequential
+        colimit of iterates of sΩ on a level-Kan prespectrum is a level-Kan
+        Omega-spectrum, and the natural map to it is a stable equivalence. The
+        adjoint structure map of this colimit is an isomorphism; the transitions
+        use R^mι, with ι_R=Rι.
+      hypotheses: The §4 results require G left Quillen with right adjoint U, an
+        almost finitely generated base, U preserving sequential colimits, and
+        (for stable equivalence) sequential colimits preserving finite products.
+        Proposition 4.4 additionally requires a level-fibrant input for its
+        fibrancy conclusion. Here G=K∧(-), U=Ω and level-fibrant means level
+        Kan. The separate model-structure supplier provides the exact
+        pointed-simplicial stable model, so the general left proper cellular
+        existence theorem is not being newly applied without its hypotheses.
+      reading_limits: Inspected the listed construction, prolongation and shift
+        definitions, the proof of Lemma 4.3, the statement and colimit proof of
+        Proposition 4.4, and the statements and proofs of Corollary 4.8 and
+        Theorem 4.9; inspected the statement and beginning of the proof of
+        Theorem 4.7. The rest of the proof of Theorem 4.7, general localization
+        theory and Appendix cellularity arguments are imported, not
+        reconstructed. The pointed model and Quillen inputs are supplied
+        separately; elementary finite-stage checks are stated below.
+dependency_level: 1
 ---
 
 ## Statement
-Let K=Δ¹/∂Δ¹ and let X be a sequential pointed simplicial prespectrum, meaning pointed simplicial sets $X_n$ and maps K∧$X_n$→$X_{n+1}$, with each $X_n$ a Kan complex. A Kan complex has fillers for all simplicial horns. Write ΩZ=Map_*(K,Z), let s denote the level tail, and put $R=s\Omega$. The adjoints of the structure maps form a natural map ι:X→RX. Define QX=colim_m $R^m X$ using the maps $R^m\iota$. Then QX is level Kan, its adjoint structure maps are weak equivalences, X→QX is a stable equivalence, and (QX)_n=colim_m Ω^mX_{n+m}. A stable equivalence here is a weak equivalence in Hovey's sequential stable model structure.
+Assume ZFC. Let $K=\Delta[1]/\partial\Delta[1]$ and let $X$ be a sequential pointed simplicial prespectrum with sphere-first maps $K\wedge X_n\to X_{n+1}$, each $X_n$ a Kan complex. Kan means that every simplicial horn has a filler. Use the pointed smash product, simplicial mapping object and model structures specified by the pointed simplicial model input. Write $\Omega Z=\operatorname{Map}_*(K,Z)$ and $a_n:X_n\to\Omega X_{n+1}$ for the adjoints. The tail is $(sX)_n=X_{n+1}$. Define $R=s\Omega$ with $(RX)_n=\Omega X_{n+1}$ and adjoint structure maps $\Omega a_{n+1}$. On prespectrum maps set $(Rf)_n=\Omega f_{n+1}$. The maps $a_n$ form a natural prespectrum map $\iota_X:X\to RX$, with $\iota_{RX}=R\iota_X$. Define $QX=\operatorname{colim}_{m\geq0}R^mX$ using transitions $R^m\iota_X$; colimits are computed levelwise. Then $QX$ is level Kan, its adjoint structure maps are weak equivalences (indeed isomorphisms), $X\to QX$ is a stable equivalence, and
+$$ (QX)_n=\operatorname{colim}_{m\geq0}\Omega^mX_{n+m}. $$
+A stable equivalence is a weak equivalence in the sequential stable model structure specified by the pointed simplicial model input; level weak equivalences use the Kan model structure. All conclusions use the stated prolongation convention.
 
-## Source contract
-**Given:** K and a level-Kan sequential pointed simplicial prespectrum X.
+## Statement references
 
-**Goal:** Import the functorial Omega replacement and its precise sequential formula.
+[[thm-adjudicate-0cc4fcf73566-pointed-simplicial-stable-model-input]]
 
-[F1] Hovey's Definition 4.2, Lemma 4.3, Proposition 4.4 and Corollary 4.8 give the construction and conclusions under the cited hypotheses.
+[[math:def-simplicial-set-homotopy-and-trivial-kan-fibration]]
+
+[[math:def-simplicial-horn-and-kan-fibration]]
+
+[[math:def-model-category-and-quillen-adjunction]]
+
+[[math:def-filtered-category-and-filtered-colimit]]
+
+[[math:def-axiom-of-choice]]
+
+## Facts & Assumptions
+**Given:** $K$ and the level-Kan sequential prespectrum $X$ in the Statement, working in ZFC.
+
+**Goal:** Import the functorial Omega replacement with its exact sequential formula and conventions.
+
+[F1] [[thm-adjudicate-0cc4fcf73566-pointed-simplicial-stable-model-input]] supplies pointed constructions, the Kan and sequential stable model structures, boundary/horn generators, and the Quillen suspension adjunction. [[math:def-model-category-and-quillen-adjunction]] fixes model terminology, and [[math:def-simplicial-horn-and-kan-fibration]] fixes the level-Kan hypothesis. The generator domains and codomains are finite simplicial sets, meaning finitely many nondegenerate simplices.
+
+[F2] [[math:thm-filtered-colimits-commute-with-finite-limits-in-set]] applies degreewise to simplicial sets, and [[math:def-filtered-category-and-filtered-colimit]] fixes the colimit convention. The sequence of nonnegative integers is a nonempty filtered index category.
+
+[F3] Reference 0 imports Hovey's sequential construction and conclusions, with all §4 hypotheses as recorded in that reference. [[math:def-axiom-of-choice]] is permitted in the imported model-structure existence and small-object arguments; the explicit $Q$ construction makes no additional selections of fillers.
 
 ## External input
-Import [F1] specialized to pointed simplicial sets and the adjunction K∧(−) ⊣ Map_*(K,−). The finite simplicial circle makes Ω preserve filtered colimits, and filtered colimits of sets commute with finite limits. Hovey's Lemma 4.3 identifies ι_{RX} with Rι_X. The formula is not applied directly to topological spaces, and no symmetric-spectrum or model-category equivalence is asserted.
+Apply [F3] to the precise pointed simplicial model of [F1], with $G=K\wedge(-)$ and $U=\Omega$. The left Quillen hypothesis holds because the pushout-product axiom applied to $*\to K$ makes $K\wedge(-)$ preserve cofibrations and trivial cofibrations; its right adjoint is the supplied $\operatorname{Map}_*(K,-)$.
+
+For the finiteness hypothesis of Definition 4.1, the boundary and horn generators in [F1] have finite domains and codomains. A map from a finite simplicial set is determined by finitely many nondegenerate simplices and finitely many compatibility conditions. In a sequential colimit these representatives and conditions occur at a common stage, and equalities between them hold at a common later stage. Thus these objects are finitely presented in Hovey's sequential sense. Taking the horn generators themselves as the detecting trivial cofibrations verifies the almost finitely generated condition, including its restriction to maps with fibrant codomain.
+
+Sequential colimits preserve finite products by [F2], including the empty product. Also $\Omega$ preserves sequential colimits: its degree-$q$ simplices are pointed maps from $K\wedge\Delta[q]_+$, which has finitely many nondegenerate simplices: a nondegenerate simplex of $\Delta[1]\times\Delta[q]$ has degree at most $q+1$, since at every step at least one coordinate of its pair of monotone maps increases. There are finitely many such pairs in those dimensions, and adjoining or collapsing a basepoint preserves this finiteness. The same finite representative-and-relation argument applies, including the basepoint condition. A filtered colimit of Kan complexes is Kan because each finite horn map factors through a stage and obtains a filler there. These checks verify the remaining specialized finiteness and colimit hypotheses; they do not assert them for arbitrary topological spaces.
+
+With these inputs, Lemma 4.3 identifies $\iota_{RX}$ with $R\iota_X$ for the stated prolongation; Proposition 4.4 gives the level-Kan Omega-spectrum and its isomorphic adjoint structure maps; Corollary 4.8 gives the stable equivalence $X\to QX$. The level formula is the objectwise colimit in Definition 4.2. Theorem 4.9 is consistent with this application: its preliminary projective fibrant replacement addresses arbitrary inputs, whereas $X$ here is already level fibrant. No symmetric-spectrum or model-category equivalence is asserted. The substantial replacement theorem is imported; the preceding checks only verify its application.

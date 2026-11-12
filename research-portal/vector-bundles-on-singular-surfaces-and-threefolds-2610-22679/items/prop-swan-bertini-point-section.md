@@ -14,9 +14,21 @@ deps:
   - lem-author-fc2380accb47-nontransverse-incidence
   - lem-author-fc2380accb47-simultaneous-good-parameters
   - lem-author-fc2380accb47-finite-etale-zero-fibers
-  - thm-author-fc2380accb47-normal-geometric-input
-  - thm-author-fc2380accb47-finite-type-geometric-input
   - math:def-axiom-of-choice
+  - def-article-conventions
+  - math:def-weil-divisor-normal-noetherian-scheme
+  - math:def-smooth-morphism-schemes
+  - math:def-coherent-module-scheme
+  - math:def-noetherian-ring-and-module
+  - math:cor-finite-type-algebra-over-noetherian-ring-is-noetherian
+  - math:def-locally-noetherian-and-noetherian-scheme
+  - math:thm-coherent-sheaves-abelian-noetherian-scheme
+  - math:def-sheaf-hom
+  - math:def-kernel-cokernel-image-sheaves
+  - math:def-exact-sequence-sheaves
+  - math:def-restriction-sheaf-open-subspace
+  - math:def-finite-morphism-schemes
+  - math:def-etale-morphism-schemes
 dependency_roles:
   def-vector-bundle-classes: mathematical-premise
   lem-regular-section-parameter-family: mathematical-premise
@@ -27,9 +39,21 @@ dependency_roles:
   lem-author-fc2380accb47-nontransverse-incidence: mathematical-premise
   lem-author-fc2380accb47-simultaneous-good-parameters: mathematical-premise
   lem-author-fc2380accb47-finite-etale-zero-fibers: mathematical-premise
-  thm-author-fc2380accb47-normal-geometric-input: mathematical-premise
-  thm-author-fc2380accb47-finite-type-geometric-input: mathematical-premise
   math:def-axiom-of-choice: mathematical-premise
+  def-article-conventions: mathematical-premise
+  math:def-weil-divisor-normal-noetherian-scheme: mathematical-premise
+  math:def-smooth-morphism-schemes: mathematical-premise
+  math:def-coherent-module-scheme: mathematical-premise
+  math:def-noetherian-ring-and-module: mathematical-premise
+  math:cor-finite-type-algebra-over-noetherian-ring-is-noetherian: mathematical-premise
+  math:def-locally-noetherian-and-noetherian-scheme: mathematical-premise
+  math:thm-coherent-sheaves-abelian-noetherian-scheme: mathematical-premise
+  math:def-sheaf-hom: mathematical-premise
+  math:def-kernel-cokernel-image-sheaves: mathematical-premise
+  math:def-exact-sequence-sheaves: mathematical-premise
+  math:def-restriction-sheaf-open-subspace: mathematical-premise
+  math:def-finite-morphism-schemes: mathematical-premise
+  math:def-etale-morphism-schemes: mathematical-premise
 provenance:
   statement: ai-altered
   proof: ai-generated
@@ -40,18 +64,79 @@ sources:
         threefolds
       url: https://arxiv.org/abs/2610.22679v1
       locator: Theorem6.7 proof, printed p.15, first Bertini application
-      reading_limits: Read actual full p.15 and its bibliography entry KM82 on p.18.
-        The cited KM82 section3 full text was not obtained or read. The local
-        proof above explicitly uses a different fully authored first-jet
-        argument.
+      reading_limits: For this repair, read the full extracted text of frozen PDF
+        pages 15 and 18, including Theorem 6.7 and the KM82 bibliography entry.
+        KM82 section 3 was not obtained or read. No new original-author defect
+        or acceptance of the article proof is asserted.
+      statement: The first part of the proof of Theorem 6.7 constructs a functional on
+        a rank-three bundle with finitely many smooth closed zeros, its finitely
+        generated kernel, and the exact off-zero sequence with globally
+        generated kernel restriction. This is the article claim decomposed here,
+        not the source of the replacement first-jet proof.
+      hypotheses: The article assumes a normal affine threefold over an algebraically
+        closed field and applies the construction to its rank-three
+        representative with first and second Chern classes zero. The locally
+        authored supplier argument here does not require those Chern or
+        determinant conditions.
     - title: The Stacks Project, method of first-order bad incidence
       url: https://stacks.math.columbia.edu/tag/0FD4
       locator: Situation33.47.2 and Lemma33.47.3, complete proof
-      reading_limits: "Read actual complete setup, statement and proof of this
-        line-bundle Bertini lemma. It supplies methodological context only: the
-        rank-three jet and determinant argument is proved in the local helpers,
-        not misattributed as its literal statement."
-dependency_level: 12
+      reading_limits: Read Situation 33.47.2 and the complete statement and displayed
+        proof of Lemma 33.47.3 at tag 0FD4 in this repair. Upstream references
+        were not reconstructed. The rank-three jet, determinant, avoidance and
+        finite-etale arguments are supplied by the declared local interfaces.
+      statement: A generated invertible sheaf whose associated projective map is an
+        immersion has generally smooth zero divisors on a smooth field scheme;
+        the proof bounds the projected bad first-order incidence. This is
+        methodological context only, not the rank-three assertion used as a
+        premise.
+      hypotheses: "Situation 33.47.2: a field, a scheme over it, an invertible sheaf
+        and a finite-dimensional section family; Lemma 33.47.3 additionally
+        assumes smoothness, generation and the immersion property. These are the
+        source theorem hypotheses, not an asserted application to the rank-three
+        bundle."
+formulation_deps:
+  - def-vector-bundle-classes
+  - lem-regular-section-parameter-family
+  - math:def-axiom-of-choice
+  - def-article-conventions
+  - math:def-weil-divisor-normal-noetherian-scheme
+  - math:def-smooth-morphism-schemes
+  - math:def-coherent-module-scheme
+  - math:def-sheaf-hom
+  - math:def-kernel-cokernel-image-sheaves
+  - math:def-exact-sequence-sheaves
+  - math:def-restriction-sheaf-open-subspace
+  - math:def-finite-morphism-schemes
+  - math:def-etale-morphism-schemes
+  - math:def-noetherian-ring-and-module
+  - math:def-locally-noetherian-and-noetherian-scheme
+argument_deps:
+  - def-vector-bundle-classes
+  - lem-regular-section-parameter-family
+  - lem-affine-coherent-global-generation
+  - lem-surjection-kernel-bundle
+  - lem-author-fc2380accb47-normal-smooth-strata
+  - lem-author-fc2380accb47-coordinate-first-jets
+  - lem-author-fc2380accb47-nontransverse-incidence
+  - lem-author-fc2380accb47-simultaneous-good-parameters
+  - lem-author-fc2380accb47-finite-etale-zero-fibers
+  - math:def-axiom-of-choice
+  - def-article-conventions
+  - math:def-weil-divisor-normal-noetherian-scheme
+  - math:def-smooth-morphism-schemes
+  - math:def-coherent-module-scheme
+  - math:def-noetherian-ring-and-module
+  - math:cor-finite-type-algebra-over-noetherian-ring-is-noetherian
+  - math:def-locally-noetherian-and-noetherian-scheme
+  - math:thm-coherent-sheaves-abelian-noetherian-scheme
+  - math:def-sheaf-hom
+  - math:def-kernel-cokernel-image-sheaves
+  - math:def-exact-sequence-sheaves
+  - math:def-restriction-sheaf-open-subspace
+  - math:def-finite-morphism-schemes
+  - math:def-etale-morphism-schemes
+dependency_level: 14
 ---
 
 ## Statement
@@ -66,18 +151,24 @@ is exact. Hence $Q|_U$ is generated by global sections on $U$, even though $U$ n
 
 **Goal:** Produce the actual functional in every characteristic and establish the kernel properties used in the article.
 
-[F1] [[lem-author-fc2380accb47-normal-smooth-strata]] provides $W$ and its closed complement $D$ of dimension at most two. [[lem-author-fc2380accb47-coordinate-first-jets]] constructs a finite-dimensional dual-section family spanning first jets, using [[lem-affine-coherent-global-generation]].
+[F1] [[lem-author-fc2380accb47-normal-smooth-strata]] provides $X_3$, the union of the three-dimensional clopen integral components, $W=(X_3)_{\mathrm{sm}/k}$ and its reduced closed complement $D$ of dimension at most two. [[lem-author-fc2380accb47-coordinate-first-jets]] constructs the finite indexed family of sections of $E=P^\vee$ spanning first jets on $W$ from finite algebra generators and finite global generators of $E$.
 
-[F2] [[lem-author-fc2380accb47-nontransverse-incidence]] and [[lem-author-fc2380accb47-simultaneous-good-parameters]] provide a nonempty good parameter open and a $k$-point. [[lem-author-fc2380accb47-finite-etale-zero-fibers]] proves the actual selected zero scheme is finite étale and avoids $D$, and identifies its geometric scheme structure.
+[F2] [[lem-author-fc2380accb47-nontransverse-incidence]] bounds the bad derivative incidence by $N-1$ in an $N$-parameter family. [[lem-author-fc2380accb47-simultaneous-good-parameters]] supplies a nonempty parameter open avoiding it and the incidence over $D$, and a $k$-rational parameter in that open. [[lem-author-fc2380accb47-finite-etale-zero-fibers]] proves that the actual selected zero scheme is finite étale and is a finite disjoint union of copies of $\operatorname{Spec}k$ in $W$, including the empty case.
 
-[F3] [[lem-surjection-kernel-bundle]] gives local freeness and rank for a kernel off the zero locus; [[lem-affine-coherent-global-generation]] gives finite generators for coherent sheaves on the affine scheme and on restrictions. [[def-vector-bundle-classes]] fixes vector-bundle conventions and AC. [[lem-regular-section-parameter-family]] fixes actual zero ideals and base-change fibers.
+[F3] [[lem-surjection-kernel-bundle]] gives local splitting, the rank-two kernel and the off-zero exact sequence. [[lem-affine-coherent-global-generation]] gives finite global generators of a coherent sheaf on a Noetherian affine scheme under AC and preserves the generating surjection on every open restriction. Only the finite locally free definition of a rank-three bundle in [[def-vector-bundle-classes]] is used here; its K-theory, isomorphism-class set and universe assertions are not invoked. [[lem-regular-section-parameter-family]] constructs the actual coefficient zero ideals and identifies parameter fibers with zero subschemes.
+
+[F4] [[def-article-conventions]] fixes the algebraically closed base field, $k$-schemes, affine finite type $X=\operatorname{Spec}A$ with $A=k[f_1,\ldots,f_d]$, and chain dimension. Pure dimension three means every irreducible component has dimension three; clopen means both open and closed. Normality means every local ring is an integrally closed domain, using only that convention from [[math:def-weil-divisor-normal-noetherian-scheme]] after Noetherianity is established below. Smoothness means smoothness of the structure morphism to $\operatorname{Spec}k$ in [[math:def-smooth-morphism-schemes]], and $X_{\mathrm{sm}/k}$ is the set where that morphism is smooth. Finite means affine with module-finite coordinate algebra over each affine base open, as in [[math:def-finite-morphism-schemes]]; over $k$ this is a finite-dimensional coordinate algebra. Étale means smooth of relative dimension zero, as in [[math:def-etale-morphism-schemes]]. A $k$-rational point has residue field $k$; reduced means there are no nonzero nilpotent local sections.
+
+[F5] A ring is Noetherian when every ideal is finitely generated, as in [[math:def-noetherian-ring-and-module]]. [[math:cor-finite-type-algebra-over-noetherian-ring-is-noetherian]] applies to a finite-type algebra over a Noetherian commutative ring. A scheme with a finite affine cover by spectra of Noetherian rings is Noetherian, as in [[math:def-locally-noetherian-and-noetherian-scheme]]. Coherence has the quasi-coherent, finite-type and finite relation-kernel meaning in [[math:def-coherent-module-scheme]]. Under AC, [[math:thm-coherent-sheaves-abelian-noetherian-scheme]] identifies finite-type quasi-coherent sheaves with coherent sheaves on a locally Noetherian scheme and makes kernels of morphisms of coherent sheaves coherent. In particular its criterion applies to finite locally free sheaves: on affine frame charts they are associated to finite free modules.
+
+[F6] The dual is $P^\vee=\mathcal Hom_{\mathcal O_X}(P,\mathcal O_X)$ using [[math:def-sheaf-hom]]. A local basis of $P$ gives the dual basis by evaluation, so the dual is also finite locally free of rank three. Kernels are sectionwise kernels and images are sheafified sectionwise images, as in [[math:def-kernel-cokernel-image-sheaves]]. The zero subscheme of a functional is the coefficient-ideal subscheme of [F3]; an invertible change of frame preserves that ideal. Exactness means equality of image and kernel sheaves, as in [[math:def-exact-sequence-sheaves]]. Restriction to an open $U$ has $(\mathcal F|_U)(V)=\mathcal F(V)$ for $V\subseteq U$ open, as in [[math:def-restriction-sheaf-open-subspace]], with $\mathcal O_U=\mathcal O_X|_U$. A finite family generates if its induced map from the finite free sheaf is surjective on stalks, the convention in [F3].
+
+[A1] AC is the axiom that every family of nonempty sets has a choice function, as in [[math:def-axiom-of-choice]]. It is retained at the affine-generation, coherence and geometric-supplier invocations above. The finite local dual-basis calculation and the restrictions below require no additional arbitrary-index choice.
 
 ## Proof
-1.1 Apply [F1] with $E=P^\vee$. Its coherence and affineness give finite global generators, and multiplying them by a finite list of algebra generators for $\mathcal O_X(X)$ produces the first-jet-spanning family. Apply [F2] to choose a $k$-rational parameter outside the closures of both the nontransverse-zero incidence and the forbidden-locus incidence. The corresponding global section of $P^\vee$ is the desired functional $s$. Its actual zero scheme, not just its underlying set, is finite étale by [F2], and lies in $W\subset X_{\mathrm{sm}/k}$. Since $k$ is algebraically closed it is a finite disjoint union of $\operatorname{Spec}k$. This proves the existence and all-characteristic smoothness/avoidance assertions, including the empty case. [F1, F2, F3, given]
+1.1 Write $X=\operatorname{Spec}A$ with $A=k[f_1,\ldots,f_d]$ by [F4]. The only ideals of the field $k$ are $0$ and $k$, both finitely generated, so $k$ is Noetherian. The finite-type algebra corollary in [F5] gives that $A$ is Noetherian, and the single affine chart $X$ is a finite Noetherian affine cover, so $X$ is Noetherian. The finite locally free sheaves $P$, $\mathcal O_X$ and $E=P^\vee$ are coherent by the criterion in [F5] and the dual frames in [F6]. Thus affine generation in [F3] applies to $E$ under [A1]. Use [F1] to form $W,D$ and multiply these finite global generators by the fixed algebra generators to obtain the first-jet-spanning family. The nontransverse-incidence bound and simultaneous-good-parameter result in [F2] give a $k$-rational parameter outside the closures of both bad incidences. By [F3] its section of $P^\vee$ is an actual functional $s$ with the asserted coefficient zero scheme. The finite-étale-zero-fiber result in [F2] makes this scheme finite étale and a finite disjoint union of copies of $\operatorname{Spec}k$ in $W\subset X_{\mathrm{sm}/k}$. By [F4] it is finite and smooth; its points are distinct, reduced, rational and closed, as asserted by [F2]. This includes an empty zero scheme and avoidance of all lower-dimensional components, with no Chern, determinant or characteristic hypothesis added. [A1, F1, F2, F3, F4, F5, F6, given]
 
-2.1 On the Noetherian scheme $X$, the kernel of a morphism of coherent sheaves is coherent: locally it is a submodule of a finite module over a Noetherian ring, hence finite, with finite relations. Thus $Q$ is coherent. By the completed affine-generation result in [F3] it admits a surjection $\mathcal O_X^m\twoheadrightarrow Q$ with $m$ finite. [F3, step 1.1, algebra]
-
-3.1 On $U$ at least one coefficient of $s$ is locally a unit, by the definition of its zero ideal. Hence $s|_U$ is surjective. Restriction preserves its kernel, so [F3] makes $Q|_U$ locally free of rank $3-1=2$ and gives the asserted exact sequence. Restricting the surjection of step 2.1 preserves surjectivity on stalks and gives $\mathcal O_U^m\twoheadrightarrow Q|_U$. Its images of the standard basis are global sections on $U$, proving global generation. Together with step 1.1 this completes every asserted part. [F3, step 1.1, step 2.1] ∎
+2.1 Both source and target of $s$ are coherent by step 1.1, so the coherent-kernel theorem in [F5] gives coherence of the sectionwise kernel $Q=\ker s$. Affine generation in [F3], under [A1], gives a finite surjection $\mathcal O_X^m\twoheadrightarrow Q$. Put $U=X\setminus S$. The off-zero assertion of the kernel-bundle supplier in [F3], using the coefficient zero ideal of [F6], gives surjectivity of $s|_U$ and the exact sequence with rank-two kernel. Explicitly, at each point of $U$ a coefficient has nonzero residue, and on its nonvanishing open it is a unit and gives a local right inverse of $s$. Restriction preserves the kernel because both restriction and kernels are computed on the same sections by [F6]. Finally the restriction assertion of affine generation in [F3] gives $\mathcal O_U^m\twoheadrightarrow Q|_U$. Its standard basis images are global sections on $U$ and hence generate there, whether or not $U$ is affine. Together with step 1.1 this proves every assertion. [A1, F3, F5, F6, step 1.1] ∎
 
 ## Source/application note
-The article cites Swan's Bertini form through KM82 section3. The authored proof here instead gives the characteristic-free finite-first-jet incidence argument, following the bad-locus method actually read in Stacks Lemma33.47.3 and extending it from a line-bundle hyperplane family to the explicit rank-three determinant condition. It neither attributes this proof to unread KM82 nor assumes the characteristic-zero conventions of another Swan formulation. There is no claim about the second, rank-two irreducible-curve Bertini application later in the article's paragraph; that is outside this assigned proposition.
+The article's first Bertini application and kernel assertions are in [Theorem 6.7, printed p. 15](https://arxiv.org/abs/2610.22679v1); its bibliography on printed p. 18 identifies KM82. That cited section 3 was not read. The replacement proof composes the declared first-jet, determinant-incidence, avoidance and finite-étale suppliers. [Stacks, Situation 33.47.2 and Lemma 33.47.3](https://stacks.math.columbia.edu/tag/0FD4) provides methodological context for projecting bad first-order incidence for an invertible sheaf; its line-bundle theorem is not applied to the rank-three bundle. No second, rank-two irreducible-curve Bertini claim is made here. The present repair adds the Noetherian/coherence bridge and exact formulation interfaces to generated content, and asserts no defect of the article's authors.

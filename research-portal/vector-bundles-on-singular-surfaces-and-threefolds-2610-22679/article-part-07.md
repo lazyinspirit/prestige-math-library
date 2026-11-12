@@ -4,119 +4,119 @@ title: Article items · 07 — Characteristic-prime degree-five vanishing for
 description: Presents 28 items from the article and its immediate prerequisites,
   covering dependency levels 11–12.
 status: published
-dependency_level: 6
+dependency_level: 1
 research_article_page: true
 item_count: 28
 ---
 
-## Characteristic-prime degree-five vanishing for singular affine threefolds
+## Published prerequisite
 
-[Open item](item-lem-author-c5b0693f4fc3-top-torsion-characteristic-prime) · level 11
+[math:thm-quasi-coherent-ideal-closed-subscheme-correspondence](https://alphabetamath.cc/item/thm-quasi-coherent-ideal-closed-subscheme-correspondence)
 
-## Top-weight degree-five vanishing away from the characteristic
+## Published prerequisite
 
-[Open item](item-lem-author-c5b0693f4fc3-top-torsion-invertible-prime) · level 11
+[math:thm-rank-nullity](https://alphabetamath.cc/item/thm-rank-nullity)
 
-## Characteristic-zero coefficient vanishing and torsion freeness
+## Published prerequisite
 
-[Open item](item-lem-characteristic-zero-top-torsion) · level 11
+[math:thm-regular-equals-smooth-over-perfect-field](https://alphabetamath.cc/item/thm-regular-equals-smooth-over-perfect-field)
 
-## Critical-rank representatives of rank-zero classes
+## Published prerequisite
 
-[Open item](item-lem-critical-rank-representatives) · level 11
+[math:thm-separability-of-x-n-minus-one-and-the-order-of-the-group-of-roots-of-unity](https://alphabetamath.cc/item/thm-separability-of-x-n-minus-one-and-the-order-of-the-group-of-roots-of-unity)
 
-## Units split the K one determinant
+## Published prerequisite
 
-[Open item](item-lem-unit-section-of-k-one-determinant) · level 11
+[math:thm-smooth-locus-open](https://alphabetamath.cc/item/thm-smooth-locus-open)
 
-## Finite refinement for integer cdh sections
+## Published prerequisite
 
-[Open item](item-prop-cdh-cover-refinement) · level 11
+[math:thm-stalk-structure-sheaf-prime-localization](https://alphabetamath.cc/item/thm-stalk-structure-sheaf-prime-localization)
 
-## Krishna's affine zero-cycle divisibility and kernel input
+## Published prerequisite
 
-[Open item](item-thm-author-b87d598e83f3-krishna-cycle-input) · level 11
+[math:thm-universal-property-of-module-tensor-products](https://alphabetamath.cc/item/thm-universal-property-of-module-tensor-products)
 
-## Rank-two Chern map and its fixed-invariant fibers
+## Article scheme conventions
 
-[Open item](item-def-author-9b282fc59773-chern-map-and-fibers) · level 12
+[Open item](item-def-article-conventions) · level 0
 
-## Rank-three alternating exterior class
+## Bigraded cohomology and the projective bundle contract
 
-[Open item](item-def-rank-three-euler-k-class) · level 12
+[Open item](item-def-bigraded-oriented-theory) · level 0
 
-## Support fibers with explicit cohomological indexing
+## Euler class group presentation
 
-[Open item](item-def-supported-complex-indexing) · level 12
+[Open item](item-def-euler-class-group-presentation) · level 0
 
-## Every actual motivic stage on the empty scheme is zero
+## Exterior powers and determinant of an algebraic bundle
 
-[Open item](item-lem-adjudicate-5eb16844831b-empty-motivic-stages) · level 12
+[Open item](item-def-exterior-determinant-bundles) · level 0
 
-## Combining the actual motivic and cdh outer-term bounds
+## Levine–Weibel zero cycles
 
-[Open item](item-lem-author-0bac6b264f4a-motivic-dim-prime-field-vanishing) · level 12
+[Open item](item-def-levine-weibel-zero-cycles) · level 0
 
-## General equicharacteristic scope and the standing filtration restriction
+## Stable triviality and stable bundle equivalence
 
-[Open item](item-lem-author-0cc80c1b5792-noetherian-scope) · level 12
+[Open item](item-def-stably-free-bundles) · level 0
 
-## The root map through derived sections, truncation and localization
+## Finite-type schemes have finitely many clopen connected components
 
-[Open item](item-lem-author-2ac325480ae8-truncated-root-map) · level 12
+[Open item](item-lem-adjudicate-60a5a67fb86d-finite-type-clopen-components) · level 0
 
-## The zero-dimensional critical-rank boundary
+## Finite-type field schemes lie in the qcqs source domain
 
-[Open item](item-lem-author-394a5b71198d-zero-boundary) · level 12
+[Open item](item-lem-adjudicate-a6bf10648fa2-finite-type-field-qcqs) · level 0
 
-## The hypercomplete derived-localization model on the actual general site
+## Finite-type schemes over fields are qcqs
 
-[Open item](item-lem-author-7113c087ecba-general-localization) · level 12
+[Open item](item-lem-adjudicate-d6ce097ccb62-finite-type-qcqs) · level 0
 
-## Projective bundle closure and naturality of the actual decomposition
+## Dimension and purity of an affine polynomial cylinder
 
-[Open item](item-lem-author-79117e1d72ed-base-change) · level 12
+[Open item](item-lem-adjudicate-fa9c7180089a-polynomial-spectrum-dimension) · level 0
 
-## Actual Chow localization gives surjectivity of the motivic arrow
+## Closed-subset and specialization chains compute the same scheme codimension
 
-[Open item](item-lem-author-8a080e7d9445-chow-restriction) · level 12
+[Open item](item-lem-adjudicate-fc0ec1cc794d-scheme-codimension-conventions) · level 0
 
-## Stable triviality fixes the K-zero class and determinant
+## Finite-type schemes over a field are qcqs
 
-[Open item](item-lem-author-b02e51f9da03-stable-invariants) · level 12
+[Open item](item-lem-adjudicate-febd1cc3219d-finite-type-field-qcqs) · level 0
 
-## Constant integer coefficients and exact derived evaluation
+## Affine bundles and finite projective modules
 
-[Open item](item-lem-author-dcdf962edbda-constant-sections) · level 12
+[Open item](item-lem-affine-bundle-module-interface) · level 0
 
-## Prime-field restriction and the intrinsic étale coefficient complex
+## Finite global generation on an affine scheme
 
-[Open item](item-lem-author-e71ff76fe904-prime-field-coefficients) · level 12
+[Open item](item-lem-affine-coherent-global-generation) · level 0
 
-## The ordinary Chow Chern map on isomorphism classes
+## Normalization of an affine integral curve
 
-[Open item](item-lem-author-f08c343a07fc-local-chern-interface) · level 12
+[Open item](item-lem-affine-curve-normalization-interface) · level 0
 
-## Representable cdh sheaves and seminormalization
+## Finite projective modules are finitely presented
 
-[Open item](item-prop-cdh-representable-seminormalization) · level 12
+[Open item](item-lem-author-3af31ead36fb-finite-projective-presentation) · level 0
 
-## Bertini functional with finite smooth zero locus
+## Dimension of the maximal spectrum
 
-[Open item](item-prop-swan-bertini-point-section) · level 12
+[Open item](item-lem-author-3af31ead36fb-max-spectrum-dimension) · level 0
 
-## Torsion freeness of top threefold motivic cohomology
+## Roots in a finite product of groups
 
-[Open item](item-prop-top-motivic-torsion-free) · level 12
+[Open item](item-lem-author-9ab3274efad8-finite-product-roots) · level 0
 
-## External actual augmented EM and smooth slice tower comparison
+## Picard groups of finite disjoint unions
 
-[Open item](item-thm-author-16f30f6b95cb-lowweight-augmented-slice-comparison) · level 12
+[Open item](item-lem-author-9ab3274efad8-picard-disjoint-union) · level 0
 
-## External actual graded algebra and multiplicative tower spectral sequence
+## Positive roots suffice for divisibility
 
-[Open item](item-thm-author-74a9c17e63f1-source-multiplicative-input) · level 12
+[Open item](item-lem-author-9ab3274efad8-positive-roots) · level 0
 
-## External actual motivic stagewise boundedness
+## Connected components of a smooth affine curve
 
-[Open item](item-thm-author-74a9c17e63f1-stage-bound-input) · level 12
+[Open item](item-lem-author-9ab3274efad8-smooth-affine-components) · level 0

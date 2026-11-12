@@ -3,122 +3,110 @@ title: Supporting prerequisites · 03 — Spectral K-zero equality gives an actu
   projective stabilization
 description: Presents 29 supporting prerequisites, covering dependency levels 12–26.
 status: published
-dependency_level: 26
-item_count: 29
+dependency_level: 10
+item_count: 26
 ---
 
-## Spectral K-zero equality gives an actual projective stabilization
+## Universal Chern cohomology and countable derived limits
 
-[Open item](item-lem-author-7dc5154c7a6f-spectral-kzero-stability) · level 12
+[Open item](item-thm-repair-72891dd58cd0-universal-chern-derived-limit-input) · level 4
 
-## Spectral K-zero equality gives an actual projective stabilization
+## Local comparison of coherent coefficient presheaves with derived sheaf Eilenberg targets
 
-[Open item](item-lem-author-f08c343a07fc-cancel-spectral-kzero-stability) · level 12
+[Open item](item-lem-adjudicate-5e92a1f59168-coefficient-local-comparison) · level 5
 
-## External actual motivic stagewise boundedness
+## Degreewise eventually zero spectral towers have zero limit
 
-[Open item](item-thm-author-0cc80c1b5792-stage-bound-input) · level 12
+[Open item](item-lem-adjudicate-656ca1c4e08f-eventually-zero-spectral-towers) · level 5
 
-## Fixed determinant isolates the actual Chern fiber
+## Exact range of a cofiber connectivity bound
 
-[Open item](item-lem-author-9b282fc59773-fixed-determinant-fibers) · level 13
+[Open item](item-lem-author-13e6fe931c45-cone-exact-range) · level 5
 
-## Cohomology of shifted Nisnevich units
+## A sheaf restricts injectively to a covering singleton
 
-[Open item](item-lem-author-13e6fe931c45-shifted-units) · level 14
+[Open item](item-lem-author-60d95bfb692a-cover-restriction-injective) · level 6
 
-## Chern-compatible presentation transports the exact fibers
+## External valuative dimension comparison on locally Noetherian schemes
 
-[Open item](item-lem-author-9b282fc59773-compatible-presentation-fibers) · level 14
+[Open item](item-thm-author-0cc80c1b5792-valuation-input) · level 6
 
-## External actual EM graded algebra, Picard class and complex PBF
+## Covering axioms for the common small Nisnevich site
 
-[Open item](item-thm-author-32887006bdff-em-graded-input) · level 14
+[Open item](item-lem-adjudicate-93bd81579a6e-small-nisnevich-covering-axioms) · level 7
 
-## External actual EM graded algebra, Picard class and complex PBF
+## Qcqs scheme sites and affine detection for space-valued sheafification
 
-[Open item](item-thm-author-4f94f7982b0d-em-graded-input) · level 14
+[Open item](item-lem-adjudicate-bd5616aab033-qcqs-sites-affine-detection) · level 7
 
-## The actual EM comparison commutes with the Picard first-Chern map
+## Perfect determinant with true-triangle additivity: precise external input
 
-[Open item](item-lem-adjudicate-6e70d30b9793-em-picard-square) · level 15
+[Open item](item-thm-adjudicate-a8dfc5e2f7fe-perfect-determinant-true-triangle-input) · level 7
 
-## An actual non-A¹ P¹-spectrum for the supplied EM complexes
+## External dimension criterion for a cdh-acyclic Nisnevich sheaf
 
-[Open item](item-lem-author-32887006bdff-em-p1-model) · level 15
+[Open item](item-thm-author-0bac6b264f4a-motivic-dim-dimension-criterion-input) · level 7
 
-## Negative coefficients of the actual EM projective-line model
+## Completely decomposed proper maps are abstract-blowup covers
 
-[Open item](item-lem-adjudicate-a8be8a17c858-negative-model-coefficients) · level 16
+[Open item](item-lem-adjudicate-57a7caabd963-cdp-abstract-generation) · level 8
 
-## Actual EM orientation and projective bundle maps on that model
+## The local simplicial model retains actual sections on a finite-dimensional noetherian Nisnevich site
 
-[Open item](item-lem-author-32887006bdff-actual-orientation) · level 16
+[Open item](item-lem-adjudicate-838c28062b21-small-nisnevich-local-model) · level 8
 
-## External actual universal-class detection on Vect and Grass
+## Comparison of the MVW and cdp cdh topologies
 
-[Open item](item-thm-author-3cde9692a7e9-universal-grass-input) · level 17
+[Open item](item-lem-adjudicate-bda1b5017300-mvw-cdp-topology-comparison) · level 8
 
-## Finite-rank detection of stable pointed motivic classes
+## Finite subintegral maps are cdh covers
 
-[Open item](item-lem-adjudicate-00232ac8c49e-stable-universal-class-detection) · level 18
+[Open item](item-lem-author-60d95bfb692a-finite-subintegral-cdh-cover) · level 8
 
-## Actual exact-sequence Whitney and filtered-root formula on singular qcqs schemes
+## The diagonal of a finite subintegral map is a cdh cover
 
-[Open item](item-lem-author-4f94f7982b0d-actual-whitney) · level 18
+[Open item](item-lem-author-60d95bfb692a-subintegral-diagonal-cover) · level 8
 
-## External Quillen acyclicity and the actual local free-class model
+## External prime-field cdh comparison and cdh dimension bound
 
-[Open item](item-thm-author-3cde9692a7e9-plus-model-input) · level 18
+[Open item](item-thm-author-0bac6b264f4a-motivic-dim-cdh-interface-input) · level 8
 
-## Projective relations transport the actual universal Chern operations
+## Exact source weight-zero and constant-sheaf input
 
-[Open item](item-lem-adjudicate-6e70d30b9793-chern-operation-transport) · level 19
+[Open item](item-thm-author-dcdf962edbda-source-input) · level 8
 
-## The stable free-class comparison is locally integrally acyclic
+## Exact cdh factorization inputs for the source étale map
 
-[Open item](item-lem-author-3cde9692a7e9-local-free-test) · level 19
+[Open item](item-thm-author-e71ff76fe904-cdh-factorization-input) · level 8
 
-## Local free chains detect natural perfect operations on every qcqs base
+## Flag detection over an arbitrary field by prime-field restriction
 
-[Open item](item-lem-author-9b6cb358ddc9-local-chains) · level 19
+[Open item](item-lem-adjudicate-6cf37231df39-arbitrary-field-flag-detection) · level 9
 
-## The field comparison preserves refined smooth Gysin and the point class
+## Exactness of ordinary derived cdh sheafification and evaluation
 
-[Open item](item-lem-adjudicate-6e70d30b9793-smooth-supported-gysin-transport) · level 20
+[Open item](item-lem-adjudicate-e4768ff43a65-ordinary-localization-exactness) · level 9
 
-## Local integral chains detect global natural maps into Chern targets
+## Sections match across a finite subintegral cover
 
-[Open item](item-lem-author-3cde9692a7e9-derived-chain-detection) · level 20
+[Open item](item-lem-author-60d95bfb692a-subintegral-matching) · level 9
 
-## Free-class detection on qcqs perfect K-space models
+## External geometric properties of the actual motivic comparison fiber
 
-[Open item](item-lem-adjudicate-2ec9cc32fdc8-qcqs-free-class-detection) · level 21
+[Open item](item-thm-author-0bac6b264f4a-motivic-dim-relative-package-input) · level 9
 
-## Integral oriented field coefficient comparison with actual Picard and support maps
+## Exact natural regular motivic-to-cdh comparison
 
-[Open item](item-thm-author-d026a7b99ace-integral-field-model) · level 21
+[Open item](item-thm-author-149a02132c3b-em-regular-input) · level 9
 
-## Coefficientwise perfect Cartan on every qcqs field-scheme
+## Exact natural regular motivic-to-cdh comparison
 
-[Open item](item-lem-adjudicate-2ec9cc32fdc8-qcqs-perfect-cartan) · level 22
+[Open item](item-thm-author-8a080e7d9445-em-regular-input) · level 9
 
-## External actual supported Riemann–Roch in codimension three
+## Exact objectwise cofiber bound for the canonical source composite
 
-[Open item](item-thm-author-d026a7b99ace-supported-rr) · level 22
+[Open item](item-thm-author-e71ff76fe904-objectwise-range-input) · level 9
 
-## Apply the actual perfect Cartan identity to the second image
+## Affine characteristic-p syntomic amplitude without regularity
 
-[Open item](item-lem-author-3cde9692a7e9-second-subgroup) · level 25
-
-## The reduced universal bundle calculation identifies the second projection
-
-[Open item](item-lem-author-e216acade157-bundle-calculation) · level 25
-
-## The perfect image filtration has the stated second projection and kernel
-
-[Open item](item-lem-author-e216acade157-perfect-image-formula) · level 25
-
-## The second-stage projection is minus the actual second Chern map on its homotopy fiber
-
-[Open item](item-lem-author-e216acade157-actual-fiber-comparison) · level 26
+[Open item](item-lem-author-c5b0693f4fc3-top-torsion-syntomic-bound) · level 10

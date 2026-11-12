@@ -10,8 +10,12 @@ PDF p. 3: Filtered S1 spectra: stable enhancement prerequisites
 ## Prerequisites
 
 - [thm-author-e0b0bf18ed2b-stable-enhancement-input](item-thm-author-e0b0bf18ed2b-stable-enhancement-input)
+- [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
+
 
 ## Statement
+Assume the Axiom of Choice and the compatible nested Grothendieck universes $U\in V\in W$, with $\omega\in U$, stipulated by the supplied stable spectra and filtration constructions. All indexing diagrams and objects obey those size bounds.
+
 In $\mathrm{Sp}$ every small coherent diagram has a homotopy limit and colimit. For $f:A\to B$ define $\operatorname{fib}(f)=A\times_B0$ and $\operatorname{cofib}(f)=B\amalg_A0$. Then $\operatorname{cofib}(f)\simeq\operatorname{fib}(f)[1]$. A fiber sequence $F\to A\to B$, including its nullhomotopy and defining pullback square, extends to the cofiber triangle $F\to A\to B\to F[1]$. Products are coherent homotopy products. Smash with a fixed spectrum preserves finite limits and finite colimits in either variable.
 
 ## Facts & Assumptions
@@ -20,6 +24,8 @@ In $\mathrm{Sp}$ every small coherent diagram has a homotopy limit and colimit. 
 **Goal:** Establish rotation, products and separate exactness of smash.
 
 [F1] The stable enhancement gives all small limits and colimits, equality of pushouts and pullbacks, and a symmetric monoidal smash preserving colimits separately. [thm-author-e0b0bf18ed2b-stable-enhancement-input](item-thm-author-e0b0bf18ed2b-stable-enhancement-input)
+
+[A1] Retain the classical foundations and compatible universe bounds of the supplied constructions, including the Axiom of Choice and $\omega\in U$ for fixed $U\in V\in W$. These are premises of the selected framework; the algebraic image and product arguments below assert no necessity of Choice for the corresponding abstract group facts. [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
 
 ## Proof
 1.1 The limits and colimits exist by [F1] and are homotopy limits and colimits because their universal properties are equivalences of mapping spaces. In particular, the limit over a discrete small indexing category is the homotopy product, with the coherences supplied by the limit construction. [F1]

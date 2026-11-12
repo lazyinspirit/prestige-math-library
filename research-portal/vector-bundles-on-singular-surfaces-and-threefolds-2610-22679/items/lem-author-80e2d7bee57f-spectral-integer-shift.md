@@ -13,6 +13,10 @@ provenance:
   proof: ai-generated
 proof_strategy: direct-proof
 dependency_level: 4
+formulation_deps:
+  - def-stable-spectra-interface
+argument_deps:
+  - def-stable-spectra-interface
 ---
 
 ## Statement

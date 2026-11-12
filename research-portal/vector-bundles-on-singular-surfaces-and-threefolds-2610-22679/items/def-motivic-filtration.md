@@ -5,6 +5,8 @@ title: Motivic filtration and image groups
 status: published
 domain: mathematics
 deps:
+  - math:thm-prime-subfield-classification
+  - math:thm-affine-scheme-ring-anti-equivalence
   - math:def-axiom-of-choice
   - def-article-conventions
   - def-nonconnective-k-spectrum-interface
@@ -17,6 +19,8 @@ deps:
   - lem-author-98a750efd0cc-filtration-naturality
   - lem-author-98a750efd0cc-filtration-products
 dependency_roles:
+  math:thm-prime-subfield-classification: mathematical-premise
+  math:thm-affine-scheme-ring-anti-equivalence: mathematical-premise
   math:def-axiom-of-choice: mathematical-premise
   def-article-conventions: mathematical-premise
   def-nonconnective-k-spectrum-interface: mathematical-premise
@@ -37,8 +41,25 @@ sources:
       url: https://arxiv.org/abs/2610.22679v1
       locator: PDF p. 2, introductory discussion; p. 3, Section 2 opening; p. 8,
         Section 4 opening
+      statement: The article describes a functorial multiplicative motivic filtration
+        on nonconnective algebraic K-theory, with zeroth stage K, and defines
+        its image filtration groups for every homotopy degree and nonnegative
+        filtration index. Section 4 records surjections from stage homotopy
+        groups onto the images.
+      hypotheses: Qcqs schemes over the standing algebraically closed base field k,
+        unless a statement specifies otherwise; homotopy degree is any integer,
+        and the Section 2 image definition uses nonnegative filtration indices.
+      reading_limits: Read the frozen article text at printed pp. 2, 3 and 8 and
+        inspected the supplied PDF page images for pp. 3 and 8. These passages
+        support the filtration notation, products, stage zero, image definition
+        and surjectivity. The negative-index convention is implemented by the
+        declared local extension lemma; prime-field restriction and the local
+        justification below are not attributed to the article. The
+        Elmanto-Morrow construction is used through its declared imported
+        interface; no fresh reading or reconstruction of its deep proof is
+        claimed here.
 proof_strategy: direct
-dependency_level: 11
+dependency_level: 13
 ---
 
 ## Definition
@@ -61,24 +82,24 @@ $$F^j_{\mathrm{mot}}K_i(X)=\operatorname{im}\bigl(\pi_iF^j_{\mathrm{mot}}K(X)\lo
 The arrow is induced by the transition to stage zero and its identification with $K(X)$. Its image is a subgroup, and the induced map onto that subgroup is surjective. The same formula also makes sense for negative $j$ under the stated extension, in which case it gives all of $K_i(X)$.
 
 ## Facts & Assumptions
-**Given:** A field $k$, a qcqs $k$-scheme $X$, the Axiom of Choice, and the integer indices specified above.
+**Given:** A field $k$, a qcqs $k$-scheme $X$, the Axiom of Choice, the fixed compatible universes of the supplied spectral interfaces, and the integer indices specified above.
 
 **Goal:** Justify the functor, its augmentation and multiplication, and the image-group definition without reconstructing the external filtration.
 
-[F1] [[def-article-conventions]] defines the scheme category; every field contains its prime field, either $\mathbb Q$ or $\mathbb F_p$.
+[F1] [[def-article-conventions]] defines the scheme category. By [[math:thm-prime-subfield-classification]], the prime subfield $k_0$ of $k$ admits a unit-preserving isomorphism from $\mathbb F=\mathbb Q$ or $\mathbb F_p$ for a prime $p$. Composing this isomorphism with $k_0\hookrightarrow k$ gives a unit-preserving embedding $\iota:\mathbb F\hookrightarrow k$.
 
 [F2] The assumed Choice premise, [[math:def-axiom-of-choice]], discharges the explicit AC hypothesis of [[def-nonconnective-k-spectrum-interface]] when its common-family perfect-complex realization and essentially small nonconnective-functor domain are invoked. That interface supplies contravariant nonconnective $K$, all integer homotopy groups and the ambient ring structure. [[thm-author-98a750efd0cc-motivic-filtration-input]] imports the nonnegative filtration, functoriality, multiplication and zeroth-stage equivalence on qcqs schemes over the prime field.
 
-[F3] [[lem-author-98a750efd0cc-filtration-extension]] supplies the integer-indexed extension; [[def-decreasing-filtered-spectrum]] and [[def-multiplicative-filtered-spectrum]] specify its augmentation and coherent algebra-object notation.
+[F3] [[lem-author-98a750efd0cc-filtration-extension]] supplies the integer-indexed extension; [[def-decreasing-filtered-spectrum]] and [[def-multiplicative-filtered-spectrum]] specify its augmentation and coherent algebra-object notation. All diagrams and algebra objects use the fixed compatible universes required by these interfaces.
 
 [F4] [[lem-author-98a750efd0cc-filtration-image]], [[lem-author-98a750efd0cc-filtration-nesting]], [[lem-author-98a750efd0cc-filtration-naturality]] and [[lem-author-98a750efd0cc-filtration-products]] establish, respectively, subgroup and surjectivity, nesting, naturality and compatibility of products for such images.
 
+[F5] [[math:thm-affine-scheme-ring-anti-equivalence]] sends a unit-preserving map of commutative rings $A\to B$ contravariantly to a morphism of affine schemes $\operatorname{Spec}B\to\operatorname{Spec}A$. It applies to the embedding $\iota$ in [F1].
+
 ## Justification
-1.1 Invoke the perfect-complex $K$-theory interface in [F2] under the assumed Choice premise. The structure morphism of each $k$-scheme composes with $\operatorname{Spec}k\to\operatorname{Spec}\mathbb F$ for its prime field $\mathbb F$. Its underlying scheme remains qcqs, and every $k$-morphism is an $\mathbb F$-morphism. Restrict the functor in [F2] along this forgetful functor; no finite-type, regularity or finite-dimensional assumption is needed. [F1, F2, given]
+1.1 Invoke the perfect-complex $K$-theory interface in [F2] under the assumed Choice premise and compatible universes. By [F1], use the unit-preserving embedding $\iota:\mathbb F\hookrightarrow k$ from the appropriate standard prime field. By [F5] it induces $\operatorname{Spec}k\to\operatorname{Spec}\mathbb F$. Compose each $k$-scheme structure morphism with this map. The underlying scheme remains qcqs; a $k$-morphism commutes with the composite structure maps, so is an $\mathbb F$-morphism. Leaving underlying morphisms unchanged preserves identities and composition and gives a forgetful functor $\mathrm{Sch}_k\to\mathrm{Sch}_{\mathbb F}$. Restrict the filtration functor in [F2] along its opposite. No finite-type, regularity or finite-dimensional assumption is needed. [F1, F2, F5, given]
 
-2.1 Apply the extension in [F3] to the restricted nonnegative tower. Its stage zero is naturally equivalent to $K$, and its coherent products give the displayed maps. The extension and all maps are functorial because they are built from the original transitions and products. The equality at stage zero is notation for the supplied natural equivalence. [F2, F3, step 1.1]
-
-3.1 Apply the image lemma in [F4] to each stage-to-$K$ map. The subgroup and surjectivity statements follow. Nesting, pullback compatibility and product containment follow from the remaining lemmas in [F4]. If $j<0$, the extended stage and its map to $K$ are identified with $K$ and its identity, so the image is the whole group. This justifies the definition and its stated properties. [F3, F4, step 2.1] ∎
+2.1 Use the natural zeroth-stage equivalence in [F2] to identify stage zero with the commutative ring spectrum $K$, and apply the extension in [F3] to the restricted nonnegative tower. Its coherent products give the displayed maps. The extension and all maps are functorial because they are built from the original transitions and products; the equality at stage zero denotes the supplied natural equivalence. Apply the image lemma in [F4] to each stage-to-$K$ map to obtain the subgroup and surjectivity statements. The remaining lemmas in [F4] give nesting, pullback compatibility and product containment. If $j<0$, the extended stage and its map to $K$ are identified with $K$ and its identity, so the image is the whole group. This justifies the definition and its stated properties. [F2, F3, F4, step 1.1] ∎
 
 ## Scope
 The external construction is not reconstructed here. No completeness, boundedness, associated-graded identification or injectivity of a stage-to-$K$ map is asserted by this definition.
