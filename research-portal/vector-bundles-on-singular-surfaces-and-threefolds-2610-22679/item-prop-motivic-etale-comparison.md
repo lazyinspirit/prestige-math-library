@@ -50,7 +50,6 @@ PDF p. 5: Property (5)
 - [math:def-scheme-over-base](https://alphabetamath.cc/item/def-scheme-over-base)
 - [math:def-quasi-compact-and-quasi-separated-scheme](https://alphabetamath.cc/item/def-quasi-compact-and-quasi-separated-scheme)
 - [math:def-grothendieck-universe-closure-convention](https://alphabetamath.cc/item/def-grothendieck-universe-closure-convention)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · p. 5, property (5); base-field convention on p. 3; motivic-complex notation in Definition 2.2 on p. 4 `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Statement

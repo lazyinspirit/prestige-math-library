@@ -56,7 +56,6 @@ PDF p. 4: Property (4); PDF p. 13: Smooth groups in Proposition 6.1
 - [lem-adjudicate-d6ce097ccb62-finite-type-qcqs](item-lem-adjudicate-d6ce097ccb62-finite-type-qcqs)
 - [def-decreasing-filtered-spectrum](item-def-decreasing-filtered-spectrum)
 - [lem-author-98a750efd0cc-filtration-extension](item-lem-author-98a750efd0cc-filtration-extension)
-- [` Vector bundles on singular surfaces and threefolds · PDF p. 4, property (4); p. 13, Proposition 6.1 discussion `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Statement

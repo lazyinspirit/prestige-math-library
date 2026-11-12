@@ -53,7 +53,6 @@ PDF p. 8: Lemma 4.1; PDF p. 9: Conclusion of proof
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
 - [math:def-integral-closure-and-integrally-closed-domain](https://alphabetamath.cc/item/def-integral-closure-and-integrally-closed-domain)
 - [lem-author-74a9c17e63f1-index-calculation](item-lem-author-74a9c17e63f1-index-calculation)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 3, Notation and conventions and filtration image definition; pp. 8–9, Section 4 opening and Lemma 4.1 with its proof `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Statement

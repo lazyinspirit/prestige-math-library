@@ -53,7 +53,6 @@ PDF p. 11: Opening paragraphs of Lemma 5.3 proof
 - [math:thm-noetherian-ring-has-noetherian-spectrum](https://alphabetamath.cc/item/thm-noetherian-ring-has-noetherian-spectrum)
 - [math:lem-noetherian-open-subsets-are-quasi-compact](https://alphabetamath.cc/item/lem-noetherian-open-subsets-are-quasi-compact)
 - [math:def-quasi-compact-and-quasi-separated-scheme](https://alphabetamath.cc/item/def-quasi-compact-and-quasi-separated-scheme)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 3, Notation and conventions; p. 8, Proposition 3.2 and Lemma 4.1; pp. 9–10, Lemma 4.1 continuation and Section 5 opening through Lemma 5.2; p. 11, opening of the proof of Lemma 5.3 `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Statement

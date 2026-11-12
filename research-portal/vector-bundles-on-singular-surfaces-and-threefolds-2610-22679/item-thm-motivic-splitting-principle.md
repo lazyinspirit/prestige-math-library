@@ -48,7 +48,6 @@ PDF p. 8: Theorem 3.1 and following paragraph
 - [math:def-scheme-over-base](https://alphabetamath.cc/item/def-scheme-over-base)
 - [math:def-locally-free-sheaf-finite-rank](https://alphabetamath.cc/item/def-locally-free-sheaf-finite-rank)
 - [math:def-pullback-module-ringed-spaces](https://alphabetamath.cc/item/def-pullback-module-ringed-spaces)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · p. 8, Section 3 opening, Theorem 3.1 and immediately following paragraph; p. 3, standing scheme conventions `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Statement

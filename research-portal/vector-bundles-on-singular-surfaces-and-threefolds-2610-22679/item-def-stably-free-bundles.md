@@ -5,20 +5,30 @@ research_item: def-stably-free-bundles
 dependency_level: 0
 sources:
   references:
-    - title: Fasel–Yakerson, Vector bundles on singular surfaces and threefolds
-      url: https://arxiv.org/abs/2610.22679v1
-      locator: p. 1, final introductory paragraph, continued in p. 2, opening sentence
-      reading_limits: Read the text extracted directly from the frozen article PDF, p.
-        1 final introductory paragraph and p. 2 opening sentence. The article
-        reports the example; the cited construction in Kum85 was not read. No
-        original existence or nontriviality proof was checked, and the example
-        is used only as contextual attribution.
-      statement: The article reports that Mohan Kumar constructed a nontrivial stably
-        trivial rank-two bundle on a smooth complex affine fourfold.
-      hypotheses: Algebraic vector bundle of constant rank two on a smooth affine
-        complex variety of algebraic dimension four; this is a reported
-        existence example, not a premise for the definitions or
+    - title: Thomas Brazelton, Morgan Opie and Tariq Syed, On Algebraic Vector Bundles
+        of Rank 2 over Smooth Affine Fourfolds
+      url: https://tbrazel.github.io/assets/papers/fourfolds.pdf
+      locator: Example 6.6, printed/PDF p. 33, opening paragraph; see also the
+        introductory existence assertion, p. 2. Section-6 field restriction is
+        on p. 32; MK84/MK85 bibliography entries are on p. 36.
+      statement: Brazelton–Opie–Syed report that Mohan Kumar constructed a smooth
+        complex affine fourfold carrying a nontrivial stably trivial algebraic
+        vector bundle of rank two.
+      hypotheses: The reported example is an algebraic vector bundle of constant rank
+        two on a smooth affine complex variety of dimension four. The section-6
+        standing hypothesis is an algebraically closed field of characteristic
+        different from 2 and 3, which holds over the complex numbers. This
+        example is context only, not a premise for the definitions or
         equivalence-relation proof.
+      reading_limits: For this citation replacement, downloaded the author-hosted PDF
+        and read extracted text on title/authors p. 1, the introductory
+        existence assertion p. 2, the section-6 standing field restriction p.
+        32, Example 6.6 pp. 33–34 and the MK84/MK85 bibliography entries p. 36.
+        The original Mohan Kumar papers, their defining equations and the
+        original existence and nontriviality proofs were not read or
+        reconstructed. This reference is an independent report of the example
+        and is used only for contextual attribution; its Hermitian-K-theory
+        continuation is not a premise.
 ---
 
 PDF p. 2: Mohan Kumar fourfold example
@@ -28,7 +38,7 @@ PDF p. 2: Mohan Kumar fourfold example
 - [math:def-scheme](https://alphabetamath.cc/item/def-scheme)
 - [math:def-module-on-ringed-space](https://alphabetamath.cc/item/def-module-on-ringed-space)
 - [math:def-locally-free-sheaf-finite-rank](https://alphabetamath.cc/item/def-locally-free-sheaf-finite-rank)
-- [` Fasel–Yakerson, Vector bundles on singular surfaces and threefolds · p. 1, final introductory paragraph, continued in p. 2, opening sentence `](https://arxiv.org/abs/2610.22679v1)
+- [` Thomas Brazelton, Morgan Opie and Tariq Syed, On Algebraic Vector Bundles of Rank 2 over Smooth Affine Fourfolds · Example 6.6, printed/PDF p. 33, opening paragraph; see also the introductory existence assertion, p. 2. Section-6 field restriction is on p. 32; MK84/MK85 bibliography entries are on p. 36. `](https://tbrazel.github.io/assets/papers/fourfolds.pdf)
 
 
 ## Definition
@@ -58,4 +68,4 @@ Bundles $E$ and $F$ are **stably isomorphic** if, for some integer $N\geq 0$, th
 2.1 The identity isomorphism with $N=0$ gives reflexivity, and an isomorphism can be inverted, giving symmetry. If $E\oplus\mathcal O_X^N\cong F\oplus\mathcal O_X^N$ and $F\oplus\mathcal O_X^M\cong G\oplus\mathcal O_X^M$, take the direct sum of the first isomorphism with the identity on $\mathcal O_X^M$ and of the second with the identity on $\mathcal O_X^N$, then compose them using the coordinate reassociation and permutation maps from step 1.1. This gives $E\oplus\mathcal O_X^{N+M}\cong G\oplus\mathcal O_X^{N+M}$, proving transitivity. Finally, concatenation gives $\mathcal O_X^r\oplus\mathcal O_X^N\cong\mathcal O_X^{r+N}$, so the stated form of stable triviality is exactly stable isomorphism to $\mathcal O_X^r$. [step 1.1, algebra] ∎
 
 ## Remarks
-The article reports a nontrivial stably trivial rank $2$ bundle on a smooth complex affine fourfold, attributed to Mohan Kumar. This definition does not establish that example or a cancellation theorem.
+Brazelton–Opie–Syed report Mohan Kumar's construction of a nontrivial stably trivial rank $2$ bundle on a smooth complex affine fourfold (Example 6.6, p. 33; see also p. 2). This definition does not establish that example or a cancellation theorem.

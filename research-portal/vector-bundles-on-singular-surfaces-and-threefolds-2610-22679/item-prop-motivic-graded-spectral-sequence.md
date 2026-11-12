@@ -93,7 +93,6 @@ PDF p. 4: Motivic graded spectral sequence; PDF p. 9: Eventual filtration vanish
 - [math:prop-a-map-of-exact-couples-induces-a-map-of-spectral-sequences](https://alphabetamath.cc/item/prop-a-map-of-exact-couples-induces-a-map-of-spectral-sequences)
 - [def-multiplicative-filtered-spectrum](item-def-multiplicative-filtered-spectrum)
 - [lem-fiber-sequence-homotopy-exactness](item-lem-fiber-sequence-homotopy-exactness)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 3, conventions and Section 2 opening; p. 4, equation (2.1), Definition 2.2 and following spectral-sequence paragraph; p. 9, Lemma 4.2 proof `](https://arxiv.org/abs/2610.22679v1)
 - [` Elmanto–Morrow, Motivic cohomology of equicharacteristic schemes · v1, 15 September 2023 (title date 18 September): Theorem 1.1(1), p.3; section 2.2, pp.11–12; Definitions 4.9/4.23, pp.21 and 27–28; Theorems 4.10(1)/4.24(1), pp.21 and 28; Theorems 4.12(1)/4.27(1), pp.22–23 and 29. `](https://arxiv.org/pdf/2309.08463v1)
 - [` Jacob Lurie, Higher Algebra (September 18, 2017) · Theorem 7.1.2.13 and proof, printed pp. 1212–1213; Theorem 7.1.2.1, first proof paragraph, p. 1206; Remark 7.1.2.9, p. 1211; Definition 7.1.1.2, p. 1199. `](https://www.math.ias.edu/~lurie/papers/HA.pdf)
 

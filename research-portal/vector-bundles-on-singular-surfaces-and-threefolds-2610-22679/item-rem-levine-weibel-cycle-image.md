@@ -48,7 +48,6 @@ PDF p. 3: Levine–Weibel image after TheoremC; PDF p. 14: Definition6.5 pure-di
 - [thm-author-80f982ded420-quotient-cycle-map-input](item-thm-author-80f982ded420-quotient-cycle-map-input)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
 - [math:cor-fields-of-characteristic-zero-and-finite-fields-are-perfect](https://alphabetamath.cc/item/cor-fields-of-characteristic-zero-and-finite-fields-are-perfect)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · TheoremC pp2–3 and following cycle-image sentence; printed p14 Definition6.5 `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Remark

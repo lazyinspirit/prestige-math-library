@@ -319,7 +319,7 @@ Bundles $E$ and $F$ are **stably isomorphic** if, for some integer $N\geq 0$, th
 2.1 The identity isomorphism with $N=0$ gives reflexivity, and an isomorphism can be inverted, giving symmetry. If $E\oplus\mathcal O_X^N\cong F\oplus\mathcal O_X^N$ and $F\oplus\mathcal O_X^M\cong G\oplus\mathcal O_X^M$, take the direct sum of the first isomorphism with the identity on $\mathcal O_X^M$ and of the second with the identity on $\mathcal O_X^N$, then compose them using the coordinate reassociation and permutation maps from step 1.1. This gives $E\oplus\mathcal O_X^{N+M}\cong G\oplus\mathcal O_X^{N+M}$, proving transitivity. Finally, concatenation gives $\mathcal O_X^r\oplus\mathcal O_X^N\cong\mathcal O_X^{r+N}$, so the stated form of stable triviality is exactly stable isomorphism to $\mathcal O_X^r$. [step 1.1, algebra] ∎
 
 ### Remarks
-The article reports a nontrivial stably trivial rank $2$ bundle on a smooth complex affine fourfold, attributed to Mohan Kumar. This definition does not establish that example or a cancellation theorem.
+Brazelton–Opie–Syed report Mohan Kumar's construction of a nontrivial stably trivial rank $2$ bundle on a smooth complex affine fourfold (Example 6.6, p. 33; see also p. 2). This definition does not establish that example or a cancellation theorem.
 
 
 ## Normalization of an affine integral curve

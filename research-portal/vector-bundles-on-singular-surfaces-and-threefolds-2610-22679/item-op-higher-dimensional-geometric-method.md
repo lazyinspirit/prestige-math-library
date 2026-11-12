@@ -57,7 +57,6 @@ PDF p. 16: Paragraph following Remark 6.8
 - [math:cor-algebraic-extensions-of-perfect-fields-are-separable](https://alphabetamath.cc/item/cor-algebraic-extensions-of-perfect-fields-are-separable)
 - [math:def-integral-closure-and-integrally-closed-domain](https://alphabetamath.cc/item/def-integral-closure-and-integrally-closed-domain)
 - [def-scheme-perfect-complexes](item-def-scheme-perfect-complexes)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 2, Theorem C; pp. 15–16, Theorem 6.7 proof; p. 16, Remark 6.8 and following paragraph `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Open problem

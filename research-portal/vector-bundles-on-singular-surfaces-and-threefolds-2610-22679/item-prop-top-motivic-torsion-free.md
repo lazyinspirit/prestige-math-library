@@ -92,7 +92,6 @@ PDF p. 5: Proposition 2.6: torsion freeness
 - [math:def-prime](https://alphabetamath.cc/item/def-prime)
 - [math:lem-characteristic-and-additive-order](https://alphabetamath.cc/item/lem-characteristic-and-additive-order)
 - [thm-author-c5b0693f4fc3-top-torsion-em-syntomic](item-thm-author-c5b0693f4fc3-top-torsion-em-syntomic)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · Proposition 2.6, printed pp. 5–6; Notation and conventions, printed p. 3 `](https://arxiv.org/abs/2610.22679v1)
 - [` Elden Elmanto (joint work with Matthew Morrow), Zero cycles on singular varieties, Oberwolfach Report 36/2025 · Printed pp. 1994–1996 (PDF pages 46–48, one-based): Theorem 1, Theorem 3(2), Theorem 4 and its proof, and affine torsion application `](https://ems.press/content/serial-article-files/52244)
 - [` Elden Elmanto and Matthew Morrow, Motivic cohomology of equicharacteristic schemes, arXiv:2309.08463v1 · v1, printed pp. 24–25: Definition 4.14 and Lemma 4.16 with proof; printed pp. 29–30: Theorem 4.28, Definition 4.29, Remarks 4.30–4.31, (4.7), Corollary 4.32 with proof `](https://arxiv.org/pdf/2309.08463v1)
 

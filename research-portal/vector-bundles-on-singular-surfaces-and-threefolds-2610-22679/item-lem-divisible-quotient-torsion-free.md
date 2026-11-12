@@ -33,7 +33,6 @@ PDF p. 13: Final group-theoretic paragraph
 - [math:def-exact-and-short-exact-sequences-of-modules](https://alphabetamath.cc/item/def-exact-and-short-exact-sequences-of-modules)
 - [math:def-group](https://alphabetamath.cc/item/def-group)
 - [math:prop-abelian-groups-are-z-modules](https://alphabetamath.cc/item/prop-abelian-groups-are-z-modules)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 13, final group-theoretic paragraph in the proof of Proposition 6.1 `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Statement

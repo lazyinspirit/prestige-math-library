@@ -64,7 +64,6 @@ PDF p. 10: Section 5 opening; PDF p. 12: Section 6 projection p3
 - [math:def-quasi-compact-and-quasi-separated-scheme](https://alphabetamath.cc/item/def-quasi-compact-and-quasi-separated-scheme)
 - [math:def-integral-closure-and-integrally-closed-domain](https://alphabetamath.cc/item/def-integral-closure-and-integrally-closed-domain)
 - [math:def-derived-category-of-an-abelian-category](https://alphabetamath.cc/item/def-derived-category-of-an-abelian-category)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 3, conventions; pp. 8–9, Lemma 4.1; p. 10, Section 5 opening; pp. 12–13, Section 6 opening `](https://arxiv.org/abs/2610.22679v1)
 - [` Elden Elmanto and Matthew Morrow, Motivic cohomology of equicharacteristic schemes · arXiv:2309.08463v1 (arXiv stamp 15 September 2023; title-page date 18 September 2023), printed pp. 21–22 and 27–28, Definitions 4.9/4.23 and Theorems 4.10(1)–(2)/4.24(1)–(2) `](https://arxiv.org/pdf/2309.08463v1)
 
 

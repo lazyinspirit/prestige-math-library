@@ -97,7 +97,6 @@ PDF p. 15: Proof of Theorem 6.7, closure of Y and exact sequences on V
 - [math:thm-quasi-coherent-ideal-closed-subscheme-correspondence](https://alphabetamath.cc/item/thm-quasi-coherent-ideal-closed-subscheme-correspondence)
 - [lem-adjudicate-3b1b7891f21e-clopen-zero-dimensional-points](item-lem-adjudicate-3b1b7891f21e-clopen-zero-dimensional-points)
 - [math:cor-fields-of-characteristic-zero-and-finite-fields-are-perfect](https://alphabetamath.cc/item/cor-fields-of-characteristic-zero-and-finite-fields-are-perfect)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 15, proof of Theorem 6.7, from the two Bertini applications through the support conclusion `](https://arxiv.org/abs/2610.22679v1)
 - [` Daniel Kasprowski and Christoph Winges, Algebraic K-theory of stable infinity-categories via binary complexes · Section 2.1 opening (printed p. 2), formula (2.6) (p. 3), and Section 2.2 opening before Lemma 2.12 (p. 4). `](https://arxiv.org/pdf/1805.06175v2)
 - [` Jacob Lurie, Higher Algebra, September 18, 2017 · Remark 1.3.2.17 (printed p. 91); Proposition 1.3.5.13 and its proof (printed p. 127). `](https://www.math.ias.edu/~lurie/papers/HA.pdf)
 

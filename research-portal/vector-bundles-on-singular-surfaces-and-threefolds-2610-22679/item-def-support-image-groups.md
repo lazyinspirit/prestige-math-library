@@ -43,7 +43,6 @@ PDF p. 6: Final two displays of Definition 2.7; PDF p. 7: Equation (2.8), K-zero
 - [def-motivic-filtration](item-def-motivic-filtration)
 - [def-motivic-cohomology](item-def-motivic-cohomology)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 3, Notation and conventions; p. 6, Definition 2.7, final two displays; p. 7, opening paragraph through equation (2.8) `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Definition

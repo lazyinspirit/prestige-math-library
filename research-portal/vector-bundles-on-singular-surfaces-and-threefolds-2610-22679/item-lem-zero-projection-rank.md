@@ -44,7 +44,6 @@ PDF p. 10: Lemma 5.1
 - [lem-adjudicate-60a5a67fb86d-finite-type-clopen-components](item-lem-adjudicate-60a5a67fb86d-finite-type-clopen-components)
 - [math:def-quasi-compact-and-quasi-separated-scheme](https://alphabetamath.cc/item/def-quasi-compact-and-quasi-separated-scheme)
 - [math:def-algebraically-closed-field](https://alphabetamath.cc/item/def-algebraically-closed-field)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 3, Notation and conventions; p. 5, Lemma 2.4 and proof; p. 10, Lemma 5.1 and proof `](https://arxiv.org/abs/2610.22679v1)
 
 
 

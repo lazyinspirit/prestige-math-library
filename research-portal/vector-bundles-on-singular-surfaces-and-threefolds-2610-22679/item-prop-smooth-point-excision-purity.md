@@ -129,7 +129,6 @@ PDF p. 7: Opening squares and purity
 - [math:def-separable-elements-and-separable-extensions](https://alphabetamath.cc/item/def-separable-elements-and-separable-extensions)
 - [math:def-coherent-module-scheme](https://alphabetamath.cc/item/def-coherent-module-scheme)
 - [math:def-finite-type-finite-presentation-module-sheaf](https://alphabetamath.cc/item/def-finite-type-finite-presentation-module-sheaf)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · p. 7, squares preceding equation (2.8) `](https://arxiv.org/abs/2610.22679v1)
 - [` Kerodon: adjoints and cofinality · Corollary 7.2.3.7(1), tag 02P3 `](https://kerodon.net/tag/02P3)
 - [` Kerodon: restriction of limit cones · Corollary 7.2.2.2, tag 02XQ, absolute case with U the functor to a point `](https://kerodon.net/tag/02XQ)
 - [` Kerodon: pointwise limits in diagram infinity-categories · Proposition 7.1.8.3(1)-(2), tag 02X9, applied by passage to opposite infinity-categories `](https://kerodon.net/tag/02X9)

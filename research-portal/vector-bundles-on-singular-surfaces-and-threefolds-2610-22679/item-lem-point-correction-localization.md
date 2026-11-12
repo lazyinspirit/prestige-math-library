@@ -72,7 +72,6 @@ PDF p. 15: Proof of Theorem 6.7, cocartesian square and localization diagram; PD
 - [math:cor-fields-of-characteristic-zero-and-finite-fields-are-perfect](https://alphabetamath.cc/item/cor-fields-of-characteristic-zero-and-finite-fields-are-perfect)
 - [math:def-morphism-of-schemes](https://alphabetamath.cc/item/def-morphism-of-schemes)
 - [math:def-sheaf-on-topological-space](https://alphabetamath.cc/item/def-sheaf-on-topological-space)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF pp. 15–16, proof of Theorem 6.7, cocartesian square and point correction `](https://arxiv.org/abs/2610.22679v1)
 - [` Jacob Lurie, Higher Topos Theory (Princeton University Press, 2009) · Corollaries 5.1.2.3–5.1.2.4, printed p. 319; Section 5.1.5 opening and Lemmas 5.1.5.2–5.1.5.3, printed pp. 324–326 (PDF indices 336, 341–343). `](https://www.math.ias.edu/~lurie/papers/HTT.pdf)
 
 

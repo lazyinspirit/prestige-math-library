@@ -53,7 +53,6 @@ PDF p. 7: Lemma2.9: smooth-point supported purity
 - [math:def-extension-degree-and-finite-extension](https://alphabetamath.cc/item/def-extension-degree-and-finite-extension)
 - [math:def-separable-elements-and-separable-extensions](https://alphabetamath.cc/item/def-separable-elements-and-separable-extensions)
 - [math:def-grothendieck-universe-closure-convention](https://alphabetamath.cc/item/def-grothendieck-universe-closure-convention)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · Printed p. 7, Lemma 2.9 proof, first display and following lower-weight vanishing sentence; preceding smooth-point excision paragraph `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Statement

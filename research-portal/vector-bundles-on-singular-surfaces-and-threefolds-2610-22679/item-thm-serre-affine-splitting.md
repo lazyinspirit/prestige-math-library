@@ -74,7 +74,6 @@ PDF p. 1: Serre splitting theorem
 - [math:thm-irreducible-closed-subsets-and-prime-ideals](https://alphabetamath.cc/item/thm-irreducible-closed-subsets-and-prime-ideals)
 - [math:thm-proper-ideal-contained-in-maximal-ideal](https://alphabetamath.cc/item/thm-proper-ideal-contained-in-maximal-ideal)
 - [math:def-sheaf-on-topological-space](https://alphabetamath.cc/item/def-sheaf-on-topological-space)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 1, introduction; PDF p. 12, application citing Ser58 §4 Theorem 1 `](https://arxiv.org/abs/2610.22679v1)
 - [` The Stacks Project, More on Algebra, Section 15.129: Splitting off a free module · Theorem 15.129.5; imported through thm-author-3af31ead36fb-serre-module-input `](https://stacks.math.columbia.edu/tag/0GVC)
 - [` The Stacks Project, Properties of Schemes, Lemma 28.5.2 · Lemma 28.5.2 (tag 01OW), implication (1) to (2), and its displayed proof `](https://stacks.math.columbia.edu/tag/01OW)
 

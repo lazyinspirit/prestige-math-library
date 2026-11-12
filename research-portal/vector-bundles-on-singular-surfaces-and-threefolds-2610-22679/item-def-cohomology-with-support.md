@@ -55,7 +55,6 @@ PDF p. 6: Definition 2.7, quotient sheaf and support groups
 - [math:def-affine-open-subscheme](https://alphabetamath.cc/item/def-affine-open-subscheme)
 - [math:lem-distinguished-open-refinement-at-a-point](https://alphabetamath.cc/item/lem-distinguished-open-refinement-at-a-point)
 - [math:lem-spectrum-localization-open-immersion](https://alphabetamath.cc/item/lem-spectrum-localization-open-immersion)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 6, Definition 2.7 `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Definition

@@ -61,7 +61,6 @@ PDF p. 10: Opening multiplication square and equation (4.3)
 - [math:thm-universal-property-of-module-tensor-products](https://alphabetamath.cc/item/thm-universal-property-of-module-tensor-products)
 - [math:thm-prime-subfield-classification](https://alphabetamath.cc/item/thm-prime-subfield-classification)
 - [math:thm-affine-scheme-ring-anti-equivalence](https://alphabetamath.cc/item/thm-affine-scheme-ring-anti-equivalence)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 3, Notation and conventions; pp. 8–9, Lemma 4.1; p. 10, opening multiplication square and equation (4.3) `](https://arxiv.org/abs/2610.22679v1)
 - [` Elden Elmanto and Matthew Morrow, Motivic cohomology of equicharacteristic schemes, arXiv:2309.08463v1 · v1, Section 2.2, printed pp. 11–12; Definition 4.9 and Theorem 4.10(1)–(2), pp. 21–22; Definition 4.23 and Theorem 4.24(1)–(2), pp. 27–28. `](https://arxiv.org/pdf/2309.08463v1)
 
 ## Statement

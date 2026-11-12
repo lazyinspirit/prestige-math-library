@@ -61,7 +61,6 @@ PDF p. 17: Proof of Corollary 6.10, Mur94 Theorem 3.8
 - [math:thm-irreducible-closed-subsets-and-prime-ideals](https://alphabetamath.cc/item/thm-irreducible-closed-subsets-and-prime-ideals)
 - [lem-koszul-point-support-class](item-lem-koszul-point-support-class)
 - [lem-adjudicate-8da4ac7e2794-affine-perfect-module-resolution](item-lem-adjudicate-8da4ac7e2794-affine-perfect-module-resolution)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 17, proof of Corollary 6.10, final sentence `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Statement

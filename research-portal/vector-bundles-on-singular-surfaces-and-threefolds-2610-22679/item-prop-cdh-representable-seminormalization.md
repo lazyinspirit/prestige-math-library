@@ -50,7 +50,6 @@ PDF p. 5: Proof of Lemma 2.4, HK18 Theorem 1.4
 - [thm-author-60d95bfb692a-huber-kelly-representable-input](item-thm-author-60d95bfb692a-huber-kelly-representable-input)
 - [def-scheme-sites-and-sheafification](item-def-scheme-sites-and-sheafification)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
-- [` Vector bundles on singular surfaces and threefolds · PDF p. 5, proof of Lemma 2.4, the representable-sheaf formula and following specialization `](https://arxiv.org/abs/2610.22679v1)
 - [` Differential forms in positive characteristic, II: cdh-descent via functorial Riemann–Zariski spaces · Theorem 1.4, printed pp. 651–652, perfect-field example and equations (2)–(3); Section 2A, Definition 2.1 and Remark 2.2(1), pp. 653–654; Remark 2.7 and Proposition 2.8(3), pp. 654–655 `](https://msp.org/ant/2018/12-3/ant-v12-n3-p05-p.pdf)
 
 

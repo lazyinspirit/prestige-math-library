@@ -97,7 +97,6 @@ PDF p. 6: Affine Artin vanishing
 - [lem-adjudicate-a6bf10648fa2-finite-type-field-qcqs](item-lem-adjudicate-a6bf10648fa2-finite-type-field-qcqs)
 - [math:def-canonical-truncation-of-a-complex](https://alphabetamath.cc/item/def-canonical-truncation-of-a-complex)
 - [math:lem-canonical-truncation-is-a-complex-and-has-the-claimed-cohomology](https://alphabetamath.cc/item/lem-canonical-truncation-is-a-complex-and-has-the-claimed-cohomology)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · v1, p. 6, proof of Proposition 2.6 `](https://arxiv.org/abs/2610.22679v1)
 - [` Elden Elmanto, Zero cycles on singular varieties, Oberwolfach Report 36/2025 · Theorem 3(1) and footnote 1, printed p. 1994; Theorem 4 and its proof, printed p. 1995 (PDF pages 46-47) `](https://ems.press/content/serial-article-files/52244)
 - [` Elden Elmanto and Matthew Morrow, Motivic cohomology of equicharacteristic schemes, arXiv:2309.08463v1 · Section 2.1, p. 11; section 3.3, pp. 14-15, Theorem 3.5(3); Theorems 4.10(4), p. 21, and 4.24(3), p. 28; Theorem 4.33(1) and its proof, p. 31 `](https://arxiv.org/pdf/2309.08463v1)
 - [` J. S. Milne, Lectures on Etale Cohomology, version 2.21, 22 March 2013 · Section 15, Theorem 15.1 and preceding definition, p. 105; Schemes with nilpotents, p. 22 `](https://www.jmilne.org/math/CourseNotes/LEC.pdf)

@@ -33,7 +33,6 @@ PDF p. 5: Finite refinements and integer sections
 - [thm-author-5bfbe3ebf14f-mvw-finite-type-cdh-two-stage-input](item-thm-author-5bfbe3ebf14f-mvw-finite-type-cdh-two-stage-input)
 - [def-cdh-topology-interface](item-def-cdh-topology-interface)
 - [def-scheme-sites-and-sheafification](item-def-scheme-sites-and-sheafification)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · Lemma2.4 proof, printed p.5, final paragraph `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Statement

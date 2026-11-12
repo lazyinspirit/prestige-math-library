@@ -61,7 +61,6 @@ PDF p. 10: Lemma 5.2 and restriction square
 - [math:lem-noetherian-open-subsets-are-quasi-compact](https://alphabetamath.cc/item/lem-noetherian-open-subsets-are-quasi-compact)
 - [math:lem-distinguished-opens-cover-every-open](https://alphabetamath.cc/item/lem-distinguished-opens-cover-every-open)
 - [math:lem-spectrum-localization-open-immersion](https://alphabetamath.cc/item/lem-spectrum-localization-open-immersion)
-- [` Vector bundles on singular surfaces and threefolds · arXiv:2610.22679v1, PDF p. 3, Notation and conventions; p. 10, Lemma 5.2 and its proof `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Statement

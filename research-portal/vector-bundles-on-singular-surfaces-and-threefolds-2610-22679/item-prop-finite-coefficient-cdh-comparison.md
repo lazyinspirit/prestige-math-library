@@ -65,7 +65,6 @@ PDF p. 6: Proof of Proposition 2.6, EM23 Theorem 4.10(4)
 - [math:thm-affine-schemes-quasi-separated](https://alphabetamath.cc/item/thm-affine-schemes-quasi-separated)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
 - [math:thm-affine-scheme-ring-anti-equivalence](https://alphabetamath.cc/item/thm-affine-scheme-ring-anti-equivalence)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · Printed p. 6, proof of Proposition 2.6, canonical-comparison passage; p. 5, proposition hypotheses; p. 3, Notation and conventions `](https://arxiv.org/abs/2610.22679v1)
 - [` Elden Elmanto and Matthew Morrow, Motivic cohomology of equicharacteristic schemes · arXiv v1, Theorem 4.10(2)–(4), printed pp. 21–22 (PDF pages 21–22); Section 3.3, equation (3.5), printed p. 14 `](https://arxiv.org/pdf/2309.08463v1)
 
 ## Statement

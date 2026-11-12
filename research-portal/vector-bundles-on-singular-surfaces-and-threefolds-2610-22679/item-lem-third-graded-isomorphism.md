@@ -48,7 +48,6 @@ PDF p. 12: Section 6 opening projection; PDF p. 13: Opening sentence
 - [math:def-grothendieck-universe-closure-convention](https://alphabetamath.cc/item/def-grothendieck-universe-closure-convention)
 - [def-stable-spectra-interface](item-def-stable-spectra-interface)
 - [math:lem-inverse-of-bijective-group-homomorphism](https://alphabetamath.cc/item/lem-inverse-of-bijective-group-homomorphism)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · pp. 12–13, opening of Section 6; p. 9, Lemma 4.2 `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Statement

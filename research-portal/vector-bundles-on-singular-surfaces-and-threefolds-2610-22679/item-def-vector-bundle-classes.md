@@ -41,7 +41,6 @@ PDF p. 2: Paragraph before Theorem A; PDF p. 11: Proof of Proposition 5.5, notat
 - [math:def-grothendieck-universe-closure-convention](https://alphabetamath.cc/item/def-grothendieck-universe-closure-convention)
 - [math:def-commutative-ring](https://alphabetamath.cc/item/def-commutative-ring)
 - [math:def-affine-scheme](https://alphabetamath.cc/item/def-affine-scheme)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · p. 2, paragraph before Theorem A; p. 11, proof of Proposition 5.5 `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Definition

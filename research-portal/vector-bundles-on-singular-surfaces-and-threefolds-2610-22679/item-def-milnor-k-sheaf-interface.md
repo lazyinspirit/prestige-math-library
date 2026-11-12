@@ -5,22 +5,40 @@ research_item: def-milnor-k-sheaf-interface
 dependency_level: 7
 sources:
   references:
-    - title: Fasel–Yakerson, Vector bundles on singular surfaces and threefolds
-      url: https://arxiv.org/abs/2610.22679v1
-      locator: p. 16, Remark 6.8
-      statement: "Remark 6.8 reports Morrow's communicated alternative proof in
-        arbitrary dimension d without normality: identify motivic cohomology in
-        bidegree (2d,d) with degree-d Nisnevich cohomology of the intended
-        Milnor K-sheaf, then use a Kato–Saito generation result for smooth
-        closed points. It does not specify the naive or improved convention."
-      hypotheses: This is a report of a communication about the setting of Theorem
-        6.7, with d the dimension parameter; Remark 6.8 removes normality in the
-        reported argument but does not state its complete hypotheses. No
-        comparison theorem is assumed or proved in this definition.
-      reading_limits: Read Remark 6.8 in the supplied extracted article text, PDF p.
-        16. The communicated proof, the Kato–Saito source and the ongoing
-        Elmanto–Morrow work were not read or verified. This citation supplies
-        article context only, not the locally specified naive construction.
+    - title: Moritz Kerz and Yigeng Zhao, Higher ideles and class field theory
+        (arXiv:1804.00603v2)
+      url: https://arxiv.org/abs/1804.00603v2
+      locator: p. 3, Definition 1.1.2(i); p. 4, §1.2, opening paragraph
+      statement: Definition 1.1.2(i) gives the tensor-algebra quotient by Steinberg
+        relations and symbol notation for a commutative unital ring. Section 1.2
+        defines the corresponding Nisnevich sheafification from affine schemes.
+      hypotheses: The ring definition permits any commutative unital ring. The sheaf
+        paragraph assumes X integral. This item uses the same formula for
+        arbitrary X by the explicit functoriality and sheafification
+        construction in its Justification; this formal extension is not
+        attributed to a theorem of Kerz–Zhao.
+      reading_limits: Read the full cited definition and the opening sheaf paragraph
+        in the v2 PDF; inspected the PDF image of p. 4. No class-field-theory or
+        motivic comparison theorem from this paper is used or claimed to have
+        been verified.
+    - title: Moritz Kerz, Milnor K-theory of local rings (2008 dissertation)
+      url: https://epub.uni-regensburg.de/10749/1/main.pdf
+      locator: p. 17, Definition 3.2.1 and following paragraph; pp. 42, 44–45, §4.2,
+        opening paragraph, Theorem 4.2.5 and beginning of its proof
+      statement: Definition 3.2.1 gives the tensor/Steinberg ring and the presheaf on
+        global functions, with Zariski sheafification. Section 4.2 calls this
+        convention naive and constructs a separate improved theory through a
+        rational-function kernel and sheafification.
+      hypotheses: The naive ring is defined for any commutative unital ring. The
+        improved construction is formulated for continuous sheaves on the big
+        Zariski site with the transfer structure specified in §4.2. This
+        citation distinguishes constructions; it does not identify the present
+        Nisnevich sheaf with improved Milnor K-theory.
+      reading_limits: Read Definition 3.2.1 and its following global-functions/sheaf
+        paragraph, the opening of §4.2, Theorem 4.2.5 and the construction at
+        the start of its proof; inspected the PDF image of p. 45. The complete
+        transfer theorem, improved-theory comparison proofs and later motivic
+        results were not verified.
 ---
 
 PDF p. 16: Milnor K sheaf in Remark 6.8
@@ -32,7 +50,8 @@ PDF p. 16: Milnor K sheaf in Remark 6.8
 - [math:def-tensor-product-of-modules-by-generators-and-relations](https://alphabetamath.cc/item/def-tensor-product-of-modules-by-generators-and-relations)
 - [math:def-quotient-ring](https://alphabetamath.cc/item/def-quotient-ring)
 - [math:def-morphism-of-schemes](https://alphabetamath.cc/item/def-morphism-of-schemes)
-- [` Fasel–Yakerson, Vector bundles on singular surfaces and threefolds · p. 16, Remark 6.8 `](https://arxiv.org/abs/2610.22679v1)
+- [` Moritz Kerz and Yigeng Zhao, Higher ideles and class field theory (arXiv:1804.00603v2) · p. 3, Definition 1.1.2(i); p. 4, §1.2, opening paragraph `](https://arxiv.org/abs/1804.00603v2)
+- [` Moritz Kerz, Milnor K-theory of local rings (2008 dissertation) · p. 17, Definition 3.2.1 and following paragraph; pp. 42, 44–45, §4.2, opening paragraph, Theorem 4.2.5 and beginning of its proof `](https://epub.uni-regensburg.de/10749/1/main.pdf)
 
 
 ## Definition
@@ -59,4 +78,4 @@ The tensor relations in [math:def-tensor-product-of-modules-by-generators-and-re
 By [def-scheme-sites-and-sheafification](item-def-scheme-sites-and-sheafification), applying plus twice produces a sheaf of sets with the stated universal property. Its group operations are induced by the presheaf operations: matching families can be added, negated and given zero componentwise. Families on two covering sieves can be compared on their common covering intersection, which is covering by pullback stability and transitivity of the topology; agreement after restriction is preserved by these operations. Hence the operations are well-defined on plus classes and satisfy the group laws locally, and therefore on the classes. Restrictions preserve the operations because they restrict the matching families. Applying the same argument a second time gives an abelian-group sheaf with an additive sheafification unit. The degree-zero assertion follows because sheafification is applied to the presheaf with value $\mathbb Z$ and identity restrictions, rather than being evaluated before sheafification.
 
 ## Reading limits
-Remark 6.8 of the article uses $K_d^M$ in a reported comparison; the passage does not specify the naive or improved convention. This item fixes a usable naive convention and does not attribute that choice to the article.
+The tensor/Steinberg presentation and Nisnevich sheaf convention follow Kerz–Zhao, Definition 1.1.2(i) and §1.2. Their sheaf paragraph assumes an integral scheme and uses affine objects. This item applies the explicit global-functions presheaf and the existing sheafification interface to any scheme; this formal extension is justified above. Kerz, Definition 3.2.1, uses that global-functions presheaf with Zariski sheafification, and §4.2 distinguishes its naive convention from the improved construction. No identification with improved Milnor K-theory or motivic cohomology is imported. The article-specific communication remains recorded in the separate remark on Morrow's reported argument; it supplies no premise here.

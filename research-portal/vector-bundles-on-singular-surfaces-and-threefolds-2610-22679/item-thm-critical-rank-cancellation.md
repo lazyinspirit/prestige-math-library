@@ -65,7 +65,6 @@ PDF p. 2: Sus77 reduction; PDF p. 12: Theorem A opening; PDF p. 17: Theorem B in
 - [math:def-dimension-noetherian-topological-space](https://alphabetamath.cc/item/def-dimension-noetherian-topological-space)
 - [math:thm-noetherian-ring-has-noetherian-spectrum](https://alphabetamath.cc/item/thm-noetherian-ring-has-noetherian-spectrum)
 - [math:thm-irreducible-closed-subsets-and-prime-ideals](https://alphabetamath.cc/item/thm-irreducible-closed-subsets-and-prime-ideals)
-- [` Fasel–Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 2, introduction after Theorem B; p. 12, opening of the proof of Theorem A; p. 17, opening of the proof of Theorem B `](https://arxiv.org/abs/2610.22679v1)
 - [` Manoj Kumar Keshari, Cancellation problem for projective modules over affine algebras · Printed p. 1, Introduction: opening conventions, definition of cancellative, and Theorem 1.1(i) `](https://arxiv.org/pdf/0708.2961v1)
 
 ## Statement

@@ -46,7 +46,6 @@ PDF p. 1: Introduction: vector bundles of rank equal to dimension; PDF p. 3: Not
 - [math:cor-tensor-product-with-a-quotient-ring](https://alphabetamath.cc/item/cor-tensor-product-with-a-quotient-ring)
 - [math:def-dimension](https://alphabetamath.cc/item/def-dimension)
 - [math:thm-first-isomorphism-theorem-modules](https://alphabetamath.cc/item/thm-first-isomorphism-theorem-modules)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · p. 1, Introduction; p. 3, Notation and conventions and beginning of Section 2 `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Definition

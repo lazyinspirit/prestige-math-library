@@ -90,7 +90,6 @@ PDF p. 1: Introduction, second paragraph; PDF p. 2: After Theorem A
 - [def-exterior-determinant-bundles](item-def-exterior-determinant-bundles)
 - [thm-author-79117e1d72ed-em-multiplication-c1](item-thm-author-79117e1d72ed-em-multiplication-c1)
 - [lem-author-13e6fe931c45-weight-one-external](item-lem-author-13e6fe931c45-weight-one-external)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · Introduction, p. 1; equation (2.3), p. 4; Proposition 3.2 and its proof, p. 8 `](https://arxiv.org/abs/2610.22679v1)
 - [` Elden Elmanto and Matthew Morrow, Motivic cohomology of equicharacteristic schemes (arXiv v1) · Section 5.1, Lemma 5.1 and its proof; Definition 5.2, equation (5.1); Corollary 7.11 and its proof; Introduction prime-field convention `](https://arxiv.org/html/2309.08463v1)
 - [` The Stacks Project, First cohomology and invertible sheaves, Lemma 21.6.1 (Tag 040E) · Lemma 21.6.1, first paragraph of proof, through the map from invertible sheaves to torsors and its composition with Lemma 21.4.3 `](https://stacks.math.columbia.edu/tag/040E)
 

@@ -41,7 +41,6 @@ PDF p. 7: Equation (2.8)
 - [math:def-closed-immersion-schemes](https://alphabetamath.cc/item/def-closed-immersion-schemes)
 - [math:def-separable-elements-and-separable-extensions](https://alphabetamath.cc/item/def-separable-elements-and-separable-extensions)
 - [lem-adjudicate-7a5c49c4e930-affine-line-point-class](item-lem-adjudicate-7a5c49c4e930-affine-line-point-class)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 7, the purity display and equation (2.8) `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Definition

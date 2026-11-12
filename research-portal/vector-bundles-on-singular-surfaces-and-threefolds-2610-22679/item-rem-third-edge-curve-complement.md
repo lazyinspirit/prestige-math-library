@@ -43,7 +43,6 @@ PDF p. 14: Remark 6.3
 - [def-motivic-filtration](item-def-motivic-filtration)
 - [def-motivic-cohomology](item-def-motivic-cohomology)
 - [def-stable-spectra-interface](item-def-stable-spectra-interface)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 14, Remark 6.3 and proof of Proposition 6.2; p. 13, Proposition 6.1 `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Statement

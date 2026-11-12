@@ -71,7 +71,6 @@ PDF p. 17: Proof of Corollary 6.9, Kri19 Corollary 1.5
 - [math:def-affine-open-subscheme](https://alphabetamath.cc/item/def-affine-open-subscheme)
 - [math:def-principal-localisation](https://alphabetamath.cc/item/def-principal-localisation)
 - [math:def-finite-type-and-module-finite-algebras](https://alphabetamath.cc/item/def-finite-type-and-module-finite-algebras)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · p. 17, proof of Corollary 6.9; p. 14, Definition 6.5 `](https://arxiv.org/abs/2610.22679v1)
 - [` Amalendu Krishna, Murthy’s conjecture on 0-cycles · v3, Theorems 1.3–1.4, Corollary 1.5; §1.9 finite-type convention; §2.1, equations (2.1)–(2.2) and following K-theory convention `](https://arxiv.org/html/1511.04221v3)
 
 

@@ -70,7 +70,6 @@ PDF p. 15: Theorem6.7: rank-three Bertini functional
 - [math:def-restriction-sheaf-open-subspace](https://alphabetamath.cc/item/def-restriction-sheaf-open-subspace)
 - [math:def-finite-morphism-schemes](https://alphabetamath.cc/item/def-finite-morphism-schemes)
 - [math:def-etale-morphism-schemes](https://alphabetamath.cc/item/def-etale-morphism-schemes)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · Theorem6.7 proof, printed p.15, first Bertini application `](https://arxiv.org/abs/2610.22679v1)
 - [` The Stacks Project, method of first-order bad incidence · Situation33.47.2 and Lemma33.47.3, complete proof `](https://stacks.math.columbia.edu/tag/0FD4)
 
 ## Statement

@@ -90,7 +90,6 @@ PDF p. 11: Remark 5.4: second Chern nonadditivity
 - [math:def-affine-scheme-spectrum](https://alphabetamath.cc/item/def-affine-scheme-spectrum)
 - [math:def-chow-group-of-cycles-mod-rational-equivalence](https://alphabetamath.cc/item/def-chow-group-of-cycles-mod-rational-equivalence)
 - [math:def-grothendieck-universe-closure-convention](https://alphabetamath.cc/item/def-grothendieck-universe-closure-convention)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 11, Remark 5.4 `](https://arxiv.org/abs/2610.22679v1)
 - [` Asakura–Sato, Chern Class and Riemann–Roch Theorem for Cohomology Theory without Homotopy Invariance, 2019 journal version · Definition 5.1 and Section 5 Steps 1–3, Proposition 5.3 and formula (5.3.1), printed pp. 269–271 `](https://www.ms.u-tokyo.ac.jp/journal/26-3-1.pdf)
 - [` Annala–Iwasa, Motivic spectra and universality of K-theory, author PDF dated April 14, 2025 · Definition 4.4.1 and Lemma 4.4.3 with its displayed proof, printed pp. 30–31 `](https://ryomei.com/papers/MotSp.pdf)
 

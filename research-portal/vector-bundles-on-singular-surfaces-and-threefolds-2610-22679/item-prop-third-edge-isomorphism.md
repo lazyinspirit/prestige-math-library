@@ -44,7 +44,6 @@ PDF p. 14: Proposition 6.2
 - [math:def-field](https://alphabetamath.cc/item/def-field)
 - [math:def-noetherian-ring-and-module](https://alphabetamath.cc/item/def-noetherian-ring-and-module)
 - [math:def-grothendieck-universe-closure-convention](https://alphabetamath.cc/item/def-grothendieck-universe-closure-convention)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · Proposition 6.2 and its proof, PDF p. 14 `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Statement

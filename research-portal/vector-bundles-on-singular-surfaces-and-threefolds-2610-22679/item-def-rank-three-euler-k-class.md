@@ -35,7 +35,6 @@ PDF p. 17: Proof of Corollary 6.10, definition of beta
 - [def-vector-bundle-classes](item-def-vector-bundle-classes)
 - [def-exterior-determinant-bundles](item-def-exterior-determinant-bundles)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 17, proof of Corollary 6.10 `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Definition

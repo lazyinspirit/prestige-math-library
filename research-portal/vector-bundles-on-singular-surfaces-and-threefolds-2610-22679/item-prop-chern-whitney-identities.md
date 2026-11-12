@@ -43,7 +43,6 @@ PDF p. 8: Actual Chern and Whitney identities; PDF p. 11: Total virtual Chern cl
 - [math:def-exact-sequence-sheaves](https://alphabetamath.cc/item/def-exact-sequence-sheaves)
 - [math:def-sheaf-tensor-product](https://alphabetamath.cc/item/def-sheaf-tensor-product)
 - [math:def-locally-noetherian-and-noetherian-scheme](https://alphabetamath.cc/item/def-locally-noetherian-and-noetherian-scheme)
-- [` Fasel and Yakerson, Vector bundles on singular surfaces and threefolds · Section 3, page 8; Section 5, page 11 `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Statement

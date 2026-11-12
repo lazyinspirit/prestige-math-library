@@ -58,7 +58,6 @@ PDF p. 4: Motivic graded spectral sequence; PDF p. 9: Eventual filtration vanish
 - [math:def-locally-noetherian-and-noetherian-scheme](https://alphabetamath.cc/item/def-locally-noetherian-and-noetherian-scheme)
 - [def-stable-spectra-interface](item-def-stable-spectra-interface)
 - [math:def-grothendieck-universe-closure-convention](https://alphabetamath.cc/item/def-grothendieck-universe-closure-convention)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · Frozen v1 PDF, printed p. 9, Lemma 4.2, proof, both boundedness applications `](https://arxiv.org/abs/2610.22679v1)
 - [` Elden Elmanto and Matthew Morrow, Motivic cohomology of equicharacteristic schemes · arXiv v1 (15 September 2023; internal date 18 September 2023), Introduction footnote 1 p. 2; Section 2.2 pp. 11–12; Theorem 4.12(1) p. 22 and boundedness paragraph p. 23; Theorem 4.27(1) and boundedness paragraph p. 29 `](https://arxiv.org/pdf/2309.08463v1)
 
 

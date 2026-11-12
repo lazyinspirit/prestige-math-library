@@ -44,7 +44,6 @@ PDF p. 13: First paragraph of Proposition 6.1 proof
 - [def-motivic-cohomology](item-def-motivic-cohomology)
 - [math:def-smooth-locus-morphism](https://alphabetamath.cc/item/def-smooth-locus-morphism)
 - [math:def-integral-scheme](https://alphabetamath.cc/item/def-integral-scheme)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · Printed p. 13, Proposition 6.1 and the first vanishing paragraph of its proof `](https://arxiv.org/abs/2610.22679v1)
 
 ## Statement
 Assume the Axiom of Choice and the completed size conventions. Let $X$ be an affine finite-type threefold over an arbitrary algebraically closed field $k$, let $U=X_{\mathrm{smooth}}$, and let $T\subset X$ be a closed integral subset contained in $U$ (in particular the curve of Proposition6.1). Then

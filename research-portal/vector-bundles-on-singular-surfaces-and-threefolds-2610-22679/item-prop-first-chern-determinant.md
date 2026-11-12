@@ -39,7 +39,6 @@ PDF p. 8: Proposition3.2, perfect-complex first class and determinant
 - [math:def-locally-free-sheaf-finite-rank](https://alphabetamath.cc/item/def-locally-free-sheaf-finite-rank)
 - [math:def-picard-group-scheme](https://alphabetamath.cc/item/def-picard-group-scheme)
 - [math:def-grothendieck-universe-closure-convention](https://alphabetamath.cc/item/def-grothendieck-universe-closure-convention)
-- [` Fasel–Yakerson, Vector bundles on singular surfaces and threefolds · Proposition 3.2 and its proof, printed p. 8 `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Statement

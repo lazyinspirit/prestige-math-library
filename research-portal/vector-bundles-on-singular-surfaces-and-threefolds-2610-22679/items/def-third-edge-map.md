@@ -39,25 +39,23 @@ provenance:
   proof: ai-generated
 sources:
   references:
-    - title: Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and
-        threefolds
-      url: https://arxiv.org/abs/2610.22679v1
-      locator: PDF p. 13, immediately before Proposition 6.1
-      statement: The third edge homomorphism is the inverse of the third-stage
-        projection followed by the map to the third image-filtration group; it
-        is surjective.
-      hypotheses: The construction occurs in the article’s Section 6 setting of normal
-        threefolds over the standing field.
-      reading_limits: For this repair, read the frozen article extraction at the
-        opening of Section 6, printed pp. 12–13, including the third-stage
-        isomorphism, displayed edge composite and assertion that it is onto by
-        definition. No fresh visual inspection of the PDF or reading of the
-        article’s cited upstream sources is claimed. The broader Noetherian
-        dimension-three scope, inherited size assumptions and local
-        justification use the current declared third-graded and filtration
-        interfaces. The finite-cover argument and qcqs verification use the
-        declared Math interfaces, whose actual current bodies were read; these
-        are generated-content repairs, not original-author defect findings.
+    - title: Elden Elmanto and Matthew Morrow, Motivic cohomology of
+        equicharacteristic schemes
+      url: https://arxiv.org/pdf/2309.08463v1
+      locator: Theorem 1.1(1), printed p. 3; Definitions 4.9 and 4.23, printed pp. 21
+        and 27
+      statement: For qcqs schemes over a prime field, Theorem 1.1(1) provides a
+        functorial multiplicative motivic filtration on nonconnective K-theory
+        with graded pieces given by shifted motivic complexes. The named third
+        edge map and its surjectivity are not stated there.
+      hypotheses: A qcqs scheme over a prime field and nonnegative weight. Restriction
+        to the fixed field and the third-stage isomorphism are supplied
+        separately by the declared local interfaces.
+      reading_limits: Read the primary v1 PDF text of Theorem 1.1(1), printed p. 3,
+        and the filtration constructions in Definitions 4.9 and 4.23. The third
+        edge map and its surjectivity are local formal deductions from the
+        declared suppliers; the deeper filtration construction is imported, not
+        reconstructed.
 proof_strategy: direct
 dependency_level: 23
 formulation_deps:
@@ -155,3 +153,6 @@ The second arrow is the stage-to-$K_0$ homomorphism with its codomain restricted
 1.1 Work under [A1]. By [F3], take a finite affine open cover $X=U_1\cup\cdots\cup U_n$ by spectra of Noetherian rings; $n\geq1$ since $\dim X=3$. By [F4], each underlying space $U_i$ is Noetherian. For any ascending chain of opens $V_0\subseteq V_1\subseteq\cdots$ of $X$, the chain $V_j\cap U_i$ stabilizes at an index $N_i$ for each $i$. Taking $N=\max_iN_i$ shows that all restrictions, hence the opens $V_j$ themselves, agree for $j\geq N$. Thus the underlying space of $X$ is Noetherian, so the dimension notion in [F3] applies exactly as stated. By [F6], every open subset of $X$ is quasi-compact. In particular, $X$ itself and the intersection of any two affine open subschemes are quasi-compact, so $X$ is qcqs. Therefore the filtration in [F2] applies. The field, scheme, dimension and Choice hypotheses of [F1] hold, with all its universe, enlargement, smallness and pointed-space assumptions adopted in [A1], so it supplies the actual isomorphism $p_3$. By [F5], $p_3$ has its unique inverse homomorphism from $H^{6,3}_{\mathrm{mot}}(X,\mathbb Z)$ to $\pi_0F^3_{\mathrm{mot}}K(X)$. [A1, F1, F2, F3, F4, F5, F6, given]
 
 2.1 By [F2], the second arrow in the displayed composite is a well-defined surjective homomorphism onto the stated image subgroup. Compose it with the inverse from step 1.1; [F5] shows that this defines a homomorphism $\epsilon_3$. For any element $y$ of the image subgroup, there exists a stage class $a$ mapping to $y$. Then $p_3(a)$ maps to $y$ under $\epsilon_3$, since $p_3^{-1}(p_3(a))=a$. Thus $\epsilon_3$ is surjective. No choice of preimages for all $y$ simultaneously, and no injectivity of the stage-to-$K_0$ map, is needed for this conclusion. [F1, F2, F5, step 1.1] ∎
+
+## Reading limits
+Elmanto–Morrow, Theorem 1.1(1), supplies the prime-field motivic filtration and graded comparison. The third edge map and its surjectivity are local formal deductions from the declared third-graded and filtration suppliers.

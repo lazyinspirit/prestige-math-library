@@ -147,24 +147,6 @@ sources:
       hypotheses: Prime base field Q or F_p, qcqs schemes, and nonnegative weights.
         Restriction to an arbitrary field is supplied by the declared local
         motivic-complex interface.
-    - title: Fasel–Yakerson, Vector bundles on singular surfaces and threefolds,
-        arXiv:2610.22679v1
-      url: https://arxiv.org/abs/2610.22679v1
-      locator: Scheme conventions p. 3; Definition 2.2 p. 4; Definition 2.7 p. 6;
-        Corollary 6.9 proof p. 17
-      reading_limits: Historical reading record inherited from the existing generated
-        item; this dependency-declaration maintenance does not assert fresh
-        reading of that external source. Read the frozen primary article
-        extraction at pp. 3, 4, 6 and 17 for this repair. No new PDF image
-        inspection, KM82 reading, or original-author defect adjudication. The
-        declared support definition supplies the explicit shifted realization.
-      statement: The article fixes qcqs field-schemes and its affine finite-type
-        convention, defines motivic complexes and support notation, and reduces
-        the Corollary 6.9 factor calculation to smooth point supports.
-      hypotheses: Standing algebraically closed field, with the stated qcqs
-        conventions; Corollary 6.9 concerns a normal affine threefold. The
-        general any-field qcqs operation is supplied locally, not attributed to
-        this article.
 formulation_deps:
   - math:def-axiom-of-choice
   - math:def-grothendieck-universe-closure-convention
@@ -291,7 +273,7 @@ The ordinary total-series constant is $c_0=1$. It is unpointed and is not assert
 
 [Elmanto–Morrow v1](https://arxiv.org/pdf/2309.08463v1), reference 2, states prime-field qcqs derived Nisnevich sheafhood. The actual enhanced restriction to $k$-schemes used in [F6] is supplied by the declared motivic-complex item.
 
-The [original article](https://arxiv.org/abs/2610.22679v1), reference 3, supplies context for the conventions, support notation and point-support application. The explicit shifted convention here comes from [F5]; the historical source-indexing finding is retained without fresh author-defect adjudication. The factor-two calculation and KM82 proof are not imported into this operation-construction lemma.
+The support convention, including the explicit shift and arbitrary-open extension, is supplied by [F5]. The actual coefficient descent is supplied by [F6] and the independent Elmanto–Morrow source in reference 2. The smooth affine threefold specialization is verified in [F9]–[F10] and step 4.1 using the declared geometric suppliers. No factor-two calculation or Riemann–Roch formula is imported into this operation-construction lemma.
 
 ## Source use and reading limits
-This maintenance read the current assigned body and its actual supplier interfaces, including the ordinary Cartan identity, the universal supplier's conditional native clause, and the integral-field supplier's new independent Navarro comparison. The latter's supporting comparison statement and definitions were inspected to check its source, perfect-field smooth-pair scope and pointed restriction-arrow homotopy. The earlier readings of external references 0–3 are retained as historical records; those PDFs were not reread for this repair, and no fresh page-image or source-hash authentication is claimed. The operation construction, affine coefficient calculation, support-fiber argument and application of the supplied Navarro comparison are local compositions of declared inputs. No new proof of the independent comparison or independent acceptance is asserted.
+This maintenance read the current assigned body and its actual supplier interfaces, including the ordinary Cartan identity, the universal supplier's conditional native clause, and the integral-field supplier's new independent Navarro comparison. The latter's supporting comparison statement and definitions were inspected to check its source, perfect-field smooth-pair scope and pointed restriction-arrow homotopy. The earlier readings of external references 0–2 are retained as historical records; those PDFs were not reread for this repair, and no fresh page-image or source-hash authentication is claimed. The operation construction, affine coefficient calculation, support-fiber argument and application of the supplied Navarro comparison are local compositions of declared inputs. No new proof of the independent comparison or independent acceptance is asserted.

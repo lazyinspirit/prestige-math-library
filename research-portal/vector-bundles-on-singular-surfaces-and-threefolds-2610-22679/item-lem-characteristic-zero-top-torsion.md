@@ -49,7 +49,6 @@ PDF p. 6: Proof of Proposition 2.6, multiplication by p sequence and conclusion
 - [math:prop-algebraically-closed-splitting-and-finite-extension-criteria](https://alphabetamath.cc/item/prop-algebraically-closed-splitting-and-finite-extension-criteria)
 - [math:thm-separability-of-x-n-minus-one-and-the-order-of-the-group-of-roots-of-unity](https://alphabetamath.cc/item/thm-separability-of-x-n-minus-one-and-the-order-of-the-group-of-roots-of-unity)
 - [math:prop-cohomology-factors-through-the-derived-category](https://alphabetamath.cc/item/prop-cohomology-factors-through-the-derived-category)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · p. 5, Proposition 2.6; p. 6, characteristic-zero proof, multiplication-by-p sequence and final displayed isomorphism `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Statement

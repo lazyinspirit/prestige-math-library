@@ -49,7 +49,6 @@ PDF p. 12: Theorem A surjectivity construction
 - [def-motivic-filtration](item-def-motivic-filtration)
 - [def-vector-bundle-classes](item-def-vector-bundle-classes)
 - [def-exterior-determinant-bundles](item-def-exterior-determinant-bundles)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 12, final paragraph of the proof of Theorem A `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Statement

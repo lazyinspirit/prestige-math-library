@@ -65,7 +65,6 @@ PDF p. 17: Corollary6.9 supported factor calculation
 - [def-cohomology-with-support](item-def-cohomology-with-support)
 - [lem-adjudicate-a6bf10648fa2-finite-type-field-qcqs](item-lem-adjudicate-a6bf10648fa2-finite-type-field-qcqs)
 - [math:def-locally-noetherian-and-noetherian-scheme](https://alphabetamath.cc/item/def-locally-noetherian-and-noetherian-scheme)
-- [` Fasel and Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 17, Corollary 6.9, first assertion and first paragraph of proof `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Statement

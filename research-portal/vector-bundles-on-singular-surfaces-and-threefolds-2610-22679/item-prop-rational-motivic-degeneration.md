@@ -86,7 +86,6 @@ PDF p. 14: Proof of Proposition 6.2, rational degeneration; PDF p. 14: Remark 6.
 - [math:def-module-homomorphism-kernel-image-and-cokernel](https://alphabetamath.cc/item/def-module-homomorphism-kernel-image-and-cokernel)
 - [math:def-exact-and-short-exact-sequences-of-modules](https://alphabetamath.cc/item/def-exact-and-short-exact-sequences-of-modules)
 - [math:thm-module-kernel-image-and-injectivity](https://alphabetamath.cc/item/thm-module-kernel-image-and-injectivity)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · p. 14, proof of Proposition 6.2 and Remark 6.3; p. 13, Proposition 6.1 `](https://arxiv.org/abs/2610.22679v1)
 - [` The Stacks Project, dimension of nonempty opens in irreducible field schemes · Definition 33.20.1; Lemma 33.20.3(3), statement and proof of (3). `](https://stacks.math.columbia.edu/tag/06LF)
 - [` The Stacks Project, Noetherian topology and locally closed subschemes · Lemmas 28.5.5 and 28.5.6, including the displayed proof of 28.5.5 and the hint following 28.5.6. `](https://stacks.math.columbia.edu/tag/01OU)
 

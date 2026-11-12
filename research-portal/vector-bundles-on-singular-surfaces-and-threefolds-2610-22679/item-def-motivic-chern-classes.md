@@ -37,7 +37,6 @@ PDF p. 2: Displayed motivic Chern classes; PDF p. 8: Section 3, first display
 - [lem-chern-relation-uniqueness](item-lem-chern-relation-uniqueness)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
 - [math:thm-projective-bundle-represents-line-quotients](https://alphabetamath.cc/item/thm-projective-bundle-represents-line-quotients)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · p. 2, displayed motivic Chern classes; p. 8, Section 3, first display `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Definition

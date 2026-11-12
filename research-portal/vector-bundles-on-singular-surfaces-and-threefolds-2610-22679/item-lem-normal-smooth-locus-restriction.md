@@ -59,7 +59,6 @@ PDF p. 9: Functions on the smooth locus; PDF p. 10: Lemmas 5.1 and 5.2; PDF p. 1
 - [math:def-locally-noetherian-and-noetherian-scheme](https://alphabetamath.cc/item/def-locally-noetherian-and-noetherian-scheme)
 - [math:def-open-immersion-schemes](https://alphabetamath.cc/item/def-open-immersion-schemes)
 - [lem-adjudicate-fc0ec1cc794d-scheme-codimension-conventions](item-lem-adjudicate-fc0ec1cc794d-scheme-codimension-conventions)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 3, Notation and conventions; pp. 9–10, preceding Lemma 5.1 and proofs of Lemmas 5.1 and 5.2; p. 15, proof of Theorem 6.7 `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Statement

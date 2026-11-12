@@ -52,7 +52,6 @@ PDF p. 9: Lemma 4.2
 - [math:lem-chain-dimension-open-cover](https://alphabetamath.cc/item/lem-chain-dimension-open-cover)
 - [math:thm-irreducible-closed-subsets-and-prime-ideals](https://alphabetamath.cc/item/thm-irreducible-closed-subsets-and-prime-ideals)
 - [math:def-krull-dimension-of-a-ring](https://alphabetamath.cc/item/def-krull-dimension-of-a-ring)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · p. 9, Lemma 4.2 and proof `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Statement

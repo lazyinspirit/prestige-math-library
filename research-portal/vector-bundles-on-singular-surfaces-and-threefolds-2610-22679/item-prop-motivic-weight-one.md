@@ -48,7 +48,6 @@ PDF p. 4: Property (2) and equation (2.3)
 - [def-nisnevich-covering-interface](item-def-nisnevich-covering-interface)
 - [def-derived-sections-on-sites](item-def-derived-sections-on-sites)
 - [math:thm-prime-subfield-classification](https://alphabetamath.cc/item/thm-prime-subfield-classification)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · p. 4, property (2) and equation (2.3) `](https://arxiv.org/abs/2610.22679v1)
 - [` Elden Elmanto and Matthew Morrow, Motivic cohomology of equicharacteristic schemes · Introduction prime-field convention; Lemma 5.1 statement; Definition 5.2 and map (5.1); Corollary 7.11 statement and short proof `](https://arxiv.org/html/2309.08463v1)
 
 

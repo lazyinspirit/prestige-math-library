@@ -36,7 +36,6 @@ PDF p. 2: Motivic projective bundle property; PDF p. 8: Orientation for the spli
 - [lem-author-79117e1d72ed-all-bidegrees](item-lem-author-79117e1d72ed-all-bidegrees)
 - [lem-author-79117e1d72ed-base-change](item-lem-author-79117e1d72ed-base-change)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
-- [` Fasel–Yakerson, Vector bundles on singular surfaces and threefolds · p. 2, introductory projective-bundle property; p. 8, Section 3 opening, immediately before Theorem 3.1 `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Statement

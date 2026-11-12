@@ -45,7 +45,6 @@ PDF p. 2: Introductory filtration; PDF p. 3: Section 2 opening; PDF p. 8: Sectio
 - [lem-author-98a750efd0cc-filtration-nesting](item-lem-author-98a750efd0cc-filtration-nesting)
 - [lem-author-98a750efd0cc-filtration-naturality](item-lem-author-98a750efd0cc-filtration-naturality)
 - [lem-author-98a750efd0cc-filtration-products](item-lem-author-98a750efd0cc-filtration-products)
-- [` Vector bundles on singular surfaces and threefolds · PDF p. 2, introductory discussion; p. 3, Section 2 opening; p. 8, Section 4 opening `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Definition

@@ -51,7 +51,6 @@ PDF p. 6: Singular Beilinson–Lichtenbaum comparison
 - [math:thm-prime-subfield-classification](https://alphabetamath.cc/item/thm-prime-subfield-classification)
 - [math:prop-algebraically-closed-splitting-and-finite-extension-criteria](https://alphabetamath.cc/item/prop-algebraically-closed-splitting-and-finite-extension-criteria)
 - [math:thm-separability-of-x-n-minus-one-and-the-order-of-the-group-of-roots-of-unity](https://alphabetamath.cc/item/thm-separability-of-x-n-minus-one-and-the-order-of-the-group-of-roots-of-unity)
-- [` Fasel–Yakerson, Vector bundles on singular surfaces and threefolds · Printed p. 6, proof of Proposition 2.6, displayed singular Beilinson–Lichtenbaum comparison citing BEM Corollary 7.20; proposition hypotheses on printed p. 5 `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Statement

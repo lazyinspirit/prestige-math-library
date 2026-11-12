@@ -47,7 +47,6 @@ PDF p. 12: Surjectivity of p2; PDF p. 17: Surjectivity of c2
 - [math:lem-noetherian-open-subsets-are-quasi-compact](https://alphabetamath.cc/item/lem-noetherian-open-subsets-are-quasi-compact)
 - [math:def-quasi-compact-and-quasi-separated-scheme](https://alphabetamath.cc/item/def-quasi-compact-and-quasi-separated-scheme)
 - [math:def-integral-closure-and-integrally-closed-domain](https://alphabetamath.cc/item/def-integral-closure-and-integrally-closed-domain)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 12, proof of Theorem A; p. 17, proof of Theorem B `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Statement

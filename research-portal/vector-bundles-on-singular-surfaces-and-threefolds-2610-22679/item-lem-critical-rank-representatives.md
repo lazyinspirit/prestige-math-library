@@ -49,7 +49,6 @@ PDF p. 12: Proof of Theorem A, rank two representative; PDF p. 15: Proof of Theo
 - [math:def-locally-free-sheaf-finite-rank](https://alphabetamath.cc/item/def-locally-free-sheaf-finite-rank)
 - [math:def-grothendieck-universe-closure-convention](https://alphabetamath.cc/item/def-grothendieck-universe-closure-convention)
 - [math:def-irreducible-topological-space-and-subset](https://alphabetamath.cc/item/def-irreducible-topological-space-and-subset)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 12, proof of Theorem A, surjectivity paragraph; p. 15, opening of proof of Theorem 6.7; p. 17, proof of Theorem B, surjectivity paragraph `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Statement

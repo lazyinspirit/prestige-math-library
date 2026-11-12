@@ -45,7 +45,6 @@ PDF p. 9: Lemma 4.1 proof: exact row and restriction square
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
 - [lem-author-ec13f1db88a5-global-picard-projection](item-lem-author-ec13f1db88a5-global-picard-projection)
 - [math:def-integral-closure-and-integrally-closed-domain](https://alphabetamath.cc/item/def-integral-closure-and-integrally-closed-domain)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 3, notation and conventions; pp. 8–9, proof of Lemma 4.1 `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Statement

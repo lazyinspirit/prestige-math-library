@@ -58,7 +58,6 @@ PDF p. 7: Lemma 2.9 and final square
 - [math:def-smooth-morphism-schemes](https://alphabetamath.cc/item/def-smooth-morphism-schemes)
 - [math:def-separable-elements-and-separable-extensions](https://alphabetamath.cc/item/def-separable-elements-and-separable-extensions)
 - [math:def-grothendieck-universe-closure-convention](https://alphabetamath.cc/item/def-grothendieck-universe-closure-convention)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · Printed p. 3, Notation and conventions; p. 7, opening perfect-field paragraph, equation (2.8), Lemma 2.9 and its proof including the final square `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Statement

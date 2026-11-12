@@ -54,7 +54,6 @@ PDF p. 16: Proof of Theorem 6.7, application of Proposition 6.2 and Remark 6.3
 - [math:lem-noetherian-open-subsets-are-quasi-compact](https://alphabetamath.cc/item/lem-noetherian-open-subsets-are-quasi-compact)
 - [def-nisnevich-covering-interface](item-def-nisnevich-covering-interface)
 - [lem-adjudicate-d5306176fce5-coherent-realization](item-lem-adjudicate-d5306176fce5-coherent-realization)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 16, proof of Theorem 6.7, application of Proposition 6.2 and Remark 6.3 `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Statement

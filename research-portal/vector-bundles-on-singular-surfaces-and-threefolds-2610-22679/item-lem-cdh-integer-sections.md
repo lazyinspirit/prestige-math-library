@@ -53,7 +53,6 @@ PDF p. 5: Lemma 2.4
 - [math:def-group-isomorphism-and-automorphism](https://alphabetamath.cc/item/def-group-isomorphism-and-automorphism)
 - [math:def-topological-space](https://alphabetamath.cc/item/def-topological-space)
 - [math:def-subspace-topology-top](https://alphabetamath.cc/item/def-subspace-topology-top)
-- [` Vector bundles on singular surfaces and threefolds · PDF page 5, Lemma 2.4 and its proof `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Statement

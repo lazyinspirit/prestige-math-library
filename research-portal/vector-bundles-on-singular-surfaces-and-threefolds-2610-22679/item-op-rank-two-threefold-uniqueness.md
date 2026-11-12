@@ -52,7 +52,6 @@ PDF p. 3: Following Corollary D
 - [math:thm-noetherian-ring-quotients-and-localisations](https://alphabetamath.cc/item/thm-noetherian-ring-quotients-and-localisations)
 - [math:thm-stalk-structure-sheaf-prime-localization](https://alphabetamath.cc/item/thm-stalk-structure-sheaf-prime-localization)
 - [math:def-grothendieck-universe-closure-convention](https://alphabetamath.cc/item/def-grothendieck-universe-closure-convention)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · Printed p. 3, Corollary D, the paragraph immediately following it, and Notation and conventions `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Open problem

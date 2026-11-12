@@ -54,7 +54,6 @@ PDF p. 16: Proof of Theorem 6.7, supported second-stage exact sequence
 - [math:cor-finite-type-algebra-over-noetherian-ring-is-noetherian](https://alphabetamath.cc/item/cor-finite-type-algebra-over-noetherian-ring-is-noetherian)
 - [math:thm-noetherian-ring-has-noetherian-spectrum](https://alphabetamath.cc/item/thm-noetherian-ring-has-noetherian-spectrum)
 - [math:lem-noetherian-open-subsets-are-quasi-compact](https://alphabetamath.cc/item/lem-noetherian-open-subsets-are-quasi-compact)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · Printed pp. 15–16, Theorem 6.7 and its proof; p. 16, the final two supported exact sequences and generic-localization paragraph `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Statement

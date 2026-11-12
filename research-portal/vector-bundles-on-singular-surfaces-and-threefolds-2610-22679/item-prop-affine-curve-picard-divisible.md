@@ -68,7 +68,6 @@ PDF p. 13: Ful98 Example 1.6.6
 - [math:def-picard-group-scheme](https://alphabetamath.cc/item/def-picard-group-scheme)
 - [math:def-group-power](https://alphabetamath.cc/item/def-group-power)
 - [math:lem-group-homomorphism-basic-properties](https://alphabetamath.cc/item/lem-group-homomorphism-basic-properties)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF page 13, paragraph citing Fulton Example 1.6.6 `](https://arxiv.org/abs/2610.22679v1)
 - [` The Stacks Project, Section 59.69: Picard groups of curves · Opening degree exact sequence and identification before Lemma 59.69.1; opening paragraph of the proof of Lemma 59.69.3 `](https://stacks.math.columbia.edu/tag/03RN)
 - [` The Stacks Project, Proposition 39.9.11: Abelian varieties · Proposition 39.9.11(2)-(4) and the proof sentence deriving (4) from (3) `](https://stacks.math.columbia.edu/tag/03RP)
 

@@ -33,7 +33,6 @@ PDF p. 2: Paragraph following Theorem A
 - [math:def-affine-scheme](https://alphabetamath.cc/item/def-affine-scheme)
 - [math:def-scheme-over-base](https://alphabetamath.cc/item/def-scheme-over-base)
 - [math:def-locally-finite-type-and-finite-type-morphism](https://alphabetamath.cc/item/def-locally-finite-type-and-finite-type-morphism)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 2, paragraph following Theorem A; p. 3, Notation and conventions `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Statement

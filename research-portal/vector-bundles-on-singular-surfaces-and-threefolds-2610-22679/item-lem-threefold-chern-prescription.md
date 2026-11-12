@@ -44,7 +44,6 @@ PDF p. 17: Theorem B surjectivity construction
 - [math:def-scheme-over-base](https://alphabetamath.cc/item/def-scheme-over-base)
 - [math:def-affine-scheme](https://alphabetamath.cc/item/def-affine-scheme)
 - [math:def-integral-closure-and-integrally-closed-domain](https://alphabetamath.cc/item/def-integral-closure-and-integrally-closed-domain)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 17, proof of Theorem B, surjectivity `](https://arxiv.org/abs/2610.22679v1)
 
 ## Statement
 Assume the Axiom of Choice and the site and universe size bounds required by the cited motivic filtration and Chern-class constructions. Let $k$ be an algebraically closed field and $X$ a normal affine finite-type $k$-scheme of Krull dimension three. Given classes $a_i\in H^{2i,i}_{\mathrm{mot}}(X,\mathbb Z)$ for $i=1,2,3$, there is a rank-three vector bundle $E$ with $c_i(E)=a_i$ for all three indices.

@@ -46,7 +46,6 @@ PDF p. 11: Lemma5.3, second Chern additivity
 - [def-motivic-cohomology](item-def-motivic-cohomology)
 - [thm-author-d026a7b99ace-universal-chern-space](item-thm-author-d026a7b99ace-universal-chern-space)
 - [math:def-grothendieck-universe-closure-convention](https://alphabetamath.cc/item/def-grothendieck-universe-closure-convention)
-- [` Fasel and Yakerson, Vector bundles on singular surfaces and threefolds · v1, p. 3, Notation and conventions; p. 11, Section 5, Lemma 5.3 and its proof `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Statement

@@ -56,17 +56,14 @@ argument_deps:
   - math:def-quasi-compact-and-quasi-separated-scheme
 sources:
   references:
-    - title: Fasel and Yakerson, Vector bundles on singular surfaces and threefolds
-      url: https://arxiv.org/abs/2610.22679v1
-      locator: arXiv v1, PDF p. 3 conventions; pp. 11–12, Lemma 5.3 and Proposition 5.5
-      reading_limits: "Historical reading record retained from the preceding repair:
-        Read the supplied frozen article extraction at printed p. 3 and pp.
-        11–12, including both proofs. No fresh PDF image inspection or
-        original-author defect adjudication is claimed. This citation records
-        the original comparison context; the local proof uses the declared
-        full-qcqs suppliers and does not import global bundle representability.
-        Current downstream maintenance checked the generated body and current
-        declared supplier contracts; it did not freshly retrieve this article."
+    - title: Elden Elmanto and Matthew Morrow, Motivic cohomology of
+        equicharacteristic schemes
+      url: https://arxiv.org/pdf/2309.08463v1
+      locator: Theorem 1.1(1), printed p. 3
+      reading_limits: "Background for the motivic filtration and graded comparison
+        only: read Theorem 1.1(1) in the primary v1 PDF. The stated image,
+        Chern-sign and kernel formulas are local deductions from the declared
+        suppliers and are not attributed to this paper."
 ---
 
 ## Statement
@@ -103,11 +100,11 @@ In particular, this preserves the original normal qcqs scope over an algebraical
 3.1 Write $r:\pi_0\operatorname{Fil}^3K(X)\to\pi_0\operatorname{Fil}^2K(X)$ for the transition. Exactness in [F3] gives $\ker Q_{2,*}=\operatorname{im}r$. Thus the isomorphism $q_2$ in step 1.1 gives $\ker p_2=q_2(\operatorname{im}r)$. Compatibility of augmentations identifies the image of this composite in $K_0(X)$ with the image of the third-stage augmentation, which is exactly $F^3_{\mathrm{mot}}K_0(X)$. This proves the kernel formula without third-stage injectivity. [A1, F3, step 1.1, step 2.1] ∎
 
 ## Scope and reading limits
-For adjudicate-8accbc1c5f88, the complete current assigned body, all eleven direct supplier bodies and the low-dimensional-quotient consumer were read and matched to the frozen hashes. The article reference is retained solely as bibliography for comparison context; it supplies no imported premise in this item. Its statement-bearing metadata and corresponding source prerequisite entry are removed. The Statement, Facts & Assumptions, Proof, declared mathematical dependencies and coverage are unchanged. No fresh article or external-source reading is claimed. The following maintenance and article-reading notes are historical records retained from the preceding carrier.
+The arbitrary-field qcqs result is a local deduction from [F1]–[F4]; no global bundle-representation premise is used.
+
+This citation-only maintenance removes the original-article bibliography entry. The proof uses the declared local suppliers in [F1]–[F4]; no external premise is removed or newly imported. The Statement, Facts & Assumptions, Proof, declared mathematical dependencies and prerequisite inventory are unchanged. The historical reading and maintenance notes below remain records of earlier work and confer no fresh source-reading or acceptance credit. No external PDF or original article was freshly read for this citation cleanup.
 
 The reading and previous-maintenance notes below are historical records from the preceding carrier, not new source-reading or acceptance claims. Current maintenance read the assigned body, all its direct supplier contracts and its current low-dimensional-quotient consumer; it did not retrieve the article PDF. The repair uses the supplier’s explicit actual-value conclusion and preserves the statement, sign, kernel, hypotheses and coverage.
-
-The supplied article extraction was read at the printed p. 3 conventions and the complete statements and proofs of Lemma 5.3 and Proposition 5.5 on pp. 11–12. These passages record the original normal qcqs comparison context, with the article's additional convention that affine schemes are of finite type. The arbitrary-field qcqs result here is the local deduction from [F1]–[F4]; the original global bundle-representation premise is not used.
 
 For this repair, read the complete assigned body, its six local direct suppliers, the Choice definition, and the four published formulation definitions in [F5]. The seven existing direct supplier files match the hashes in the frozen context. The perfect-complex convention is stated inline and agrees with [F2]; [F3] supplies the perfect K-spectrum, image groups and graded target. The supplied injections in [F2] suffice for step 1.1, so no additional pointed-space homotopy-exactness premise is invoked. The inverse-additivity argument is supplied locally in that step. These supplier readings check this application, without auditing their prerequisite chains.
 

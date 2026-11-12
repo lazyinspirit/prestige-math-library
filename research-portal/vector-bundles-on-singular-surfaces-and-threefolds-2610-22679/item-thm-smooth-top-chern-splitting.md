@@ -62,7 +62,6 @@ PDF p. 1: Mur94 Remark 3.6 and Theorem 3.7
 - [math:thm-irreducible-closed-subsets-and-prime-ideals](https://alphabetamath.cc/item/thm-irreducible-closed-subsets-and-prime-ideals)
 - [math:def-chow-group-of-cycles-mod-rational-equivalence](https://alphabetamath.cc/item/def-chow-group-of-cycles-mod-rational-equivalence)
 - [math:def-grothendieck-universe-closure-convention](https://alphabetamath.cc/item/def-grothendieck-universe-closure-convention)
-- [` Fasel–Yakerson, Vector bundles on singular surfaces and threefolds · Introduction, printed p. 1 / PDF p. 1, paragraph beginning “We note that the above cases”; citation [Mur94, Remark 3.6 and Theorem 3.7] `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Statement

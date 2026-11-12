@@ -51,7 +51,6 @@ PDF p. 17: Splitting-principle calculations in the proof of Corollary 6.10
 - [def-exterior-determinant-bundles](item-def-exterior-determinant-bundles)
 - [math:cor-affine-scheme-quasi-compact](https://alphabetamath.cc/item/cor-affine-scheme-quasi-compact)
 - [math:thm-affine-schemes-quasi-separated](https://alphabetamath.cc/item/thm-affine-schemes-quasi-separated)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 3, Notation and conventions; p. 17, proof of Corollary 6.10, final paragraph `](https://arxiv.org/abs/2610.22679v1)
 
 
 

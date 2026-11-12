@@ -47,7 +47,6 @@ PDF p. 1: Abstract; PDF p. 17: Corollary 6.9
 - [math:def-smooth-morphism-schemes](https://alphabetamath.cc/item/def-smooth-morphism-schemes)
 - [math:def-perfect-field](https://alphabetamath.cc/item/def-perfect-field)
 - [math:def-grothendieck-universe-closure-convention](https://alphabetamath.cc/item/def-grothendieck-universe-closure-convention)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 1, abstract; p. 17, Corollary 6.9 and proof `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Statement

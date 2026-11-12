@@ -47,7 +47,6 @@ PDF p. 2: Before Theorem C; PDF p. 14: Definition 6.5
 - [math:def-scheme-over-base](https://alphabetamath.cc/item/def-scheme-over-base)
 - [math:def-smooth-morphism-schemes](https://alphabetamath.cc/item/def-smooth-morphism-schemes)
 - [math:def-separable-elements-and-separable-extensions](https://alphabetamath.cc/item/def-separable-elements-and-separable-extensions)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 2, notation before Theorem C; p. 14, Definition 6.5; p. 7, equation (2.8) and Lemma 2.9 `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Definition

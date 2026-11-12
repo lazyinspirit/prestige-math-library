@@ -50,7 +50,6 @@ PDF p. 15: First sentence of Theorem 6.7 proof
 - [def-exterior-determinant-bundles](item-def-exterior-determinant-bundles)
 - [prop-first-chern-determinant](item-prop-first-chern-determinant)
 - [def-vector-bundle-classes](item-def-vector-bundle-classes)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 15, Theorem 6.7 and the first sentence of its proof `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Statement

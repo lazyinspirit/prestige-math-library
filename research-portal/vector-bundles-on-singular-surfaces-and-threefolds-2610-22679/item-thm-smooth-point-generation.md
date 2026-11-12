@@ -78,7 +78,6 @@ PDF p. 1: Abstract; PDF p. 2: Theorem C; PDF p. 15: Theorem 6.7; PDF p. 16: Conc
 - [math:lem-closed-immersion-affine-quotient-and-base-change](https://alphabetamath.cc/item/lem-closed-immersion-affine-quotient-and-base-change)
 - [math:def-residue-field-scheme-point](https://alphabetamath.cc/item/def-residue-field-scheme-point)
 - [math:lem-spectrum-localization-open-immersion](https://alphabetamath.cc/item/lem-spectrum-localization-open-immersion)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 2, Theorem C; pp. 15–16, Theorem 6.7 and proof; p. 14, Definition 6.5 `](https://arxiv.org/abs/2610.22679v1)
 - [` The Stacks Project, Algebraic schemes · Section 33.20, Noetherian observation after Definition 33.20.1; Lemma 33.20.3(3), (6), (10), and their proof paragraphs. `](https://stacks.math.columbia.edu/tag/06LF)
 
 

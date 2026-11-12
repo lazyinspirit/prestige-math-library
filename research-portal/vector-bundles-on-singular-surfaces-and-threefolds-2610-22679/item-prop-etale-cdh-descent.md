@@ -123,7 +123,6 @@ PDF p. 6: Stacks Lemma 59.105.1
 - [thm-author-7113c087ecba-arc-input](item-thm-author-7113c087ecba-arc-input)
 - [math:def-commutative-ring](https://alphabetamath.cc/item/def-commutative-ring)
 - [math:thm-integers-modulo-n-basic-algebra](https://alphabetamath.cc/item/thm-integers-modulo-n-basic-algebra)
-- [` Fasel–Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 6, characteristic-zero proof of Proposition 2.6, final cdh-locality application. `](https://arxiv.org/abs/2610.22679v1)
 - [` The Stacks Project, Lemma 59.105.1 · Complete displayed statement and proof. `](https://stacks.math.columbia.edu/tag/0EW5)
 - [` Bhargav Bhatt and Akhil Mathew, The arc-topology · Definition 1.2 and Remark 1.4, p. 3; Notation 5.8 and preceding finite-ring paragraph, p. 41; Theorem 5.13 and complete proof, pp. 42–43. `](https://arxiv.org/pdf/1807.04725v4)
 - [` Utsav Choudhury and Martin Gallauer Alves de Souza, Homotopy theory of dg sheaves · Section 3 opening, p. 8; Definitions 5.1/5.3, pp. 17–18; Theorem 5.7 statement, p. 18, and proof, pp. 19–20; Lemma 5.10 and proof, p. 19; Fact 5.15 and preceding paragraph, p. 22. `](https://arxiv.org/pdf/1511.02828v1)

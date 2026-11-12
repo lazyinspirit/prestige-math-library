@@ -36,7 +36,6 @@ PDF p. 14: Remark 6.6
 - [def-smooth-point-filtration](item-def-smooth-point-filtration)
 - [def-motivic-filtration](item-def-motivic-filtration)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 14, Definition 6.5 and Remark 6.6 `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Remark

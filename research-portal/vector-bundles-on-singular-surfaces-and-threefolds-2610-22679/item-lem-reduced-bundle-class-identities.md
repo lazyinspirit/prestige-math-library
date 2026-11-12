@@ -54,7 +54,6 @@ PDF p. 11: Reduced rank-two identity; PDF p. 12: Induction identity
 - [def-motivic-chern-classes](item-def-motivic-chern-classes)
 - [math:def-field](https://alphabetamath.cc/item/def-field)
 - [math:def-scheme-over-base](https://alphabetamath.cc/item/def-scheme-over-base)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · v1, PDF p. 3 conventions; p. 8, Section 3; pp. 11–12, proof of Proposition 5.5 `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Statement

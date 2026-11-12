@@ -62,7 +62,6 @@ PDF p. 15: Theorem6.7 second Bertini application
 - [math:def-base-change-morphism-schemes](https://alphabetamath.cc/item/def-base-change-morphism-schemes)
 - [math:cor-fields-of-characteristic-zero-and-finite-fields-are-perfect](https://alphabetamath.cc/item/cor-fields-of-characteristic-zero-and-finite-fields-are-perfect)
 - [lem-adjudicate-f71858254bdf-clopen-threefold-comparison](item-lem-adjudicate-f71858254bdf-clopen-threefold-comparison)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · Printed p3 conventions; Theorem6.7 proof p15, second Bertini application, conditions(1)–(4) `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Statement

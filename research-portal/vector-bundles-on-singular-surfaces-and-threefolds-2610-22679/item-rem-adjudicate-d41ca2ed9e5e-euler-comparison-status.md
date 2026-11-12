@@ -59,7 +59,6 @@ PDF p. 3: Opening paragraph, expected Euler class identification
 - [rem-levine-weibel-cycle-image](item-rem-levine-weibel-cycle-image)
 - [lem-author-3a003d7b5208-affine-bundle-split-group](item-lem-author-3a003d7b5208-affine-bundle-split-group)
 - [math:def-grothendieck-universe-closure-convention](https://alphabetamath.cc/item/def-grothendieck-universe-closure-convention)
-- [` Fasel–Yakerson, Vector bundles on singular surfaces and threefolds, arXiv:2610.22679v1 · PDF pp. 2–3, Theorem C and following Euler-group expectation `](https://arxiv.org/abs/2610.22679v1)
 - [` Krishna, Murthy’s conjecture on 0-cycles, arXiv:1511.04221v3, 18 March 2019 · Section 1.1, height-d smooth maximal ideals and classical K_0; Section 2.1, opening component convention, quotient (2.1) and cycle map (2.2); Section 7 opening field convention; Definition 7.1; Corollary 7.6; Theorem 7.7 and its proof (PDF p. 34). `](https://arxiv.org/html/1511.04221v3)
 
 

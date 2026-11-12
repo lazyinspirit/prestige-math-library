@@ -45,7 +45,6 @@ PDF p. 4: Property (1)
 - [math:thm-prime-subfield-classification](https://alphabetamath.cc/item/thm-prime-subfield-classification)
 - [math:def-grothendieck-universe-closure-convention](https://alphabetamath.cc/item/def-grothendieck-universe-closure-convention)
 - [def-motivic-cohomology](item-def-motivic-cohomology)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 3, Notation and conventions; p. 4, Definition 2.2 and property (1) (weight 0) `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Statement

@@ -51,7 +51,6 @@ PDF p. 5: Proof of Lemma 2.4, YA and equation (2.5)
 - [math:def-algebraically-closed-field](https://alphabetamath.cc/item/def-algebraically-closed-field)
 - [math:thm-evaluation-kernel-and-minimal-polynomial](https://alphabetamath.cc/item/thm-evaluation-kernel-and-minimal-polynomial)
 - [math:def-separable-elements-and-separable-extensions](https://alphabetamath.cc/item/def-separable-elements-and-separable-extensions)
-- [` Vector bundles on singular surfaces and threefolds · PDF page 5, proof of Lemma 2.4, displays preceding and including equation (2.5) `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Statement

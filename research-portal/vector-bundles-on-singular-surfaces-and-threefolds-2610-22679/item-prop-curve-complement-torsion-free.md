@@ -45,7 +45,6 @@ PDF p. 13: Proposition 6.1 and proof
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
 - [def-article-conventions](item-def-article-conventions)
 - [lem-author-149a02132c3b-geometry](item-lem-author-149a02132c3b-geometry)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 13, Proposition 6.1 and proof `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Statement

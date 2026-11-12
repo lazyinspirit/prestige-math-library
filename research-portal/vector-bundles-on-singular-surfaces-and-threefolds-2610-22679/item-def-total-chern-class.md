@@ -86,7 +86,6 @@ PDF p. 8: Actual Chern and Whitney identities; PDF p. 11: Total virtual Chern cl
 - [lem-adjudicate-e61a86f4a27f-all-field-clopen-restriction](item-lem-adjudicate-e61a86f4a27f-all-field-clopen-restriction)
 - [math:def-smooth-morphism-schemes](https://alphabetamath.cc/item/def-smooth-morphism-schemes)
 - [math:thm-jacobian-criterion-smooth-morphism](https://alphabetamath.cc/item/thm-jacobian-criterion-smooth-morphism)
-- [` Fasel and Yakerson, Vector bundles on singular surfaces and threefolds · Section 3, p. 8; Lemma 5.3 proof, p. 11 `](https://arxiv.org/abs/2610.22679v1)
 - [` Annala–Iwasa, Motivic spectra and universality of K-theory, author PDF dated 14 April 2025 · Definition 4.4.1 and Lemma 4.4.3(i), pp. 30–31; Lemma 3.1.8, p. 22 `](https://ryomei.com/papers/MotSp.pdf)
 
 

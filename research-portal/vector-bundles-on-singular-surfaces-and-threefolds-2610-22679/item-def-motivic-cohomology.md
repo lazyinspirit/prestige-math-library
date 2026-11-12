@@ -54,7 +54,6 @@ PDF p. 4: Definition 2.2
 - [math:def-derived-category-of-an-abelian-category](https://alphabetamath.cc/item/def-derived-category-of-an-abelian-category)
 - [lem-author-b747b28c359f-cochain-cohomology](item-lem-author-b747b28c359f-cochain-cohomology)
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · p. 4, Definition 2.2 `](https://arxiv.org/abs/2610.22679v1)
 - [` Elden Elmanto and Matthew Morrow, Motivic cohomology of equicharacteristic schemes · v1, Introduction p. 2 (prime-field convention); p. 3, opening assertion of Theorem 1.1; p. 11, Section 2.1 (derived sheaf conventions) `](https://arxiv.org/pdf/2309.08463v1)
 
 

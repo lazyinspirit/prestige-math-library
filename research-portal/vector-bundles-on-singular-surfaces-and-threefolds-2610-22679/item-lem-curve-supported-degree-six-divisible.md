@@ -50,7 +50,6 @@ PDF p. 13: Supported Chow group and normalization
 - [lem-affine-curve-normalization-interface](item-lem-affine-curve-normalization-interface)
 - [lem-curve-support-divisor-complex](item-lem-curve-support-divisor-complex)
 - [math:def-relative-dimension-smooth-morphism](https://alphabetamath.cc/item/def-relative-dimension-smooth-morphism)
-- [` Fasel–Yakerson · p. 13, middle of Proposition 6.1 proof `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Statement

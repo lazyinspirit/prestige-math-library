@@ -80,7 +80,6 @@ PDF p. 1: Introduction, first paragraph
 - [math:cor-finite-type-algebra-over-noetherian-ring-is-noetherian](https://alphabetamath.cc/item/cor-finite-type-algebra-over-noetherian-ring-is-noetherian)
 - [math:def-locally-noetherian-and-noetherian-scheme](https://alphabetamath.cc/item/def-locally-noetherian-and-noetherian-scheme)
 - [lem-adjudicate-fa9c7180089a-polynomial-spectrum-dimension](item-lem-adjudicate-fa9c7180089a-polynomial-spectrum-dimension)
-- [` Fasel–Yakerson, Vector bundles on singular surfaces and threefolds · Printed p. 1, Introduction, first paragraph; printed p. 3, Notation and conventions for the affine finite-type convention. `](https://arxiv.org/abs/2610.22679v1)
 - [` Aravind Asok and Jean Fasel, A cohomological classification of vector bundles on smooth affine threefolds · Printed p. 2, Section 1, contextual paragraph immediately after Theorem 1, displayed rank-three Chern map; printed p. 4, opening preliminaries for the finite-type convention. `](https://arxiv.org/pdf/1204.0770v5)
 - [` Aravind Asok and Jean Fasel, A cohomological classification of vector bundles on smooth affine threefolds (v1) · Printed p. 2, Section 1, opening paragraph before Theorem 1. `](https://arxiv.org/pdf/1204.0770v1)
 

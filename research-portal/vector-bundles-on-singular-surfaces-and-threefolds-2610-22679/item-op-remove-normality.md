@@ -60,7 +60,6 @@ PDF p. 3: Finally, we expect normality to be an artifact; PDF p. 16: Remark 6.8
 - [math:def-algebra-over-a-commutative-ring](https://alphabetamath.cc/item/def-algebra-over-a-commutative-ring)
 - [math:def-grothendieck-universe-closure-convention](https://alphabetamath.cc/item/def-grothendieck-universe-closure-convention)
 - [def-motivic-cohomology](item-def-motivic-cohomology)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · pp. 2–3, Theorems A, B and C, Corollary D, final introductory paragraph before Structure of the paper, and Notation and conventions; p. 14, Definition 6.5; p. 16, Remark 6.8 `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Open problem

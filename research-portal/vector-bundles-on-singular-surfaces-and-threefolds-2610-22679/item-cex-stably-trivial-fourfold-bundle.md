@@ -77,7 +77,6 @@ PDF p. 1: Introduction final paragraph, Kum85 claim before the page break; PDF p
 - [math:cor-affine-scheme-quasi-compact](https://alphabetamath.cc/item/cor-affine-scheme-quasi-compact)
 - [math:thm-affine-schemes-quasi-separated](https://alphabetamath.cc/item/thm-affine-schemes-quasi-separated)
 - [math:def-quasi-compact-and-quasi-separated-scheme](https://alphabetamath.cc/item/def-quasi-compact-and-quasi-separated-scheme)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · p. 1 final introductory paragraph continued at p. 2 opening sentence; Kum85 bibliography p. 18 `](https://arxiv.org/abs/2610.22679v1)
 - [` Thomas Brazelton, Morgan Opie and Tariq Syed, On Algebraic Vector Bundles of Rank 2 over Smooth Affine Fourfolds · Example 6.6, printed/PDF pp. 33–34, opening existence assertion and p=2 geometric description; section-6 field restriction, p. 32 `](https://tbrazel.github.io/assets/papers/fourfolds.pdf)
 
 

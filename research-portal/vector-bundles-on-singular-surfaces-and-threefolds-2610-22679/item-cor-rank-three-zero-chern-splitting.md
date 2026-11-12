@@ -50,7 +50,6 @@ PDF p. 3: Splitting criterion after Corollary D; PDF p. 17: Corollary 6.10 proof
 - [math:def-axiom-of-choice](https://alphabetamath.cc/item/def-axiom-of-choice)
 - [math:cor-affine-scheme-quasi-compact](https://alphabetamath.cc/item/cor-affine-scheme-quasi-compact)
 - [math:thm-affine-schemes-quasi-separated](https://alphabetamath.cc/item/thm-affine-schemes-quasi-separated)
-- [` Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and threefolds · PDF p. 3, explanation after Corollary D; p. 17, proof of Corollary 6.10 `](https://arxiv.org/abs/2610.22679v1)
 
 
 ## Statement

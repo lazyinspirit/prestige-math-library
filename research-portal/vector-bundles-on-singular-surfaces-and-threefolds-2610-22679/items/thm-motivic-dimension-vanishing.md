@@ -47,26 +47,51 @@ sources:
         motivic cohomology vanishes in degrees i>j+dimX.
       hypotheses: Global equicharacteristic factorization through SpecQ or SpecF_p; X
         Noetherian and finite-dimensional; j≥0.
-      reading_limits: For this repair, read the versioned PDF extraction of both
-        complete theorem statements and the equicharacteristic footnote. The
-        local two-step argument applies the inspected current prime-field,
-        shifted-hypothesis, fiber-bound and cohomological-gluing suppliers; it
-        does not reconstruct the geometric proofs or review their upstream
-        sources. Choice and universe assumptions are inherited from those
-        current local interfaces, not asserted as additional geometric
-        hypotheses of the published theorem.
-    - title: Jean Fasel and Maria Yakerson, Vector bundles on singular surfaces and
-        threefolds
-      url: https://arxiv.org/abs/2610.22679v1
-      locator: p. 4, property (3), referring to EM23 Theorem 1.13
-      statement: The article invokes the full motivic dimension vanishing bound.
-      hypotheses: The precise theorem hypotheses are retained from the referenced EM
-        theorem.
-      reading_limits: For this repair, read property (3) and the surrounding
-        Definition 2.2 in the frozen article text. This verifies the retained
-        vanishing claim and attribution only; no original-author defect or new
-        review of the article proofs is asserted.
+      reading_limits: "Current consumer maintenance read the complete assigned
+        theorem, all 13 direct supplier interfaces, the independent
+        dimension-input contracts and their citation records, the reachable
+        declared dependency graph, and the sole direct consumer. Fresh
+        primary-source reading was limited to Elmanto-Morrow v1 Theorem 1.13,
+        Theorem 8.1 and introduction footnote 1 in PDF text. The older Section
+        8.2 and Proposition 8.10/8.12 proof-reading record below remains
+        historical, not fresh credit. No reconstruction, supplier-source defect
+        audit or independent acceptance is claimed. Historical incoming
+        citation-repair reading record: For this citation repair, freshly read
+        the versioned primary PDF text of the complete Theorems 1.13 and 8.1 and
+        introduction footnote 1. Also read the Section 8.2 paragraph after
+        Remark 8.8 and Propositions 8.10 and 8.12 with their proofs, printed pp.
+        56–58, to check the independent geometric input chain. Read the current
+        local dimension interfaces and their declared dependencies. The local
+        two-step application and fixed-field identification are retained; no
+        reconstruction or independent audit of the geometric foundations or
+        their upstream sources is claimed. Choice and universe assumptions are
+        inherited from the current local interfaces, not additional geometric
+        hypotheses of the published theorem."
 dependency_level: 13
+formulation_deps:
+  - def-motivic-cohomology
+  - lem-author-b747b28c359f-elmanto-morrow-complexes
+  - lem-author-b747b28c359f-derived-cohomology
+  - lem-author-0bac6b264f4a-motivic-dim-general-interface
+  - math:def-locally-noetherian-and-noetherian-scheme
+  - math:def-dimension-noetherian-topological-space
+  - math:def-scheme-over-base
+  - math:def-axiom-of-choice
+  - math:def-grothendieck-universe-closure-convention
+argument_deps:
+  - def-motivic-cohomology
+  - lem-author-b747b28c359f-elmanto-morrow-complexes
+  - lem-author-b747b28c359f-derived-cohomology
+  - lem-author-0bac6b264f4a-motivic-dim-general-interface
+  - lem-author-0bac6b264f4a-motivic-dim-shifted-hypotheses
+  - lem-author-0bac6b264f4a-motivic-dim-fiber-bound
+  - lem-author-0bac6b264f4a-motivic-dim-cohomological-glueing
+  - lem-author-0bac6b264f4a-motivic-dim-prime-field-vanishing
+  - math:def-locally-noetherian-and-noetherian-scheme
+  - math:def-dimension-noetherian-topological-space
+  - math:def-scheme-over-base
+  - math:def-axiom-of-choice
+  - math:def-grothendieck-universe-closure-convention
 ---
 
 ## Statement
@@ -113,7 +138,7 @@ Equicharacteristic has the precise EM meaning: the structure map $X\to\operatorn
 [F5] [[lem-author-b747b28c359f-elmanto-morrow-complexes]] supplies the actual prime-field motivic sheaf, its field restriction and empty-cover descent; [[lem-author-b747b28c359f-derived-cohomology]] supplies functorial cohomology on its derived homotopy category. [[def-motivic-cohomology]] is the standing fixed-field definition used in [F1].
 
 ## External input
-Reference 0 records the published vanishing statement in Elmanto–Morrow v1, Theorems 1.13 and 8.1, with the global equicharacteristic convention of its introduction footnote 1. Reference 1 records the original article's use of that statement at p. 4, property (3). The geometric inputs are used through [F1]–[F3] with their own explicit import limits; the application and fixed-field identification below are local deductions, not a reconstruction of the published geometric proofs. The foundational assumptions in [A1] come from the current local supplier contracts.
+Reference 0 records the published vanishing statement in Elmanto–Morrow v1, Theorems 1.13 and 8.1, with the global equicharacteristic convention of its introduction footnote 1. The geometric inputs are used through [F1]–[F3] with their own explicit import limits; the application and fixed-field identification below are local deductions, not a reconstruction of the published geometric proofs. The foundational assumptions in [A1] come from the current local supplier contracts.
 
 ## Proof
 1.1 Work under [A1]. If $X$ is nonempty, its assumed equicharacteristic factorization equips it with an $F$-scheme structure as in [F4]. Its Noetherian and finite-dimensional hypotheses give a finite integer $d\geq0$ in precisely the convention of [F2]–[F4]. Apply [F3], using the fiber bound checked in [F2], to obtain $H^i(M_{j,F}(X))=0$ whenever $i>j+d$. By [F1] and [F5] these are the claimed general motivic groups. For the empty scheme [F1] and [F5] give the zero complex by empty-cover descent, so all integer-degree groups vanish, agreeing with the convention in [F4]. [A1, F1, F2, F3, F4, F5]
