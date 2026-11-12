@@ -1,6 +1,6 @@
 ---
 title: Closed-subset and specialization chains compute the same scheme codimension
-status: draft
+status: published
 research_item: lem-adjudicate-fc0ec1cc794d-scheme-codimension-conventions
 dependency_level: 0
 ---

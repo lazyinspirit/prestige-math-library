@@ -2,7 +2,7 @@
 id: def-adjudicate-17ec23c10d5e-zariski-derived-unit
 kind: definition
 title: Small Zariski site, abelian sheafification and derived unit
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-scheme-sites-and-sheafification

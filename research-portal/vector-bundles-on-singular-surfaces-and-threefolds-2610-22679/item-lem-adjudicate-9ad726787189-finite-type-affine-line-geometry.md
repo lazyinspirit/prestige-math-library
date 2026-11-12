@@ -1,6 +1,6 @@
 ---
 title: Finite-type Noetherian spaces and affine-line product dimension
-status: draft
+status: published
 research_item: lem-adjudicate-9ad726787189-finite-type-affine-line-geometry
 dependency_level: 1
 ---

@@ -2,7 +2,7 @@
 id: lem-adjudicate-f63a33a7279d-smooth-affine-components
 kind: lemma
 title: Integral components of a smooth affine pure-dimensional scheme
-status: draft
+status: published
 domain: mathematics
 deps: &a1
   - math:def-axiom-of-choice

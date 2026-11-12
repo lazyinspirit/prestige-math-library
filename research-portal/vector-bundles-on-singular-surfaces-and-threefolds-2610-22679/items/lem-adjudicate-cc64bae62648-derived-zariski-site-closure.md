@@ -2,7 +2,7 @@
 id: lem-adjudicate-cc64bae62648-derived-zariski-site-closure
 kind: lemma
 title: Truncation and closure of the native derived smooth Zariski site
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-adjudicate-c387df8ff29b-non-a1-spectrum-framework

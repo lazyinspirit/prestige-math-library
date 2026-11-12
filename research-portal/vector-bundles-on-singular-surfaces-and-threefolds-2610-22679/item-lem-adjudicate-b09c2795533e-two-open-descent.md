@@ -1,6 +1,6 @@
 ---
 title: Covering-sieve descent for the actual two-open square
-status: draft
+status: published
 research_item: lem-adjudicate-b09c2795533e-two-open-descent
 dependency_level: 16
 sources:

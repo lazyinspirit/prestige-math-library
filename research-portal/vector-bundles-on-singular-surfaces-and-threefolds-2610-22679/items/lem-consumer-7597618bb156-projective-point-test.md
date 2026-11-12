@@ -2,7 +2,7 @@
 id: lem-consumer-7597618bb156-projective-point-test
 kind: lemma
 title: The actual EM Chern operation on the standard point
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-d026a7b99ace-positive-rr-coefficient

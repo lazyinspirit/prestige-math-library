@@ -1,6 +1,6 @@
 ---
 title: Reduced free-chain adjunction for local derived Eilenberg targets
-status: draft
+status: published
 research_item: lem-adjudicate-8ea8635dc870-reduced-chain-adjunction
 dependency_level: 11
 ---

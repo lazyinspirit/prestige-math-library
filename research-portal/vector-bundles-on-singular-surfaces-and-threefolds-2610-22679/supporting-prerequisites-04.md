@@ -2,7 +2,7 @@
 title: Supporting prerequisites · 04 — Exact arbitrary-field open-natural
   classical cycle interface
 description: Presents 26 supporting prerequisites, covering dependency levels 10–17.
-status: draft
+status: published
 dependency_level: 17
 item_count: 26
 ---

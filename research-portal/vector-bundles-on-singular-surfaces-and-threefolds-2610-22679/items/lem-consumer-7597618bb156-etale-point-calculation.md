@@ -2,7 +2,7 @@
 id: lem-consumer-7597618bb156-etale-point-calculation
 kind: lemma
 title: The actual EM point calculation through an étale chart
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-consumer-7597618bb156-projective-point-test

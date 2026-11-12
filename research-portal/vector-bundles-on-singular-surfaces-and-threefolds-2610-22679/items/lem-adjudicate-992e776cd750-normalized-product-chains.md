@@ -2,7 +2,7 @@
 id: lem-adjudicate-992e776cd750-normalized-product-chains
 kind: lemma
 title: Normalized free chains preserve products of homology equivalences
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

@@ -2,7 +2,7 @@
 id: lem-adjudicate-9ad726787189-finite-type-affine-line-geometry
 kind: lemma
 title: Finite-type Noetherian spaces and affine-line product dimension
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-tensor-product-of-modules-by-generators-and-relations

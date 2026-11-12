@@ -1,6 +1,6 @@
 ---
 title: A coherent spectral realization of derived abelian complexes
-status: draft
+status: published
 research_item: lem-adjudicate-d5306176fce5-coherent-realization
 dependency_level: 4
 sources:

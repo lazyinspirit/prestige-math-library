@@ -2,7 +2,7 @@
 id: def-adjudicate-c387df8ff29b-non-a1-spectrum-framework
 kind: definition
 title: Source-specific non-A¹ motivic spectrum framework and hypotheses
-status: draft
+status: published
 domain: mathematics
 deps: []
 dependency_roles: {}

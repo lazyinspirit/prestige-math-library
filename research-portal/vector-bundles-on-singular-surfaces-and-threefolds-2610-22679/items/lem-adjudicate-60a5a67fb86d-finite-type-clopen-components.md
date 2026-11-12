@@ -2,7 +2,7 @@
 id: lem-adjudicate-60a5a67fb86d-finite-type-clopen-components
 kind: lemma
 title: Finite-type schemes have finitely many clopen connected components
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

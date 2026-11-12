@@ -1,6 +1,6 @@
 ---
 title: Topology generators on general scheme categories
-status: draft
+status: published
 research_item: def-adjudicate-0a21e0b4be3b-general-scheme-topologies
 dependency_level: 7
 sources:

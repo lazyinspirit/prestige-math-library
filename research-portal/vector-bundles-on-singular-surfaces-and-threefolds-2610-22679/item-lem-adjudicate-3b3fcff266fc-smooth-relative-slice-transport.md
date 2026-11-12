@@ -1,6 +1,6 @@
 ---
 title: Smooth adjunction identifies the absolute and relative augmented slice towers
-status: draft
+status: published
 research_item: lem-adjudicate-3b3fcff266fc-smooth-relative-slice-transport
 dependency_level: 16
 sources:

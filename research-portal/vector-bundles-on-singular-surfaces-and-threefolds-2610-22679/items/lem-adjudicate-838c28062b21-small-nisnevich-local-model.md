@@ -3,7 +3,7 @@ id: lem-adjudicate-838c28062b21-small-nisnevich-local-model
 kind: lemma
 title: The local simplicial model retains actual sections on a
   finite-dimensional noetherian Nisnevich site
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-adjudicate-bd5616aab033-qcqs-sites-affine-detection

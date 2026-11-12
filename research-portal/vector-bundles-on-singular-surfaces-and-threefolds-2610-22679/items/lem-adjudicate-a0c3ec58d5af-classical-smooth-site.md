@@ -2,7 +2,7 @@
 id: lem-adjudicate-a0c3ec58d5af-classical-smooth-site
 kind: lemma
 title: Classical-base comparison of the native smooth site and bundle constructions
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-author-4f94f7982b0d-p1-spectrum-input

@@ -1,6 +1,6 @@
 ---
 title: External stable mapping and derived linear target interfaces
-status: draft
+status: published
 research_item: thm-adjudicate-60ab133bec72-enhanced-mapping-input
 dependency_level: 0
 sources:

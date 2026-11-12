@@ -1,6 +1,6 @@
 ---
 title: Coherent derived étale sections for the constant and Tate coefficients
-status: draft
+status: published
 research_item: lem-adjudicate-9ec8664ca09c-etale-coefficient-functor
 dependency_level: 14
 sources:

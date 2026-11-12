@@ -1,6 +1,6 @@
 ---
 title: The native smooth site over an ordinary base and transport of coefficients
-status: draft
+status: published
 research_item: lem-adjudicate-112a302cd08b-ordinary-base-smooth-site
 dependency_level: 1
 sources:

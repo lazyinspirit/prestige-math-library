@@ -2,7 +2,7 @@
 id: lem-adjudicate-7a5c49c4e930-affine-line-point-class
 kind: lemma
 title: The origin of the affine line has zero perfect K class
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-article-conventions

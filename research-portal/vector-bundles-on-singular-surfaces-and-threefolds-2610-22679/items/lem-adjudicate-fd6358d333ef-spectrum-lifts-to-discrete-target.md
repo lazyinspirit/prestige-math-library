@@ -2,7 +2,7 @@
 id: lem-adjudicate-fd6358d333ef-spectrum-lifts-to-discrete-target
 kind: lemma
 title: Pointed spectrum lifts through a discrete target are unique
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-author-e0b0bf18ed2b-stable-enhancement-input

@@ -1,6 +1,6 @@
 ---
 title: Classical and derived smooth Zariski sites over a classical base
-status: draft
+status: published
 research_item: lem-adjudicate-7e43085ab36e-classical-smooth-site
 dependency_level: 1
 sources:

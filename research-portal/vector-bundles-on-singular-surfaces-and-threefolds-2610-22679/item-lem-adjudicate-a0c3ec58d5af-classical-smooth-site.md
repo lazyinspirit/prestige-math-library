@@ -1,6 +1,6 @@
 ---
 title: Classical-base comparison of the native smooth site and bundle constructions
-status: draft
+status: published
 research_item: lem-adjudicate-a0c3ec58d5af-classical-smooth-site
 dependency_level: 2
 sources:

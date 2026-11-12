@@ -2,7 +2,7 @@
 id: thm-adjudicate-60ab133bec72-enhanced-mapping-input
 kind: theorem
 title: External stable mapping and derived linear target interfaces
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-triangulated-category

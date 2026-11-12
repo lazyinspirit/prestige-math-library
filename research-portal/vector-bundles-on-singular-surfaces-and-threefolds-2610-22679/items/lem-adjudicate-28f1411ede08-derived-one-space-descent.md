@@ -2,7 +2,7 @@
 id: lem-adjudicate-28f1411ede08-derived-one-space-descent
 kind: lemma
 title: Coherent descent for shifted derived abelian sections
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

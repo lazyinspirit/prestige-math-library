@@ -2,7 +2,7 @@
 id: lem-adjudicate-8e6efd435bbb-equal-value-group-rank
 kind: lemma
 title: Equal value groups preserve valuation rank
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-valuation-ring

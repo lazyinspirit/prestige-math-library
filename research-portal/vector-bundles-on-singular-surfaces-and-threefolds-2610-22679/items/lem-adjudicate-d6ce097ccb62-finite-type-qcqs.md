@@ -2,7 +2,7 @@
 id: lem-adjudicate-d6ce097ccb62-finite-type-qcqs
 kind: lemma
 title: Finite-type schemes over fields are qcqs
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-field

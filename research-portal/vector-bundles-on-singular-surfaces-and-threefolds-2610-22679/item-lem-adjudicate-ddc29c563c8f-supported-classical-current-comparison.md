@@ -1,6 +1,6 @@
 ---
 title: Classical supported K zero and the current Euler map agree
-status: draft
+status: published
 research_item: lem-adjudicate-ddc29c563c8f-supported-classical-current-comparison
 dependency_level: 17
 sources:

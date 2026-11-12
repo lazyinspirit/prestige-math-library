@@ -2,7 +2,7 @@
 id: lem-adjudicate-3b1b7891f21e-clopen-zero-dimensional-points
 kind: lemma
 title: Clopen affine pieces and the zero-dimensional residue-point basis
-status: draft
+status: published
 domain: mathematics
 deps: &a1
   - math:def-axiom-of-choice

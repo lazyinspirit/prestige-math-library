@@ -1,6 +1,6 @@
 ---
 title: Small Zariski site, abelian sheafification and derived unit
-status: draft
+status: published
 research_item: def-adjudicate-17ec23c10d5e-zariski-derived-unit
 dependency_level: 9
 sources:

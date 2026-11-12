@@ -35,7 +35,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 dependency_level: 15
-status: draft
+status: published
 dependency_roles:
   thm-adjudicate-0e33ede8caef-k-stack-mapping-and-extension-input: mathematical-premise
   lem-author-b747b28c359f-elmanto-morrow-complexes: mathematical-premise

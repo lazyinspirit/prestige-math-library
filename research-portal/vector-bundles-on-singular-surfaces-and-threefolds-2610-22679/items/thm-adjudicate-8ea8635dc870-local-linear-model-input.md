@@ -2,7 +2,7 @@
 id: thm-adjudicate-8ea8635dc870-local-linear-model-input
 kind: theorem
 title: Local simplicial sheaf and additive chain model interfaces
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-author-cf6ede58b450-site-plus-data

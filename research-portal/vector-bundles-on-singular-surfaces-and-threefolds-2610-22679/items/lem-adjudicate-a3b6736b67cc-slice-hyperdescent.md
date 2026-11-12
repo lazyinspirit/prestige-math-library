@@ -2,7 +2,7 @@
 id: lem-adjudicate-a3b6736b67cc-slice-hyperdescent
 kind: lemma
 title: Hypercovers and derived hyperdescent on the big cdh slice
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-2ac325480ae8-slice-site

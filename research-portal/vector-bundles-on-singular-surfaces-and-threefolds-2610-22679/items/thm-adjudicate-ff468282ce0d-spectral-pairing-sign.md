@@ -2,7 +2,7 @@
 id: thm-adjudicate-ff468282ce0d-spectral-pairing-sign
 kind: theorem
 title: External spectral pairings and the integer sphere-interchange sign
-status: draft
+status: published
 domain: mathematics
 external_input: true
 deps:

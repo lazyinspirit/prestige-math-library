@@ -1,6 +1,6 @@
 ---
 title: Source-specific non-A¹ motivic spectrum framework and hypotheses
-status: draft
+status: published
 research_item: def-adjudicate-c387df8ff29b-non-a1-spectrum-framework
 dependency_level: 0
 sources:

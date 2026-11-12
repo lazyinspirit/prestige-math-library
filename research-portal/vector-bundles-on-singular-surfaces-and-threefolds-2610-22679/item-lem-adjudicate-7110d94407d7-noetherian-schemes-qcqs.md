@@ -1,6 +1,6 @@
 ---
 title: Noetherian schemes belong to the qcqs domain
-status: draft
+status: published
 research_item: lem-adjudicate-7110d94407d7-noetherian-schemes-qcqs
 dependency_level: 0
 ---

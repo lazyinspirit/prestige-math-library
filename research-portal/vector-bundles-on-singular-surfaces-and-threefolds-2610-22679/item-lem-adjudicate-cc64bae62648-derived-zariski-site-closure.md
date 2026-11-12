@@ -1,6 +1,6 @@
 ---
 title: Truncation and closure of the native derived smooth Zariski site
-status: draft
+status: published
 research_item: lem-adjudicate-cc64bae62648-derived-zariski-site-closure
 dependency_level: 1
 sources:

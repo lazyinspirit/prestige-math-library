@@ -1,6 +1,6 @@
 ---
 title: Clopen reduction of the smooth-point comparison
-status: draft
+status: published
 research_item: lem-adjudicate-f71858254bdf-clopen-threefold-comparison
 dependency_level: 23
 ---

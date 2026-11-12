@@ -1,6 +1,6 @@
 ---
 title: Stable Yoneda Waldhausen presentations without retract completion
-status: draft
+status: published
 research_item: lem-adjudicate-55b16ac0b0e5-stable-yoneda-waldhausen-presentation
 dependency_level: 1
 sources:

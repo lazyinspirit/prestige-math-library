@@ -1,6 +1,6 @@
 ---
 title: Finite-clopen motivic restriction over every field
-status: draft
+status: published
 research_item: lem-adjudicate-e61a86f4a27f-all-field-clopen-restriction
 dependency_level: 8
 sources:

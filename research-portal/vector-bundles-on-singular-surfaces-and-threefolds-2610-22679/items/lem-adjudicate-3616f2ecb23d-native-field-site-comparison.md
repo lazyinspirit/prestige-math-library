@@ -2,7 +2,7 @@
 id: lem-adjudicate-3616f2ecb23d-native-field-site-comparison
 kind: lemma
 title: Classical realization of the native smooth field site
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-adjudicate-c387df8ff29b-non-a1-spectrum-framework

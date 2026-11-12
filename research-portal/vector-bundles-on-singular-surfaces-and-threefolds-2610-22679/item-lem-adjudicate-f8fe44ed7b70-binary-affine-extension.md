@@ -1,6 +1,6 @@
 ---
 title: Two-variable affine extension before hypercompletion
-status: draft
+status: published
 research_item: lem-adjudicate-f8fe44ed7b70-binary-affine-extension
 dependency_level: 16
 sources:

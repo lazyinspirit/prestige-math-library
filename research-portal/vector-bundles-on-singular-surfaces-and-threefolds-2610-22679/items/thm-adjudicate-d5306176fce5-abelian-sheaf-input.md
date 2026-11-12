@@ -51,7 +51,7 @@ sources:
         functoriality paragraph for this adjudication. Checked that the input is
         an arbitrary presheaf of sets. Lemmas 18.5.2 and 18.5.3, whose proofs
         are omitted on the page, are not used or claimed reconstructed.
-status: draft
+status: published
 dependency_roles:
   def-scheme-sites-and-sheafification: mathematical-premise
   math:def-free-abelian-group: mathematical-premise

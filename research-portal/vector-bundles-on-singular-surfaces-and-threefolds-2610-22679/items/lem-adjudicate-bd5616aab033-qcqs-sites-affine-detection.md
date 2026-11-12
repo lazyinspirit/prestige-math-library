@@ -2,7 +2,7 @@
 id: lem-adjudicate-bd5616aab033-qcqs-sites-affine-detection
 kind: lemma
 title: Qcqs scheme sites and affine detection for space-valued sheafification
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-scheme-sites-and-sheafification

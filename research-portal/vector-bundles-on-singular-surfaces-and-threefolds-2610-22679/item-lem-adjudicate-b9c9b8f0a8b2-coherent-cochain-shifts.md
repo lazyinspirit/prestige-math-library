@@ -1,6 +1,6 @@
 ---
 title: Cochain shifts preserve coherent limits and colimits
-status: draft
+status: published
 research_item: lem-adjudicate-b9c9b8f0a8b2-coherent-cochain-shifts
 dependency_level: 4
 sources:

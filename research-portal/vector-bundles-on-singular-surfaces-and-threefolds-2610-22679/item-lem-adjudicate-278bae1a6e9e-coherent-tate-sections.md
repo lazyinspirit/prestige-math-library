@@ -1,6 +1,6 @@
 ---
 title: Coherent étale Tate sections and root trivialization on a slice
-status: draft
+status: published
 research_item: lem-adjudicate-278bae1a6e9e-coherent-tate-sections
 dependency_level: 12
 sources:

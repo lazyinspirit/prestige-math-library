@@ -1,6 +1,6 @@
 ---
 title: Imported Hom computation into a K-injective complex
-status: draft
+status: published
 research_item: lem-adjudicate-94864d118f52-kinjective-hom-input
 dependency_level: 0
 sources:

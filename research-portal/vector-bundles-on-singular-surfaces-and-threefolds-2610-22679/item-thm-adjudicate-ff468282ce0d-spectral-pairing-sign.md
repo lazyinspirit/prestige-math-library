@@ -1,6 +1,6 @@
 ---
 title: External spectral pairings and the integer sphere-interchange sign
-status: draft
+status: published
 research_item: thm-adjudicate-ff468282ce0d-spectral-pairing-sign
 dependency_level: 4
 sources:

@@ -2,7 +2,7 @@
 id: lem-adjudicate-fc0ec1cc794d-scheme-codimension-conventions
 kind: lemma
 title: Closed-subset and specialization chains compute the same scheme codimension
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-scheme

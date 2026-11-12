@@ -2,7 +2,7 @@
 id: lem-adjudicate-9ec8664ca09c-etale-coefficient-functor
 kind: lemma
 title: Coherent derived étale sections for the constant and Tate coefficients
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

@@ -2,7 +2,7 @@
 id: lem-adjudicate-ac7b69b92374-zariski-coefficient-compactness
 kind: lemma
 title: Compactness of the smooth Zariski stack coefficients
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-adjudicate-c387df8ff29b-non-a1-spectrum-framework

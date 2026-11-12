@@ -1,6 +1,6 @@
 ---
 title: Bundles and Chow Chern maps on a finite clopen partition
-status: draft
+status: published
 research_item: lem-adjudicate-f63a33a7279d-clopen-chern-products
 dependency_level: 15
 ---

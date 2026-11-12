@@ -1,6 +1,6 @@
 ---
 title: Independent Navarro and EM Chern operations on the smooth separated site
-status: draft
+status: published
 research_item: lem-consumer-58c9d7aa5419-navarro-em-smooth-comparison
 dependency_level: 26
 sources:

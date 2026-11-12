@@ -1,6 +1,6 @@
 ---
 title: Closed immersions preserve residue fields
-status: draft
+status: published
 research_item: lem-adjudicate-dba56f870de6-closed-immersion-residue-fields
 dependency_level: 0
 ---

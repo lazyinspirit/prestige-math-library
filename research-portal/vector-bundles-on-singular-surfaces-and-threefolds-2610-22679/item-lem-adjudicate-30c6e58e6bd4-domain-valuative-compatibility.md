@@ -1,6 +1,6 @@
 ---
 title: Agreement of the domain and prime-quotient valuative formulas
-status: draft
+status: published
 research_item: lem-adjudicate-30c6e58e6bd4-domain-valuative-compatibility
 dependency_level: 0
 sources:

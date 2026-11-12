@@ -2,7 +2,7 @@
 id: lem-adjudicate-992e776cd750-sheaf-chain-adjunction
 kind: lemma
 title: Derived free sheaf chains and unbounded Eilenberg targets
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-stalk-of-presheaf

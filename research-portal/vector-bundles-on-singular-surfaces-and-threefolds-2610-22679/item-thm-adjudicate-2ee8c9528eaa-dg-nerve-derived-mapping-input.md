@@ -1,6 +1,6 @@
 ---
 title: External dg-nerve mapping and complex-localization bridges
-status: draft
+status: published
 research_item: thm-adjudicate-2ee8c9528eaa-dg-nerve-derived-mapping-input
 dependency_level: 1
 sources:

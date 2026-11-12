@@ -1,6 +1,6 @@
 ---
 title: Projective-line projection dichotomy and endpoint coordinates
-status: draft
+status: published
 research_item: lem-adjudicate-e2821b68ac29-projective-line-projection
 dependency_level: 1
 sources:

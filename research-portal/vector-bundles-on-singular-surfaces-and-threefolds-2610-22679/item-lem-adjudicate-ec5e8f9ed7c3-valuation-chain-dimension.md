@@ -1,6 +1,6 @@
 ---
 title: Valuation-overring chains compute Krull valuative dimension
-status: draft
+status: published
 research_item: lem-adjudicate-ec5e8f9ed7c3-valuation-chain-dimension
 dependency_level: 0
 ---

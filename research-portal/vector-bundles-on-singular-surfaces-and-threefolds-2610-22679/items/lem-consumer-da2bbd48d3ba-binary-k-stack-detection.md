@@ -2,7 +2,7 @@
 id: lem-consumer-da2bbd48d3ba-binary-k-stack-detection
 kind: lemma
 title: Binary detection by the ordinary rank-zero K-stack comparison
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-adjudicate-0e33ede8caef-k-stack-mapping-and-extension-input

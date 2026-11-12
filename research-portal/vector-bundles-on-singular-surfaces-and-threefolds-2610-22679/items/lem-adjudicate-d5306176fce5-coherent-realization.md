@@ -38,7 +38,7 @@ sources:
         reversing the homological grading. The composition and choice comparison
         below are local arguments; no motivic construction is imported from
         these locators.
-status: draft
+status: published
 dependency_roles:
   thm-author-4f716d60801a-derived-enhancement-input: mathematical-premise
   thm-adjudicate-60ab133bec72-enhanced-mapping-input: mathematical-premise

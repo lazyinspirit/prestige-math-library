@@ -1,6 +1,6 @@
 ---
 title: K-stack mapping spaces and extension from smooth affine schemes
-status: draft
+status: published
 research_item: thm-adjudicate-0e33ede8caef-k-stack-mapping-and-extension-input
 dependency_level: 14
 sources:

@@ -1,6 +1,6 @@
 ---
 title: Filtered affine K-space continuity with the actual free-class arrow
-status: draft
+status: published
 research_item: lem-adjudicate-77833c5b656f-filtered-affine-k-space-continuity
 dependency_level: 14
 sources:

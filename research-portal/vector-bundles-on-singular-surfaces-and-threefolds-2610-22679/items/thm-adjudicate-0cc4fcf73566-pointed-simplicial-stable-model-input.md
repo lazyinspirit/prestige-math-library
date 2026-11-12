@@ -2,7 +2,7 @@
 id: thm-adjudicate-0cc4fcf73566-pointed-simplicial-stable-model-input
 kind: theorem
 title: Pointed simplicial constructions and sequential model structures
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-simplicial-set-homotopy-and-trivial-kan-fibration

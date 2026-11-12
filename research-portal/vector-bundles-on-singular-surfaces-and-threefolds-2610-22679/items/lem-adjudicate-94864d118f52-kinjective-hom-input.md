@@ -2,7 +2,7 @@
 id: lem-adjudicate-94864d118f52-kinjective-hom-input
 kind: lemma
 title: Imported Hom computation into a K-injective complex
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-abelian-category

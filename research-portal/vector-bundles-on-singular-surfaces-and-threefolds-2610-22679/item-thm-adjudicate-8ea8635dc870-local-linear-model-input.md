@@ -1,6 +1,6 @@
 ---
 title: Local simplicial sheaf and additive chain model interfaces
-status: draft
+status: published
 research_item: thm-adjudicate-8ea8635dc870-local-linear-model-input
 dependency_level: 1
 sources:

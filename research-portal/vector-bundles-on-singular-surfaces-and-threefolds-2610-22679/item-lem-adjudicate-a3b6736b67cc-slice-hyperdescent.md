@@ -1,6 +1,6 @@
 ---
 title: Hypercovers and derived hyperdescent on the big cdh slice
-status: draft
+status: published
 research_item: lem-adjudicate-a3b6736b67cc-slice-hyperdescent
 dependency_level: 13
 sources:

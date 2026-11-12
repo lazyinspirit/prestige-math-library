@@ -1,6 +1,6 @@
 ---
 title: Degreewise eventually zero spectral towers have zero limit
-status: draft
+status: published
 research_item: lem-adjudicate-656ca1c4e08f-eventually-zero-spectral-towers
 dependency_level: 5
 sources:

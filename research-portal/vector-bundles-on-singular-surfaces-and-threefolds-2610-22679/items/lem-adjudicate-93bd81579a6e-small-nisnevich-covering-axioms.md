@@ -2,7 +2,7 @@
 id: lem-adjudicate-93bd81579a6e-small-nisnevich-covering-axioms
 kind: lemma
 title: Covering axioms for the common small Nisnevich site
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-nisnevich-covering-interface

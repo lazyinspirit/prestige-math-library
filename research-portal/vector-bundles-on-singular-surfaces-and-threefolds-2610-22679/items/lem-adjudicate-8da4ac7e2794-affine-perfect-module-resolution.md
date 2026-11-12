@@ -2,7 +2,7 @@
 id: lem-adjudicate-8da4ac7e2794-affine-perfect-module-resolution
 kind: lemma
 title: A perfect affine module sheaf admits a finite projective resolution
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-4f716d60801a-lifted-affine-equivalence

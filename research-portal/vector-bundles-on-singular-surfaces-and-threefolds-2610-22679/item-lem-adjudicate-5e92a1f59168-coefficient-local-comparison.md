@@ -1,7 +1,7 @@
 ---
 title: Local comparison of coherent coefficient presheaves with derived sheaf
   Eilenberg targets
-status: draft
+status: published
 research_item: lem-adjudicate-5e92a1f59168-coefficient-local-comparison
 dependency_level: 5
 sources:

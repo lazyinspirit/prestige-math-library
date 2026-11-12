@@ -1,6 +1,6 @@
 ---
 title: Normalized free chains preserve products of homology equivalences
-status: draft
+status: published
 research_item: lem-adjudicate-992e776cd750-normalized-product-chains
 dependency_level: 0
 sources:

@@ -2,7 +2,7 @@
 id: lem-adjudicate-3b3fcff266fc-smooth-relative-slice-transport
 kind: lemma
 title: Smooth adjunction identifies the absolute and relative augmented slice towers
-status: draft
+status: published
 domain: mathematics
 deps: &a1
   - thm-author-16f30f6b95cb-lowweight-augmented-slice-comparison

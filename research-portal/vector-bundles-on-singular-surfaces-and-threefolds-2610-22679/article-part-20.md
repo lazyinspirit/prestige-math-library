@@ -2,7 +2,7 @@
 title: Article items · 20 — Reduced bundle class identities
 description: Presents 29 items from the article and its immediate prerequisites,
   covering dependency levels 27–39.
-status: draft
+status: published
 dependency_level: 14
 research_article_page: true
 item_count: 29

@@ -2,7 +2,7 @@
 id: thm-adjudicate-d1c21a67502d-reduced-closed-subscheme-input
 kind: theorem
 title: Reduced induced closed subscheme construction
-status: draft
+status: published
 domain: mathematics
 external_input: true
 deps:

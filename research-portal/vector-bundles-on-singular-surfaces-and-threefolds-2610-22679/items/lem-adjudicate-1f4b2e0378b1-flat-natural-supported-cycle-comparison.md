@@ -2,7 +2,7 @@
 id: lem-adjudicate-1f4b2e0378b1-flat-natural-supported-cycle-comparison
 kind: lemma
 title: A specified étale-natural comparison with supported cycles
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-adjudicate-6e70d30b9793-field-unit-zigzag

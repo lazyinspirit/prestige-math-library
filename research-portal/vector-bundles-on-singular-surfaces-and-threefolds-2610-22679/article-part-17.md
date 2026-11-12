@@ -2,7 +2,7 @@
 title: Article items · 17 — Affine étale vanishing and the actual localized evaluation
 description: Presents 28 items from the article and its immediate prerequisites,
   covering dependency levels 17–20.
-status: draft
+status: published
 dependency_level: 11
 research_article_page: true
 item_count: 28

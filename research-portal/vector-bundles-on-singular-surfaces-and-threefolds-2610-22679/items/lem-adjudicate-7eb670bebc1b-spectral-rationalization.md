@@ -2,7 +2,7 @@
 id: lem-adjudicate-7eb670bebc1b-spectral-rationalization
 kind: lemma
 title: Spectral rationalization and its homotopy groups
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-stable-spectra-interface

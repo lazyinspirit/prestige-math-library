@@ -3,7 +3,7 @@ title: Article items · 19 — Extending the geometric support method to higher
   dimensions
 description: Presents 28 items from the article and its immediate prerequisites,
   covering dependency levels 23–27.
-status: draft
+status: published
 dependency_level: 13
 research_article_page: true
 item_count: 28

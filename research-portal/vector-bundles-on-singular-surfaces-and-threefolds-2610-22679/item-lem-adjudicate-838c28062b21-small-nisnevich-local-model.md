@@ -1,7 +1,7 @@
 ---
 title: The local simplicial model retains actual sections on a
   finite-dimensional noetherian Nisnevich site
-status: draft
+status: published
 research_item: lem-adjudicate-838c28062b21-small-nisnevich-local-model
 dependency_level: 8
 sources:

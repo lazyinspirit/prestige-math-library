@@ -2,7 +2,7 @@
 id: lem-adjudicate-bda1b5017300-mvw-cdp-topology-comparison
 kind: lemma
 title: Comparison of the MVW and cdp cdh topologies
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-cdh-topology-interface

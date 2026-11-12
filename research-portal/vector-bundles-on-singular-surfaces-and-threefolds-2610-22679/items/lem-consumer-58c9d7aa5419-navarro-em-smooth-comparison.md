@@ -2,7 +2,7 @@
 id: lem-consumer-58c9d7aa5419-navarro-em-smooth-comparison
 kind: lemma
 title: Independent Navarro and EM Chern operations on the smooth separated site
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-adjudicate-6e70d30b9793-chern-operation-transport

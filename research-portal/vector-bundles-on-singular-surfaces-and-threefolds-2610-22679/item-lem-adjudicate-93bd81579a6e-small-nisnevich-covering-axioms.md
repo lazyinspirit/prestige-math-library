@@ -1,6 +1,6 @@
 ---
 title: Covering axioms for the common small Nisnevich site
-status: draft
+status: published
 research_item: lem-adjudicate-93bd81579a6e-small-nisnevich-covering-axioms
 dependency_level: 7
 ---

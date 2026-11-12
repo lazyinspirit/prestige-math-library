@@ -2,7 +2,7 @@
 id: lem-adjudicate-77833c5b656f-filtered-affine-k-space-continuity
 kind: lemma
 title: Filtered affine K-space continuity with the actual free-class arrow
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-adjudicate-10deda40f9da-affine-k-space-sheafification

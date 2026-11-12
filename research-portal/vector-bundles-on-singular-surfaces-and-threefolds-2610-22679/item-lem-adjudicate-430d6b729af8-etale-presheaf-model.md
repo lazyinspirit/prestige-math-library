@@ -1,6 +1,6 @@
 ---
 title: A compatible presheaf-complex model of étale derived sections
-status: draft
+status: published
 research_item: lem-adjudicate-430d6b729af8-etale-presheaf-model
 dependency_level: 11
 sources:

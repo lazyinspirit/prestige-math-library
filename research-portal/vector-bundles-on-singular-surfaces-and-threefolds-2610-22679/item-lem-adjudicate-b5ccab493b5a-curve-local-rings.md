@@ -1,6 +1,6 @@
 ---
 title: Closed-point local rings and function fields of integral curves
-status: draft
+status: published
 research_item: lem-adjudicate-b5ccab493b5a-curve-local-rings
 dependency_level: 0
 ---

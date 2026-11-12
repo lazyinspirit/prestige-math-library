@@ -2,7 +2,7 @@
 id: lem-adjudicate-e2821b68ac29-projective-line-projection
 kind: lemma
 title: Projective-line projection dichotomy and endpoint coordinates
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

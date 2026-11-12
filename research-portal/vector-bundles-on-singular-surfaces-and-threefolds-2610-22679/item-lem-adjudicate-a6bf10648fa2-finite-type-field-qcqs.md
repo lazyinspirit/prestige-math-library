@@ -1,6 +1,6 @@
 ---
 title: Finite-type field schemes lie in the qcqs source domain
-status: draft
+status: published
 research_item: lem-adjudicate-a6bf10648fa2-finite-type-field-qcqs
 dependency_level: 0
 ---

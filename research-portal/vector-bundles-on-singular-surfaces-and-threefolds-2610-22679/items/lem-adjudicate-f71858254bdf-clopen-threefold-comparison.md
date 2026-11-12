@@ -2,7 +2,7 @@
 id: lem-adjudicate-f71858254bdf-clopen-threefold-comparison
 kind: lemma
 title: Clopen reduction of the smooth-point comparison
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

@@ -1,6 +1,6 @@
 ---
 title: Open-natural smooth cycle layers by separated-open descent
-status: draft
+status: published
 research_item: lem-adjudicate-37c8a46c3b6b-open-natural-cycle-layers
 dependency_level: 15
 sources:

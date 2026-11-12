@@ -2,7 +2,7 @@
 id: lem-adjudicate-8ea8635dc870-reduced-chain-adjunction
 kind: lemma
 title: Reduced free-chain adjunction for local derived Eilenberg targets
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-adjudicate-8ea8635dc870-local-linear-model-input

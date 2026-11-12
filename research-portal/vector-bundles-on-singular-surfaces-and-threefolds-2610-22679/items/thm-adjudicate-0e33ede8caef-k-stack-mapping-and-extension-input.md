@@ -94,7 +94,7 @@ sources:
         inputs cited there are imported, not reconstructed. No assertion about
         affineness of every quotient diagonal is attributed to this section.
 dependency_level: 14
-status: draft
+status: published
 dependency_roles:
   def-adjudicate-c387df8ff29b-non-a1-spectrum-framework: mathematical-premise
   def-nonconnective-k-spectrum-interface: mathematical-premise

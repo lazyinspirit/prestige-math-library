@@ -3,7 +3,7 @@ title: Article items · 18 — Levine–Weibel relations split on clopen
   pure-dimensional components
 description: Presents 28 items from the article and its immediate prerequisites,
   covering dependency levels 20–23.
-status: draft
+status: published
 dependency_level: 12
 research_article_page: true
 item_count: 28

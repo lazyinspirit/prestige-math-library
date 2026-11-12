@@ -1,6 +1,6 @@
 ---
 title: Compactness of the smooth Zariski stack coefficients
-status: draft
+status: published
 research_item: lem-adjudicate-ac7b69b92374-zariski-coefficient-compactness
 dependency_level: 2
 sources:

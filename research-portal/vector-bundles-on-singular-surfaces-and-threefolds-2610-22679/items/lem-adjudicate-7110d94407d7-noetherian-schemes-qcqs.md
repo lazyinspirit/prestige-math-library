@@ -2,7 +2,7 @@
 id: lem-adjudicate-7110d94407d7-noetherian-schemes-qcqs
 kind: lemma
 title: Noetherian schemes belong to the qcqs domain
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-locally-noetherian-and-noetherian-scheme

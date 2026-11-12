@@ -2,7 +2,7 @@
 id: lem-adjudicate-b5ccab493b5a-curve-local-rings
 kind: lemma
 title: Closed-point local rings and function fields of integral curves
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-integral-scheme

@@ -2,7 +2,7 @@
 id: lem-adjudicate-e4768ff43a65-ordinary-localization-exactness
 kind: lemma
 title: Exactness of ordinary derived cdh sheafification and evaluation
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

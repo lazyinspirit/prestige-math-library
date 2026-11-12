@@ -2,7 +2,7 @@
 id: lem-adjudicate-f63a33a7279d-clopen-chern-products
 kind: lemma
 title: Bundles and Chow Chern maps on a finite clopen partition
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-f08c343a07fc-local-chern-interface

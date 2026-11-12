@@ -1,6 +1,6 @@
 ---
 title: Finite-type schemes over fields are qcqs
-status: draft
+status: published
 research_item: lem-adjudicate-d6ce097ccb62-finite-type-qcqs
 dependency_level: 0
 sources:

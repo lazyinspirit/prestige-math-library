@@ -1,6 +1,6 @@
 ---
 title: Finite-type schemes have finitely many clopen connected components
-status: draft
+status: published
 research_item: lem-adjudicate-60a5a67fb86d-finite-type-clopen-components
 dependency_level: 0
 sources:

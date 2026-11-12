@@ -1,6 +1,6 @@
 ---
 title: Binary detection by the ordinary rank-zero K-stack comparison
-status: draft
+status: published
 research_item: lem-consumer-da2bbd48d3ba-binary-k-stack-detection
 dependency_level: 15
 sources:

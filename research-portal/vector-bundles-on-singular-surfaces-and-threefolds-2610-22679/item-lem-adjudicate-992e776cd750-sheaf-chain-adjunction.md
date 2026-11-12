@@ -1,6 +1,6 @@
 ---
 title: Derived free sheaf chains and unbounded Eilenberg targets
-status: draft
+status: published
 research_item: lem-adjudicate-992e776cd750-sheaf-chain-adjunction
 dependency_level: 1
 sources:

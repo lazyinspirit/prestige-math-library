@@ -2,7 +2,7 @@
 id: lem-adjudicate-b9c9b8f0a8b2-coherent-cochain-shifts
 kind: lemma
 title: Cochain shifts preserve coherent limits and colimits
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-adjudicate-60ab133bec72-enhanced-mapping-input

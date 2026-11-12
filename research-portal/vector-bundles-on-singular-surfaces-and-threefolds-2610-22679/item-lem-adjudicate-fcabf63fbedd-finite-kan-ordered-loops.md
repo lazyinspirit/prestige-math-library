@@ -1,6 +1,6 @@
 ---
 title: Finite Kan representatives and ordered iterated loops
-status: draft
+status: published
 research_item: lem-adjudicate-fcabf63fbedd-finite-kan-ordered-loops
 dependency_level: 1
 sources:

@@ -1,6 +1,6 @@
 ---
 title: Adapted frames identify the universal quotient-projective stack
-status: draft
+status: published
 research_item: lem-adjudicate-63e8cd82ee4c-projective-stack-adapted-frames
 dependency_level: 15
 sources:

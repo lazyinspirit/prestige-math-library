@@ -1,6 +1,6 @@
 ---
 title: Abelian sheafification and quotient sheaves on a site
-status: draft
+status: published
 research_item: thm-adjudicate-d5306176fce5-abelian-sheaf-input
 dependency_level: 6
 sources:

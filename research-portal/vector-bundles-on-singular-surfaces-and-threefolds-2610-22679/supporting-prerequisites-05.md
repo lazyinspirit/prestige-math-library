@@ -2,7 +2,7 @@
 title: Supporting prerequisites · 05 — External actual EM graded algebra, Picard
   class and complex PBF
 description: Presents 26 supporting prerequisites, covering dependency levels 17–31.
-status: draft
+status: published
 dependency_level: 31
 item_count: 26
 ---

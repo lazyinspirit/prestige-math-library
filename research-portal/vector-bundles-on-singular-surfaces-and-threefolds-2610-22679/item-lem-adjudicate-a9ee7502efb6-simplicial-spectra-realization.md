@@ -1,6 +1,6 @@
 ---
 title: From simplicial sequential spectra to the fixed coherent realization
-status: draft
+status: published
 research_item: lem-adjudicate-a9ee7502efb6-simplicial-spectra-realization
 dependency_level: 5
 sources:

@@ -2,7 +2,7 @@
 id: lem-adjudicate-430d6b729af8-etale-presheaf-model
 kind: lemma
 title: A compatible presheaf-complex model of étale derived sections
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-commutative-ring

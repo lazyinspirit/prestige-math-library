@@ -1,6 +1,6 @@
 ---
 title: Exactness of ordinary derived cdh sheafification and evaluation
-status: draft
+status: published
 research_item: lem-adjudicate-e4768ff43a65-ordinary-localization-exactness
 dependency_level: 9
 sources:

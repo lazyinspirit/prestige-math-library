@@ -1,6 +1,6 @@
 ---
 title: Equal value groups preserve valuation rank
-status: draft
+status: published
 research_item: lem-adjudicate-8e6efd435bbb-equal-value-group-rank
 dependency_level: 0
 ---

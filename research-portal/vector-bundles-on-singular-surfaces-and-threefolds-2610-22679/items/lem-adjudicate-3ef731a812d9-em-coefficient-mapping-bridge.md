@@ -2,7 +2,7 @@
 id: lem-adjudicate-3ef731a812d9-em-coefficient-mapping-bridge
 kind: lemma
 title: Actual EM coefficient mapping and smooth-site comparison
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-author-32887006bdff-em-p1-model

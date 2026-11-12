@@ -1,6 +1,6 @@
 ---
 title: Filtered colimits of spaces and based loops
-status: draft
+status: published
 research_item: thm-adjudicate-992e776cd750-filtered-space-colimits-input
 dependency_level: 0
 sources:

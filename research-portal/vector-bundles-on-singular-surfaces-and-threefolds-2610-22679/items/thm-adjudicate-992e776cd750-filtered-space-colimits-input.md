@@ -2,7 +2,7 @@
 id: thm-adjudicate-992e776cd750-filtered-space-colimits-input
 kind: theorem
 title: Filtered colimits of spaces and based loops
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

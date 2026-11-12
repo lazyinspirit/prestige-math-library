@@ -2,7 +2,7 @@
 id: lem-adjudicate-c48bc07f0450-punctured-affine-lifting
 kind: lemma
 title: Polynomial lifting on punctured affine three-space
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

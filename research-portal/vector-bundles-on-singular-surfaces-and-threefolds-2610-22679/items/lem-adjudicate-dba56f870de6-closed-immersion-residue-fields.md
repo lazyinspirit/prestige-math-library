@@ -2,7 +2,7 @@
 id: lem-adjudicate-dba56f870de6-closed-immersion-residue-fields
 kind: lemma
 title: Closed immersions preserve residue fields
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-closed-immersion-schemes

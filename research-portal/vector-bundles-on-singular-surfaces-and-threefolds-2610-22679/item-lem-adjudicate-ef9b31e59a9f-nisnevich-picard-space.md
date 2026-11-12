@@ -1,6 +1,6 @@
 ---
 title: Shifted Nisnevich units and the line-bundle groupoid
-status: draft
+status: published
 research_item: lem-adjudicate-ef9b31e59a9f-nisnevich-picard-space
 dependency_level: 16
 sources:

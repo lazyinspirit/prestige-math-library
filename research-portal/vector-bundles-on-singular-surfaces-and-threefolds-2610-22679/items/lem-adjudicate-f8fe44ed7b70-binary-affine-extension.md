@@ -2,7 +2,7 @@
 id: lem-adjudicate-f8fe44ed7b70-binary-affine-extension
 kind: lemma
 title: Two-variable affine extension before hypercompletion
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-adjudicate-0e33ede8caef-k-stack-mapping-and-extension-input

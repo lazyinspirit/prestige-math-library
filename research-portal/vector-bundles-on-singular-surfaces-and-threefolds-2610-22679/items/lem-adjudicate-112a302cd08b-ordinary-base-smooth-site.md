@@ -2,7 +2,7 @@
 id: lem-adjudicate-112a302cd08b-ordinary-base-smooth-site
 kind: lemma
 title: The native smooth site over an ordinary base and transport of coefficients
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-adjudicate-c387df8ff29b-non-a1-spectrum-framework

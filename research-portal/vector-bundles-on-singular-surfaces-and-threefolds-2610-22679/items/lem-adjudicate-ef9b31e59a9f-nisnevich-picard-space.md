@@ -2,7 +2,7 @@
 id: lem-adjudicate-ef9b31e59a9f-nisnevich-picard-space
 kind: lemma
 title: Shifted Nisnevich units and the line-bundle groupoid
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

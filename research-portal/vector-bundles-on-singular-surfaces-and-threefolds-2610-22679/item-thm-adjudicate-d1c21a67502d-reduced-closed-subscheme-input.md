@@ -1,6 +1,6 @@
 ---
 title: Reduced induced closed subscheme construction
-status: draft
+status: published
 research_item: thm-adjudicate-d1c21a67502d-reduced-closed-subscheme-input
 dependency_level: 0
 sources:

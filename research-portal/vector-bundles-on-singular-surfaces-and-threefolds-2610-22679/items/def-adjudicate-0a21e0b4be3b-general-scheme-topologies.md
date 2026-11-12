@@ -2,7 +2,7 @@
 id: def-adjudicate-0a21e0b4be3b-general-scheme-topologies
 kind: definition
 title: Topology generators on general scheme categories
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-scheme-sites-and-sheafification

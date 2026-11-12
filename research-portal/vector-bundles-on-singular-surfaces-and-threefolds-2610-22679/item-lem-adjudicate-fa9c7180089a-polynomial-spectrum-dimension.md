@@ -1,6 +1,6 @@
 ---
 title: Dimension and purity of an affine polynomial cylinder
-status: draft
+status: published
 research_item: lem-adjudicate-fa9c7180089a-polynomial-spectrum-dimension
 dependency_level: 0
 ---

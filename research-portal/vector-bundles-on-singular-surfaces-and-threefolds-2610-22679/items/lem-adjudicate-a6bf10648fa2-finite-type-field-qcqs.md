@@ -2,7 +2,7 @@
 id: lem-adjudicate-a6bf10648fa2-finite-type-field-qcqs
 kind: lemma
 title: Finite-type field schemes lie in the qcqs source domain
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

@@ -1,6 +1,6 @@
 ---
 title: Integral components of a smooth affine pure-dimensional scheme
-status: draft
+status: published
 research_item: lem-adjudicate-f63a33a7279d-smooth-affine-components
 dependency_level: 0
 sources:

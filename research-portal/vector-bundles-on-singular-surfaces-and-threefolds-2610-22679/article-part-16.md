@@ -3,7 +3,7 @@ title: Article items · 16 — Explicit eventual-stage thresholds in every fixed
   homotopy degree
 description: Presents 28 items from the article and its immediate prerequisites,
   covering dependency levels 16–17.
-status: draft
+status: published
 dependency_level: 10
 research_article_page: true
 item_count: 28

@@ -3,7 +3,7 @@ id: lem-adjudicate-5e92a1f59168-coefficient-local-comparison
 kind: lemma
 title: Local comparison of coherent coefficient presheaves with derived sheaf
   Eilenberg targets
-status: draft
+status: published
 domain: mathematics
 deps:
   - lem-adjudicate-992e776cd750-sheaf-chain-adjunction

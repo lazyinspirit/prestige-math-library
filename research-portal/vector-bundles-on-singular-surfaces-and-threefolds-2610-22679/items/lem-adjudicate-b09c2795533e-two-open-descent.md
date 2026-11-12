@@ -2,7 +2,7 @@
 id: lem-adjudicate-b09c2795533e-two-open-descent
 kind: lemma
 title: Covering-sieve descent for the actual two-open square
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

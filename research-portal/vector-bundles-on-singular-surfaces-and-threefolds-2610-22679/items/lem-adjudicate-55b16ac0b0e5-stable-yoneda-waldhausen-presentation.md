@@ -2,7 +2,7 @@
 id: lem-adjudicate-55b16ac0b0e5-stable-yoneda-waldhausen-presentation
 kind: lemma
 title: Stable Yoneda Waldhausen presentations without retract completion
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-author-e0b0bf18ed2b-stable-enhancement-input

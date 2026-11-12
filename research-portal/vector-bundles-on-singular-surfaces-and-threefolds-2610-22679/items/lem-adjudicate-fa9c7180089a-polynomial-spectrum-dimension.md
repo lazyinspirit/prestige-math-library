@@ -2,7 +2,7 @@
 id: lem-adjudicate-fa9c7180089a-polynomial-spectrum-dimension
 kind: lemma
 title: Dimension and purity of an affine polynomial cylinder
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

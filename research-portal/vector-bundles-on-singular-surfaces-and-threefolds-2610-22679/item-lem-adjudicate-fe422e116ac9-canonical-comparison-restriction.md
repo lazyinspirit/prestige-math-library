@@ -1,6 +1,6 @@
 ---
 title: Canonical comparison and restriction from the prime field
-status: draft
+status: published
 research_item: lem-adjudicate-fe422e116ac9-canonical-comparison-restriction
 dependency_level: 12
 sources:

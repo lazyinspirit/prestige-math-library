@@ -2,7 +2,7 @@
 id: lem-adjudicate-37c8a46c3b6b-open-natural-cycle-layers
 kind: lemma
 title: Open-natural smooth cycle layers by separated-open descent
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-author-16f30f6b95cb-lowweight-augmented-slice-comparison

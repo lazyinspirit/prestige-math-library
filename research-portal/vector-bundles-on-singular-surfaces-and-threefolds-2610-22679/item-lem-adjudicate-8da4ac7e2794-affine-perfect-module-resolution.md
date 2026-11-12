@@ -1,6 +1,6 @@
 ---
 title: A perfect affine module sheaf admits a finite projective resolution
-status: draft
+status: published
 research_item: lem-adjudicate-8da4ac7e2794-affine-perfect-module-resolution
 dependency_level: 6
 ---

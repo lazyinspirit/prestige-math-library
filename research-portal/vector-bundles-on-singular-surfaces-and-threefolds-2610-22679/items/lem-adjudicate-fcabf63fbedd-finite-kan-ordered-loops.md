@@ -2,7 +2,7 @@
 id: lem-adjudicate-fcabf63fbedd-finite-kan-ordered-loops
 kind: lemma
 title: Finite Kan representatives and ordered iterated loops
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-simplicial-set-homotopy-and-trivial-kan-fibration

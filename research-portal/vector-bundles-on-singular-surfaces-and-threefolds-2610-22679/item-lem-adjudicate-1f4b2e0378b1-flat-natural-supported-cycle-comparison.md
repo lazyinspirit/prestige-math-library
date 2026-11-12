@@ -1,6 +1,6 @@
 ---
 title: A specified étale-natural comparison with supported cycles
-status: draft
+status: published
 research_item: lem-adjudicate-1f4b2e0378b1-flat-natural-supported-cycle-comparison
 dependency_level: 19
 sources:

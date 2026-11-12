@@ -1,6 +1,6 @@
 ---
 title: Classical realization of the native smooth field site
-status: draft
+status: published
 research_item: lem-adjudicate-3616f2ecb23d-native-field-site-comparison
 dependency_level: 15
 sources:

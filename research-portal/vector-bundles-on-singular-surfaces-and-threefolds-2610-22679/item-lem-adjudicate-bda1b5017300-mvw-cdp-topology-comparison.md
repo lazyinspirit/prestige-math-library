@@ -1,6 +1,6 @@
 ---
 title: Comparison of the MVW and cdp cdh topologies
-status: draft
+status: published
 research_item: lem-adjudicate-bda1b5017300-mvw-cdp-topology-comparison
 dependency_level: 8
 sources:

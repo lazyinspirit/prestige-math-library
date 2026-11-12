@@ -2,7 +2,7 @@
 id: lem-adjudicate-656ca1c4e08f-eventually-zero-spectral-towers
 kind: lemma
 title: Degreewise eventually zero spectral towers have zero limit
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

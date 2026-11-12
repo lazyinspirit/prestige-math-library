@@ -1,6 +1,6 @@
 ---
 title: Actual EM coefficient mapping and smooth-site comparison
-status: draft
+status: published
 research_item: lem-adjudicate-3ef731a812d9-em-coefficient-mapping-bridge
 dependency_level: 20
 sources:

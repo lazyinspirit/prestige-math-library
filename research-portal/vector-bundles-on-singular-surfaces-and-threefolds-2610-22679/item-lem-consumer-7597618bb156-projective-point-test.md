@@ -1,6 +1,6 @@
 ---
 title: The actual EM Chern operation on the standard point
-status: draft
+status: published
 research_item: lem-consumer-7597618bb156-projective-point-test
 dependency_level: 30
 ---

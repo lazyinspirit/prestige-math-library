@@ -1,6 +1,6 @@
 ---
 title: Qcqs scheme sites and affine detection for space-valued sheafification
-status: draft
+status: published
 research_item: lem-adjudicate-bd5616aab033-qcqs-sites-affine-detection
 dependency_level: 7
 sources:

@@ -1,6 +1,6 @@
 ---
 title: Polynomial lifting on punctured affine three-space
-status: draft
+status: published
 research_item: lem-adjudicate-c48bc07f0450-punctured-affine-lifting
 dependency_level: 0
 ---

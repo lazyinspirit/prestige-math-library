@@ -2,7 +2,7 @@
 id: lem-adjudicate-a9ee7502efb6-simplicial-spectra-realization
 kind: lemma
 title: From simplicial sequential spectra to the fixed coherent realization
-status: draft
+status: published
 domain: mathematics
 deps:
   - def-stable-spectra-interface

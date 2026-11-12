@@ -1,6 +1,6 @@
 ---
 title: Spectral rationalization and its homotopy groups
-status: draft
+status: published
 research_item: lem-adjudicate-7eb670bebc1b-spectral-rationalization
 dependency_level: 5
 sources:

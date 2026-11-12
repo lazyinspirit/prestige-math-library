@@ -2,7 +2,7 @@
 id: lem-adjudicate-278bae1a6e9e-coherent-tate-sections
 kind: lemma
 title: Coherent étale Tate sections and root trivialization on a slice
-status: draft
+status: published
 domain: mathematics
 deps: &a1
   - math:def-axiom-of-choice

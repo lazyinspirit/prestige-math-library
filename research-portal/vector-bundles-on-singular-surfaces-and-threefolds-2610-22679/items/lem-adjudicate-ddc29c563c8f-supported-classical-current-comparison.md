@@ -2,7 +2,7 @@
 id: lem-adjudicate-ddc29c563c8f-supported-classical-current-comparison
 kind: lemma
 title: Classical supported K zero and the current Euler map agree
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice

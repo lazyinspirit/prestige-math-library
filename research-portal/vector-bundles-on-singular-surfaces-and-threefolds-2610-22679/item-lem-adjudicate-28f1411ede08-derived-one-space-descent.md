@@ -1,6 +1,6 @@
 ---
 title: Coherent descent for shifted derived abelian sections
-status: draft
+status: published
 research_item: lem-adjudicate-28f1411ede08-derived-one-space-descent
 dependency_level: 9
 sources:

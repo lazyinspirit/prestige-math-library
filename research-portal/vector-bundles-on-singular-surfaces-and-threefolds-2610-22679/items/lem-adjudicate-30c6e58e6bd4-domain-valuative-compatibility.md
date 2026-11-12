@@ -2,7 +2,7 @@
 id: lem-adjudicate-30c6e58e6bd4-domain-valuative-compatibility
 kind: lemma
 title: Agreement of the domain and prime-quotient valuative formulas
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-valuation-ring

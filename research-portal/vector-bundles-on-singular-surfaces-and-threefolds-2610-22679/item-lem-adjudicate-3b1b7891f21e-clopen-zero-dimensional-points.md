@@ -1,6 +1,6 @@
 ---
 title: Clopen affine pieces and the zero-dimensional residue-point basis
-status: draft
+status: published
 research_item: lem-adjudicate-3b1b7891f21e-clopen-zero-dimensional-points
 dependency_level: 22
 ---

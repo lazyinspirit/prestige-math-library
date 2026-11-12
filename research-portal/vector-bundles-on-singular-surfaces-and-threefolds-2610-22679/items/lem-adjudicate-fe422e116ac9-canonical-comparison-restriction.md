@@ -2,7 +2,7 @@
 id: lem-adjudicate-fe422e116ac9-canonical-comparison-restriction
 kind: lemma
 title: Canonical comparison and restriction from the prime field
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-author-c5b0693f4fc3-top-torsion-topweight-comparison

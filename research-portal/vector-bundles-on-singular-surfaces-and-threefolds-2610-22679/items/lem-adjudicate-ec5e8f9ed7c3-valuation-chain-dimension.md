@@ -2,7 +2,7 @@
 id: lem-adjudicate-ec5e8f9ed7c3-valuation-chain-dimension
 kind: lemma
 title: Valuation-overring chains compute Krull valuative dimension
-status: draft
+status: published
 domain: mathematics
 deps: &a1
   - math:def-commutative-ring

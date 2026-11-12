@@ -1,6 +1,6 @@
 ---
 title: The actual EM point calculation through an étale chart
-status: draft
+status: published
 research_item: lem-consumer-7597618bb156-etale-point-calculation
 dependency_level: 31
 sources:

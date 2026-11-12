@@ -1,6 +1,6 @@
 ---
 title: Pointed simplicial constructions and sequential model structures
-status: draft
+status: published
 research_item: thm-adjudicate-0cc4fcf73566-pointed-simplicial-stable-model-input
 dependency_level: 0
 sources:

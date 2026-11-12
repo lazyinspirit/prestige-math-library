@@ -2,7 +2,7 @@
 id: thm-adjudicate-2ee8c9528eaa-dg-nerve-derived-mapping-input
 kind: theorem
 title: External dg-nerve mapping and complex-localization bridges
-status: draft
+status: published
 domain: mathematics
 deps:
   - thm-author-4f716d60801a-derived-enhancement-input

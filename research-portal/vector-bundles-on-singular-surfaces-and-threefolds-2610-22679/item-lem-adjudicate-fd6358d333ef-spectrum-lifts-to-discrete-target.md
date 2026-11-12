@@ -1,6 +1,6 @@
 ---
 title: Pointed spectrum lifts through a discrete target are unique
-status: draft
+status: published
 research_item: lem-adjudicate-fd6358d333ef-spectrum-lifts-to-discrete-target
 dependency_level: 1
 sources:

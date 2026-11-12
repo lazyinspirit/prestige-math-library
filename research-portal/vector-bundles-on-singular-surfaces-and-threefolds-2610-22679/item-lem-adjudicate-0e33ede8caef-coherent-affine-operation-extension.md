@@ -1,6 +1,6 @@
 ---
 title: Coherent extension of Chern-target operations from smooth affines
-status: draft
+status: published
 research_item: lem-adjudicate-0e33ede8caef-coherent-affine-operation-extension
 dependency_level: 15
 ---

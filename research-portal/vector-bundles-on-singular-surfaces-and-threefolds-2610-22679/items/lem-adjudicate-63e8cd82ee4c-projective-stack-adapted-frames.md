@@ -2,7 +2,7 @@
 id: lem-adjudicate-63e8cd82ee4c-projective-stack-adapted-frames
 kind: lemma
 title: Adapted frames identify the universal quotient-projective stack
-status: draft
+status: published
 domain: mathematics
 deps:
   - math:def-axiom-of-choice
