@@ -1,6 +1,6 @@
 ---
 title: A fixed-law Wigner spectral-edge input
-status: draft
+status: published
 research_item: thm-expander-prereq-fixed-law-wigner-edge-input
 dependency_level: 1
 sources:

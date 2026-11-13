@@ -1,6 +1,6 @@
 ---
 title: The deterministic critical degree root stays above nine quarters
-status: draft
+status: published
 research_item: lem-author-47d4423675aa-critical-degree-root
 dependency_level: 7
 ---

@@ -3,7 +3,7 @@ id: lem-expander-sync-kernel-stability
 title: Kernel stability condition — Lemma 2.8
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-graph-notation

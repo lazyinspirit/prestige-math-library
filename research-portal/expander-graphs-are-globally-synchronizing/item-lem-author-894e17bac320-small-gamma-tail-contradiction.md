@@ -1,6 +1,6 @@
 ---
 title: The proposed small-gamma centered-adjacency tail has the opposite limit
-status: draft
+status: published
 research_item: lem-author-894e17bac320-small-gamma-tail-contradiction
 dependency_level: 4
 ---

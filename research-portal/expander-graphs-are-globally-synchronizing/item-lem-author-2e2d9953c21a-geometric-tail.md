@@ -1,6 +1,6 @@
 ---
 title: A uniform inverse-sine majorant and geometric angular tail
-status: draft
+status: published
 research_item: lem-author-2e2d9953c21a-geometric-tail
 dependency_level: 1
 ---

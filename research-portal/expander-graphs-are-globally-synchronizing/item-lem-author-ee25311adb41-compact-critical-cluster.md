@@ -1,6 +1,6 @@
 ---
 title: A critical cluster point for a compact gradient trajectory
-status: draft
+status: published
 research_item: lem-author-ee25311adb41-compact-critical-cluster
 dependency_level: 5
 ---

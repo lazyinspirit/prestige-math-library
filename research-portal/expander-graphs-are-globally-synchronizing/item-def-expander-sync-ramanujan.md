@@ -1,6 +1,6 @@
 ---
 title: Ramanujan graph convention used in the article
-status: draft
+status: published
 research_item: def-expander-sync-ramanujan
 dependency_level: 4
 sources:

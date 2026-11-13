@@ -1,6 +1,6 @@
 ---
 title: Chernoff bounds with the exact degree mean
-status: draft
+status: published
 research_item: prop-expander-prereq-degree-chernoff-union
 dependency_level: 1
 ---

@@ -1,6 +1,6 @@
 ---
 title: Reversible labels for adjacency slots
-status: draft
+status: published
 research_item: lem-author-f736bc76cd5d-reversible-slots
 dependency_level: 0
 ---

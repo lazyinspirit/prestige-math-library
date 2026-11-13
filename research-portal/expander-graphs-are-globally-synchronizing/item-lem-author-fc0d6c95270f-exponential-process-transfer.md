@@ -1,6 +1,6 @@
 ---
 title: Exponential clocks and the uniform edge-order process
-status: draft
+status: published
 research_item: lem-author-fc0d6c95270f-exponential-process-transfer
 dependency_level: 1
 ---

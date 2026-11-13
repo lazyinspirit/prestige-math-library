@@ -3,7 +3,7 @@ id: lem-author-10a0d5e0c110-psd-kernel-and-half-circle
 title: "Critical PSD phases: kernel inequality and half-circle rigidity"
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-10a0d5e0c110-psd-tests-and-mass

@@ -3,7 +3,7 @@ id: lem-author-647111dd30d9-gradient-energy
 kind: lemma
 title: Energy identity and displacement for Euclidean gradient trajectories
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:thm-chain-rule-for-total-derivatives

@@ -3,7 +3,7 @@ id: lem-author-5d47c15147c9-unshifted-rate-counterexample
 title: The exact unshifted expansion event cannot have polynomial failure decay
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-erdos-renyi

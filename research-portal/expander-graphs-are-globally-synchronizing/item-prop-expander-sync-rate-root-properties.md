@@ -1,6 +1,6 @@
 ---
 title: Monotonicity, endpoints, and asymmetry of the rate roots
-status: draft
+status: published
 research_item: prop-expander-sync-rate-root-properties
 dependency_level: 7
 sources:

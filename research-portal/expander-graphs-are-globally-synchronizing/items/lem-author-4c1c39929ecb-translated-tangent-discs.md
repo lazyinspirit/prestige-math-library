@@ -3,7 +3,7 @@ id: lem-author-4c1c39929ecb-translated-tangent-discs
 kind: lemma
 title: Translation preserves an embedded disc and its tangent space
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-total-derivative-in-euclidean-space

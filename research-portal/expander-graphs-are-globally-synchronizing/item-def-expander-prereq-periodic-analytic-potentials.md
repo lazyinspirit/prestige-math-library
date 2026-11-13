@@ -1,6 +1,6 @@
 ---
 title: Analytic potentials on a finite phase torus
-status: draft
+status: published
 research_item: def-expander-prereq-periodic-analytic-potentials
 dependency_level: 1
 ---

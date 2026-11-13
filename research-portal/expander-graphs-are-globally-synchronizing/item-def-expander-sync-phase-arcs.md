@@ -1,6 +1,6 @@
 ---
 title: Phase tail sets for amplification
-status: draft
+status: published
 research_item: def-expander-sync-phase-arcs
 dependency_level: 1
 sources:

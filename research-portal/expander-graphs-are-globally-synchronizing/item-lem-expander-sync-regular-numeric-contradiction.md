@@ -1,6 +1,6 @@
 ---
 title: Regular-graph numerical contradiction threshold
-status: draft
+status: published
 research_item: lem-expander-sync-regular-numeric-contradiction
 dependency_level: 14
 sources:

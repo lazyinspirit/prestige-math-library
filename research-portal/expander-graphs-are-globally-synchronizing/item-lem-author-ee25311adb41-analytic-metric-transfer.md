@@ -1,6 +1,6 @@
 ---
 title: Transfer of the analytic gradient inequality to a smooth metric
-status: draft
+status: published
 research_item: lem-author-ee25311adb41-analytic-metric-transfer
 dependency_level: 4
 ---

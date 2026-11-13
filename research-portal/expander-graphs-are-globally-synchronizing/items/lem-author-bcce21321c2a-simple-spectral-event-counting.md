@@ -3,7 +3,7 @@ id: lem-author-bcce21321c2a-simple-spectral-event-counting
 title: Simple-model spectral events as conditional pairing counts
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-regular-pairing-conditioning

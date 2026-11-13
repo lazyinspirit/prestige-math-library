@@ -1,6 +1,6 @@
 ---
 title: Synchronization for nonuniform and geometric random graph models
-status: draft
+status: published
 research_item: op-expander-sync-other-random-graphs-question
 dependency_level: 7
 sources:

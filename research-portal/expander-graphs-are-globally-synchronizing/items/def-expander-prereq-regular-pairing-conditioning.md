@@ -3,7 +3,7 @@ id: def-expander-prereq-regular-pairing-conditioning
 kind: definition
 title: Pairings, simple-graph conditioning and model transfer
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-finite-probability-space-and-event

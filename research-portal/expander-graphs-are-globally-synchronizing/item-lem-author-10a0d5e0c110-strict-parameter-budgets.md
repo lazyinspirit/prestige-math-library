@@ -1,6 +1,6 @@
 ---
 title: Strict numerical budgets for the two-stage PSD amplification
-status: draft
+status: published
 research_item: lem-author-10a0d5e0c110-strict-parameter-budgets
 dependency_level: 1
 ---

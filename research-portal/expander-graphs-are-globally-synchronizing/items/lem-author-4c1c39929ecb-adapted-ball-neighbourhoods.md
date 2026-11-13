@@ -3,7 +3,7 @@ id: lem-author-4c1c39929ecb-adapted-ball-neighbourhoods
 kind: lemma
 title: Adapted norm balls are ordinary Euclidean neighbourhoods
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:thm-all-norms-on-rn-are-equivalent

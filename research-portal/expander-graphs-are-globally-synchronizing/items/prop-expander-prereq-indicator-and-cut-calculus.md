@@ -3,7 +3,7 @@ id: prop-expander-prereq-indicator-and-cut-calculus
 kind: proposition
 title: Ordered edge counts and centered cut vectors
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-loop-compatible-networks

@@ -3,7 +3,7 @@ id: thm-expander-prereq-convex-product-concentration
 kind: theorem
 title: Convex Lipschitz concentration with its coordinate metric
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-symmetric-coordinate-metrics

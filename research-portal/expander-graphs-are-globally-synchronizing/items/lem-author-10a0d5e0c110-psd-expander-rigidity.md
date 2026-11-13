@@ -3,7 +3,7 @@ id: lem-author-10a0d5e0c110-psd-expander-rigidity
 title: Positive-reference expanders have only synchronized critical PSD phases
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-10a0d5e0c110-psd-tests-and-mass

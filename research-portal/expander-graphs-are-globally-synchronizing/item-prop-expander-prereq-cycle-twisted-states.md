@@ -1,6 +1,6 @@
 ---
 title: Twisted cycle equilibria and transverse positivity
-status: draft
+status: published
 research_item: prop-expander-prereq-cycle-twisted-states
 dependency_level: 2
 ---

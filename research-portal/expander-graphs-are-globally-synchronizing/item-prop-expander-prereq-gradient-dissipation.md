@@ -1,6 +1,6 @@
 ---
 title: Energy dissipation along a downward gradient curve
-status: draft
+status: published
 research_item: prop-expander-prereq-gradient-dissipation
 dependency_level: 0
 ---

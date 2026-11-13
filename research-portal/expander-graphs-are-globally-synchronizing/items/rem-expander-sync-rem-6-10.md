@@ -3,7 +3,7 @@ id: rem-expander-sync-rem-6-10
 title: Shifted-root comparison — Remark 6.10
 kind: remark
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-rate-function

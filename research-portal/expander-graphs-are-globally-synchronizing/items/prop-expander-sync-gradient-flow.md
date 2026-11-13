@@ -3,7 +3,7 @@ id: prop-expander-sync-gradient-flow
 title: Rotating-frame gradient formulation
 kind: proposition
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-kuramoto-system

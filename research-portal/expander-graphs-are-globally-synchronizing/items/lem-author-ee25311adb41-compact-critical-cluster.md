@@ -3,7 +3,7 @@ id: lem-author-ee25311adb41-compact-critical-cluster
 kind: lemma
 title: A critical cluster point for a compact gradient trajectory
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-ee25311adb41-analytic-metric-transfer

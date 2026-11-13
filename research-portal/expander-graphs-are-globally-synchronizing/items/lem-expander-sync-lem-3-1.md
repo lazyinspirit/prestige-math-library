@@ -3,7 +3,7 @@ id: lem-expander-sync-lem-3-1
 title: Degree bounds from two-sided expansion — Lemma 3.1
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-two-sided-expander

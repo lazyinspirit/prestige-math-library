@@ -3,7 +3,7 @@ id: lem-expander-sync-lem-3-4
 title: Cut-edge mixing bound — Lemma 3.4
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-two-sided-expander

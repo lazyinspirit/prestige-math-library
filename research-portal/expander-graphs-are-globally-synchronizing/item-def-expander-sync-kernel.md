@@ -1,6 +1,6 @@
 ---
 title: Kernel for stability amplification
-status: draft
+status: published
 research_item: def-expander-sync-kernel
 dependency_level: 1
 sources:

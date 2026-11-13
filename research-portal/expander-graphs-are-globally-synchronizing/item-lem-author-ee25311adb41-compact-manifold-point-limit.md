@@ -1,6 +1,6 @@
 ---
 title: Finite tail length and point convergence on a compact analytic manifold
-status: draft
+status: published
 research_item: lem-author-ee25311adb41-compact-manifold-point-limit
 dependency_level: 7
 ---

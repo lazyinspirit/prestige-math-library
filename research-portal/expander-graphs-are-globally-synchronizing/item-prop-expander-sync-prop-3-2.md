@@ -1,6 +1,6 @@
 ---
 title: Degree control implies two-sided expansion — Proposition 3.2
-status: draft
+status: published
 research_item: prop-expander-sync-prop-3-2
 dependency_level: 5
 sources:

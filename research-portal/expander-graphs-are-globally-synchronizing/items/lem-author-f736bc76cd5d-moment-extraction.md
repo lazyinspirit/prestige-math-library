@@ -3,7 +3,7 @@ id: lem-author-f736bc76cd5d-moment-extraction
 kind: lemma
 title: Extracting a nonconstant eigenvalue from closed-walk moments
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-f736bc76cd5d-trace-walk-count

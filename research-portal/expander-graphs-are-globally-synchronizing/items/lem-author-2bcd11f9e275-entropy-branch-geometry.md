@@ -3,7 +3,7 @@ id: lem-author-2bcd11f9e275-entropy-branch-geometry
 kind: lemma
 title: Entropy endpoint limits and the two monotone branches
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-2bcd11f9e275-logarithmic-tangent-bound

@@ -3,7 +3,7 @@ id: def-expander-sync-asymptotic-synchrony
 title: Asymptotically global synchrony via basin mass
 kind: definition
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-states

@@ -1,6 +1,6 @@
 ---
 title: Certified regular amplification excludes a PSD half-circle tail
-status: draft
+status: published
 research_item: lem-author-8ada42a8dac6-regular-psd-recurrence
 dependency_level: 7
 ---

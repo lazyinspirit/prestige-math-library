@@ -1,6 +1,6 @@
 ---
 title: Normalized graph Laplacian and its nontrivial spectrum
-status: draft
+status: published
 research_item: def-author-fc0d6c95270f-normalized-laplacian
 dependency_level: 2
 ---

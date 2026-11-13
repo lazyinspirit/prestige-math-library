@@ -1,6 +1,6 @@
 ---
 title: Independent cross-degrees produce a large degree at logarithmic density
-status: draft
+status: published
 research_item: lem-author-894e17bac320-independent-degree-amplification
 dependency_level: 2
 ---

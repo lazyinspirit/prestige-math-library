@@ -3,7 +3,7 @@ id: prop-expander-prereq-rounding-exponent-budget
 kind: proposition
 title: Floor and ceiling thresholds in logarithmic degree estimates
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:lem-integer-part

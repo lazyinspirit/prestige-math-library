@@ -3,7 +3,7 @@ id: thm-expander-sync-thm-1-2
 title: Erdős–Rényi global synchronization — Theorem 1.2
 kind: theorem
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-erdos-renyi

@@ -1,6 +1,6 @@
 ---
 title: Simultaneous global synchronization from connectivity
-status: draft
+status: published
 research_item: thm-expander-prereq-synchronization-hitting-time-input
 dependency_level: 5
 sources:

@@ -1,6 +1,6 @@
 ---
 title: Certificates for finite transcendental inequalities
-status: draft
+status: published
 research_item: def-expander-prereq-certified-numerical-contract
 dependency_level: 3
 ---

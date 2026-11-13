@@ -1,6 +1,6 @@
 ---
 title: Finite sieve determines the probability of a zero count
-status: draft
+status: published
 research_item: lem-author-c1dce5041ae4-finite-sieve-zero-count
 dependency_level: 1
 ---

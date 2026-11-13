@@ -3,7 +3,7 @@ id: lem-author-5d47c15147c9-rare-degree-existence
 title: A rare logarithmic degree occurs with probability of its first-moment order
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - prop-expander-prereq-degree-law-and-dependence

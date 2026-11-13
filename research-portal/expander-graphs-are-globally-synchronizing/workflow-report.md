@@ -1,6 +1,6 @@
 ---
 title: "Research workflow: Expander graphs are globally synchronizing"
-status: draft
+status: published
 ---
 
 Step 8 reassessment. Earlier scientific review remains recorded in its original evidence.

@@ -1,7 +1,7 @@
 ---
 title: Valid restricted spectral tails and a counterexample to the shifted
   degree-failure conclusion
-status: draft
+status: published
 research_item: lem-expander-sync-degree-failure-probabilities
 dependency_level: 10
 sources:

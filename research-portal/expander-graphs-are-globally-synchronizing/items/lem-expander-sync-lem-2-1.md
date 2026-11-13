@@ -3,7 +3,7 @@ id: lem-expander-sync-lem-2-1
 title: First and second order parameter inequality — Lemma 2.1
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-graph-notation

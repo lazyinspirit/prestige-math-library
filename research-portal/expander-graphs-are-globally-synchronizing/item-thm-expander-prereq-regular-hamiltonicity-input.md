@@ -1,6 +1,6 @@
 ---
 title: Hamiltonicity of a uniform fixed-degree regular graph
-status: draft
+status: published
 research_item: thm-expander-prereq-regular-hamiltonicity-input
 dependency_level: 4
 sources:

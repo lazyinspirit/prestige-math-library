@@ -3,7 +3,7 @@ id: def-expander-sync-two-sided-expander
 title: Two-sided spectral expander — Definition 1.9
 kind: definition
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-graph-notation

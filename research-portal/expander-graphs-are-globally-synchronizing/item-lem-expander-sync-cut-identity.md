@@ -1,6 +1,6 @@
 ---
 title: Nested-cut polarization identity
-status: draft
+status: published
 research_item: lem-expander-sync-cut-identity
 dependency_level: 3
 sources:

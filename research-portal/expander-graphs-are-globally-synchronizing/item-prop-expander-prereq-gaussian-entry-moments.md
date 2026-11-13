@@ -1,6 +1,6 @@
 ---
 title: Gaussian entry moments and triangular independence
-status: draft
+status: published
 research_item: prop-expander-prereq-gaussian-entry-moments
 dependency_level: 0
 ---

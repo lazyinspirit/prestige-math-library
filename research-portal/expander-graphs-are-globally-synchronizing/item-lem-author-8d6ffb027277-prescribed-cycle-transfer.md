@@ -1,6 +1,6 @@
 ---
 title: From Hamiltonicity and an invariant event to a prescribed cycle
-status: draft
+status: published
 research_item: lem-author-8d6ffb027277-prescribed-cycle-transfer
 dependency_level: 3
 ---

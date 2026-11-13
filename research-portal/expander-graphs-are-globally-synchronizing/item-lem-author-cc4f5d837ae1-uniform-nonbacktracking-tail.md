@@ -1,6 +1,6 @@
 ---
 title: A parameter-uniform nonbacktracking spectral tail
-status: draft
+status: published
 research_item: lem-author-cc4f5d837ae1-uniform-nonbacktracking-tail
 dependency_level: 4
 sources:

@@ -3,7 +3,7 @@ id: def-expander-sync-kernel
 title: Kernel for stability amplification
 kind: definition
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-phasor-calculus

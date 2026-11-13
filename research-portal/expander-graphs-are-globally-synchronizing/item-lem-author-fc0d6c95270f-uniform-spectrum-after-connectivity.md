@@ -1,6 +1,6 @@
 ---
 title: Uniform spectral control transfers past connectivity
-status: draft
+status: published
 research_item: lem-author-fc0d6c95270f-uniform-spectrum-after-connectivity
 dependency_level: 4
 ---

@@ -3,7 +3,7 @@ id: prop-expander-prereq-gradient-dissipation
 kind: proposition
 title: Energy dissipation along a downward gradient curve
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-riemannian-gradient-of-a-smooth-function

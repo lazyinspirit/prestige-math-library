@@ -1,6 +1,6 @@
 ---
 title: Single-vertex degree laws and the shared-edge dependence
-status: draft
+status: published
 research_item: prop-expander-prereq-degree-law-and-dependence
 dependency_level: 0
 ---

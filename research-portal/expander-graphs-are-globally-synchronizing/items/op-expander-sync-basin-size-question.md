@@ -3,7 +3,7 @@ id: op-expander-sync-basin-size-question
 title: Families with vanishing total spurious-basin measure
 kind: open-problem
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-asymptotic-synchrony

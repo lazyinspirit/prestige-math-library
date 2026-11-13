@@ -1,6 +1,6 @@
 ---
 title: Vertex relabeling preserves the uniform regular graph law
-status: draft
+status: published
 research_item: lem-author-8d6ffb027277-uniform-vertex-relabeling
 dependency_level: 2
 ---

@@ -3,7 +3,7 @@ id: def-expander-prereq-periodic-analytic-potentials
 kind: definition
 title: Analytic potentials on a finite phase torus
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-phase-torus

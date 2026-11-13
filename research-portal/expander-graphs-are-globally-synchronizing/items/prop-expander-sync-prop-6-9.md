@@ -3,7 +3,7 @@ id: prop-expander-sync-prop-6-9
 title: Quantitative two-sided expansion — Proposition 6.9
 kind: proposition
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-erdos-renyi

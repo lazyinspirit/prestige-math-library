@@ -1,6 +1,6 @@
 ---
 title: Positive first order parameter — Corollary 2.2
-status: draft
+status: published
 research_item: cor-expander-sync-cor-2-2
 dependency_level: 9
 sources:

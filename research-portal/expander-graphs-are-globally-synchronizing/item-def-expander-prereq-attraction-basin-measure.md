@@ -1,6 +1,6 @@
 ---
 title: Point basins, equilibrium-set basins and aggregate volume
-status: draft
+status: published
 research_item: def-expander-prereq-attraction-basin-measure
 dependency_level: 1
 ---

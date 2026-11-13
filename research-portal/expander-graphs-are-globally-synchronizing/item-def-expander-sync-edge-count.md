@@ -1,6 +1,6 @@
 ---
 title: Oriented edge count between sets
-status: draft
+status: published
 research_item: def-expander-sync-edge-count
 dependency_level: 2
 sources:

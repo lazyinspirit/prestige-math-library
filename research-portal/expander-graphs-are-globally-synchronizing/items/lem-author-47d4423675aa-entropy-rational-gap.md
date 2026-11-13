@@ -3,7 +3,7 @@ id: lem-author-47d4423675aa-entropy-rational-gap
 title: A rational entropy test above the critical degree ratio two
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - prop-expander-prereq-entropy-root-geometry

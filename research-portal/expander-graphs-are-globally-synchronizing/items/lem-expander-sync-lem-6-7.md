@@ -3,7 +3,7 @@ id: lem-expander-sync-lem-6-7
 title: Lower degree-tail count estimate — Lemma 6.7
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-degree-counts

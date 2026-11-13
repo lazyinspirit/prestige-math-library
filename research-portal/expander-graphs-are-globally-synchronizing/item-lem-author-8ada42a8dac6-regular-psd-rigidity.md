@@ -1,6 +1,6 @@
 ---
 title: All critical PSD equilibria synchronize on positive regular expanders
-status: draft
+status: published
 research_item: lem-author-8ada42a8dac6-regular-psd-rigidity
 dependency_level: 8
 ---

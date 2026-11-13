@@ -3,7 +3,7 @@ id: prop-expander-sync-rate-root-properties
 title: Monotonicity, endpoints, and asymmetry of the rate roots
 kind: proposition
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-rate-function

@@ -3,7 +3,7 @@ id: lem-author-f736bc76cd5d-catalan-count
 kind: lemma
 title: Dyck words and elementary Catalan growth
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-sequences-in-an-ordered-field

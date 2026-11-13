@@ -1,6 +1,6 @@
 ---
 title: Trees synchronize whereas cycles longer than five do not
-status: draft
+status: published
 research_item: ex-expander-sync-trees-cycles
 dependency_level: 7
 sources:

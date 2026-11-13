@@ -1,6 +1,6 @@
 ---
 title: Gradient and Hessian formulas
-status: draft
+status: published
 research_item: prop-expander-sync-energy-derivatives
 dependency_level: 3
 sources:

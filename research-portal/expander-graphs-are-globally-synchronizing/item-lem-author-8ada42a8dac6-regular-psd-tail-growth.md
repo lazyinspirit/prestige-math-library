@@ -1,6 +1,6 @@
 ---
 title: "Critical PSD kernel phases: quantitative tail growth"
-status: draft
+status: published
 research_item: lem-author-8ada42a8dac6-regular-psd-tail-growth
 dependency_level: 6
 ---

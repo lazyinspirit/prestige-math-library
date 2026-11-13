@@ -3,7 +3,7 @@ id: def-expander-sync-global-synchrony
 title: Globally synchronizing graph — Definition 1.1
 kind: definition
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-graph-notation

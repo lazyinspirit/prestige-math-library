@@ -3,7 +3,7 @@ id: prop-expander-sync-energy-derivatives
 title: Gradient and Hessian formulas
 kind: proposition
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-energy

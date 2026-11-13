@@ -3,7 +3,7 @@ id: ex-expander-sync-degenerate-saddle
 title: Positive-measure attraction to a degenerate saddle
 kind: example
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - prop-expander-prereq-scalar-quadratic-flow

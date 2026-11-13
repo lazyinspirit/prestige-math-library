@@ -3,7 +3,7 @@ id: lem-author-8ada42a8dac6-regular-psd-half-circle
 title: "Regular critical PSD phases: kernel and half-circle"
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-8ada42a8dac6-regular-psd-mass

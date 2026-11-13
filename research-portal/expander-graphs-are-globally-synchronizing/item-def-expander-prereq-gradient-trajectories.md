@@ -1,6 +1,6 @@
 ---
 title: Gradient trajectories and complete compact phase dynamics
-status: draft
+status: published
 research_item: def-expander-prereq-gradient-trajectories
 dependency_level: 1
 ---

@@ -1,6 +1,6 @@
 ---
 title: The reported centered-adjacency estimate and its sparse-law limit
-status: draft
+status: published
 research_item: rem-expander-sync-peche-soshnikov-bound
 dependency_level: 9
 sources:

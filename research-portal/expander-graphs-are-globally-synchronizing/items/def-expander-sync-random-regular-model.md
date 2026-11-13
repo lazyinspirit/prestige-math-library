@@ -3,7 +3,7 @@ id: def-expander-sync-random-regular-model
 title: Uniform random regular graph convention
 kind: definition
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-graph-notation

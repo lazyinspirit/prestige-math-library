@@ -3,7 +3,7 @@ id: lem-author-894e17bac320-small-gamma-tail-contradiction
 title: The proposed small-gamma centered-adjacency tail has the opposite limit
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-894e17bac320-centered-column-degree

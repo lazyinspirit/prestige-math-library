@@ -3,7 +3,7 @@ id: rem-expander-sync-earlier-thresholds
 title: Previous Erdős–Rényi synchronization bounds
 kind: remark
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-erdos-renyi

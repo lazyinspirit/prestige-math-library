@@ -1,6 +1,6 @@
 ---
 title: Equilibria, stable states, synchronized states, and spurious minima
-status: draft
+status: published
 research_item: def-expander-sync-states
 dependency_level: 5
 sources:

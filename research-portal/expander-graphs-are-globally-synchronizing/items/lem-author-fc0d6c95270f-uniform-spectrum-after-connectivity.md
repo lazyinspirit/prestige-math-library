@@ -3,7 +3,7 @@ id: lem-author-fc0d6c95270f-uniform-spectrum-after-connectivity
 kind: lemma
 title: Uniform spectral control transfers past connectivity
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-author-fc0d6c95270f-normalized-laplacian

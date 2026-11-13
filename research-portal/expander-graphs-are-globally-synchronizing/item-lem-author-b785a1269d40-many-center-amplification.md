@@ -1,6 +1,6 @@
 ---
 title: A large degree with explicitly bounded probability at fixed sparse density
-status: draft
+status: published
 research_item: lem-author-b785a1269d40-many-center-amplification
 dependency_level: 2
 ---

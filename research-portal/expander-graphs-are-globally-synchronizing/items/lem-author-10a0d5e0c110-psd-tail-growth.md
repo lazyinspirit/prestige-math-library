@@ -3,7 +3,7 @@ id: lem-author-10a0d5e0c110-psd-tail-growth
 title: "Kernel phases on two-sided expanders: the two tail-growth estimates"
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-10a0d5e0c110-psd-kernel-and-half-circle

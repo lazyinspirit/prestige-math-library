@@ -3,7 +3,7 @@ id: lem-expander-sync-kernel-three-regions
 title: Kernel bounds on three phase regions
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-graph-notation

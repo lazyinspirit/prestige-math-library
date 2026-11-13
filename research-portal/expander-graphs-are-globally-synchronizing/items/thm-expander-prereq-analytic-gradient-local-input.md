@@ -3,7 +3,7 @@ id: thm-expander-prereq-analytic-gradient-local-input
 kind: theorem
 title: Łojasiewicz inequality and analytic point stability
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-real-analytic-germ-in-several-variables

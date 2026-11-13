@@ -3,7 +3,7 @@ id: op-expander-sync-amplification-other-models
 title: Adapting amplification beyond synchronization
 kind: open-problem
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-kuramoto-system

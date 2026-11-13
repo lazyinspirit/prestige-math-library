@@ -1,6 +1,6 @@
 ---
 title: An isolated vertex before three quarters of the connectivity scale
-status: draft
+status: published
 research_item: lem-author-fc0d6c95270f-isolated-vertex-before-onset
 dependency_level: 2
 ---

@@ -1,6 +1,6 @@
 ---
 title: Bipartite Ramanujan existence and the centered spectrum
-status: draft
+status: published
 research_item: thm-expander-prereq-bipartite-ramanujan-existence
 dependency_level: 2
 sources:

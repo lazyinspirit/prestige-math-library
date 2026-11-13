@@ -3,7 +3,7 @@ id: thm-expander-prereq-center-stable-map-input
 kind: theorem
 title: Local center-stable trapping disc for a time map
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-4c1c39929ecb-fixed-point-translation

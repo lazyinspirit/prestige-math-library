@@ -1,6 +1,6 @@
 ---
 title: Counts of vertices of each degree
-status: draft
+status: published
 research_item: def-expander-sync-degree-counts
 dependency_level: 2
 sources:

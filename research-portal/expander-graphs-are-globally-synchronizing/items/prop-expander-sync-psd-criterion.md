@@ -3,7 +3,7 @@ id: prop-expander-sync-psd-criterion
 title: Positive-semidefinite-equilibrium criterion for global synchrony
 kind: proposition
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-states

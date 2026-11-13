@@ -3,7 +3,7 @@ id: lem-author-6ad39f024b17-nonbacktracking-tail-application
 title: A nonbacktracking tail smaller than the required polynomial
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-6ad39f024b17-centered-normalization

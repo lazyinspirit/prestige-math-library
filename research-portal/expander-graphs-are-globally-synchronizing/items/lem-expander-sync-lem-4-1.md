@@ -3,7 +3,7 @@ id: lem-expander-sync-lem-4-1
 title: Mass-angle lower bound — Lemma 4.1
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-h

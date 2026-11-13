@@ -3,7 +3,7 @@ id: lem-author-4f905b3f6478-positive-transverse-basin
 kind: lemma
 title: A positive transverse Hessian gives an open nonsynchronous basin
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-gradient-trajectories

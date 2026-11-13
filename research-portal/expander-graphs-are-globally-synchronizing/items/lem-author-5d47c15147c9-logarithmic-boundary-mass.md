@@ -3,7 +3,7 @@ id: lem-author-5d47c15147c9-logarithmic-boundary-mass
 title: Exact logarithmic binomial masses at bounded distance from an entropy root
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:lem-binomial-count-law

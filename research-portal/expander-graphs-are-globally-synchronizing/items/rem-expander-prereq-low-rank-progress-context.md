@@ -3,7 +3,7 @@ id: rem-expander-prereq-low-rank-progress-context
 kind: remark
 title: Scoped independent low-rank landscape reports
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-vector-spin-landscapes

@@ -3,7 +3,7 @@ id: rem-expander-sync-median-mean-gap
 title: Median–mean gap for convex Lipschitz concentration
 kind: remark
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-expander-sync-thm-6-5

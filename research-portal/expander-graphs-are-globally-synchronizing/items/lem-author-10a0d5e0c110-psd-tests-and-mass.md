@@ -3,7 +3,7 @@ id: lem-author-10a0d5e0c110-psd-tests-and-mass
 title: "Critical PSD phases: quadratic tests and small-alpha mass bound"
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-two-sided-expander

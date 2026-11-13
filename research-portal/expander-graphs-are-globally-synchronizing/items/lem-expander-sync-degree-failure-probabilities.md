@@ -4,7 +4,7 @@ title: Valid restricted spectral tails and a counterexample to the shifted
   degree-failure conclusion
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-shifted-rate-roots

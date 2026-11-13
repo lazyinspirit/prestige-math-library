@@ -1,6 +1,6 @@
 ---
 title: Differentiation of symmetric periodic pair potentials
-status: draft
+status: published
 research_item: prop-expander-prereq-pair-potential-calculus
 dependency_level: 1
 ---

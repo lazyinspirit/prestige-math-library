@@ -1,6 +1,6 @@
 ---
 title: Slack entropy thresholds preserve the quantitative synchronization bound
-status: draft
+status: published
 research_item: lem-author-5d47c15147c9-slack-expansion-synchrony
 dependency_level: 11
 ---

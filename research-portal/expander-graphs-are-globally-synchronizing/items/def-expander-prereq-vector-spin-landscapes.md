@@ -3,7 +3,7 @@ id: def-expander-prereq-vector-spin-landscapes
 kind: definition
 title: Signed vector-spin objectives and low-rank Gram factors
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-gram-matrix-and-gram-determinant

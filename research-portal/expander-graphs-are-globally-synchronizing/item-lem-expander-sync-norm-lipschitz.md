@@ -1,6 +1,6 @@
 ---
 title: "Convex adjacency norm: sharp coordinate constant and median counterexample"
-status: draft
+status: published
 research_item: lem-expander-sync-norm-lipschitz
 dependency_level: 4
 sources:

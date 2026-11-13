@@ -1,6 +1,6 @@
 ---
 title: Rational sine enclosures from a finite factorial sum
-status: draft
+status: published
 research_item: lem-author-2e2d9953c21a-sine-enclosures
 dependency_level: 0
 ---

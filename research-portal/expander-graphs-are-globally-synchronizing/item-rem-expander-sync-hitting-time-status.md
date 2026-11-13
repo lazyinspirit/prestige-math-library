@@ -1,6 +1,6 @@
 ---
 title: Synchronization at the connectivity hitting time
-status: draft
+status: published
 research_item: rem-expander-sync-hitting-time-status
 dependency_level: 7
 sources:

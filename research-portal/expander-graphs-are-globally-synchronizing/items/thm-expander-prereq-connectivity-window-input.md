@@ -3,7 +3,7 @@ id: thm-expander-prereq-connectivity-window-input
 kind: theorem
 title: Connectivity in the logarithmic random-graph window
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-erdos-renyi-random-graph

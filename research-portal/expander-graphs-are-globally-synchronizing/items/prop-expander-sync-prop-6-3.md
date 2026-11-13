@@ -3,7 +3,7 @@ id: prop-expander-sync-prop-6-3
 title: Expected centered-adjacency norm — Proposition 6.3
 kind: proposition
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-graph-notation

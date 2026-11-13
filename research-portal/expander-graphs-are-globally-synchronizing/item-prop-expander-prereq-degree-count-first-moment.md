@@ -1,6 +1,6 @@
 ---
 title: Indicator expectations and exceptional-vertex probabilities
-status: draft
+status: published
 research_item: prop-expander-prereq-degree-count-first-moment
 dependency_level: 0
 ---

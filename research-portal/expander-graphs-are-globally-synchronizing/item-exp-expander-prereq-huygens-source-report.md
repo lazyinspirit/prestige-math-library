@@ -1,6 +1,6 @@
 ---
 title: Historical report of Huygens’s two clocks
-status: draft
+status: published
 research_item: exp-expander-prereq-huygens-source-report
 dependency_level: 0
 sources:

@@ -3,7 +3,7 @@ id: def-expander-prereq-certified-numerical-contract
 kind: definition
 title: Certificates for finite transcendental inequalities
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:lem-real-interval-arithmetic-preserves-enclosure

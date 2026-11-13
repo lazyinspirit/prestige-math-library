@@ -3,7 +3,7 @@ id: rem-expander-sync-degree-count-approximation
 title: Binomial approximation for vertex degree counts
 kind: remark
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-degree-counts

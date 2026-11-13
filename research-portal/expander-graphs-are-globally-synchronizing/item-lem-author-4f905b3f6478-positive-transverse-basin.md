@@ -1,6 +1,6 @@
 ---
 title: A positive transverse Hessian gives an open nonsynchronous basin
-status: draft
+status: published
 research_item: lem-author-4f905b3f6478-positive-transverse-basin
 dependency_level: 2
 sources:

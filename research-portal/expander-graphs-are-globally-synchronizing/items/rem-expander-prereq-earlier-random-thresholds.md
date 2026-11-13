@@ -3,7 +3,7 @@ id: rem-expander-prereq-earlier-random-thresholds
 kind: remark
 title: Earlier thresholds with explicit source quantifiers and a fixed-scale deduction
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - prop-expander-prereq-degree-law-and-dependence

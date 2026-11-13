@@ -1,6 +1,6 @@
 ---
 title: Failure of the stated constant-two expansion bound — Corollary 6.1
-status: draft
+status: published
 research_item: cor-expander-sync-cor-6-1
 dependency_level: 9
 sources:

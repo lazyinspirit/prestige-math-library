@@ -3,7 +3,7 @@ id: lem-author-3bf637a47abd-weighted-complete-example
 kind: lemma
 title: A complete weighted network distinguishes a loop cap from spectral control
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-loop-compatible-networks

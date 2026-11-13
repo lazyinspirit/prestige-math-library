@@ -2,7 +2,7 @@
 title: Supporting prerequisites · 01 — Spectral edge and vertex expansion
 description: Presents 18 supporting prerequisites, covering published library
   prerequisites and dependency levels 0–3.
-status: draft
+status: published
 dependency_level: 3
 item_count: 18
 ---

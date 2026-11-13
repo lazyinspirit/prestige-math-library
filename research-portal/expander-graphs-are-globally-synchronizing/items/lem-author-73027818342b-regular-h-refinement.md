@@ -3,7 +3,7 @@ id: lem-author-73027818342b-regular-h-refinement
 title: Refined H mass bound in a regular graph
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-graph-notation

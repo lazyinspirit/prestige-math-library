@@ -3,7 +3,7 @@ id: rem-expander-sync-nonnegative-weights
 kind: remark
 title: Claimed extension to nonnegative weighted graphs
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-loop-compatible-networks

@@ -1,7 +1,7 @@
 ---
 title: Historical regular-graph synchronization question and subsequent
   negative-resolution claims
-status: draft
+status: published
 research_item: rem-author-3de9ee202611-regular-question-status
 dependency_level: 7
 sources:

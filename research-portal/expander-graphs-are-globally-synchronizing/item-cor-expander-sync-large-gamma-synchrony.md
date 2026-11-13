@@ -1,6 +1,6 @@
 ---
 title: Synchronization for sufficiently large logarithmic density constants
-status: draft
+status: published
 research_item: cor-expander-sync-large-gamma-synchrony
 dependency_level: 11
 sources:

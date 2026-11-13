@@ -3,7 +3,7 @@ id: prop-expander-prereq-median-tail-integration
 kind: proposition
 title: Tail integration and a median-to-mean bridge
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-expectation-of-a-nonnegative-or-integrable-random-variable

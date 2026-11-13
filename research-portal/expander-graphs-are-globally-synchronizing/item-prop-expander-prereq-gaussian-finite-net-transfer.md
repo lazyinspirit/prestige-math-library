@@ -1,6 +1,6 @@
 ---
 title: From finite Gaussian comparisons to a sphere supremum
-status: draft
+status: published
 research_item: prop-expander-prereq-gaussian-finite-net-transfer
 dependency_level: 0
 ---

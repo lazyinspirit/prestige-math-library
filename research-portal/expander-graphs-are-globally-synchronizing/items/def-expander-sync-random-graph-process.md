@@ -3,7 +3,7 @@ id: def-expander-sync-random-graph-process
 title: Random graph process and connectivity hitting time
 kind: definition
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-graph-notation

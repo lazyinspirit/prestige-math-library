@@ -3,7 +3,7 @@ id: cex-author-47d4423675aa-near-threshold-spectral-edge
 title: A near-threshold counterexample to the reported constant-two spectral bound
 kind: counterexample
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-erdos-renyi

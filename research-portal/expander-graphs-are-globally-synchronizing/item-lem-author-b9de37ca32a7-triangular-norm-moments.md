@@ -1,6 +1,6 @@
 ---
 title: "Triangular Gaussian coordinates: metric and moment control"
-status: draft
+status: published
 research_item: lem-author-b9de37ca32a7-triangular-norm-moments
 dependency_level: 1
 ---

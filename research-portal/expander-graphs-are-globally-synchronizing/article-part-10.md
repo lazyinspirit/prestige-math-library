@@ -2,7 +2,7 @@
 title: Article items · 10 — Łojasiewicz inequality and analytic point stability
 description: Presents 29 items from the article and its immediate prerequisites,
   covering dependency levels 3–5.
-status: draft
+status: published
 dependency_level: 6
 research_article_page: true
 item_count: 29

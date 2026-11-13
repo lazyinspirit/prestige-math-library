@@ -3,7 +3,7 @@ id: cor-expander-sync-cor-2-4
 title: Lower bound for the second order parameter — Corollary 2.4
 kind: corollary
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-expander-sync-lem-2-3

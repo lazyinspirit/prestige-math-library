@@ -1,6 +1,6 @@
 ---
 title: Mixing for two nearby nested sets — Lemma 3.7
-status: draft
+status: published
 research_item: lem-expander-sync-lem-3-7
 dependency_level: 6
 sources:

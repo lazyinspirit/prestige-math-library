@@ -3,7 +3,7 @@ id: prop-expander-prereq-gaussian-finite-net-transfer
 kind: proposition
 title: From finite Gaussian comparisons to a sphere supremum
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:lem-finite-gaussian-max-comparison

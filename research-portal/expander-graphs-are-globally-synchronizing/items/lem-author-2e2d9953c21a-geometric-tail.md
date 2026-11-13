@@ -3,7 +3,7 @@ id: lem-author-2e2d9953c21a-geometric-tail
 kind: lemma
 title: A uniform inverse-sine majorant and geometric angular tail
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-2e2d9953c21a-sine-enclosures

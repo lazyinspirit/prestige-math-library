@@ -1,6 +1,6 @@
 ---
 title: Uniform random regular graph convention
-status: draft
+status: published
 research_item: def-expander-sync-random-regular-model
 dependency_level: 2
 sources:

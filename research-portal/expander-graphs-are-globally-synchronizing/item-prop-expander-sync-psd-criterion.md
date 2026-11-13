@@ -1,6 +1,6 @@
 ---
 title: Positive-semidefinite-equilibrium criterion for global synchrony
-status: draft
+status: published
 research_item: prop-expander-sync-psd-criterion
 dependency_level: 9
 sources:

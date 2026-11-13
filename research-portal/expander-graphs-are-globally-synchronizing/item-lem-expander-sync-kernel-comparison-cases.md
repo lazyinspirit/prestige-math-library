@@ -1,6 +1,6 @@
 ---
 title: Pointwise comparisons used in kernel stability
-status: draft
+status: published
 research_item: lem-expander-sync-kernel-comparison-cases
 dependency_level: 8
 sources:

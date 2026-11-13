@@ -3,7 +3,7 @@ id: op-expander-sync-other-random-graphs-question
 title: Synchronization for nonuniform and geometric random graph models
 kind: open-problem
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-global-synchrony

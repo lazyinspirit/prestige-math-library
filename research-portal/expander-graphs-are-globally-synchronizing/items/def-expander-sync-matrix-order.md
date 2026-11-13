@@ -3,7 +3,7 @@ id: def-expander-sync-matrix-order
 title: Loewner order, Hermitian inner product, and operator norm
 kind: definition
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-vertex-hilbert-space

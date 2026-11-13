@@ -1,6 +1,6 @@
 ---
 title: Real symmetric quadratic forms tested on phasors
-status: draft
+status: published
 research_item: prop-expander-prereq-complex-quadratic-tests
 dependency_level: 1
 ---

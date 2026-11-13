@@ -3,7 +3,7 @@ id: lem-expander-sync-cut-test-vector
 title: Cut test-vector identities for Laplacian mixing
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-edge-count

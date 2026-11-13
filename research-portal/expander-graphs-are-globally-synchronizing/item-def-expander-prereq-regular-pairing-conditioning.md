@@ -1,6 +1,6 @@
 ---
 title: Pairings, simple-graph conditioning and model transfer
-status: draft
+status: published
 research_item: def-expander-prereq-regular-pairing-conditioning
 dependency_level: 0
 ---

@@ -3,7 +3,7 @@ id: prop-expander-prereq-constant-projection
 kind: proposition
 title: The constant projection and centering decomposition
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-vertex-hilbert-space

@@ -1,6 +1,6 @@
 ---
 title: Trace-moment comparison with Gaussian matrices
-status: draft
+status: published
 research_item: lem-expander-sync-trace-comparison
 dependency_level: 4
 sources:

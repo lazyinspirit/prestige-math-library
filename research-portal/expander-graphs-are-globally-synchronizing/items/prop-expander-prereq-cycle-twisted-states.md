@@ -3,7 +3,7 @@ id: prop-expander-prereq-cycle-twisted-states
 kind: proposition
 title: Twisted cycle equilibria and transverse positivity
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-phase-torus

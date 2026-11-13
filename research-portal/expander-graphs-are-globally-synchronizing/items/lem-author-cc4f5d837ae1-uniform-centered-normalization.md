@@ -3,7 +3,7 @@ id: lem-author-cc4f5d837ae1-uniform-centered-normalization
 title: Uniform centered normalization across the full Bernoulli density range
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-erdos-renyi

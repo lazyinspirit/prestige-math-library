@@ -1,6 +1,6 @@
 ---
 title: Shifted rate roots for quantitative expansion
-status: draft
+status: published
 research_item: def-expander-sync-shifted-rate-roots
 dependency_level: 7
 sources:

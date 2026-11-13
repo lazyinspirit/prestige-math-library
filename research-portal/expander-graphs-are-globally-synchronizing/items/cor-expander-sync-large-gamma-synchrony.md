@@ -3,7 +3,7 @@ id: cor-expander-sync-large-gamma-synchrony
 title: Synchronization for sufficiently large logarithmic density constants
 kind: corollary
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-erdos-renyi

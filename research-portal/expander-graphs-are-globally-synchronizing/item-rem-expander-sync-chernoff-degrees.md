@@ -1,6 +1,6 @@
 ---
 title: Chernoff degree concentration used in Section 6
-status: draft
+status: published
 research_item: rem-expander-sync-chernoff-degrees
 dependency_level: 6
 sources:

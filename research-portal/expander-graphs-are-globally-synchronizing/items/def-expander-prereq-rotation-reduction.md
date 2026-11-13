@@ -3,7 +3,7 @@ id: def-expander-prereq-rotation-reduction
 kind: definition
 title: Diagonal phase rotations and relative-phase coordinates
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-phase-torus

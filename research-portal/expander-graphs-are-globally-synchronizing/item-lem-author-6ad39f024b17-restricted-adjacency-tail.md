@@ -1,6 +1,6 @@
 ---
 title: The restricted spectral estimate needed above the connectivity threshold
-status: draft
+status: published
 research_item: lem-author-6ad39f024b17-restricted-adjacency-tail
 dependency_level: 5
 ---

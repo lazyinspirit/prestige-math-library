@@ -3,7 +3,7 @@ id: rem-expander-sync-saddle-null-basin
 title: Measure-zero convergence to strict saddles
 kind: remark
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-energy

@@ -1,6 +1,6 @@
 ---
 title: An elementary sufficient budget for the synchronization criterion
-status: draft
+status: published
 research_item: lem-author-635c380339fd-inverse-sine-budget
 dependency_level: 0
 ---

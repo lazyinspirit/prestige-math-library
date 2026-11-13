@@ -1,6 +1,6 @@
 ---
 title: Spectral estimates for phase Fourier sums
-status: draft
+status: published
 research_item: lem-expander-sync-spectral-phase-sums
 dependency_level: 4
 sources:

@@ -3,7 +3,7 @@ id: lem-author-ee25311adb41-gradient-tail-length
 kind: lemma
 title: The local gradient inequality bounds trajectory length
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-ee25311adb41-analytic-metric-transfer

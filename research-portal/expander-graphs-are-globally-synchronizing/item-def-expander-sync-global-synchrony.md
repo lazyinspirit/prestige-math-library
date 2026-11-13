@@ -1,6 +1,6 @@
 ---
 title: Globally synchronizing graph — Definition 1.1
-status: draft
+status: published
 research_item: def-expander-sync-global-synchrony
 dependency_level: 6
 sources:

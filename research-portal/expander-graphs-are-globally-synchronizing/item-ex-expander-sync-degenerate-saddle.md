@@ -1,6 +1,6 @@
 ---
 title: Positive-measure attraction to a degenerate saddle
-status: draft
+status: published
 research_item: ex-expander-sync-degenerate-saddle
 dependency_level: 1
 sources:

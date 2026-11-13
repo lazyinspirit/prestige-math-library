@@ -1,6 +1,6 @@
 ---
 title: Internal-edge mixing bound — Lemma 3.3
-status: draft
+status: published
 research_item: lem-expander-sync-lem-3-3
 dependency_level: 4
 sources:

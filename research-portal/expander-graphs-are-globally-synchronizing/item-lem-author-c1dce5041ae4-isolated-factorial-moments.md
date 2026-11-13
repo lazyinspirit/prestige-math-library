@@ -1,6 +1,6 @@
 ---
 title: Factorial moments of isolated vertices at the connectivity window
-status: draft
+status: published
 research_item: lem-author-c1dce5041ae4-isolated-factorial-moments
 dependency_level: 1
 ---

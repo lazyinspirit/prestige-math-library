@@ -1,6 +1,6 @@
 ---
 title: Extremal-degree asymptotics near connectivity
-status: draft
+status: published
 research_item: rem-expander-sync-extremal-degree-asymptotics
 dependency_level: 7
 sources:

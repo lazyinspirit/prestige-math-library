@@ -3,7 +3,7 @@ id: rem-expander-sync-hitting-time-status
 title: Synchronization at the connectivity hitting time
 kind: remark
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-random-graph-process

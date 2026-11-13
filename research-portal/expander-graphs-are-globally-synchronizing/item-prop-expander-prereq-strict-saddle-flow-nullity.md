@@ -1,6 +1,6 @@
 ---
 title: A null basin for all strict saddles of a smooth compact gradient flow
-status: draft
+status: published
 research_item: prop-expander-prereq-strict-saddle-flow-nullity
 dependency_level: 4
 ---

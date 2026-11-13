@@ -1,6 +1,6 @@
 ---
 title: Transport local invariance and forward trapping to a fixed point
-status: draft
+status: published
 research_item: lem-author-4c1c39929ecb-transport-of-trapping
 dependency_level: 2
 ---

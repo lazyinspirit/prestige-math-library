@@ -1,6 +1,6 @@
 ---
 title: Connectivity in the logarithmic random-graph window
-status: draft
+status: published
 research_item: thm-expander-prereq-connectivity-window-input
 dependency_level: 2
 sources:

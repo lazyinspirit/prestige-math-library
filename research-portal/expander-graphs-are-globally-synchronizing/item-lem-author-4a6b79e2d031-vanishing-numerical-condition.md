@@ -1,6 +1,6 @@
 ---
 title: Vanishing numerical condition for fixed positive Laplacian margins
-status: draft
+status: published
 research_item: lem-author-4a6b79e2d031-vanishing-numerical-condition
 dependency_level: 0
 ---

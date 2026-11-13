@@ -3,7 +3,7 @@ id: prop-expander-prereq-entropy-root-geometry
 kind: proposition
 title: Entropy rates, inverse branches and shifted root contracts
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-natural-logarithm

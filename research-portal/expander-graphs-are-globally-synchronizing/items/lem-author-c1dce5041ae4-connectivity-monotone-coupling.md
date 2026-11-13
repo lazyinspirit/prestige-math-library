@@ -3,7 +3,7 @@ id: lem-author-c1dce5041ae4-connectivity-monotone-coupling
 kind: lemma
 title: Finite coupling makes connectivity probability monotone
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-product-of-finite-probability-spaces

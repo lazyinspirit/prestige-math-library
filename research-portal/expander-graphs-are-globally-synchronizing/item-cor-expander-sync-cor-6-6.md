@@ -1,6 +1,6 @@
 ---
 title: Counterexamples to both centered-adjacency tail bounds in Corollary 6.6
-status: draft
+status: published
 research_item: cor-expander-sync-cor-6-6
 dependency_level: 5
 sources:

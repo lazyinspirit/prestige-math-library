@@ -3,7 +3,7 @@ id: lem-expander-sync-lem-2-5
 title: Tractable order parameter inequalities — Lemma 2.5
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-graph-notation

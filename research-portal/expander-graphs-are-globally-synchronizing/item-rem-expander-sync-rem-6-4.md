@@ -1,6 +1,6 @@
 ---
 title: Numerical coefficients and thresholds — Remark 6.4
-status: draft
+status: published
 research_item: rem-expander-sync-rem-6-4
 dependency_level: 9
 sources:

@@ -1,6 +1,6 @@
 ---
 title: Nearby critical values force nonminimum escape
-status: draft
+status: published
 research_item: lem-author-647111dd30d9-nonminimum-escape
 dependency_level: 2
 ---

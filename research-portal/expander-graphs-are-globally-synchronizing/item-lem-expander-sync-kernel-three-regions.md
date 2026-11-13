@@ -1,6 +1,6 @@
 ---
 title: Kernel bounds on three phase regions
-status: draft
+status: published
 research_item: lem-expander-sync-kernel-three-regions
 dependency_level: 10
 sources:

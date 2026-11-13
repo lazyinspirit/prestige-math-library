@@ -1,6 +1,6 @@
 ---
 title: Cheeger lower bound — Remark 3.5
-status: draft
+status: published
 research_item: rem-expander-sync-rem-3-5
 dependency_level: 6
 sources:

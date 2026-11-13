@@ -1,6 +1,6 @@
 ---
 title: A bilinear centered-adjacency estimate without regularity
-status: draft
+status: published
 research_item: prop-expander-prereq-centered-bilinear-estimate
 dependency_level: 1
 ---

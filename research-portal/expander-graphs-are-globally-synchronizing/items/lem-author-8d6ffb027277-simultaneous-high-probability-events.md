@@ -3,7 +3,7 @@ id: lem-author-8d6ffb027277-simultaneous-high-probability-events
 kind: lemma
 title: Intersecting finitely many high-probability events
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-asymptotic-quantifiers

@@ -1,6 +1,6 @@
 ---
 title: Logarithmic tangent bound and a quadratic entropy envelope
-status: draft
+status: published
 research_item: lem-author-2bcd11f9e275-logarithmic-tangent-bound
 dependency_level: 0
 ---

@@ -3,7 +3,7 @@ id: lem-author-c1dce5041ae4-isolated-factorial-moments
 kind: lemma
 title: Factorial moments of isolated vertices at the connectivity window
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-erdos-renyi-random-graph

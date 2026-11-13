@@ -3,7 +3,7 @@ id: alg-expander-sync-amplification-construction
 title: Two-stage angle and mass construction
 kind: algorithm
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-amplification-sequences

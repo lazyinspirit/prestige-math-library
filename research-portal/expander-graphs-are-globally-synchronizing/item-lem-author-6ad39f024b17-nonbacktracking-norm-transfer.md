@@ -1,6 +1,6 @@
 ---
 title: Transfer two nonbacktracking good events to the required norm bound
-status: draft
+status: published
 research_item: lem-author-6ad39f024b17-nonbacktracking-norm-transfer
 dependency_level: 0
 sources:

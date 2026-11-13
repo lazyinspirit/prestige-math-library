@@ -3,7 +3,7 @@ id: def-expander-sync-phase-locked
 title: Phase-locked long-term behavior
 kind: definition
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-graph-notation

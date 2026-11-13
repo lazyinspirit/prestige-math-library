@@ -1,6 +1,6 @@
 ---
 title: Gaussian comparison matrix in the moment argument
-status: draft
+status: published
 research_item: def-expander-sync-gaussian-comparator
 dependency_level: 1
 sources:

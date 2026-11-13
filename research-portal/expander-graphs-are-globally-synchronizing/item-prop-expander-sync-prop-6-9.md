@@ -1,6 +1,6 @@
 ---
 title: Quantitative two-sided expansion — Proposition 6.9
-status: draft
+status: published
 research_item: prop-expander-sync-prop-6-9
 dependency_level: 10
 sources:

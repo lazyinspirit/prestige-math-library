@@ -3,7 +3,7 @@ id: lem-author-4f905b3f6478-eight-phase-certificate
 kind: lemma
 title: An explicit eight-phase weighted stability certificate
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-author-4f905b3f6478-spinning

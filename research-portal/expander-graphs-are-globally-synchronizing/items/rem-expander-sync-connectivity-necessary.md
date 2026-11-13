@@ -3,7 +3,7 @@ id: rem-expander-sync-connectivity-necessary
 title: Connectivity is necessary but not sufficient for synchrony
 kind: remark
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-countable-choice

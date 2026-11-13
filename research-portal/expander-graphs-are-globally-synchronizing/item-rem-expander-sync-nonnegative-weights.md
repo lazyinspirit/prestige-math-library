@@ -1,6 +1,6 @@
 ---
 title: Claimed extension to nonnegative weighted graphs
-status: draft
+status: published
 research_item: rem-expander-sync-nonnegative-weights
 dependency_level: 5
 sources:

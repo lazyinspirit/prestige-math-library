@@ -3,7 +3,7 @@ id: prop-expander-prereq-pair-potential-calculus
 kind: proposition
 title: Differentiation of symmetric periodic pair potentials
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-phasor-calculus

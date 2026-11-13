@@ -3,7 +3,7 @@ id: lem-author-3bf637a47abd-weighted-offdiagonal-degree
 kind: lemma
 title: Weighted spectral bounds control the degree without loops
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-loop-compatible-networks

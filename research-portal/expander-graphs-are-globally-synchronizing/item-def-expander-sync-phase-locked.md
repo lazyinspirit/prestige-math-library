@@ -1,6 +1,6 @@
 ---
 title: Phase-locked long-term behavior
-status: draft
+status: published
 research_item: def-expander-sync-phase-locked
 dependency_level: 3
 sources:

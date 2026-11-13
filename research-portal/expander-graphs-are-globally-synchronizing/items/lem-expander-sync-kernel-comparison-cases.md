@@ -3,7 +3,7 @@ id: lem-expander-sync-kernel-comparison-cases
 title: Pointwise comparisons used in kernel stability
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-kernel

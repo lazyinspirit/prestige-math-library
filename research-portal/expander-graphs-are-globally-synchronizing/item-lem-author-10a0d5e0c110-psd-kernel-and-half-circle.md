@@ -1,6 +1,6 @@
 ---
 title: "Critical PSD phases: kernel inequality and half-circle rigidity"
-status: draft
+status: published
 research_item: lem-author-10a0d5e0c110-psd-kernel-and-half-circle
 dependency_level: 6
 ---

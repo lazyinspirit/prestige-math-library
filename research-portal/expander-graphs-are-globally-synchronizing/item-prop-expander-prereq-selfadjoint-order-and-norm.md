@@ -1,6 +1,6 @@
 ---
 title: Self-adjoint order, norm bounds and diagonal tests
-status: draft
+status: published
 research_item: prop-expander-prereq-selfadjoint-order-and-norm
 dependency_level: 1
 ---

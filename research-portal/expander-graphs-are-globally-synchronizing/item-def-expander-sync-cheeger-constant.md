@@ -1,6 +1,6 @@
 ---
 title: Edge isoperimetric constant convention
-status: draft
+status: published
 research_item: def-expander-sync-cheeger-constant
 dependency_level: 3
 sources:

@@ -3,7 +3,7 @@ id: lem-expander-sync-kernel-almost-antisymmetry
 title: Almost antisymmetry and summed kernel bounds
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-kernel

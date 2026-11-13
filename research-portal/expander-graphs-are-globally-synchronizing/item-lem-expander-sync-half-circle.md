@@ -1,6 +1,6 @@
 ---
 title: Half-circle lemma — Lemma 2.9
-status: draft
+status: published
 research_item: lem-expander-sync-half-circle
 dependency_level: 10
 sources:

@@ -1,6 +1,6 @@
 ---
 title: Covariance under a common positive rescaling of weights
-status: draft
+status: published
 research_item: lem-author-3bf637a47abd-weighted-scale-covariance
 dependency_level: 3
 ---

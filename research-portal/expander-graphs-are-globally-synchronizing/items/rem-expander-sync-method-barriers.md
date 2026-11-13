@@ -3,7 +3,7 @@ id: rem-expander-sync-method-barriers
 title: Numerical and structural limits of the regular-graph method
 kind: remark
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-ramanujan

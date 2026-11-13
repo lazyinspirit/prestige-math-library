@@ -1,6 +1,6 @@
 ---
 title: Bounds on the critical connectivity threshold
-status: draft
+status: published
 research_item: rem-expander-sync-density-bounds
 dependency_level: 8
 sources:

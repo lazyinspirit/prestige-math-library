@@ -1,6 +1,6 @@
 ---
 title: Finite phase tori, local lifts and the flat metric
-status: draft
+status: published
 research_item: def-expander-prereq-phase-torus
 dependency_level: 0
 ---

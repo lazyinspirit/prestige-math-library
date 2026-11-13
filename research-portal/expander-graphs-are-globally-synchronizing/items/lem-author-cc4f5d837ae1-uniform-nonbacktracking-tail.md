@@ -3,7 +3,7 @@ id: lem-author-cc4f5d837ae1-uniform-nonbacktracking-tail
 title: A parameter-uniform nonbacktracking spectral tail
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-cc4f5d837ae1-uniform-centered-normalization

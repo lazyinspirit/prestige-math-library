@@ -1,6 +1,6 @@
 ---
 title: Refined order estimates for regular graphs — Remark 2.7
-status: draft
+status: published
 research_item: rem-expander-sync-regular-order-bounds
 dependency_level: 13
 sources:

@@ -3,7 +3,7 @@ id: prop-expander-prereq-gaussian-entry-moments
 kind: proposition
 title: Gaussian entry moments and triangular independence
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-standard-normal-and-normal-laws

@@ -3,7 +3,7 @@ id: cor-expander-sync-cor-2-6
 title: Uniform bound on average H mass — Corollary 2.6
 kind: corollary
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-expander-sync-lem-2-3

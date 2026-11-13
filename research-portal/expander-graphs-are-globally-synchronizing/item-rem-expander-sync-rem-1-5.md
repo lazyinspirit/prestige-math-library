@@ -1,6 +1,6 @@
 ---
 title: Analytic versus numerical regular-expander bounds — Remark 1.5
-status: draft
+status: published
 research_item: rem-expander-sync-rem-1-5
 dependency_level: 11
 sources:

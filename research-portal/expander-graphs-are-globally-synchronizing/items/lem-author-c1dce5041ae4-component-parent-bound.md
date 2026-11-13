@@ -3,7 +3,7 @@ id: lem-author-c1dce5041ae4-component-parent-bound
 kind: lemma
 title: A parent-map bound for isolated components
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-erdos-renyi-random-graph

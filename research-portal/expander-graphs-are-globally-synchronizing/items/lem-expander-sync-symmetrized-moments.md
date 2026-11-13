@@ -3,7 +3,7 @@ id: lem-expander-sync-symmetrized-moments
 title: Symmetrization and moments of the adjacency difference
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-symmetrized-matrix

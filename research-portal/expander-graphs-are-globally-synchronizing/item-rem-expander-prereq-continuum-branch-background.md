@@ -1,6 +1,6 @@
 ---
 title: A scoped continuum self-consistency input
-status: draft
+status: published
 research_item: rem-expander-prereq-continuum-branch-background
 dependency_level: 2
 sources:

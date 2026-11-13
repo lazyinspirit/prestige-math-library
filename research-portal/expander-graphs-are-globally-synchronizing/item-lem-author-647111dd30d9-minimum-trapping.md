@@ -1,6 +1,6 @@
 ---
 title: A local minimum with a gradient inequality is stable
-status: draft
+status: published
 research_item: lem-author-647111dd30d9-minimum-trapping
 dependency_level: 2
 ---

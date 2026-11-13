@@ -3,7 +3,7 @@ id: def-expander-sync-degree-counts
 title: Counts of vertices of each degree
 kind: definition
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-erdos-renyi

@@ -1,6 +1,6 @@
 ---
 title: A compactly trapped gradient trajectory has a critical accumulation point
-status: draft
+status: published
 research_item: lem-author-647111dd30d9-compact-critical-accumulation
 dependency_level: 1
 ---

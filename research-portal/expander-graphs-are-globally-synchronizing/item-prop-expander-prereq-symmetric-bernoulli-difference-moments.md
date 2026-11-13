@@ -1,6 +1,6 @@
 ---
 title: Finite Bernoulli difference laws and parity of moments
-status: draft
+status: published
 research_item: prop-expander-prereq-symmetric-bernoulli-difference-moments
 dependency_level: 0
 ---

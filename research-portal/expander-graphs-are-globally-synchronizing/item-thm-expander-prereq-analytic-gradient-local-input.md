@@ -1,6 +1,6 @@
 ---
 title: Łojasiewicz inequality and analytic point stability
-status: draft
+status: published
 research_item: thm-expander-prereq-analytic-gradient-local-input
 dependency_level: 3
 sources:

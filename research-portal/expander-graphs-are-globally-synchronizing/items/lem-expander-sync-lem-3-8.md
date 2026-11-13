@@ -3,7 +3,7 @@ id: lem-expander-sync-lem-3-8
 title: Relative mixing for a small nested set — Lemma 3.8
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-two-sided-expander

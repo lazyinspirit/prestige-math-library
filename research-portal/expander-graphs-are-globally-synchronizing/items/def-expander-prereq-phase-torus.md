@@ -3,7 +3,7 @@ id: def-expander-prereq-phase-torus
 kind: definition
 title: Finite phase tori, local lifts and the flat metric
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-quotient-topology

@@ -1,6 +1,6 @@
 ---
 title: Exact normalized spectral threshold transfer
-status: draft
+status: published
 research_item: lem-author-bcce21321c2a-normalized-spectral-thresholds
 dependency_level: 3
 ---

@@ -1,6 +1,6 @@
 ---
 title: An explicit lower bound on a sparse binomial atom
-status: draft
+status: published
 research_item: lem-author-b785a1269d40-sparse-binomial-mass
 dependency_level: 1
 ---

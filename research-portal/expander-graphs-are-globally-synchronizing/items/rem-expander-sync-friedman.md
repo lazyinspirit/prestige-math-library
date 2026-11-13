@@ -3,7 +3,7 @@ id: rem-expander-sync-friedman
 title: Typical regular graphs are almost Ramanujan
 kind: remark
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-adjacency-expander

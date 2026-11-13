@@ -1,6 +1,6 @@
 ---
 title: The local gradient inequality bounds trajectory length
-status: draft
+status: published
 research_item: lem-author-ee25311adb41-gradient-tail-length
 dependency_level: 5
 ---

@@ -3,7 +3,7 @@ id: lem-author-47d4423675aa-loop-free-mean
 title: Loop-free Bernoulli adjacency and its two centerings
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-erdos-renyi

@@ -3,7 +3,7 @@ id: lem-author-6ad39f024b17-centered-normalization
 title: Normalize the logarithmic random graph for nonbacktracking estimates
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-adjacency-matrix-of-a-finite-simple-graph

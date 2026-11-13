@@ -1,6 +1,6 @@
 ---
 title: Symmetrization and moments of the adjacency difference
-status: draft
+status: published
 research_item: lem-expander-sync-symmetrized-moments
 dependency_level: 3
 sources:

@@ -3,7 +3,7 @@ id: def-expander-sync-critical-density
 title: Critical minimum-degree connectivity parameter
 kind: definition
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-graph-notation

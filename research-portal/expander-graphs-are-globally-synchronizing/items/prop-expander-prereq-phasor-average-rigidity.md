@@ -3,7 +3,7 @@ id: prop-expander-prereq-phasor-average-rigidity
 kind: proposition
 title: Rigidity and rotation of a unit-phasor average
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-phasor-calculus

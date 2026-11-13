@@ -1,6 +1,6 @@
 ---
 title: Quantitative synchronization speed from random initial conditions
-status: draft
+status: published
 research_item: op-expander-sync-speed-question
 dependency_level: 7
 sources:

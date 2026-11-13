@@ -3,7 +3,7 @@ id: lem-author-3bf637a47abd-weighted-loop-degree-envelope
 kind: lemma
 title: Loop-dependent weighted degree envelope
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-loop-compatible-networks

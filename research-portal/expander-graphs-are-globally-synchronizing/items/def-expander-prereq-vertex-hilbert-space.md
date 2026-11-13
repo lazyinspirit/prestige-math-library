@@ -3,7 +3,7 @@ id: def-expander-prereq-vertex-hilbert-space
 kind: definition
 title: Finite vertex Hilbert space in the article convention
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-inner-product-space

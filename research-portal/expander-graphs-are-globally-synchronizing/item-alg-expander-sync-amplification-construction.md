@@ -1,6 +1,6 @@
 ---
 title: Two-stage angle and mass construction
-status: draft
+status: published
 research_item: alg-expander-sync-amplification-construction
 dependency_level: 13
 sources:

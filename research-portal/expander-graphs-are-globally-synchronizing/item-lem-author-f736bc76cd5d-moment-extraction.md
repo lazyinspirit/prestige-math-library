@@ -1,6 +1,6 @@
 ---
 title: Extracting a nonconstant eigenvalue from closed-walk moments
-status: draft
+status: published
 research_item: lem-author-f736bc76cd5d-moment-extraction
 dependency_level: 2
 ---

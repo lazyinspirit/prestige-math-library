@@ -3,7 +3,7 @@ id: rem-expander-sync-heterogeneous-chaos
 title: Possible chaos with nonidentical intrinsic frequencies
 kind: remark
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-kuramoto-system

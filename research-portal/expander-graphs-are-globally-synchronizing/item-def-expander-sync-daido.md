@@ -1,6 +1,6 @@
 ---
 title: Daido order parameters
-status: draft
+status: published
 research_item: def-expander-sync-daido
 dependency_level: 1
 sources:

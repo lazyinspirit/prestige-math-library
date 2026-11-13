@@ -1,6 +1,6 @@
 ---
 title: Connectivity and the lower Laplacian parameter
-status: draft
+status: published
 research_item: rem-expander-sync-connected-expander
 dependency_level: 5
 sources:

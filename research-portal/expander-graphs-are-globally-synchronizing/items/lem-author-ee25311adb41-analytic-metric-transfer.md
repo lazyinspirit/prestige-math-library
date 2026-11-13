@@ -3,7 +3,7 @@ id: lem-author-ee25311adb41-analytic-metric-transfer
 kind: lemma
 title: Transfer of the analytic gradient inequality to a smooth metric
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-smooth-manifold

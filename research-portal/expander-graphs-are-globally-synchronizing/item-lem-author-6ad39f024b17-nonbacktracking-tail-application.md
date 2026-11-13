@@ -1,6 +1,6 @@
 ---
 title: A nonbacktracking tail smaller than the required polynomial
-status: draft
+status: published
 research_item: lem-author-6ad39f024b17-nonbacktracking-tail-application
 dependency_level: 4
 sources:

@@ -3,7 +3,7 @@ id: def-expander-prereq-stability-and-attraction
 kind: definition
 title: Point stability, attraction and stability of a set
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-metric-space

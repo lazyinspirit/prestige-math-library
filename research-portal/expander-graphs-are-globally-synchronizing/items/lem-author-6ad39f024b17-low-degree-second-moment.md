@@ -3,7 +3,7 @@ id: lem-author-6ad39f024b17-low-degree-second-moment
 title: A second-moment bound for the absence of low-degree vertices
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-erdos-renyi-random-graph

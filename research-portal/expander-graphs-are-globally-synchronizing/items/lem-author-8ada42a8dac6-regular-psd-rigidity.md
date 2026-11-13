@@ -3,7 +3,7 @@ id: lem-author-8ada42a8dac6-regular-psd-rigidity
 title: All critical PSD equilibria synchronize on positive regular expanders
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-8ada42a8dac6-regular-psd-mass

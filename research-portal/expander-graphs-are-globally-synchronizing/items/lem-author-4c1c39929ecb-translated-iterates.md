@@ -3,7 +3,7 @@ id: lem-author-4c1c39929ecb-translated-iterates
 kind: lemma
 title: Translate every finite forward orbit without assuming global invertibility
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-4c1c39929ecb-fixed-point-translation

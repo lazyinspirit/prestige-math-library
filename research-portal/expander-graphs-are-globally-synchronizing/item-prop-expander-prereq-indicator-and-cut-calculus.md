@@ -1,6 +1,6 @@
 ---
 title: Ordered edge counts and centered cut vectors
-status: draft
+status: published
 research_item: prop-expander-prereq-indicator-and-cut-calculus
 dependency_level: 1
 ---

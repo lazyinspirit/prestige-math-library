@@ -3,7 +3,7 @@ id: def-expander-sync-h
 title: Truncated sine-square function
 kind: definition
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-phasor-calculus

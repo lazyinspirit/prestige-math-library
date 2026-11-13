@@ -3,7 +3,7 @@ id: lem-author-73027818342b-regular-small-alpha-mass
 title: Small-alpha first parameter and regular H mass
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-graph-notation

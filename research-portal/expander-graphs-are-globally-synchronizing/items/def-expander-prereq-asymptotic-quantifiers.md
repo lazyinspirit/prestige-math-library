@@ -3,7 +3,7 @@ id: def-expander-prereq-asymptotic-quantifiers
 kind: definition
 title: Asymptotic quantifiers and uniform parameter ranges
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-sequences-in-an-ordered-field

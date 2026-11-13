@@ -1,6 +1,6 @@
 ---
 title: Uniform constant-two adjacency control above a large logarithmic density
-status: draft
+status: published
 research_item: lem-author-cc4f5d837ae1-uniform-sharp-adjacency-bound
 dependency_level: 5
 sources:

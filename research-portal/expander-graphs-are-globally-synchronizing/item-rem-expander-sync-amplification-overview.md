@@ -1,6 +1,6 @@
 ---
 title: Mass amplification outline and methodological claims
-status: draft
+status: published
 research_item: rem-expander-sync-amplification-overview
 dependency_level: 11
 sources:

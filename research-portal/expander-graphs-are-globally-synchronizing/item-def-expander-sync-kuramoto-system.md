@@ -1,6 +1,6 @@
 ---
 title: Graph Kuramoto differential equations
-status: draft
+status: published
 research_item: def-expander-sync-kuramoto-system
 dependency_level: 2
 sources:

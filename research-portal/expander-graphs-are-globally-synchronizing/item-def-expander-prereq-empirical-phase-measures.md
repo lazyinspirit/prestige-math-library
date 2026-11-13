@@ -1,6 +1,6 @@
 ---
 title: Empirical phase measures and Fourier order statistics
-status: draft
+status: published
 research_item: def-expander-prereq-empirical-phase-measures
 dependency_level: 1
 ---

@@ -3,7 +3,7 @@ id: lem-author-f736bc76cd5d-stack-closed-walks
 kind: lemma
 title: Stack construction of closed walks with loops and repeated edges
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-regular-multigraph-and-normalized-adjacency

@@ -3,7 +3,7 @@ id: lem-author-c1dce5041ae4-finite-sieve-zero-count
 kind: lemma
 title: Finite sieve determines the probability of a zero count
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-expectation-on-a-finite-probability-space

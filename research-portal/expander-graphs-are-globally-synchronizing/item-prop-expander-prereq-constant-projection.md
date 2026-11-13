@@ -1,6 +1,6 @@
 ---
 title: The constant projection and centering decomposition
-status: draft
+status: published
 research_item: prop-expander-prereq-constant-projection
 dependency_level: 1
 ---

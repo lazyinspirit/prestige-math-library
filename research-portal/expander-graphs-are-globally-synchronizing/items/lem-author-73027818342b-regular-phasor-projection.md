@@ -3,7 +3,7 @@ id: lem-author-73027818342b-regular-phasor-projection
 title: Mean-zero projection of the regular phase vector
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-graph-notation

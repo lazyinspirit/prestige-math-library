@@ -3,7 +3,7 @@ id: rem-expander-prereq-critical-density-background
 kind: remark
 title: Independent inputs for the critical-density bounds
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-loop-compatible-networks

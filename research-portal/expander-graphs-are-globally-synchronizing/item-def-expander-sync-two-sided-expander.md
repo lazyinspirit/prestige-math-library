@@ -1,6 +1,6 @@
 ---
 title: Two-sided spectral expander — Definition 1.9
-status: draft
+status: published
 research_item: def-expander-sync-two-sided-expander
 dependency_level: 4
 sources:

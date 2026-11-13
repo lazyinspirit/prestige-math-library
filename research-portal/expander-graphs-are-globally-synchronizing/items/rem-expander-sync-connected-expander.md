@@ -3,7 +3,7 @@ id: rem-expander-sync-connected-expander
 title: Connectivity and the lower Laplacian parameter
 kind: remark
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-two-sided-expander

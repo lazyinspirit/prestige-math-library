@@ -1,6 +1,6 @@
 ---
 title: Refined H mass bound in a regular graph
-status: draft
+status: published
 research_item: lem-author-73027818342b-regular-h-refinement
 dependency_level: 9
 ---

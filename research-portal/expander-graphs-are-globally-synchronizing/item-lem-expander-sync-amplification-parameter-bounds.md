@@ -1,6 +1,6 @@
 ---
 title: Parameter and critical-step estimates in general amplification
-status: draft
+status: published
 research_item: lem-expander-sync-amplification-parameter-bounds
 dependency_level: 14
 sources:

@@ -1,6 +1,6 @@
 ---
 title: Lower degree-tail count estimate — Lemma 6.7
-status: draft
+status: published
 research_item: lem-expander-sync-lem-6-7
 dependency_level: 3
 sources:

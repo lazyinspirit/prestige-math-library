@@ -3,7 +3,7 @@ id: lem-author-6ad39f024b17-restricted-adjacency-tail
 title: The restricted spectral estimate needed above the connectivity threshold
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-6ad39f024b17-centered-normalization

@@ -3,7 +3,7 @@ id: lem-author-4a6b79e2d031-positive-degree-envelope
 title: A positive minimum degree envelope at every fixed supercritical ratio
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - prop-expander-prereq-degree-law-and-dependence

@@ -3,7 +3,7 @@ id: lem-author-8ada42a8dac6-regular-psd-recurrence
 title: Certified regular amplification excludes a PSD half-circle tail
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-8ada42a8dac6-regular-psd-mass

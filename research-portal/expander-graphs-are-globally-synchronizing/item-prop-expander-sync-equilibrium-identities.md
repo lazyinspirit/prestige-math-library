@@ -1,6 +1,6 @@
 ---
 title: Real and complex equilibrium identities
-status: draft
+status: published
 research_item: prop-expander-sync-equilibrium-identities
 dependency_level: 6
 sources:

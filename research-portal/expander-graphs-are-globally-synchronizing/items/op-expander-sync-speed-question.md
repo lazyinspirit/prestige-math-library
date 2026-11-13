@@ -3,7 +3,7 @@ id: op-expander-sync-speed-question
 title: Quantitative synchronization speed from random initial conditions
 kind: open-problem
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-kuramoto-system

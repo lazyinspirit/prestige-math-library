@@ -1,6 +1,6 @@
 ---
 title: Local minima and nonnegative second variation
-status: draft
+status: published
 research_item: prop-expander-prereq-second-variation-test
 dependency_level: 0
 ---

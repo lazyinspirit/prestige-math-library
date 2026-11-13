@@ -3,7 +3,7 @@ id: lem-author-2bcd11f9e275-logarithmic-tangent-bound
 kind: lemma
 title: Logarithmic tangent bound and a quadratic entropy envelope
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:thm-natural-logarithm-laws

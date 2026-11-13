@@ -1,6 +1,6 @@
 ---
 title: Erdős–Rényi global synchronization — Theorem 1.2
-status: draft
+status: published
 research_item: thm-expander-sync-thm-1-2
 dependency_level: 11
 sources:

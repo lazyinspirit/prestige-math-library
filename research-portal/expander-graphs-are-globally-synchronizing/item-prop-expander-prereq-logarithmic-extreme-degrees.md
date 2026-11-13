@@ -1,6 +1,6 @@
 ---
 title: Extremal degrees at a fixed logarithmic mean
-status: draft
+status: published
 research_item: prop-expander-prereq-logarithmic-extreme-degrees
 dependency_level: 6
 ---

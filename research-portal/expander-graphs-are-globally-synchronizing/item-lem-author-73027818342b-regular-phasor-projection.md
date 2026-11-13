@@ -1,6 +1,6 @@
 ---
 title: Mean-zero projection of the regular phase vector
-status: draft
+status: published
 research_item: lem-author-73027818342b-regular-phasor-projection
 dependency_level: 6
 ---

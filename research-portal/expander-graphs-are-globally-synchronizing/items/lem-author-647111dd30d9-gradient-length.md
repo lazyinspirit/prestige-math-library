@@ -3,7 +3,7 @@ id: lem-author-647111dd30d9-gradient-length
 kind: lemma
 title: Conditional gradient inequality gives a length bound
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-647111dd30d9-gradient-energy

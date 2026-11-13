@@ -3,7 +3,7 @@ id: lem-expander-sync-elementary-angle-bounds
 title: Elementary angle and logarithm estimates used in amplification
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - prop-expander-prereq-ordered-angle-inequalities

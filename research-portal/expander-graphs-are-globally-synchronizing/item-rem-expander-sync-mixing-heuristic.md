@@ -1,6 +1,6 @@
 ---
 title: Expansion and the distribution of phases in stable states
-status: draft
+status: published
 research_item: rem-expander-sync-mixing-heuristic
 dependency_level: 11
 sources:

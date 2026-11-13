@@ -1,6 +1,6 @@
 ---
 title: A spectral window giving condition number below two
-status: draft
+status: published
 research_item: lem-author-fc0d6c95270f-spectral-window-ratio
 dependency_level: 3
 ---

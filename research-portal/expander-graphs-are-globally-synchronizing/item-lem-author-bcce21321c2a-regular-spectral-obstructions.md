@@ -1,6 +1,6 @@
 ---
 title: Disconnected and bipartite spectral witnesses
-status: draft
+status: published
 research_item: lem-author-bcce21321c2a-regular-spectral-obstructions
 dependency_level: 3
 ---

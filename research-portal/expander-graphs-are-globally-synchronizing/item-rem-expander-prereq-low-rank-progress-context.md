@@ -1,6 +1,6 @@
 ---
 title: Scoped independent low-rank landscape reports
-status: draft
+status: published
 research_item: rem-expander-prereq-low-rank-progress-context
 dependency_level: 1
 sources:

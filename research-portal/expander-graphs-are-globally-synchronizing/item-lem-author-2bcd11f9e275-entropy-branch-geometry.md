@@ -1,6 +1,6 @@
 ---
 title: Entropy endpoint limits and the two monotone branches
-status: draft
+status: published
 research_item: lem-author-2bcd11f9e275-entropy-branch-geometry
 dependency_level: 1
 ---

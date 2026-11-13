@@ -1,6 +1,6 @@
 ---
 title: Order parameter control of total H mass — Lemma 2.3
-status: draft
+status: published
 research_item: lem-expander-sync-lem-2-3
 dependency_level: 9
 sources:

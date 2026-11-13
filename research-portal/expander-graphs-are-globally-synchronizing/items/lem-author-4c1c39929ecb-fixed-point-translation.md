@@ -3,7 +3,7 @@ id: lem-author-4c1c39929ecb-fixed-point-translation
 kind: lemma
 title: Translate a local diffeomorphism and its spectral data to the origin
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:thm-chain-rule-for-total-derivatives

@@ -1,6 +1,6 @@
 ---
 title: A near-threshold counterexample to the reported constant-two spectral bound
-status: draft
+status: published
 research_item: cex-author-47d4423675aa-near-threshold-spectral-edge
 dependency_level: 8
 sources:

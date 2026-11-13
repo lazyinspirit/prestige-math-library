@@ -3,7 +3,7 @@ id: lem-expander-sync-spectral-phase-sums
 title: Spectral estimates for phase Fourier sums
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-graph-notation

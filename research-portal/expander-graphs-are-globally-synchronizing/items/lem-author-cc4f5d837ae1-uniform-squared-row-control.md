@@ -3,7 +3,7 @@ id: lem-author-cc4f5d837ae1-uniform-squared-row-control
 title: Uniform squared-row control including dense graphs
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-cc4f5d837ae1-uniform-centered-normalization

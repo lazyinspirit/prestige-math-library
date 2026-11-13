@@ -3,7 +3,7 @@ id: rem-expander-sync-lyapunov-stability
 title: Analytic local minima and Lyapunov stability
 kind: remark
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-energy

@@ -3,7 +3,7 @@ id: prop-expander-prereq-degree-count-first-moment
 kind: proposition
 title: Indicator expectations and exceptional-vertex probabilities
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-natural-numbers

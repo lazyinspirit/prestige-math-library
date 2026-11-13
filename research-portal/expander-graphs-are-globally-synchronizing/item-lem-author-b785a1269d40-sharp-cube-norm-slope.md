@@ -1,6 +1,6 @@
 ---
 title: The sharp coordinate constant already occurs inside the Bernoulli cube
-status: draft
+status: published
 research_item: lem-author-b785a1269d40-sharp-cube-norm-slope
 dependency_level: 1
 ---

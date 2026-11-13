@@ -3,7 +3,7 @@ id: lem-expander-sync-lem-6-8
 title: Upper degree-tail count estimate — Lemma 6.8
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-degree-counts

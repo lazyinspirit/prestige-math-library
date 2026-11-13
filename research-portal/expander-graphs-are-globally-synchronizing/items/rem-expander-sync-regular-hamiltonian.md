@@ -3,7 +3,7 @@ id: rem-expander-sync-regular-hamiltonian
 title: Typical regular graphs are Hamiltonian
 kind: remark
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-graph-notation

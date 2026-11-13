@@ -3,7 +3,7 @@ id: rem-expander-sync-rem-3-9
 title: Strict forms of the nested mixing estimates — Remark 3.9
 kind: remark
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-two-sided-expander

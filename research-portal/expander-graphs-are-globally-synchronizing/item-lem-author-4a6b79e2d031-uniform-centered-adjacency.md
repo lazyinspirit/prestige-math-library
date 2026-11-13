@@ -1,6 +1,6 @@
 ---
 title: Uniform small centered adjacency above logarithmic mean degree
-status: draft
+status: published
 research_item: lem-author-4a6b79e2d031-uniform-centered-adjacency
 dependency_level: 2
 ---

@@ -3,7 +3,7 @@ id: rem-expander-prereq-continuum-branch-background
 kind: remark
 title: A scoped continuum self-consistency input
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-empirical-phase-measures

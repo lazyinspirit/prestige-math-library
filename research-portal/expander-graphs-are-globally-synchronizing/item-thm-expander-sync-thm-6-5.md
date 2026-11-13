@@ -1,6 +1,6 @@
 ---
 title: Convex Lipschitz concentration — Theorem 6.5
-status: draft
+status: published
 research_item: thm-expander-sync-thm-6-5
 dependency_level: 2
 sources:

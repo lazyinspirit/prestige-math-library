@@ -3,7 +3,7 @@ id: prop-expander-prereq-regular-mean-zero-spectrum
 kind: proposition
 title: Regular adjacency spectra and normalized expansion
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-vertex-hilbert-space

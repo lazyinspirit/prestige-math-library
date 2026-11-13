@@ -3,7 +3,7 @@ id: lem-author-f736bc76cd5d-reversible-slots
 kind: lemma
 title: Reversible labels for adjacency slots
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-regular-multigraph-and-normalized-adjacency

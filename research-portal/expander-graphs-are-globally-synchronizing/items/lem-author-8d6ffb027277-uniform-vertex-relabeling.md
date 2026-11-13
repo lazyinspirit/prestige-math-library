@@ -3,7 +3,7 @@ id: lem-author-8d6ffb027277-uniform-vertex-relabeling
 kind: lemma
 title: Vertex relabeling preserves the uniform regular graph law
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-regular-pairing-conditioning

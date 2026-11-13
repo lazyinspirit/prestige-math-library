@@ -3,7 +3,7 @@ id: lem-expander-sync-regular-numeric-contradiction
 title: Regular-graph numerical contradiction threshold
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-graph-notation

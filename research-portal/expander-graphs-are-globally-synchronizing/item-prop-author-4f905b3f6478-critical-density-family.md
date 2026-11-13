@@ -1,6 +1,6 @@
 ---
 title: A simple nonsynchronizing family approaching eleven sixteenths
-status: draft
+status: published
 research_item: prop-author-4f905b3f6478-critical-density-family
 dependency_level: 5
 sources:

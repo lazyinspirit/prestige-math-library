@@ -3,7 +3,7 @@ id: thm-expander-prereq-alon-boppana-input
 kind: theorem
 title: The fixed-degree Alon–Boppana lower bound
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - prop-expander-prereq-regular-mean-zero-spectrum

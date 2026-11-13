@@ -1,6 +1,6 @@
 ---
 title: Spurious minima obstruct global synchrony
-status: draft
+status: published
 research_item: rem-expander-sync-spurious-basin
 dependency_level: 7
 sources:

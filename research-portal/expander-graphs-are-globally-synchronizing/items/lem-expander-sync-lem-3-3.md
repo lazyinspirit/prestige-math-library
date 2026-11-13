@@ -3,7 +3,7 @@ id: lem-expander-sync-lem-3-3
 title: Internal-edge mixing bound — Lemma 3.3
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-adjacency-expander

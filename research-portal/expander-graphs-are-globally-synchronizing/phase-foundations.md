@@ -3,7 +3,7 @@ title: Phase dynamics and oscillator models
 description: Build phase geometry, analytic gradient dynamics and basin measure;
   place oscillator assumptions, historical observations and continuum context in
   their separate stated scopes.
-status: draft
+status: published
 dependency_level: 0
 ---
 

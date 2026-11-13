@@ -3,7 +3,7 @@ id: thm-expander-prereq-gaussian-wigner-moment-input
 kind: theorem
 title: An independent symmetric-Gaussian norm moment input
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-b9de37ca32a7-triangular-norm-moments

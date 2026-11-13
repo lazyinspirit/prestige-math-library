@@ -3,7 +3,7 @@ id: rem-expander-sync-disjoint-mixing-limitation
 title: Disjoint-set lower mixing needs additional hypotheses
 kind: remark
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-two-sided-expander

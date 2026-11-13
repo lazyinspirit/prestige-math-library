@@ -3,7 +3,7 @@ id: op-expander-sync-higher-sphere-question
 title: Extensions to higher-dimensional phase spheres
 kind: open-problem
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-kuramoto-system

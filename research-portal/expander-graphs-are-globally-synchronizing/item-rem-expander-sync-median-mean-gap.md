@@ -1,6 +1,6 @@
 ---
 title: Median–mean gap for convex Lipschitz concentration
-status: draft
+status: published
 research_item: rem-expander-sync-median-mean-gap
 dependency_level: 3
 sources:

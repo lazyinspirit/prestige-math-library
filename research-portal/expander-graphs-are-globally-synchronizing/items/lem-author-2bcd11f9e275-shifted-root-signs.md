@@ -3,7 +3,7 @@ id: lem-author-2bcd11f9e275-shifted-root-signs
 kind: lemma
 title: Parameter bounds giving the signs of shifted entropy roots
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-2bcd11f9e275-logarithmic-tangent-bound

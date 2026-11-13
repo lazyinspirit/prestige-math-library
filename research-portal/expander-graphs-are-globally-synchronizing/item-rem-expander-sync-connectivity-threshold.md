@@ -1,6 +1,6 @@
 ---
 title: Classical Erdős–Rényi connectivity threshold
-status: draft
+status: published
 research_item: rem-expander-sync-connectivity-threshold
 dependency_level: 3
 sources:

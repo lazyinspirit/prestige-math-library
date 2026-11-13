@@ -3,7 +3,7 @@ id: lem-author-8ada42a8dac6-regular-psd-mass
 title: "Regular critical PSD phases: a direct mass bootstrap at 0.0816"
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-energy

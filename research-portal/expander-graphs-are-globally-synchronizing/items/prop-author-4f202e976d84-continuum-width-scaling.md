@@ -3,7 +3,7 @@ id: prop-author-4f202e976d84-continuum-width-scaling
 kind: proposition
 title: Width scaling of the continuum branch threshold
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - rem-expander-prereq-continuum-branch-background

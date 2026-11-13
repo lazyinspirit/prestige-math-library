@@ -1,6 +1,6 @@
 ---
 title: Binomial approximation for vertex degree counts
-status: draft
+status: published
 research_item: rem-expander-sync-degree-count-approximation
 dependency_level: 3
 sources:

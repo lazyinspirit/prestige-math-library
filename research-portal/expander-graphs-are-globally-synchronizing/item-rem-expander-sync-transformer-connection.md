@@ -1,6 +1,6 @@
 ---
 title: Connections to optimization and transformer dynamics
-status: draft
+status: published
 research_item: rem-expander-sync-transformer-connection
 dependency_level: 5
 sources:

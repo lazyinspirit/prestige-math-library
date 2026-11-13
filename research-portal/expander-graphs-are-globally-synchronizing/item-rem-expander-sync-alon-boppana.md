@@ -1,6 +1,6 @@
 ---
 title: Asymptotic optimality and existence background for Ramanujan graphs
-status: draft
+status: published
 research_item: rem-expander-sync-alon-boppana
 dependency_level: 5
 sources:

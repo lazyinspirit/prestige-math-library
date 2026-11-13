@@ -1,6 +1,6 @@
 ---
 title: Large-set amplification — Lemma 4.3
-status: draft
+status: published
 research_item: lem-expander-sync-amp-large
 dependency_level: 12
 sources:

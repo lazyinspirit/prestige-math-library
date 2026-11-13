@@ -3,7 +3,7 @@ id: prop-expander-prereq-symmetric-bernoulli-difference-moments
 kind: proposition
 title: Finite Bernoulli difference laws and parity of moments
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-bernoulli-and-binomial-random-variables

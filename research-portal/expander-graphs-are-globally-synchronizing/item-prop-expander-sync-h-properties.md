@@ -1,6 +1,6 @@
 ---
 title: Elementary properties of the function H
-status: draft
+status: published
 research_item: prop-expander-sync-h-properties
 dependency_level: 2
 sources:

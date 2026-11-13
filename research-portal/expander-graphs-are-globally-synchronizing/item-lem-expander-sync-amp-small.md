@@ -1,6 +1,6 @@
 ---
 title: Small-set amplification — Lemma 4.2
-status: draft
+status: published
 research_item: lem-expander-sync-amp-small
 dependency_level: 11
 sources:

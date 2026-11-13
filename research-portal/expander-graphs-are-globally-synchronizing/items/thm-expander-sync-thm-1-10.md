@@ -3,7 +3,7 @@ id: thm-expander-sync-thm-1-10
 title: General two-sided spectral criterion — Theorem 1.10
 kind: theorem
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-10a0d5e0c110-psd-expander-rigidity

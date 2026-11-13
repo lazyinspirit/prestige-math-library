@@ -1,6 +1,6 @@
 ---
 title: Diagonal phase rotations and relative-phase coordinates
-status: draft
+status: published
 research_item: def-expander-prereq-rotation-reduction
 dependency_level: 1
 ---

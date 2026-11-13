@@ -1,6 +1,6 @@
 ---
 title: Historical observation of coupled pendulum clocks
-status: draft
+status: published
 research_item: exp-expander-sync-huygens-clocks
 dependency_level: 1
 sources:

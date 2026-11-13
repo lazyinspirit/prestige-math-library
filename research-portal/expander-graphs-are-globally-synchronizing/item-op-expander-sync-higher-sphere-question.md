@@ -1,6 +1,6 @@
 ---
 title: Extensions to higher-dimensional phase spheres
-status: draft
+status: published
 research_item: op-expander-sync-higher-sphere-question
 dependency_level: 7
 sources:

@@ -1,6 +1,6 @@
 ---
 title: Truncated sine-square function
-status: draft
+status: published
 research_item: def-expander-sync-h
 dependency_level: 1
 sources:

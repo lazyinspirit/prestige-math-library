@@ -3,7 +3,7 @@ id: lem-author-4f905b3f6478-spinning-transverse-certificate
 kind: lemma
 title: Transverse positivity for the special spinning family
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-author-4f905b3f6478-spinning

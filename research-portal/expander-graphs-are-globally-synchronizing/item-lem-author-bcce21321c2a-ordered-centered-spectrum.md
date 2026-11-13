@@ -1,6 +1,6 @@
 ---
 title: Ordered eigenvalues and the centered regular norm
-status: draft
+status: published
 research_item: lem-author-bcce21321c2a-ordered-centered-spectrum
 dependency_level: 2
 ---

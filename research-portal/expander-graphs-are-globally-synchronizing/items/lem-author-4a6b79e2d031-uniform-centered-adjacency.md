@@ -3,7 +3,7 @@ id: lem-author-4a6b79e2d031-uniform-centered-adjacency
 title: Uniform small centered adjacency above logarithmic mean degree
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-4a6b79e2d031-bounded-symmetric-expectation

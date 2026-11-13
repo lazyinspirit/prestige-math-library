@@ -3,7 +3,7 @@ id: prop-expander-prereq-binomial-exponential-envelope
 kind: proposition
 title: Elementary binomial probability envelopes
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-probability-measure

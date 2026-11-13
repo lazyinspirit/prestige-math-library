@@ -1,6 +1,6 @@
 ---
 title: Numerical amplification argument for alpha 0.0816
-status: draft
+status: published
 research_item: lem-expander-sync-numeric-amplification
 dependency_level: 15
 sources:

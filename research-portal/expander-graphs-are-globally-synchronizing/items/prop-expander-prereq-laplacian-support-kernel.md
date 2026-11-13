@@ -3,7 +3,7 @@ id: prop-expander-prereq-laplacian-support-kernel
 kind: proposition
 title: Support connectivity and the unnormalized Laplacian kernel
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-loop-compatible-networks

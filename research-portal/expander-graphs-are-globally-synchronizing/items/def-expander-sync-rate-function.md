@@ -3,7 +3,7 @@ id: def-expander-sync-rate-function
 title: Degree large-deviation rate function and roots
 kind: definition
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-natural-logarithm

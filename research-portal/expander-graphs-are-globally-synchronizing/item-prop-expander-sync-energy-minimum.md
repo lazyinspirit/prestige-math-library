@@ -1,6 +1,6 @@
 ---
 title: Nonnegativity and synchronized global minima
-status: draft
+status: published
 research_item: prop-expander-sync-energy-minimum
 dependency_level: 6
 sources:

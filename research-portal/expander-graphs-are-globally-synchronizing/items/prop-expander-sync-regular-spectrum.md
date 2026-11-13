@@ -3,7 +3,7 @@ id: prop-expander-sync-regular-spectrum
 title: Regular spectral characterization and notation convention
 kind: proposition
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-adjacency-expander

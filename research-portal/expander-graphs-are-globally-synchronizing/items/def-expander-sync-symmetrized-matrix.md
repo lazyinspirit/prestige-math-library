@@ -3,7 +3,7 @@ id: def-expander-sync-symmetrized-matrix
 title: Independent-copy symmetrization matrix
 kind: definition
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-erdos-renyi

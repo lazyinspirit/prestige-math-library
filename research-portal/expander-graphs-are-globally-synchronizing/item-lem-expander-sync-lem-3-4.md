@@ -1,6 +1,6 @@
 ---
 title: Cut-edge mixing bound — Lemma 3.4
-status: draft
+status: published
 research_item: lem-expander-sync-lem-3-4
 dependency_level: 5
 sources:

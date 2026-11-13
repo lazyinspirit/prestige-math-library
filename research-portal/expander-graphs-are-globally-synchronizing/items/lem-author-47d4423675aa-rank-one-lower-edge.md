@@ -3,7 +3,7 @@ id: lem-author-47d4423675aa-rank-one-lower-edge
 title: A negative adjacency eigenvalue survives all-ones centering
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-vertex-hilbert-space

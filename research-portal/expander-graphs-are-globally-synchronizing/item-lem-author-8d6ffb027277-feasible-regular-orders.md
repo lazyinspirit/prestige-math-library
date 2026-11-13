@@ -1,6 +1,6 @@
 ---
 title: Feasible orders for labelled simple regular graphs
-status: draft
+status: published
 research_item: lem-author-8d6ffb027277-feasible-regular-orders
 dependency_level: 1
 ---

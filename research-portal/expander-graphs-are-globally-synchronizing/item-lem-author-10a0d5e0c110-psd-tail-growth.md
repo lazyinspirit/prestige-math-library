@@ -1,6 +1,6 @@
 ---
 title: "Kernel phases on two-sided expanders: the two tail-growth estimates"
-status: draft
+status: published
 research_item: lem-author-10a0d5e0c110-psd-tail-growth
 dependency_level: 7
 ---

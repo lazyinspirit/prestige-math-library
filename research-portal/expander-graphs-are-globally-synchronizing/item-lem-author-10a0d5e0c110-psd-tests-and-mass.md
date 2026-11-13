@@ -1,6 +1,6 @@
 ---
 title: "Critical PSD phases: quadratic tests and small-alpha mass bound"
-status: draft
+status: published
 research_item: lem-author-10a0d5e0c110-psd-tests-and-mass
 dependency_level: 5
 ---

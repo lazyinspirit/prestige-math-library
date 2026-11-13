@@ -1,6 +1,6 @@
 ---
 title: "Regular critical PSD phases: kernel and half-circle"
-status: draft
+status: published
 research_item: lem-author-8ada42a8dac6-regular-psd-half-circle
 dependency_level: 5
 ---

@@ -3,7 +3,7 @@ id: ex-expander-sync-trees-cycles
 title: Trees synchronize whereas cycles longer than five do not
 kind: example
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-global-synchrony

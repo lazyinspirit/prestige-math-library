@@ -1,6 +1,6 @@
 ---
 title: Translation preserves an embedded disc and its tangent space
-status: draft
+status: published
 research_item: lem-author-4c1c39929ecb-translated-tangent-discs
 dependency_level: 0
 ---

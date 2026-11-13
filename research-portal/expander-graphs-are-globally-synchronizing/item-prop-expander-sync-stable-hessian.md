@@ -1,6 +1,6 @@
 ---
 title: Second-order necessary conditions for stable states
-status: draft
+status: published
 research_item: prop-expander-sync-stable-hessian
 dependency_level: 7
 sources:

@@ -1,6 +1,6 @@
 ---
 title: Conditional gradient inequality gives a length bound
-status: draft
+status: published
 research_item: lem-author-647111dd30d9-gradient-length
 dependency_level: 1
 ---

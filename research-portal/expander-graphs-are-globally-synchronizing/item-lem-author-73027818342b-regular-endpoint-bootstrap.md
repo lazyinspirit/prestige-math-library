@@ -1,6 +1,6 @@
 ---
 title: Rational bootstrap through the regular endpoint
-status: draft
+status: published
 research_item: lem-author-73027818342b-regular-endpoint-bootstrap
 dependency_level: 10
 ---

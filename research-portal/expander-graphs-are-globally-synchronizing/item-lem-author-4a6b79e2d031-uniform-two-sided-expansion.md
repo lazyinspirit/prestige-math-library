@@ -1,6 +1,6 @@
 ---
 title: Uniform two-sided expansion sufficient for global synchrony
-status: draft
+status: published
 research_item: lem-author-4a6b79e2d031-uniform-two-sided-expansion
 dependency_level: 5
 ---

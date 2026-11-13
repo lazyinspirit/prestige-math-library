@@ -3,7 +3,7 @@ id: lem-expander-sync-amp-large
 title: Large-set amplification — Lemma 4.3
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-two-sided-expander

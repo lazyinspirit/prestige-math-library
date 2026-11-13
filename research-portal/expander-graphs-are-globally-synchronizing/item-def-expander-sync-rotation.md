@@ -1,6 +1,6 @@
 ---
 title: Global rotation equivalence of phase configurations
-status: draft
+status: published
 research_item: def-expander-sync-rotation
 dependency_level: 3
 sources:

@@ -1,6 +1,6 @@
 ---
 title: Expander graphs are globally synchronizing
-status: draft
+status: published
 ---
 
 - [Phase dynamics and oscillator models](phase-foundations) — level 0

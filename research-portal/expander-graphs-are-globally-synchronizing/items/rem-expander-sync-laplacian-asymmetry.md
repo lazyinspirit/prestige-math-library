@@ -3,7 +3,7 @@ id: rem-expander-sync-laplacian-asymmetry
 title: Failure of symmetric Laplacian control near threshold
 kind: remark
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-centered-matrices

@@ -3,7 +3,7 @@ id: rem-expander-sync-self-loops
 title: Self-loops do not affect Kuramoto dynamics
 kind: remark
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-graph-notation

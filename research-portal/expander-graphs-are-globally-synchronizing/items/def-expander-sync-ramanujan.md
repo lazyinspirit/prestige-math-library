@@ -3,7 +3,7 @@ id: def-expander-sync-ramanujan
 title: Ramanujan graph convention used in the article
 kind: definition
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-adjacency-expander

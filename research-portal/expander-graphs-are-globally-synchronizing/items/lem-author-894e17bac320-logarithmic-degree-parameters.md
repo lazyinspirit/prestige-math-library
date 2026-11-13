@@ -3,7 +3,7 @@ id: lem-author-894e17bac320-logarithmic-degree-parameters
 title: Explicit parameters for the small-gamma logarithmic density
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:lem-ceiling-and-least-positive-integer-threshold

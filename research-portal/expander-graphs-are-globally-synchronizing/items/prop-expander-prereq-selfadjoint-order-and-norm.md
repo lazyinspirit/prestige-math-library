@@ -3,7 +3,7 @@ id: prop-expander-prereq-selfadjoint-order-and-norm
 kind: proposition
 title: Self-adjoint order, norm bounds and diagonal tests
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-vertex-hilbert-space

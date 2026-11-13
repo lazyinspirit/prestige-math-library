@@ -3,7 +3,7 @@ id: rem-expander-sync-vertex-gluing
 title: Synchronization landscape preserved by vertex gluing
 kind: remark
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-graph-notation

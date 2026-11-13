@@ -3,7 +3,7 @@ id: lem-expander-sync-degree-expectation-bound
 title: Expected degree-count bound and logarithmic factorial estimate
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-degree-counts

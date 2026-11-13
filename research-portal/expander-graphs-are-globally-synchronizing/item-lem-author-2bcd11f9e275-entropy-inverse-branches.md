@@ -1,6 +1,6 @@
 ---
 title: Differentiable entropy inverse branches and shifted contracts
-status: draft
+status: published
 research_item: lem-author-2bcd11f9e275-entropy-inverse-branches
 dependency_level: 2
 ---

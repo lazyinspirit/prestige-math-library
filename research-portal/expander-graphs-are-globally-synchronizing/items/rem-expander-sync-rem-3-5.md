@@ -3,7 +3,7 @@ id: rem-expander-sync-rem-3-5
 title: Cheeger lower bound — Remark 3.5
 kind: remark
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-two-sided-expander

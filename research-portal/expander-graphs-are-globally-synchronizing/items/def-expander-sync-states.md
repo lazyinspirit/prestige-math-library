@@ -3,7 +3,7 @@ id: def-expander-sync-states
 title: Equilibria, stable states, synchronized states, and spurious minima
 kind: definition
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-kuramoto-system

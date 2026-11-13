@@ -3,7 +3,7 @@ id: lem-author-635c380339fd-centered-laplacian
 kind: lemma
 title: The unnormalized Laplacian needs its own degree deviation
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-635c380339fd-loop-coupling

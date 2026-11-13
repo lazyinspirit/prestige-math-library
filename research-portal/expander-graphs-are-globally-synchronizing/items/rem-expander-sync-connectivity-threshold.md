@@ -3,7 +3,7 @@ id: rem-expander-sync-connectivity-threshold
 title: Classical Erdős–Rényi connectivity threshold
 kind: remark
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-erdos-renyi

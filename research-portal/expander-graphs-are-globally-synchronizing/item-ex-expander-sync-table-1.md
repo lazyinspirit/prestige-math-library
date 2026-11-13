@@ -1,6 +1,6 @@
 ---
 title: Published amplification parameters and bounds — Table 1
-status: draft
+status: published
 research_item: ex-expander-sync-table-1
 dependency_level: 13
 sources:

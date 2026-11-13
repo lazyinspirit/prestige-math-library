@@ -3,7 +3,7 @@ id: def-author-4f905b3f6478-spinning
 kind: definition
 title: Simple spinning graphs and cluster-constant equilibria
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-loop-compatible-networks

@@ -3,7 +3,7 @@ id: rem-expander-sync-density-bounds
 title: Bounds on the critical connectivity threshold
 kind: remark
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-critical-density

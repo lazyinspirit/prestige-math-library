@@ -1,6 +1,6 @@
 ---
 title: Bounded symmetric matrix expectation at the variance scale
-status: draft
+status: published
 research_item: lem-author-4a6b79e2d031-bounded-symmetric-expectation
 dependency_level: 1
 sources:

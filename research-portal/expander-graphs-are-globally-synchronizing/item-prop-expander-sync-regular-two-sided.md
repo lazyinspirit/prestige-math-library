@@ -1,6 +1,6 @@
 ---
 title: Regular adjacency expansion supplies two-sided expansion
-status: draft
+status: published
 research_item: prop-expander-sync-regular-two-sided
 dependency_level: 5
 sources:

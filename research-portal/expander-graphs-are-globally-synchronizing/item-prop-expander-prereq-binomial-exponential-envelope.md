@@ -1,6 +1,6 @@
 ---
 title: Elementary binomial probability envelopes
-status: draft
+status: published
 research_item: prop-expander-prereq-binomial-exponential-envelope
 dependency_level: 0
 ---

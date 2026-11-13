@@ -1,6 +1,6 @@
 ---
 title: Possible chaos with nonidentical intrinsic frequencies
-status: draft
+status: published
 research_item: rem-expander-sync-heterogeneous-chaos
 dependency_level: 3
 sources:

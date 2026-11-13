@@ -1,6 +1,6 @@
 ---
 title: Trapping a gradient tail near a critical cluster point
-status: draft
+status: published
 research_item: lem-author-ee25311adb41-analytic-ball-trapping
 dependency_level: 6
 ---

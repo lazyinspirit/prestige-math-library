@@ -3,7 +3,7 @@ id: def-author-fc0d6c95270f-normalized-laplacian
 kind: definition
 title: Normalized graph Laplacian and its nontrivial spectrum
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-edge-order-process-coupling

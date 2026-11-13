@@ -1,6 +1,6 @@
 ---
 title: The original shifted roots impose a minimum degree above log n
-status: draft
+status: published
 research_item: lem-author-6ad39f024b17-shifted-root-degree-obstruction
 dependency_level: 8
 ---

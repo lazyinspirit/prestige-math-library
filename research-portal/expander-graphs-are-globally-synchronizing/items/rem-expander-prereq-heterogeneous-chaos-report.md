@@ -3,7 +3,7 @@ id: rem-expander-prereq-heterogeneous-chaos-report
 kind: remark
 title: An independently attributed heterogeneous-model chaos report
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-phase-torus

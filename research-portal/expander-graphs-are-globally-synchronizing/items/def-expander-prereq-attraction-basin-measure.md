@@ -3,7 +3,7 @@ id: def-expander-prereq-attraction-basin-measure
 kind: definition
 title: Point basins, equilibrium-set basins and aggregate volume
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-stability-and-attraction

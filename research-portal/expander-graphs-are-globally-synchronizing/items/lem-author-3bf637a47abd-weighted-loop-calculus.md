@@ -3,7 +3,7 @@ id: lem-author-3bf637a47abd-weighted-loop-calculus
 kind: lemma
 title: Loop removal in the weighted Kuramoto calculus
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-loop-compatible-networks

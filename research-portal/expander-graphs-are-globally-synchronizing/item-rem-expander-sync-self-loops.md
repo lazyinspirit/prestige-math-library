@@ -1,6 +1,6 @@
 ---
 title: Self-loops do not affect Kuramoto dynamics
-status: draft
+status: published
 research_item: rem-expander-sync-self-loops
 dependency_level: 4
 sources:

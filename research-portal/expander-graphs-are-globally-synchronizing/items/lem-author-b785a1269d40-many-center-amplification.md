@@ -3,7 +3,7 @@ id: lem-author-b785a1269d40-many-center-amplification
 title: A large degree with explicitly bounded probability at fixed sparse density
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-b785a1269d40-independent-cross-degrees

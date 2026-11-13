@@ -1,6 +1,6 @@
 ---
 title: Angular order and elementary inverse-trigonometric bounds
-status: draft
+status: published
 research_item: prop-expander-prereq-ordered-angle-inequalities
 dependency_level: 0
 ---

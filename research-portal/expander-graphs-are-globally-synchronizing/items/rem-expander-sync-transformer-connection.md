@@ -3,7 +3,7 @@ id: rem-expander-sync-transformer-connection
 title: Connections to optimization and transformer dynamics
 kind: remark
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-energy

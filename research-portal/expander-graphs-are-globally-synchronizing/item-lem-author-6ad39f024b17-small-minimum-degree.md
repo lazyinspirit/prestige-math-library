@@ -1,6 +1,6 @@
 ---
 title: The gamma-two graph has a vertex of degree at most log n with high probability
-status: draft
+status: published
 research_item: lem-author-6ad39f024b17-small-minimum-degree
 dependency_level: 1
 ---

@@ -3,7 +3,7 @@ id: lem-author-73027818342b-regular-lemma-extension
 title: Both tractable inequalities at the regular endpoint
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-graph-notation

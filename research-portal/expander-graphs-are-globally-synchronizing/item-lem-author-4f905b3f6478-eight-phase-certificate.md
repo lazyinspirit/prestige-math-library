@@ -1,6 +1,6 @@
 ---
 title: An explicit eight-phase weighted stability certificate
-status: draft
+status: published
 research_item: lem-author-4f905b3f6478-eight-phase-certificate
 dependency_level: 3
 sources:

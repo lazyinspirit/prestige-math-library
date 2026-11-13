@@ -1,6 +1,6 @@
 ---
 title: A fixed outlier gap dominates the critical-source error
-status: draft
+status: published
 research_item: lem-author-47d4423675aa-outlier-error-transfer
 dependency_level: 7
 ---

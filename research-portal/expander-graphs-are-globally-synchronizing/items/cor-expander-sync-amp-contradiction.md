@@ -3,7 +3,7 @@ id: cor-expander-sync-amp-contradiction
 title: Contradiction threshold for amplification
 kind: corollary
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-expander-sync-cor-2-6

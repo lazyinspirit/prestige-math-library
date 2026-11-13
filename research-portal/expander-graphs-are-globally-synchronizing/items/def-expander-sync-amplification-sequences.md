@@ -3,7 +3,7 @@ id: def-expander-sync-amplification-sequences
 title: Angle and mass sequences in the amplification argument
 kind: definition
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-phase-arcs

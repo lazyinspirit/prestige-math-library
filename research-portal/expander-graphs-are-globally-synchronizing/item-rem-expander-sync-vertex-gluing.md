@@ -1,6 +1,6 @@
 ---
 title: Synchronization landscape preserved by vertex gluing
-status: draft
+status: published
 research_item: rem-expander-sync-vertex-gluing
 dependency_level: 6
 sources:

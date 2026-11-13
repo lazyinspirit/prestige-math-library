@@ -1,6 +1,6 @@
 ---
 title: A second-moment bound for the absence of low-degree vertices
-status: draft
+status: published
 research_item: lem-author-6ad39f024b17-low-degree-second-moment
 dependency_level: 0
 ---

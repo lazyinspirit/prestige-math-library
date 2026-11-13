@@ -1,6 +1,6 @@
 ---
 title: Scope of the phase-only sinusoidal oscillator idealization
-status: draft
+status: published
 research_item: post-expander-prereq-phase-model-assumptions
 dependency_level: 1
 sources:

@@ -1,6 +1,6 @@
 ---
 title: Numerical and structural limits of the regular-graph method
-status: draft
+status: published
 research_item: rem-expander-sync-method-barriers
 dependency_level: 7
 sources:

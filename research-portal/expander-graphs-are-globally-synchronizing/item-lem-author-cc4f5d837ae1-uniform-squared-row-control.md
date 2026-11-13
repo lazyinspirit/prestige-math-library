@@ -1,6 +1,6 @@
 ---
 title: Uniform squared-row control including dense graphs
-status: draft
+status: published
 research_item: lem-author-cc4f5d837ae1-uniform-squared-row-control
 dependency_level: 4
 ---

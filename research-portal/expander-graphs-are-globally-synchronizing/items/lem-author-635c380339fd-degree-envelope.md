@@ -3,7 +3,7 @@ id: lem-author-635c380339fd-degree-envelope
 kind: lemma
 title: Simultaneous degree deviations on the squared logarithmic scale
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - prop-expander-prereq-degree-chernoff-union

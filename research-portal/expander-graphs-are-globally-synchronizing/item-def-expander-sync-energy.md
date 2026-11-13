@@ -1,6 +1,6 @@
 ---
 title: Homogeneous Kuramoto energy
-status: draft
+status: published
 research_item: def-expander-sync-energy
 dependency_level: 2
 sources:

@@ -1,6 +1,6 @@
 ---
 title: Previous Erdős–Rényi synchronization bounds
-status: draft
+status: published
 research_item: rem-expander-sync-earlier-thresholds
 dependency_level: 7
 sources:

@@ -3,7 +3,7 @@ id: lem-author-cc4f5d837ae1-uniform-synchrony-slack
 title: Uniform degree slack and the vanishing synchrony condition
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - prop-expander-prereq-degree-chernoff-union

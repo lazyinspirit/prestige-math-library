@@ -1,6 +1,6 @@
 ---
 title: Signed vector-spin objectives and low-rank Gram factors
-status: draft
+status: published
 research_item: def-expander-prereq-vector-spin-landscapes
 dependency_level: 0
 ---

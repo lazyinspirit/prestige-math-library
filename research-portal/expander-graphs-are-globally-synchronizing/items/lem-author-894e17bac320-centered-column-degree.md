@@ -3,7 +3,7 @@ id: lem-author-894e17bac320-centered-column-degree
 title: A centered adjacency column retains a high-degree lower bound
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-graph-notation

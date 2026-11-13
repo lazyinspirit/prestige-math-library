@@ -3,7 +3,7 @@ id: def-expander-prereq-phase-volume
 kind: definition
 title: Normalized phase volume and almost-everywhere assertions
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-quotient-topology

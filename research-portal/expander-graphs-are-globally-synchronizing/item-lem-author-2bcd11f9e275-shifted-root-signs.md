@@ -1,6 +1,6 @@
 ---
 title: Parameter bounds giving the signs of shifted entropy roots
-status: draft
+status: published
 research_item: lem-author-2bcd11f9e275-shifted-root-signs
 dependency_level: 3
 ---

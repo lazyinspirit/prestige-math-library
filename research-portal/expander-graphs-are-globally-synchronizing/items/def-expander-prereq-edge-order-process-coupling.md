@@ -3,7 +3,7 @@ id: def-expander-prereq-edge-order-process-coupling
 kind: definition
 title: Uniform edge orderings, graph-process times and independent labels
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-uniform-finite-probability-space

@@ -3,7 +3,7 @@ id: op-expander-sync-finite-size-optimization
 title: Useful finite-size synchronization estimates near threshold
 kind: open-problem
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-erdos-renyi

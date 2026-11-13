@@ -3,7 +3,7 @@ id: lem-expander-sync-elementary-degree-estimates
 title: Elementary estimates used for degree expectations
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - prop-expander-prereq-binomial-exponential-envelope

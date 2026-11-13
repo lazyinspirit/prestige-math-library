@@ -1,6 +1,6 @@
 ---
 title: Simultaneous degree deviations on the squared logarithmic scale
-status: draft
+status: published
 research_item: lem-author-635c380339fd-degree-envelope
 dependency_level: 2
 ---

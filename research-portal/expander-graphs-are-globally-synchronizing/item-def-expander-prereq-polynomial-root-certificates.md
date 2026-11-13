@@ -1,6 +1,6 @@
 ---
 title: Root and sign certificates for parameter-dependent polynomials
-status: draft
+status: published
 research_item: def-expander-prereq-polynomial-root-certificates
 dependency_level: 0
 ---

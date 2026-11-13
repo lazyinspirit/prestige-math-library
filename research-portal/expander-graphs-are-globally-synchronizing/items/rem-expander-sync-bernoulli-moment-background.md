@@ -3,7 +3,7 @@ id: rem-expander-sync-bernoulli-moment-background
 title: Symmetry and moments in the random-matrix discussion
 kind: remark
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-erdos-renyi

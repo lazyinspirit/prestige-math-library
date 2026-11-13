@@ -3,7 +3,7 @@ id: prop-expander-prereq-degree-chernoff-union
 kind: proposition
 title: Chernoff bounds with the exact degree mean
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - prop-expander-prereq-degree-law-and-dependence

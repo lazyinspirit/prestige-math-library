@@ -3,7 +3,7 @@ id: thm-expander-sync-thm-1-4
 title: Regular spectral expansion implies synchronization — Theorem 1.4
 kind: theorem
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-8ada42a8dac6-regular-psd-rigidity

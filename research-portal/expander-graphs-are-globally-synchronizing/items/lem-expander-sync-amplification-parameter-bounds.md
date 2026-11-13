@@ -3,7 +3,7 @@ id: lem-expander-sync-amplification-parameter-bounds
 title: Parameter and critical-step estimates in general amplification
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - alg-expander-sync-amplification-construction

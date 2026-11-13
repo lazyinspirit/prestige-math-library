@@ -1,6 +1,6 @@
 ---
 title: Rational inverse-sine brackets on the principal branch
-status: draft
+status: published
 research_item: lem-author-2e2d9953c21a-inverse-brackets
 dependency_level: 1
 ---

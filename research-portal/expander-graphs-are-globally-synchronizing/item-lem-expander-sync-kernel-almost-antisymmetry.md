@@ -1,6 +1,6 @@
 ---
 title: Almost antisymmetry and summed kernel bounds
-status: draft
+status: published
 research_item: lem-expander-sync-kernel-almost-antisymmetry
 dependency_level: 11
 sources:

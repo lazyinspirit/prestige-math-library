@@ -3,7 +3,7 @@ id: lem-author-bcce21321c2a-normalized-spectral-thresholds
 title: Exact normalized spectral threshold transfer
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-bcce21321c2a-ordered-centered-spectrum

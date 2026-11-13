@@ -1,6 +1,6 @@
 ---
 title: Translate a local diffeomorphism and its spectral data to the origin
-status: draft
+status: published
 research_item: lem-author-4c1c39929ecb-fixed-point-translation
 dependency_level: 0
 ---

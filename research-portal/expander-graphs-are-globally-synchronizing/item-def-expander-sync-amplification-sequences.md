@@ -1,6 +1,6 @@
 ---
 title: Angle and mass sequences in the amplification argument
-status: draft
+status: published
 research_item: def-expander-sync-amplification-sequences
 dependency_level: 11
 sources:

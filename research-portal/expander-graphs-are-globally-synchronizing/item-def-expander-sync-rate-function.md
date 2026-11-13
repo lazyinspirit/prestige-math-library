@@ -1,6 +1,6 @@
 ---
 title: Degree large-deviation rate function and roots
-status: draft
+status: published
 research_item: def-expander-sync-rate-function
 dependency_level: 6
 sources:

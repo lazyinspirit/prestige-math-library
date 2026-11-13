@@ -1,6 +1,6 @@
 ---
 title: Regular adjacency spectra and normalized expansion
-status: draft
+status: published
 research_item: prop-expander-prereq-regular-mean-zero-spectrum
 dependency_level: 1
 ---

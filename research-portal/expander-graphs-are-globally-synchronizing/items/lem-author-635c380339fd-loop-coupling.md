@@ -3,7 +3,7 @@ id: lem-author-635c380339fd-loop-coupling
 kind: lemma
 title: Loop coupling preserves the dynamics and centered Laplacian
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-loop-compatible-networks

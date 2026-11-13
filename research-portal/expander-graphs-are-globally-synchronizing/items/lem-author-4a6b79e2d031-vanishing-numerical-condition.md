@@ -3,7 +3,7 @@ id: lem-author-4a6b79e2d031-vanishing-numerical-condition
 title: Vanishing numerical condition for fixed positive Laplacian margins
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:thm-logarithm-slower-than-every-positive-power

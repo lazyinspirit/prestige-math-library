@@ -1,6 +1,6 @@
 ---
 title: Connectivity is necessary but not sufficient for synchrony
-status: draft
+status: published
 research_item: rem-expander-sync-connectivity-necessary
 dependency_level: 8
 sources:

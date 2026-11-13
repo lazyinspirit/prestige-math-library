@@ -1,6 +1,6 @@
 ---
 title: Typical regular graphs are almost Ramanujan
-status: draft
+status: published
 research_item: rem-expander-sync-friedman
 dependency_level: 5
 sources:

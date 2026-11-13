@@ -3,7 +3,7 @@ id: lem-author-cc4f5d837ae1-uniform-sharp-adjacency-bound
 title: Uniform constant-two adjacency control above a large logarithmic density
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-cc4f5d837ae1-uniform-centered-normalization

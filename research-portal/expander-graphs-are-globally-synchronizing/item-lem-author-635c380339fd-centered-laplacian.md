@@ -1,6 +1,6 @@
 ---
 title: The unnormalized Laplacian needs its own degree deviation
-status: draft
+status: published
 research_item: lem-author-635c380339fd-centered-laplacian
 dependency_level: 3
 ---

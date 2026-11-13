@@ -3,7 +3,7 @@ id: lem-author-2e2d9953c21a-logarithm-and-pi
 kind: lemma
 title: Rational logarithm and pi enclosures after range reduction
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:lem-range-reduced-exp-log-and-arctan-series-enclosures

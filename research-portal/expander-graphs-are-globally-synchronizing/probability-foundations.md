@@ -3,7 +3,7 @@ title: Random graphs and matrix concentration
 description: Develop degree tails, trace and Gaussian estimates, and
   concentration; connect them to regular spectra, connectivity and
   synchronization thresholds with each input's model and asymptotic range.
-status: draft
+status: published
 dependency_level: 2
 ---
 

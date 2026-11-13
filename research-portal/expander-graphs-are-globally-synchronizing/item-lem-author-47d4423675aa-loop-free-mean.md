@@ -1,6 +1,6 @@
 ---
 title: Loop-free Bernoulli adjacency and its two centerings
-status: draft
+status: published
 research_item: lem-author-47d4423675aa-loop-free-mean
 dependency_level: 3
 ---

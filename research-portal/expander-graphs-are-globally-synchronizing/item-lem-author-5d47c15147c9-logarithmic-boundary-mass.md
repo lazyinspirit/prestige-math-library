@@ -1,6 +1,6 @@
 ---
 title: Exact logarithmic binomial masses at bounded distance from an entropy root
-status: draft
+status: published
 research_item: lem-author-5d47c15147c9-logarithmic-boundary-mass
 dependency_level: 0
 ---

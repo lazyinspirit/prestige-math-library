@@ -3,7 +3,7 @@ id: rem-expander-sync-peche-soshnikov-bound
 title: The reported centered-adjacency estimate and its sparse-law limit
 kind: remark
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-erdos-renyi

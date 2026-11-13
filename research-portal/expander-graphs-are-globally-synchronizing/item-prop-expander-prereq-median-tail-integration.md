@@ -1,6 +1,6 @@
 ---
 title: Tail integration and a median-to-mean bridge
-status: draft
+status: published
 research_item: prop-expander-prereq-median-tail-integration
 dependency_level: 0
 ---

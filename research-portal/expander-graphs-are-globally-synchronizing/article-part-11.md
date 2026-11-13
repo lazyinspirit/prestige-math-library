@@ -2,7 +2,7 @@
 title: Article items · 11 — Entropy rates, inverse branches and shifted root contracts
 description: Presents 28 items from the article and its immediate prerequisites,
   covering dependency levels 5–6.
-status: draft
+status: published
 dependency_level: 7
 research_article_page: true
 item_count: 28

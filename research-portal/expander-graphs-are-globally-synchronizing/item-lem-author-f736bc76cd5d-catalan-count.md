@@ -1,6 +1,6 @@
 ---
 title: Dyck words and elementary Catalan growth
-status: draft
+status: published
 research_item: lem-author-f736bc76cd5d-catalan-count
 dependency_level: 0
 ---

@@ -1,6 +1,6 @@
 ---
 title: Tractable order parameter inequalities — Lemma 2.5
-status: draft
+status: published
 research_item: lem-expander-sync-lem-2-5
 dependency_level: 12
 sources:

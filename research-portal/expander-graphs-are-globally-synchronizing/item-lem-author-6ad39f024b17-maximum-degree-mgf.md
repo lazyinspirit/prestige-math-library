@@ -1,6 +1,6 @@
 ---
 title: A maximum-degree tail with an explicit logarithmic exponent
-status: draft
+status: published
 research_item: lem-author-6ad39f024b17-maximum-degree-mgf
 dependency_level: 0
 ---

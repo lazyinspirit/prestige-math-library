@@ -3,7 +3,7 @@ id: lem-author-8d6ffb027277-prescribed-cycle-transfer
 kind: lemma
 title: From Hamiltonicity and an invariant event to a prescribed cycle
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-8d6ffb027277-uniform-vertex-relabeling

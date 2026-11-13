@@ -1,6 +1,6 @@
 ---
 title: Entropy rates, inverse branches and shifted root contracts
-status: draft
+status: published
 research_item: prop-expander-prereq-entropy-root-geometry
 dependency_level: 5
 ---

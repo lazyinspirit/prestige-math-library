@@ -1,6 +1,6 @@
 ---
 title: Cubic estimates used for the order parameter bootstrap
-status: draft
+status: published
 research_item: lem-expander-sync-order-cubic
 dependency_level: 11
 sources:

@@ -1,6 +1,6 @@
 ---
 title: Typical regular graphs are Hamiltonian
-status: draft
+status: published
 research_item: rem-expander-sync-regular-hamiltonian
 dependency_level: 5
 sources:

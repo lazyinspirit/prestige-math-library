@@ -1,6 +1,6 @@
 ---
 title: General amplification for signed optimization landscapes
-status: draft
+status: published
 research_item: op-expander-sync-signed-landscape-question
 dependency_level: 11
 sources:

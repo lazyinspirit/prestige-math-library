@@ -1,6 +1,6 @@
 ---
 title: Mass-angle lower bound — Lemma 4.1
-status: draft
+status: published
 research_item: lem-expander-sync-lem-4-1
 dependency_level: 12
 sources:

@@ -1,6 +1,6 @@
 ---
 title: A negative adjacency eigenvalue survives all-ones centering
-status: draft
+status: published
 research_item: lem-author-47d4423675aa-rank-one-lower-edge
 dependency_level: 2
 ---

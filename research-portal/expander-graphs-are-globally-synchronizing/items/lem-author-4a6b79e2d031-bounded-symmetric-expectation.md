@@ -3,7 +3,7 @@ id: lem-author-4a6b79e2d031-bounded-symmetric-expectation
 title: Bounded symmetric matrix expectation at the variance scale
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-vertex-hilbert-space

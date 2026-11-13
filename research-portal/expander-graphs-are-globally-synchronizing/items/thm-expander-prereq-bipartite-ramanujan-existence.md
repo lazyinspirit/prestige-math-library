@@ -3,7 +3,7 @@ id: thm-expander-prereq-bipartite-ramanujan-existence
 kind: theorem
 title: Bipartite Ramanujan existence and the centered spectrum
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-loop-compatible-networks

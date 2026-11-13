@@ -3,7 +3,7 @@ id: def-expander-prereq-loop-compatible-networks
 kind: definition
 title: Finite symmetric networks and loop removal
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-finite-simple-graph

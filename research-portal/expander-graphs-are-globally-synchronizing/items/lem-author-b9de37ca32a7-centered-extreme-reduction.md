@@ -3,7 +3,7 @@ id: lem-author-b9de37ca32a7-centered-extreme-reduction
 kind: lemma
 title: Extreme-value Lipschitz bounds and centered norm reduction
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-b9de37ca32a7-triangular-norm-moments

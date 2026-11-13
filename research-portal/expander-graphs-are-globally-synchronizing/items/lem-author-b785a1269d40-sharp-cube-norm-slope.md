@@ -3,7 +3,7 @@ id: lem-author-b785a1269d40-sharp-cube-norm-slope
 title: The sharp coordinate constant already occurs inside the Bernoulli cube
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-symmetric-coordinate-metrics

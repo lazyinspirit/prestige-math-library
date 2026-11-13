@@ -3,7 +3,7 @@ id: lem-author-b9de37ca32a7-quadratic-gaussian-increments
 kind: lemma
 title: Quadratic Gaussian process and its increment metric
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-b9de37ca32a7-triangular-norm-moments

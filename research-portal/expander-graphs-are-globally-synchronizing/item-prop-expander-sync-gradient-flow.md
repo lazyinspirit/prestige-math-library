@@ -1,6 +1,6 @@
 ---
 title: Rotating-frame gradient formulation
-status: draft
+status: published
 research_item: prop-expander-sync-gradient-flow
 dependency_level: 4
 sources:

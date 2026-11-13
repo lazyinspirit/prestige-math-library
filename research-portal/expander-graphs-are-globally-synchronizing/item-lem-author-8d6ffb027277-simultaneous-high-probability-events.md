@@ -1,6 +1,6 @@
 ---
 title: Intersecting finitely many high-probability events
-status: draft
+status: published
 research_item: lem-author-8d6ffb027277-simultaneous-high-probability-events
 dependency_level: 1
 ---

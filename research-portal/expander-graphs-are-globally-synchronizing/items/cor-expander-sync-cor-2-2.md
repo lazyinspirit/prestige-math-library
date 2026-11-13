@@ -3,7 +3,7 @@ id: cor-expander-sync-cor-2-2
 title: Positive first order parameter — Corollary 2.2
 kind: corollary
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-graph-notation

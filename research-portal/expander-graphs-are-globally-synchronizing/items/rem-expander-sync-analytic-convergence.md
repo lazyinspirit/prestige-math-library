@@ -3,7 +3,7 @@ id: rem-expander-sync-analytic-convergence
 kind: remark
 title: Single-point convergence for analytic gradient flows
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-energy

@@ -1,6 +1,6 @@
 ---
 title: Energy identity and displacement for Euclidean gradient trajectories
-status: draft
+status: published
 research_item: lem-author-647111dd30d9-gradient-energy
 dependency_level: 0
 ---

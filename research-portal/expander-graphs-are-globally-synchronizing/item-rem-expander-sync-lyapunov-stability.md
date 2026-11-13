@@ -1,6 +1,6 @@
 ---
 title: Analytic local minima and Lyapunov stability
-status: draft
+status: published
 research_item: rem-expander-sync-lyapunov-stability
 dependency_level: 6
 sources:

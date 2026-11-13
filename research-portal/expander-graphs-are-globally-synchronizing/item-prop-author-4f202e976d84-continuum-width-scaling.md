@@ -1,6 +1,6 @@
 ---
 title: Width scaling of the continuum branch threshold
-status: draft
+status: published
 research_item: prop-author-4f202e976d84-continuum-width-scaling
 dependency_level: 3
 ---

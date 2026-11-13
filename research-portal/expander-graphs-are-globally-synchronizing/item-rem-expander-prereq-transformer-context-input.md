@@ -1,6 +1,6 @@
 ---
 title: A scoped interacting-particle transformer connection
-status: draft
+status: published
 research_item: rem-expander-prereq-transformer-context-input
 dependency_level: 1
 sources:

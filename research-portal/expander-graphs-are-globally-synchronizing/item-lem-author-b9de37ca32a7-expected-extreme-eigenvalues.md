@@ -1,6 +1,6 @@
 ---
 title: Expected extreme eigenvalues from finite Gaussian comparison
-status: draft
+status: published
 research_item: lem-author-b9de37ca32a7-expected-extreme-eigenvalues
 dependency_level: 3
 ---

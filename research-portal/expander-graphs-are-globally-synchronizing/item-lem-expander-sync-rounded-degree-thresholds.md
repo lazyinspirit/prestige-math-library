@@ -1,6 +1,6 @@
 ---
 title: Rounded degree thresholds and expectation bounds
-status: draft
+status: published
 research_item: lem-expander-sync-rounded-degree-thresholds
 dependency_level: 9
 sources:

@@ -1,6 +1,6 @@
 ---
 title: Adjacency spectral expander — Definition 1.3
-status: draft
+status: published
 research_item: def-expander-sync-adjacency-expander
 dependency_level: 3
 sources:

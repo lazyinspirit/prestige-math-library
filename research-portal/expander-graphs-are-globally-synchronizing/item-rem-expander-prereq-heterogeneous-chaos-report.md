@@ -1,6 +1,6 @@
 ---
 title: An independently attributed heterogeneous-model chaos report
-status: draft
+status: published
 research_item: rem-expander-prereq-heterogeneous-chaos-report
 dependency_level: 1
 sources:

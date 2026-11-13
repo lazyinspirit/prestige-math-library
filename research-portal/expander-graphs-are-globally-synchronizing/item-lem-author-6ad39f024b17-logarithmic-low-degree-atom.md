@@ -1,6 +1,6 @@
 ---
 title: A logarithmic low-degree atom for the gamma-two graph
-status: draft
+status: published
 research_item: lem-author-6ad39f024b17-logarithmic-low-degree-atom
 dependency_level: 0
 ---

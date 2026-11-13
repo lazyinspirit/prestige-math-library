@@ -1,6 +1,6 @@
 ---
 title: Stack construction of closed walks with loops and repeated edges
-status: draft
+status: published
 research_item: lem-author-f736bc76cd5d-stack-closed-walks
 dependency_level: 1
 ---

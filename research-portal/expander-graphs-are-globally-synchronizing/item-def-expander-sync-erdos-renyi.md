@@ -1,6 +1,6 @@
 ---
 title: Erdős–Rényi random graph and high probability
-status: draft
+status: published
 research_item: def-expander-sync-erdos-renyi
 dependency_level: 1
 sources:

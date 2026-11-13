@@ -1,6 +1,6 @@
 ---
 title: Adapted norm balls are ordinary Euclidean neighbourhoods
-status: draft
+status: published
 research_item: lem-author-4c1c39929ecb-adapted-ball-neighbourhoods
 dependency_level: 0
 ---

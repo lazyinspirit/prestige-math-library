@@ -1,6 +1,6 @@
 ---
 title: Loewner order, Hermitian inner product, and operator norm
-status: draft
+status: published
 research_item: def-expander-sync-matrix-order
 dependency_level: 2
 sources:

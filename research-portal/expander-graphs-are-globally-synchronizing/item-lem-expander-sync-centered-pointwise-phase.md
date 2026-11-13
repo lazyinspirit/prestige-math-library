@@ -1,6 +1,6 @@
 ---
 title: Centered-adjacency pointwise phase bounds
-status: draft
+status: published
 research_item: lem-expander-sync-centered-pointwise-phase
 dependency_level: 8
 sources:

@@ -3,7 +3,7 @@ id: rem-expander-sync-continuum-transition
 title: Background continuum phase transition
 kind: remark
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-kuramoto-system

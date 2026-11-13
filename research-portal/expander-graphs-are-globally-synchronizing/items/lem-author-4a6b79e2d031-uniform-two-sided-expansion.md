@@ -3,7 +3,7 @@ id: lem-author-4a6b79e2d031-uniform-two-sided-expansion
 title: Uniform two-sided expansion sufficient for global synchrony
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-4a6b79e2d031-uniform-centered-adjacency

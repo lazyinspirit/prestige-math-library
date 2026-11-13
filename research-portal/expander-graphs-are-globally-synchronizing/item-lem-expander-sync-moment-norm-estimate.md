@@ -1,6 +1,6 @@
 ---
 title: Expected-norm estimate from the corrected moment comparison
-status: draft
+status: published
 research_item: lem-expander-sync-moment-norm-estimate
 dependency_level: 7
 sources:

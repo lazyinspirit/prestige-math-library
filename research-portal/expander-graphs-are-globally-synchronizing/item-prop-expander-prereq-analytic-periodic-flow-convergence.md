@@ -1,6 +1,6 @@
 ---
 title: Point convergence for compact analytic periodic gradient flows
-status: draft
+status: published
 research_item: prop-expander-prereq-analytic-periodic-flow-convergence
 dependency_level: 4
 ---

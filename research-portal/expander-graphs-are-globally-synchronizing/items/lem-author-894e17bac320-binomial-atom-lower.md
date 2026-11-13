@@ -3,7 +3,7 @@ id: lem-author-894e17bac320-binomial-atom-lower
 title: A lower estimate for a binomial point probability
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-b785a1269d40-independent-cross-degrees

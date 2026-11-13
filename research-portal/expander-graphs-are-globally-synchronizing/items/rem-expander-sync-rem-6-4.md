@@ -3,7 +3,7 @@ id: rem-expander-sync-rem-6-4
 title: Numerical coefficients and thresholds — Remark 6.4
 kind: remark
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-expander-sync-moment-norm-estimate

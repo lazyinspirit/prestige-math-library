@@ -3,7 +3,7 @@ id: thm-expander-prereq-uniform-regular-spectral-input
 title: Friedman spectral expansion in the uniform simple model
 kind: theorem
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-bcce21321c2a-feasible-regular-orders

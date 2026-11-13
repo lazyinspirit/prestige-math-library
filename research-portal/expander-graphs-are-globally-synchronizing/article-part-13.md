@@ -2,7 +2,7 @@
 title: Article items · 13 — Families with vanishing total spurious-basin measure
 description: Presents 28 items from the article and its immediate prerequisites,
   covering dependency levels 8–11.
-status: draft
+status: published
 dependency_level: 9
 research_article_page: true
 item_count: 28

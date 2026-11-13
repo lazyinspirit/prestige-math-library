@@ -3,7 +3,7 @@ id: thm-expander-prereq-regular-hamiltonicity-input
 kind: theorem
 title: Hamiltonicity of a uniform fixed-degree regular graph
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-regular-pairing-conditioning

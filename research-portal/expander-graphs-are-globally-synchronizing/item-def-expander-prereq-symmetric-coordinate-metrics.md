@@ -1,6 +1,6 @@
 ---
 title: Independent-entry coordinates, convexity and Lipschitz constants
-status: draft
+status: published
 research_item: def-expander-prereq-symmetric-coordinate-metrics
 dependency_level: 0
 ---

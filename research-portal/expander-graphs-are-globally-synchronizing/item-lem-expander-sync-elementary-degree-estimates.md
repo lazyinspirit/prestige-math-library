@@ -1,6 +1,6 @@
 ---
 title: Elementary estimates used for degree expectations
-status: draft
+status: published
 research_item: lem-expander-sync-elementary-degree-estimates
 dependency_level: 1
 sources:

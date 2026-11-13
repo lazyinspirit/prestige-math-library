@@ -1,6 +1,6 @@
 ---
 title: A positive minimum degree envelope at every fixed supercritical ratio
-status: draft
+status: published
 research_item: lem-author-4a6b79e2d031-positive-degree-envelope
 dependency_level: 1
 ---

@@ -3,7 +3,7 @@ id: lem-author-47d4423675aa-outlier-error-transfer
 title: A fixed outlier gap dominates the critical-source error
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-47d4423675aa-rank-one-lower-edge

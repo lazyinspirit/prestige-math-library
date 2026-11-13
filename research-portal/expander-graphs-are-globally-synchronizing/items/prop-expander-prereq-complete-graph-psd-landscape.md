@@ -3,7 +3,7 @@ id: prop-expander-prereq-complete-graph-psd-landscape
 kind: proposition
 title: A complete-graph second-order landscape application
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-phase-torus

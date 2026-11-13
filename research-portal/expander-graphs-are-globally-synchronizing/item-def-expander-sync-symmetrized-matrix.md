@@ -1,6 +1,6 @@
 ---
 title: Independent-copy symmetrization matrix
-status: draft
+status: published
 research_item: def-expander-sync-symmetrized-matrix
 dependency_level: 2
 sources:

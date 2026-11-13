@@ -3,7 +3,7 @@ id: lem-author-635c380339fd-fixed-density-budget
 kind: lemma
 title: Every fixed positive squared logarithmic density satisfies the budget
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-635c380339fd-inverse-sine-budget

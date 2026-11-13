@@ -1,6 +1,6 @@
 ---
 title: A lower estimate for a binomial point probability
-status: draft
+status: published
 research_item: lem-author-894e17bac320-binomial-atom-lower
 dependency_level: 1
 ---

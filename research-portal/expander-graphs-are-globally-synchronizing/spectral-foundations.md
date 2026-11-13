@@ -3,7 +3,7 @@ title: Spectral estimates and phase landscapes
 description: Supply graph and matrix conventions, centered cut estimates,
   angular and numerical controls, and graph-specific and vector-spin landscape
   applications.
-status: draft
+status: published
 dependency_level: 1
 ---
 

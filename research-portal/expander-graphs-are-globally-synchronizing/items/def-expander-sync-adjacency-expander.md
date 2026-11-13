@@ -3,7 +3,7 @@ id: def-expander-sync-adjacency-expander
 title: Adjacency spectral expander — Definition 1.3
 kind: definition
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-graph-notation

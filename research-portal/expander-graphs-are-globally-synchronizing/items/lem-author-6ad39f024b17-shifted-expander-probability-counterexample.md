@@ -3,7 +3,7 @@ id: lem-author-6ad39f024b17-shifted-expander-probability-counterexample
 title: Two fixed-parameter expander events have vanishing success probabilities
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-6ad39f024b17-small-minimum-degree

@@ -3,7 +3,7 @@ id: lem-author-bcce21321c2a-feasible-regular-orders
 title: Feasible labelled simple regular graph orders
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-finite-simple-graph

@@ -3,7 +3,7 @@ id: lem-author-ee25311adb41-analytic-ball-trapping
 kind: lemma
 title: Trapping a gradient tail near a critical cluster point
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-ee25311adb41-analytic-metric-transfer

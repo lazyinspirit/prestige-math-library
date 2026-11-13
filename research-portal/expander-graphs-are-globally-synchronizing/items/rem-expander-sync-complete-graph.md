@@ -3,7 +3,7 @@ id: rem-expander-sync-complete-graph
 title: Complete-graph positive-semidefinite equilibria
 kind: remark
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-energy

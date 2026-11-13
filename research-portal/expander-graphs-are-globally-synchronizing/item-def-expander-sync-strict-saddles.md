@@ -1,6 +1,6 @@
 ---
 title: Strict saddle critical point
-status: draft
+status: published
 research_item: def-expander-sync-strict-saddles
 dependency_level: 3
 sources:

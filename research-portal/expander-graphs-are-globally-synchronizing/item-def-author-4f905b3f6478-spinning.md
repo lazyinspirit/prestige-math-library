@@ -1,6 +1,6 @@
 ---
 title: Simple spinning graphs and cluster-constant equilibria
-status: draft
+status: published
 research_item: def-author-4f905b3f6478-spinning
 dependency_level: 2
 sources:

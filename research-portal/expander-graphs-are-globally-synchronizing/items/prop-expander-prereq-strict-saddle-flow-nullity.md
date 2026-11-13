@@ -3,7 +3,7 @@ id: prop-expander-prereq-strict-saddle-flow-nullity
 kind: proposition
 title: A null basin for all strict saddles of a smooth compact gradient flow
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-phase-torus

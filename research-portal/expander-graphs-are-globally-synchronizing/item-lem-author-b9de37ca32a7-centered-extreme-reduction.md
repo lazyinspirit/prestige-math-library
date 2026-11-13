@@ -1,6 +1,6 @@
 ---
 title: Extreme-value Lipschitz bounds and centered norm reduction
-status: draft
+status: published
 research_item: lem-author-b9de37ca32a7-centered-extreme-reduction
 dependency_level: 4
 ---

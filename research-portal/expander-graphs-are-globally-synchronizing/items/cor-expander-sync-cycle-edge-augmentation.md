@@ -3,7 +3,7 @@ id: cor-expander-sync-cycle-edge-augmentation
 title: Destroying cycle spurious minima by bounded-degree edge additions
 kind: corollary
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-expander-sync-cor-1-6

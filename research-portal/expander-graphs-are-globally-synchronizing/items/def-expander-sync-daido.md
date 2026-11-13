@@ -3,7 +3,7 @@ id: def-expander-sync-daido
 title: Daido order parameters
 kind: definition
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-phase-torus

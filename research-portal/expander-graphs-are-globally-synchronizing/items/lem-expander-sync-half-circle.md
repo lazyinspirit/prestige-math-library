@@ -3,7 +3,7 @@ id: lem-expander-sync-half-circle
 title: Half-circle lemma — Lemma 2.9
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-expander-sync-kernel-stability

@@ -3,7 +3,7 @@ id: prop-expander-prereq-random-matrix-walk-expansion
 kind: proposition
 title: Trace powers, closed walks and independent edge moments
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-vertex-hilbert-space

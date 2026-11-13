@@ -1,6 +1,6 @@
 ---
 title: Uniform bound on average H mass — Corollary 2.6
-status: draft
+status: published
 research_item: cor-expander-sync-cor-2-6
 dependency_level: 13
 sources:

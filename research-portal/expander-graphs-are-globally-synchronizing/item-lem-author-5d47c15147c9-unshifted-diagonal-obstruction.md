@@ -1,6 +1,6 @@
 ---
 title: The unshifted lower Laplacian bound excludes a boundary degree
-status: draft
+status: published
 research_item: lem-author-5d47c15147c9-unshifted-diagonal-obstruction
 dependency_level: 7
 ---

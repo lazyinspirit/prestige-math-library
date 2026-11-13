@@ -3,7 +3,7 @@ id: def-expander-prereq-polynomial-root-certificates
 kind: definition
 title: Root and sign certificates for parameter-dependent polynomials
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-polynomial-ring-on-a-family-of-indeterminates

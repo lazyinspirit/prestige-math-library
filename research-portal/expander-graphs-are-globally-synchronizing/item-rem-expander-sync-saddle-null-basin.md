@@ -1,6 +1,6 @@
 ---
 title: Measure-zero convergence to strict saddles
-status: draft
+status: published
 research_item: rem-expander-sync-saddle-null-basin
 dependency_level: 5
 sources:

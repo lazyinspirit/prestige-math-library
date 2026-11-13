@@ -1,6 +1,6 @@
 ---
 title: Total incident edge bounds — Lemma 3.6
-status: draft
+status: published
 research_item: lem-expander-sync-lem-3-6
 dependency_level: 6
 sources:

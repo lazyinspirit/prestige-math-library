@@ -1,6 +1,6 @@
 ---
 title: Quadratic Gaussian process and its increment metric
-status: draft
+status: published
 research_item: lem-author-b9de37ca32a7-quadratic-gaussian-increments
 dependency_level: 2
 ---

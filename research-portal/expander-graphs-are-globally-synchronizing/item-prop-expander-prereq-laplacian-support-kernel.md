@@ -1,6 +1,6 @@
 ---
 title: Support connectivity and the unnormalized Laplacian kernel
-status: draft
+status: published
 research_item: prop-expander-prereq-laplacian-support-kernel
 dependency_level: 1
 ---

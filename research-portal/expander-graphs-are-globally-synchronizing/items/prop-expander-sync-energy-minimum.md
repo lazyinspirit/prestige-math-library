@@ -3,7 +3,7 @@ id: prop-expander-sync-energy-minimum
 title: Nonnegativity and synchronized global minima
 kind: proposition
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-energy

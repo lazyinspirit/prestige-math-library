@@ -1,6 +1,6 @@
 ---
 title: Asymptotically global synchrony via basin mass
-status: draft
+status: published
 research_item: def-expander-sync-asymptotic-synchrony
 dependency_level: 7
 sources:

@@ -1,6 +1,6 @@
 ---
 title: Bounds, saturation, and rotation of order parameters
-status: draft
+status: published
 research_item: prop-expander-sync-daido-properties
 dependency_level: 4
 sources:

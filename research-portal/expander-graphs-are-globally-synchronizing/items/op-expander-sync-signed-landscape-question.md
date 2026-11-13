@@ -3,7 +3,7 @@ id: op-expander-sync-signed-landscape-question
 title: General amplification for signed optimization landscapes
 kind: open-problem
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-vector-spin-landscapes

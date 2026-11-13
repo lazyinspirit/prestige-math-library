@@ -3,7 +3,7 @@ id: lem-author-c1dce5041ae4-small-component-sum
 kind: lemma
 title: Components between two vertices and half the graph disappear in the window
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-c1dce5041ae4-component-parent-bound

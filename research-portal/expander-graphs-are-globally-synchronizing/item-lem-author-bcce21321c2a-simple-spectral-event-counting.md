@@ -1,6 +1,6 @@
 ---
 title: Simple-model spectral events as conditional pairing counts
-status: draft
+status: published
 research_item: lem-author-bcce21321c2a-simple-spectral-event-counting
 dependency_level: 3
 ---

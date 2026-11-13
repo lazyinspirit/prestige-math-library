@@ -3,7 +3,7 @@ id: lem-author-4c1c39929ecb-transport-of-trapping
 kind: lemma
 title: Transport local invariance and forward trapping to a fixed point
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-4c1c39929ecb-fixed-point-translation

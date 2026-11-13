@@ -3,7 +3,7 @@ id: prop-expander-prereq-complex-quadratic-tests
 kind: proposition
 title: Real symmetric quadratic forms tested on phasors
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-vertex-hilbert-space

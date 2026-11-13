@@ -3,7 +3,7 @@ id: lem-author-bcce21321c2a-regular-spectral-obstructions
 title: Disconnected and bipartite spectral witnesses
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-bcce21321c2a-ordered-centered-spectrum

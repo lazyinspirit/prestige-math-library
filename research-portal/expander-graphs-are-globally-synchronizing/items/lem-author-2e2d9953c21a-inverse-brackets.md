@@ -3,7 +3,7 @@ id: lem-author-2e2d9953c21a-inverse-brackets
 kind: lemma
 title: Rational inverse-sine brackets on the principal branch
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-2e2d9953c21a-sine-enclosures

@@ -3,7 +3,7 @@ id: post-expander-prereq-phase-model-assumptions
 kind: postulate
 title: Scope of the phase-only sinusoidal oscillator idealization
 domain: physics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-phasor-calculus

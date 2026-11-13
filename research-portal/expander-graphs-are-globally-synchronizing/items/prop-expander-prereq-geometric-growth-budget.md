@@ -3,7 +3,7 @@ id: prop-expander-prereq-geometric-growth-budget
 kind: proposition
 title: Geometric growth, truncation and total decrement budgets
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:thm-geometric-series

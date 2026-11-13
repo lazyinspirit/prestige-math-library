@@ -1,6 +1,6 @@
 ---
 title: An independent symmetric-Gaussian norm moment input
-status: draft
+status: published
 research_item: thm-expander-prereq-gaussian-wigner-moment-input
 dependency_level: 5
 sources:

@@ -1,6 +1,6 @@
 ---
 title: Hamiltonian cycles as finite cyclic-order events
-status: draft
+status: published
 research_item: lem-author-8d6ffb027277-hamilton-cycle-encodings
 dependency_level: 1
 ---

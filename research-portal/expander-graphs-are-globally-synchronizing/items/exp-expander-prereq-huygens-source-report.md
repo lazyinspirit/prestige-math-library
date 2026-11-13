@@ -3,7 +3,7 @@ id: exp-expander-prereq-huygens-source-report
 kind: experiment
 title: Historical report of Huygens’s two clocks
 domain: physics
-status: draft
+status: published
 origin: pipeline
 deps: []
 dependency_roles: {}

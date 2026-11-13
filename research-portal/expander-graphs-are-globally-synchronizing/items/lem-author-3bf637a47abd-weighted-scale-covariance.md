@@ -3,7 +3,7 @@ id: lem-author-3bf637a47abd-weighted-scale-covariance
 kind: lemma
 title: Covariance under a common positive rescaling of weights
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-loop-compatible-networks

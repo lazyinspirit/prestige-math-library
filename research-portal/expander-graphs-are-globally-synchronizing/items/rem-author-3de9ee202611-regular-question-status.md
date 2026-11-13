@@ -4,7 +4,7 @@ title: Historical regular-graph synchronization question and subsequent
   negative-resolution claims
 kind: remark
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-graph-notation

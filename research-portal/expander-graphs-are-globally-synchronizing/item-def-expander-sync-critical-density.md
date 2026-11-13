@@ -1,6 +1,6 @@
 ---
 title: Critical minimum-degree connectivity parameter
-status: draft
+status: published
 research_item: def-expander-sync-critical-density
 dependency_level: 7
 sources:

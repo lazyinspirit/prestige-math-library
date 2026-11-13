@@ -1,6 +1,6 @@
 ---
 title: Weighted spectral bounds control the degree without loops
-status: draft
+status: published
 research_item: lem-author-3bf637a47abd-weighted-offdiagonal-degree
 dependency_level: 2
 ---

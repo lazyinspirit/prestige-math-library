@@ -1,6 +1,6 @@
 ---
 title: Asymptotic quantifiers and uniform parameter ranges
-status: draft
+status: published
 research_item: def-expander-prereq-asymptotic-quantifiers
 dependency_level: 0
 ---

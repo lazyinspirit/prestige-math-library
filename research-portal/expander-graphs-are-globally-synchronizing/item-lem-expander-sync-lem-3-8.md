@@ -1,6 +1,6 @@
 ---
 title: Relative mixing for a small nested set — Lemma 3.8
-status: draft
+status: published
 research_item: lem-expander-sync-lem-3-8
 dependency_level: 7
 sources:

@@ -3,7 +3,7 @@ id: lem-author-2bcd11f9e275-entropy-inverse-branches
 kind: lemma
 title: Differentiable entropy inverse branches and shifted contracts
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-2bcd11f9e275-entropy-branch-geometry

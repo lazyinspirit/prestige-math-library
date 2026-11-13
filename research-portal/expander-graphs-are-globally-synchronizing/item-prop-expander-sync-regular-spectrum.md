@@ -1,6 +1,6 @@
 ---
 title: Regular spectral characterization and notation convention
-status: draft
+status: published
 research_item: prop-expander-sync-regular-spectrum
 dependency_level: 4
 sources:

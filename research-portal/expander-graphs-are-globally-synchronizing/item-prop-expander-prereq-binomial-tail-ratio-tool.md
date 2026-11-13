@@ -1,6 +1,6 @@
 ---
 title: Binomial mass ratios and geometric tail domination
-status: draft
+status: published
 research_item: prop-expander-prereq-binomial-tail-ratio-tool
 dependency_level: 0
 ---

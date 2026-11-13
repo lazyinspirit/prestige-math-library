@@ -1,6 +1,6 @@
 ---
 title: Regular spectral expansion implies synchronization — Theorem 1.4
-status: draft
+status: published
 research_item: thm-expander-sync-thm-1-4
 dependency_level: 10
 sources:

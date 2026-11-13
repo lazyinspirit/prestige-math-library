@@ -3,7 +3,7 @@ id: def-expander-sync-edge-count
 title: Oriented edge count between sets
 kind: definition
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-graph-notation

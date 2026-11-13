@@ -3,7 +3,7 @@ id: lem-author-b785a1269d40-degree-forces-centered-norm
 title: A high-degree vertex forces a large centered adjacency norm
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-operator-norm-on-a-finite-dimensional-inner-product-space

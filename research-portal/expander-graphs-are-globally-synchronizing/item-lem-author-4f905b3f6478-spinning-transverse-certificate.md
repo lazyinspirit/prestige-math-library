@@ -1,6 +1,6 @@
 ---
 title: Transverse positivity for the special spinning family
-status: draft
+status: published
 research_item: lem-author-4f905b3f6478-spinning-transverse-certificate
 dependency_level: 4
 sources:

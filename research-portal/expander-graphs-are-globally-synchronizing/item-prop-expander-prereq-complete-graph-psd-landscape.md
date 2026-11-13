@@ -1,6 +1,6 @@
 ---
 title: A complete-graph second-order landscape application
-status: draft
+status: published
 research_item: prop-expander-prereq-complete-graph-psd-landscape
 dependency_level: 2
 ---

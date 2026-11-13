@@ -3,7 +3,7 @@ id: def-expander-prereq-symmetric-coordinate-metrics
 kind: definition
 title: Independent-entry coordinates, convexity and Lipschitz constants
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:lem-symmetric-matrix-frobenius-isometry

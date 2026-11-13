@@ -1,6 +1,6 @@
 ---
 title: Elementary angle and logarithm estimates used in amplification
-status: draft
+status: published
 research_item: lem-expander-sync-elementary-angle-bounds
 dependency_level: 1
 sources:

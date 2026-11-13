@@ -3,7 +3,7 @@ id: thm-expander-prereq-fixed-law-wigner-edge-input
 kind: theorem
 title: A fixed-law Wigner spectral-edge input
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-asymptotic-quantifiers

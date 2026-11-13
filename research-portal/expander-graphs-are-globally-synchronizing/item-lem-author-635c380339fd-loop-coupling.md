@@ -1,6 +1,6 @@
 ---
 title: Loop coupling preserves the dynamics and centered Laplacian
-status: draft
+status: published
 research_item: lem-author-635c380339fd-loop-coupling
 dependency_level: 1
 ---

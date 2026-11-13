@@ -3,7 +3,7 @@ id: ex-expander-sync-poor-expansion-example
 title: Two cliques joined by one edge synchronize despite poor expansion
 kind: example
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-graph-notation

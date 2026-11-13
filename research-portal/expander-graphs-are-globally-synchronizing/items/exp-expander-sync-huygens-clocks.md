@@ -3,7 +3,7 @@ id: exp-expander-sync-huygens-clocks
 title: Historical observation of coupled pendulum clocks
 kind: experiment
 domain: physics
-status: draft
+status: published
 origin: pipeline
 deps:
   - exp-expander-prereq-huygens-source-report

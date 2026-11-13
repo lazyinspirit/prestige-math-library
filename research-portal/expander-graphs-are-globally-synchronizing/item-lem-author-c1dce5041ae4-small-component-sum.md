@@ -1,6 +1,6 @@
 ---
 title: Components between two vertices and half the graph disappear in the window
-status: draft
+status: published
 research_item: lem-author-c1dce5041ae4-small-component-sum
 dependency_level: 1
 ---

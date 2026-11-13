@@ -3,7 +3,7 @@ id: lem-author-8d6ffb027277-hamilton-cycle-encodings
 kind: lemma
 title: Hamiltonian cycles as finite cyclic-order events
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-regular-pairing-conditioning

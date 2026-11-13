@@ -1,6 +1,6 @@
 ---
 title: Loop removal in the weighted Kuramoto calculus
-status: draft
+status: published
 research_item: lem-author-3bf637a47abd-weighted-loop-calculus
 dependency_level: 2
 ---

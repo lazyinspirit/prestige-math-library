@@ -3,7 +3,7 @@ id: def-expander-prereq-phasor-calculus
 kind: definition
 title: Phasors, trigonometric identities and periodic derivatives
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-complex-exponential

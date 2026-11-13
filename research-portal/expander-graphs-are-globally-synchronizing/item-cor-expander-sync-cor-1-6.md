@@ -1,6 +1,6 @@
 ---
 title: Ramanujan and typical regular graphs synchronize for degree at least 600
-status: draft
+status: published
 research_item: cor-expander-sync-cor-1-6
 dependency_level: 11
 sources:

@@ -3,7 +3,7 @@ id: lem-author-647111dd30d9-compact-critical-accumulation
 kind: lemma
 title: A compactly trapped gradient trajectory has a critical accumulation point
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-647111dd30d9-gradient-energy

@@ -1,6 +1,6 @@
 ---
 title: Even trace moments transfer from the operator norm
-status: draft
+status: published
 research_item: lem-author-b9de37ca32a7-even-trace-transfer
 dependency_level: 2
 ---

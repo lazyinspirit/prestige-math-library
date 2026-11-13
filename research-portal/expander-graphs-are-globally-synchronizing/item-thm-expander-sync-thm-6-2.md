@@ -1,7 +1,7 @@
 ---
 title: Quantitative Erdős–Rényi synchrony and the false exact-expansion rate —
   Theorem 6.2
-status: draft
+status: published
 research_item: thm-expander-sync-thm-6-2
 dependency_level: 12
 sources:

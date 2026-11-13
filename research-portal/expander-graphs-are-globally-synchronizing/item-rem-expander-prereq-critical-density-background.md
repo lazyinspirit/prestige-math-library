@@ -1,6 +1,6 @@
 ---
 title: Independent inputs for the critical-density bounds
-status: draft
+status: published
 research_item: rem-expander-prereq-critical-density-background
 dependency_level: 6
 sources:

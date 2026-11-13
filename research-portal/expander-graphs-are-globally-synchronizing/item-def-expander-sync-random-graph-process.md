@@ -1,6 +1,6 @@
 ---
 title: Random graph process and connectivity hitting time
-status: draft
+status: published
 research_item: def-expander-sync-random-graph-process
 dependency_level: 2
 sources:

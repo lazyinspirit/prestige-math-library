@@ -3,7 +3,7 @@ id: lem-author-b9de37ca32a7-even-trace-transfer
 kind: lemma
 title: Even trace moments transfer from the operator norm
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-b9de37ca32a7-triangular-norm-moments

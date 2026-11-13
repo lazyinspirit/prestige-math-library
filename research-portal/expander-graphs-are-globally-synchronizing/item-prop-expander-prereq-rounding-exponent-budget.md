@@ -1,6 +1,6 @@
 ---
 title: Floor and ceiling thresholds in logarithmic degree estimates
-status: draft
+status: published
 research_item: prop-expander-prereq-rounding-exponent-budget
 dependency_level: 0
 ---

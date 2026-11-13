@@ -1,6 +1,6 @@
 ---
 title: Background continuum phase transition
-status: draft
+status: published
 research_item: rem-expander-sync-continuum-transition
 dependency_level: 4
 sources:

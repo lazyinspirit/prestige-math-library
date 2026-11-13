@@ -1,6 +1,6 @@
 ---
 title: A high-degree vertex forces a large centered adjacency norm
-status: draft
+status: published
 research_item: lem-author-b785a1269d40-degree-forces-centered-norm
 dependency_level: 3
 ---

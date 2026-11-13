@@ -3,7 +3,7 @@ id: lem-author-fc0d6c95270f-spectral-window-ratio
 kind: lemma
 title: A spectral window giving condition number below two
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-author-fc0d6c95270f-normalized-laplacian

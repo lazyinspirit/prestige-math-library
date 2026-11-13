@@ -3,7 +3,7 @@ id: prop-expander-prereq-degree-law-and-dependence
 kind: proposition
 title: Single-vertex degree laws and the shared-edge dependence
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-erdos-renyi-random-graph

@@ -3,7 +3,7 @@ id: prop-expander-sync-h-properties
 title: Elementary properties of the function H
 kind: proposition
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-h

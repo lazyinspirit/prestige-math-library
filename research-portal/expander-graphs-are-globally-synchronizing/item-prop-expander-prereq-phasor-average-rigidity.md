@@ -1,6 +1,6 @@
 ---
 title: Rigidity and rotation of a unit-phasor average
-status: draft
+status: published
 research_item: prop-expander-prereq-phasor-average-rigidity
 dependency_level: 1
 ---

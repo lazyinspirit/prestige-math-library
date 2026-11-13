@@ -3,7 +3,7 @@ id: lem-author-ee25311adb41-compact-manifold-point-limit
 kind: lemma
 title: Finite tail length and point convergence on a compact analytic manifold
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-ee25311adb41-analytic-metric-transfer

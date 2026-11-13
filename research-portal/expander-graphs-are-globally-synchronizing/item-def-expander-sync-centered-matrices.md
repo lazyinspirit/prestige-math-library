@@ -1,6 +1,6 @@
 ---
 title: Centered graph matrices and reference degree
-status: draft
+status: published
 research_item: def-expander-sync-centered-matrices
 dependency_level: 2
 sources:

@@ -3,7 +3,7 @@ id: rem-expander-sync-landscape-progress
 title: Reported progress on benign landscapes and an alternative synchronization proof
 kind: remark
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-expander-sync-thm-1-2

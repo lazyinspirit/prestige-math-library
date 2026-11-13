@@ -1,6 +1,6 @@
 ---
 title: Rational logarithm and pi enclosures after range reduction
-status: draft
+status: published
 research_item: lem-author-2e2d9953c21a-logarithm-and-pi
 dependency_level: 0
 ---

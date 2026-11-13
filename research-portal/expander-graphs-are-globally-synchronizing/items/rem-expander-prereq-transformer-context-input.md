@@ -3,7 +3,7 @@ id: rem-expander-prereq-transformer-context-input
 kind: remark
 title: A scoped interacting-particle transformer connection
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-sphere-vector-configurations

@@ -1,6 +1,6 @@
 ---
 title: A complete weighted network distinguishes a loop cap from spectral control
-status: draft
+status: published
 research_item: lem-author-3bf637a47abd-weighted-complete-example
 dependency_level: 4
 ---

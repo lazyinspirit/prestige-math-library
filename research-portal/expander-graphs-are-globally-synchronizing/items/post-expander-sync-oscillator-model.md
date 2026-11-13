@@ -3,7 +3,7 @@ id: post-expander-sync-oscillator-model
 title: Phase oscillator interpretation and homogeneous modeling assumption
 kind: postulate
 domain: physics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-kuramoto-system

@@ -1,6 +1,6 @@
 ---
 title: Cut test-vector identities for Laplacian mixing
-status: draft
+status: published
 research_item: lem-expander-sync-cut-test-vector
 dependency_level: 3
 sources:

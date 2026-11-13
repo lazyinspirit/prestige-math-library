@@ -1,6 +1,6 @@
 ---
 title: Phasors, trigonometric identities and periodic derivatives
-status: draft
+status: published
 research_item: def-expander-prereq-phasor-calculus
 dependency_level: 0
 ---

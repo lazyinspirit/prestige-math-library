@@ -1,6 +1,6 @@
 ---
 title: Finite symmetric networks and loop removal
-status: draft
+status: published
 research_item: def-expander-prereq-loop-compatible-networks
 dependency_level: 0
 ---

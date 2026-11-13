@@ -1,6 +1,6 @@
 ---
 title: Strict forms of the nested mixing estimates — Remark 3.9
-status: draft
+status: published
 research_item: rem-expander-sync-rem-3-9
 dependency_level: 8
 sources:

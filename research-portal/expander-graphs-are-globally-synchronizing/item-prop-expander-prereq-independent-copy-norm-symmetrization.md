@@ -1,6 +1,6 @@
 ---
 title: Norm symmetrization at the actual matrix mean
-status: draft
+status: published
 research_item: prop-expander-prereq-independent-copy-norm-symmetrization
 dependency_level: 0
 ---

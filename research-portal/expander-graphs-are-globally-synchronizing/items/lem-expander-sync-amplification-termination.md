@@ -3,7 +3,7 @@ id: lem-expander-sync-amplification-termination
 title: Mass growth, stopping, and final-angle claims
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - alg-expander-sync-amplification-construction

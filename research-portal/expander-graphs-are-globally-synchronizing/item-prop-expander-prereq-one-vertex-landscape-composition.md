@@ -1,6 +1,6 @@
 ---
 title: One-vertex composition of phase-difference landscapes
-status: draft
+status: published
 research_item: prop-expander-prereq-one-vertex-landscape-composition
 dependency_level: 2
 ---

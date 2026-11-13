@@ -1,6 +1,6 @@
 ---
 title: Explicit scalar quadratic descent and its forward domain
-status: draft
+status: published
 research_item: prop-expander-prereq-scalar-quadratic-flow
 dependency_level: 0
 ---

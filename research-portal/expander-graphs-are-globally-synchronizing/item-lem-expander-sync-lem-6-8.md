@@ -1,6 +1,6 @@
 ---
 title: Upper degree-tail count estimate — Lemma 6.8
-status: draft
+status: published
 research_item: lem-expander-sync-lem-6-8
 dependency_level: 3
 sources:

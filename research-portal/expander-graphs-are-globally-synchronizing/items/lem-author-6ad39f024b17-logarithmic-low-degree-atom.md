@@ -3,7 +3,7 @@ id: lem-author-6ad39f024b17-logarithmic-low-degree-atom
 title: A logarithmic low-degree atom for the gamma-two graph
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-erdos-renyi-random-graph

@@ -3,7 +3,7 @@ id: lem-author-8d6ffb027277-feasible-regular-orders
 kind: lemma
 title: Feasible orders for labelled simple regular graphs
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-regular-pairing-conditioning

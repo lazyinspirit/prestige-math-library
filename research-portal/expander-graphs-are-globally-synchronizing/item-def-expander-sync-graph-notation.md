@@ -1,6 +1,6 @@
 ---
 title: Adjacency, degrees, graph Laplacian, and spectral notation
-status: draft
+status: published
 research_item: def-expander-sync-graph-notation
 dependency_level: 1
 sources:

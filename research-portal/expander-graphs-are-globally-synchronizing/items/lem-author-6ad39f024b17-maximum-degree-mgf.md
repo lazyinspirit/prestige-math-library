@@ -3,7 +3,7 @@ id: lem-author-6ad39f024b17-maximum-degree-mgf
 title: A maximum-degree tail with an explicit logarithmic exponent
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-erdos-renyi-random-graph

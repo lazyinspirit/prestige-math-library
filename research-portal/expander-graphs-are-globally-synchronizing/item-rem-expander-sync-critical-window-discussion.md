@@ -1,6 +1,6 @@
 ---
 title: Critical-window gap and vanishing epsilon in the authors’ method
-status: draft
+status: published
 research_item: rem-expander-sync-critical-window-discussion
 dependency_level: 12
 sources:

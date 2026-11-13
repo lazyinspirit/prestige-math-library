@@ -1,6 +1,6 @@
 ---
 title: Families with vanishing total spurious-basin measure
-status: draft
+status: published
 research_item: op-expander-sync-basin-size-question
 dependency_level: 8
 sources:

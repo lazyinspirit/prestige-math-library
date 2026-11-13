@@ -3,7 +3,7 @@ id: rem-expander-sync-extremal-degree-asymptotics
 title: Extremal-degree asymptotics near connectivity
 kind: remark
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-erdos-renyi

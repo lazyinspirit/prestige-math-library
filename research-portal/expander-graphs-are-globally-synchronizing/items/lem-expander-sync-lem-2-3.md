@@ -3,7 +3,7 @@ id: lem-expander-sync-lem-2-3
 title: Order parameter control of total H mass — Lemma 2.3
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-states

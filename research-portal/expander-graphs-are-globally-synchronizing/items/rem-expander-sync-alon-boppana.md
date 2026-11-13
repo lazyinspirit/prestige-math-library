@@ -3,7 +3,7 @@ id: rem-expander-sync-alon-boppana
 title: Asymptotic optimality and existence background for Ramanujan graphs
 kind: remark
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-ramanujan

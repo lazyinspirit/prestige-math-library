@@ -3,7 +3,7 @@ id: lem-author-2e2d9953c21a-regular-numerical-replay
 kind: lemma
 title: Exact rational replay of the regular amplification constants
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-2e2d9953c21a-sine-enclosures

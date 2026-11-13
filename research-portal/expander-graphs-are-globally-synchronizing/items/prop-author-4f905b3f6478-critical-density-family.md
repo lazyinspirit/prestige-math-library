@@ -3,7 +3,7 @@ id: prop-author-4f905b3f6478-critical-density-family
 kind: proposition
 title: A simple nonsynchronizing family approaching eleven sixteenths
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-author-4f905b3f6478-spinning

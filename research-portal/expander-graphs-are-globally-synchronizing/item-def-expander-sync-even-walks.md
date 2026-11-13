@@ -1,6 +1,6 @@
 ---
 title: Even closed walks and traversal multiplicities
-status: draft
+status: published
 research_item: def-expander-sync-even-walks
 dependency_level: 2
 sources:

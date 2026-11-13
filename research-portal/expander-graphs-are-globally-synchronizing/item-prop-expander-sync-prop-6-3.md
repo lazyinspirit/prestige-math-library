@@ -1,6 +1,6 @@
 ---
 title: Expected centered-adjacency norm — Proposition 6.3
-status: draft
+status: published
 research_item: prop-expander-sync-prop-6-3
 dependency_level: 8
 sources:

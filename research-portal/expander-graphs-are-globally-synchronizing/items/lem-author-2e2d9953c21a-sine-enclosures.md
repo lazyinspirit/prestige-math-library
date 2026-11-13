@@ -3,7 +3,7 @@ id: lem-author-2e2d9953c21a-sine-enclosures
 kind: lemma
 title: Rational sine enclosures from a finite factorial sum
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-sine-and-cosine-by-power-series

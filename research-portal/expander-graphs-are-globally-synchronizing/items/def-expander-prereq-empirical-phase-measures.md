@@ -3,7 +3,7 @@ id: def-expander-prereq-empirical-phase-measures
 kind: definition
 title: Empirical phase measures and Fourier order statistics
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-phasor-calculus

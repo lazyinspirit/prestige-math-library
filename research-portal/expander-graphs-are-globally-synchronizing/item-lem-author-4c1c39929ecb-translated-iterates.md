@@ -1,6 +1,6 @@
 ---
 title: Translate every finite forward orbit without assuming global invertibility
-status: draft
+status: published
 research_item: lem-author-4c1c39929ecb-translated-iterates
 dependency_level: 1
 ---

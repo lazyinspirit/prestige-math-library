@@ -1,6 +1,6 @@
 ---
 title: Normalized phase volume and almost-everywhere assertions
-status: draft
+status: published
 research_item: def-expander-prereq-phase-volume
 dependency_level: 0
 ---

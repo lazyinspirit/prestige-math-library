@@ -3,7 +3,7 @@ id: rem-expander-sync-gaussian-norm-bound
 title: Gaussian trace/norm estimate attributed to Slepian comparison
 kind: remark
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-gaussian-comparator

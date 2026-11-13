@@ -2,7 +2,7 @@
 title: Supporting prerequisites · 02 — A centered adjacency column retains a
   high-degree lower bound
 description: Presents 19 supporting prerequisites, covering dependency levels 3–10.
-status: draft
+status: published
 dependency_level: 10
 item_count: 19
 ---

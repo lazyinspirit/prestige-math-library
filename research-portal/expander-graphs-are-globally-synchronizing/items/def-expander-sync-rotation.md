@@ -3,7 +3,7 @@ id: def-expander-sync-rotation
 title: Global rotation equivalence of phase configurations
 kind: definition
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-phase-torus

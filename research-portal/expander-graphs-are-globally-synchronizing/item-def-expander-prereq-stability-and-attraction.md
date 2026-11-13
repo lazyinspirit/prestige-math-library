@@ -1,6 +1,6 @@
 ---
 title: Point stability, attraction and stability of a set
-status: draft
+status: published
 research_item: def-expander-prereq-stability-and-attraction
 dependency_level: 0
 ---

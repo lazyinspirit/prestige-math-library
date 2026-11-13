@@ -4,7 +4,7 @@ title: Quantitative Erdős–Rényi synchrony and the false exact-expansion rate
   Theorem 6.2
 kind: theorem
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-erdos-renyi

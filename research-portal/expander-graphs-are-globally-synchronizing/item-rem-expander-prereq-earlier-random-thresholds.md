@@ -1,6 +1,6 @@
 ---
 title: Earlier thresholds with explicit source quantifiers and a fixed-scale deduction
-status: draft
+status: published
 research_item: rem-expander-prereq-earlier-random-thresholds
 dependency_level: 4
 sources:

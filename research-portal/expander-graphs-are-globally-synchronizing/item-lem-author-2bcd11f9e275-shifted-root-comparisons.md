@@ -1,6 +1,6 @@
 ---
 title: Inward comparison and small-shift limits of entropy roots
-status: draft
+status: published
 research_item: lem-author-2bcd11f9e275-shifted-root-comparisons
 dependency_level: 4
 ---

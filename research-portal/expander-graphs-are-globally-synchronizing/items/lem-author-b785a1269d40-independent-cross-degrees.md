@@ -3,7 +3,7 @@ id: lem-author-b785a1269d40-independent-cross-degrees
 title: Independent degrees into a fixed half of a random graph
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-erdos-renyi-random-graph

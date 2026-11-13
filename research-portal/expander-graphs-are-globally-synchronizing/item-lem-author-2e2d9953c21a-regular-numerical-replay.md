@@ -1,6 +1,6 @@
 ---
 title: Exact rational replay of the regular amplification constants
-status: draft
+status: published
 research_item: lem-author-2e2d9953c21a-regular-numerical-replay
 dependency_level: 2
 ---

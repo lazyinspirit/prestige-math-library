@@ -3,7 +3,7 @@ id: lem-author-b9de37ca32a7-triangular-norm-moments
 kind: lemma
 title: "Triangular Gaussian coordinates: metric and moment control"
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - prop-expander-prereq-gaussian-entry-moments

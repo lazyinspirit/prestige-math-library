@@ -3,7 +3,7 @@ id: lem-expander-sync-lem-3-6
 title: Total incident edge bounds — Lemma 3.6
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-two-sided-expander

@@ -1,6 +1,6 @@
 ---
 title: Two cliques joined by one edge synchronize despite poor expansion
-status: draft
+status: published
 research_item: ex-expander-sync-poor-expansion-example
 dependency_level: 10
 sources:

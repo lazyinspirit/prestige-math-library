@@ -3,7 +3,7 @@ id: rem-expander-sync-chernoff-degrees
 title: Chernoff degree concentration used in Section 6
 kind: remark
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-erdos-renyi

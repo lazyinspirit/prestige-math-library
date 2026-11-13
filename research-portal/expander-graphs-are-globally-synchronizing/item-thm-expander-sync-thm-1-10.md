@@ -1,6 +1,6 @@
 ---
 title: General two-sided spectral criterion — Theorem 1.10
-status: draft
+status: published
 research_item: thm-expander-sync-thm-1-10
 dependency_level: 10
 sources:

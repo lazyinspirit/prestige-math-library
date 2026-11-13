@@ -3,7 +3,7 @@ id: prop-expander-sync-prop-3-2
 title: Degree control implies two-sided expansion — Proposition 3.2
 kind: proposition
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-two-sided-expander

@@ -3,7 +3,7 @@ id: thm-expander-prereq-synchronization-hitting-time-input
 kind: theorem
 title: Simultaneous global synchronization from connectivity
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-edge-order-process-coupling

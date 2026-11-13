@@ -3,7 +3,7 @@ id: cor-expander-sync-cor-6-1
 title: Failure of the stated constant-two expansion bound — Corollary 6.1
 kind: corollary
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-two-sided-expander

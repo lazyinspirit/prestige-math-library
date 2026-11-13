@@ -3,7 +3,7 @@ id: prop-expander-prereq-logarithmic-extreme-degrees
 kind: proposition
 title: Extremal degrees at a fixed logarithmic mean
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - prop-expander-prereq-degree-law-and-dependence

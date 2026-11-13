@@ -3,7 +3,7 @@ id: lem-expander-sync-amp-small
 title: Small-set amplification — Lemma 4.2
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-graph-notation

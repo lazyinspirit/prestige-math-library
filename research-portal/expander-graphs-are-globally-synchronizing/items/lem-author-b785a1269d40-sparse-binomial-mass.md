@@ -3,7 +3,7 @@ id: lem-author-b785a1269d40-sparse-binomial-mass
 title: An explicit lower bound on a sparse binomial atom
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-b785a1269d40-independent-cross-degrees

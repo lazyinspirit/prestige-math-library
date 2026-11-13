@@ -3,7 +3,7 @@ id: prop-expander-sync-daido-properties
 title: Bounds, saturation, and rotation of order parameters
 kind: proposition
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-daido

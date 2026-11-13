@@ -3,7 +3,7 @@ id: lem-author-647111dd30d9-minimum-trapping
 kind: lemma
 title: A local minimum with a gradient inequality is stable
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-647111dd30d9-gradient-length

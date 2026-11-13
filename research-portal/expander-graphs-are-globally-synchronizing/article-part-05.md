@@ -2,7 +2,7 @@
 title: Article items · 05 — The principle of mathematical induction
 description: Presents 29 items from the article and its immediate prerequisites,
   covering published library prerequisites and dependency level 0.
-status: draft
+status: published
 dependency_level: 1
 research_article_page: true
 item_count: 29

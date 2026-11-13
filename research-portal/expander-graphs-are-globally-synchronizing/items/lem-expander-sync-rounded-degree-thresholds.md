@@ -3,7 +3,7 @@ id: lem-expander-sync-rounded-degree-thresholds
 title: Rounded degree thresholds and expectation bounds
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-degree-counts

@@ -3,7 +3,7 @@ id: lem-expander-sync-moment-norm-estimate
 title: Expected-norm estimate from the corrected moment comparison
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-centered-matrices

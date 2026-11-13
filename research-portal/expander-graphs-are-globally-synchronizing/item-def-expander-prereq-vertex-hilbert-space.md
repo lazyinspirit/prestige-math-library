@@ -1,6 +1,6 @@
 ---
 title: Finite vertex Hilbert space in the article convention
-status: draft
+status: published
 research_item: def-expander-prereq-vertex-hilbert-space
 dependency_level: 0
 ---

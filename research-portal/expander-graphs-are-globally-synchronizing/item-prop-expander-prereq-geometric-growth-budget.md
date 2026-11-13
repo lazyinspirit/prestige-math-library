@@ -1,6 +1,6 @@
 ---
 title: Geometric growth, truncation and total decrement budgets
-status: draft
+status: published
 research_item: prop-expander-prereq-geometric-growth-budget
 dependency_level: 0
 ---

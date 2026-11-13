@@ -3,7 +3,7 @@ id: def-expander-sync-kuramoto-system
 title: Graph Kuramoto differential equations
 kind: definition
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-graph-notation

@@ -3,7 +3,7 @@ id: lem-author-5d47c15147c9-slack-expansion-synchrony
 title: Slack entropy thresholds preserve the quantitative synchronization bound
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-erdos-renyi

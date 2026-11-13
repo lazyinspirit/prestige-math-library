@@ -1,6 +1,6 @@
 ---
 title: Kernel stability condition — Lemma 2.8
-status: draft
+status: published
 research_item: lem-expander-sync-kernel-stability
 dependency_level: 9
 sources:

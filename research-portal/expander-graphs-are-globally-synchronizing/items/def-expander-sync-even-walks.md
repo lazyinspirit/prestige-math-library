@@ -3,7 +3,7 @@ id: def-expander-sync-even-walks
 title: Even closed walks and traversal multiplicities
 kind: definition
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - prop-expander-prereq-random-matrix-walk-expansion

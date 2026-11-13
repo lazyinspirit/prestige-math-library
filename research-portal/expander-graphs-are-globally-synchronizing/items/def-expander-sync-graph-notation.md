@@ -3,7 +3,7 @@ id: def-expander-sync-graph-notation
 title: Adjacency, degrees, graph Laplacian, and spectral notation
 kind: definition
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-loop-compatible-networks

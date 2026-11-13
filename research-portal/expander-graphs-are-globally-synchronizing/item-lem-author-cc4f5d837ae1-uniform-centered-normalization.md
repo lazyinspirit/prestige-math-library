@@ -1,6 +1,6 @@
 ---
 title: Uniform centered normalization across the full Bernoulli density range
-status: draft
+status: published
 research_item: lem-author-cc4f5d837ae1-uniform-centered-normalization
 dependency_level: 3
 ---

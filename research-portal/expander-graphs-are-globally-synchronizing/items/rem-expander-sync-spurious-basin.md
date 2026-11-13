@@ -3,7 +3,7 @@ id: rem-expander-sync-spurious-basin
 title: Spurious minima obstruct global synchrony
 kind: remark
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-energy

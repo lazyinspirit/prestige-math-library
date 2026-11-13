@@ -1,6 +1,6 @@
 ---
 title: Useful finite-size synchronization estimates near threshold
-status: draft
+status: published
 research_item: op-expander-sync-finite-size-optimization
 dependency_level: 13
 sources:

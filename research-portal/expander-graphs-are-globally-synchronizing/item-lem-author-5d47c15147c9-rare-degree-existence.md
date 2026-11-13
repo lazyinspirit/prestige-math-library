@@ -1,6 +1,6 @@
 ---
 title: A rare logarithmic degree occurs with probability of its first-moment order
-status: draft
+status: published
 research_item: lem-author-5d47c15147c9-rare-degree-existence
 dependency_level: 1
 ---

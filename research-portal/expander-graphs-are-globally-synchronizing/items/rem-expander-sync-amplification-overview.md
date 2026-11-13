@@ -3,7 +3,7 @@ id: rem-expander-sync-amplification-overview
 title: Mass amplification outline and methodological claims
 kind: remark
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-erdos-renyi

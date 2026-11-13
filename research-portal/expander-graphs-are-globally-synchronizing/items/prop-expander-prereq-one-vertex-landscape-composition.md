@@ -3,7 +3,7 @@ id: prop-expander-prereq-one-vertex-landscape-composition
 kind: proposition
 title: One-vertex composition of phase-difference landscapes
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-phase-torus

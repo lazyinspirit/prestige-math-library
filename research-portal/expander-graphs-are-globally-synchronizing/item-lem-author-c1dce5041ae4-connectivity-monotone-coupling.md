@@ -1,6 +1,6 @@
 ---
 title: Finite coupling makes connectivity probability monotone
-status: draft
+status: published
 research_item: lem-author-c1dce5041ae4-connectivity-monotone-coupling
 dependency_level: 0
 ---

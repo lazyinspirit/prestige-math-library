@@ -3,7 +3,7 @@ id: prop-expander-prereq-binomial-tail-ratio-tool
 kind: proposition
 title: Binomial mass ratios and geometric tail domination
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-bernoulli-and-binomial-random-variables

@@ -1,6 +1,6 @@
 ---
 title: Independent degrees into a fixed half of a random graph
-status: draft
+status: published
 research_item: lem-author-b785a1269d40-independent-cross-degrees
 dependency_level: 0
 ---

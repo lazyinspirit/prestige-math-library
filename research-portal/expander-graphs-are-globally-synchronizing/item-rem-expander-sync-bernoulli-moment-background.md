@@ -1,6 +1,6 @@
 ---
 title: Symmetry and moments in the random-matrix discussion
-status: draft
+status: published
 research_item: rem-expander-sync-bernoulli-moment-background
 dependency_level: 3
 sources:

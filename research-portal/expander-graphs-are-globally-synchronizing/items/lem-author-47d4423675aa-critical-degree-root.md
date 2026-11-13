@@ -3,7 +3,7 @@ id: lem-author-47d4423675aa-critical-degree-root
 title: The deterministic critical degree root stays above nine quarters
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-47d4423675aa-entropy-rational-gap

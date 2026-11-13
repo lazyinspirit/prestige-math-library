@@ -1,6 +1,6 @@
 ---
 title: Failure of symmetric Laplacian control near threshold
-status: draft
+status: published
 research_item: rem-expander-sync-laplacian-asymmetry
 dependency_level: 8
 sources:

@@ -3,7 +3,7 @@ id: thm-expander-sync-thm-6-5
 title: Convex Lipschitz concentration — Theorem 6.5
 kind: theorem
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-expander-prereq-convex-product-concentration

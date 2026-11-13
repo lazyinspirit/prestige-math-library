@@ -3,7 +3,7 @@ id: prop-expander-sync-stable-hessian
 title: Second-order necessary conditions for stable states
 kind: proposition
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-graph-notation

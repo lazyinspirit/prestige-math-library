@@ -1,6 +1,6 @@
 ---
 title: Complete-graph positive-semidefinite equilibria
-status: draft
+status: published
 research_item: rem-expander-sync-complete-graph
 dependency_level: 3
 sources:

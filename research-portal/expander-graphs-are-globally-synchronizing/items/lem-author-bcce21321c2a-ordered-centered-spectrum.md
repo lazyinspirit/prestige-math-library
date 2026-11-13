@@ -3,7 +3,7 @@ id: lem-author-bcce21321c2a-ordered-centered-spectrum
 title: Ordered eigenvalues and the centered regular norm
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - prop-expander-prereq-regular-mean-zero-spectrum

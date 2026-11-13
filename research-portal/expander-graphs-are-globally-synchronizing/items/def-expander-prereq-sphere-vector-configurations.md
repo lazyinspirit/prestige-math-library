@@ -3,7 +3,7 @@ id: def-expander-prereq-sphere-vector-configurations
 kind: definition
 title: Sphere configurations and tangent variations
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-euclidean-inner-product

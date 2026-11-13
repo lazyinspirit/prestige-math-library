@@ -3,7 +3,7 @@ id: rem-expander-sync-critical-window-discussion
 title: Critical-window gap and vanishing epsilon in the authors’ method
 kind: remark
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-expander-sync-thm-1-2

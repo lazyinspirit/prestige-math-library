@@ -3,7 +3,7 @@ id: cor-expander-sync-cor-6-6
 title: Counterexamples to both centered-adjacency tail bounds in Corollary 6.6
 kind: corollary
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-graph-adjacency-incidence-neighbourhood-and-degree

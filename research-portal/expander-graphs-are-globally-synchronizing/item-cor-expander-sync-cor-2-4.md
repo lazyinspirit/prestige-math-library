@@ -1,6 +1,6 @@
 ---
 title: Lower bound for the second order parameter — Corollary 2.4
-status: draft
+status: published
 research_item: cor-expander-sync-cor-2-4
 dependency_level: 10
 sources:

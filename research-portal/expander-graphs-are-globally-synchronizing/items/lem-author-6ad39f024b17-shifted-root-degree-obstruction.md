@@ -3,7 +3,7 @@ id: lem-author-6ad39f024b17-shifted-root-degree-obstruction
 title: The original shifted roots impose a minimum degree above log n
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-shifted-rate-roots

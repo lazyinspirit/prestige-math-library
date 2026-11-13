@@ -3,7 +3,7 @@ id: lem-author-fc0d6c95270f-isolated-vertex-before-onset
 kind: lemma
 title: An isolated vertex before three quarters of the connectivity scale
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-edge-order-process-coupling

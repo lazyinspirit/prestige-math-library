@@ -1,6 +1,6 @@
 ---
 title: Normalize the logarithmic random graph for nonbacktracking estimates
-status: draft
+status: published
 research_item: lem-author-6ad39f024b17-centered-normalization
 dependency_level: 3
 ---

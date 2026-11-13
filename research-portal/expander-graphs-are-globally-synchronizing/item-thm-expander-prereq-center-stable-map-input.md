@@ -1,6 +1,6 @@
 ---
 title: Local center-stable trapping disc for a time map
-status: draft
+status: published
 research_item: thm-expander-prereq-center-stable-map-input
 dependency_level: 3
 sources:

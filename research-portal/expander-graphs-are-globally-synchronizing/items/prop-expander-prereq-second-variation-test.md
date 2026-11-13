@@ -3,7 +3,7 @@ id: prop-expander-prereq-second-variation-test
 kind: proposition
 title: Local minima and nonnegative second variation
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-euclidean-local-extrema-and-critical-points

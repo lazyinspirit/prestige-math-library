@@ -1,6 +1,6 @@
 ---
 title: Shifted-root comparison — Remark 6.10
-status: draft
+status: published
 research_item: rem-expander-sync-rem-6-10
 dependency_level: 8
 sources:

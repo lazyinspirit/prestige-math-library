@@ -1,6 +1,6 @@
 ---
 title: Mass growth, stopping, and final-angle claims
-status: draft
+status: published
 research_item: lem-expander-sync-amplification-termination
 dependency_level: 14
 sources:

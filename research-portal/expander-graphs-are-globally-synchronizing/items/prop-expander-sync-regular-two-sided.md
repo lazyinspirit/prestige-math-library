@@ -3,7 +3,7 @@ id: prop-expander-sync-regular-two-sided
 title: Regular adjacency expansion supplies two-sided expansion
 kind: proposition
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-graph-notation

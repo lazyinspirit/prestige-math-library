@@ -1,6 +1,6 @@
 ---
 title: The fixed-degree Alon–Boppana lower bound
-status: draft
+status: published
 research_item: thm-expander-prereq-alon-boppana-input
 dependency_level: 3
 sources:

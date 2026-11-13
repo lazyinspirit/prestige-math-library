@@ -3,7 +3,7 @@ id: def-expander-sync-centered-matrices
 title: Centered graph matrices and reference degree
 kind: definition
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-graph-notation

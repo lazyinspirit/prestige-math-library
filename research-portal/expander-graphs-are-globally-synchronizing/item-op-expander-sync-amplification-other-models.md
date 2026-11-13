@@ -1,6 +1,6 @@
 ---
 title: Adapting amplification beyond synchronization
-status: draft
+status: published
 research_item: op-expander-sync-amplification-other-models
 dependency_level: 6
 sources:

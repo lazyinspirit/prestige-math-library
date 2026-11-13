@@ -3,7 +3,7 @@ id: lem-author-10a0d5e0c110-strict-parameter-budgets
 title: Strict numerical budgets for the two-stage PSD amplification
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - prop-expander-prereq-ordered-angle-inequalities

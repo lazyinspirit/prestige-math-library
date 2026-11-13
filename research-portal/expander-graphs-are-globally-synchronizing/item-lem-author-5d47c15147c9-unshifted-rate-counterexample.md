@@ -1,6 +1,6 @@
 ---
 title: The exact unshifted expansion event cannot have polynomial failure decay
-status: draft
+status: published
 research_item: lem-author-5d47c15147c9-unshifted-rate-counterexample
 dependency_level: 8
 ---

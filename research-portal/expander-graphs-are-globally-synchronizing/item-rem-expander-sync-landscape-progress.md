@@ -1,6 +1,6 @@
 ---
 title: Reported progress on benign landscapes and an alternative synchronization proof
-status: draft
+status: published
 research_item: rem-expander-sync-landscape-progress
 dependency_level: 12
 sources:

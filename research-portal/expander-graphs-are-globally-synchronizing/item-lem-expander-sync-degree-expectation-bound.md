@@ -1,6 +1,6 @@
 ---
 title: Expected degree-count bound and logarithmic factorial estimate
-status: draft
+status: published
 research_item: lem-expander-sync-degree-expectation-bound
 dependency_level: 8
 sources:

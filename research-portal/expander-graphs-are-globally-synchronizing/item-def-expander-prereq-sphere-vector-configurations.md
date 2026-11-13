@@ -1,6 +1,6 @@
 ---
 title: Sphere configurations and tangent variations
-status: draft
+status: published
 research_item: def-expander-prereq-sphere-vector-configurations
 dependency_level: 0
 ---

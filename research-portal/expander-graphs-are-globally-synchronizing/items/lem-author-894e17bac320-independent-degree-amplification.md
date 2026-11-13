@@ -3,7 +3,7 @@ id: lem-author-894e17bac320-independent-degree-amplification
 title: Independent cross-degrees produce a large degree at logarithmic density
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-894e17bac320-logarithmic-degree-parameters

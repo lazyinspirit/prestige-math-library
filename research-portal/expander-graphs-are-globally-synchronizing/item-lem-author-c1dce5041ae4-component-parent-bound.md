@@ -1,6 +1,6 @@
 ---
 title: A parent-map bound for isolated components
-status: draft
+status: published
 research_item: lem-author-c1dce5041ae4-component-parent-bound
 dependency_level: 0
 ---

@@ -3,7 +3,7 @@ id: prop-expander-prereq-analytic-periodic-flow-convergence
 kind: proposition
 title: Point convergence for compact analytic periodic gradient flows
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-phase-torus

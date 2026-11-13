@@ -3,7 +3,7 @@ id: lem-expander-sync-lem-3-7
 title: Mixing for two nearby nested sets — Lemma 3.7
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-two-sided-expander

@@ -3,7 +3,7 @@ id: lem-author-6ad39f024b17-nonbacktracking-norm-transfer
 title: Transfer two nonbacktracking good events to the required norm bound
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-operator-norm-on-a-finite-dimensional-inner-product-space

@@ -1,6 +1,6 @@
 ---
 title: Trace powers, closed walks and independent edge moments
-status: draft
+status: published
 research_item: prop-expander-prereq-random-matrix-walk-expansion
 dependency_level: 1
 ---

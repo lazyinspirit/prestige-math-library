@@ -1,6 +1,6 @@
 ---
 title: Degree bounds from two-sided expansion — Lemma 3.1
-status: draft
+status: published
 research_item: lem-expander-sync-lem-3-1
 dependency_level: 5
 sources:

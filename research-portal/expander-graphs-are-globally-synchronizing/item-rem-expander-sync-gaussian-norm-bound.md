@@ -1,6 +1,6 @@
 ---
 title: Gaussian trace/norm estimate attributed to Slepian comparison
-status: draft
+status: published
 research_item: rem-expander-sync-gaussian-norm-bound
 dependency_level: 6
 sources:

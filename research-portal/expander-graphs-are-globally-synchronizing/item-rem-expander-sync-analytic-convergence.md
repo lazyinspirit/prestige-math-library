@@ -1,6 +1,6 @@
 ---
 title: Single-point convergence for analytic gradient flows
-status: draft
+status: published
 research_item: rem-expander-sync-analytic-convergence
 dependency_level: 8
 sources:

@@ -1,6 +1,6 @@
 ---
 title: Loop-dependent weighted degree envelope
-status: draft
+status: published
 research_item: lem-author-3bf637a47abd-weighted-loop-degree-envelope
 dependency_level: 3
 ---

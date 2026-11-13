@@ -3,7 +3,7 @@ id: def-expander-prereq-gradient-trajectories
 kind: definition
 title: Gradient trajectories and complete compact phase dynamics
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-phase-torus

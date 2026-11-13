@@ -3,7 +3,7 @@ id: def-expander-sync-shifted-rate-roots
 title: Shifted rate roots for quantitative expansion
 kind: definition
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-rate-function

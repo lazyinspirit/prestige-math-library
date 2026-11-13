@@ -3,7 +3,7 @@ id: cor-expander-sync-cor-1-6
 title: Ramanujan and typical regular graphs synchronize for degree at least 600
 kind: corollary
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-ramanujan

@@ -3,7 +3,7 @@ id: lem-author-647111dd30d9-nonminimum-escape
 kind: lemma
 title: Nearby critical values force nonminimum escape
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-647111dd30d9-compact-critical-accumulation

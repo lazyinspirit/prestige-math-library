@@ -3,7 +3,7 @@ title: Open questions and potential solutions
 research_report: open-questions
 description: Insights, fruitful questions and potential solutions arising from
   Expander graphs are globally synchronizing.
-status: draft
+status: published
 generated_at: "2026-11-13T18:09:38.925Z"
 ---
 

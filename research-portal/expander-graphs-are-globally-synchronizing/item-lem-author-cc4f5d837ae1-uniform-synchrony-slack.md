@@ -1,6 +1,6 @@
 ---
 title: Uniform degree slack and the vanishing synchrony condition
-status: draft
+status: published
 research_item: lem-author-cc4f5d837ae1-uniform-synchrony-slack
 dependency_level: 2
 ---

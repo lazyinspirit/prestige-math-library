@@ -1,6 +1,6 @@
 ---
 title: Contradiction threshold for amplification
-status: draft
+status: published
 research_item: cor-expander-sync-amp-contradiction
 dependency_level: 14
 sources:

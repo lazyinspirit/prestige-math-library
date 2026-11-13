@@ -1,6 +1,6 @@
 ---
 title: A centered adjacency column retains a high-degree lower bound
-status: draft
+status: published
 research_item: lem-author-894e17bac320-centered-column-degree
 dependency_level: 3
 ---

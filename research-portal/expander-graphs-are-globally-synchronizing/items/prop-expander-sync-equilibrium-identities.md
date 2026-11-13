@@ -3,7 +3,7 @@ id: prop-expander-sync-equilibrium-identities
 title: Real and complex equilibrium identities
 kind: proposition
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-graph-notation

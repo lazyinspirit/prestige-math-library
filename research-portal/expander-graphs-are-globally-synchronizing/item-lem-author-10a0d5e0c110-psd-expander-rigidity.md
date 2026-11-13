@@ -1,6 +1,6 @@
 ---
 title: Positive-reference expanders have only synchronized critical PSD phases
-status: draft
+status: published
 research_item: lem-author-10a0d5e0c110-psd-expander-rigidity
 dependency_level: 8
 ---

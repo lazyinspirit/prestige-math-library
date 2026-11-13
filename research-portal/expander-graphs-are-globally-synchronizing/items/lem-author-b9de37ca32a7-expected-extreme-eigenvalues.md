@@ -3,7 +3,7 @@ id: lem-author-b9de37ca32a7-expected-extreme-eigenvalues
 kind: lemma
 title: Expected extreme eigenvalues from finite Gaussian comparison
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-b9de37ca32a7-quadratic-gaussian-increments

@@ -1,6 +1,6 @@
 ---
 title: Every fixed positive squared logarithmic density satisfies the budget
-status: draft
+status: published
 research_item: lem-author-635c380339fd-fixed-density-budget
 dependency_level: 1
 ---

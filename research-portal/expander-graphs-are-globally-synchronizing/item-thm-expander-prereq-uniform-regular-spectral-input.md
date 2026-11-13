@@ -1,6 +1,6 @@
 ---
 title: Friedman spectral expansion in the uniform simple model
-status: draft
+status: published
 research_item: thm-expander-prereq-uniform-regular-spectral-input
 dependency_level: 4
 sources:

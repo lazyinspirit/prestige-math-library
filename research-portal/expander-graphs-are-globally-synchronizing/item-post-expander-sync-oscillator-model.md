@@ -1,6 +1,6 @@
 ---
 title: Phase oscillator interpretation and homogeneous modeling assumption
-status: draft
+status: published
 research_item: post-expander-sync-oscillator-model
 dependency_level: 3
 sources:

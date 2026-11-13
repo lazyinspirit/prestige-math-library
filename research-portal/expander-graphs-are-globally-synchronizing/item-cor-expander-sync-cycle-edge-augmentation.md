@@ -1,6 +1,6 @@
 ---
 title: Destroying cycle spurious minima by bounded-degree edge additions
-status: draft
+status: published
 research_item: cor-expander-sync-cycle-edge-augmentation
 dependency_level: 12
 sources:

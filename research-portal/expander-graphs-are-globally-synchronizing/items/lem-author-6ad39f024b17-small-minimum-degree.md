@@ -3,7 +3,7 @@ id: lem-author-6ad39f024b17-small-minimum-degree
 title: The gamma-two graph has a vertex of degree at most log n with high probability
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-6ad39f024b17-logarithmic-low-degree-atom

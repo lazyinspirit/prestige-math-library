@@ -1,6 +1,6 @@
 ---
 title: Uniform edge orderings, graph-process times and independent labels
-status: draft
+status: published
 research_item: def-expander-prereq-edge-order-process-coupling
 dependency_level: 0
 ---

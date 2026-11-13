@@ -3,7 +3,7 @@ id: lem-author-fc0d6c95270f-exponential-process-transfer
 kind: lemma
 title: Exponential clocks and the uniform edge-order process
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-edge-order-process-coupling

@@ -3,7 +3,7 @@ id: prop-expander-prereq-ordered-angle-inequalities
 kind: proposition
 title: Angular order and elementary inverse-trigonometric bounds
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:thm-sine-cosine-signs-monotonicity-and-ranges

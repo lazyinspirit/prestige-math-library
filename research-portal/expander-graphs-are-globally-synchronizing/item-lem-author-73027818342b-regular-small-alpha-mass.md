@@ -1,6 +1,6 @@
 ---
 title: Small-alpha first parameter and regular H mass
-status: draft
+status: published
 research_item: lem-author-73027818342b-regular-small-alpha-mass
 dependency_level: 12
 ---

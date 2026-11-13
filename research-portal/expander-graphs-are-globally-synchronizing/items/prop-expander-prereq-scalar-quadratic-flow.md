@@ -3,7 +3,7 @@ id: prop-expander-prereq-scalar-quadratic-flow
 kind: proposition
 title: Explicit scalar quadratic descent and its forward domain
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-first-order-ode-initial-value-problem-and-solution

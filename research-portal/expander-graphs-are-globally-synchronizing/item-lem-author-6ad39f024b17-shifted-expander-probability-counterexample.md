@@ -1,6 +1,6 @@
 ---
 title: Two fixed-parameter expander events have vanishing success probabilities
-status: draft
+status: published
 research_item: lem-author-6ad39f024b17-shifted-expander-probability-counterexample
 dependency_level: 9
 ---

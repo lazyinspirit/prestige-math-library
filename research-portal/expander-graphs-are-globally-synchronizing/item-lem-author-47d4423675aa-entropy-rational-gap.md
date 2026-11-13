@@ -1,6 +1,6 @@
 ---
 title: A rational entropy test above the critical degree ratio two
-status: draft
+status: published
 research_item: lem-author-47d4423675aa-entropy-rational-gap
 dependency_level: 6
 ---

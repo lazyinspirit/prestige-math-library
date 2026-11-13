@@ -3,7 +3,7 @@ id: lem-expander-sync-cut-identity
 title: Nested-cut polarization identity
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-edge-count

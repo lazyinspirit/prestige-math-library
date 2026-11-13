@@ -3,7 +3,7 @@ id: lem-author-f736bc76cd5d-trace-walk-count
 kind: lemma
 title: Matrix powers count closed labelled slot walks
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-author-f736bc76cd5d-reversible-slots

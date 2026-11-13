@@ -3,7 +3,7 @@ id: prop-expander-prereq-centered-bilinear-estimate
 kind: proposition
 title: A bilinear centered-adjacency estimate without regularity
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-prereq-loop-compatible-networks

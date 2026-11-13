@@ -3,7 +3,7 @@ id: rem-expander-sync-regular-order-bounds
 title: Refined order estimates for regular graphs — Remark 2.7
 kind: remark
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-graph-notation

@@ -1,6 +1,6 @@
 ---
 title: Convex Lipschitz concentration with its coordinate metric
-status: draft
+status: published
 research_item: thm-expander-prereq-convex-product-concentration
 dependency_level: 1
 sources:

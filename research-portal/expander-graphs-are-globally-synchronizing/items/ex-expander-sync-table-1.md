@@ -3,7 +3,7 @@ id: ex-expander-sync-table-1
 title: Published amplification parameters and bounds — Table 1
 kind: example
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-phase-arcs

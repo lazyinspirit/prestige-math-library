@@ -1,6 +1,6 @@
 ---
 title: First and second order parameter inequality — Lemma 2.1
-status: draft
+status: published
 research_item: lem-expander-sync-lem-2-1
 dependency_level: 8
 sources:

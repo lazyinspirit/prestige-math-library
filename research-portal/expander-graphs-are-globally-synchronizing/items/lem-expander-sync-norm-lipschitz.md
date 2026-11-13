@@ -3,7 +3,7 @@ id: lem-expander-sync-norm-lipschitz
 title: "Convex adjacency norm: sharp coordinate constant and median counterexample"
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-erdos-renyi-random-graph

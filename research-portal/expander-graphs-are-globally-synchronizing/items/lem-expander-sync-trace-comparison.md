@@ -3,7 +3,7 @@ id: lem-expander-sync-trace-comparison
 title: Trace-moment comparison with Gaussian matrices
 kind: lemma
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-even-walks

@@ -1,6 +1,6 @@
 ---
 title: "Regular critical PSD phases: a direct mass bootstrap at 0.0816"
-status: draft
+status: published
 research_item: lem-author-8ada42a8dac6-regular-psd-mass
 dependency_level: 4
 ---

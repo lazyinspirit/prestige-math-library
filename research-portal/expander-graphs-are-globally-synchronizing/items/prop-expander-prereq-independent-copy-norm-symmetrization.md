@@ -3,7 +3,7 @@ id: prop-expander-prereq-independent-copy-norm-symmetrization
 kind: proposition
 title: Norm symmetrization at the actual matrix mean
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-independence-of-finite-random-variables

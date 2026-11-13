@@ -3,7 +3,7 @@ id: def-expander-sync-erdos-renyi
 title: Erdős–Rényi random graph and high probability
 kind: definition
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-erdos-renyi-random-graph

@@ -3,7 +3,7 @@ id: rem-expander-sync-rem-1-5
 title: Analytic versus numerical regular-expander bounds — Remark 1.5
 kind: remark
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-expander-sync-thm-1-10

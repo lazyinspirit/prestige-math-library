@@ -1,6 +1,6 @@
 ---
 title: Explicit parameters for the small-gamma logarithmic density
-status: draft
+status: published
 research_item: lem-author-894e17bac320-logarithmic-degree-parameters
 dependency_level: 0
 ---

@@ -3,7 +3,7 @@ id: lem-author-635c380339fd-inverse-sine-budget
 kind: lemma
 title: An elementary sufficient budget for the synchronization criterion
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - math:def-principal-inverse-sine-and-cosine

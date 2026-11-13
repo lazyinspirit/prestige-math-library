@@ -3,7 +3,7 @@ id: rem-expander-sync-mixing-heuristic
 title: Expansion and the distribution of phases in stable states
 kind: remark
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-expander-sync-states

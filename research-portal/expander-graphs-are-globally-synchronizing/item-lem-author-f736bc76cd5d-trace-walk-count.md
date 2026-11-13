@@ -1,6 +1,6 @@
 ---
 title: Matrix powers count closed labelled slot walks
-status: draft
+status: published
 research_item: lem-author-f736bc76cd5d-trace-walk-count
 dependency_level: 1
 ---
