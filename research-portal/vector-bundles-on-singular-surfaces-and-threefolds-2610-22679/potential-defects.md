@@ -2,9 +2,10 @@
 title: Prerequisite omissions and potential defects
 description: Source-specific omissions, correctable errors and substantial proof gaps recorded for Fasel–Yakerson arXiv:2610.22679v1.
 status: published
+generated_at: "2026-11-13T19:12:14.752Z"
 ---
 
-9 confirmed findings and 1 potential finding in the original article.
+9 confirmed findings and 2 potential findings in the original article.
 
 ## article-characteristic-p-input · confirmed
 
@@ -30,15 +31,15 @@ https://arxiv.org/abs/2610.22679v1; PDF p. 13, Proposition 6.1 proof, Picard div
 
 > The Picard group of a smooth affine curve over an algebraically closed
 
-The affine Picard-divisibility use omits the completion-and-boundary reduction. For a smooth affine curve C, choose a smooth projective completion Cbar and a boundary k-point b. Subtracting $\deg(L)b$ makes any extending line bundle degree zero without changing its restriction.
+The affine Picard-divisibility use omits the completion-and-boundary reduction. Fulton Example 1.6.6 concerns degree-zero cycles on a complete scheme. The affine-curve application needs the standard completion and boundary-point reduction, which is not written.
 
-The source moves directly from its Ful98 citation to affine Picard divisibility; the standard intervening reduction is not written.
+The quoted p. 13 application skips this reduction. The book’s Example 1.6.6 and the Stacks Jacobian/divisibility passages were freshly checked; the proposition is correct.
 
-**Correction:** State that $\operatorname{Pic}^0(\overline C)(k)$ surjects onto $\operatorname{Pic}(C)$; it is divisible by Jacobian multiplication, in every characteristic.
+**Correction:** For a smooth projective completion $\overline C$ and boundary $k$-point $b$, subtract $\deg(L)b$ from an extension of any line bundle. Thus $\operatorname{Pic}^0(\overline C)(k)$ surjects onto $\operatorname{Pic}(C)$ and divisibility follows.
 
 The claim is correct. This is not a defect audit of Fulton.
 
-## article-cdh-truncation-input · confirmed
+## article-cdh-truncation-input · potential
 
 **Tags:** prerequisite omission; missing proof steps
 
@@ -47,13 +48,13 @@ https://arxiv.org/abs/2610.22679v1; PDF p. 6, Proposition 2.6 proof, passage fro
 > The
 > associated cdh-sheaf also vanishes and therefore
 
-The characteristic-zero proof omits the locality step needed to truncate before cdh localization. Artin vanishing on affine threefolds does not alone prove the displayed equivalence on the entire qcqs site, which has larger-dimensional objects.
+The cdh-truncation step needs an explicitly dimension-bounded interpretation. Artin vanishing controls affine opens of X; the cited BEM comparison is on the big qcqs site. The proof does not specify the refinement or restriction justifying truncation there.
 
-The quoted sentence is the authors’ transition between affine vanishing and the cdh-localized comparison.
+The authors pass from affine vanishing to this sheaf assertion. BEM Corollary 7.20 confirms the big-site context; a local interpretation may repair the compression.
 
-**Correction:** State and justify the needed dimension-bounded refinement/site comparison, or prove the equivalence only after evaluation on X.
+**Correction:** Explain the dimension-bounded cdh computation after evaluation on X. A global equivalence on all qcqs schemes is unnecessary.
 
-This identifies an omitted justification; it does not refute the evaluated comparison or Proposition 2.6.
+This is a possible omitted locality justification, not a counterexample to the evaluated comparison or torsion-freeness.
 
 ## article-qcqs-smooth-locus · confirmed
 
@@ -63,17 +64,17 @@ https://arxiv.org/abs/2610.22679v1; PDF p. 10, Lemma 5.2 proof, Picard restricti
 
 > Let U ⊂X be the smooth locus.
 
-The smooth-locus proofs of Lemmas 4.1, 5.1 and 5.2 exceed the stated qcqs scope. Normality alone does not ensure a dense k-smooth locus, global-function equality, or injective Picard restriction. The affine finite-type convention does not restrict all nonaffine qcqs schemes.
+The smooth-locus reductions in Lemmas 4.1 and 5.2 exceed the printed normal qcqs scope. Normality alone gives neither a dense k-smooth locus nor injective Picard restriction. The conventions impose finite type on affine schemes, without imposing it on all qcqs schemes.
 
-The source conventions on p. 3 and proofs on pp. 9–10 invoke these restrictions without local finite presentation.
+The p. 10 Picard square and p. 9 global-functions argument use these premises under the p. 3 qcqs convention. The example refutes those premises, not the lemmas.
 
 **Correction:** Retain the qcqs conclusions using direct rank/determinant comparisons; use smooth-locus restriction only with suitable finite-type hypotheses.
 
-The example refutes the proof premises, not the rank/determinant conclusions or affine classification theorems.
+The failure is in the restriction premises; no failure of the affine classification theorems or rank/determinant identities is established.
 
-**Counterexample:** Let $k$ be algebraically closed and $X=\mathbf P^1_{k(t)}$, viewed over $k$. This nonaffine scheme is normal and qcqs, with empty $k$-smooth locus, $\Gamma(X,\mathcal O)=k(t)$ and $\operatorname{Pic}(X)=\mathbb Z$.
+**Counterexample:** Let $k$ be algebraically closed and $X=\mathbf P^1_{k(t)}$, viewed over $k$. It is nonaffine, normal, Noetherian, one-dimensional and qcqs. Thus it satisfies the printed hypotheses of Lemmas 4.1 and 5.2 and does not violate the affine finite-type convention.
 
-A nonempty $k$-smooth affine neighborhood would have a nonzero finitely generated $k$-algebra containing $k(t)$. A maximal residue field would give a $k$-algebra map $k(t)\to k$, impossible since $t-a$ is invertible for every $a\in k$. Hence $U=\varnothing$, $\Gamma(U,\mathcal O)=0$ and $\operatorname{Pic}(U)=0$. The nonaffine example respects the original affine finite-type convention.
+Its $k$-smooth locus $U$ is empty: a nonempty smooth affine neighbourhood would have a nonzero finitely generated $k$-algebra $B$ containing $k(t)$. A maximal residue field is $k$ by the Nullstellensatz, giving an impossible $k$-algebra map $k(t)\to k$: if $t$ maps to $a$, the invertible element $t-a$ maps to zero. Meanwhile $\Gamma(X,\mathcal O_X)=k(t)$ and $\operatorname{Pic}(X)=\mathbb Z$, whereas $\Gamma(U,\mathcal O_U)=0$ and $\operatorname{Pic}(U)=0$. Thus the p. 9 restriction is not an isomorphism and the p. 10 Picard restriction is not injective. The previously suggested affine $\operatorname{Spec}k(t)$ example is unnecessary and conflicts with the article’s affine convention.
 
 ## article-perfect-first-chern-input · confirmed
 
@@ -101,15 +102,15 @@ https://arxiv.org/abs/2610.22679v1; PDF p. 11, Lemma 5.3 proof, opening bundle-d
 
 The proofs of Lemma 5.3 and Proposition 5.5 assume arbitrary perfect classes are bundle differences. Normal qcqs schemes need not have that property. Lemma 6.4 inherits the reduction.
 
-The reduction is explicitly printed on p. 11, repeated in Proposition 5.5, and inherited on p. 14.
+This representation is asserted in Lemma 5.3 and repeated in Proposition 5.5. Lemma 6.4 refers back to the same method. The doubled plane defeats this premise under their actual scope.
 
 **Correction:** Use perfect-K Chern/Cartan operations and a compatible projection comparison; retain the qcqs conclusions.
 
 This defeats a proof reduction under the original nonseparated qcqs hypotheses; it is not a counterexample to additivity, $p_2$=−$c_2$, or either affine classification.
 
-**Counterexample:** Over algebraically closed $k$, glue two copies of $\mathbb A^2_k$ along $W=\mathbb A^2_k\setminus\{0\}$. The doubled plane $X$ is smooth, normal, finite type and qcqs. It has a nonzero rank-zero class in perfect $K_0$ that is not a bundle difference.
+**Counterexample:** Glue two copies $A_1,A_2$ of $\mathbb A^2_k$ by the identity on $W=\mathbb A^2_k\setminus\{0\}$, with $k$ algebraically closed. The resulting nonaffine doubled plane $X$ is smooth, normal, finite type, pure dimension two and qcqs. There is $0\ne\delta\in F^2_{\mathrm{mot}}K_0(X)$ with no global bundle-difference representative.
 
-Quillen–Suslin trivializes bundles on each chart. Since $\Gamma(W,\mathcal O)=k[x,y]$, transition matrices and their inverses extend across the origin; every bundle on $X$ is trivial. Localization gives $K_1(W)/\operatorname{im}K_1(\mathbb A^2_k)=\mathbb Z$: the origin Koszul generator has Euler length one and zero ambient $K_0$ class. Thomason–Trobaugh Mayer–Vietoris injects this quotient into $K_0(X)$, giving a nonzero class $\delta$ vanishing on both charts. The same extension of units gives $\operatorname{Pic}(X)=0$. Weight zero identifies the rank kernel $F^1$, and the exact weight-one triangle with $H^{2,1}=\operatorname{Pic}(X)=0$ places $\delta$ in $F^2$. A rank-zero bundle difference is zero here.
+Quillen–Suslin trivializes every bundle on each $A_i$. The elementary intersection $k[x,y]_x\cap k[x,y]_y=k[x,y]$ gives $\Gamma(W,\mathcal O)=k[x,y]$. Both a transition matrix and its inverse extend, so every bundle on $X$ is trivial and $\operatorname{Pic}(X)=0$. In the localization sequence for $0\subset A_i$, the supported group $K_0(k)=\mathbb Z$ maps to zero in $K_0(A_i)$: its Koszul resolution has alternating class $1-2+1=0$. Hence $K_1(W)/\operatorname{im}K_1(A_i)=\mathbb Z$. The two restriction images coincide. Thomason–Trobaugh Theorem 8.1 therefore injects this quotient into perfect $K_0(X)$, producing a nonzero boundary $\delta$ restricting to zero on both charts. Nisnevich descent and negative weight-zero vanishing inject $H^{0,0}(X)$ into $H^{0,0}(A_1)\oplus H^{0,0}(A_2)$; thus $p_0(\delta)=0$, so $\delta\in F^1$. The weight-one triangle and $H^{2,1}(X)=\operatorname{Pic}(X)=0$ lift it to $F^2$. Any rank-zero difference of the globally trivial bundles is zero. All hypotheses of the p. 11 normal-qcqs reduction hold, but that reduction fails. This uses the independently checked localization and Mayer–Vietoris statements, not the conclusions of Lemma 5.3 or Proposition 5.5.
 
 ## article-bundle-index-typo · confirmed
 
@@ -170,3 +171,17 @@ The original paragraph’s scope and its explicit invocation of Lemma 4.1 do not
 **Correction:** State normality for this deduction, or supply a general degree-zero identification.
 
 No counterexample to the square is established; a stronger comparison can repair the deduction without narrowing its conclusion.
+
+## article-scheme-category-notation · confirmed
+
+**Tags:** typos
+
+https://arxiv.org/abs/2610.22679v1; Printed p. 3, Notation and conventions; Section 2 opening functor (PDF p. 3).
+
+> the category of qcqs schemes over a field k.
+
+The conventions name the scheme category $\mathrm{Sch}_k^{\mathrm{op}}$ instead of $\mathrm{Sch}_k$. The same superscripted notation is then used as the contravariant domain of the motivic filtration. The intended scheme category and its opposite should be distinguished.
+
+The superscript op is visible on the category name in the original rendered conventions and on the subsequent functor domain. Extraction separates the superscript from the name.
+
+**Correction:** Remove the superscript $\mathrm{op}$ from the category name in the conventions; retain it on the displayed functor domain.
