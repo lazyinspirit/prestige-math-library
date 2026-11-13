@@ -1,6 +1,6 @@
 ---
 title: Vector bundles on singular surfaces and threefolds — defects
-status: draft
+status: published
 generated_at: "2026-11-13T19:12:14.752Z"
 ---
 
