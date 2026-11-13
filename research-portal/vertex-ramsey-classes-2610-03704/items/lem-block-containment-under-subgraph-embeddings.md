@@ -2,7 +2,7 @@
 id: lem-block-containment-under-subgraph-embeddings
 kind: lemma
 title: Block containment and monotonicity under subgraphs
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

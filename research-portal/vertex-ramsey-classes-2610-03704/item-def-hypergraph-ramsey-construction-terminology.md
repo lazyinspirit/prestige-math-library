@@ -1,6 +1,6 @@
 ---
 title: Hypergraph terminology used in Construction 1
-status: draft
+status: published
 research_item: def-hypergraph-ramsey-construction-terminology
 dependency_level: 2
 sources:

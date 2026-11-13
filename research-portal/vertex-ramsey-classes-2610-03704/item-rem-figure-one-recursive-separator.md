@@ -1,6 +1,6 @@
 ---
 title: "Figure 1: recursive construction and red witness"
-status: draft
+status: published
 research_item: rem-figure-one-recursive-separator
 dependency_level: 15
 sources:

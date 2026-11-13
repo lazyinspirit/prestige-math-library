@@ -1,6 +1,6 @@
 ---
 title: Complement of a disconnected graph is connected
-status: draft
+status: published
 research_item: lem-complement-of-disconnected-graph-connected
 dependency_level: 0
 sources:

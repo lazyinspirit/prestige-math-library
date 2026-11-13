@@ -1,6 +1,6 @@
 ---
 title: Independence is monotone under induced embeddings
-status: draft
+status: published
 research_item: lem-independence-monotone-under-embeddings
 dependency_level: 0
 ---

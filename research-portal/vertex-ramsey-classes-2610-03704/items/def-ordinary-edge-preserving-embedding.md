@@ -2,7 +2,7 @@
 id: def-ordinary-edge-preserving-embedding
 kind: definition
 title: Ordinary embeddings as injections preserving edges
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

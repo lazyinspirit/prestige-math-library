@@ -2,7 +2,7 @@
 id: prop-construction-induced-ramsey-property
 kind: proposition
 title: Construction 1 gives an induced vertex-Ramsey graph
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

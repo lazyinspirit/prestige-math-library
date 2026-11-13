@@ -1,6 +1,6 @@
 ---
 title: Finite maximal extension of a 2-connected subgraph
-status: draft
+status: published
 research_item: lem-author-3d61151c342f-finite-maximal-extension
 dependency_level: 1
 ---

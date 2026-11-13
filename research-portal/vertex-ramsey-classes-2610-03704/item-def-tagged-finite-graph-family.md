@@ -1,6 +1,6 @@
 ---
 title: Tagged graph families with anticomplete parts
-status: draft
+status: published
 research_item: def-tagged-finite-graph-family
 dependency_level: 0
 ---

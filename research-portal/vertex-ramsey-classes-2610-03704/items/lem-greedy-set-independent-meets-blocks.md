@@ -2,7 +2,7 @@
 id: lem-greedy-set-independent-meets-blocks
 kind: lemma
 title: The greedy set is independent and meets every block
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

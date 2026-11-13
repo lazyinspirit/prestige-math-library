@@ -1,6 +1,6 @@
 ---
 title: Linear realisations preserve induced pieces
-status: draft
+status: published
 research_item: lem-linear-realisation-preserves-each-induced-piece
 dependency_level: 1
 ---

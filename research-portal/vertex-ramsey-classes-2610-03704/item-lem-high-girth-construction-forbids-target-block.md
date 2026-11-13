@@ -1,6 +1,6 @@
 ---
 title: Block exclusion in the high-girth base graph
-status: draft
+status: published
 research_item: lem-high-girth-construction-forbids-target-block
 dependency_level: 11
 sources:

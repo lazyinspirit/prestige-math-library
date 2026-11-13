@@ -1,6 +1,6 @@
 ---
 title: A Berge cycle bounds the union of its hyperedges
-status: draft
+status: published
 research_item: lem-author-2501feae0519-cycle-union-bound
 dependency_level: 1
 ---

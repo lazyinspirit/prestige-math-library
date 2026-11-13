@@ -2,7 +2,7 @@
 id: def-block-and-largest-block-order
 kind: definition
 title: Blocks and the parameter beta
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

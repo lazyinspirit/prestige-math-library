@@ -1,6 +1,6 @@
 ---
 title: Block bounds in the edged-F case
-status: draft
+status: published
 research_item: lem-nonempty-remainder-block-bounds
 dependency_level: 10
 sources:

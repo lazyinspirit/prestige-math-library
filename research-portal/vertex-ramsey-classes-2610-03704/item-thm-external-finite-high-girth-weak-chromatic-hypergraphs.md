@@ -1,6 +1,6 @@
 ---
 title: Finite high-girth hypergraphs with no weak k-colouring
-status: draft
+status: published
 research_item: thm-external-finite-high-girth-weak-chromatic-hypergraphs
 dependency_level: 4
 ---

@@ -2,7 +2,7 @@
 id: lem-author-2501feae0519-independent-class-colouring-bound
 kind: lemma
 title: Small independent sets obstruct weak colourings
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

@@ -1,6 +1,6 @@
 ---
 title: Graph realisations with possibly different hyperedge pieces
-status: draft
+status: published
 research_item: def-hyperedge-indexed-graph-realisation
 dependency_level: 0
 ---

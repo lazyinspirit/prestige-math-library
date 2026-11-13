@@ -1,6 +1,6 @@
 ---
 title: The finite graph boundary gives two-uniform witnesses
-status: draft
+status: published
 research_item: lem-author-2501feae0519-finite-graph-boundary-transfer
 dependency_level: 2
 sources:

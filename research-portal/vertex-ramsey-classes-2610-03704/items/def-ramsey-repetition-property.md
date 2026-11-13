@@ -2,7 +2,7 @@
 id: def-ramsey-repetition-property
 kind: definition
 title: Ramsey repetition property at fixed k
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

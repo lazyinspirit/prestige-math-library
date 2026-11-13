@@ -2,7 +2,7 @@
 id: lem-author-2501feae0519-finite-graph-boundary-transfer
 kind: lemma
 title: The finite graph boundary gives two-uniform witnesses
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

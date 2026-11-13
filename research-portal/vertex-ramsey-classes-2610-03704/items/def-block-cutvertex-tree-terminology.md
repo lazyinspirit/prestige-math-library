@@ -2,7 +2,7 @@
 id: def-block-cutvertex-tree-terminology
 kind: definition
 title: Block-cutvertex tree terminology
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

@@ -2,7 +2,7 @@
 id: lem-complement-of-disconnected-graph-connected
 kind: lemma
 title: Complement of a disconnected graph is connected
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

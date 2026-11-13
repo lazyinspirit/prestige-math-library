@@ -2,7 +2,7 @@
 id: def-cutvertex-and-nontrivial-block-system
 kind: definition
 title: Cutvertices, 2-connected pieces and nontrivial blocks
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

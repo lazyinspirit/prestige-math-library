@@ -1,6 +1,6 @@
 ---
 title: Single-vertex target case
-status: draft
+status: published
 research_item: ex-single-vertex-induced-ramsey-separator
 dependency_level: 3
 sources:

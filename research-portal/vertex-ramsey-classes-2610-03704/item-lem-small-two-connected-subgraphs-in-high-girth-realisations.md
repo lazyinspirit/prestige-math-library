@@ -1,6 +1,6 @@
 ---
 title: Small 2-connected subgraphs localise in high-girth pieces
-status: draft
+status: published
 research_item: lem-small-two-connected-subgraphs-in-high-girth-realisations
 dependency_level: 2
 ---

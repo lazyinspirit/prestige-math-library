@@ -2,7 +2,7 @@
 title: Article items · 04 — High-girth hypergraphs for Construction 1
 description: Presents 29 items from the article and its immediate prerequisites,
   covering dependency levels 5–19.
-status: draft
+status: published
 dependency_level: 3
 research_article_page: true
 item_count: 29

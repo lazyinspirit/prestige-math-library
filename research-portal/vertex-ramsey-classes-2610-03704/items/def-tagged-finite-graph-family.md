@@ -2,7 +2,7 @@
 id: def-tagged-finite-graph-family
 kind: definition
 title: Tagged graph families with anticomplete parts
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

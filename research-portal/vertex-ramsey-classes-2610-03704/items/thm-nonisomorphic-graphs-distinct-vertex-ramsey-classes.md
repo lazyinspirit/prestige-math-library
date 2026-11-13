@@ -2,7 +2,7 @@
 id: thm-nonisomorphic-graphs-distinct-vertex-ramsey-classes
 kind: theorem
 title: "Theorem 1.1: both vertex-Ramsey distinctions"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

@@ -2,7 +2,7 @@
 id: lem-author-2501feae0519-sparsity-forces-berge-girth
 kind: lemma
 title: Finite edge-union sparsity excludes short Berge cycles
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

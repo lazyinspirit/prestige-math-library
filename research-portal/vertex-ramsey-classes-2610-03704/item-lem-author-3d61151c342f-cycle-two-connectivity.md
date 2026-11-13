@@ -1,6 +1,6 @@
 ---
 title: Cycles are 2-connected
-status: draft
+status: published
 research_item: lem-author-3d61151c342f-cycle-two-connectivity
 dependency_level: 1
 ---

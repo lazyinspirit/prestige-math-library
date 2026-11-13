@@ -2,7 +2,7 @@
 id: lem-recursive-separator-fewer-colours-case
 kind: lemma
 title: An attachment using fewer colours supplies H2
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

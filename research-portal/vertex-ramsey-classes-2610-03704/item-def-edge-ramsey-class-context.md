@@ -1,6 +1,6 @@
 ---
 title: Edge-Ramsey class terminology in the motivation
-status: draft
+status: published
 research_item: def-edge-ramsey-class-context
 dependency_level: 2
 sources:

@@ -1,6 +1,6 @@
 ---
 title: Ramsey repetition property at fixed k
-status: draft
+status: published
 research_item: def-ramsey-repetition-property
 dependency_level: 3
 sources:

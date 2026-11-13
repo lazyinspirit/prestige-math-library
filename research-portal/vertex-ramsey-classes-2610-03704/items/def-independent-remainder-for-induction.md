@@ -2,7 +2,7 @@
 id: def-independent-remainder-for-induction
 kind: definition
 title: The independent set I and remainder F
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

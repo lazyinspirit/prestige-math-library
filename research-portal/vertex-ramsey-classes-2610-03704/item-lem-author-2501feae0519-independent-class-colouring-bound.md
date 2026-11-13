@@ -1,6 +1,6 @@
 ---
 title: Small independent sets obstruct weak colourings
-status: draft
+status: published
 research_item: lem-author-2501feae0519-independent-class-colouring-bound
 dependency_level: 2
 ---

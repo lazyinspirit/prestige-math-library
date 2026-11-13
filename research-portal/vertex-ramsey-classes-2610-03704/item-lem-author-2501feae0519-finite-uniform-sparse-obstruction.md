@@ -1,6 +1,6 @@
 ---
 title: Finite sparse uniform hypergraphs obstruct a prescribed palette
-status: draft
+status: published
 research_item: lem-author-2501feae0519-finite-uniform-sparse-obstruction
 dependency_level: 3
 sources:

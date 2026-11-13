@@ -2,7 +2,7 @@
 id: def-graph-join
 kind: definition
 title: Join of graphs
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

@@ -1,6 +1,6 @@
 ---
 title: Recursion for deterministic finite graph updates
-status: draft
+status: published
 research_item: lem-finite-graph-update-recursion
 dependency_level: 0
 ---

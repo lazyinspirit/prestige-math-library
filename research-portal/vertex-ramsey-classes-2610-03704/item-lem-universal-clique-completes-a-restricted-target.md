@@ -1,6 +1,6 @@
 ---
 title: Completing a restricted target with universal clique vertices
-status: draft
+status: published
 research_item: lem-universal-clique-completes-a-restricted-target
 dependency_level: 1
 ---

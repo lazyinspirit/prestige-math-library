@@ -1,6 +1,6 @@
 ---
 title: Invariant of the recursive induced separator
-status: draft
+status: published
 research_item: prop-recursive-induced-separator-invariant
 dependency_level: 16
 sources:

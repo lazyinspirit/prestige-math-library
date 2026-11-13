@@ -2,7 +2,7 @@
 id: def-finite-labelled-neighbourhood-attachments
 kind: definition
 title: Neighbourhood attachments indexed by induced embeddings
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

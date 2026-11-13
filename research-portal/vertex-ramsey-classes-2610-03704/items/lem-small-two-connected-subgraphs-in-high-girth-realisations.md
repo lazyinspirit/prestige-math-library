@@ -2,7 +2,7 @@
 id: lem-small-two-connected-subgraphs-in-high-girth-realisations
 kind: lemma
 title: Small 2-connected subgraphs localise in high-girth pieces
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

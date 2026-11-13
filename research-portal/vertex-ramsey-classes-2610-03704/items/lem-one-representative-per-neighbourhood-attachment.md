@@ -2,7 +2,7 @@
 id: lem-one-representative-per-neighbourhood-attachment
 kind: lemma
 title: One representative from each matching attachment reconstructs the target
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

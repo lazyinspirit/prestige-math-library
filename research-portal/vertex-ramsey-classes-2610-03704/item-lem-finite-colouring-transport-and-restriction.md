@@ -1,6 +1,6 @@
 ---
 title: Transport, restriction and relabelling of finite colourings
-status: draft
+status: published
 research_item: lem-finite-colouring-transport-and-restriction
 dependency_level: 1
 ---

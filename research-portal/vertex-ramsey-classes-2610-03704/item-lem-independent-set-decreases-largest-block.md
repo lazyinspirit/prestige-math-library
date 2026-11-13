@@ -1,6 +1,6 @@
 ---
 title: Independent deletion decreases beta
-status: draft
+status: published
 research_item: lem-independent-set-decreases-largest-block
 dependency_level: 8
 sources:

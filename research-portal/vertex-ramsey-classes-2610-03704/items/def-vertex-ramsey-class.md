@@ -2,7 +2,7 @@
 id: def-vertex-ramsey-class
 kind: definition
 title: Ordinary vertex-Ramsey class
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

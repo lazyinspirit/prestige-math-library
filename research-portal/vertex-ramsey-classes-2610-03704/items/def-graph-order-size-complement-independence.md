@@ -2,7 +2,7 @@
 id: def-graph-order-size-complement-independence
 kind: definition
 title: Order, size, complement and independence number
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

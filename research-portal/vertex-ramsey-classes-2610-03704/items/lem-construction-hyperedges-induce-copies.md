@@ -2,7 +2,7 @@
 id: lem-construction-hyperedges-induce-copies
 kind: lemma
 title: Copies on hyperedges are induced
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

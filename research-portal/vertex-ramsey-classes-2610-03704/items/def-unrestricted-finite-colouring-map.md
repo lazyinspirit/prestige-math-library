@@ -2,7 +2,7 @@
 id: def-unrestricted-finite-colouring-map
 kind: definition
 title: Unrestricted finite colourings and used palettes
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

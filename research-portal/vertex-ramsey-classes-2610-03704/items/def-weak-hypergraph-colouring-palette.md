@@ -2,7 +2,7 @@
 id: def-weak-hypergraph-colouring-palette
 kind: definition
 title: Weak hypergraph colourings with singleton boundary
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

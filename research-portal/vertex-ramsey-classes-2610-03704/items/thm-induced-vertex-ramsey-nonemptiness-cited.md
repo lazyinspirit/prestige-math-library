@@ -2,7 +2,7 @@
 id: thm-induced-vertex-ramsey-nonemptiness-cited
 kind: theorem
 title: Nonemptiness attributed to Folkman
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

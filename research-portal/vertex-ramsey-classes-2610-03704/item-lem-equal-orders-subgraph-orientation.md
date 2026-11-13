@@ -1,6 +1,6 @@
 ---
 title: Orienting equal-order non-isomorphic targets
-status: draft
+status: published
 research_item: lem-equal-orders-subgraph-orientation
 dependency_level: 3
 sources:

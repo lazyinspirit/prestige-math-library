@@ -2,7 +2,7 @@
 id: lem-disconnected-target-repetition-witness
 kind: lemma
 title: Disjoint-copy witness against repetition
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

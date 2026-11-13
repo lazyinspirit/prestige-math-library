@@ -2,7 +2,7 @@
 id: lem-equal-orders-subgraph-orientation
 kind: lemma
 title: Orienting equal-order non-isomorphic targets
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

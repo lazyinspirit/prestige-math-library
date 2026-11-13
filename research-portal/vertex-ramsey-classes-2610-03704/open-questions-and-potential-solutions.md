@@ -3,7 +3,7 @@ title: Open questions and potential solutions
 research_report: open-questions
 description: Insights, fruitful questions and potential solutions arising from
   Non-isomorphic graphs have distinct vertex-Ramsey classes.
-status: draft
+status: published
 ---
 
 ## 1. Research insights beyond the article

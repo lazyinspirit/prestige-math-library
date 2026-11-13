@@ -2,7 +2,7 @@
 id: def-hypergraph-ramsey-construction-terminology
 kind: definition
 title: Hypergraph terminology used in Construction 1
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

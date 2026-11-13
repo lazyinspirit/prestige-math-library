@@ -1,6 +1,6 @@
 ---
 title: Connected non-isomorphic graphs and edge-Ramsey classes
-status: draft
+status: published
 research_item: op-connected-graphs-distinct-edge-ramsey-classes
 dependency_level: 3
 sources:

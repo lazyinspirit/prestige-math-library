@@ -2,7 +2,7 @@
 id: thm-distinct-induced-vertex-ramsey-classes
 kind: theorem
 title: Induced part of Theorem 1.1
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

@@ -1,6 +1,6 @@
 ---
 title: Ordering targets and excluding H1 from H2
-status: draft
+status: published
 research_item: lem-target-ordering-and-forbidden-membership
 dependency_level: 4
 sources:

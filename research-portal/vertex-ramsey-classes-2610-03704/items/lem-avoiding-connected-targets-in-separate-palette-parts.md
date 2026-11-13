@@ -2,7 +2,7 @@
 id: lem-avoiding-connected-targets-in-separate-palette-parts
 kind: lemma
 title: Avoidance using separated palettes and anticomplete attachments
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

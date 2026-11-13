@@ -1,6 +1,6 @@
 ---
 title: Recursive graphs Ar and their attachments
-status: draft
+status: published
 research_item: def-recursive-induced-separator-graphs
 dependency_level: 13
 sources:

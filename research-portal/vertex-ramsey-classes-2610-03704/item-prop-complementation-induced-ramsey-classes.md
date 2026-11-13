@@ -1,6 +1,6 @@
 ---
 title: Complementation preserves distinction of induced classes
-status: draft
+status: published
 research_item: prop-complementation-induced-ramsey-classes
 dependency_level: 3
 sources:

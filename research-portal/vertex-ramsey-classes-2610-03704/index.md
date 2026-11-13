@@ -1,6 +1,6 @@
 ---
 title: Non-isomorphic graphs have distinct vertex-Ramsey classes
-status: draft
+status: published
 ---
 
 - [Colourings, embeddings and graph attachments](finite-colouring-and-embedding-tools) — level 0

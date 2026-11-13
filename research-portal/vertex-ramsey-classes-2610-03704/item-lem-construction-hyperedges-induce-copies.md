@@ -1,6 +1,6 @@
 ---
 title: Copies on hyperedges are induced
-status: draft
+status: published
 research_item: lem-construction-hyperedges-induce-copies
 dependency_level: 7
 sources:

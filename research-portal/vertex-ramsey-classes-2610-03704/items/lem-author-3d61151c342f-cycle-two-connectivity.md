@@ -2,7 +2,7 @@
 id: lem-author-3d61151c342f-cycle-two-connectivity
 kind: lemma
 title: Cycles are 2-connected
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

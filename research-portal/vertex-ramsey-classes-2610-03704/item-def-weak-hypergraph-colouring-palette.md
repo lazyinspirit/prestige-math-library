@@ -1,6 +1,6 @@
 ---
 title: Weak hypergraph colourings with singleton boundary
-status: draft
+status: published
 research_item: def-weak-hypergraph-colouring-palette
 dependency_level: 1
 ---

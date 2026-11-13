@@ -1,6 +1,6 @@
 ---
 title: Complete-graph separator when orders differ
-status: draft
+status: published
 research_item: ex-different-orders-ordinary-ramsey-separator
 dependency_level: 3
 sources:

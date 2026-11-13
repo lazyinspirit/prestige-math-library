@@ -2,7 +2,7 @@
 id: lem-recursive-separator-avoids-first-target
 kind: lemma
 title: Inductive colouring avoiding H1
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

@@ -1,6 +1,6 @@
 ---
 title: Block-cutvertex tree terminology
-status: draft
+status: published
 research_item: def-block-cutvertex-tree-terminology
 dependency_level: 5
 sources:

@@ -1,6 +1,6 @@
 ---
 title: Ordinary embeddings as injections preserving edges
-status: draft
+status: published
 research_item: def-ordinary-edge-preserving-embedding
 dependency_level: 0
 ---

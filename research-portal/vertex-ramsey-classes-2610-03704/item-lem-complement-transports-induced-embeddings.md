@@ -1,6 +1,6 @@
 ---
 title: Complementation transports induced copies on fixed vertices
-status: draft
+status: published
 research_item: lem-complement-transports-induced-embeddings
 dependency_level: 1
 ---

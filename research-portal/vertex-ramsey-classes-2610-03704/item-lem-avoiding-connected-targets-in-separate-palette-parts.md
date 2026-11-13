@@ -1,6 +1,6 @@
 ---
 title: Avoidance using separated palettes and anticomplete attachments
-status: draft
+status: published
 research_item: lem-avoiding-connected-targets-in-separate-palette-parts
 dependency_level: 2
 ---

@@ -1,6 +1,6 @@
 ---
 title: Inductive Ramsey membership for H2
-status: draft
+status: published
 research_item: lem-recursive-separator-forces-second-target
 dependency_level: 15
 sources:

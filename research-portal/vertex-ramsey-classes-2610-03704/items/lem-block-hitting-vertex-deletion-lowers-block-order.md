@@ -2,7 +2,7 @@
 id: lem-block-hitting-vertex-deletion-lowers-block-order
 kind: lemma
 title: Block-hitting deletion lowers maximum block order
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

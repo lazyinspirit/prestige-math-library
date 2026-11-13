@@ -2,7 +2,7 @@
 id: lem-rooted-block-exposure-separation
 kind: lemma
 title: Rooted block exposure and attachment separation
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

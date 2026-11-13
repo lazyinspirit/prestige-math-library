@@ -2,7 +2,7 @@
 id: def-disjoint-graph-multiple
 kind: definition
 title: The disjoint multiple qA
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

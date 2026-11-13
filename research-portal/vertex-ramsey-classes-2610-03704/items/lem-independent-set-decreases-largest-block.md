@@ -2,7 +2,7 @@
 id: lem-independent-set-decreases-largest-block
 kind: lemma
 title: Independent deletion decreases beta
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

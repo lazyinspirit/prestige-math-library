@@ -1,6 +1,6 @@
 ---
 title: Independence gap for the join of components
-status: draft
+status: published
 research_item: lem-disconnected-target-independence-gap
 dependency_level: 10
 sources:

@@ -2,7 +2,7 @@
 id: lem-independence-of-disjoint-families-and-joins
 kind: lemma
 title: Independence numbers of disjoint families and complete joins
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

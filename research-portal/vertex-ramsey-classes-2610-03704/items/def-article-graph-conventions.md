@@ -2,7 +2,7 @@
 id: def-article-graph-conventions
 kind: definition
 title: Graph and colouring conventions
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

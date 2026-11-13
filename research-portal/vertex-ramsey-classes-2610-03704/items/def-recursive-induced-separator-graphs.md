@@ -2,7 +2,7 @@
 id: def-recursive-induced-separator-graphs
 kind: definition
 title: Recursive graphs Ar and their attachments
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

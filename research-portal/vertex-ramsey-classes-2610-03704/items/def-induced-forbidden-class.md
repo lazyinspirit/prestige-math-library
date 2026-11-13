@@ -2,7 +2,7 @@
 id: def-induced-forbidden-class
 kind: definition
 title: Induced forbidden-subgraph class
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

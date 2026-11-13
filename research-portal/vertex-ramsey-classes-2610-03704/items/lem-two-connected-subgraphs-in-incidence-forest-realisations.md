@@ -2,7 +2,7 @@
 id: lem-two-connected-subgraphs-in-incidence-forest-realisations
 kind: lemma
 title: Two-connected subgraphs stay in one incidence-forest piece
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

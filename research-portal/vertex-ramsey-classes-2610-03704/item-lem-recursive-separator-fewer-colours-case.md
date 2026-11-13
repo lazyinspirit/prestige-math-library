@@ -1,6 +1,6 @@
 ---
 title: An attachment using fewer colours supplies H2
-status: draft
+status: published
 research_item: lem-recursive-separator-fewer-colours-case
 dependency_level: 14
 sources:

@@ -1,6 +1,6 @@
 ---
 title: Nonempty remainder after deleting an independent set
-status: draft
+status: published
 research_item: lem-independent-deletion-leaves-a-vertex
 dependency_level: 1
 ---

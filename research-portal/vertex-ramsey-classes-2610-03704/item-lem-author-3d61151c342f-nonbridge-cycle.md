@@ -1,6 +1,6 @@
 ---
 title: Nonbridge edges lie on 2-connected cycles
-status: draft
+status: published
 research_item: lem-author-3d61151c342f-nonbridge-cycle
 dependency_level: 2
 ---

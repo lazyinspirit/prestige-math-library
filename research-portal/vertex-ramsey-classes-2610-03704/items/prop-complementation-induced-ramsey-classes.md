@@ -2,7 +2,7 @@
 id: prop-complementation-induced-ramsey-classes
 kind: proposition
 title: Complementation preserves distinction of induced classes
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

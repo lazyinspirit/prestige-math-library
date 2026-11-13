@@ -2,7 +2,7 @@
 id: lem-recursive-separator-base-case
 kind: lemma
 title: The implicit $r=1$ base case
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

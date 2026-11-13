@@ -1,6 +1,6 @@
 ---
 title: Join separator for equal-order targets
-status: draft
+status: published
 research_item: ex-equal-orders-ordinary-ramsey-separator
 dependency_level: 4
 sources:

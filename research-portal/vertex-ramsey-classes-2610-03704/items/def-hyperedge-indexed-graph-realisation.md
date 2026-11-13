@@ -2,7 +2,7 @@
 id: def-hyperedge-indexed-graph-realisation
 kind: definition
 title: Graph realisations with possibly different hyperedge pieces
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

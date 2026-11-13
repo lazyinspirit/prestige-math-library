@@ -2,7 +2,7 @@
 id: lem-ramsey-repetition-iff-connected
 kind: lemma
 title: "Lemma 2.1: repetition characterizes connectivity"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

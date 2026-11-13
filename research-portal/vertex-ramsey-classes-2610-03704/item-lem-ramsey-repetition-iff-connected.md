@@ -1,6 +1,6 @@
 ---
 title: "Lemma 2.1: repetition characterizes connectivity"
-status: draft
+status: published
 research_item: lem-ramsey-repetition-iff-connected
 dependency_level: 12
 sources:

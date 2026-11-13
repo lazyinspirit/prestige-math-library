@@ -1,6 +1,6 @@
 ---
 title: The greedy set is independent and meets every block
-status: draft
+status: published
 research_item: lem-greedy-set-independent-meets-blocks
 dependency_level: 7
 sources:

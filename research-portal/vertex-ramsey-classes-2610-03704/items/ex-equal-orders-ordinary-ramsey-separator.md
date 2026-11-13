@@ -2,7 +2,7 @@
 id: ex-equal-orders-ordinary-ramsey-separator
 kind: example
 title: Join separator for equal-order targets
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

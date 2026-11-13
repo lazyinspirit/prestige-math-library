@@ -2,7 +2,7 @@
 id: op-connected-graphs-distinct-edge-ramsey-classes
 kind: open-problem
 title: Connected non-isomorphic graphs and edge-Ramsey classes
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

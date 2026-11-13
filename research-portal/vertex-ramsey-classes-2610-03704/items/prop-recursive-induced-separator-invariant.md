@@ -2,7 +2,7 @@
 id: prop-recursive-induced-separator-invariant
 kind: proposition
 title: Invariant of the recursive induced separator
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

@@ -1,6 +1,6 @@
 ---
 title: Inductive colouring avoiding H1
-status: draft
+status: published
 research_item: lem-recursive-separator-avoids-first-target
 dependency_level: 14
 sources:

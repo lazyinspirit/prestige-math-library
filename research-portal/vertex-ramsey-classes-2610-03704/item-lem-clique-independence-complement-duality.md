@@ -1,6 +1,6 @@
 ---
 title: Clique and independence duality under complementation
-status: draft
+status: published
 research_item: lem-clique-independence-complement-duality
 dependency_level: 0
 ---

@@ -2,7 +2,7 @@
 id: lem-author-2501feae0519-finite-uniform-sparse-obstruction
 kind: lemma
 title: Finite sparse uniform hypergraphs obstruct a prescribed palette
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

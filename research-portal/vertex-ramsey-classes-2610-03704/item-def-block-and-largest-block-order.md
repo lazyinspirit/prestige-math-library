@@ -1,6 +1,6 @@
 ---
 title: Blocks and the parameter beta
-status: draft
+status: published
 research_item: def-block-and-largest-block-order
 dependency_level: 3
 sources:

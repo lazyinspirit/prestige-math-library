@@ -1,6 +1,6 @@
 ---
 title: "Research workflow: Non-isomorphic graphs have distinct vertex-Ramsey classes"
-status: draft
+status: published
 ---
 
 96 draft items on 3 pages.

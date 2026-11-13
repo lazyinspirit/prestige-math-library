@@ -2,7 +2,7 @@
 id: lem-finite-graph-update-recursion
 kind: lemma
 title: Recursion for deterministic finite graph updates
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

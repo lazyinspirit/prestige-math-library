@@ -2,7 +2,7 @@
 id: lem-small-hyperedge-support-has-incidence-forest
 kind: lemma
 title: Small edge supports in a high-girth hypergraph
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

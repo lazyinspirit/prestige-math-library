@@ -2,7 +2,7 @@
 title: Article items · 03 — Order, size, complement and independence number
 description: Presents 28 items from the article and its immediate prerequisites,
   covering dependency levels 2–5.
-status: draft
+status: published
 dependency_level: 2
 research_article_page: true
 item_count: 28

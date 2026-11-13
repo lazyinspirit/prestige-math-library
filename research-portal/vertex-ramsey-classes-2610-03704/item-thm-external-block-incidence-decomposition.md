@@ -1,6 +1,6 @@
 ---
 title: Block incidence tree and containment contract
-status: draft
+status: published
 research_item: thm-external-block-incidence-decomposition
 dependency_level: 4
 sources:

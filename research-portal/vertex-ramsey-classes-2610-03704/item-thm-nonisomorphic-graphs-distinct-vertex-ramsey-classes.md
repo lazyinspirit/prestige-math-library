@@ -1,6 +1,6 @@
 ---
 title: "Theorem 1.1: both vertex-Ramsey distinctions"
-status: draft
+status: published
 research_item: thm-nonisomorphic-graphs-distinct-vertex-ramsey-classes
 dependency_level: 19
 sources:

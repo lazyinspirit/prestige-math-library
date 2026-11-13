@@ -2,7 +2,7 @@
 id: prop-independence-preserving-induced-ramsey-graph
 kind: proposition
 title: Induced Ramsey graph with the same independence number
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

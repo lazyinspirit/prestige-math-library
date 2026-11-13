@@ -2,7 +2,7 @@
 id: lem-independence-monotone-under-embeddings
 kind: lemma
 title: Independence is monotone under induced embeddings
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

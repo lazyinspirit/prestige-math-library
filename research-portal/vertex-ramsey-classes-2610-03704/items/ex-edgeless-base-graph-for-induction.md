@@ -2,7 +2,7 @@
 id: ex-edgeless-base-graph-for-induction
 kind: example
 title: Edgeless choice of A
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

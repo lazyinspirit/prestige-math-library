@@ -2,7 +2,7 @@
 id: lem-independent-deletion-leaves-a-vertex
 kind: lemma
 title: Nonempty remainder after deleting an independent set
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

@@ -2,7 +2,7 @@
 id: lem-clique-independence-complement-duality
 kind: lemma
 title: Clique and independence duality under complementation
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

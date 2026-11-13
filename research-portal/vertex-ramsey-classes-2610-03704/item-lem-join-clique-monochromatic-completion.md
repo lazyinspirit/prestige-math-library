@@ -1,6 +1,6 @@
 ---
 title: Completion inside the join separator
-status: draft
+status: published
 research_item: lem-join-clique-monochromatic-completion
 dependency_level: 3
 sources:

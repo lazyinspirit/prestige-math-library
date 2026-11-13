@@ -1,6 +1,6 @@
 ---
 title: Block-hitting deletion lowers maximum block order
-status: draft
+status: published
 research_item: lem-block-hitting-vertex-deletion-lowers-block-order
 dependency_level: 2
 ---

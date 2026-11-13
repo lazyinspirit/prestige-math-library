@@ -1,6 +1,6 @@
 ---
 title: Block containment and monotonicity under subgraphs
-status: draft
+status: published
 research_item: lem-block-containment-under-subgraph-embeddings
 dependency_level: 1
 ---

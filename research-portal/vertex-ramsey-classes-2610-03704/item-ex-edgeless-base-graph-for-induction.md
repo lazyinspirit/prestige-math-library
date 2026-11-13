@@ -1,6 +1,6 @@
 ---
 title: Edgeless choice of A
-status: draft
+status: published
 research_item: ex-edgeless-base-graph-for-induction
 dependency_level: 10
 sources:

@@ -1,6 +1,6 @@
 ---
 title: Fewer colours for the base graph
-status: draft
+status: published
 research_item: lem-induced-ramsey-colour-monotonicity
 dependency_level: 13
 sources:

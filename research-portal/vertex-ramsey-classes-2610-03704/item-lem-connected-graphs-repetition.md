@@ -1,6 +1,6 @@
 ---
 title: Connected targets have repetition
-status: draft
+status: published
 research_item: lem-connected-graphs-repetition
 dependency_level: 4
 sources:

@@ -2,7 +2,7 @@
 id: lem-author-3d61151c342f-nonbridge-cycle
 kind: lemma
 title: Nonbridge edges lie on 2-connected cycles
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

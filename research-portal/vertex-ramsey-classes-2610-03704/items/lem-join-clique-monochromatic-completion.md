@@ -2,7 +2,7 @@
 id: lem-join-clique-monochromatic-completion
 kind: lemma
 title: Completion inside the join separator
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

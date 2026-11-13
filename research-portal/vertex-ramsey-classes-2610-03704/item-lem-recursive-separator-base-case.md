@@ -1,6 +1,6 @@
 ---
 title: The implicit $r=1$ base case
-status: draft
+status: published
 research_item: lem-recursive-separator-base-case
 dependency_level: 5
 sources:

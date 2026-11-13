@@ -2,7 +2,7 @@
 id: lem-high-girth-construction-forbids-target-block
 kind: lemma
 title: Block exclusion in the high-girth base graph
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

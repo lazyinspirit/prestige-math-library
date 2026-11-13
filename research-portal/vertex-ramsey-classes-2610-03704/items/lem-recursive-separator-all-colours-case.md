@@ -2,7 +2,7 @@
 id: lem-recursive-separator-all-colours-case
 kind: lemma
 title: A monochromatic F extends through all-colour attachments
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

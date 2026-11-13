@@ -2,7 +2,7 @@
 id: lem-finite-mutual-embedding-rigidity
 kind: lemma
 title: Rigidity of mutual ordinary embeddings
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

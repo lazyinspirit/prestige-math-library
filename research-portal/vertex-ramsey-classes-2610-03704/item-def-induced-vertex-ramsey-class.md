@@ -1,6 +1,6 @@
 ---
 title: Induced vertex-Ramsey class
-status: draft
+status: published
 research_item: def-induced-vertex-ramsey-class
 dependency_level: 2
 sources:

@@ -1,6 +1,6 @@
 ---
 title: The independent set I and remainder F
-status: draft
+status: published
 research_item: def-independent-remainder-for-induction
 dependency_level: 9
 sources:

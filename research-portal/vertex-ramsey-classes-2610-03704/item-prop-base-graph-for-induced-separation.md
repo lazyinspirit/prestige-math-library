@@ -1,6 +1,6 @@
 ---
 title: Existence of the base graph A
-status: draft
+status: published
 research_item: prop-base-graph-for-induced-separation
 dependency_level: 12
 sources:

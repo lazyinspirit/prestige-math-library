@@ -2,7 +2,7 @@
 id: ex-final-induced-ramsey-separator
 kind: example
 title: Final induced-Ramsey separator
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

@@ -3,7 +3,7 @@ title: Hypergraph girth and graph blocks
 description: Connect Berge girth and incidence forests with block decomposition
   and vertex deletion, supplying induced graph realisations, forbidden-block
   control and the induction remainder.
-status: draft
+status: published
 dependency_level: 1
 ---
 

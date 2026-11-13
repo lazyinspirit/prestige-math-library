@@ -1,6 +1,6 @@
 ---
 title: Nonemptiness attributed to Folkman
-status: draft
+status: published
 research_item: thm-induced-vertex-ramsey-nonemptiness-cited
 dependency_level: 9
 sources:

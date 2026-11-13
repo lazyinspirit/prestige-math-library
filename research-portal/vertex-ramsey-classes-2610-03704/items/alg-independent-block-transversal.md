@@ -2,7 +2,7 @@
 id: alg-independent-block-transversal
 kind: algorithm
 title: Greedy choice in the block-cutvertex tree
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

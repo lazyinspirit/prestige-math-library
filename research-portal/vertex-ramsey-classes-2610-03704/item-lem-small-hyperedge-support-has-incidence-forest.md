@@ -1,6 +1,6 @@
 ---
 title: Small edge supports in a high-girth hypergraph
-status: draft
+status: published
 research_item: lem-small-hyperedge-support-has-incidence-forest
 dependency_level: 1
 ---

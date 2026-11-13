@@ -1,6 +1,6 @@
 ---
 title: Construction 1 gives an induced vertex-Ramsey graph
-status: draft
+status: published
 research_item: prop-construction-induced-ramsey-property
 dependency_level: 8
 sources:

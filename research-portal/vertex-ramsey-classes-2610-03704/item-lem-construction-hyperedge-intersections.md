@@ -1,6 +1,6 @@
 ---
 title: Hyperedge intersection consequence in Construction 1
-status: draft
+status: published
 research_item: lem-construction-hyperedge-intersections
 dependency_level: 3
 sources:

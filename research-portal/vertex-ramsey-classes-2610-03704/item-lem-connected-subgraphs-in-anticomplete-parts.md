@@ -1,6 +1,6 @@
 ---
 title: Connected subgraphs cannot cross anticomplete parts
-status: draft
+status: published
 research_item: lem-connected-subgraphs-in-anticomplete-parts
 dependency_level: 1
 ---

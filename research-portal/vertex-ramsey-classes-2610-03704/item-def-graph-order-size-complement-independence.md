@@ -1,6 +1,6 @@
 ---
 title: Order, size, complement and independence number
-status: draft
+status: published
 research_item: def-graph-order-size-complement-independence
 dependency_level: 2
 sources:

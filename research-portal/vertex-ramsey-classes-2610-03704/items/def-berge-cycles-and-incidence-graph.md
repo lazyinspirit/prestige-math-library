@@ -2,7 +2,7 @@
 id: def-berge-cycles-and-incidence-graph
 kind: definition
 title: Berge cycles, incidence graphs and girth
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

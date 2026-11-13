@@ -2,7 +2,7 @@
 id: lem-finite-palette-capacity
 kind: lemma
 title: Finite colour-class capacity and prescribed partitions
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

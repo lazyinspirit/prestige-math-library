@@ -1,6 +1,6 @@
 ---
 title: Berge girth at least three forces linearity
-status: draft
+status: published
 research_item: lem-berge-girth-three-implies-linear
 dependency_level: 1
 ---

@@ -2,7 +2,7 @@
 id: lem-author-3d61151c342f-finite-maximal-extension
 kind: lemma
 title: Finite maximal extension of a 2-connected subgraph
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

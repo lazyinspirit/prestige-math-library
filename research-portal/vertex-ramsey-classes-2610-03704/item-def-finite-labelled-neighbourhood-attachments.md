@@ -1,6 +1,6 @@
 ---
 title: Neighbourhood attachments indexed by induced embeddings
-status: draft
+status: published
 research_item: def-finite-labelled-neighbourhood-attachments
 dependency_level: 1
 ---

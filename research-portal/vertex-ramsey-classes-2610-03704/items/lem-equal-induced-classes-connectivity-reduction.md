@@ -2,7 +2,7 @@
 id: lem-equal-induced-classes-connectivity-reduction
 kind: lemma
 title: Reduction to connected targets
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

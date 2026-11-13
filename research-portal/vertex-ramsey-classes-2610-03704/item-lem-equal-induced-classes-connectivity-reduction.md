@@ -1,6 +1,6 @@
 ---
 title: Reduction to connected targets
-status: draft
+status: published
 research_item: lem-equal-induced-classes-connectivity-reduction
 dependency_level: 13
 sources:

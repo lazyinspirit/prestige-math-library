@@ -2,7 +2,7 @@
 id: def-hypergraph-copy-construction
 kind: definition
 title: "Construction 1: graph G(H,q,k)"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

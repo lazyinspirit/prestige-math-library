@@ -1,6 +1,6 @@
 ---
 title: Finite colour-class capacity and prescribed partitions
-status: draft
+status: published
 research_item: lem-finite-palette-capacity
 dependency_level: 1
 ---

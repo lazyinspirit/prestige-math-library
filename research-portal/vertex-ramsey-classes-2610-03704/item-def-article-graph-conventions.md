@@ -1,6 +1,6 @@
 ---
 title: Graph and colouring conventions
-status: draft
+status: published
 research_item: def-article-graph-conventions
 dependency_level: 1
 sources:

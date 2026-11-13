@@ -2,7 +2,7 @@
 id: lem-disconnected-target-independence-gap
 kind: lemma
 title: Independence gap for the join of components
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

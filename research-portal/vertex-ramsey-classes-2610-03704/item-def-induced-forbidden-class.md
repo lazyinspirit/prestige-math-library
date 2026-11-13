@@ -1,6 +1,6 @@
 ---
 title: Induced forbidden-subgraph class
-status: draft
+status: published
 research_item: def-induced-forbidden-class
 dependency_level: 2
 sources:

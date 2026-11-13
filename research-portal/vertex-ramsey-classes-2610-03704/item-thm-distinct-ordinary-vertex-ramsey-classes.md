@@ -1,6 +1,6 @@
 ---
 title: Ordinary part of Theorem 1.1
-status: draft
+status: published
 research_item: thm-distinct-ordinary-vertex-ramsey-classes
 dependency_level: 5
 sources:

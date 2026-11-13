@@ -2,7 +2,7 @@
 id: thm-external-finite-high-girth-weak-chromatic-hypergraphs
 kind: theorem
 title: Finite high-girth hypergraphs with no weak k-colouring
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

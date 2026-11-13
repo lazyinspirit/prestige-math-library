@@ -2,7 +2,7 @@
 id: lem-berge-girth-three-implies-linear
 kind: lemma
 title: Berge girth at least three forces linearity
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

@@ -1,6 +1,6 @@
 ---
 title: Two-connected subgraphs stay in one incidence-forest piece
-status: draft
+status: published
 research_item: lem-two-connected-subgraphs-in-incidence-forest-realisations
 dependency_level: 1
 ---

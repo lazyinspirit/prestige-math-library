@@ -1,6 +1,6 @@
 ---
 title: Greedy choice in the block-cutvertex tree
-status: draft
+status: published
 research_item: alg-independent-block-transversal
 dependency_level: 6
 sources:

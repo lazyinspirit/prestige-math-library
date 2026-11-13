@@ -2,7 +2,7 @@
 id: lem-nonempty-remainder-block-bounds
 kind: lemma
 title: Block bounds in the edged-F case
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

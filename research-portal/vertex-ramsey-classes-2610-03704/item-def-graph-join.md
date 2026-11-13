@@ -1,6 +1,6 @@
 ---
 title: Join of graphs
-status: draft
+status: published
 research_item: def-graph-join
 dependency_level: 2
 sources:

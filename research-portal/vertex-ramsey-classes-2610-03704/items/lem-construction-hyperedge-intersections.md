@@ -2,7 +2,7 @@
 id: lem-construction-hyperedge-intersections
 kind: lemma
 title: Hyperedge intersection consequence in Construction 1
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

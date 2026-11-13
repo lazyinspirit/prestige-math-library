@@ -2,7 +2,7 @@
 id: prop-one-colour-ramsey-distinction
 kind: proposition
 title: The $k=1$ case
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

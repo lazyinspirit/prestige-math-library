@@ -2,7 +2,7 @@
 id: lem-linear-realisation-preserves-each-induced-piece
 kind: lemma
 title: Linear realisations preserve induced pieces
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

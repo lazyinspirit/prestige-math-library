@@ -1,6 +1,6 @@
 ---
 title: Berge cycles, incidence graphs and girth
-status: draft
+status: published
 research_item: def-berge-cycles-and-incidence-graph
 dependency_level: 0
 sources:

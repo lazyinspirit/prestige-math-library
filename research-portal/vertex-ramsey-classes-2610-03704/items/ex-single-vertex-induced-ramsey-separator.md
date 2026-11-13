@@ -2,7 +2,7 @@
 id: ex-single-vertex-induced-ramsey-separator
 kind: example
 title: Single-vertex target case
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

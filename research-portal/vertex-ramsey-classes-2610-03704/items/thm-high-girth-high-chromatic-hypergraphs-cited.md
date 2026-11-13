@@ -2,7 +2,7 @@
 id: thm-high-girth-high-chromatic-hypergraphs-cited
 kind: theorem
 title: High-girth hypergraphs for Construction 1
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

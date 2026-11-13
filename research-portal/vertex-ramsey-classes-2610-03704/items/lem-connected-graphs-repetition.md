@@ -2,7 +2,7 @@
 id: lem-connected-graphs-repetition
 kind: lemma
 title: Connected targets have repetition
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

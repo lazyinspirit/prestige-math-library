@@ -1,6 +1,6 @@
 ---
 title: The $k=1$ case
-status: draft
+status: published
 research_item: prop-one-colour-ramsey-distinction
 dependency_level: 3
 sources:

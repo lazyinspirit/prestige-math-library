@@ -1,6 +1,6 @@
 ---
 title: Disjoint-copy witness against repetition
-status: draft
+status: published
 research_item: lem-disconnected-target-repetition-witness
 dependency_level: 11
 sources:

@@ -3,7 +3,7 @@ title: Colourings, embeddings and graph attachments
 description: Develop finite colouring capacity, copy transport, graph operations
   and labelled attachments for ordinary Ramsey separation, repetition and the
   recursive induced separator.
-status: draft
+status: published
 dependency_level: 0
 ---
 

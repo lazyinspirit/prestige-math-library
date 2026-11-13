@@ -2,7 +2,7 @@
 id: ex-different-orders-ordinary-ramsey-separator
 kind: example
 title: Complete-graph separator when orders differ
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

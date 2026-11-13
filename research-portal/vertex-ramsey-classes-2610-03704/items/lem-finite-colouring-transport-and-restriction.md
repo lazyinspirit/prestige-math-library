@@ -2,7 +2,7 @@
 id: lem-finite-colouring-transport-and-restriction
 kind: lemma
 title: Transport, restriction and relabelling of finite colourings
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

@@ -1,6 +1,6 @@
 ---
 title: High-girth hypergraphs for Construction 1
-status: draft
+status: published
 research_item: thm-high-girth-high-chromatic-hypergraphs-cited
 dependency_level: 5
 sources:

@@ -1,6 +1,6 @@
 ---
 title: Final induced-Ramsey separator
-status: draft
+status: published
 research_item: ex-final-induced-ramsey-separator
 dependency_level: 17
 sources:

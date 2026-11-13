@@ -2,7 +2,7 @@
 id: lem-universal-clique-completes-a-restricted-target
 kind: lemma
 title: Completing a restricted target with universal clique vertices
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

@@ -1,6 +1,6 @@
 ---
 title: "Construction 1: graph G(H,q,k)"
-status: draft
+status: published
 research_item: def-hypergraph-copy-construction
 dependency_level: 6
 sources:

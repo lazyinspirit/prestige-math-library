@@ -2,7 +2,7 @@
 id: thm-distinct-ordinary-vertex-ramsey-classes
 kind: theorem
 title: Ordinary part of Theorem 1.1
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

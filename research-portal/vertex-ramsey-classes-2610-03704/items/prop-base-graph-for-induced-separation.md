@@ -2,7 +2,7 @@
 id: prop-base-graph-for-induced-separation
 kind: proposition
 title: Existence of the base graph A
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

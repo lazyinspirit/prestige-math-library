@@ -1,6 +1,6 @@
 ---
 title: Rooted block exposure and attachment separation
-status: draft
+status: published
 research_item: lem-rooted-block-exposure-separation
 dependency_level: 5
 ---

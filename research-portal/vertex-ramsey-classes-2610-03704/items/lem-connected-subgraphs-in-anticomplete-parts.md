@@ -2,7 +2,7 @@
 id: lem-connected-subgraphs-in-anticomplete-parts
 kind: lemma
 title: Connected subgraphs cannot cross anticomplete parts
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

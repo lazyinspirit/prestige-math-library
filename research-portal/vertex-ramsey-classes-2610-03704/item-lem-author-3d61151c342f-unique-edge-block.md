@@ -1,6 +1,6 @@
 ---
 title: Every edge belongs to exactly one nontrivial block
-status: draft
+status: published
 research_item: lem-author-3d61151c342f-unique-edge-block
 dependency_level: 3
 ---

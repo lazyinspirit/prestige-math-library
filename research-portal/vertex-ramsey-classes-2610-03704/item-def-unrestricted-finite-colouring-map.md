@@ -1,6 +1,6 @@
 ---
 title: Unrestricted finite colourings and used palettes
-status: draft
+status: published
 research_item: def-unrestricted-finite-colouring-map
 dependency_level: 0
 ---

@@ -2,7 +2,7 @@
 id: lem-recursive-separator-forces-second-target
 kind: lemma
 title: Inductive Ramsey membership for H2
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

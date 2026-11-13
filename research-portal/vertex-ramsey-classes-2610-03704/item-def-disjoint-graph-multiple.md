@@ -1,6 +1,6 @@
 ---
 title: The disjoint multiple qA
-status: draft
+status: published
 research_item: def-disjoint-graph-multiple
 dependency_level: 2
 sources:

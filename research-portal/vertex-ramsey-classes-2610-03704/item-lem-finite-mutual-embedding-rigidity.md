@@ -1,6 +1,6 @@
 ---
 title: Rigidity of mutual ordinary embeddings
-status: draft
+status: published
 research_item: lem-finite-mutual-embedding-rigidity
 dependency_level: 1
 ---

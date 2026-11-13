@@ -3,7 +3,7 @@ title: Article items · 02 — A finite set with $n$ elements has exactly
   $\binom{n}{2}$ two-element subsets, and $2\binom{n}{2} = n(n-1)$
 description: Presents 29 items from the article and its immediate prerequisites,
   covering published library prerequisites and dependency levels 0–2.
-status: draft
+status: published
 dependency_level: 1
 research_article_page: true
 item_count: 29

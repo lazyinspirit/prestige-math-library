@@ -2,7 +2,7 @@
 id: def-edge-ramsey-class-context
 kind: definition
 title: Edge-Ramsey class terminology in the motivation
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

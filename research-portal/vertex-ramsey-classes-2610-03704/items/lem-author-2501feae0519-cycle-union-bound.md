@@ -2,7 +2,7 @@
 id: lem-author-2501feae0519-cycle-union-bound
 kind: lemma
 title: A Berge cycle bounds the union of its hyperedges
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

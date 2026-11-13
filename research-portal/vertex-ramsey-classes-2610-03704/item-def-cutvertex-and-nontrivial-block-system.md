@@ -1,6 +1,6 @@
 ---
 title: Cutvertices, 2-connected pieces and nontrivial blocks
-status: draft
+status: published
 research_item: def-cutvertex-and-nontrivial-block-system
 dependency_level: 0
 ---

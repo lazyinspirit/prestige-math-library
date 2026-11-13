@@ -2,7 +2,7 @@
 id: lem-complement-transports-induced-embeddings
 kind: lemma
 title: Complementation transports induced copies on fixed vertices
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

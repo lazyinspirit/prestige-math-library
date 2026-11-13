@@ -1,6 +1,6 @@
 ---
 title: A monochromatic F extends through all-colour attachments
-status: draft
+status: published
 research_item: lem-recursive-separator-all-colours-case
 dependency_level: 14
 sources:

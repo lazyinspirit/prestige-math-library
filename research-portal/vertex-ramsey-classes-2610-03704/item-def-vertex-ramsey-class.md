@@ -1,6 +1,6 @@
 ---
 title: Ordinary vertex-Ramsey class
-status: draft
+status: published
 research_item: def-vertex-ramsey-class
 dependency_level: 2
 sources:

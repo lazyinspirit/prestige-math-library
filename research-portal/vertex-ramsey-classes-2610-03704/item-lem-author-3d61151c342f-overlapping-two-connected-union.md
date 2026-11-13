@@ -1,6 +1,6 @@
 ---
 title: Union closure for overlapping 2-connected subgraphs
-status: draft
+status: published
 research_item: lem-author-3d61151c342f-overlapping-two-connected-union
 dependency_level: 1
 ---

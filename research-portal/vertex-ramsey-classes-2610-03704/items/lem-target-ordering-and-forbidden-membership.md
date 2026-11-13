@@ -2,7 +2,7 @@
 id: lem-target-ordering-and-forbidden-membership
 kind: lemma
 title: Ordering targets and excluding H1 from H2
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

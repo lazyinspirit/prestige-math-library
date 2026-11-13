@@ -1,6 +1,6 @@
 ---
 title: One representative from each matching attachment reconstructs the target
-status: draft
+status: published
 research_item: lem-one-representative-per-neighbourhood-attachment
 dependency_level: 2
 ---

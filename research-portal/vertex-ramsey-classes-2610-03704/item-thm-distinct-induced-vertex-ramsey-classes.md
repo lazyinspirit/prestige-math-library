@@ -1,6 +1,6 @@
 ---
 title: Induced part of Theorem 1.1
-status: draft
+status: published
 research_item: thm-distinct-induced-vertex-ramsey-classes
 dependency_level: 18
 sources:

@@ -2,7 +2,7 @@
 id: rem-figure-one-recursive-separator
 kind: remark
 title: "Figure 1: recursive construction and red witness"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

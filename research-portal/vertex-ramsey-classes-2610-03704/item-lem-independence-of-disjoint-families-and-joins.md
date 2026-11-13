@@ -1,6 +1,6 @@
 ---
 title: Independence numbers of disjoint families and complete joins
-status: draft
+status: published
 research_item: lem-independence-of-disjoint-families-and-joins
 dependency_level: 1
 ---

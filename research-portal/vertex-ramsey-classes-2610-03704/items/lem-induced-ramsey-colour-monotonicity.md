@@ -2,7 +2,7 @@
 id: lem-induced-ramsey-colour-monotonicity
 kind: lemma
 title: Fewer colours for the base graph
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

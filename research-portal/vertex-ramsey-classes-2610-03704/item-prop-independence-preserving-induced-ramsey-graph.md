@@ -1,6 +1,6 @@
 ---
 title: Induced Ramsey graph with the same independence number
-status: draft
+status: published
 research_item: prop-independence-preserving-induced-ramsey-graph
 dependency_level: 9
 sources:

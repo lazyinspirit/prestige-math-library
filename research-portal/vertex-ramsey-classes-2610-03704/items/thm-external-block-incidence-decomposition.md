@@ -2,7 +2,7 @@
 id: thm-external-block-incidence-decomposition
 kind: theorem
 title: Block incidence tree and containment contract
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:
