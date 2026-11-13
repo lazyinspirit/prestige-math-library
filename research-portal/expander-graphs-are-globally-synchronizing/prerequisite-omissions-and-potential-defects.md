@@ -3,10 +3,10 @@ title: Prerequisite omissions and potential defects
 research_report: defects
 description: Original-article findings for Expander graphs are globally synchronizing.
 status: draft
-generated_at: 2026-11-13T17:20:00.722Z
+generated_at: "2026-11-13T18:09:38.925Z"
 ---
 
-27 confirmed findings in the original article.
+29 confirmed findings in the original article.
 
 ## finding-original-spurious-point-basin · confirmed
 
@@ -196,7 +196,6 @@ The sentence and immediately following rendered display have opposite logical di
 
 https://static1.squarespace.com/static/5436e695e4b07f1e91b30155/t/6991d638ab1b273169a7becd/1771165240824/expander-graphs-are-globally-synchronizing.pdf; PDF p. 29, (5.1); p. 30, explanation of $3.326/c_i$ (PDF p. 29).
 
-> In particular, we have a
 > contradiction if
 
 Two rounded scalar deductions need stronger justification. At $\alpha=0.0816$, $5\alpha^2/4=0.0083232>0.00832$. Also $1.05\cdot3.168=3.3264>3.326$. The cited estimates alone do not give the printed rounded constants.
@@ -245,7 +244,7 @@ https://static1.squarespace.com/static/5436e695e4b07f1e91b30155/t/6991d638ab1b27
 
 > best result is due to
 
-The constant-two adjacency bound fails in part of the stated near-connectivity regime. Independent critical sparse-graph eigenvalue estimates yield an outlier gap at $p=3\log n/(2n)$. The fixed-law Wigner citation does not establish the claimed sparse uniformity.
+The constant-two adjacency bound fails in part of the stated near-connectivity regime. Independent critical sparse-graph eigenvalue estimates yield an outlier gap at $p=3\log n/(2n)$, contradicting the article’s constant-two tolerance in that regime.
 
 The original p. 31 estimate is immediately used in the $\gamma\log n/n$ regime, and Corollary 6.1 imposes the same constant-two adjacency tolerance. The independent theorem applies to exactly the original loop-free graph law.
 
@@ -253,7 +252,7 @@ The original p. 31 estimate is immediately used in the $\gamma\log n/n$ regime, 
 
 **Counterexample:** Let $d_n=(3/2)\log n$, $p_n=d_n/n$, $g=9/(2\sqrt5)-2>0$.
 
-These are the original loop-free independent-edge graphs, with fixed $\gamma=3/2>1$ and $0<p_n<1$ eventually. In Alt–Ducatez–Knowles, Corollary 2.4(i), take $\kappa=\theta=1/10$, so $a=2/5$ and $(\log n)^{5/6}\le d_n\le n/2$ eventually. The deterministic degree root $\beta_1$ solves $d_n I(\beta_1)+\frac12\log(2\pi\beta_1d_n)=\log n$. Since $I(9/4)<5/8$, its left side at $9/4$ is at most $(15/16+o(1))\log n$, hence $\beta_1>9/4$ and index 1 is admissible. The source theorem gives $-\lambda_{\min}(A)\ge(2+g-o(1))\sqrt{d_n}$ with probability tending to one. Subtracting PSD $p_nJ$ cannot increase the least eigenvalue, so $\|A-p_nJ\|\ge(2+g/2)\sqrt{d_n}$ eventually with high probability. This contradicts (6.1). It also contradicts Corollary 6.1 at its fixed $\varepsilon=10^{-3}<g/2$, since $p_n\ge(1+\varepsilon)\log n/n$. The synchronization conclusion is not tested by this example.
+These are the original loop-free independent-edge graphs, with fixed $\gamma=3/2>1$ and $0<p_n<1$ eventually. In Alt–Ducatez–Knowles, Corollary 2.4(i), take $\kappa=\theta=1/10$, so $a=2/5$ and $(\log n)^{5/6}\le d_n\le n/2$ eventually. The deterministic degree root $\beta_1$ solves $d_n I(\beta_1)+\frac12\log(2\pi\beta_1d_n)=\log n$. Since $I(9/4)<5/8$, its left side is increasing for $\beta\ge1$ and at $9/4$ is at most $(15/16+o(1))\log n$, hence $\beta_1>9/4$ and index 1 is admissible, including $1\le n/(C\sqrt{d_n})$ eventually for the fixed source constant. Here $I(t)=t\log t-t+1$ and $I(9/4)<5/8$ follows from $\log(9/4)<5/6$, since the exponential series gives $e^{5/6}>9/4$. The source theorem gives $-\lambda_{\min}(A)\ge(2+g-o(1))\sqrt{d_n}$ with probability tending to one. Subtracting PSD $p_nJ$ cannot increase the least eigenvalue, so $\|A-p_nJ\|\ge(2+g/2)\sqrt{d_n}$ eventually with high probability. This contradicts (6.1). It also contradicts Corollary 6.1 at its fixed $\varepsilon=10^{-3}<g/2$, since $p_n\ge(1+\varepsilon)\log n/n$. The synchronization conclusion is not tested by this example.
 
 ## finding-original-symmetrization-centering · confirmed
 
@@ -437,7 +436,7 @@ The original rendered p. 38 formula has minus signs in this prefactor although $
 
 **Counterexample:** Take $\varepsilon=4/5$, $\gamma=11/5$ and the original positive shifted root.
 
-The hypotheses hold: $1.8<2.2<2.5625$. For $h(x)=(1+x)\log(1+x)-x$, direct logarithm estimates give $h(4/5)<9/11<h(8/5)$. Strict increase on positive $x$ and $h(c^++4/5)=9/11$ imply $0<c^+<4/5$. Thus the printed prefactor $(1+c^+-\varepsilon)/(c^+-\varepsilon)$ is negative. For all sufficiently large $n$, $0<k^+<n-1$ and $0<p<1$, so the degree-tail probability is strictly positive, while the printed right side is negative. The other branch also exists with $c^-<0$: $h(-4/5)<9/11<1=h(-1^+)$ gives its shifted argument in $(-1,-4/5)$ and hence $c^-\in(-1/5,0)$. The other branch also exists with $c^-<0$: $h(-4/5)<9/11<1=h(-1^+)$ gives its shifted argument in $(-1,-4/5)$ and hence $c^-\in(-1/5,0)$.
+The hypotheses hold: $1.8<2.2<2.5625$. For $h(x)=(1+x)\log(1+x)-x$, direct logarithm estimates give $h(4/5)<9/11<h(8/5)$. Strict increase on positive $x$ and $h(c^++4/5)=9/11$ imply $0<c^+<4/5$. Thus the printed prefactor $(1+c^+-\varepsilon)/(c^+-\varepsilon)$ is negative. For all sufficiently large $n$, $0<k^+<n-1$ and $0<p<1$, so the degree-tail probability is strictly positive, while the printed right side is negative. The other branch also exists with $c^-<0$: $h(-4/5)<9/11<1=h(-1^+)$ gives its shifted argument in $(-1,-4/5)$ and hence $c^-\in(-1/5,0)$.
 
 ## finding-original-exact-root-expansion-rate · confirmed
 
@@ -470,3 +469,39 @@ The cited spectral event is missing its degree scale. Corollary 6.6 supplies $\|
 The original line and Definition 1.9 use different normalizations; the chosen value of $\alpha$ makes the missing factor explicit.
 
 **Correction:** Insert $d^*$; this only corrects the normalization.
+
+## finding-original-gaussian-variable-parity-typo · confirmed
+
+**Tags:** typos
+
+https://static1.squarespace.com/static/5436e695e4b07f1e91b30155/t/6991d638ab1b273169a7becd/1771165240824/expander-graphs-are-globally-synchronizing.pdf; PDF p. 34, Gaussian-comparison paragraph between the two trace displays (PDF p. 34).
+
+> On the other hand, if G is a symmetric matrix
+
+The Gaussian comparison sentence uses the wrong variable and omits the even-power restriction. The printed $\mathbb EW_{xy}^k\ge1$ fails for the defined Bernoulli difference. Replacing $W$ by $G$ still requires even $k$.
+
+The PDF image prints W in the Gaussian paragraph. The following trace lower bound is justified using even Gaussian moments on even walks; this correction does not repair the separate reversed Bernoulli comparison.
+
+**Correction:** Use $\mathbb EG_{xy}^{2j}=(2j-1)!!\ge1$ for positive integers $j$; odd Gaussian moments vanish.
+
+**Counterexample:** Use $p=1/2$, $x\ne y$, $k=2$, and any arbitrarily large $n\ge2$.
+
+These obey Proposition 6.3 and its independent-copy graph law. The defined $W=A-A^\prime$ has probabilities $1/4,1/2,1/4$ at $-1,0,1$, so $\mathbb EW_{xy}^2=1/2<1$. For a standard Gaussian the odd moment at $k=1$ is zero by symmetry. Thus both the variable and parity corrections are needed; the even-walk Gaussian trace lower bound remains valid.
+
+## finding-original-rounding-logarithm-typo · confirmed
+
+**Tags:** typos
+
+https://static1.squarespace.com/static/5436e695e4b07f1e91b30155/t/6991d638ab1b273169a7becd/1771165240824/expander-graphs-are-globally-synchronizing.pdf; PDF p. 37, final line of the rounding paragraph, immediately before Lemma 6.7 is applied (PDF p. 37).
+
+> as |Lk −Lk+η| ⩽|η| log log n + log(k + 1).
+
+The rounding explanation bounds a difference of L-values instead of their logarithms. With $L_k=(\log n)^k/k!$, the preceding exponent contains $\log L_k$. The printed bound for $|L_k-L_{k+\eta}|$ is false.
+
+The rendered formula omits both logarithms despite explicitly bounding exponent variation. The logarithmic correction supplies the intended type of estimate, without validating the separate degree-target inference.
+
+**Correction:** For adjacent integer indices use $|\log L_k-\log L_{k+\eta}|$; handle fractional rounding by a mean-value bound on the smooth exponent.
+
+**Counterexample:** Take the permitted $\gamma=2$, $\varepsilon=1/2$, its printed lower shifted root, $\delta=2(1+c^--1/2)$, $k=\lfloor\delta\log n\rfloor$, and the adjacent-index test $\eta=1$.
+
+The parameter restrictions $0<1/2<1$ and $3/2<2<5$ hold. The root has $-1/2<c^-<0$, hence $0<\delta<1$ and eventually $1\le k<k+1\le n-1$, $0<p=2\log n/n<1$. Put $L=\log n$. Exactly $L_{k+1}/L_k=L/(k+1)\to1/\delta>1$. Also $k!\le k^k$ gives $L_k\ge(L/k)^k\ge\delta^{-k}\ge\delta n^{\delta\log(1/\delta)}$. Thus $|L_{k+1}-L_k|$ grows at least as a positive power of n, exceeding the printed $O(\log L)$ right side. This tests the printed unit-index inequality, not the probability conclusion. The correct logarithmic identity is $\log L_{k+1}-\log L_k=\log\log n-\log(k+1)$.
