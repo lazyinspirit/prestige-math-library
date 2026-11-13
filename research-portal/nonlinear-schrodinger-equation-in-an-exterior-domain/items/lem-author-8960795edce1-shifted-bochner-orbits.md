@@ -3,7 +3,7 @@ id: lem-author-8960795edce1-shifted-bochner-orbits
 kind: lemma
 domain: mathematics
 title: Strongly continuous shifted orbits in finite Bochner norms
-status: draft
+status: published
 deps:
   - math:def-countable-choice
   - math:def-strongly-continuous-one-parameter-unitary-group

@@ -1,6 +1,6 @@
 ---
 title: Quintic control around nonzero trajectories
-status: draft
+status: published
 research_item: op-se-quintic-trajectories
 dependency_level: 8
 sources:

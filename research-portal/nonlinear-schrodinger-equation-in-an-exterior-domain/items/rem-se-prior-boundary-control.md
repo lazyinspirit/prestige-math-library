@@ -3,7 +3,7 @@ id: rem-se-prior-boundary-control
 kind: remark
 domain: mathematics
 title: Prior full and partial boundary control results reported in the introduction
-status: draft
+status: published
 deps:
   - def-se-cubic-boundary-system
   - def-se-foundation-time-function-spaces

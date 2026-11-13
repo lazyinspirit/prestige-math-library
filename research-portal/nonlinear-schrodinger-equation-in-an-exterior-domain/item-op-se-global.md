@@ -1,6 +1,6 @@
 ---
 title: Global defocusing controllability in large time
-status: draft
+status: published
 research_item: op-se-global
 dependency_level: 8
 sources:

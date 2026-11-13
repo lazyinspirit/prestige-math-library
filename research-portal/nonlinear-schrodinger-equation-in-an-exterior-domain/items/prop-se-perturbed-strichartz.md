@@ -3,7 +3,7 @@ id: prop-se-perturbed-strichartz
 kind: proposition
 domain: mathematics
 title: Linearized propagator bounds in the nonlinear control spaces
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - def-se-geometry

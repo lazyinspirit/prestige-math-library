@@ -1,6 +1,6 @@
 ---
 title: Critical nonlinearities named in the article
-status: draft
+status: published
 research_item: rem-se-critical-exponents
 dependency_level: 8
 sources:

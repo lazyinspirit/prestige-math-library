@@ -1,6 +1,6 @@
 ---
 title: Energy dispersive bounds under bounded trajectory perturbations
-status: draft
+status: published
 research_item: lem-se-bounded-perturbation-dispersive-transfer
 dependency_level: 7
 sources:

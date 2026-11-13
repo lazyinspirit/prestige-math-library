@@ -1,6 +1,6 @@
 ---
 title: Closed compactness of arbitrary exterior generalized-ray segments
-status: draft
+status: published
 research_item: prop-author-062cb22743bb-exterior-ray-compactness
 dependency_level: 2
 sources:

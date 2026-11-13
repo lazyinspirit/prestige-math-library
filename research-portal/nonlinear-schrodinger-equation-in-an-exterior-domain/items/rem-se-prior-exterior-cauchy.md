@@ -3,7 +3,7 @@ id: rem-se-prior-exterior-cauchy
 kind: remark
 domain: mathematics
 title: Prior exterior-domain dispersive and Cauchy results
-status: draft
+status: published
 deps:
   - def-se-geometry
   - def-se-nontrapping

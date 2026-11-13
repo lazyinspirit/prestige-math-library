@@ -3,7 +3,7 @@ id: lem-se-power-time-integrability
 kind: lemma
 domain: mathematics
 title: Cubic and quintic time bounds from L4 Linfinity control
-status: draft
+status: published
 deps:
   - lem-se-complex-polynomial-energy-rule
   - def-se-foundation-time-function-spaces

@@ -3,7 +3,7 @@ id: thm-se-general-aubin-lions-simon-input
 kind: theorem
 domain: mathematics
 title: General Banach-triple Aubin–Lions–Simon compactness
-status: draft
+status: published
 deps:
   - def-author-ab209e1f475e-compact-banach-triple
   - lem-author-ab209e1f475e-bochner-lp-inclusion

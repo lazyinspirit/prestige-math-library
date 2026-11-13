@@ -1,6 +1,6 @@
 ---
 title: Exterior Dirichlet realization, H² domain and form domain
-status: draft
+status: published
 research_item: lem-se-exterior-dirichlet-realization
 dependency_level: 3
 ---

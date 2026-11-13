@@ -3,7 +3,7 @@ id: thm-se-1-4
 kind: theorem
 domain: mathematics
 title: "Theorem 1.4: linearized control around a trajectory"
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - def-se-geometry

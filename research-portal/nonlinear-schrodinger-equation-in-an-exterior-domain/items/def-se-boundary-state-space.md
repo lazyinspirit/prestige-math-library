@@ -3,7 +3,7 @@ id: def-se-boundary-state-space
 kind: definition
 domain: mathematics
 title: States compatible with the uncontrolled obstacle boundary
-status: draft
+status: published
 deps:
   - def-se-geometry
   - lem-se-sobolev-extension-retraction

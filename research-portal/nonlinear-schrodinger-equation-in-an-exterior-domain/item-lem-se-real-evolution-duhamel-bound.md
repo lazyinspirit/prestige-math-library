@@ -1,6 +1,6 @@
 ---
 title: Bounded real-linear perturbations preserve solution estimates
-status: draft
+status: published
 research_item: lem-se-real-evolution-duhamel-bound
 dependency_level: 5
 ---

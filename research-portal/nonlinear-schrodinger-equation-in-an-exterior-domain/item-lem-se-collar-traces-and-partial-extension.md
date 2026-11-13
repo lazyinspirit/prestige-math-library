@@ -1,6 +1,6 @@
 ---
 title: Collar traces and extension across an artificial boundary
-status: draft
+status: published
 research_item: lem-se-collar-traces-and-partial-extension
 dependency_level: 12
 ---

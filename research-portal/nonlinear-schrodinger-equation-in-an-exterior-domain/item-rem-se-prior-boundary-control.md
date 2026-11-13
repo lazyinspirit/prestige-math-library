@@ -1,6 +1,6 @@
 ---
 title: Prior full and partial boundary control results reported in the introduction
-status: draft
+status: published
 research_item: rem-se-prior-boundary-control
 dependency_level: 3
 sources:

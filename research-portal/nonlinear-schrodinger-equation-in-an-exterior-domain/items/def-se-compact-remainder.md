@@ -3,7 +3,7 @@ id: def-se-compact-remainder
 kind: definition
 domain: mathematics
 title: Regularized lower-order observation remainder
-status: draft
+status: published
 deps:
   - def-se-control-cutoffs
   - def-se-dirichlet-scale

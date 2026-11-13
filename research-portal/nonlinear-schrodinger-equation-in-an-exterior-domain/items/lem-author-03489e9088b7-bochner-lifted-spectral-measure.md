@@ -3,7 +3,7 @@ id: lem-author-03489e9088b7-bochner-lifted-spectral-measure
 kind: lemma
 domain: mathematics
 title: Lifted spectral measure and isometric Bochner scale interpolation
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - lem-author-03489e9088b7-spectral-cutoff-scale-identifications

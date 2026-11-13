@@ -1,6 +1,6 @@
 ---
 title: Coercivity and bounded trajectory control operator
-status: draft
+status: published
 research_item: prop-se-real-hum-isomorphism
 dependency_level: 18
 sources:

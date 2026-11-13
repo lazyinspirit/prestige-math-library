@@ -3,7 +3,7 @@ id: lem-se-real-hilbert-dualization
 kind: lemma
 domain: mathematics
 title: Realification of Hilbert pairings and conjugate-linear coefficients
-status: draft
+status: published
 deps:
   - math:def-realification-of-a-complex-vector-space
   - math:lem-complex-norm-realification-is-a-real-norm

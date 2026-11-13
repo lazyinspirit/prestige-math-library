@@ -1,6 +1,6 @@
 ---
 title: Prior damped exterior Schrödinger results
-status: draft
+status: published
 research_item: rem-se-prior-exterior-stabilization
 dependency_level: 3
 sources:

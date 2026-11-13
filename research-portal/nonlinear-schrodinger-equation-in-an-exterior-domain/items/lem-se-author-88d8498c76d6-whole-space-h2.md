@@ -3,7 +3,7 @@ id: lem-se-author-88d8498c76d6-whole-space-h2
 kind: lemma
 domain: mathematics
 title: Whole-space H² regularity from an L² distributional Laplacian
-status: draft
+status: published
 deps:
   - math:def-axiom-of-choice
   - math:lem-weak-derivatives-are-polynomial-fourier-multipliers

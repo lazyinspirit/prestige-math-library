@@ -1,6 +1,6 @@
 ---
 title: Exterior H2 algebra and polynomial nonlinear estimates
-status: draft
+status: published
 research_item: prop-se-h2-nonlinearity
 dependency_level: 12
 sources:

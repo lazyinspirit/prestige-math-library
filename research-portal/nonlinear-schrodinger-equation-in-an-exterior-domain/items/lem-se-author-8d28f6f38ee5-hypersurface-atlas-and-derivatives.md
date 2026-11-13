@@ -4,7 +4,7 @@ kind: lemma
 domain: mathematics
 title: Atlas-independent hypersurface Sobolev norms and $H^{3/2}$ tangential
   derivatives
-status: draft
+status: published
 deps:
   - math:def-codimension-and-hypersurface
   - math:def-smooth-atlas

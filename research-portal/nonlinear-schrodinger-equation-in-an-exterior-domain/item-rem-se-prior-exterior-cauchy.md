@@ -1,6 +1,6 @@
 ---
 title: Prior exterior-domain dispersive and Cauchy results
-status: draft
+status: published
 research_item: rem-se-prior-exterior-cauchy
 dependency_level: 3
 sources:

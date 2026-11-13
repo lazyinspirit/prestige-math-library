@@ -1,6 +1,6 @@
 ---
 title: Bounded collar regularity for an exterior weak Dirichlet function
-status: draft
+status: published
 research_item: lem-se-author-88d8498c76d6-bounded-collar-h2
 dependency_level: 0
 ---

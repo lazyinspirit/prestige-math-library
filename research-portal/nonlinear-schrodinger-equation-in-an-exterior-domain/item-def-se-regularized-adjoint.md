@@ -1,6 +1,6 @@
 ---
 title: Resolvent-regularized adjoint and its forcing
-status: draft
+status: published
 research_item: def-se-regularized-adjoint
 dependency_level: 14
 sources:

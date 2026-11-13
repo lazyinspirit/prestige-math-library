@@ -3,7 +3,7 @@ id: prop-se-real-duhamel
 kind: proposition
 domain: mathematics
 title: Duhamel formula for a real-linear propagator
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - def-se-geometry

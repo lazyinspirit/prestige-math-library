@@ -1,6 +1,6 @@
 ---
 title: Localized multiplier estimate for the exterior Dirichlet normal trace
-status: draft
+status: published
 research_item: lem-se-localized-boundary-normal-trace
 dependency_level: 4
 ---

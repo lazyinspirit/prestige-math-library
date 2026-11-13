@@ -1,6 +1,6 @@
 ---
 title: Integer resolvent commutator and localized first-order bounds
-status: draft
+status: published
 research_item: prop-se-integer-commutator
 dependency_level: 8
 sources:

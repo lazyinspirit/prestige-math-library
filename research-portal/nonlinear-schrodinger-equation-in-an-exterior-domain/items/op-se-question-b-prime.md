@@ -3,7 +3,7 @@ id: op-se-question-b-prime
 kind: open-problem
 domain: mathematics
 title: "Question B prime: outer boundary control"
-status: draft
+status: published
 deps:
   - math:def-countable-choice
   - def-se-cubic-boundary-system

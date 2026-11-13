@@ -3,7 +3,7 @@ id: prop-se-energy-nonlinear-estimates
 kind: proposition
 domain: mathematics
 title: Cubic and quintic energy-space nonlinear time estimates
-status: draft
+status: published
 deps:
   - def-se-energy-space
   - def-se-foundation-integer-sobolev-notation

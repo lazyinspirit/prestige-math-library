@@ -3,7 +3,7 @@ id: lem-se-author-ccbb64dfef2c-sobolev-quotient-bochner-retraction
 kind: lemma
 domain: mathematics
 title: Restriction quotient and Bochner interpolation for the exterior extension
-status: draft
+status: published
 deps:
   - math:def-axiom-of-choice
   - math:thm-sobolev-spaces-are-banach-spaces

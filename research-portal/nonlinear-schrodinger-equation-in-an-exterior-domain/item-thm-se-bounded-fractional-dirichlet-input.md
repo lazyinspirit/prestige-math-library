@@ -1,6 +1,6 @@
 ---
 title: Bounded smooth fractional Dirichlet domain contract
-status: draft
+status: published
 research_item: thm-se-bounded-fractional-dirichlet-input
 dependency_level: 0
 sources:

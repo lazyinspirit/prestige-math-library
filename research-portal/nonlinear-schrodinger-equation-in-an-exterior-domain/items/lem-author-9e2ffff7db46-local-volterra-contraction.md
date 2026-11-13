@@ -3,7 +3,7 @@ id: lem-author-9e2ffff7db46-local-volterra-contraction
 kind: lemma
 domain: mathematics
 title: Short-interval real Volterra contraction
-status: draft
+status: published
 deps:
   - lem-author-9e2ffff7db46-free-continuous-convolution
   - math:thm-banach-fixed-point

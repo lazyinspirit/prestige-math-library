@@ -3,7 +3,7 @@ id: lem-se-observation-gramian-right-inverse
 kind: lemma
 domain: mathematics
 title: Observation lower bounds give Hilbert control right inverses
-status: draft
+status: published
 deps:
   - math:def-hilbert-space
   - math:def-hilbert-space-adjoint

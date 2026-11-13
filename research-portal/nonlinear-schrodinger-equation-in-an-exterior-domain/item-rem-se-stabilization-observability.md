@@ -1,6 +1,6 @@
 ---
 title: Linear damping decay and observability comparison
-status: draft
+status: published
 research_item: rem-se-stabilization-observability
 dependency_level: 8
 sources:

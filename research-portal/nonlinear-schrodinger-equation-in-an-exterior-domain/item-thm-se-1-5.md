@@ -1,6 +1,6 @@
 ---
 title: "Theorem 1.5: cubic internal control near a trajectory"
-status: draft
+status: published
 research_item: thm-se-1-5
 dependency_level: 21
 sources:

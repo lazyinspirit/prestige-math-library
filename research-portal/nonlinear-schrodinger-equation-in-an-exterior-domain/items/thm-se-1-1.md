@@ -3,7 +3,7 @@ id: thm-se-1-1
 kind: theorem
 domain: mathematics
 title: "Theorem 1.1: exact outer boundary controllability"
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - def-se-geometry

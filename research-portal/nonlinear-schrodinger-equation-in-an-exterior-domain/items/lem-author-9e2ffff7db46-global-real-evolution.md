@@ -3,7 +3,7 @@ id: lem-author-9e2ffff7db46-global-real-evolution
 kind: lemma
 domain: mathematics
 title: Global real evolution, cocycle and inverse
-status: draft
+status: published
 deps:
   - lem-author-9e2ffff7db46-free-continuous-convolution
   - lem-author-9e2ffff7db46-local-volterra-contraction

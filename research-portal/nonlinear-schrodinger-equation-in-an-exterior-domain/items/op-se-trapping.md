@@ -3,7 +3,7 @@ id: op-se-trapping
 kind: open-problem
 domain: mathematics
 title: Nonlinear control for trapping obstacle configurations
-status: draft
+status: published
 deps:
   - def-se-geometry
   - def-se-cubic-boundary-system

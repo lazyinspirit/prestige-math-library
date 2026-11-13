@@ -3,7 +3,7 @@ id: prop-se-import-bgt-local-smoothing
 kind: proposition
 domain: mathematics
 title: Imported homogeneous and retarded exterior smoothing
-status: draft
+status: published
 deps:
   - def-se-geometry
   - def-se-nontrapping

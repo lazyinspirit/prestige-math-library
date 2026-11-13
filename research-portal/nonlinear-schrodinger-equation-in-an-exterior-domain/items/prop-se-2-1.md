@@ -3,7 +3,7 @@ id: prop-se-2-1
 kind: proposition
 domain: mathematics
 title: "Proposition 2.1: cut-off resolvent estimate"
-status: draft
+status: published
 deps:
   - def-se-geometry
   - def-se-nontrapping

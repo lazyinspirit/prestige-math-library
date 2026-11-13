@@ -1,6 +1,6 @@
 ---
 title: "Theorem 1.2: linear control on the full stated scale"
-status: draft
+status: published
 research_item: thm-se-1-2
 dependency_level: 19
 sources:

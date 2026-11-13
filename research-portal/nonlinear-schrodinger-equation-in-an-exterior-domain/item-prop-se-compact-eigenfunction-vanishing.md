@@ -1,6 +1,6 @@
 ---
 title: Vanishing of an eigenfunction invisible outside a ball
-status: draft
+status: published
 research_item: prop-se-compact-eigenfunction-vanishing
 dependency_level: 8
 sources:

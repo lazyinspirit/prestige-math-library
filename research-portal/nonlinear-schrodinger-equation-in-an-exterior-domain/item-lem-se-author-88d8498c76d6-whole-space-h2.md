@@ -1,6 +1,6 @@
 ---
 title: Whole-space H² regularity from an L² distributional Laplacian
-status: draft
+status: published
 research_item: lem-se-author-88d8498c76d6-whole-space-h2
 dependency_level: 0
 ---

@@ -1,6 +1,6 @@
 ---
 title: Annular extension and cutoff gluing construction
-status: draft
+status: published
 research_item: def-se-extension-construction
 dependency_level: 14
 sources:

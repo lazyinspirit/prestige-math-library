@@ -1,6 +1,6 @@
 ---
 title: Simultaneous Sobolev extension and localization
-status: draft
+status: published
 research_item: lem-se-sobolev-extension-retraction
 dependency_level: 9
 ---

@@ -3,7 +3,7 @@ id: lem-se-exterior-h2-uniform-algebra
 kind: lemma
 domain: mathematics
 title: Uniform localized H2 algebra on a smooth exterior domain
-status: draft
+status: published
 deps:
   - math:def-axiom-of-choice
   - math:def-sobolev-space-wkp-and-its-norm

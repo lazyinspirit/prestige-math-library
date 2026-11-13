@@ -1,6 +1,6 @@
 ---
 title: Scalar Banach-function retarded estimates by Fatou approximation
-status: draft
+status: published
 research_item: lem-author-8960795edce1-scalar-fatou-retarded-transfer
 dependency_level: 0
 ---

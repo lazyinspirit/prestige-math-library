@@ -3,7 +3,7 @@ title: Article items · 11 — Partial extension across an artificial sphere and
   annular cutoff gluing
 description: Presents 28 items from the article and its immediate prerequisites,
   covering dependency levels 11–15.
-status: draft
+status: published
 dependency_level: 5
 research_article_page: true
 item_count: 28

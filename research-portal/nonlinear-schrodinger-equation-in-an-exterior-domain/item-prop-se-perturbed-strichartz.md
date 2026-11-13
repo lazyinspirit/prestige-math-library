@@ -1,6 +1,6 @@
 ---
 title: Linearized propagator bounds in the nonlinear control spaces
-status: draft
+status: published
 research_item: prop-se-perturbed-strichartz
 dependency_level: 15
 sources:

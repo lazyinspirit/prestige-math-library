@@ -1,6 +1,6 @@
 ---
 title: Lifting zero-order observability to the order-two endpoint
-status: draft
+status: published
 research_item: prop-se-observation-endpoint
 dependency_level: 9
 sources:

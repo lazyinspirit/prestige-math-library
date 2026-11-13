@@ -1,6 +1,6 @@
 ---
 title: Linearized equation and its real-duality adjoint
-status: draft
+status: published
 research_item: def-se-linearized-pair
 dependency_level: 9
 sources:

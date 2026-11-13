@@ -1,6 +1,6 @@
 ---
 title: Weak shifted Dirichlet form and energy bound on an open set
-status: draft
+status: published
 research_item: lem-se-author-88d8498c76d6-weak-dirichlet-form
 dependency_level: 0
 ---

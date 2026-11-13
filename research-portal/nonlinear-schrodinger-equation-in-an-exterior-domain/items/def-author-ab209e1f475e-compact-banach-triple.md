@@ -3,7 +3,7 @@ id: def-author-ab209e1f475e-compact-banach-triple
 kind: definition
 domain: mathematics
 title: Compatible compact Banach triples
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - math:def-banach-space

@@ -1,6 +1,6 @@
 ---
 title: "Remark 3: loss, Littlewood–Paley input and Neumann estimates"
-status: draft
+status: published
 research_item: rem-se-3
 dependency_level: 9
 sources:

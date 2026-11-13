@@ -3,7 +3,7 @@ id: op-se-low-regularity
 kind: open-problem
 domain: mathematics
 title: Nonlinear exact control below energy regularity
-status: draft
+status: published
 deps:
   - def-se-geometry
   - def-se-internal-systems

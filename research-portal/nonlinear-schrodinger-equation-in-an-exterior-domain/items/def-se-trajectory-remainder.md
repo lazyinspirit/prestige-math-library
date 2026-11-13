@@ -3,7 +3,7 @@ id: def-se-trajectory-remainder
 kind: definition
 domain: mathematics
 title: Quadratic-cubic remainder after subtracting a trajectory
-status: draft
+status: published
 deps:
   - def-se-trajectory
   - def-se-linearized-pair

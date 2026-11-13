@@ -1,6 +1,6 @@
 ---
 title: Endpoint-correcting nonlinear feedback map
-status: draft
+status: published
 research_item: def-se-feedback-map
 dependency_level: 19
 sources:

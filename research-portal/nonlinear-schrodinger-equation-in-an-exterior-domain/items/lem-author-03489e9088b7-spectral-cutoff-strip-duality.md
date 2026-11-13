@@ -3,7 +3,7 @@ id: lem-author-03489e9088b7-spectral-cutoff-strip-duality
 kind: lemma
 domain: mathematics
 title: Spectral cutoff dual tests and the exact interpolation lower bound
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - lem-author-03489e9088b7-spectral-analytic-strip-profiles

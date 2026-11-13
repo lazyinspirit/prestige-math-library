@@ -1,6 +1,6 @@
 ---
 title: Spectral cutoff cores and unitary identifications of completed scales
-status: draft
+status: published
 research_item: lem-author-03489e9088b7-spectral-cutoff-scale-identifications
 dependency_level: 0
 ---

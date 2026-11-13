@@ -3,7 +3,7 @@ id: prop-se-real-duality
 kind: proposition
 domain: mathematics
 title: Real pairing cancellation for the linearized-adjoint pair
-status: draft
+status: published
 deps:
   - def-se-linearized-pair
   - def-se-dirichlet-scale

@@ -3,7 +3,7 @@ id: prop-se-star-shaped-sign
 kind: proposition
 domain: mathematics
 title: Star-shaped multiplier signs
-status: draft
+status: published
 deps:
   - math:def-star-shaped-open-subset-of-rn
   - math:def-bounded-c-one-domain-boundary-charts-and-outward-normal

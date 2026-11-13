@@ -1,6 +1,6 @@
 ---
 title: Exact scale interpolation and endpoint operator transport
-status: draft
+status: published
 research_item: lem-author-03489e9088b7-exact-scale-operator-interpolation
 dependency_level: 3
 ---

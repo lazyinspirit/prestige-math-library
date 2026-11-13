@@ -3,7 +3,7 @@ id: prop-se-fractional-interpolation
 kind: proposition
 domain: mathematics
 title: Spectral interpolation and lower-order absorption
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - def-se-dirichlet-scale

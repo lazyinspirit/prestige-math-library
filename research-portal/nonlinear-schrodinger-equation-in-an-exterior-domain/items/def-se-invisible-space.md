@@ -3,7 +3,7 @@ id: def-se-invisible-space
 kind: definition
 domain: mathematics
 title: Invisible initial-data spaces
-status: draft
+status: published
 deps:
   - def-se-dirichlet-scale
   - prop-se-scale-flow

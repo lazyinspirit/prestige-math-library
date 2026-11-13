@@ -3,7 +3,7 @@ id: lem-se-bounded-perturbation-dispersive-transfer
 kind: lemma
 domain: mathematics
 title: Energy dispersive bounds under bounded trajectory perturbations
-status: draft
+status: published
 deps:
   - lem-se-real-evolution-duhamel-bound
   - lem-se-shifted-l1-retarded-transfer

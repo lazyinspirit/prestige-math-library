@@ -3,7 +3,7 @@ id: rem-se-4
 kind: remark
 domain: mathematics
 title: Scope of the spectral unique continuation argument
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - lem-se-3-4

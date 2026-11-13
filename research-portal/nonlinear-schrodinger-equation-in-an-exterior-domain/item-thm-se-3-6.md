@@ -1,6 +1,6 @@
 ---
 title: "Theorem 3.6: bounded continuous control operator"
-status: draft
+status: published
 research_item: thm-se-3-6
 dependency_level: 18
 sources:

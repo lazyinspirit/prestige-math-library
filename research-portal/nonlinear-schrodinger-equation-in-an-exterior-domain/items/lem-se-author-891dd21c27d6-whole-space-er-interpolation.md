@@ -3,7 +3,7 @@ id: lem-se-author-891dd21c27d6-whole-space-er-interpolation
 kind: lemma
 domain: mathematics
 title: Whole-space interpolation of one extension–restriction operator
-status: draft
+status: published
 deps:
   - math:def-axiom-of-choice
   - math:thm-fourier-characterisation-of-fractional-hilbert-sobolev-spaces

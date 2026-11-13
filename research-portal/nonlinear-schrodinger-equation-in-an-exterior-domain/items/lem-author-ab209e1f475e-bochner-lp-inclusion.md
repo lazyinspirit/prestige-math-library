@@ -3,7 +3,7 @@ id: lem-author-ab209e1f475e-bochner-lp-inclusion
 kind: lemma
 domain: mathematics
 title: Bochner spaces and bounded inclusion of value spaces
-status: draft
+status: published
 deps:
   - math:def-countable-choice
   - math:def-banach-space

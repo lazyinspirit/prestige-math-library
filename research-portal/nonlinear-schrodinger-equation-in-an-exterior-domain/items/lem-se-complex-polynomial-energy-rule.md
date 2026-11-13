@@ -3,7 +3,7 @@ id: lem-se-complex-polynomial-energy-rule
 kind: lemma
 domain: mathematics
 title: Complex polynomial weak derivatives and zero boundary preservation
-status: draft
+status: published
 deps:
   - math:def-sobolev-space-wkp-and-its-norm
   - math:def-wkp-zero-as-a-sobolev-closure

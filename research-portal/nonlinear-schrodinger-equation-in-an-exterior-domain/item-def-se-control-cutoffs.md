@@ -1,6 +1,6 @@
 ---
 title: Control region and nested real cutoffs
-status: draft
+status: published
 research_item: def-se-control-cutoffs
 dependency_level: 2
 sources:

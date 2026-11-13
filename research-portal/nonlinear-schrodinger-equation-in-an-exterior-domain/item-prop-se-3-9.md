@@ -1,6 +1,6 @@
 ---
 title: "Proposition 3.9: energy-space local control"
-status: draft
+status: published
 research_item: prop-se-3-9
 dependency_level: 22
 sources:

@@ -3,7 +3,7 @@ id: rem-se-endpoint-compatibility
 kind: remark
 domain: mathematics
 title: Necessary endpoint compatibility for boundary controls
-status: draft
+status: published
 deps:
   - def-se-geometry
   - def-se-boundary-state-space

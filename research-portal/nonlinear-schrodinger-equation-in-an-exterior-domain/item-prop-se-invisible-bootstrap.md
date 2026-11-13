@@ -1,6 +1,6 @@
 ---
 title: Time cutoff bootstrap for invisible adjoint solutions
-status: draft
+status: published
 research_item: prop-se-invisible-bootstrap
 dependency_level: 14
 sources:

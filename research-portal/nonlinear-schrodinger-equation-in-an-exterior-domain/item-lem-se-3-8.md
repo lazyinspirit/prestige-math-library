@@ -1,6 +1,6 @@
 ---
 title: "Lemma 3.8: energy-data time-integrable supremum bound"
-status: draft
+status: published
 research_item: lem-se-3-8
 dependency_level: 13
 sources:

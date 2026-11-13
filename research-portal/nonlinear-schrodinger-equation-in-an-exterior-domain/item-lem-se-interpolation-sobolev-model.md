@@ -1,6 +1,6 @@
 ---
 title: An explicit common interpolation model for the fractional Strichartz targets
-status: draft
+status: published
 research_item: lem-se-interpolation-sobolev-model
 dependency_level: 4
 sources:

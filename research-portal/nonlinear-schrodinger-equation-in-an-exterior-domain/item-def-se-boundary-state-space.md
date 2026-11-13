@@ -1,6 +1,6 @@
 ---
 title: States compatible with the uncontrolled obstacle boundary
-status: draft
+status: published
 research_item: def-se-boundary-state-space
 dependency_level: 13
 sources:

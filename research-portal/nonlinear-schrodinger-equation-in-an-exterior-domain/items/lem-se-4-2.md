@@ -3,7 +3,7 @@ id: lem-se-4-2
 kind: lemma
 domain: mathematics
 title: "Lemma 4.2: smoothing of the regularized adjoint"
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - def-se-geometry

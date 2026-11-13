@@ -1,6 +1,6 @@
 ---
 title: Quadratic-cubic estimates near a reference trajectory
-status: draft
+status: published
 research_item: prop-se-trajectory-nonlinear-estimates
 dependency_level: 12
 sources:

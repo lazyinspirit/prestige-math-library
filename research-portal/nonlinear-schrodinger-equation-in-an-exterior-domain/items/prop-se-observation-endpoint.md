@@ -3,7 +3,7 @@ id: prop-se-observation-endpoint
 kind: proposition
 domain: mathematics
 title: Lifting zero-order observability to the order-two endpoint
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - def-se-control-cutoffs

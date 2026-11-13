@@ -1,6 +1,6 @@
 ---
 title: "Proposition 2.2: retarded local smoothing"
-status: draft
+status: published
 research_item: prop-se-2-2-retarded
 dependency_level: 8
 sources:

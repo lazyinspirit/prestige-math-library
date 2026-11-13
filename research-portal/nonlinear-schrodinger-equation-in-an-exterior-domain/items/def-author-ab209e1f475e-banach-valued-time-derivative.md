@@ -3,7 +3,7 @@ id: def-author-ab209e1f475e-banach-valued-time-derivative
 kind: definition
 domain: mathematics
 title: Distributional time derivatives with values in a Banach space
-status: draft
+status: published
 deps:
   - math:def-countable-choice
   - math:lem-pe12-bochner-lp-mollification

@@ -3,7 +3,7 @@ id: def-se-extension-construction
 kind: definition
 domain: mathematics
 title: Annular extension and cutoff gluing construction
-status: draft
+status: published
 deps:
   - def-se-geometry
   - def-se-boundary-state-space

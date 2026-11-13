@@ -3,7 +3,7 @@ id: lem-se-cutoff-resolvent-negative-extension
 kind: lemma
 domain: mathematics
 title: Resolvent adjoint transport to order minus two
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - def-se-geometry

@@ -1,6 +1,6 @@
 ---
 title: Fractional Hilbert Sobolev algebra on a smooth exterior domain
-status: draft
+status: published
 research_item: lem-se-exterior-fractional-hilbert-algebra
 dependency_level: 10
 ---

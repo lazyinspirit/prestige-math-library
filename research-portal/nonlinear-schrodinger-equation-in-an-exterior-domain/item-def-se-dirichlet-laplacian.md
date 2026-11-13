@@ -1,6 +1,6 @@
 ---
 title: Dirichlet Laplacian and positive shift
-status: draft
+status: published
 research_item: def-se-dirichlet-laplacian
 dependency_level: 4
 sources:

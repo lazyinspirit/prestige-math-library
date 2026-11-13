@@ -1,6 +1,6 @@
 ---
 title: "Remark 6: exact use and zero-trajectory case of unique continuation"
-status: draft
+status: published
 research_item: rem-se-6
 dependency_level: 18
 sources:

@@ -1,6 +1,6 @@
 ---
 title: Compatible compact Banach triples
-status: draft
+status: published
 research_item: def-author-ab209e1f475e-compact-banach-triple
 dependency_level: 0
 ---

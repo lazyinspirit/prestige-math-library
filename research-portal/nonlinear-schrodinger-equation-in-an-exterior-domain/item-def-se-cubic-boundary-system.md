@@ -1,6 +1,6 @@
 ---
 title: Cubic NLS and boundary control formulations
-status: draft
+status: published
 research_item: def-se-cubic-boundary-system
 dependency_level: 2
 sources:

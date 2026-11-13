@@ -3,7 +3,7 @@ id: def-se-nontrapping
 kind: definition
 domain: mathematics
 title: Non-trapping obstacle
-status: draft
+status: published
 deps:
   - def-se-geometry
   - prop-se-generalized-ray-contract

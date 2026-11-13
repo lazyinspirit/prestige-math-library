@@ -1,6 +1,6 @@
 ---
 title: Duhamel formula for a real-linear propagator
-status: draft
+status: published
 research_item: prop-se-real-duhamel
 dependency_level: 14
 sources:

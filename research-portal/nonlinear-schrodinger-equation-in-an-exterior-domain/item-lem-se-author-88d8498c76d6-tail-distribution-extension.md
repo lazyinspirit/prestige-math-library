@@ -1,6 +1,6 @@
 ---
 title: Zero extension of a free exterior tail by distribution tests
-status: draft
+status: published
 research_item: lem-se-author-88d8498c76d6-tail-distribution-extension
 dependency_level: 1
 ---

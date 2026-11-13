@@ -1,6 +1,6 @@
 ---
 title: Conditional energy-level unique continuation hypothesis
-status: draft
+status: published
 research_item: def-se-ucpw
 dependency_level: 10
 sources:

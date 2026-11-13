@@ -1,6 +1,6 @@
 ---
 title: Observation lower bounds give Hilbert control right inverses
-status: draft
+status: published
 research_item: lem-se-observation-gramian-right-inverse
 dependency_level: 0
 ---

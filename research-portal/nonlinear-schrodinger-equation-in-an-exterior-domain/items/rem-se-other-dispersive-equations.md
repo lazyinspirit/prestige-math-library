@@ -3,7 +3,7 @@ id: rem-se-other-dispersive-equations
 kind: remark
 domain: mathematics
 title: Proposed transfer of the smoothing-control mechanism
-status: draft
+status: published
 deps:
   - prop-se-2-2-homogeneous
   - lem-se-3-2

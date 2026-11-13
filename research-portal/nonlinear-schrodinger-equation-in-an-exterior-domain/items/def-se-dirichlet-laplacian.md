@@ -3,7 +3,7 @@ id: def-se-dirichlet-laplacian
 kind: definition
 domain: mathematics
 title: Dirichlet Laplacian and positive shift
-status: draft
+status: published
 deps:
   - def-se-geometry
   - def-se-foundation-integer-sobolev-notation

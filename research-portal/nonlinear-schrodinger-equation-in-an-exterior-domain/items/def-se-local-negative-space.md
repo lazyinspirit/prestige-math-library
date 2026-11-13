@@ -3,7 +3,7 @@ id: def-se-local-negative-space
 kind: definition
 domain: mathematics
 title: Local negative Sobolev space in the compactness argument
-status: draft
+status: published
 deps:
   - def-se-control-cutoffs
   - def-se-foundation-integer-sobolev-notation

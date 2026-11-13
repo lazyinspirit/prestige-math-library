@@ -1,6 +1,6 @@
 ---
 title: "Lemma 3.3: observability modulo a compact remainder"
-status: draft
+status: published
 research_item: lem-se-3-3
 dependency_level: 10
 sources:

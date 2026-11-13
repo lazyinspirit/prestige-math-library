@@ -1,6 +1,6 @@
 ---
 title: "Research workflow: Nonlinear Schrödinger equation in an exterior domain"
-status: draft
+status: published
 ---
 
 200 draft items on 4 pages.

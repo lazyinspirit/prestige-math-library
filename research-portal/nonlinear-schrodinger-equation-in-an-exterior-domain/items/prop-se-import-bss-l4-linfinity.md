@@ -3,7 +3,7 @@ id: prop-se-import-bss-l4-linfinity
 kind: proposition
 domain: mathematics
 title: Three-dimensional Dirichlet energy-to-mixed-norm estimate
-status: draft
+status: published
 deps:
   - def-se-geometry
   - def-se-nontrapping

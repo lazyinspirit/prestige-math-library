@@ -3,7 +3,7 @@ id: post-se-wave-model
 kind: postulate
 domain: physics
 title: Cubic NLS as a nonlinear dispersive wave model
-status: draft
+status: published
 physical_scope: "An introductory model interpretation: nonlinear dispersive
   waves, nonlinear optics and Bose–Einstein condensation. No apparatus,
   measurement, control actuator or quantitative range of applicability is

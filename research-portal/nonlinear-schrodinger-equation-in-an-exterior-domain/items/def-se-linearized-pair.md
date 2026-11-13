@@ -3,7 +3,7 @@ id: def-se-linearized-pair
 kind: definition
 domain: mathematics
 title: Linearized equation and its real-duality adjoint
-status: draft
+status: published
 deps:
   - def-se-trajectory
   - def-se-control-cutoffs

@@ -1,6 +1,6 @@
 ---
 title: Exterior and truncated obstacle domains
-status: draft
+status: published
 research_item: def-se-geometry
 dependency_level: 1
 sources:

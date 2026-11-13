@@ -3,7 +3,7 @@ id: def-se-control-cutoffs
 kind: definition
 domain: mathematics
 title: Control region and nested real cutoffs
-status: draft
+status: published
 deps:
   - def-se-geometry
   - math:def-the-standard-smooth-step-function

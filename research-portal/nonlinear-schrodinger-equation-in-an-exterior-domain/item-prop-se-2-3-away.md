@@ -1,6 +1,6 @@
 ---
 title: Strichartz estimate away from the obstacle
-status: draft
+status: published
 research_item: prop-se-2-3-away
 dependency_level: 8
 sources:

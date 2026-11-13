@@ -3,7 +3,7 @@ id: prop-se-generalized-ray-contract
 kind: proposition
 domain: mathematics
 title: Independent generalized reflected-ray and GCC convention
-status: draft
+status: published
 deps:
   - math:def-bounded-c-k-domain-and-boundary-charts
   - math:def-cotangent-space-and-cotangent-bundle-as-a-disjoint-union

@@ -3,7 +3,7 @@ id: lem-se-endpoint-feedback-contraction
 kind: lemma
 domain: mathematics
 title: A bounded endpoint selector yields small nonlinear exact steering
-status: draft
+status: published
 deps:
   - def-se-foundation-time-function-spaces
   - def-se-foundation-control-language

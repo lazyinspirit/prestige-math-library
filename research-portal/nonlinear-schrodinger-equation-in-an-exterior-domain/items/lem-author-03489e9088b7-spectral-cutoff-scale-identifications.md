@@ -3,7 +3,7 @@ id: lem-author-03489e9088b7-spectral-cutoff-scale-identifications
 kind: lemma
 domain: mathematics
 title: Spectral cutoff cores and unitary identifications of completed scales
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - math:thm-spectral-theorem-for-unbounded-self-adjoint-operators

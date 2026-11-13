@@ -3,7 +3,7 @@ id: prop-se-power-chain-rule
 kind: proposition
 domain: mathematics
 title: Power nonlinearity preserves the zero-boundary energy space
-status: draft
+status: published
 deps:
   - def-se-internal-systems
   - def-se-foundation-integer-sobolev-notation

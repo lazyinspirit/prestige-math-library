@@ -1,6 +1,6 @@
 ---
 title: "Question B prime: outer boundary control"
-status: draft
+status: published
 research_item: op-se-question-b-prime
 dependency_level: 3
 sources:

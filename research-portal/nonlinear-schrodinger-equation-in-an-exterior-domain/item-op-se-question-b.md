@@ -1,6 +1,6 @@
 ---
 title: "Question B: controls on part of the boundary"
-status: draft
+status: published
 research_item: op-se-question-b
 dependency_level: 11
 sources:

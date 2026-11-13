@@ -1,6 +1,6 @@
 ---
 title: Compatible Banach pairs and their integrals
-status: draft
+status: published
 research_item: lem-author-8960795edce1-compatible-banach-pairs
 dependency_level: 0
 ---

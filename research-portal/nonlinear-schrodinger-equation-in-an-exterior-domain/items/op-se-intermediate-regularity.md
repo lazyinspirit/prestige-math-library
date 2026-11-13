@@ -3,7 +3,7 @@ id: op-se-intermediate-regularity
 kind: open-problem
 domain: mathematics
 title: Three-dimensional intermediate Sobolev control
-status: draft
+status: published
 deps:
   - def-se-internal-systems
   - def-se-dirichlet-scale

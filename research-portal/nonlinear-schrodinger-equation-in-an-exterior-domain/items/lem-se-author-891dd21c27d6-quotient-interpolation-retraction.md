@@ -3,7 +3,7 @@ id: lem-se-author-891dd21c27d6-quotient-interpolation-retraction
 kind: lemma
 domain: mathematics
 title: Restriction-quotient interpolation from a common endpoint retraction
-status: draft
+status: published
 deps:
   - math:def-axiom-of-choice
   - lem-se-author-891dd21c27d6-whole-space-er-interpolation

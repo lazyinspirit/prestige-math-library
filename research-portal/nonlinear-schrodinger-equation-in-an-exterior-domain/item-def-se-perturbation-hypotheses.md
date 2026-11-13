@@ -1,6 +1,6 @@
 ---
 title: Abstract nonlinear control-space hypotheses
-status: draft
+status: published
 research_item: def-se-perturbation-hypotheses
 dependency_level: 8
 sources:

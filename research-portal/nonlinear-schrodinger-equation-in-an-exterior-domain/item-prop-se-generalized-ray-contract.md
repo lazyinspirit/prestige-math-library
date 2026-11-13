@@ -1,6 +1,6 @@
 ---
 title: Independent generalized reflected-ray and GCC convention
-status: draft
+status: published
 research_item: prop-se-generalized-ray-contract
 dependency_level: 0
 sources:

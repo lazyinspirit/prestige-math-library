@@ -3,7 +3,7 @@ id: def-se-perturbation-hypotheses
 kind: definition
 domain: mathematics
 title: Abstract nonlinear control-space hypotheses
-status: draft
+status: published
 deps:
   - def-se-internal-systems
   - def-se-dirichlet-scale

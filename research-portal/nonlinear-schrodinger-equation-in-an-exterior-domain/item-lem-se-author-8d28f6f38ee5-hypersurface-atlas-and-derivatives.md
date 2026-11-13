@@ -1,7 +1,7 @@
 ---
 title: Atlas-independent hypersurface Sobolev norms and $H^{3/2}$ tangential
   derivatives
-status: draft
+status: published
 research_item: lem-se-author-8d28f6f38ee5-hypersurface-atlas-and-derivatives
 dependency_level: 7
 ---

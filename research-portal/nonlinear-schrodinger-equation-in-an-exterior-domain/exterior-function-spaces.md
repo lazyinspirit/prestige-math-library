@@ -4,7 +4,7 @@ description: Specify the obstacle and generalized-ray conventions, Sobolev and
   time-space notation, Dirichlet realization and spectral scales; connect
   bounded fractional inputs to exterior localization, traces, compactness and
   continuation.
-status: draft
+status: published
 dependency_level: 0
 ---
 

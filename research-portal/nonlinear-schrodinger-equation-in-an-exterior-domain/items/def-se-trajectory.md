@@ -3,7 +3,7 @@ id: def-se-trajectory
 kind: definition
 domain: mathematics
 title: Reference trajectory hypothesis W
-status: draft
+status: published
 deps:
   - def-se-geometry
   - def-se-dirichlet-scale

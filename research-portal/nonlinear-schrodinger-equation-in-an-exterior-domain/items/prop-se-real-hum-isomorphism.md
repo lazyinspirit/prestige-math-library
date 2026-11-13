@@ -3,7 +3,7 @@ id: prop-se-real-hum-isomorphism
 kind: proposition
 domain: mathematics
 title: Coercivity and bounded trajectory control operator
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - def-se-real-hum

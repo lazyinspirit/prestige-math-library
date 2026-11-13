@@ -1,6 +1,6 @@
 ---
 title: Complex integer-order Sobolev notation
-status: draft
+status: published
 research_item: def-se-foundation-integer-sobolev-notation
 dependency_level: 0
 ---

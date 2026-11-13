@@ -3,7 +3,7 @@ title: Article items · 02 — Directional derivatives and partial derivatives o
   map $U\subseteq\mathbb{R}^m\to\mathbb{R}^n$
 description: Presents 28 items from the article and its immediate prerequisites,
   covering published library prerequisites.
-status: draft
+status: published
 dependency_level: 0
 research_article_page: true
 item_count: 28

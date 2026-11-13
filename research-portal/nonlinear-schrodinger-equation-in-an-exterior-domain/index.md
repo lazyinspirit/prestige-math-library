@@ -1,6 +1,6 @@
 ---
 title: Nonlinear Schrödinger equation in an exterior domain
-status: draft
+status: published
 ---
 
 - [Exterior geometry and function spaces](exterior-function-spaces) — level 0

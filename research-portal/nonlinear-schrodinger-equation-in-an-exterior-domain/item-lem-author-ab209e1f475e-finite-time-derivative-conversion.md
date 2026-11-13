@@ -1,6 +1,6 @@
 ---
 title: Finite-time bounds for Banach-valued derivatives
-status: draft
+status: published
 research_item: lem-author-ab209e1f475e-finite-time-derivative-conversion
 dependency_level: 1
 ---

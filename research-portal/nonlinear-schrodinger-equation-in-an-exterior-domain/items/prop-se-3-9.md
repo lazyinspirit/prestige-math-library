@@ -3,7 +3,7 @@ id: prop-se-3-9
 kind: proposition
 domain: mathematics
 title: "Proposition 3.9: energy-space local control"
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - def-se-geometry

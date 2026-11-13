@@ -3,7 +3,7 @@ id: rem-se-novelty
 kind: remark
 domain: mathematics
 title: Authors' qualified novelty claims
-status: draft
+status: published
 deps:
   - def-se-geometry
   - def-se-foundation-control-language

@@ -1,6 +1,6 @@
 ---
 title: Pointwise and energy difference estimates for odd powers
-status: draft
+status: published
 research_item: prop-se-pointwise-differences
 dependency_level: 9
 sources:

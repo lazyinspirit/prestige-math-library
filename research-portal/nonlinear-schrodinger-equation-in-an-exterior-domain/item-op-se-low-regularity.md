@@ -1,6 +1,6 @@
 ---
 title: Nonlinear exact control below energy regularity
-status: draft
+status: published
 research_item: op-se-low-regularity
 dependency_level: 8
 sources:

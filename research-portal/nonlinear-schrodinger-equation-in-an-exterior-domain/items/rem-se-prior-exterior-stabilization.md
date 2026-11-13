@@ -3,7 +3,7 @@ id: rem-se-prior-exterior-stabilization
 kind: remark
 domain: mathematics
 title: Prior damped exterior Schrödinger results
-status: draft
+status: published
 deps:
   - def-se-geometry
   - def-se-nontrapping

@@ -1,6 +1,6 @@
 ---
 title: Power nonlinearity preserves the zero-boundary energy space
-status: draft
+status: published
 research_item: prop-se-power-chain-rule
 dependency_level: 8
 sources:

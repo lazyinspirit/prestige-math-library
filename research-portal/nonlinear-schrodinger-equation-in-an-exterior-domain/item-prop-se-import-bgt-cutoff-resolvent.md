@@ -1,6 +1,6 @@
 ---
 title: Nontrapping cutoff resolvent estimates
-status: draft
+status: published
 research_item: prop-se-import-bgt-cutoff-resolvent
 dependency_level: 7
 sources:

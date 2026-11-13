@@ -3,7 +3,7 @@ id: def-se-internal-systems
 kind: definition
 domain: mathematics
 title: Linear and nonlinear internally controlled exterior systems
-status: draft
+status: published
 deps:
   - def-se-control-cutoffs
   - def-se-dirichlet-scale

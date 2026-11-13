@@ -1,6 +1,6 @@
 ---
 title: Endpoint correction and small-ball contraction estimates
-status: draft
+status: published
 research_item: prop-se-feedback-estimates
 dependency_level: 20
 sources:

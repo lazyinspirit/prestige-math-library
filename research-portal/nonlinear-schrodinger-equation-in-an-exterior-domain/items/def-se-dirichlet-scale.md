@@ -3,7 +3,7 @@ id: def-se-dirichlet-scale
 kind: definition
 domain: mathematics
 title: Dirichlet spectral Sobolev scale and duality
-status: draft
+status: published
 deps:
   - def-se-geometry
   - def-se-foundation-integer-sobolev-notation

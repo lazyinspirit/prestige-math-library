@@ -1,6 +1,6 @@
 ---
 title: Admissible spectral strip profiles and the exact interpolation upper bound
-status: draft
+status: published
 research_item: lem-author-03489e9088b7-spectral-analytic-strip-profiles
 dependency_level: 1
 ---

@@ -3,7 +3,7 @@ id: prop-se-2-3-loss
 kind: proposition
 domain: mathematics
 title: Global Strichartz estimate with derivative loss
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - def-se-geometry

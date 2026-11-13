@@ -1,6 +1,6 @@
 ---
 title: Spatial Lq classes satisfy the scalar mixed-norm hypotheses
-status: draft
+status: published
 research_item: lem-author-8960795edce1-spatial-lq-mixed-norms
 dependency_level: 1
 ---

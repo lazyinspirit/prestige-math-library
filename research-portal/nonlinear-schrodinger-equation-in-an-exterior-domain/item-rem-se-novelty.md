@@ -1,6 +1,6 @@
 ---
 title: Authors' qualified novelty claims
-status: draft
+status: published
 research_item: rem-se-novelty
 dependency_level: 2
 sources:

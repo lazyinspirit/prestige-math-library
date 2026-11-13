@@ -1,6 +1,6 @@
 ---
 title: A ray trapped between two convex obstacles
-status: draft
+status: published
 research_item: ex-se-two-obstacle-trapping
 dependency_level: 3
 sources:

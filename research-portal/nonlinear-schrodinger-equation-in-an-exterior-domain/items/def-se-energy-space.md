@@ -3,7 +3,7 @@ id: def-se-energy-space
 kind: definition
 domain: mathematics
 title: Energy control space with a time-integrable supremum norm
-status: draft
+status: published
 deps:
   - def-se-geometry
   - def-se-dirichlet-scale

@@ -1,6 +1,6 @@
 ---
 title: Free HUM identity, coercivity and invertibility
-status: draft
+status: published
 research_item: prop-se-hum-duality
 dependency_level: 17
 sources:

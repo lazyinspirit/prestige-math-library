@@ -3,7 +3,7 @@ id: rem-se-scope
 kind: remark
 domain: mathematics
 title: Scope of geometric assumptions and control results
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - def-se-geometry

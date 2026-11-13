@@ -1,6 +1,6 @@
 ---
 title: Abstract retarded integration in compatible time spaces
-status: draft
+status: published
 research_item: lem-author-8960795edce1-abstract-retarded-integration
 dependency_level: 1
 ---

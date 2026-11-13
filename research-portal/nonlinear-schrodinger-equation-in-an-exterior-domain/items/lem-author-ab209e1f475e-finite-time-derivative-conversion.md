@@ -3,7 +3,7 @@ id: lem-author-ab209e1f475e-finite-time-derivative-conversion
 kind: lemma
 domain: mathematics
 title: Finite-time bounds for Banach-valued derivatives
-status: draft
+status: published
 deps:
   - lem-author-ab209e1f475e-bochner-lp-inclusion
   - def-author-ab209e1f475e-banach-valued-time-derivative

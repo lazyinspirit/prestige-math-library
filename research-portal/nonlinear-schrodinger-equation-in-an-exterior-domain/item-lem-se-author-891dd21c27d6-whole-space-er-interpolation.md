@@ -1,6 +1,6 @@
 ---
 title: Whole-space interpolation of one extension–restriction operator
-status: draft
+status: published
 research_item: lem-se-author-891dd21c27d6-whole-space-er-interpolation
 dependency_level: 6
 ---

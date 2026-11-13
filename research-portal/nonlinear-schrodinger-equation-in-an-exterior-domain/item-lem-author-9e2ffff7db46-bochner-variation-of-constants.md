@@ -1,6 +1,6 @@
 ---
 title: Bochner variation of constants for real evolution
-status: draft
+status: published
 research_item: lem-author-9e2ffff7db46-bochner-variation-of-constants
 dependency_level: 3
 ---

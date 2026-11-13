@@ -1,6 +1,6 @@
 ---
 title: Time-dependent potential and conjugation bounds on the scale
-status: draft
+status: published
 research_item: prop-se-potential-multipliers
 dependency_level: 12
 sources:

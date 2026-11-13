@@ -1,6 +1,6 @@
 ---
 title: Cutoff multipliers through order two and by duality
-status: draft
+status: published
 research_item: prop-se-cutoff-multipliers
 dependency_level: 7
 sources:

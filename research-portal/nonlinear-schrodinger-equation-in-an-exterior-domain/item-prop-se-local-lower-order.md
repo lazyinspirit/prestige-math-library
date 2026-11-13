@@ -1,6 +1,6 @@
 ---
 title: Local observation has a lower initial regularity cost
-status: draft
+status: published
 research_item: prop-se-local-lower-order
 dependency_level: 9
 sources:

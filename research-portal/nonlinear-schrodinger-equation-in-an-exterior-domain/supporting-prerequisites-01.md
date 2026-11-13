@@ -3,7 +3,7 @@ title: Supporting prerequisites · 01 — The Dirichlet Laplacian generates an
   analytic heat semigroup
 description: Presents 15 supporting prerequisites, covering published library
   prerequisites and dependency levels 0–1.
-status: draft
+status: published
 dependency_level: 1
 item_count: 15
 ---

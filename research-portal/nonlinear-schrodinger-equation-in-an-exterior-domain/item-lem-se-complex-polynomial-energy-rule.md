@@ -1,6 +1,6 @@
 ---
 title: Complex polynomial weak derivatives and zero boundary preservation
-status: draft
+status: published
 research_item: lem-se-complex-polynomial-energy-rule
 dependency_level: 0
 ---

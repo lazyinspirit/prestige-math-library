@@ -1,6 +1,6 @@
 ---
 title: Cubic and quintic time bounds from L4 Linfinity control
-status: draft
+status: published
 research_item: lem-se-power-time-integrability
 dependency_level: 1
 ---

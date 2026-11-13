@@ -3,7 +3,7 @@ id: prop-se-two-dimensional-embedding
 kind: proposition
 domain: mathematics
 title: Two-dimensional exponents removing the Strichartz loss
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - def-se-geometry

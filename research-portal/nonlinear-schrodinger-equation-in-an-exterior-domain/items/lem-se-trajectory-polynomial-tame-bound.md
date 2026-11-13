@@ -3,7 +3,7 @@ id: lem-se-trajectory-polynomial-tame-bound
 kind: lemma
 domain: mathematics
 title: Tame bounds for the quadratic-cubic trajectory remainder
-status: draft
+status: published
 deps:
   - lem-se-power-time-integrability
   - lem-se-exterior-h2-uniform-algebra

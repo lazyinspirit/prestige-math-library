@@ -3,7 +3,7 @@ id: prop-se-scale-flow
 kind: proposition
 domain: mathematics
 title: Scale isometries and free Schrödinger evolution
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - def-se-dirichlet-laplacian

@@ -1,6 +1,6 @@
 ---
 title: Forward and backward real-linear propagators
-status: draft
+status: published
 research_item: prop-se-perturbed-evolution
 dependency_level: 13
 sources:

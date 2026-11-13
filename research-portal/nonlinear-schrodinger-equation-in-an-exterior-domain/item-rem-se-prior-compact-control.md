@@ -1,6 +1,6 @@
 ---
 title: Prior compact-manifold control under GCC and unique continuation
-status: draft
+status: published
 research_item: rem-se-prior-compact-control
 dependency_level: 1
 sources:

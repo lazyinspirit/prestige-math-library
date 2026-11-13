@@ -1,6 +1,6 @@
 ---
 title: Locally constant invisible spaces are Laplacian invariant
-status: draft
+status: published
 research_item: prop-se-invisible-invariant
 dependency_level: 14
 sources:

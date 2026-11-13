@@ -3,7 +3,7 @@ id: lem-author-03489e9088b7-spectral-analytic-strip-profiles
 kind: lemma
 domain: mathematics
 title: Admissible spectral strip profiles and the exact interpolation upper bound
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - lem-author-03489e9088b7-spectral-cutoff-scale-identifications

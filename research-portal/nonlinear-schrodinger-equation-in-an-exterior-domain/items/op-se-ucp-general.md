@@ -3,7 +3,7 @@ id: op-se-ucp-general
 kind: open-problem
 domain: mathematics
 title: Unique continuation for general non-trapping obstacles and trajectories
-status: draft
+status: published
 deps:
   - def-se-trajectory
   - def-se-ucpw

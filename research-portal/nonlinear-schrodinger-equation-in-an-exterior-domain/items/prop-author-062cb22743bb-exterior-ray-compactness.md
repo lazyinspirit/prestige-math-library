@@ -3,7 +3,7 @@ id: prop-author-062cb22743bb-exterior-ray-compactness
 kind: proposition
 domain: mathematics
 title: Closed compactness of arbitrary exterior generalized-ray segments
-status: draft
+status: published
 deps:
   - prop-se-generalized-ray-contract
   - def-se-geometry

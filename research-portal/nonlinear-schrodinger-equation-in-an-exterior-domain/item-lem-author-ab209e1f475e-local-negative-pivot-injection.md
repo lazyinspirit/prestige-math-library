@@ -1,6 +1,6 @@
 ---
 title: The L2 pivot injects into the local negative Sobolev space
-status: draft
+status: published
 research_item: lem-author-ab209e1f475e-local-negative-pivot-injection
 dependency_level: 0
 ---

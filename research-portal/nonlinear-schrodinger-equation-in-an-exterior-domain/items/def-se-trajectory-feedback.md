@@ -3,7 +3,7 @@ id: def-se-trajectory-feedback
 kind: definition
 domain: mathematics
 title: Endpoint feedback around a trajectory
-status: draft
+status: published
 deps:
   - def-se-geometry
   - def-se-control-cutoffs

@@ -1,6 +1,6 @@
 ---
 title: "Positive spectral Hilbert scale: duality and interpolation"
-status: draft
+status: published
 research_item: lem-se-positive-spectral-scale-contract
 dependency_level: 5
 ---

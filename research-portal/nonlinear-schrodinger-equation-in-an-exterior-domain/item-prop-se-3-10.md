@@ -1,6 +1,6 @@
 ---
 title: "Proposition 3.10: order-two local control"
-status: draft
+status: published
 research_item: prop-se-3-10
 dependency_level: 22
 sources:

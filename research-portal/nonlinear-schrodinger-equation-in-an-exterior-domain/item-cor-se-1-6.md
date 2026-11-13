@@ -1,6 +1,6 @@
 ---
 title: "Corollary 1.6: quintic control near zero"
-status: draft
+status: published
 research_item: cor-se-1-6
 dependency_level: 23
 sources:

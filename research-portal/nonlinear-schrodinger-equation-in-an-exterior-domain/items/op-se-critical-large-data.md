@@ -3,7 +3,7 @@ id: op-se-critical-large-data
 kind: open-problem
 domain: mathematics
 title: Large-data control for energy-critical NLS
-status: draft
+status: published
 deps:
   - def-se-internal-systems
   - def-se-dirichlet-scale

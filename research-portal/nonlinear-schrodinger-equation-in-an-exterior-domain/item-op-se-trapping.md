@@ -1,6 +1,6 @@
 ---
 title: Nonlinear control for trapping obstacle configurations
-status: draft
+status: published
 research_item: op-se-trapping
 dependency_level: 14
 sources:

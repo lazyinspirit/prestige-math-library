@@ -3,7 +3,7 @@ id: prop-se-compact-eigenfunction-vanishing
 kind: proposition
 domain: mathematics
 title: Vanishing of an eigenfunction invisible outside a ball
-status: draft
+status: published
 deps:
   - def-se-geometry
   - def-se-control-cutoffs

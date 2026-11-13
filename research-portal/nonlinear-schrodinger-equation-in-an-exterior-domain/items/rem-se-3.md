@@ -3,7 +3,7 @@ id: rem-se-3
 kind: remark
 domain: mathematics
 title: "Remark 3: loss, Littlewood–Paley input and Neumann estimates"
-status: draft
+status: published
 deps:
   - prop-se-2-2-homogeneous
   - prop-se-2-3-loss

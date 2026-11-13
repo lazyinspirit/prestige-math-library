@@ -3,7 +3,7 @@ id: thm-se-1-5
 kind: theorem
 domain: mathematics
 title: "Theorem 1.5: cubic internal control near a trajectory"
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - def-se-geometry

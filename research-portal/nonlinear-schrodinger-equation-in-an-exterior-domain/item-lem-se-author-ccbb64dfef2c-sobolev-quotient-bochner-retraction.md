@@ -1,6 +1,6 @@
 ---
 title: Restriction quotient and Bochner interpolation for the exterior extension
-status: draft
+status: published
 research_item: lem-se-author-ccbb64dfef2c-sobolev-quotient-bochner-retraction
 dependency_level: 3
 sources:

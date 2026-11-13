@@ -1,6 +1,6 @@
 ---
 title: "Lemma 3.11: extension preserving the obstacle Dirichlet condition"
-status: draft
+status: published
 research_item: lem-se-3-11
 dependency_level: 15
 sources:

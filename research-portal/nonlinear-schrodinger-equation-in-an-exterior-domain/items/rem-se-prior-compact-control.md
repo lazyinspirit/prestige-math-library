@@ -3,7 +3,7 @@ id: rem-se-prior-compact-control
 kind: remark
 domain: mathematics
 title: Prior compact-manifold control under GCC and unique continuation
-status: draft
+status: published
 deps:
   - def-se-foundation-control-language
   - math:def-smooth-manifold

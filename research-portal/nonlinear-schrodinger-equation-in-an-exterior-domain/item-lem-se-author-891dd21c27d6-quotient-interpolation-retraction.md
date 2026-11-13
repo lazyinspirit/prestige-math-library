@@ -1,6 +1,6 @@
 ---
 title: Restriction-quotient interpolation from a common endpoint retraction
-status: draft
+status: published
 research_item: lem-se-author-891dd21c27d6-quotient-interpolation-retraction
 dependency_level: 7
 ---

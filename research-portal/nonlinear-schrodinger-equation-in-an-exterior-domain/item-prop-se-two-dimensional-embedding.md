@@ -1,6 +1,6 @@
 ---
 title: Two-dimensional exponents removing the Strichartz loss
-status: draft
+status: published
 research_item: prop-se-two-dimensional-embedding
 dependency_level: 12
 sources:

@@ -3,7 +3,7 @@ id: def-se-foundation-integer-sobolev-notation
 kind: definition
 domain: mathematics
 title: Complex integer-order Sobolev notation
-status: draft
+status: published
 deps:
   - math:def-sobolev-space-wkp-and-its-norm
   - math:def-wkp-zero-as-a-sobolev-closure

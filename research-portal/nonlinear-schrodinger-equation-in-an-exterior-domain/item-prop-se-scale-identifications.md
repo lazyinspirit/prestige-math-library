@@ -1,6 +1,6 @@
 ---
 title: Low-order identifications of the Dirichlet scale
-status: draft
+status: published
 research_item: prop-se-scale-identifications
 dependency_level: 11
 sources:

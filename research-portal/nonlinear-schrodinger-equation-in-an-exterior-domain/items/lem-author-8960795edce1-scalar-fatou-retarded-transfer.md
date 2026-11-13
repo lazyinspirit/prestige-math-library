@@ -3,7 +3,7 @@ id: lem-author-8960795edce1-scalar-fatou-retarded-transfer
 kind: lemma
 domain: mathematics
 title: Scalar Banach-function retarded estimates by Fatou approximation
-status: draft
+status: published
 deps:
   - math:def-hilbert-space
   - math:def-banach-space

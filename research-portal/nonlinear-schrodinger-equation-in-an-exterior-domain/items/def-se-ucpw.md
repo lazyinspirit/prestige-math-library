@@ -3,7 +3,7 @@ id: def-se-ucpw
 kind: definition
 domain: mathematics
 title: Conditional energy-level unique continuation hypothesis
-status: draft
+status: published
 deps:
   - def-se-trajectory
   - def-se-linearized-pair

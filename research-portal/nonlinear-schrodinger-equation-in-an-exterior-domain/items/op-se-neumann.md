@@ -3,7 +3,7 @@ id: op-se-neumann
 kind: open-problem
 domain: mathematics
 title: Outer Neumann boundary controllability
-status: draft
+status: published
 deps:
   - def-se-geometry
   - def-se-nontrapping

@@ -3,7 +3,7 @@ id: lem-se-local-fractional-rellich
 kind: lemma
 domain: mathematics
 title: Fractional compactness on bounded collar domains
-status: draft
+status: published
 deps:
   - lem-se-sobolev-extension-retraction
   - math:thm-fourier-characterisation-of-fractional-hilbert-sobolev-spaces

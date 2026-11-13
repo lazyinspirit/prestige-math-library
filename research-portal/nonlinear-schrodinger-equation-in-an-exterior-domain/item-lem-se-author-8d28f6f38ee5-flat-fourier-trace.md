@@ -1,6 +1,6 @@
 ---
 title: Fourier trace on a hyperplane and one-sided H¹ uniqueness
-status: draft
+status: published
 research_item: lem-se-author-8d28f6f38ee5-flat-fourier-trace
 dependency_level: 7
 ---

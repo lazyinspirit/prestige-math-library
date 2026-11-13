@@ -3,7 +3,7 @@ id: rem-se-linear-proof-scope
 kind: remark
 domain: mathematics
 title: Localization and analytic scope of the free control construction
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - def-se-control-cutoffs

@@ -1,6 +1,6 @@
 ---
 title: Spectral interpolation and lower-order absorption
-status: draft
+status: published
 research_item: prop-se-fractional-interpolation
 dependency_level: 7
 sources:

@@ -3,7 +3,7 @@ id: prop-se-4-6
 kind: proposition
 domain: mathematics
 title: "Proposition 4.6: conditional adjoint observability"
-status: draft
+status: published
 proof_strategy: contradiction
 deps:
   - def-se-geometry

@@ -1,6 +1,6 @@
 ---
 title: Diagonal gluing without a single-valued reflected flow
-status: draft
+status: published
 research_item: lem-author-062cb22743bb-diagonal-ray
 dependency_level: 1
 sources:

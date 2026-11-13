@@ -1,6 +1,6 @@
 ---
 title: Partial extension across an artificial sphere and annular cutoff gluing
-status: draft
+status: published
 research_item: lem-se-author-8d28f6f38ee5-artificial-sphere-extension-and-gluing
 dependency_level: 11
 ---

@@ -1,6 +1,6 @@
 ---
 title: Scope of the spectral unique continuation argument
-status: draft
+status: published
 research_item: rem-se-4
 dependency_level: 16
 sources:

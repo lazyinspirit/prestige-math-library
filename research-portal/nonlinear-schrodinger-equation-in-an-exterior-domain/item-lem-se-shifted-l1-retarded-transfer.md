@@ -1,6 +1,6 @@
 ---
 title: Homogeneous bounds transfer to L1 retarded forcing
-status: draft
+status: published
 research_item: lem-se-shifted-l1-retarded-transfer
 dependency_level: 2
 ---

@@ -3,7 +3,7 @@ id: lem-se-author-ccbb64dfef2c-single-exterior-extension
 kind: lemma
 domain: mathematics
 title: A single collar-reflection and free-tail exterior extension
-status: draft
+status: published
 deps:
   - math:def-axiom-of-choice
   - lem-se-author-ccbb64dfef2c-collar-chart-localization

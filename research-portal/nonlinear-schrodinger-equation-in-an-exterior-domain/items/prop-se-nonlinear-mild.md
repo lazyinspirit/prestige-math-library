@@ -3,7 +3,7 @@ id: prop-se-nonlinear-mild
 kind: proposition
 domain: mathematics
 title: Mild formulation of the controlled power NLS
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - def-se-internal-systems

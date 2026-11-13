@@ -1,7 +1,7 @@
 ---
 title: Nonlinear Schrödinger equation in an exterior domain
 description: Article items and their immediate prerequisites, ordered by dependency level.
-status: draft
+status: published
 research_article_overview: true
 ---
 

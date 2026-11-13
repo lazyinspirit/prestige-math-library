@@ -1,6 +1,6 @@
 ---
 title: A common exterior extension and explicit collar–tail retraction
-status: draft
+status: published
 research_item: lem-se-author-891dd21c27d6-exterior-collar-tail-retraction
 dependency_level: 8
 ---

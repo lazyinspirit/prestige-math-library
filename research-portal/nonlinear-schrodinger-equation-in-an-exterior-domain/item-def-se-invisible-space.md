@@ -1,6 +1,6 @@
 ---
 title: Invisible initial-data spaces
-status: draft
+status: published
 research_item: def-se-invisible-space
 dependency_level: 8
 sources:

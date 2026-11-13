@@ -1,6 +1,6 @@
 ---
 title: Finite dimensionality of invisible spaces
-status: draft
+status: published
 research_item: prop-se-invisible-finite-dimensional
 dependency_level: 13
 sources:

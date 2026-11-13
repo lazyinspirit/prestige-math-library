@@ -2,7 +2,7 @@
 title: Article items · 10 — Three-dimensional L4 time Linfinity space estimate
 description: Presents 29 items from the article and its immediate prerequisites,
   covering dependency levels 8–10.
-status: draft
+status: published
 dependency_level: 4
 research_article_page: true
 item_count: 29

@@ -1,6 +1,6 @@
 ---
 title: Imported homogeneous and retarded exterior smoothing
-status: draft
+status: published
 research_item: prop-se-import-bgt-local-smoothing
 dependency_level: 7
 sources:

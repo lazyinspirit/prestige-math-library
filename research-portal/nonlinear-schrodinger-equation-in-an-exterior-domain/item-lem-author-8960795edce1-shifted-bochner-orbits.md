@@ -1,6 +1,6 @@
 ---
 title: Strongly continuous shifted orbits in finite Bochner norms
-status: draft
+status: published
 research_item: lem-author-8960795edce1-shifted-bochner-orbits
 dependency_level: 0
 ---

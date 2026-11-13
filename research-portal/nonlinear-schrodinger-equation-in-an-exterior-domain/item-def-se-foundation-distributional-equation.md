@@ -1,6 +1,6 @@
 ---
 title: Distributional equation convention for complex Schrödinger solutions
-status: draft
+status: published
 research_item: def-se-foundation-distributional-equation
 dependency_level: 0
 ---

@@ -1,6 +1,6 @@
 ---
 title: "Theorem 1.4: linearized control around a trajectory"
-status: draft
+status: published
 research_item: thm-se-1-4
 dependency_level: 19
 sources:

@@ -3,7 +3,7 @@ id: op-se-question-b
 kind: open-problem
 domain: mathematics
 title: "Question B: controls on part of the boundary"
-status: draft
+status: published
 deps:
   - def-se-foundation-control-language
   - def-se-foundation-time-function-spaces

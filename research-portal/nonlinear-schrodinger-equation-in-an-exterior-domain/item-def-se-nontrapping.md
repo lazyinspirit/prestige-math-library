@@ -1,6 +1,6 @@
 ---
 title: Non-trapping obstacle
-status: draft
+status: published
 research_item: def-se-nontrapping
 dependency_level: 2
 sources:

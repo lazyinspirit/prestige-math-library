@@ -3,7 +3,7 @@ id: def-se-regularized-adjoint
 kind: definition
 domain: mathematics
 title: Resolvent-regularized adjoint and its forcing
-status: draft
+status: published
 deps:
   - def-se-geometry
   - def-se-foundation-time-function-spaces

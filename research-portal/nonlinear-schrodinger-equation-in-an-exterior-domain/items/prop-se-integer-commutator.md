@@ -3,7 +3,7 @@ id: prop-se-integer-commutator
 kind: proposition
 domain: mathematics
 title: Integer resolvent commutator and localized first-order bounds
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - def-se-control-cutoffs

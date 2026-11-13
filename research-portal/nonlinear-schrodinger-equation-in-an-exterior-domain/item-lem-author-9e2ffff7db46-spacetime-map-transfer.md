@@ -1,6 +1,6 @@
 ---
 title: Transfer of a compatible spacetime norm through the free forcing map
-status: draft
+status: published
 research_item: lem-author-9e2ffff7db46-spacetime-map-transfer
 dependency_level: 4
 ---

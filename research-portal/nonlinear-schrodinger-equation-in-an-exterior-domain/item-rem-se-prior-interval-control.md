@@ -1,6 +1,6 @@
 ---
 title: Prior interval and rectangle NLS control results
-status: draft
+status: published
 research_item: rem-se-prior-interval-control
 dependency_level: 1
 sources:

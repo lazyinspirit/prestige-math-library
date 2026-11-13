@@ -3,7 +3,7 @@ id: lem-se-author-ccbb64dfef2c-simultaneous-flat-reflection
 kind: lemma
 domain: mathematics
 title: One flat reflection with simultaneous Lq and W1q bounds
-status: draft
+status: published
 deps:
   - math:def-axiom-of-choice
   - math:def-sobolev-space-wkp-and-its-norm

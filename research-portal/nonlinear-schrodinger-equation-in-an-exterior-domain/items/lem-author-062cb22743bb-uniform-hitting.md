@@ -3,7 +3,7 @@ id: lem-author-062cb22743bb-uniform-hitting
 kind: lemma
 domain: mathematics
 title: Uniform hitting for a compact closed family of ray segments
-status: draft
+status: published
 deps:
   - lem-author-062cb22743bb-diagonal-ray
   - math:def-dependent-choice

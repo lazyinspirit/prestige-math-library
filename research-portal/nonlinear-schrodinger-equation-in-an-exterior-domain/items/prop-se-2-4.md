@@ -3,7 +3,7 @@ id: prop-se-2-4
 kind: proposition
 domain: mathematics
 title: Three-dimensional L4 time Linfinity space estimate
-status: draft
+status: published
 deps:
   - math:def-axiom-of-choice
   - def-se-nontrapping

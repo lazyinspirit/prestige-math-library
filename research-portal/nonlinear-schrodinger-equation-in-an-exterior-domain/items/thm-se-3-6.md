@@ -3,7 +3,7 @@ id: thm-se-3-6
 kind: theorem
 domain: mathematics
 title: "Theorem 3.6: bounded continuous control operator"
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - def-se-geometry

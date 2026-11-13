@@ -1,6 +1,6 @@
 ---
 title: Bochner spaces and bounded inclusion of value spaces
-status: draft
+status: published
 research_item: lem-author-ab209e1f475e-bochner-lp-inclusion
 dependency_level: 0
 ---

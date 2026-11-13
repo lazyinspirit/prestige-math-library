@@ -1,6 +1,6 @@
 ---
 title: A compactly supported common L²/H² extension from a bounded smooth domain
-status: draft
+status: published
 research_item: lem-se-author-891dd21c27d6-bounded-common-endpoint-extension
 dependency_level: 1
 ---

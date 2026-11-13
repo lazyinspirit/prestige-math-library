@@ -1,6 +1,6 @@
 ---
 title: One second-order flat reflection on L² and H²
-status: draft
+status: published
 research_item: lem-se-author-891dd21c27d6-flat-second-order-reflection
 dependency_level: 0
 ---

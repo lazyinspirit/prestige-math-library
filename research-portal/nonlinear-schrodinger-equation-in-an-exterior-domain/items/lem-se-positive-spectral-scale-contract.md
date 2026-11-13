@@ -3,7 +3,7 @@ id: lem-se-positive-spectral-scale-contract
 kind: lemma
 domain: mathematics
 title: "Positive spectral Hilbert scale: duality and interpolation"
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - lem-author-03489e9088b7-spectral-cutoff-scale-identifications

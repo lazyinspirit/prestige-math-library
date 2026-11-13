@@ -1,6 +1,6 @@
 ---
 title: Endpoint feedback around a trajectory
-status: draft
+status: published
 research_item: def-se-trajectory-feedback
 dependency_level: 19
 sources:

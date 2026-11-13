@@ -3,7 +3,7 @@ id: prop-se-perturbed-evolution
 kind: proposition
 domain: mathematics
 title: Forward and backward real-linear propagators
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - def-se-geometry

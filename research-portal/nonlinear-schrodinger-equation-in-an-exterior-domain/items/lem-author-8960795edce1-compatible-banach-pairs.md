@@ -3,7 +3,7 @@ id: lem-author-8960795edce1-compatible-banach-pairs
 kind: lemma
 domain: mathematics
 title: Compatible Banach pairs and their integrals
-status: draft
+status: published
 deps:
   - math:def-banach-space
   - math:lem-closed-subspace-of-a-banach-space-is-banach

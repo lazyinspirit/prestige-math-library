@@ -3,7 +3,7 @@ id: def-se-periodic-space
 kind: definition
 domain: mathematics
 title: Periodic energy space on an interval
-status: draft
+status: published
 deps:
   - math:def-axiom-of-choice
   - math:def-sobolev-space-wkp-and-its-norm

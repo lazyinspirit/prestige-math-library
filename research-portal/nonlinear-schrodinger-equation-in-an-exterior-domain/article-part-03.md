@@ -2,7 +2,7 @@
 title: Article items · 03 — Strongly continuous one-parameter unitary group
 description: Presents 29 items from the article and its immediate prerequisites,
   covering published library prerequisites.
-status: draft
+status: published
 dependency_level: 0
 research_article_page: true
 item_count: 29

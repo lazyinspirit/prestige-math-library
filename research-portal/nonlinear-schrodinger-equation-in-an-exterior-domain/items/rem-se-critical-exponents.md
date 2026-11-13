@@ -3,7 +3,7 @@ id: rem-se-critical-exponents
 kind: remark
 domain: mathematics
 title: Critical nonlinearities named in the article
-status: draft
+status: published
 deps:
   - def-se-internal-systems
   - math:def-axiom-of-choice

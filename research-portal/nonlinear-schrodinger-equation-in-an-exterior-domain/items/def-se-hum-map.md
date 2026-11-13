@@ -3,7 +3,7 @@ id: def-se-hum-map
 kind: definition
 domain: mathematics
 title: Scale Riesz map and free HUM operator
-status: draft
+status: published
 deps:
   - def-se-dirichlet-scale
   - lem-se-positive-spectral-scale-contract

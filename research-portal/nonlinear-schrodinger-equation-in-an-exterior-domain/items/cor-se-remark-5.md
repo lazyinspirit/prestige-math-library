@@ -3,7 +3,7 @@ id: cor-se-remark-5
 kind: corollary
 domain: mathematics
 title: "Remark 5: controllability above the Sobolev algebra threshold"
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - def-se-geometry

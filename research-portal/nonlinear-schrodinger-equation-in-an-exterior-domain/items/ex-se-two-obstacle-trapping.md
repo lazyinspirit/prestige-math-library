@@ -3,7 +3,7 @@ id: ex-se-two-obstacle-trapping
 kind: example
 domain: mathematics
 title: A ray trapped between two convex obstacles
-status: draft
+status: published
 deps:
   - def-se-geometry
   - def-se-nontrapping

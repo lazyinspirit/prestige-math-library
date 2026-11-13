@@ -1,6 +1,6 @@
 ---
 title: "Lemma 3.4: free unique continuation on the scale"
-status: draft
+status: published
 research_item: lem-se-3-4
 dependency_level: 15
 sources:

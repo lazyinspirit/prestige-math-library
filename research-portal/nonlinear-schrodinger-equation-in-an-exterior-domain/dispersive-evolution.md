@@ -4,7 +4,7 @@ description: Organize the independent exterior resolvent, smoothing and
   Strichartz inputs with their dimensional, exponent and derivative-loss limits,
   then the negative-scale, causal L1 and real-linear perturbation transfers used
   by the article.
-status: draft
+status: published
 dependency_level: 1
 ---
 

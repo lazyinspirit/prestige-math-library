@@ -1,6 +1,6 @@
 ---
 title: Local negative Sobolev space in the compactness argument
-status: draft
+status: published
 research_item: def-se-local-negative-space
 dependency_level: 7
 sources:

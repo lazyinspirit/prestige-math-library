@@ -3,7 +3,7 @@ id: lem-se-helmholtz-open-set-continuation
 kind: lemma
 domain: mathematics
 title: Helmholtz continuation through a harmonic lift
-status: draft
+status: published
 deps:
   - math:def-axiom-of-choice
   - math:def-connected-space

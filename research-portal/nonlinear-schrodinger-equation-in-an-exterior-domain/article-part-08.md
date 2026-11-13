@@ -2,7 +2,7 @@
 title: Article items · 08 — Cubic and quintic time bounds from L4 Linfinity control
 description: Presents 29 items from the article and its immediate prerequisites,
   covering dependency levels 1–5.
-status: draft
+status: published
 dependency_level: 2
 research_article_page: true
 item_count: 29

@@ -1,6 +1,6 @@
 ---
 title: Collar and tail assembly of the exterior graph domain
-status: draft
+status: published
 research_item: lem-se-author-88d8498c76d6-exterior-graph-domain
 dependency_level: 2
 ---

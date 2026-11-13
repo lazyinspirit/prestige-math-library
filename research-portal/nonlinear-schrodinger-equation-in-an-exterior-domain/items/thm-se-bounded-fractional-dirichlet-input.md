@@ -3,7 +3,7 @@ id: thm-se-bounded-fractional-dirichlet-input
 kind: theorem
 domain: mathematics
 title: Bounded smooth fractional Dirichlet domain contract
-status: draft
+status: published
 deps:
   - math:def-bounded-c-k-domain-and-boundary-charts
   - math:def-sobolev-space-wkp-and-its-norm

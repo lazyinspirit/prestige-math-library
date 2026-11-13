@@ -1,6 +1,6 @@
 ---
 title: Continuous free convolution on a finite time interval
-status: draft
+status: published
 research_item: lem-author-9e2ffff7db46-free-continuous-convolution
 dependency_level: 0
 ---

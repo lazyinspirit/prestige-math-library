@@ -3,7 +3,7 @@ id: lem-author-03489e9088b7-exact-scale-operator-interpolation
 kind: lemma
 domain: mathematics
 title: Exact scale interpolation and endpoint operator transport
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - lem-author-03489e9088b7-spectral-cutoff-scale-identifications

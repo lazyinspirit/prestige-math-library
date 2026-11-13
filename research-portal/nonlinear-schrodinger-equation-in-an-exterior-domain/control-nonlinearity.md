@@ -3,7 +3,7 @@ title: Control duality and nonlinear estimates
 description: Develop the real Hilbert observation-to-control chain and endpoint
   feedback construction alongside polynomial, time-integrability and exterior
   algebra bounds needed for nonlinear endpoint and trajectory control.
-status: draft
+status: published
 dependency_level: 1
 ---
 

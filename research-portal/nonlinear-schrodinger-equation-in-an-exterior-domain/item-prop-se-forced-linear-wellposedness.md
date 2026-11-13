@@ -1,6 +1,6 @@
 ---
 title: Linear forced well-posedness by Duhamel formula
-status: draft
+status: published
 research_item: prop-se-forced-linear-wellposedness
 dependency_level: 8
 sources:

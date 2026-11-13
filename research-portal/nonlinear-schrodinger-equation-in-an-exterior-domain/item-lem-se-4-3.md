@@ -1,6 +1,6 @@
 ---
 title: "Lemma 4.3: perturbed observability modulo a remainder"
-status: draft
+status: published
 research_item: lem-se-4-3
 dependency_level: 16
 sources:

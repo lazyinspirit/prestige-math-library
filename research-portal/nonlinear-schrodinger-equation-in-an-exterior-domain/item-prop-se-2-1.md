@@ -1,6 +1,6 @@
 ---
 title: "Proposition 2.1: cut-off resolvent estimate"
-status: draft
+status: published
 research_item: prop-se-2-1
 dependency_level: 8
 sources:

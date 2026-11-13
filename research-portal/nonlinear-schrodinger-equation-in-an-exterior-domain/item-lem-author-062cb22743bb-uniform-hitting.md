@@ -1,6 +1,6 @@
 ---
 title: Uniform hitting for a compact closed family of ray segments
-status: draft
+status: published
 research_item: lem-author-062cb22743bb-uniform-hitting
 dependency_level: 2
 sources:

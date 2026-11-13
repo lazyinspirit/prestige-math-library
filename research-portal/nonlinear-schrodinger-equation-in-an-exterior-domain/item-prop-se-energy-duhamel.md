@@ -1,6 +1,6 @@
 ---
 title: Free and retarded bounds in the energy control space
-status: draft
+status: published
 research_item: prop-se-energy-duhamel
 dependency_level: 14
 sources:

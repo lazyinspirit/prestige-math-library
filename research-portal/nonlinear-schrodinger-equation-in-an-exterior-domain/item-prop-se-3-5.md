@@ -1,6 +1,6 @@
 ---
 title: "Proposition 3.5: full-scale free observability"
-status: draft
+status: published
 research_item: prop-se-3-5
 dependency_level: 16
 sources:

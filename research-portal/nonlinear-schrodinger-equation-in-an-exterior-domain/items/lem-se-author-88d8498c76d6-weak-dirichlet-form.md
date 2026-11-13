@@ -3,7 +3,7 @@ id: lem-se-author-88d8498c76d6-weak-dirichlet-form
 kind: lemma
 domain: mathematics
 title: Weak shifted Dirichlet form and energy bound on an open set
-status: draft
+status: published
 deps:
   - math:def-axiom-of-choice
   - math:def-sobolev-space-wkp-and-its-norm

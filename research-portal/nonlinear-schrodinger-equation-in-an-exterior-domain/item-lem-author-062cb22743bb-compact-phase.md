@@ -1,6 +1,6 @@
 ---
 title: Compact normalized compressed phase sets over bounded regions
-status: draft
+status: published
 research_item: lem-author-062cb22743bb-compact-phase
 dependency_level: 1
 sources:

@@ -1,6 +1,6 @@
 ---
 title: Uniform localized H2 algebra on a smooth exterior domain
-status: draft
+status: published
 research_item: lem-se-exterior-h2-uniform-algebra
 dependency_level: 0
 ---

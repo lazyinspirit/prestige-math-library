@@ -3,7 +3,7 @@ id: rem-se-prior-interval-control
 kind: remark
 domain: mathematics
 title: Prior interval and rectangle NLS control results
-status: draft
+status: published
 deps:
   - def-se-periodic-space
   - def-se-foundation-integer-sobolev-notation

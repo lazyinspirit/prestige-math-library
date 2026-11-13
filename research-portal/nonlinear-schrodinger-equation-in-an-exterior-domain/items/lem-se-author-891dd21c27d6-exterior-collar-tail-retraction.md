@@ -3,7 +3,7 @@ id: lem-se-author-891dd21c27d6-exterior-collar-tail-retraction
 kind: lemma
 domain: mathematics
 title: A common exterior extension and explicit collar–tail retraction
-status: draft
+status: published
 deps:
   - math:def-axiom-of-choice
   - lem-se-author-891dd21c27d6-bounded-common-endpoint-extension

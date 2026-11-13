@@ -3,7 +3,7 @@ id: lem-se-endpoint-control-factorization
 kind: lemma
 domain: mathematics
 title: Endpoint maps and exact steering from a null-control operator
-status: draft
+status: published
 deps:
   - lem-se-observation-gramian-right-inverse
   - def-se-foundation-control-language

@@ -1,6 +1,6 @@
 ---
 title: Reachability and observation vocabulary for controlled evolutions
-status: draft
+status: published
 research_item: def-se-foundation-control-language
 dependency_level: 0
 ---

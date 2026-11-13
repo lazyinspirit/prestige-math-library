@@ -3,7 +3,7 @@ id: lem-author-062cb22743bb-diagonal-ray
 kind: lemma
 domain: mathematics
 title: Diagonal gluing without a single-valued reflected flow
-status: draft
+status: published
 deps:
   - prop-se-generalized-ray-contract
   - math:def-dependent-choice

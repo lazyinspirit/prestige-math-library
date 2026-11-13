@@ -1,6 +1,6 @@
 ---
 title: "Lemma 4.2: smoothing of the regularized adjoint"
-status: draft
+status: published
 research_item: lem-se-4-2
 dependency_level: 15
 sources:

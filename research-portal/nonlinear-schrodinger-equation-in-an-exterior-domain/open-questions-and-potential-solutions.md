@@ -3,7 +3,7 @@ title: Open questions and potential solutions
 research_report: open-questions
 description: Insights, fruitful questions and potential solutions arising from
   Nonlinear Schrödinger equation in an exterior domain.
-status: draft
+status: published
 ---
 
 ## 1. Research insights beyond the article

@@ -1,6 +1,6 @@
 ---
 title: Unique continuation for general non-trapping obstacles and trajectories
-status: draft
+status: published
 research_item: op-se-ucp-general
 dependency_level: 11
 sources:

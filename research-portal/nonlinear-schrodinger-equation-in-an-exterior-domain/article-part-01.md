@@ -2,7 +2,7 @@
 title: Article items · 01 — Cauchy-Schwarz inequality for $L^2$
 description: Presents 28 items from the article and its immediate prerequisites,
   covering published library prerequisites.
-status: draft
+status: published
 dependency_level: 0
 research_article_page: true
 item_count: 28

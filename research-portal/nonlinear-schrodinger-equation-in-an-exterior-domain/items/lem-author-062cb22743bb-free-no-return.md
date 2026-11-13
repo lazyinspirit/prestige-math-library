@@ -3,7 +3,7 @@ id: lem-author-062cb22743bb-free-no-return
 kind: lemma
 domain: mathematics
 title: An outward Euclidean exit cannot return
-status: draft
+status: published
 deps:
   - prop-se-generalized-ray-contract
   - math:thm-compact-subset-of-a-hausdorff-space-is-closed

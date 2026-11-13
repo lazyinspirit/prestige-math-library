@@ -3,7 +3,7 @@ id: lem-author-9e2ffff7db46-free-continuous-convolution
 kind: lemma
 domain: mathematics
 title: Continuous free convolution on a finite time interval
-status: draft
+status: published
 deps:
   - math:def-banach-space
   - math:def-countable-choice

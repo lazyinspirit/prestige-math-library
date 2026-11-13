@@ -3,7 +3,7 @@ id: def-se-real-hum
 kind: definition
 domain: mathematics
 title: Real HUM operator for the trajectory linearization
-status: draft
+status: published
 deps:
   - prop-se-perturbed-evolution
   - def-se-hum-map

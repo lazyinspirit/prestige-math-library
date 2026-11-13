@@ -1,6 +1,6 @@
 ---
 title: Uniform endpoint localization in a smooth boundary chart
-status: draft
+status: published
 research_item: lem-se-author-ccbb64dfef2c-collar-chart-localization
 dependency_level: 1
 ---

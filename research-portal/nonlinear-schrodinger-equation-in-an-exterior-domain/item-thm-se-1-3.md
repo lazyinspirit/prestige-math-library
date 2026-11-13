@@ -1,6 +1,6 @@
 ---
 title: "Theorem 1.3: cubic internal control near zero"
-status: draft
+status: published
 research_item: thm-se-1-3
 dependency_level: 23
 sources:

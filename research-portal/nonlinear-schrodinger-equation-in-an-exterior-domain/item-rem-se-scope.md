@@ -1,6 +1,6 @@
 ---
 title: Scope of geometric assumptions and control results
-status: draft
+status: published
 research_item: rem-se-scope
 dependency_level: 26
 sources:

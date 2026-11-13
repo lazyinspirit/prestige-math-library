@@ -1,6 +1,6 @@
 ---
 title: Homogeneous half-derivative local smoothing
-status: draft
+status: published
 research_item: prop-se-2-2-homogeneous
 dependency_level: 8
 sources:

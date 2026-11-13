@@ -3,7 +3,7 @@ id: lem-se-spectral-cutoff-duality
 kind: lemma
 domain: mathematics
 title: Endpoint multiplier bounds extended to negative spectral orders
-status: draft
+status: published
 deps:
   - lem-se-exterior-dirichlet-realization
   - lem-se-positive-spectral-scale-contract

@@ -1,6 +1,6 @@
 ---
 title: Multiplier boundary term and hidden normal trace
-status: draft
+status: published
 research_item: prop-se-boundary-hidden-regularity
 dependency_level: 5
 sources:

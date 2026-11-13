@@ -3,7 +3,7 @@ id: thm-se-1-3
 kind: theorem
 domain: mathematics
 title: "Theorem 1.3: cubic internal control near zero"
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - def-se-geometry

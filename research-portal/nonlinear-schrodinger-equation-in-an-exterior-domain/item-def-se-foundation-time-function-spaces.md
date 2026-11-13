@@ -1,6 +1,6 @@
 ---
 title: Continuous and mixed time-space function spaces
-status: draft
+status: published
 research_item: def-se-foundation-time-function-spaces
 dependency_level: 0
 ---

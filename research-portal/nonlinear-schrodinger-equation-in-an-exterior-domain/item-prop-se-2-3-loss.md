@@ -1,6 +1,6 @@
 ---
 title: Global Strichartz estimate with derivative loss
-status: draft
+status: published
 research_item: prop-se-2-3-loss
 dependency_level: 8
 sources:

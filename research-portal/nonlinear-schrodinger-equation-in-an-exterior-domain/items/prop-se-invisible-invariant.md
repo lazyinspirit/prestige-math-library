@@ -3,7 +3,7 @@ id: prop-se-invisible-invariant
 kind: proposition
 domain: mathematics
 title: Locally constant invisible spaces are Laplacian invariant
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - def-se-geometry

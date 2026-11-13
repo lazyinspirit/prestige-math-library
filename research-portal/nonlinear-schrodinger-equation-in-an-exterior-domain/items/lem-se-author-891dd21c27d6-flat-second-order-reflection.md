@@ -3,7 +3,7 @@ id: lem-se-author-891dd21c27d6-flat-second-order-reflection
 kind: lemma
 domain: mathematics
 title: One second-order flat reflection on L² and H²
-status: draft
+status: published
 deps:
   - math:def-axiom-of-choice
   - math:def-sobolev-space-wkp-and-its-norm

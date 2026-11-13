@@ -1,6 +1,6 @@
 ---
 title: "Lemma 4.1: retarded smoothing down to negative order two"
-status: draft
+status: published
 research_item: lem-se-4-1
 dependency_level: 10
 sources:

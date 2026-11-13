@@ -1,6 +1,6 @@
 ---
 title: "Lemma 4.4: compactness for regularized perturbed trajectories"
-status: draft
+status: published
 research_item: lem-se-4-4
 dependency_level: 16
 sources:

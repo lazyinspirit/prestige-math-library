@@ -1,6 +1,6 @@
 ---
 title: Necessary endpoint compatibility for boundary controls
-status: draft
+status: published
 research_item: rem-se-endpoint-compatibility
 dependency_level: 14
 sources:

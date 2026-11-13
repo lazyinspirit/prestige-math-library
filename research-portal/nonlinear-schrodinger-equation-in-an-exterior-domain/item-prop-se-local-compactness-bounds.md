@@ -1,6 +1,6 @@
 ---
 title: Localized free-flow bounds and compactness mechanism
-status: draft
+status: published
 research_item: prop-se-local-compactness-bounds
 dependency_level: 11
 sources:

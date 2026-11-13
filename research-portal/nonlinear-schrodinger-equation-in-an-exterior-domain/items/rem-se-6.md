@@ -3,7 +3,7 @@ id: rem-se-6
 kind: remark
 domain: mathematics
 title: "Remark 6: exact use and zero-trajectory case of unique continuation"
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - def-se-ucpw

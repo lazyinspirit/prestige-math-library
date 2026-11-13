@@ -1,6 +1,6 @@
 ---
 title: An outward Euclidean exit cannot return
-status: draft
+status: published
 research_item: lem-author-062cb22743bb-free-no-return
 dependency_level: 1
 sources:

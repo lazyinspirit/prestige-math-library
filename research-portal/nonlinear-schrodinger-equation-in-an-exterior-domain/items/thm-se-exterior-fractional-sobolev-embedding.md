@@ -3,7 +3,7 @@ id: thm-se-exterior-fractional-sobolev-embedding
 kind: theorem
 domain: mathematics
 title: Independent exterior fractional Sobolev embedding
-status: draft
+status: published
 deps:
   - lem-se-interpolation-sobolev-model
   - math:def-axiom-of-choice

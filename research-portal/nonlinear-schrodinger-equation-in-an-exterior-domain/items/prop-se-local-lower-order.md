@@ -3,7 +3,7 @@ id: prop-se-local-lower-order
 kind: proposition
 domain: mathematics
 title: Local observation has a lower initial regularity cost
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - def-se-geometry

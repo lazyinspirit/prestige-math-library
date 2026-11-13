@@ -1,6 +1,6 @@
 ---
 title: Localization and analytic scope of the free control construction
-status: draft
+status: published
 research_item: rem-se-linear-proof-scope
 dependency_level: 19
 sources:

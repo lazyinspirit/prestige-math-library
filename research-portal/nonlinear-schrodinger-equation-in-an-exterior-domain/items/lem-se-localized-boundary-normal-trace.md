@@ -3,7 +3,7 @@ id: lem-se-localized-boundary-normal-trace
 kind: lemma
 domain: mathematics
 title: Localized multiplier estimate for the exterior Dirichlet normal trace
-status: draft
+status: published
 deps:
   - lem-se-exterior-dirichlet-realization
   - def-se-foundation-integer-sobolev-notation

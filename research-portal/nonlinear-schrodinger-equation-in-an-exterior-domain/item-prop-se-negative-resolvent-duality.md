@@ -1,6 +1,6 @@
 ---
 title: Negative resolvent bounds and the retarded Fourier argument
-status: draft
+status: published
 research_item: prop-se-negative-resolvent-duality
 dependency_level: 9
 sources:

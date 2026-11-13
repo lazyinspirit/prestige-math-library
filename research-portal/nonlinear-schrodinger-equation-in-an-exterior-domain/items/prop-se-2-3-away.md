@@ -3,7 +3,7 @@ id: prop-se-2-3-away
 kind: proposition
 domain: mathematics
 title: Strichartz estimate away from the obstacle
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - def-se-geometry

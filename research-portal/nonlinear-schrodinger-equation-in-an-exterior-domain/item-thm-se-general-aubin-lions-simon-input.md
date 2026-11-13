@@ -1,6 +1,6 @@
 ---
 title: General Banach-triple Aubin–Lions–Simon compactness
-status: draft
+status: published
 research_item: thm-se-general-aubin-lions-simon-input
 dependency_level: 2
 sources:

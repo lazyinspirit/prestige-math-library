@@ -1,6 +1,6 @@
 ---
 title: Unit-speed confinement before an artificial outer boundary
-status: draft
+status: published
 research_item: lem-author-062cb22743bb-speed-confinement
 dependency_level: 1
 sources:

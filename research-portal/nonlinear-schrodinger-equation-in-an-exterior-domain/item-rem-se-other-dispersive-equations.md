@@ -1,6 +1,6 @@
 ---
 title: Proposed transfer of the smoothing-control mechanism
-status: draft
+status: published
 research_item: rem-se-other-dispersive-equations
 dependency_level: 17
 sources:

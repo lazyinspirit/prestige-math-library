@@ -1,6 +1,6 @@
 ---
 title: One flat reflection with simultaneous Lq and W1q bounds
-status: draft
+status: published
 research_item: lem-se-author-ccbb64dfef2c-simultaneous-flat-reflection
 dependency_level: 0
 ---

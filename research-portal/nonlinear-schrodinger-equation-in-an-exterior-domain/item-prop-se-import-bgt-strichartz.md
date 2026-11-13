@@ -1,6 +1,6 @@
 ---
 title: Exterior Strichartz estimates with precise loss
-status: draft
+status: published
 research_item: prop-se-import-bgt-strichartz
 dependency_level: 7
 sources:

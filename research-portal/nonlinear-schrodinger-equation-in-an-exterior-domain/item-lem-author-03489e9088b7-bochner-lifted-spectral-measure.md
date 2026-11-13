@@ -1,6 +1,6 @@
 ---
 title: Lifted spectral measure and isometric Bochner scale interpolation
-status: draft
+status: published
 research_item: lem-author-03489e9088b7-bochner-lifted-spectral-measure
 dependency_level: 4
 ---

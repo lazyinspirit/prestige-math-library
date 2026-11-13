@@ -3,7 +3,7 @@ id: lem-se-author-ccbb64dfef2c-collar-chart-localization
 kind: lemma
 domain: mathematics
 title: Uniform endpoint localization in a smooth boundary chart
-status: draft
+status: published
 deps:
   - math:def-axiom-of-choice
   - math:lem-c-k-boundary-flattening-preserves-wkp-locally

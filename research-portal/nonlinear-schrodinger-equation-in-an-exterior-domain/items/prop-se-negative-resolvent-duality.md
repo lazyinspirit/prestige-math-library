@@ -3,7 +3,7 @@ id: prop-se-negative-resolvent-duality
 kind: proposition
 domain: mathematics
 title: Negative resolvent bounds and the retarded Fourier argument
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - lem-author-03489e9088b7-spectral-cutoff-scale-identifications

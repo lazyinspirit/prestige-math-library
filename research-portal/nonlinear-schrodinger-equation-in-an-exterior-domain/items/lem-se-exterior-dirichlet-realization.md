@@ -3,7 +3,7 @@ id: lem-se-exterior-dirichlet-realization
 kind: lemma
 domain: mathematics
 title: Exterior Dirichlet realization, H² domain and form domain
-status: draft
+status: published
 deps:
   - math:def-axiom-of-choice
   - lem-se-author-88d8498c76d6-weak-dirichlet-form

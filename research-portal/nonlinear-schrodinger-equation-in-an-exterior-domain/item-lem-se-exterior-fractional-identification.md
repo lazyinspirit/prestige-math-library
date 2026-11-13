@@ -1,6 +1,6 @@
 ---
 title: Exterior spectral domains and the critical trace index
-status: draft
+status: published
 research_item: lem-se-exterior-fractional-identification
 dependency_level: 10
 ---

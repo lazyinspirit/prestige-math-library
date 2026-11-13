@@ -1,6 +1,6 @@
 ---
 title: Prior energy-critical null control on Euclidean space
-status: draft
+status: published
 research_item: rem-se-prior-critical-null-control
 dependency_level: 9
 sources:

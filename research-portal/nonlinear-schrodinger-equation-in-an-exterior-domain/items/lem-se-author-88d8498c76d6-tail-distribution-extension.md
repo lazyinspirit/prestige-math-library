@@ -3,7 +3,7 @@ id: lem-se-author-88d8498c76d6-tail-distribution-extension
 kind: lemma
 domain: mathematics
 title: Zero extension of a free exterior tail by distribution tests
-status: draft
+status: published
 deps:
   - math:def-axiom-of-choice
   - lem-se-author-88d8498c76d6-bounded-collar-h2

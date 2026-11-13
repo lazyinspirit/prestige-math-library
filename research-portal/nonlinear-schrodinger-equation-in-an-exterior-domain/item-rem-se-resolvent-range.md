@@ -1,6 +1,6 @@
 ---
 title: Resolvent frequencies, cutoff signs and higher compatibility
-status: draft
+status: published
 research_item: rem-se-resolvent-range
 dependency_level: 9
 sources:

@@ -3,7 +3,7 @@ id: lem-author-8960795edce1-spatial-lq-mixed-norms
 kind: lemma
 domain: mathematics
 title: Spatial Lq classes satisfy the scalar mixed-norm hypotheses
-status: draft
+status: published
 deps:
   - lem-author-8960795edce1-scalar-fatou-retarded-transfer
   - math:thm-riesz-fischer-completeness-of-l-p

@@ -3,7 +3,7 @@ id: prop-se-boundary-hidden-regularity
 kind: proposition
 domain: mathematics
 title: Multiplier boundary term and hidden normal trace
-status: draft
+status: published
 deps:
   - math:def-axiom-of-choice
   - def-se-dirichlet-laplacian

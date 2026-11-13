@@ -1,6 +1,6 @@
 ---
 title: "Proposition 4.6: conditional adjoint observability"
-status: draft
+status: published
 research_item: prop-se-4-6
 dependency_level: 17
 sources:

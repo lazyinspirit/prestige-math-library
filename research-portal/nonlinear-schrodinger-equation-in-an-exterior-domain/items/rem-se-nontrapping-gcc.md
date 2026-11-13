@@ -3,7 +3,7 @@ id: rem-se-nontrapping-gcc
 kind: remark
 domain: mathematics
 title: Non-trapping and geometric control from infinity
-status: draft
+status: published
 deps:
   - def-se-nontrapping
   - prop-se-generalized-ray-contract

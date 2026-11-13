@@ -1,6 +1,6 @@
 ---
 title: "Theorem 3.7: abstract small-data perturbation result"
-status: draft
+status: published
 research_item: thm-se-3-7
 dependency_level: 21
 sources:

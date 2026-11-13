@@ -3,7 +3,7 @@ id: prop-se-trajectory-nonlinear-estimates
 kind: proposition
 domain: mathematics
 title: Quadratic-cubic estimates near a reference trajectory
-status: draft
+status: published
 deps:
   - def-se-geometry
   - def-se-trajectory

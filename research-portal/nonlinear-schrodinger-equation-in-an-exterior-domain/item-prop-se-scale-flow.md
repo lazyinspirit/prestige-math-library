@@ -1,6 +1,6 @@
 ---
 title: Scale isometries and free Schrödinger evolution
-status: draft
+status: published
 research_item: prop-se-scale-flow
 dependency_level: 7
 sources:

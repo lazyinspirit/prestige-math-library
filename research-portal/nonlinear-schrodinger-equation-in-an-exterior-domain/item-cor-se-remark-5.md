@@ -1,6 +1,6 @@
 ---
 title: "Remark 5: controllability above the Sobolev algebra threshold"
-status: draft
+status: published
 research_item: cor-se-remark-5
 dependency_level: 22
 sources:

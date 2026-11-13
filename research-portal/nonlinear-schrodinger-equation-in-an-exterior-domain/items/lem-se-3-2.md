@@ -3,7 +3,7 @@ id: lem-se-3-2
 kind: lemma
 domain: mathematics
 title: "Lemma 3.2: compactness of the remainder"
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - def-se-geometry

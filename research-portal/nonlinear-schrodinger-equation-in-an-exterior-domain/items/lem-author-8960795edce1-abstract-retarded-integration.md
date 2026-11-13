@@ -3,7 +3,7 @@ id: lem-author-8960795edce1-abstract-retarded-integration
 kind: lemma
 domain: mathematics
 title: Abstract retarded integration in compatible time spaces
-status: draft
+status: published
 deps:
   - lem-author-8960795edce1-compatible-banach-pairs
   - lem-author-8960795edce1-shifted-bochner-orbits

@@ -3,7 +3,7 @@ id: def-se-foundation-control-language
 kind: definition
 domain: mathematics
 title: Reachability and observation vocabulary for controlled evolutions
-status: draft
+status: published
 deps:
   - math:def-banach-space
   - math:def-bounded-linear-operator

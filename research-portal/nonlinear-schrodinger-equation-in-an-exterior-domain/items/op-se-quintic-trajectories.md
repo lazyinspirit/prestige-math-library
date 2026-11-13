@@ -3,7 +3,7 @@ id: op-se-quintic-trajectories
 kind: open-problem
 domain: mathematics
 title: Quintic control around nonzero trajectories
-status: draft
+status: published
 deps:
   - def-se-internal-systems
   - def-se-dirichlet-scale

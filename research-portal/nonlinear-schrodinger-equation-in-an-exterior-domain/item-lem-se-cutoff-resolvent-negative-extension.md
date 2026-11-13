@@ -1,6 +1,6 @@
 ---
 title: Resolvent adjoint transport to order minus two
-status: draft
+status: published
 research_item: lem-se-cutoff-resolvent-negative-extension
 dependency_level: 8
 sources:

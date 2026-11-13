@@ -1,6 +1,6 @@
 ---
 title: Energy control space with a time-integrable supremum norm
-status: draft
+status: published
 research_item: def-se-energy-space
 dependency_level: 7
 sources:

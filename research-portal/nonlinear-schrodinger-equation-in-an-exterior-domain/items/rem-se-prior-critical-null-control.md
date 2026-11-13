@@ -3,7 +3,7 @@ id: rem-se-prior-critical-null-control
 kind: remark
 domain: mathematics
 title: Prior energy-critical null control on Euclidean space
-status: draft
+status: published
 deps:
   - def-se-foundation-control-language
   - math:def-sobolev-space-wkp-and-its-norm

@@ -3,7 +3,7 @@ id: def-se-foundation-weak-compactness-language
 kind: definition
 domain: mathematics
 title: Weak convergence notation in normed state spaces
-status: draft
+status: published
 deps:
   - math:def-norm-and-normed-space
   - math:def-complex-norm-and-complex-normed-space

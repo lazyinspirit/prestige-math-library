@@ -1,6 +1,6 @@
 ---
 title: Weak convergence notation in normed state spaces
-status: draft
+status: published
 research_item: def-se-foundation-weak-compactness-language
 dependency_level: 0
 ---

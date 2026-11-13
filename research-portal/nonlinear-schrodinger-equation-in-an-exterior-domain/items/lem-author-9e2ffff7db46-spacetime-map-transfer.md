@@ -3,7 +3,7 @@ id: lem-author-9e2ffff7db46-spacetime-map-transfer
 kind: lemma
 domain: mathematics
 title: Transfer of a compatible spacetime norm through the free forcing map
-status: draft
+status: published
 deps:
   - lem-author-9e2ffff7db46-free-continuous-convolution
   - lem-author-9e2ffff7db46-global-real-evolution

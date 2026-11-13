@@ -1,6 +1,6 @@
 ---
 title: Large-data control for energy-critical NLS
-status: draft
+status: published
 research_item: op-se-critical-large-data
 dependency_level: 8
 sources:

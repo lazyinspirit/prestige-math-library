@@ -3,7 +3,7 @@ id: prop-se-h2-nonlinearity
 kind: proposition
 domain: mathematics
 title: Exterior H2 algebra and polynomial nonlinear estimates
-status: draft
+status: published
 deps:
   - prop-se-scale-identifications
   - def-se-internal-systems

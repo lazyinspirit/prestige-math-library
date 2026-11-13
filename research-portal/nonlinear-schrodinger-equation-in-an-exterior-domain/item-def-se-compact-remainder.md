@@ -1,6 +1,6 @@
 ---
 title: Regularized lower-order observation remainder
-status: draft
+status: published
 research_item: def-se-compact-remainder
 dependency_level: 8
 sources:

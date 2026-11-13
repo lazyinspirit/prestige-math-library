@@ -3,7 +3,7 @@ id: lem-se-author-8d28f6f38ee5-localized-chart-operators
 kind: lemma
 domain: mathematics
 title: Localized smooth coordinate changes and cutoffs on Fourier $H^r$
-status: draft
+status: published
 deps:
   - math:def-axiom-of-choice
   - math:lem-c-k-boundary-flattening-preserves-wkp-locally

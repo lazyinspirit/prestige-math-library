@@ -1,6 +1,6 @@
 ---
 title: Star-shaped multiplier signs
-status: draft
+status: published
 research_item: prop-se-star-shaped-sign
 dependency_level: 0
 sources:

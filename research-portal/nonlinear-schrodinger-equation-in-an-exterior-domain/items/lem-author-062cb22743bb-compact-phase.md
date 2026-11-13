@@ -3,7 +3,7 @@ id: lem-author-062cb22743bb-compact-phase
 kind: lemma
 domain: mathematics
 title: Compact normalized compressed phase sets over bounded regions
-status: draft
+status: published
 deps:
   - prop-se-generalized-ray-contract
   - math:thm-heine-borel-rn

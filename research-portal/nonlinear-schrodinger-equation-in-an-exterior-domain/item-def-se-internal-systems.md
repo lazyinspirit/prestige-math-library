@@ -1,6 +1,6 @@
 ---
 title: Linear and nonlinear internally controlled exterior systems
-status: draft
+status: published
 research_item: def-se-internal-systems
 dependency_level: 7
 sources:

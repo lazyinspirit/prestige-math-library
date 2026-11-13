@@ -3,7 +3,7 @@ id: prop-se-3-10
 kind: proposition
 domain: mathematics
 title: "Proposition 3.10: order-two local control"
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - def-se-geometry

@@ -1,6 +1,6 @@
 ---
 title: "Lemma 4.5: invisible solutions acquire energy regularity"
-status: draft
+status: published
 research_item: lem-se-4-5
 dependency_level: 15
 sources:

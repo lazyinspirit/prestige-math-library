@@ -3,7 +3,7 @@ id: lem-author-ab209e1f475e-local-negative-pivot-injection
 kind: lemma
 domain: mathematics
 title: The L2 pivot injects into the local negative Sobolev space
-status: draft
+status: published
 deps:
   - math:def-axiom-of-choice
   - math:def-sobolev-space-wkp-and-its-norm

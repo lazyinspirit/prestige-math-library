@@ -1,6 +1,6 @@
 ---
 title: "Lemma 3.2: compactness of the remainder"
-status: draft
+status: published
 research_item: lem-se-3-2
 dependency_level: 12
 sources:

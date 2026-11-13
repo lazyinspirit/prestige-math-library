@@ -3,7 +3,7 @@ id: prop-se-hum-duality
 kind: proposition
 domain: mathematics
 title: Free HUM identity, coercivity and invertibility
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - def-se-hum-map

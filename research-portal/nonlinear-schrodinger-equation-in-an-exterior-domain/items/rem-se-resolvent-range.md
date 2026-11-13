@@ -3,7 +3,7 @@ id: rem-se-resolvent-range
 kind: remark
 domain: mathematics
 title: Resolvent frequencies, cutoff signs and higher compatibility
-status: draft
+status: published
 deps:
   - def-se-geometry
   - def-se-nontrapping

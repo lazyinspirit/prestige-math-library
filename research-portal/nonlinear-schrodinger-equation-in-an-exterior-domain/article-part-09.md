@@ -2,7 +2,7 @@
 title: Article items · 09 — Independent exterior fractional Sobolev embedding
 description: Presents 28 items from the article and its immediate prerequisites,
   covering dependency levels 5–8.
-status: draft
+status: published
 dependency_level: 3
 research_article_page: true
 item_count: 28

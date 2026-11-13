@@ -1,6 +1,6 @@
 ---
 title: Dirichlet spectral Sobolev scale and duality
-status: draft
+status: published
 research_item: def-se-dirichlet-scale
 dependency_level: 6
 sources:

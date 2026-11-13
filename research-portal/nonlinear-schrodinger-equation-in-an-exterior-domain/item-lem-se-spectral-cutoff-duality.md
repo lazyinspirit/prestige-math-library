@@ -1,6 +1,6 @@
 ---
 title: Endpoint multiplier bounds extended to negative spectral orders
-status: draft
+status: published
 research_item: lem-se-spectral-cutoff-duality
 dependency_level: 6
 ---

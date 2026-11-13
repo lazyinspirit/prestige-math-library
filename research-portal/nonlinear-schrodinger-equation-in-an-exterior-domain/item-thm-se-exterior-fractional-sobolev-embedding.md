@@ -1,6 +1,6 @@
 ---
 title: Independent exterior fractional Sobolev embedding
-status: draft
+status: published
 research_item: thm-se-exterior-fractional-sobolev-embedding
 dependency_level: 5
 sources:

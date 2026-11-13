@@ -1,6 +1,6 @@
 ---
 title: A single collar-reflection and free-tail exterior extension
-status: draft
+status: published
 research_item: lem-se-author-ccbb64dfef2c-single-exterior-extension
 dependency_level: 2
 ---

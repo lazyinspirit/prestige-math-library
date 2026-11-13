@@ -3,7 +3,7 @@ id: prop-se-scale-identifications
 kind: proposition
 domain: mathematics
 title: Low-order identifications of the Dirichlet scale
-status: draft
+status: published
 deps:
   - def-se-dirichlet-scale
   - lem-se-exterior-dirichlet-realization

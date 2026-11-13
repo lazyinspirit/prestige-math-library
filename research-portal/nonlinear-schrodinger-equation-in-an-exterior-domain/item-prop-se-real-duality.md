@@ -1,6 +1,6 @@
 ---
 title: Real pairing cancellation for the linearized-adjoint pair
-status: draft
+status: published
 research_item: prop-se-real-duality
 dependency_level: 10
 sources:

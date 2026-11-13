@@ -3,7 +3,7 @@ id: lem-se-author-88d8498c76d6-exterior-graph-domain
 kind: lemma
 domain: mathematics
 title: Collar and tail assembly of the exterior graph domain
-status: draft
+status: published
 deps:
   - math:def-axiom-of-choice
   - lem-se-author-88d8498c76d6-weak-dirichlet-form

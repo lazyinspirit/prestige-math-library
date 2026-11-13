@@ -3,7 +3,7 @@ id: lem-se-4-5
 kind: lemma
 domain: mathematics
 title: "Lemma 4.5: invisible solutions acquire energy regularity"
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - prop-se-invisible-bootstrap

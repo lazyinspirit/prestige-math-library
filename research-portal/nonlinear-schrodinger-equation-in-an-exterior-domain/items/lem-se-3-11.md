@@ -3,7 +3,7 @@ id: lem-se-3-11
 kind: lemma
 domain: mathematics
 title: "Lemma 3.11: extension preserving the obstacle Dirichlet condition"
-status: draft
+status: published
 deps:
   - def-se-geometry
   - def-se-boundary-state-space

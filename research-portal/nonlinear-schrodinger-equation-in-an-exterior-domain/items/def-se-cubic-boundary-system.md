@@ -3,7 +3,7 @@ id: def-se-cubic-boundary-system
 kind: definition
 domain: mathematics
 title: Cubic NLS and boundary control formulations
-status: draft
+status: published
 deps:
   - def-se-geometry
   - math:def-bounded-c-one-domain-boundary-charts-and-outward-normal

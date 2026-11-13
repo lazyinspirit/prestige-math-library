@@ -3,7 +3,7 @@ id: lem-se-author-8d28f6f38ee5-flat-fourier-trace
 kind: lemma
 domain: mathematics
 title: Fourier trace on a hyperplane and one-sided H¹ uniqueness
-status: draft
+status: published
 deps:
   - math:def-axiom-of-choice
   - math:thm-fourier-characterisation-of-fractional-hilbert-sobolev-spaces

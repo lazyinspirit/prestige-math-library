@@ -1,6 +1,6 @@
 ---
 title: Global real evolution, cocycle and inverse
-status: draft
+status: published
 research_item: lem-author-9e2ffff7db46-global-real-evolution
 dependency_level: 2
 ---

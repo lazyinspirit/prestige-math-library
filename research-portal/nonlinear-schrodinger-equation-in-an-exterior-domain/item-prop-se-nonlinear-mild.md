@@ -1,6 +1,6 @@
 ---
 title: Mild formulation of the controlled power NLS
-status: draft
+status: published
 research_item: prop-se-nonlinear-mild
 dependency_level: 8
 sources:

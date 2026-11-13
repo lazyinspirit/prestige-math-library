@@ -3,7 +3,7 @@ id: lem-se-4-4
 kind: lemma
 domain: mathematics
 title: "Lemma 4.4: compactness for regularized perturbed trajectories"
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - def-se-geometry

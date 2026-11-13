@@ -3,7 +3,7 @@ id: def-se-foundation-time-function-spaces
 kind: definition
 domain: mathematics
 title: Continuous and mixed time-space function spaces
-status: draft
+status: published
 deps:
   - math:def-banach-space
   - math:def-strongly-measurable-banach-valued-function

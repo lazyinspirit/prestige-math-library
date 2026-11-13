@@ -3,7 +3,7 @@ id: lem-se-author-8d28f6f38ee5-artificial-sphere-extension-and-gluing
 kind: lemma
 domain: mathematics
 title: Partial extension across an artificial sphere and annular cutoff gluing
-status: draft
+status: published
 deps:
   - math:def-axiom-of-choice
   - lem-se-sobolev-extension-retraction

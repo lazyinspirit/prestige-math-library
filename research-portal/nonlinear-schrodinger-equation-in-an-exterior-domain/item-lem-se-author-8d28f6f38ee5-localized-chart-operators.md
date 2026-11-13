@@ -1,6 +1,6 @@
 ---
 title: Localized smooth coordinate changes and cutoffs on Fourier $H^r$
-status: draft
+status: published
 research_item: lem-se-author-8d28f6f38ee5-localized-chart-operators
 dependency_level: 6
 ---

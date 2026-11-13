@@ -1,6 +1,6 @@
 ---
 title: Cubic NLS as a nonlinear dispersive wave model
-status: draft
+status: published
 research_item: post-se-wave-model
 dependency_level: 3
 sources:

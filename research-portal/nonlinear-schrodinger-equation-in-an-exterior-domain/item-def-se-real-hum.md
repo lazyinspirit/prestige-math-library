@@ -1,6 +1,6 @@
 ---
 title: Real HUM operator for the trajectory linearization
-status: draft
+status: published
 research_item: def-se-real-hum
 dependency_level: 14
 sources:

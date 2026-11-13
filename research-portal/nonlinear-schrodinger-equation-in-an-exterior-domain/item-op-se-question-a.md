@@ -1,6 +1,6 @@
 ---
 title: "Question A: general boundary exact control"
-status: draft
+status: published
 research_item: op-se-question-a
 dependency_level: 3
 sources:

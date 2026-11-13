@@ -1,6 +1,6 @@
 ---
 title: Non-trapping and geometric control from infinity
-status: draft
+status: published
 research_item: rem-se-nontrapping-gcc
 dependency_level: 25
 sources:

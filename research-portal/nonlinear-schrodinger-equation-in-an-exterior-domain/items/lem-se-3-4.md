@@ -3,7 +3,7 @@ id: lem-se-3-4
 kind: lemma
 domain: mathematics
 title: "Lemma 3.4: free unique continuation on the scale"
-status: draft
+status: published
 proof_strategy: contradiction
 deps:
   - def-se-geometry

@@ -3,7 +3,7 @@ id: prop-se-cutoff-multipliers
 kind: proposition
 domain: mathematics
 title: Cutoff multipliers through order two and by duality
-status: draft
+status: published
 deps:
   - def-se-control-cutoffs
   - def-se-dirichlet-scale

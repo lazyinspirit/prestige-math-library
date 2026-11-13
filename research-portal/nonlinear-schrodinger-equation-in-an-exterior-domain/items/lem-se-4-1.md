@@ -3,7 +3,7 @@ id: lem-se-4-1
 kind: lemma
 domain: mathematics
 title: "Lemma 4.1: retarded smoothing down to negative order two"
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - def-se-geometry

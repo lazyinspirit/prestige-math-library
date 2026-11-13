@@ -1,6 +1,6 @@
 ---
 title: Canonical higher traces on a bounded boundary or compact interior hypersurface
-status: draft
+status: published
 research_item: lem-se-author-8d28f6f38ee5-smooth-collar-trace-assembly
 dependency_level: 10
 ---

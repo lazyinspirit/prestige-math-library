@@ -3,7 +3,7 @@ id: prop-se-2-2-homogeneous
 kind: proposition
 domain: mathematics
 title: Homogeneous half-derivative local smoothing
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - def-se-geometry

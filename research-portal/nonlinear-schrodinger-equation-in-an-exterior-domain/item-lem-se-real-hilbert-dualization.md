@@ -1,6 +1,6 @@
 ---
 title: Realification of Hilbert pairings and conjugate-linear coefficients
-status: draft
+status: published
 research_item: lem-se-real-hilbert-dualization
 dependency_level: 0
 ---

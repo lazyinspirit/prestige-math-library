@@ -3,7 +3,7 @@ id: prop-se-forced-linear-wellposedness
 kind: proposition
 domain: mathematics
 title: Linear forced well-posedness by Duhamel formula
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - def-se-dirichlet-scale

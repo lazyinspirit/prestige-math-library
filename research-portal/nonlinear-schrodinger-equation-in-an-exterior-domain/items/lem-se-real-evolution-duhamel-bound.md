@@ -3,7 +3,7 @@ id: lem-se-real-evolution-duhamel-bound
 kind: lemma
 domain: mathematics
 title: Bounded real-linear perturbations preserve solution estimates
-status: draft
+status: published
 deps:
   - lem-author-9e2ffff7db46-free-continuous-convolution
   - lem-author-9e2ffff7db46-local-volterra-contraction

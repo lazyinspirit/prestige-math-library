@@ -3,7 +3,7 @@ id: lem-se-exterior-fractional-identification
 kind: lemma
 domain: mathematics
 title: Exterior spectral domains and the critical trace index
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - def-se-dirichlet-scale

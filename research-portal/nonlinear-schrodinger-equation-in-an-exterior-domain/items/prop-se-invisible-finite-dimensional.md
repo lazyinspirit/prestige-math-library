@@ -3,7 +3,7 @@ id: prop-se-invisible-finite-dimensional
 kind: proposition
 domain: mathematics
 title: Finite dimensionality of invisible spaces
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - def-se-geometry

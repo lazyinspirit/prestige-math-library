@@ -3,7 +3,7 @@ id: prop-se-invisible-bootstrap
 kind: proposition
 domain: mathematics
 title: Time cutoff bootstrap for invisible adjoint solutions
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - lem-se-4-1

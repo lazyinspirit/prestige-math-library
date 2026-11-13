@@ -3,7 +3,7 @@ id: lem-se-shifted-l1-retarded-transfer
 kind: lemma
 domain: mathematics
 title: Homogeneous bounds transfer to L1 retarded forcing
-status: draft
+status: published
 deps:
   - lem-author-8960795edce1-compatible-banach-pairs
   - lem-author-8960795edce1-shifted-bochner-orbits

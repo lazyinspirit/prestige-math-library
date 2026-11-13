@@ -1,6 +1,6 @@
 ---
 title: Small-data contraction around a nonzero trajectory
-status: draft
+status: published
 research_item: prop-se-trajectory-contraction
 dependency_level: 20
 sources:

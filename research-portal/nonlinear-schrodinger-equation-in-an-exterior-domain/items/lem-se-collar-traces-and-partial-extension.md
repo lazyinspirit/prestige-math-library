@@ -3,7 +3,7 @@ id: lem-se-collar-traces-and-partial-extension
 kind: lemma
 domain: mathematics
 title: Collar traces and extension across an artificial boundary
-status: draft
+status: published
 deps:
   - math:def-axiom-of-choice
   - lem-se-author-8d28f6f38ee5-hypersurface-atlas-and-derivatives

@@ -1,6 +1,6 @@
 ---
 title: A bounded endpoint selector yields small nonlinear exact steering
-status: draft
+status: published
 research_item: lem-se-endpoint-feedback-contraction
 dependency_level: 2
 ---

@@ -3,7 +3,7 @@ id: prop-se-3-5
 kind: proposition
 domain: mathematics
 title: "Proposition 3.5: full-scale free observability"
-status: draft
+status: published
 proof_strategy: contradiction
 deps:
   - def-se-geometry

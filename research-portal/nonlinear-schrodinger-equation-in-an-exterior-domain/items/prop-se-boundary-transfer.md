@@ -3,7 +3,7 @@ id: prop-se-boundary-transfer
 kind: proposition
 domain: mathematics
 title: Transfer from exterior internal control to outer boundary control
-status: draft
+status: published
 deps:
   - def-se-geometry
   - def-se-boundary-state-space

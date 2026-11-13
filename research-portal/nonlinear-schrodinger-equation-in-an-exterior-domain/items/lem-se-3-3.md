@@ -3,7 +3,7 @@ id: lem-se-3-3
 kind: lemma
 domain: mathematics
 title: "Lemma 3.3: observability modulo a compact remainder"
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - def-se-geometry

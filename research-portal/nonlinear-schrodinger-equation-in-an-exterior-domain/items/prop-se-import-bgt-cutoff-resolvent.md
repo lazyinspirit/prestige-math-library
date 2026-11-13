@@ -3,7 +3,7 @@ id: prop-se-import-bgt-cutoff-resolvent
 kind: proposition
 domain: mathematics
 title: Nontrapping cutoff resolvent estimates
-status: draft
+status: published
 deps:
   - def-se-geometry
   - def-se-nontrapping

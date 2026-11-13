@@ -1,6 +1,6 @@
 ---
 title: Reference trajectory hypothesis W
-status: draft
+status: published
 research_item: def-se-trajectory
 dependency_level: 8
 sources:

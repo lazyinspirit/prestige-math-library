@@ -1,6 +1,6 @@
 ---
 title: Short-interval real Volterra contraction
-status: draft
+status: published
 research_item: lem-author-9e2ffff7db46-local-volterra-contraction
 dependency_level: 1
 ---

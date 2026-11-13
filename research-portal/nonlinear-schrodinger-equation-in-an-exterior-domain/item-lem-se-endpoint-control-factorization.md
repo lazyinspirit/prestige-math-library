@@ -1,6 +1,6 @@
 ---
 title: Endpoint maps and exact steering from a null-control operator
-status: draft
+status: published
 research_item: lem-se-endpoint-control-factorization
 dependency_level: 1
 ---

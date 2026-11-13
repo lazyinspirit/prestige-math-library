@@ -1,6 +1,6 @@
 ---
 title: Spectral cutoff dual tests and the exact interpolation lower bound
-status: draft
+status: published
 research_item: lem-author-03489e9088b7-spectral-cutoff-strip-duality
 dependency_level: 2
 ---

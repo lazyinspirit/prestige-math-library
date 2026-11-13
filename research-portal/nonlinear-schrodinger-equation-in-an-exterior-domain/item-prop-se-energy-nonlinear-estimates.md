@@ -1,6 +1,6 @@
 ---
 title: Cubic and quintic energy-space nonlinear time estimates
-status: draft
+status: published
 research_item: prop-se-energy-nonlinear-estimates
 dependency_level: 10
 sources:

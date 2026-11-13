@@ -4,7 +4,7 @@ title: Article items · 05 — A point lies in the closure of $A$ iff every basi
   equals $A$ together with its derived set
 description: Presents 29 items from the article and its immediate prerequisites,
   covering published library prerequisites.
-status: draft
+status: published
 dependency_level: 0
 research_article_page: true
 item_count: 29

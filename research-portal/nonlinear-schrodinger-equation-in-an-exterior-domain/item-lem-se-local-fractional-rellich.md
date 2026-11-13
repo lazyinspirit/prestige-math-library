@@ -1,6 +1,6 @@
 ---
 title: Fractional compactness on bounded collar domains
-status: draft
+status: published
 research_item: lem-se-local-fractional-rellich
 dependency_level: 10
 ---

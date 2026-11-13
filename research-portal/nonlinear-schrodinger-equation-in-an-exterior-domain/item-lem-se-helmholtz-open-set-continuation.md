@@ -1,6 +1,6 @@
 ---
 title: Helmholtz continuation through a harmonic lift
-status: draft
+status: published
 research_item: lem-se-helmholtz-open-set-continuation
 dependency_level: 0
 ---

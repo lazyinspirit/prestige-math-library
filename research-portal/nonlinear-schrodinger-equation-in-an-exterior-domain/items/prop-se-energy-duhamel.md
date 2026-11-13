@@ -3,7 +3,7 @@ id: prop-se-energy-duhamel
 kind: proposition
 domain: mathematics
 title: Free and retarded bounds in the energy control space
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - def-se-geometry

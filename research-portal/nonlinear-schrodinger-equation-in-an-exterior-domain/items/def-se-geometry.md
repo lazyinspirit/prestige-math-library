@@ -3,7 +3,7 @@ id: def-se-geometry
 kind: definition
 domain: mathematics
 title: Exterior and truncated obstacle domains
-status: draft
+status: published
 deps:
   - math:def-compact-space
   - math:def-connected-space

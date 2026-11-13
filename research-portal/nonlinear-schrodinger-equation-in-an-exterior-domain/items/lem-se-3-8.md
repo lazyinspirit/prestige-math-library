@@ -3,7 +3,7 @@ id: lem-se-3-8
 kind: lemma
 domain: mathematics
 title: "Lemma 3.8: energy-data time-integrable supremum bound"
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - def-se-geometry

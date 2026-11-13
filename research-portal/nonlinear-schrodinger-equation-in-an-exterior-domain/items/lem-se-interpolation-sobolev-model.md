@@ -3,7 +3,7 @@ id: lem-se-interpolation-sobolev-model
 kind: lemma
 domain: mathematics
 title: An explicit common interpolation model for the fractional Strichartz targets
-status: draft
+status: published
 deps:
   - math:def-axiom-of-choice
   - math:def-banach-space

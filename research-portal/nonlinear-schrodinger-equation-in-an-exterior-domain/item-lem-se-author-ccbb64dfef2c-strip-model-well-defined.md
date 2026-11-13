@@ -1,6 +1,6 @@
 ---
 title: Well-defined strip norm and the action of a common endpoint operator
-status: draft
+status: published
 research_item: lem-se-author-ccbb64dfef2c-strip-model-well-defined
 dependency_level: 0
 sources:

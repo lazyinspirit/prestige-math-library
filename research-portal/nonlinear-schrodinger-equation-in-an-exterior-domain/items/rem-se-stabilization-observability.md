@@ -3,7 +3,7 @@ id: rem-se-stabilization-observability
 kind: remark
 domain: mathematics
 title: Linear damping decay and observability comparison
-status: draft
+status: published
 deps:
   - def-se-control-cutoffs
   - def-se-nontrapping

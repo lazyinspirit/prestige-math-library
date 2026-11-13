@@ -1,6 +1,6 @@
 ---
 title: Quadratic-cubic remainder after subtracting a trajectory
-status: draft
+status: published
 research_item: def-se-trajectory-remainder
 dependency_level: 10
 sources:

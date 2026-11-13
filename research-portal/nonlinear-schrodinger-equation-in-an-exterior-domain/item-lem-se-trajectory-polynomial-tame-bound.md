@@ -1,6 +1,6 @@
 ---
 title: Tame bounds for the quadratic-cubic trajectory remainder
-status: draft
+status: published
 research_item: lem-se-trajectory-polynomial-tame-bound
 dependency_level: 2
 ---

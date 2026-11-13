@@ -3,7 +3,7 @@ id: prop-se-pointwise-differences
 kind: proposition
 domain: mathematics
 title: Pointwise and energy difference estimates for odd powers
-status: draft
+status: published
 deps:
   - prop-se-power-chain-rule
   - lem-se-complex-polynomial-energy-rule

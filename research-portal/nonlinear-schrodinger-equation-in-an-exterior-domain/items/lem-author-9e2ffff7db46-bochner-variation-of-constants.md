@@ -3,7 +3,7 @@ id: lem-author-9e2ffff7db46-bochner-variation-of-constants
 kind: lemma
 domain: mathematics
 title: Bochner variation of constants for real evolution
-status: draft
+status: published
 deps:
   - lem-author-9e2ffff7db46-free-continuous-convolution
   - lem-author-9e2ffff7db46-global-real-evolution

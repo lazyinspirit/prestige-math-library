@@ -1,6 +1,6 @@
 ---
 title: Three-dimensional intermediate Sobolev control
-status: draft
+status: published
 research_item: op-se-intermediate-regularity
 dependency_level: 9
 sources:

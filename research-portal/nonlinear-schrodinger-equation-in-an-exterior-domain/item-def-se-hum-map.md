@@ -1,6 +1,6 @@
 ---
 title: Scale Riesz map and free HUM operator
-status: draft
+status: published
 research_item: def-se-hum-map
 dependency_level: 9
 sources:

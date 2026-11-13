@@ -3,7 +3,7 @@ id: def-se-feedback-map
 kind: definition
 domain: mathematics
 title: Endpoint-correcting nonlinear feedback map
-status: draft
+status: published
 deps:
   - def-se-geometry
   - def-se-control-cutoffs

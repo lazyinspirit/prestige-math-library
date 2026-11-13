@@ -3,7 +3,7 @@ id: prop-se-potential-multipliers
 kind: proposition
 domain: mathematics
 title: Time-dependent potential and conjugation bounds on the scale
-status: draft
+status: published
 deps:
   - def-se-trajectory
   - def-se-linearized-pair

@@ -3,7 +3,7 @@ id: cor-se-1-6
 kind: corollary
 domain: mathematics
 title: "Corollary 1.6: quintic control near zero"
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - def-se-geometry

@@ -3,7 +3,7 @@ id: prop-se-feedback-estimates
 kind: proposition
 domain: mathematics
 title: Endpoint correction and small-ball contraction estimates
-status: draft
+status: published
 deps:
   - def-se-feedback-map
   - def-se-perturbation-hypotheses

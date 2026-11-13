@@ -1,6 +1,6 @@
 ---
 title: Outer Neumann boundary controllability
-status: draft
+status: published
 research_item: op-se-neumann
 dependency_level: 3
 sources:

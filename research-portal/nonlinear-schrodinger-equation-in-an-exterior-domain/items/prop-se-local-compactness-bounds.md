@@ -3,7 +3,7 @@ id: prop-se-local-compactness-bounds
 kind: proposition
 domain: mathematics
 title: Localized free-flow bounds and compactness mechanism
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - def-se-geometry

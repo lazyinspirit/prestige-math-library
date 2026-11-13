@@ -1,6 +1,6 @@
 ---
 title: Periodic energy space on an interval
-status: draft
+status: published
 research_item: def-se-periodic-space
 dependency_level: 0
 sources:

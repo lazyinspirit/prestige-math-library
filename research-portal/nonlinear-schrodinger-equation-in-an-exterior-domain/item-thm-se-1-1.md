@@ -1,6 +1,6 @@
 ---
 title: "Theorem 1.1: exact outer boundary controllability"
-status: draft
+status: published
 research_item: thm-se-1-1
 dependency_level: 24
 sources:

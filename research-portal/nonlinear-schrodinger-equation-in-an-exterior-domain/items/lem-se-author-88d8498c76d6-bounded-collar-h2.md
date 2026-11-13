@@ -3,7 +3,7 @@ id: lem-se-author-88d8498c76d6-bounded-collar-h2
 kind: lemma
 domain: mathematics
 title: Bounded collar regularity for an exterior weak Dirichlet function
-status: draft
+status: published
 deps:
   - math:def-axiom-of-choice
   - math:def-sobolev-space-wkp-and-its-norm

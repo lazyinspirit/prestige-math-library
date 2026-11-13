@@ -3,7 +3,7 @@ id: prop-se-trajectory-contraction
 kind: proposition
 domain: mathematics
 title: Small-data contraction around a nonzero trajectory
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - def-se-trajectory-feedback

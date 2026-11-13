@@ -3,7 +3,7 @@ id: prop-se-import-bgt-strichartz
 kind: proposition
 domain: mathematics
 title: Exterior Strichartz estimates with precise loss
-status: draft
+status: published
 deps:
   - def-se-geometry
   - def-se-nontrapping

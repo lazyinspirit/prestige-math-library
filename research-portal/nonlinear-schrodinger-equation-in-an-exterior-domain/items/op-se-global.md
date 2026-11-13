@@ -3,7 +3,7 @@ id: op-se-global
 kind: open-problem
 domain: mathematics
 title: Global defocusing controllability in large time
-status: draft
+status: published
 deps:
   - def-se-internal-systems
   - def-se-geometry

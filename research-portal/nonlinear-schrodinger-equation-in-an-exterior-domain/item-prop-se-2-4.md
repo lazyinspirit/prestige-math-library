@@ -1,6 +1,6 @@
 ---
 title: Three-dimensional L4 time Linfinity space estimate
-status: draft
+status: published
 research_item: prop-se-2-4
 dependency_level: 8
 sources:

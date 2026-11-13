@@ -3,7 +3,7 @@ title: Article items · 12 — Linearized propagator bounds in the nonlinear
   control spaces
 description: Presents 29 items from the article and its immediate prerequisites,
   covering dependency levels 15–26.
-status: draft
+status: published
 dependency_level: 6
 research_article_page: true
 item_count: 29

@@ -1,6 +1,6 @@
 ---
 title: Transfer from exterior internal control to outer boundary control
-status: draft
+status: published
 research_item: prop-se-boundary-transfer
 dependency_level: 16
 sources:

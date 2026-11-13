@@ -3,7 +3,7 @@ id: lem-se-sobolev-extension-retraction
 kind: lemma
 domain: mathematics
 title: Simultaneous Sobolev extension and localization
-status: draft
+status: published
 deps:
   - math:def-axiom-of-choice
   - lem-se-author-891dd21c27d6-bounded-common-endpoint-extension

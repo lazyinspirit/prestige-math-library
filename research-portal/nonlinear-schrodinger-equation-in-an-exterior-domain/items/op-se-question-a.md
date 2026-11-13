@@ -3,7 +3,7 @@ id: op-se-question-a
 kind: open-problem
 domain: mathematics
 title: "Question A: general boundary exact control"
-status: draft
+status: published
 deps:
   - def-se-cubic-boundary-system
   - def-se-foundation-time-function-spaces

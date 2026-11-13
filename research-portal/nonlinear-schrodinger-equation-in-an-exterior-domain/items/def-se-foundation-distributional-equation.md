@@ -3,7 +3,7 @@ id: def-se-foundation-distributional-equation
 kind: definition
 domain: mathematics
 title: Distributional equation convention for complex Schrödinger solutions
-status: draft
+status: published
 deps:
   - math:def-test-function-space-d-of-an-open-set
   - math:def-test-function-topology

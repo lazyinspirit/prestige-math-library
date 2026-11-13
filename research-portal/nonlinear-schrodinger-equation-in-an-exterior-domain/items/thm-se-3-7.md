@@ -3,7 +3,7 @@ id: thm-se-3-7
 kind: theorem
 domain: mathematics
 title: "Theorem 3.7: abstract small-data perturbation result"
-status: draft
+status: published
 proof_strategy: direct
 deps:
   - def-se-dirichlet-scale
