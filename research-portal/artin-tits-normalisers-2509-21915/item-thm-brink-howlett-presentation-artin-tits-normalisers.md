@@ -1,6 +1,6 @@
 ---
 title: Brink–Howlett presentation by atomic and quadratic relations
-status: draft
+status: published
 research_item: thm-brink-howlett-presentation-artin-tits-normalisers
 dependency_level: 24
 sources:

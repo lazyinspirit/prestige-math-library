@@ -2,7 +2,7 @@
 id: rem-d4-normaliser-action-wording-artin-tits-normalisers
 kind: remark
 title: Normaliser-action wording in the D4 exposition
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

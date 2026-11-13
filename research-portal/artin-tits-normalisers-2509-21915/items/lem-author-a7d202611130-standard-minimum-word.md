@@ -2,7 +2,7 @@
 id: lem-author-a7d202611130-standard-minimum-word
 kind: lemma
 title: Standard expressions are minimum generator words
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

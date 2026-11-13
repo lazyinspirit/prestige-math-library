@@ -2,7 +2,7 @@
 id: def-longest-elements-artin-tits-normalisers
 kind: definition
 title: Longest parabolic elements and opposition permutation
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

@@ -2,7 +2,7 @@
 id: cor-coxeter-normaliser-splitting-artin-tits-normalisers
 kind: corollary
 title: Coxeter normaliser semidirect product
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

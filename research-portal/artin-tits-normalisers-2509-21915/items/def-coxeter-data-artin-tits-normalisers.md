@@ -2,7 +2,7 @@
 id: def-coxeter-data-artin-tits-normalisers
 kind: definition
 title: Coxeter-system, roots, length and weak-order conventions
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

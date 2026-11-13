@@ -2,7 +2,7 @@
 id: def-reduced-ribbon-artin-tits-normalisers
 kind: definition
 title: Reduced ribbon groupoid
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

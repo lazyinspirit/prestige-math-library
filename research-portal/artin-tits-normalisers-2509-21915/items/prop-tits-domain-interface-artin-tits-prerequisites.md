@@ -2,7 +2,7 @@
 id: prop-tits-domain-interface-artin-tits-prerequisites
 kind: proposition
 title: Tits cone geometry with its exact interior boundary
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

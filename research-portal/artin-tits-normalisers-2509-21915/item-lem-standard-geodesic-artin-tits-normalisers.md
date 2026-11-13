@@ -1,6 +1,6 @@
 ---
 title: Standard expressions correspond to geodesics
-status: draft
+status: published
 research_item: lem-standard-geodesic-artin-tits-normalisers
 dependency_level: 19
 sources:

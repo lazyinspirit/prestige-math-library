@@ -1,6 +1,6 @@
 ---
 title: Existence of universal connected groupoid covers
-status: draft
+status: published
 research_item: rem-universal-cover-existence-artin-tits-normalisers
 dependency_level: 9
 sources:

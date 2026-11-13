@@ -2,7 +2,7 @@
 id: def-separating-hyperplane-artin-tits-normalisers
 kind: definition
 title: Separation by a hyperplane
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

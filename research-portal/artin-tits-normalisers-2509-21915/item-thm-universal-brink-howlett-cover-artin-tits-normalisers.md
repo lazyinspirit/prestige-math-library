@@ -1,6 +1,6 @@
 ---
 title: Universal Brink–Howlett covering and its deck group
-status: draft
+status: published
 research_item: thm-universal-brink-howlett-cover-artin-tits-normalisers
 dependency_level: 17
 sources:

@@ -2,7 +2,7 @@
 id: ex-d4-labelled-chamber-graph-artin-tits-normalisers
 kind: example
 title: D4 chamber labels and complete adjacency graph
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

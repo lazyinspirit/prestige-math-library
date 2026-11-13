@@ -1,6 +1,6 @@
 ---
 title: Sign facets of a cone arrangement
-status: draft
+status: published
 research_item: def-author-5a1e77100001-sign-facets
 dependency_level: 2
 sources:

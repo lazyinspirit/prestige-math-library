@@ -2,7 +2,7 @@
 id: def-author-5a1e77100001-sign-facets
 kind: definition
 title: Sign facets of a cone arrangement
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

@@ -1,6 +1,6 @@
 ---
 title: Bounded weak-order joins and finite parabolic criteria
-status: draft
+status: published
 research_item: prop-weak-order-interface-artin-tits-prerequisites
 dependency_level: 0
 ---

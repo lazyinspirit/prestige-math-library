@@ -1,6 +1,6 @@
 ---
 title: Wall-crossing elements are Brink–Howlett morphisms
-status: draft
+status: published
 research_item: lem-wall-is-morphism-artin-tits-normalisers
 dependency_level: 10
 sources:

@@ -2,7 +2,7 @@
 title: Article items · 08 — Artin–Tits group, pure subgroup and positive lifts
 description: Presents 27 items from the article and its immediate prerequisites,
   covering dependency levels 6–9.
-status: draft
+status: published
 dependency_level: 4
 research_article_page: true
 item_count: 27

@@ -1,6 +1,6 @@
 ---
 title: Covering-space actions and fundamental-groupoid quotients
-status: draft
+status: published
 research_item: prop-topological-orbit-interface-artin-tits-prerequisites
 dependency_level: 1
 ---

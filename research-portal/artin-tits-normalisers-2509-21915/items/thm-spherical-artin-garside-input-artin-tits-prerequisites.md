@@ -2,7 +2,7 @@
 id: thm-spherical-artin-garside-input-artin-tits-prerequisites
 kind: theorem
 title: Independent spherical Artin Garside input
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

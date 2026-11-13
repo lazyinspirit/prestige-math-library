@@ -1,6 +1,6 @@
 ---
 title: The empty-object ribbon component and its braid relations
-status: draft
+status: published
 research_item: lem-author-c73ab6d940e2-empty-ribbon-component
 dependency_level: 8
 sources:

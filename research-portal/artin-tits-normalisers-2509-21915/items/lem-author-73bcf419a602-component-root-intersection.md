@@ -2,7 +2,7 @@
 id: lem-author-73bcf419a602-component-root-intersection
 kind: lemma
 title: Component roots intersect the complementary parabolic exactly
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

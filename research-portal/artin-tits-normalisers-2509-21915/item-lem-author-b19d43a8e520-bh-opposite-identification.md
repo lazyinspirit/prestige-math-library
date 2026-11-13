@@ -1,6 +1,6 @@
 ---
 title: Transfer to the root-action Brink–Howlett groupoid
-status: draft
+status: published
 research_item: lem-author-b19d43a8e520-bh-opposite-identification
 dependency_level: 12
 sources:

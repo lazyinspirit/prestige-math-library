@@ -2,7 +2,7 @@
 id: lem-author-1c4d8f320a61-root-permutation-minimum
 kind: lemma
 title: Root-permuting elements are minimum coset representatives
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

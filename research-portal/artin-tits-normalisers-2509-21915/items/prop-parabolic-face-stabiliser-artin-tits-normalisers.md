@@ -2,7 +2,7 @@
 id: prop-parabolic-face-stabiliser-artin-tits-normalisers
 kind: proposition
 title: Stabilizer of a fundamental parabolic face
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

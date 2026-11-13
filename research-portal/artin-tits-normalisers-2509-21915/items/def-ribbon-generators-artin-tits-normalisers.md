@@ -2,7 +2,7 @@
 id: def-ribbon-generators-artin-tits-normalisers
 kind: definition
 title: Positive elementary ribbon elements
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

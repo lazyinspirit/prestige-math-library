@@ -2,7 +2,7 @@
 title: Normalisers of parabolic subgroups of Artin–Tits groups and Tits cone
   intersections
 description: Article items and their immediate prerequisites, ordered by dependency level.
-status: draft
+status: published
 research_article_overview: true
 ---
 

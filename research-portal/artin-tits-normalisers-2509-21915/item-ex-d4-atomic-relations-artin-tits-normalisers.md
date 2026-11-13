@@ -1,6 +1,6 @@
 ---
 title: Explicit D4 atomic braid relations and lifted paths
-status: draft
+status: published
 research_item: ex-d4-atomic-relations-artin-tits-normalisers
 dependency_level: 22
 sources:

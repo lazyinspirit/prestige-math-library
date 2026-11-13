@@ -2,7 +2,7 @@
 id: def-artin-pure-lifts-artin-tits-normalisers
 kind: definition
 title: Artin–Tits group, pure subgroup and positive lifts
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

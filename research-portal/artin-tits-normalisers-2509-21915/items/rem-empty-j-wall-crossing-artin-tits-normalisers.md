@@ -2,7 +2,7 @@
 id: rem-empty-j-wall-crossing-artin-tits-normalisers
 kind: remark
 title: Empty-subset wall crossings are simple reflections
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

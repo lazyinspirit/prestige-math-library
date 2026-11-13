@@ -1,6 +1,6 @@
 ---
 title: Two-geodesic wall-crossing lemma
-status: draft
+status: published
 research_item: lem-two-geodesics-artin-tits-normalisers
 dependency_level: 20
 sources:

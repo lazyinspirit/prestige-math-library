@@ -1,6 +1,6 @@
 ---
 title: The dihedral product complement admits no finite CW model
-status: draft
+status: published
 research_item: lem-author-6f173a9d0001-finite-cw-obstruction
 dependency_level: 5
 sources:

@@ -1,6 +1,6 @@
 ---
 title: Finite parabolic longest elements and disconnected factors
-status: draft
+status: published
 research_item: prop-finite-opposition-interface-artin-tits-prerequisites
 dependency_level: 0
 ---

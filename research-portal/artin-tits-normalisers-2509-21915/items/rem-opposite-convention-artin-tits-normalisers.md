@@ -2,7 +2,7 @@
 id: rem-opposite-convention-artin-tits-normalisers
 kind: remark
 title: Opposite-category convention for Brink–Howlett
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

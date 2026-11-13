@@ -1,6 +1,6 @@
 ---
 title: Independent relative chamber labelling input
-status: draft
+status: published
 research_item: thm-relative-chamber-labelling-input-artin-tits-prerequisites
 dependency_level: 5
 sources:

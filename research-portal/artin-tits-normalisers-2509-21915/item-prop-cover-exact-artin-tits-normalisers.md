@@ -1,6 +1,6 @@
 ---
 title: Vertex-group exact sequence of a normal groupoid cover
-status: draft
+status: published
 research_item: prop-cover-exact-artin-tits-normalisers
 dependency_level: 8
 sources:

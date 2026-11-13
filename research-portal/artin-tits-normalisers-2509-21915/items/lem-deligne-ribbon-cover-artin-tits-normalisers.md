@@ -2,7 +2,7 @@
 id: lem-deligne-ribbon-cover-artin-tits-normalisers
 kind: lemma
 title: Deligne-to-ribbon functor is a covering
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

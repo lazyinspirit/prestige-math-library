@@ -2,7 +2,7 @@
 id: lem-author-1c4d8f320a61-minimum-normaliser-root-basis
 kind: lemma
 title: Minimum representatives of normaliser cosets preserve the simple roots
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

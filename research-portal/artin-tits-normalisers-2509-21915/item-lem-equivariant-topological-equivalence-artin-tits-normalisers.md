@@ -1,6 +1,6 @@
 ---
 title: Equivariant equivalence with fundamental groupoids
-status: draft
+status: published
 research_item: lem-equivariant-topological-equivalence-artin-tits-normalisers
 dependency_level: 19
 sources:

@@ -2,7 +2,7 @@
 id: lem-author-73bcf419a602-outside-root-invariance
 kind: lemma
 title: Outside parabolic roots form an invariant set
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

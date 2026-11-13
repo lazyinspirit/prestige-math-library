@@ -1,6 +1,6 @@
 ---
 title: Disjoint translates of invariant Salvetti cover members
-status: draft
+status: published
 research_item: lem-author-e61520261113-disjoint-cover-translates
 dependency_level: 10
 ---

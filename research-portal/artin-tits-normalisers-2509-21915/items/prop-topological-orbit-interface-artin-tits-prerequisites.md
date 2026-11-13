@@ -2,7 +2,7 @@
 id: prop-topological-orbit-interface-artin-tits-prerequisites
 kind: proposition
 title: Covering-space actions and fundamental-groupoid quotients
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

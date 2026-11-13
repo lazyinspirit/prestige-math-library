@@ -2,7 +2,7 @@
 id: lem-author-6f173a9d0001-isolated-meridians
 kind: lemma
 title: Isolated complex meridian disks inside the product of the dihedral cone
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

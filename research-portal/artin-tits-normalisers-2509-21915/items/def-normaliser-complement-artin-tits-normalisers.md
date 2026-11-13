@@ -2,7 +2,7 @@
 id: def-normaliser-complement-artin-tits-normalisers
 kind: definition
 title: Root-permuting normaliser complement
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

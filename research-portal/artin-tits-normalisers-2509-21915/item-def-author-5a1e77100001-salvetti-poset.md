@@ -1,6 +1,6 @@
 ---
 title: The incident facet and chamber poset
-status: draft
+status: published
 research_item: def-author-5a1e77100001-salvetti-poset
 dependency_level: 4
 sources:

@@ -2,7 +2,7 @@
 id: prop-relative-local-finiteness-artin-tits-normalisers
 kind: proposition
 title: Local finiteness of the interior relative arrangement
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

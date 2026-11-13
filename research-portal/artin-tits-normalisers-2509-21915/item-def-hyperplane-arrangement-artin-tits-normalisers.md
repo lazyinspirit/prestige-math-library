@@ -1,6 +1,6 @@
 ---
 title: Linear hyperplane arrangements and local finiteness
-status: draft
+status: published
 research_item: def-hyperplane-arrangement-artin-tits-normalisers
 dependency_level: 1
 sources:

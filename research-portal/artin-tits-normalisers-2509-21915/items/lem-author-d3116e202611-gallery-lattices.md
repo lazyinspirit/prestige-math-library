@@ -2,7 +2,7 @@
 id: lem-author-d3116e202611-gallery-lattices
 kind: lemma
 title: Both gallery divisibility orders are lattices
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

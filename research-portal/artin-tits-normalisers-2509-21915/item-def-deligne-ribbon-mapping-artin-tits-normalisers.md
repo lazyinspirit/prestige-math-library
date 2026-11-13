@@ -1,6 +1,6 @@
 ---
 title: Assignment from wall crossings to ribbon generators
-status: draft
+status: published
 research_item: def-deligne-ribbon-mapping-artin-tits-normalisers
 dependency_level: 19
 sources:

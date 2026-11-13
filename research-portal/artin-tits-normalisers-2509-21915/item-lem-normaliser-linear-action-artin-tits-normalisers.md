@@ -1,6 +1,6 @@
 ---
 title: Faithful normaliser-quotient action on the relative cone
-status: draft
+status: published
 research_item: lem-normaliser-linear-action-artin-tits-normalisers
 dependency_level: 10
 sources:

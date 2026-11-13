@@ -1,6 +1,6 @@
 ---
 title: Local finiteness of the interior relative arrangement
-status: draft
+status: published
 research_item: prop-relative-local-finiteness-artin-tits-normalisers
 dependency_level: 10
 sources:

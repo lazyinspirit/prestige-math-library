@@ -2,7 +2,7 @@
 id: def-groupoid-cover-artin-tits-normalisers
 kind: definition
 title: Groupoid coverings, universal and normal covers
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

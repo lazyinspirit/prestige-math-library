@@ -2,7 +2,7 @@
 id: prop-classical-cover-artin-tits-normalisers
 kind: proposition
 title: Classical free action and covering exact sequence
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

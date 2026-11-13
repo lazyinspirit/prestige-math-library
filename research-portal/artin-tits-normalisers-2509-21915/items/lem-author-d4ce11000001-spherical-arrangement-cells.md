@@ -2,7 +2,7 @@
 id: lem-author-d4ce11000001-spherical-arrangement-cells
 kind: lemma
 title: The seven D4 planes give a finite spherical cellulation
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

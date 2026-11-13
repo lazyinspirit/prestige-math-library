@@ -1,6 +1,6 @@
 ---
 title: The atomic-quadratic path quotient is faithful
-status: draft
+status: published
 research_item: lem-author-7bd202611130-presentation-faithfulness
 dependency_level: 23
 sources:

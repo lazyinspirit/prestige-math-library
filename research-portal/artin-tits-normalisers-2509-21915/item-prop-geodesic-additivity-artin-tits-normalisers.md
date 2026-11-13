@@ -1,6 +1,6 @@
 ---
 title: Geodesics are exactly length-additive wall words
-status: draft
+status: published
 research_item: prop-geodesic-additivity-artin-tits-normalisers
 dependency_level: 18
 sources:

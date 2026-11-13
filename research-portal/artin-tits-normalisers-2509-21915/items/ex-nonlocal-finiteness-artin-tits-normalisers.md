@@ -2,7 +2,7 @@
 id: ex-nonlocal-finiteness-artin-tits-normalisers
 kind: example
 title: Failure of local finiteness on the full cone
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

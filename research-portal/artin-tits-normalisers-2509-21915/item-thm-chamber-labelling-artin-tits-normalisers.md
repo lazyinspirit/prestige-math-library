@@ -1,6 +1,6 @@
 ---
 title: Labelling theorem for relative chambers
-status: draft
+status: published
 research_item: thm-chamber-labelling-artin-tits-normalisers
 dependency_level: 12
 sources:

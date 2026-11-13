@@ -1,6 +1,6 @@
 ---
 title: Relative central neighbourhood and antipodal generic points
-status: draft
+status: published
 research_item: lem-relative-local-neighbourhood-artin-tits-normalisers
 dependency_level: 12
 sources:

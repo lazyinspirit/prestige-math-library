@@ -1,6 +1,6 @@
 ---
 title: Both-sided divisors of the longest positive lift
-status: draft
+status: published
 research_item: lem-author-f758f7dd29a6-longest-lift-divisors
 dependency_level: 2
 ---

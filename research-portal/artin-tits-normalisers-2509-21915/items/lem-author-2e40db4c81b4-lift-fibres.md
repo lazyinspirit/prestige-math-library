@@ -2,7 +2,7 @@
 id: lem-author-2e40db4c81b4-lift-fibres
 kind: lemma
 title: Unique lifts, endpoint fibres and characteristic subgroups
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

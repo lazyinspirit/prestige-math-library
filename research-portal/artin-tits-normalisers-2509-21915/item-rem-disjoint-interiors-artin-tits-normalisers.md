@@ -1,6 +1,6 @@
 ---
 title: Relative cones can avoid the interior of the full cone
-status: draft
+status: published
 research_item: rem-disjoint-interiors-artin-tits-normalisers
 dependency_level: 11
 sources:

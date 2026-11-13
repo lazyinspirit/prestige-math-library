@@ -1,6 +1,6 @@
 ---
 title: Reduced ribbon groupoid is the Deligne orbit quotient
-status: draft
+status: published
 research_item: prop-deligne-ribbon-quotient-artin-tits-normalisers
 dependency_level: 22
 sources:

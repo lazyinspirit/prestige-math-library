@@ -1,6 +1,6 @@
 ---
 title: Codimension-two relations
-status: draft
+status: published
 research_item: def-codimension-two-artin-tits-normalisers
 dependency_level: 21
 sources:

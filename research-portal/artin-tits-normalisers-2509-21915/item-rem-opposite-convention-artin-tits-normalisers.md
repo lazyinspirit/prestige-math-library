@@ -1,6 +1,6 @@
 ---
 title: Opposite-category convention for Brink–Howlett
-status: draft
+status: published
 research_item: rem-opposite-convention-artin-tits-normalisers
 dependency_level: 10
 sources:

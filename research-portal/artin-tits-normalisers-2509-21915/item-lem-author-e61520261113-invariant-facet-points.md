@@ -1,6 +1,6 @@
 ---
 title: Invariant choices of facet points for finite linear symmetry groups
-status: draft
+status: published
 research_item: lem-author-e61520261113-invariant-facet-points
 dependency_level: 7
 ---

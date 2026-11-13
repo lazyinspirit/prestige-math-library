@@ -2,7 +2,7 @@
 id: lem-author-fcf1e9b45588-diagram-connectedness
 kind: lemma
 title: Irreducible reflection arrangements give connected Coxeter diagrams
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

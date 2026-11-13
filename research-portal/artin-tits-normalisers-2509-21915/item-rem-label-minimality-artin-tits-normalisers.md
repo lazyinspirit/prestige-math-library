@@ -1,6 +1,6 @@
 ---
 title: Minimal coset representatives remove chamber-label ambiguity
-status: draft
+status: published
 research_item: rem-label-minimality-artin-tits-normalisers
 dependency_level: 13
 sources:

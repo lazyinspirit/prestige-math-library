@@ -2,7 +2,7 @@
 id: def-parabolic-faces-artin-tits-normalisers
 kind: definition
 title: Parabolic coordinate subspaces and fundamental faces
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

@@ -3,7 +3,7 @@ title: Article items · 01 — A nonempty space is contractible if and only if i
   identity map is nullhomotopic
 description: Presents 26 items from the article and its immediate prerequisites,
   covering published library prerequisites.
-status: draft
+status: published
 dependency_level: 0
 research_article_page: true
 item_count: 26

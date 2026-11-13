@@ -1,6 +1,6 @@
 ---
 title: Linear symmetries act on the Salvetti model
-status: draft
+status: published
 research_item: lem-author-5a1e77100001-linear-action
 dependency_level: 6
 ---

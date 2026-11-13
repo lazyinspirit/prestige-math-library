@@ -1,6 +1,6 @@
 ---
 title: Atomic reduced compositions and standard products use the same order
-status: draft
+status: published
 research_item: lem-author-c05e7a202611-atomic-product-length
 dependency_level: 12
 sources:

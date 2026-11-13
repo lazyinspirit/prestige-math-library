@@ -2,7 +2,7 @@
 id: prop-geodesic-additivity-artin-tits-normalisers
 kind: proposition
 title: Geodesics are exactly length-additive wall words
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

@@ -2,7 +2,7 @@
 id: def-garside-interface-artin-tits-prerequisites
 kind: definition
 title: Categorical Garside structures and simple arrows
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

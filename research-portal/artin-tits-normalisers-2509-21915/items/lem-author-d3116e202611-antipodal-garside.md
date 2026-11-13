@@ -2,7 +2,7 @@
 id: lem-author-d3116e202611-antipodal-garside
 kind: lemma
 title: Antipodal transformation and finite-type Garside structure
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

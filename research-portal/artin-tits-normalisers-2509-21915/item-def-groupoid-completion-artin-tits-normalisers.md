@@ -1,6 +1,6 @@
 ---
 title: Groupoid completion and its universal property
-status: draft
+status: published
 research_item: def-groupoid-completion-artin-tits-normalisers
 dependency_level: 2
 sources:

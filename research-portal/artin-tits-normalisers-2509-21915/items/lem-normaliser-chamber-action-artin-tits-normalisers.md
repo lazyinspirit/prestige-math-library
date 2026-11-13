@@ -2,7 +2,7 @@
 id: lem-normaliser-chamber-action-artin-tits-normalisers
 kind: lemma
 title: Normaliser action on labels, orbits and adjacency
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

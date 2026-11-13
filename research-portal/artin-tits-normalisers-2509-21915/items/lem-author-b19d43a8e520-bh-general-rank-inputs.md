@@ -2,7 +2,7 @@
 id: lem-author-b19d43a8e520-bh-general-rank-inputs
 kind: lemma
 title: Independent arbitrary-rank factorization and simple-class inputs
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

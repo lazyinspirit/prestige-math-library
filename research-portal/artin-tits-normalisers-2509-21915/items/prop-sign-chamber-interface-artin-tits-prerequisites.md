@@ -2,7 +2,7 @@
 id: prop-sign-chamber-interface-artin-tits-prerequisites
 kind: proposition
 title: Sign cells and local finite-arrangement reductions
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

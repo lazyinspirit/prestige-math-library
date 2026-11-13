@@ -1,6 +1,6 @@
 ---
 title: Independent Artin fundamental-group identification
-status: draft
+status: published
 research_item: thm-reflection-artin-topology-input-artin-tits-prerequisites
 dependency_level: 2
 sources:

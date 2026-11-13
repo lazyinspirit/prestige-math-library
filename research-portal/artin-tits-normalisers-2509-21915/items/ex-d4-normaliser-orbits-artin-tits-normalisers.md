@@ -2,7 +2,7 @@
 id: ex-d4-normaliser-orbits-artin-tits-normalisers
 kind: example
 title: Four colour orbits of eight D4 chambers
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

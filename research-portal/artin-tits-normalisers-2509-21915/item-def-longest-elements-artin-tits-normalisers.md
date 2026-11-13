@@ -1,6 +1,6 @@
 ---
 title: Longest parabolic elements and opposition permutation
-status: draft
+status: published
 research_item: def-longest-elements-artin-tits-normalisers
 dependency_level: 8
 sources:

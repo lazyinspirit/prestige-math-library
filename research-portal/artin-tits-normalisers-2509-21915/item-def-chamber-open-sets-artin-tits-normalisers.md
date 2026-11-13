@@ -1,6 +1,6 @@
 ---
 title: Chamber open sets used for the topological equivalence
-status: draft
+status: published
 research_item: def-chamber-open-sets-artin-tits-normalisers
 dependency_level: 10
 sources:

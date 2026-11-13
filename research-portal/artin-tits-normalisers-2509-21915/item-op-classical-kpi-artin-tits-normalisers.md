@@ -1,6 +1,6 @@
 ---
 title: Classical K(pi,1) conjecture
-status: draft
+status: published
 research_item: op-classical-kpi-artin-tits-normalisers
 dependency_level: 8
 sources:

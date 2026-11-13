@@ -1,6 +1,6 @@
 ---
 title: The seven D4 planes give a finite spherical cellulation
-status: draft
+status: published
 research_item: lem-author-d4ce11000001-spherical-arrangement-cells
 dependency_level: 10
 ---

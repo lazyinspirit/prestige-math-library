@@ -1,6 +1,6 @@
 ---
 title: Explicit connected cover associated with a vertex subgroup
-status: draft
+status: published
 research_item: lem-author-2e40db4c81b4-subgroup-cover
 dependency_level: 2
 sources:

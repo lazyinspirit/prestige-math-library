@@ -1,6 +1,6 @@
 ---
 title: Spherical Artin normaliser splitting
-status: draft
+status: published
 research_item: thm-artin-normaliser-splitting-artin-tits-normalisers
 dependency_level: 13
 sources:

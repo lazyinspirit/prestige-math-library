@@ -1,6 +1,6 @@
 ---
 title: Adjacent chambers and inverse wall-crossing elements
-status: draft
+status: published
 research_item: prop-adjacent-wall-formula-artin-tits-normalisers
 dependency_level: 14
 sources:

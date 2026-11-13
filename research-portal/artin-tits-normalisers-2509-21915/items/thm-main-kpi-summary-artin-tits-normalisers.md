@@ -2,7 +2,7 @@
 id: thm-main-kpi-summary-artin-tits-normalisers
 kind: theorem
 title: Main spherical theorem combining exact sequences and asphericity
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

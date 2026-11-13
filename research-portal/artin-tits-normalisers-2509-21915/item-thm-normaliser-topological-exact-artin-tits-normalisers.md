@@ -1,6 +1,6 @@
 ---
 title: Isomorphism of algebraic and topological normaliser sequences
-status: draft
+status: published
 research_item: thm-normaliser-topological-exact-artin-tits-normalisers
 dependency_level: 25
 sources:

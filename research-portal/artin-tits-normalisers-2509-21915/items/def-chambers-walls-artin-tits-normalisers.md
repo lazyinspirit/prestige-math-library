@@ -2,7 +2,7 @@
 id: def-chambers-walls-artin-tits-normalisers
 kind: definition
 title: Chambers, walls and adjacency
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

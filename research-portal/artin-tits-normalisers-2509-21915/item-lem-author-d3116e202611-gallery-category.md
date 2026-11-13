@@ -1,6 +1,6 @@
 ---
 title: Positive gallery category, cancellation and length
-status: draft
+status: published
 research_item: lem-author-d3116e202611-gallery-category
 dependency_level: 2
 sources:

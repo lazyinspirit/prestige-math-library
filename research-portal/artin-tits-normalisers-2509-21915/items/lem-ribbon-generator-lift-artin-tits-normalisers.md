@@ -2,7 +2,7 @@
 id: lem-ribbon-generator-lift-artin-tits-normalisers
 kind: lemma
 title: Ribbon generators lift wall-crossing morphisms
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

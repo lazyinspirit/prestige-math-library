@@ -1,6 +1,6 @@
 ---
 title: Independent arbitrary-rank factorization and simple-class inputs
-status: draft
+status: published
 research_item: lem-author-b19d43a8e520-bh-general-rank-inputs
 dependency_level: 14
 sources:

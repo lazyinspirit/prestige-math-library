@@ -2,7 +2,7 @@
 id: lem-author-c73ab6d940e2-empty-ribbon-component
 kind: lemma
 title: The empty-object ribbon component and its braid relations
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

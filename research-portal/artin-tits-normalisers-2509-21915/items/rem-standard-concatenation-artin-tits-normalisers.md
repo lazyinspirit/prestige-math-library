@@ -2,7 +2,7 @@
 id: rem-standard-concatenation-artin-tits-normalisers
 kind: remark
 title: Concatenation of length-additive standard expressions
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

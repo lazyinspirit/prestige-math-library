@@ -2,7 +2,7 @@
 id: lem-author-5a1e77100001-order-complex-model
 kind: lemma
 title: The Salvetti order complex and its finite CW case
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

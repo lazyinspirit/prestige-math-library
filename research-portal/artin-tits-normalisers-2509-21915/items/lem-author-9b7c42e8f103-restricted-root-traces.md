@@ -2,7 +2,7 @@
 id: lem-author-9b7c42e8f103-restricted-root-traces
 kind: lemma
 title: The relative root deletion set is the restricted-hyperplane union
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

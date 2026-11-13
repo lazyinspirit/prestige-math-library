@@ -2,7 +2,7 @@
 id: lem-author-d4ce11000001-directed-bigon-sphere
 kind: lemma
 title: Doubling edges with bigons preserves the spherical space
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

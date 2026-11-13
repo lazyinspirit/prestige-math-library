@@ -2,7 +2,7 @@
 id: def-groupoid-action-quotient-artin-tits-normalisers
 kind: definition
 title: Free actions and quotient groupoids
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

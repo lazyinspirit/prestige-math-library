@@ -2,7 +2,7 @@
 id: prop-author-5f10a31d9e26-flop-deligne-action-contract
 kind: proposition
 title: Minimal flop paths and the arrangement-complement action
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

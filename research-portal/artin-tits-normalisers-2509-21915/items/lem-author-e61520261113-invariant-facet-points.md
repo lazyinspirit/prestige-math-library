@@ -2,7 +2,7 @@
 id: lem-author-e61520261113-invariant-facet-points
 kind: lemma
 title: Invariant choices of facet points for finite linear symmetry groups
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

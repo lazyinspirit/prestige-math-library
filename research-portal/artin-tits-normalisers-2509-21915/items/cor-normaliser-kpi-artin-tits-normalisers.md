@@ -2,7 +2,7 @@
 id: cor-normaliser-kpi-artin-tits-normalisers
 kind: corollary
 title: Spherical normaliser quotient classifying spaces
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

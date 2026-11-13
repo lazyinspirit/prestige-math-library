@@ -1,6 +1,6 @@
 ---
 title: Independent finite local wall-crossing formula
-status: draft
+status: published
 research_item: thm-finite-wall-crossing-input-artin-tits-prerequisites
 dependency_level: 6
 sources:

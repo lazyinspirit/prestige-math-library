@@ -1,6 +1,6 @@
 ---
 title: Only finitely many hyperplanes separate two Tits-cone points
-status: draft
+status: published
 research_item: lem-finite-separation-artin-tits-normalisers
 dependency_level: 4
 sources:

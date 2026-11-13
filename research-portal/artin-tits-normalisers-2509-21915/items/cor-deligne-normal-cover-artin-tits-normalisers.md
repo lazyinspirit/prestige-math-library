@@ -2,7 +2,7 @@
 id: cor-deligne-normal-cover-artin-tits-normalisers
 kind: corollary
 title: Normal Deligne–ribbon cover and its deck group
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

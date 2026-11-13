@@ -2,7 +2,7 @@
 id: prop-parabolic-minimum-interface-artin-tits-prerequisites
 kind: proposition
 title: Parabolic root subsystems and unique coset minima
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

@@ -2,7 +2,7 @@
 id: def-author-18fc5d9b80f3-garside-groupoid
 kind: definition
 title: Groupoid completion and Garside groupoids
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

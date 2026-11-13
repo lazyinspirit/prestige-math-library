@@ -2,7 +2,7 @@
 id: ex-d4-cell-complex-artin-tits-normalisers
 kind: example
 title: The D4 groupoid and the spherical cell complex
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

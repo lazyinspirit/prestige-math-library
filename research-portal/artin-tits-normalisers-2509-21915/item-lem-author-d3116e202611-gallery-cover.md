@@ -1,6 +1,6 @@
 ---
 title: Gallery fractions, fundamental groupoid and asphericity
-status: draft
+status: published
 research_item: lem-author-d3116e202611-gallery-cover
 dependency_level: 3
 sources:

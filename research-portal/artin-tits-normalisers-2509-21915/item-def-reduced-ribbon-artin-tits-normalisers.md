@@ -1,6 +1,6 @@
 ---
 title: Reduced ribbon groupoid
-status: draft
+status: published
 research_item: def-reduced-ribbon-artin-tits-normalisers
 dependency_level: 12
 sources:

@@ -1,6 +1,6 @@
 ---
 title: Seven relative D4 hyperplanes and thirty-two chambers
-status: draft
+status: published
 research_item: ex-d4-restricted-arrangement-artin-tits-normalisers
 dependency_level: 9
 sources:

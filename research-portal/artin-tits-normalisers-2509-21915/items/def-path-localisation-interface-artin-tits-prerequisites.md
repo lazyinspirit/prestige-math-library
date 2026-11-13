@@ -2,7 +2,7 @@
 id: def-path-localisation-interface-artin-tits-prerequisites
 kind: definition
 title: Path presentations, congruences and formal inverses
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

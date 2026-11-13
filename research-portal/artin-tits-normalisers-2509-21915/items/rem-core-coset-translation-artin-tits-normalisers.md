@@ -2,7 +2,7 @@
 id: rem-core-coset-translation-artin-tits-normalisers
 kind: remark
 title: Translation to Ko’s atomic cosets and the scope extension
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

@@ -1,6 +1,6 @@
 ---
 title: Contractibility and intersection components of chamber open sets
-status: draft
+status: published
 research_item: prop-chamber-open-set-properties-artin-tits-normalisers
 dependency_level: 11
 sources:

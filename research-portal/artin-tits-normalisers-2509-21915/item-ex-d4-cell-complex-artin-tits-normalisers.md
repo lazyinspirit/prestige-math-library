@@ -1,6 +1,6 @@
 ---
 title: The D4 groupoid and the spherical cell complex
-status: draft
+status: published
 research_item: ex-d4-cell-complex-artin-tits-normalisers
 dependency_level: 26
 sources:

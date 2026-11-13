@@ -1,6 +1,6 @@
 ---
 title: Empty-subset wall crossings are simple reflections
-status: draft
+status: published
 research_item: rem-empty-j-wall-crossing-artin-tits-normalisers
 dependency_level: 10
 sources:

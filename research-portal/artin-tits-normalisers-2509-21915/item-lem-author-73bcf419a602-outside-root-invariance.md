@@ -1,6 +1,6 @@
 ---
 title: Outside parabolic roots form an invariant set
-status: draft
+status: published
 research_item: lem-author-73bcf419a602-outside-root-invariance
 dependency_level: 8
 ---

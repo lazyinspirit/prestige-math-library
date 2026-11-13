@@ -2,7 +2,7 @@
 id: lem-author-d4ce11000001-flag-dual-sphere
 kind: lemma
 title: Flag triangles construct the dual sphere
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

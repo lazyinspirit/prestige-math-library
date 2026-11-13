@@ -1,6 +1,6 @@
 ---
 title: Commutative square of arrangement, ribbon and Brink–Howlett groupoids
-status: draft
+status: published
 research_item: rem-groupoid-square-artin-tits-normalisers
 dependency_level: 24
 sources:

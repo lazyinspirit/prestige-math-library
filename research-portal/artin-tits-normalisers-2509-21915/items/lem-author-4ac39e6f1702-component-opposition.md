@@ -2,7 +2,7 @@
 id: lem-author-4ac39e6f1702-component-opposition
 kind: lemma
 title: Component opposition transports the retained simple roots
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

@@ -2,7 +2,7 @@
 id: prop-topological-path-properties-artin-tits-normalisers
 kind: proposition
 title: Path-class independence and equivariance in the topological construction
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

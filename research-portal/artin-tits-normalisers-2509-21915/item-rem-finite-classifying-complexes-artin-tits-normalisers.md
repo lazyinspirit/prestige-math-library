@@ -1,6 +1,6 @@
 ---
 title: Finite CW-models for spherical normaliser quotients
-status: draft
+status: published
 research_item: rem-finite-classifying-complexes-artin-tits-normalisers
 dependency_level: 27
 sources:

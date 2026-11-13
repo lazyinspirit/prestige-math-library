@@ -1,6 +1,6 @@
 ---
 title: Independent finite simplicial arrangement theorem
-status: draft
+status: published
 research_item: thm-deligne-simplicial-input-artin-tits-prerequisites
 dependency_level: 6
 ---

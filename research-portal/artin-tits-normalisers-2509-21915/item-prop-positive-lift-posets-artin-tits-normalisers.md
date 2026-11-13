@@ -1,6 +1,6 @@
 ---
 title: Divisibility of positive lifts and weak order
-status: draft
+status: published
 research_item: prop-positive-lift-posets-artin-tits-normalisers
 dependency_level: 9
 sources:

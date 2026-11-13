@@ -2,7 +2,7 @@
 id: prop-quotient-cover-artin-tits-normalisers
 kind: proposition
 title: Quotient groupoids give normal covers
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

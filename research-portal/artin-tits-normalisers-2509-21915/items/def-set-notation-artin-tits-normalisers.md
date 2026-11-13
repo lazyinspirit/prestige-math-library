@@ -2,7 +2,7 @@
 id: def-set-notation-artin-tits-normalisers
 kind: definition
 title: Subset and vertex-complement notation
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

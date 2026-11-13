@@ -2,7 +2,7 @@
 id: thm-finite-simplicial-asphericity-artin-tits-normalisers
 kind: theorem
 title: Deligne asphericity used for the relative complement
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

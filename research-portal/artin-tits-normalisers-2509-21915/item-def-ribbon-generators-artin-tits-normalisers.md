@@ -1,6 +1,6 @@
 ---
 title: Positive elementary ribbon elements
-status: draft
+status: published
 research_item: def-ribbon-generators-artin-tits-normalisers
 dependency_level: 9
 sources:

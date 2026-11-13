@@ -2,7 +2,7 @@
 id: lem-two-geodesics-artin-tits-normalisers
 kind: lemma
 title: Two-geodesic wall-crossing lemma
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

@@ -1,6 +1,6 @@
 ---
 title: Reflecting hyperplanes, fundamental chamber and Tits cone
-status: draft
+status: published
 research_item: def-coxeter-arrangement-artin-tits-normalisers
 dependency_level: 2
 sources:

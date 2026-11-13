@@ -2,7 +2,7 @@
 id: thm-deligne-simplicial-input-artin-tits-prerequisites
 kind: theorem
 title: Independent finite simplicial arrangement theorem
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

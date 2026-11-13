@@ -1,6 +1,6 @@
 ---
 title: Coxeter normaliser semidirect product
-status: draft
+status: published
 research_item: cor-coxeter-normaliser-splitting-artin-tits-normalisers
 dependency_level: 13
 sources:

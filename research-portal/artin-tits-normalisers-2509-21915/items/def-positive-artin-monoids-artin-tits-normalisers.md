@@ -2,7 +2,7 @@
 id: def-positive-artin-monoids-artin-tits-normalisers
 kind: definition
 title: Positive Artin and parabolic monoids
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

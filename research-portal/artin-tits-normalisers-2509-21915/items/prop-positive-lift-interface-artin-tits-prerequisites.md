@@ -2,7 +2,7 @@
 id: prop-positive-lift-interface-artin-tits-prerequisites
 kind: proposition
 title: Reduced-word lifts and the prefix-order convention
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

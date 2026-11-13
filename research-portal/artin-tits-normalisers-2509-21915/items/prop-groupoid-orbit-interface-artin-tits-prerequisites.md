@@ -2,7 +2,7 @@
 id: prop-groupoid-orbit-interface-artin-tits-prerequisites
 kind: proposition
 title: Free object actions give orbit coverings
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

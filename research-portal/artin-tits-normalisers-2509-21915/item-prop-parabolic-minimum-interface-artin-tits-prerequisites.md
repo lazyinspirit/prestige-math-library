@@ -1,6 +1,6 @@
 ---
 title: Parabolic root subsystems and unique coset minima
-status: draft
+status: published
 research_item: prop-parabolic-minimum-interface-artin-tits-prerequisites
 dependency_level: 0
 ---

@@ -2,7 +2,7 @@
 id: lem-equivariant-topological-equivalence-artin-tits-normalisers
 kind: lemma
 title: Equivariant equivalence with fundamental groupoids
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

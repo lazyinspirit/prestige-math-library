@@ -2,7 +2,7 @@
 id: lem-normaliser-linear-action-artin-tits-normalisers
 kind: lemma
 title: Faithful normaliser-quotient action on the relative cone
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

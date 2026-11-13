@@ -2,7 +2,7 @@
 id: ex-d4-quotient-graph-artin-tits-normalisers
 kind: example
 title: D4 Brink–Howlett generating graph
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

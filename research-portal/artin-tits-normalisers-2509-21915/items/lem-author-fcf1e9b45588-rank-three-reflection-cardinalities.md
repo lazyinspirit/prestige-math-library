@@ -2,7 +2,7 @@
 id: lem-author-fcf1e9b45588-rank-three-reflection-cardinalities
 kind: lemma
 title: Reflection cardinalities of the three connected finite rank-three types
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

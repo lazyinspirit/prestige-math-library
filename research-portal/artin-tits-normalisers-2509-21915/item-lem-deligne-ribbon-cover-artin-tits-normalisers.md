@@ -1,6 +1,6 @@
 ---
 title: Deligne-to-ribbon functor is a covering
-status: draft
+status: published
 research_item: lem-deligne-ribbon-cover-artin-tits-normalisers
 dependency_level: 21
 sources:

@@ -1,6 +1,6 @@
 ---
 title: Separation by a hyperplane
-status: draft
+status: published
 research_item: def-separating-hyperplane-artin-tits-normalisers
 dependency_level: 3
 sources:

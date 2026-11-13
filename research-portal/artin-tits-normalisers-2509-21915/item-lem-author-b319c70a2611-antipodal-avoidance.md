@@ -1,6 +1,6 @@
 ---
 title: Antipodal generic points in a central relative ball
-status: draft
+status: published
 research_item: lem-author-b319c70a2611-antipodal-avoidance
 dependency_level: 11
 ---

@@ -1,6 +1,6 @@
 ---
 title: Locally finite arrangements and relative face terminology
-status: draft
+status: published
 research_item: def-arrangement-topology-interface-artin-tits-prerequisites
 dependency_level: 0
 ---

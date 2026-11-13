@@ -2,7 +2,7 @@
 id: prop-topological-quotient-groupoid-artin-tits-normalisers
 kind: proposition
 title: Fundamental groupoids of free topological quotients
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

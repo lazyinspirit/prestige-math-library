@@ -1,6 +1,6 @@
 ---
 title: Normaliser-action wording in the D4 exposition
-status: draft
+status: published
 research_item: rem-d4-normaliser-action-wording-artin-tits-normalisers
 dependency_level: 18
 sources:

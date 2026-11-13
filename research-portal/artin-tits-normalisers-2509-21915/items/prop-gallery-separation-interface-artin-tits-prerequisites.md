@@ -2,7 +2,7 @@
 id: prop-gallery-separation-interface-artin-tits-prerequisites
 kind: proposition
 title: Finite galleries and separating hyperplanes
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

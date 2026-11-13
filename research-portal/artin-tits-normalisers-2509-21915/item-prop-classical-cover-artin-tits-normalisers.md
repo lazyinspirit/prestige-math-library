@@ -1,6 +1,6 @@
 ---
 title: Classical free action and covering exact sequence
-status: draft
+status: published
 research_item: prop-classical-cover-artin-tits-normalisers
 dependency_level: 5
 sources:

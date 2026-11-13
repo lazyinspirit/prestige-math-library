@@ -2,7 +2,7 @@
 id: lem-normaliser-exact-artin-tits-normalisers
 kind: lemma
 title: Normaliser quotient exact sequence
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

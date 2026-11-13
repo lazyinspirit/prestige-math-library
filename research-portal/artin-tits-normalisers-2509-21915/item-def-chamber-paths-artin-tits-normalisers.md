@@ -1,6 +1,6 @@
 ---
 title: Chamber paths, concatenation and wall words
-status: draft
+status: published
 research_item: def-chamber-paths-artin-tits-normalisers
 dependency_level: 15
 sources:

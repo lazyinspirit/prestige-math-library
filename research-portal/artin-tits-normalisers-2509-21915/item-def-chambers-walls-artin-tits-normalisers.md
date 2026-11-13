@@ -1,6 +1,6 @@
 ---
 title: Chambers, walls and adjacency
-status: draft
+status: published
 research_item: def-chambers-walls-artin-tits-normalisers
 dependency_level: 2
 sources:

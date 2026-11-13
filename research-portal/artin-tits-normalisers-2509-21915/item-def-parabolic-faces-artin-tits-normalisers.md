@@ -1,6 +1,6 @@
 ---
 title: Parabolic coordinate subspaces and fundamental faces
-status: draft
+status: published
 research_item: def-parabolic-faces-artin-tits-normalisers
 dependency_level: 2
 sources:

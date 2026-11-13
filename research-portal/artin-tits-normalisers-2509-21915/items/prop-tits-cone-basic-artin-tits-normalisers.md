@@ -2,7 +2,7 @@
 id: prop-tits-cone-basic-artin-tits-normalisers
 kind: proposition
 title: Basic Tits-cone properties
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

@@ -2,7 +2,7 @@
 title: Article items · 12 — Universal Brink–Howlett covering and its deck group
 description: Presents 27 items from the article and its immediate prerequisites,
   covering dependency levels 17–20.
-status: draft
+status: published
 dependency_level: 8
 research_article_page: true
 item_count: 27

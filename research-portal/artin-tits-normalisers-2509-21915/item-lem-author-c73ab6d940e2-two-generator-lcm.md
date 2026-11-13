@@ -1,6 +1,6 @@
 ---
 title: The two-generator braid element is the lcm
-status: draft
+status: published
 research_item: lem-author-c73ab6d940e2-two-generator-lcm
 dependency_level: 7
 ---

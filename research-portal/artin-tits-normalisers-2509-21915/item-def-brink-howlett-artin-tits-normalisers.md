@@ -1,6 +1,6 @@
 ---
 title: Brink–Howlett groupoid
-status: draft
+status: published
 research_item: def-brink-howlett-artin-tits-normalisers
 dependency_level: 9
 sources:

@@ -1,6 +1,6 @@
 ---
 title: The hyperplanes are in bijection with Coxeter reflections
-status: draft
+status: published
 research_item: lem-author-fcf1e9b45588-mirror-reflection-bijection
 dependency_level: 4
 ---

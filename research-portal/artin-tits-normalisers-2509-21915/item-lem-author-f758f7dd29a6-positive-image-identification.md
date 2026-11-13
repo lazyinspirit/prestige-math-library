@@ -1,6 +1,6 @@
 ---
 title: Identifying the presented monoid with its positive image
-status: draft
+status: published
 research_item: lem-author-f758f7dd29a6-positive-image-identification
 dependency_level: 2
 ---

@@ -1,6 +1,6 @@
 ---
 title: Atomic Matsumoto theorem
-status: draft
+status: published
 research_item: thm-atomic-matsumoto-artin-tits-normalisers
 dependency_level: 20
 sources:

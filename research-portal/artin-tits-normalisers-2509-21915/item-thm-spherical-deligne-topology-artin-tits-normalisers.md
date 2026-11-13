@@ -1,6 +1,6 @@
 ---
 title: Spherical relative arrangements and Deligne topology
-status: draft
+status: published
 research_item: thm-spherical-deligne-topology-artin-tits-normalisers
 dependency_level: 18
 sources:

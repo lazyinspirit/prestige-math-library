@@ -1,6 +1,6 @@
 ---
 title: Invariant metric, product arrangements and essentiality
-status: draft
+status: published
 research_item: lem-author-fcf1e9b45588-invariant-metric-essentiality
 dependency_level: 2
 ---

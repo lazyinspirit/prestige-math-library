@@ -2,7 +2,7 @@
 id: lem-author-4ac39e6f1702-finite-crossing-roots
 kind: lemma
 title: Adjacent relative chambers force a finite crossing component
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

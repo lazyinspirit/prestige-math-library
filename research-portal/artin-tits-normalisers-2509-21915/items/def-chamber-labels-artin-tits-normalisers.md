@@ -2,7 +2,7 @@
 id: def-chamber-labels-artin-tits-normalisers
 kind: definition
 title: Algebraic chamber-label set
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

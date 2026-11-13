@@ -2,7 +2,7 @@
 id: def-groupoid-completion-artin-tits-normalisers
 kind: definition
 title: Groupoid completion and its universal property
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

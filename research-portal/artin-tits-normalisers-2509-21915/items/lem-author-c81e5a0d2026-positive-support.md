@@ -2,7 +2,7 @@
 id: lem-author-c81e5a0d2026-positive-support
 kind: lemma
 title: Support of positive Artin words and longest lifts
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

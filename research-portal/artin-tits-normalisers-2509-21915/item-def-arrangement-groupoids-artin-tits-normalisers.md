@@ -1,6 +1,6 @@
 ---
 title: Positive arrangement category and its groupoid completion
-status: draft
+status: published
 research_item: def-arrangement-groupoids-artin-tits-normalisers
 dependency_level: 17
 sources:

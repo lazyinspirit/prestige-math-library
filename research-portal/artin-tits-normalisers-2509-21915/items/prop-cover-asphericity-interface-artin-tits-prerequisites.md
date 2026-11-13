@@ -2,7 +2,7 @@
 id: prop-cover-asphericity-interface-artin-tits-prerequisites
 kind: proposition
 title: Coverings preserve the higher-homotopy obstruction to K(pi,1)
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

@@ -2,7 +2,7 @@
 id: rem-d4-region-poset-artin-tits-normalisers
 kind: remark
 title: D4 grading, region poset and simple-morphism divisibility
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

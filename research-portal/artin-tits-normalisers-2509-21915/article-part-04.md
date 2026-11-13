@@ -3,7 +3,7 @@ title: Article items · 04 — Stereographic projection and its inverse are
   explicit in coordinates
 description: Presents 27 items from the article and its immediate prerequisites,
   covering published library prerequisites.
-status: draft
+status: published
 dependency_level: 0
 research_article_page: true
 item_count: 27

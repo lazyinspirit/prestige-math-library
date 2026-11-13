@@ -1,6 +1,6 @@
 ---
 title: Main spherical theorem combining exact sequences and asphericity
-status: draft
+status: published
 research_item: thm-main-kpi-summary-artin-tits-normalisers
 dependency_level: 27
 sources:

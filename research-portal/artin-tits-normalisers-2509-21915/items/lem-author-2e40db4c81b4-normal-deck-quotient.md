@@ -2,7 +2,7 @@
 id: lem-author-2e40db4c81b4-normal-deck-quotient
 kind: lemma
 title: Normal coverings and the convention-correct deck quotient
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

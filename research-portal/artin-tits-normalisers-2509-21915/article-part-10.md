@@ -2,7 +2,7 @@
 title: Article items · 10 — Local finiteness of the interior relative arrangement
 description: Presents 27 items from the article and its immediate prerequisites,
   covering dependency levels 10–12.
-status: draft
+status: published
 dependency_level: 6
 research_article_page: true
 item_count: 27

@@ -1,6 +1,6 @@
 ---
 title: Path-class independence and equivariance in the topological construction
-status: draft
+status: published
 research_item: prop-topological-path-properties-artin-tits-normalisers
 dependency_level: 19
 sources:

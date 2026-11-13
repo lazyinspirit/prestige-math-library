@@ -2,7 +2,7 @@
 id: ex-d4-comparison-functors-artin-tits-normalisers
 kind: example
 title: Explicit D4 comparison functors
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

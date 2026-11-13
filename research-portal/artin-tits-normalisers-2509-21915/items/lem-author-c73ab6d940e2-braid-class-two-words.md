@@ -2,7 +2,7 @@
 id: lem-author-c73ab6d940e2-braid-class-two-words
 kind: lemma
 title: Exactly two words for a two-generator braid element
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

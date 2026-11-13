@@ -2,7 +2,7 @@
 id: lem-author-f758f7dd29a6-garside-transport
 kind: lemma
 title: Transport of a Garside structure to the presented monoid
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

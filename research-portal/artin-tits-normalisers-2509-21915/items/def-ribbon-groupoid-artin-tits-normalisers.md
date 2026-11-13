@@ -2,7 +2,7 @@
 id: def-ribbon-groupoid-artin-tits-normalisers
 kind: definition
 title: Ribbon groupoid in spherical type
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

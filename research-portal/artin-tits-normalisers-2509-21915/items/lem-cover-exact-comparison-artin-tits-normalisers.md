@@ -2,7 +2,7 @@
 id: lem-cover-exact-comparison-artin-tits-normalisers
 kind: lemma
 title: Intermediate exact sequences and deck morphism in Theorem 6.7
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

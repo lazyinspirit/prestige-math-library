@@ -2,7 +2,7 @@
 id: rem-normaliser-deligne-action-artin-tits-normalisers
 kind: remark
 title: Induced normaliser action on arrangement groupoids
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

@@ -2,7 +2,7 @@
 id: lem-author-d3116e202611-gallery-category
 kind: lemma
 title: Positive gallery category, cancellation and length
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

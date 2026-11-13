@@ -1,6 +1,6 @@
 ---
 title: Simplified wall crossing for a finite parabolic
-status: draft
+status: published
 research_item: lem-finite-parabolic-wall-formula-artin-tits-normalisers
 dependency_level: 10
 sources:

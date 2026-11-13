@@ -2,7 +2,7 @@
 title: Article items · 09 — Simple wall-crossing elements and maps
 description: Presents 27 items from the article and its immediate prerequisites,
   covering dependency levels 9–10.
-status: draft
+status: published
 dependency_level: 5
 research_article_page: true
 item_count: 27

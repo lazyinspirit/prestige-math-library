@@ -2,7 +2,7 @@
 id: lem-author-4ac39e6f1702-component-crossing-label
 kind: lemma
 title: A finite connected component gives the opposite relative chamber
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

@@ -2,7 +2,7 @@
 id: ex-d4-atomic-relations-artin-tits-normalisers
 kind: example
 title: Explicit D4 atomic braid relations and lifted paths
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

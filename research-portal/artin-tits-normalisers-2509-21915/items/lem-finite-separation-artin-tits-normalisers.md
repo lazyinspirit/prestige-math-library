@@ -2,7 +2,7 @@
 id: lem-finite-separation-artin-tits-normalisers
 kind: lemma
 title: Only finitely many hyperplanes separate two Tits-cone points
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

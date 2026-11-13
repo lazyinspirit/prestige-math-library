@@ -2,7 +2,7 @@
 id: thm-ribbon-lcm-input-artin-tits-prerequisites
 kind: theorem
 title: Reduced-ribbon lcm presentation including the empty subset
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

@@ -2,7 +2,7 @@
 id: lem-author-6f173a9d0001-dihedral-tits-cone
 kind: lemma
 title: The infinite dihedral Tits cone is an open half-plane with its vertex
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

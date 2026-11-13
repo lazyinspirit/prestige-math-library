@@ -2,7 +2,7 @@
 id: ex-d4-restricted-arrangement-artin-tits-normalisers
 kind: example
 title: Seven relative D4 hyperplanes and thirty-two chambers
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

@@ -2,7 +2,7 @@
 id: thm-universal-brink-howlett-cover-artin-tits-normalisers
 kind: theorem
 title: Universal Brink–Howlett covering and its deck group
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

@@ -1,6 +1,6 @@
 ---
 title: Component opposition transports the retained simple roots
-status: draft
+status: published
 research_item: lem-author-4ac39e6f1702-component-opposition
 dependency_level: 4
 ---

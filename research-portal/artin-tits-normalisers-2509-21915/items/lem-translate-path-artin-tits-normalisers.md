@@ -2,7 +2,7 @@
 id: lem-translate-path-artin-tits-normalisers
 kind: lemma
 title: Translation between relative arrangements in the geodesic argument
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

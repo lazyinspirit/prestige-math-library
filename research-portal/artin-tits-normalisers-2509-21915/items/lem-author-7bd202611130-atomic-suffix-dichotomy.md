@@ -2,7 +2,7 @@
 id: lem-author-7bd202611130-atomic-suffix-dichotomy
 kind: lemma
 title: Appending an elementary factor is additive or removes its inverse
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

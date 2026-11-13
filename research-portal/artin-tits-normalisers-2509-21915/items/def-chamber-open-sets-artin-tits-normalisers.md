@@ -2,7 +2,7 @@
 id: def-chamber-open-sets-artin-tits-normalisers
 kind: definition
 title: Chamber open sets used for the topological equivalence
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

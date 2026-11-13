@@ -2,7 +2,7 @@
 id: lem-author-e61520261113-finite-orbit-comparison
 kind: lemma
 title: Finite equivariant Salvetti and orbit homotopy models
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

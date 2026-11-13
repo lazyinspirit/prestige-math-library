@@ -2,7 +2,7 @@
 title: Article items · 13 — Two-geodesic wall-crossing lemma
 description: Presents 27 items from the article and its immediate prerequisites,
   covering dependency levels 20–27.
-status: draft
+status: published
 dependency_level: 9
 research_article_page: true
 item_count: 27

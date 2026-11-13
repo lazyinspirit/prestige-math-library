@@ -2,7 +2,7 @@
 id: lem-author-5a1e77100001-linear-action
 kind: lemma
 title: Linear symmetries act on the Salvetti model
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

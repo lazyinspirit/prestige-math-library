@@ -1,6 +1,6 @@
 ---
 title: Appending an elementary factor is additive or removes its inverse
-status: draft
+status: published
 research_item: lem-author-7bd202611130-atomic-suffix-dichotomy
 dependency_level: 13
 sources:

@@ -2,7 +2,7 @@
 id: prop-adjacent-wall-formula-artin-tits-normalisers
 kind: proposition
 title: Adjacent chambers and inverse wall-crossing elements
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

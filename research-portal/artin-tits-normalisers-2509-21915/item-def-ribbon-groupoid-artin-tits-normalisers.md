@@ -1,6 +1,6 @@
 ---
 title: Ribbon groupoid in spherical type
-status: draft
+status: published
 research_item: def-ribbon-groupoid-artin-tits-normalisers
 dependency_level: 10
 sources:

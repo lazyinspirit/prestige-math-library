@@ -1,6 +1,6 @@
 ---
 title: Convexity, stratification and faces of the relative cone
-status: draft
+status: published
 research_item: prop-relative-stratification-artin-tits-normalisers
 dependency_level: 9
 sources:

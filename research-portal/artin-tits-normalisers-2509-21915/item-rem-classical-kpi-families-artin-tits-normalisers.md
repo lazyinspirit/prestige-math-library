@@ -1,6 +1,6 @@
 ---
 title: Reported proved families for the classical conjecture
-status: draft
+status: published
 research_item: rem-classical-kpi-families-artin-tits-normalisers
 dependency_level: 8
 sources:

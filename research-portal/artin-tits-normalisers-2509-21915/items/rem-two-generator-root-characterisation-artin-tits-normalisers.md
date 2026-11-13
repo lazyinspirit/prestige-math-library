@@ -2,7 +2,7 @@
 id: rem-two-generator-root-characterisation-artin-tits-normalisers
 kind: remark
 title: Root characterization of the inverse two-generator element
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

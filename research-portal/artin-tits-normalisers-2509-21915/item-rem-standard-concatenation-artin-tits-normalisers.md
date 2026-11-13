@@ -1,6 +1,6 @@
 ---
 title: Concatenation of length-additive standard expressions
-status: draft
+status: published
 research_item: rem-standard-concatenation-artin-tits-normalisers
 dependency_level: 12
 sources:

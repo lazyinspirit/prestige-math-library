@@ -1,6 +1,6 @@
 ---
 title: Natural functors to the universal wall groupoid
-status: draft
+status: published
 research_item: rem-arrangement-to-universal-artin-tits-normalisers
 dependency_level: 18
 sources:

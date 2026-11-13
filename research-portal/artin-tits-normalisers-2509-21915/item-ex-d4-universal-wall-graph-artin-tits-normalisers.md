@@ -1,6 +1,6 @@
 ---
 title: Universal groupoid interpretation of the D4 graph
-status: draft
+status: published
 research_item: ex-d4-universal-wall-graph-artin-tits-normalisers
 dependency_level: 18
 sources:

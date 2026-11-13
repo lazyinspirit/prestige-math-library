@@ -2,7 +2,7 @@
 id: rem-classical-kpi-families-artin-tits-normalisers
 kind: remark
 title: Reported proved families for the classical conjecture
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

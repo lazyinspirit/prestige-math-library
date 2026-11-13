@@ -1,6 +1,6 @@
 ---
 title: Spherical normaliser quotient classifying spaces
-status: draft
+status: published
 research_item: cor-normaliser-kpi-artin-tits-normalisers
 dependency_level: 26
 sources:

@@ -2,7 +2,7 @@
 id: rem-label-minimality-artin-tits-normalisers
 kind: remark
 title: Minimal coset representatives remove chamber-label ambiguity
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

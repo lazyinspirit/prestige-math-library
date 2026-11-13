@@ -1,6 +1,6 @@
 ---
 title: Ribbon lcms lift two-generator Brink–Howlett elements
-status: draft
+status: published
 research_item: lem-ribbon-lcm-lift-artin-tits-normalisers
 dependency_level: 19
 sources:

@@ -1,6 +1,6 @@
 ---
 title: Translation between relative arrangements in the geodesic argument
-status: draft
+status: published
 research_item: lem-translate-path-artin-tits-normalisers
 dependency_level: 17
 sources:

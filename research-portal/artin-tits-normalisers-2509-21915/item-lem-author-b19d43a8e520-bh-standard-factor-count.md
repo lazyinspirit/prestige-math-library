@@ -1,6 +1,6 @@
 ---
 title: Every standard expression counts the same parallel classes
-status: draft
+status: published
 research_item: lem-author-b19d43a8e520-bh-standard-factor-count
 dependency_level: 15
 sources:

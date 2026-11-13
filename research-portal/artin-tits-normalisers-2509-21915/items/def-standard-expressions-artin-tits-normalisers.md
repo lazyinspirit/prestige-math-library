@@ -2,7 +2,7 @@
 id: def-standard-expressions-artin-tits-normalisers
 kind: definition
 title: Standard expressions and their lengths
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

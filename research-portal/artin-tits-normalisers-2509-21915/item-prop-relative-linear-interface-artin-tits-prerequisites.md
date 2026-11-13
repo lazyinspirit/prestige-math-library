@@ -1,6 +1,6 @@
 ---
 title: Annihilators, relative hyperplanes and complexification
-status: draft
+status: published
 research_item: prop-relative-linear-interface-artin-tits-prerequisites
 dependency_level: 0
 ---

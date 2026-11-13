@@ -2,7 +2,7 @@
 id: lem-author-b19d43a8e520-bh-compressed-additivity
 kind: lemma
 title: Compressed inversion count is additive for Coxeter-reduced composites
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

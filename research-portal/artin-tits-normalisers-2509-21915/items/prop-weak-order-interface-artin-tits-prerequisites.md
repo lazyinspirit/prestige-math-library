@@ -2,7 +2,7 @@
 id: prop-weak-order-interface-artin-tits-prerequisites
 kind: proposition
 title: Bounded weak-order joins and finite parabolic criteria
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

@@ -1,6 +1,6 @@
 ---
 title: Standard expressions are connected by atomic braid moves
-status: draft
+status: published
 research_item: lem-author-7bd202611130-standard-braid-connectivity
 dependency_level: 21
 sources:

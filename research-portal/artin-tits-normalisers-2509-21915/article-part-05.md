@@ -3,7 +3,7 @@ title: Article items · 05 — The inversion formula $|N(w)|=\ell(w)$, the
   root-reflection dictionary and strong exchange
 description: Presents 27 items from the article and its immediate prerequisites,
   covering published library prerequisites and dependency level 0.
-status: draft
+status: published
 dependency_level: 1
 research_article_page: true
 item_count: 27

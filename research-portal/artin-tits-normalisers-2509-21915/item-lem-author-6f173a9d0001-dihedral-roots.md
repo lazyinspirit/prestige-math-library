@@ -1,6 +1,6 @@
 ---
 title: Roots of the infinite dihedral geometric representation
-status: draft
+status: published
 research_item: lem-author-6f173a9d0001-dihedral-roots
 dependency_level: 1
 ---

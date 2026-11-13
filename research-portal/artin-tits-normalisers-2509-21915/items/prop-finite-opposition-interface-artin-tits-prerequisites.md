@@ -2,7 +2,7 @@
 id: prop-finite-opposition-interface-artin-tits-prerequisites
 kind: proposition
 title: Finite parabolic longest elements and disconnected factors
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

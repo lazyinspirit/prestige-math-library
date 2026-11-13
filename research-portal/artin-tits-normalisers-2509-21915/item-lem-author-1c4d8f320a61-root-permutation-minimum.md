@@ -1,6 +1,6 @@
 ---
 title: Root-permuting elements are minimum coset representatives
-status: draft
+status: published
 research_item: lem-author-1c4d8f320a61-root-permutation-minimum
 dependency_level: 11
 sources:

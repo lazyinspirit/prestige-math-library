@@ -2,7 +2,7 @@
 id: ex-d4-spherical-picture-artin-tits-normalisers
 kind: example
 title: Spherical and stereographic pictures of the D4 arrangement
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

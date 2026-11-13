@@ -1,6 +1,6 @@
 ---
 title: Root-permuting normaliser complement
-status: draft
+status: published
 research_item: def-normaliser-complement-artin-tits-normalisers
 dependency_level: 10
 sources:

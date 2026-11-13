@@ -1,6 +1,6 @@
 ---
 title: The root-permuting subgroup intersects the parabolic trivially
-status: draft
+status: published
 research_item: lem-author-1c4d8f320a61-normaliser-trivial-intersection
 dependency_level: 12
 ---

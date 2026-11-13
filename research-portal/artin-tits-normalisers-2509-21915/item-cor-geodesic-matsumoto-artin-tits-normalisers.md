@@ -1,6 +1,6 @@
 ---
 title: Geodesics differ by codimension-two relations
-status: draft
+status: published
 research_item: cor-geodesic-matsumoto-artin-tits-normalisers
 dependency_level: 22
 sources:

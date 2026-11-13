@@ -1,6 +1,6 @@
 ---
 title: D4 Deligne and ribbon graphs without quadratic relations
-status: draft
+status: published
 research_item: ex-d4-deligne-ribbon-presentations-artin-tits-normalisers
 dependency_level: 24
 sources:

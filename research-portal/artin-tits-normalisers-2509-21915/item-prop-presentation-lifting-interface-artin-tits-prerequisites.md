@@ -1,6 +1,6 @@
 ---
 title: A criterion for lifting a presented groupoid
-status: draft
+status: published
 research_item: prop-presentation-lifting-interface-artin-tits-prerequisites
 dependency_level: 7
 ---

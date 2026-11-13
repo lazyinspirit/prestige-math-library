@@ -2,7 +2,7 @@
 id: def-atomic-braid-artin-tits-normalisers
 kind: definition
 title: Atomic braid relations
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

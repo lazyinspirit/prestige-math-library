@@ -2,7 +2,7 @@
 id: lem-author-c05e7a202611-braid-identification
 kind: lemma
 title: Ko atomic braid relations are exactly the finite BH rank-two relations
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

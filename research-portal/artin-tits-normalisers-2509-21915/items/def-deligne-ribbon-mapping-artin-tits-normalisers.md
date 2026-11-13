@@ -2,7 +2,7 @@
 id: def-deligne-ribbon-mapping-artin-tits-normalisers
 kind: definition
 title: Assignment from wall crossings to ribbon generators
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

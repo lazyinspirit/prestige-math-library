@@ -1,6 +1,6 @@
 ---
 title: Rotation parameters and the two switchback completions
-status: draft
+status: published
 research_item: lem-author-c05e7a202611-rotation-words
 dependency_level: 13
 sources:

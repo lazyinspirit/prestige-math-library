@@ -1,6 +1,6 @@
 ---
 title: Tits cone intersections, relative roots and arrangements
-status: draft
+status: published
 research_item: def-relative-cone-artin-tits-normalisers
 dependency_level: 8
 sources:

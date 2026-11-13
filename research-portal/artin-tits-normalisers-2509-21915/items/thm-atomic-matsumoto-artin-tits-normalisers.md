@@ -2,7 +2,7 @@
 id: thm-atomic-matsumoto-artin-tits-normalisers
 kind: theorem
 title: Atomic Matsumoto theorem
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

@@ -1,6 +1,6 @@
 ---
 title: Intermediate exact sequences and deck morphism in Theorem 6.7
-status: draft
+status: published
 research_item: lem-cover-exact-comparison-artin-tits-normalisers
 dependency_level: 24
 sources:

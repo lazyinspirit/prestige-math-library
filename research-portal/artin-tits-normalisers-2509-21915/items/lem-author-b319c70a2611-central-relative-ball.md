@@ -2,7 +2,7 @@
 id: lem-author-b319c70a2611-central-relative-ball
 kind: lemma
 title: Shrink the finite relative ball to a central arrangement
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

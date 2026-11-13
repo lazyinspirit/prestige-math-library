@@ -1,6 +1,6 @@
 ---
 title: Minimal flop paths and the arrangement-complement action
-status: draft
+status: published
 research_item: prop-author-5f10a31d9e26-flop-deligne-action-contract
 dependency_level: 17
 sources:

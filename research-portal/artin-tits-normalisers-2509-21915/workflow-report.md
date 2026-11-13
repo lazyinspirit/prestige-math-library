@@ -1,7 +1,7 @@
 ---
 title: "Research workflow: Normalisers of parabolic subgroups of Artin–Tits
   groups and Tits cone intersections"
-status: draft
+status: published
 ---
 
 Step 8 reassessment. Earlier scientific review remains recorded in its original evidence.

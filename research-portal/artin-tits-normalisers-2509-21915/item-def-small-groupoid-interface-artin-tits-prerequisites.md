@@ -1,6 +1,6 @@
 ---
 title: Set-sized groupoids, functors and composition conversion
-status: draft
+status: published
 research_item: def-small-groupoid-interface-artin-tits-prerequisites
 dependency_level: 0
 ---

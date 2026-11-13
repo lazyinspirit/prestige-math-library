@@ -1,6 +1,6 @@
 ---
 title: Length additivity and the base-chamber half-space
-status: draft
+status: published
 research_item: lem-wall-length-halfspace-artin-tits-normalisers
 dependency_level: 13
 sources:

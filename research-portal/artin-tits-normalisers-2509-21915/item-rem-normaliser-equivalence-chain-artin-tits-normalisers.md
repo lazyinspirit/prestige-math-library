@@ -1,6 +1,6 @@
 ---
 title: Explicit equivalence chain for the middle isomorphism
-status: draft
+status: published
 research_item: rem-normaliser-equivalence-chain-artin-tits-normalisers
 dependency_level: 25
 sources:

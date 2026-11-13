@@ -1,6 +1,6 @@
 ---
 title: Root signs, inversions and descent translation
-status: draft
+status: published
 research_item: prop-root-inversion-interface-artin-tits-prerequisites
 dependency_level: 1
 ---

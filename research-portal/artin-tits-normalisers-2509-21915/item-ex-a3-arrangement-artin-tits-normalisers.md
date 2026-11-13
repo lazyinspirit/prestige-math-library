@@ -1,6 +1,6 @@
 ---
 title: A3 relative arrangement and its six labelled chambers
-status: draft
+status: published
 research_item: ex-a3-arrangement-artin-tits-normalisers
 dependency_level: 13
 sources:

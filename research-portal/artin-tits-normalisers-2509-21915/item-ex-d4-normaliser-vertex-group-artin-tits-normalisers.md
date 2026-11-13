@@ -1,6 +1,6 @@
 ---
 title: Eight-element D4 normaliser quotient vertex group
-status: draft
+status: published
 research_item: ex-d4-normaliser-vertex-group-artin-tits-normalisers
 dependency_level: 18
 sources:

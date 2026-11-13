@@ -2,7 +2,7 @@
 id: lem-author-b19d43a8e520-bh-opposite-identification
 kind: lemma
 title: Transfer to the root-action Brink–Howlett groupoid
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

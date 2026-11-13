@@ -2,7 +2,7 @@
 id: lem-author-c05e7a202611-rotation-words
 kind: lemma
 title: Rotation parameters and the two switchback completions
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

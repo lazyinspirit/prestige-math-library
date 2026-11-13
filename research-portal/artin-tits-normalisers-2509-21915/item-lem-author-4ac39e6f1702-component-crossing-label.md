@@ -1,6 +1,6 @@
 ---
 title: A finite connected component gives the opposite relative chamber
-status: draft
+status: published
 research_item: lem-author-4ac39e6f1702-component-crossing-label
 dependency_level: 13
 ---

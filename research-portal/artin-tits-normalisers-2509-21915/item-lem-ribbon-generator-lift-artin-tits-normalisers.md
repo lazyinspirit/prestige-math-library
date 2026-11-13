@@ -1,6 +1,6 @@
 ---
 title: Ribbon generators lift wall-crossing morphisms
-status: draft
+status: published
 research_item: lem-ribbon-generator-lift-artin-tits-normalisers
 dependency_level: 11
 sources:

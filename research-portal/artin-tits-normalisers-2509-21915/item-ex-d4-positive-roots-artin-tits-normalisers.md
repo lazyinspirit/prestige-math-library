@@ -1,6 +1,6 @@
 ---
 title: The twelve D4 positive roots
-status: draft
+status: published
 research_item: ex-d4-positive-roots-artin-tits-normalisers
 dependency_level: 3
 sources:

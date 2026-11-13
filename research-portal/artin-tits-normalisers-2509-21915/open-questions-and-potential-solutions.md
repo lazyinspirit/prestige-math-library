@@ -4,7 +4,7 @@ research_report: open-questions
 description: Insights, fruitful questions and potential solutions arising from
   Normalisers of parabolic subgroups of Artin–Tits groups and Tits cone
   intersections.
-status: draft
+status: published
 generated_at: "2026-11-13T16:48:12.730Z"
 ---
 

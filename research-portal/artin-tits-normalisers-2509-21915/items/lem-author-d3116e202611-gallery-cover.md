@@ -2,7 +2,7 @@
 id: lem-author-d3116e202611-gallery-cover
 kind: lemma
 title: Gallery fractions, fundamental groupoid and asphericity
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

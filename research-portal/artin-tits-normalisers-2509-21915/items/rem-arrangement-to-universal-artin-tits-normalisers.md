@@ -2,7 +2,7 @@
 id: rem-arrangement-to-universal-artin-tits-normalisers
 kind: remark
 title: Natural functors to the universal wall groupoid
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

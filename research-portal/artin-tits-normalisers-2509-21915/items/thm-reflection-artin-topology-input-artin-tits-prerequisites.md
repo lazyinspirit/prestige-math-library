@@ -2,7 +2,7 @@
 id: thm-reflection-artin-topology-input-artin-tits-prerequisites
 kind: theorem
 title: Independent Artin fundamental-group identification
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

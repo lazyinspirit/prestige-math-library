@@ -2,7 +2,7 @@
 id: lem-author-d4ce11000001-sphere-vertex-groupoid
 kind: lemma
 title: The vertex fundamental groupoid of a sphere is thin
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

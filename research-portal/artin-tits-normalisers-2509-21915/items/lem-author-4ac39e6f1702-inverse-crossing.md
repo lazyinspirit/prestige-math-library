@@ -2,7 +2,7 @@
 id: lem-author-4ac39e6f1702-inverse-crossing
 kind: lemma
 title: Componentwise crossings are inverse elements
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

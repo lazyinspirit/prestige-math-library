@@ -2,7 +2,7 @@
 id: ex-d4-positive-roots-artin-tits-normalisers
 kind: example
 title: The twelve D4 positive roots
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

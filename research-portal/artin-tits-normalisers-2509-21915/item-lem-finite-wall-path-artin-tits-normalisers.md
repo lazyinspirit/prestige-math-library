@@ -1,6 +1,6 @@
 ---
 title: Finite wall-crossing connectivity
-status: draft
+status: published
 research_item: lem-finite-wall-path-artin-tits-normalisers
 dependency_level: 15
 sources:

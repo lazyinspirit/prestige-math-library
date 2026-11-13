@@ -1,6 +1,6 @@
 ---
 title: Natural finite Salvetti good covers
-status: draft
+status: published
 research_item: lem-author-e61520261113-natural-salvetti-cover
 dependency_level: 8
 sources:

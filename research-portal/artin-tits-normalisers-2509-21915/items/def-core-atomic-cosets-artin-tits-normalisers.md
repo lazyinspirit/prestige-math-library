@@ -2,7 +2,7 @@
 id: def-core-atomic-cosets-artin-tits-normalisers
 kind: definition
 title: Core and atomic double cosets
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

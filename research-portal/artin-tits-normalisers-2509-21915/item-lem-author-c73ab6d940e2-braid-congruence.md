@@ -1,6 +1,6 @@
 ---
 title: Braid congruence preserves word length and support
-status: draft
+status: published
 research_item: lem-author-c73ab6d940e2-braid-congruence
 dependency_level: 5
 ---

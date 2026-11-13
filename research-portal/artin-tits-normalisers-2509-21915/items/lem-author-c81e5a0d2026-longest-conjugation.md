@@ -2,7 +2,7 @@
 id: lem-author-c81e5a0d2026-longest-conjugation
 kind: lemma
 title: Opposition as conjugation by a longest Artin lift
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

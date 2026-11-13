@@ -1,6 +1,6 @@
 ---
 title: Normaliser quotient exact sequence
-status: draft
+status: published
 research_item: lem-normaliser-exact-artin-tits-normalisers
 dependency_level: 9
 sources:

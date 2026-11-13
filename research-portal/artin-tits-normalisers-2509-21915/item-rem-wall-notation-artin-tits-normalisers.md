@@ -1,6 +1,6 @@
 ---
 title: Wall-crossing notation and Brink–Howlett convention
-status: draft
+status: published
 research_item: rem-wall-notation-artin-tits-normalisers
 dependency_level: 10
 sources:

@@ -3,7 +3,7 @@ title: Coxeter geometry and relative chambers
 description: Connect Coxeter representations, root signs, parabolic minima,
   opposition and weak order with relative arrangements, chamber labels,
   galleries and wall crossings.
-status: draft
+status: published
 dependency_level: 0
 ---
 

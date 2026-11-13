@@ -1,6 +1,6 @@
 ---
 title: Elementary ribbons have explicitly determined endpoints
-status: draft
+status: published
 research_item: lem-author-c81e5a0d2026-ribbon-endpoints
 dependency_level: 6
 sources:

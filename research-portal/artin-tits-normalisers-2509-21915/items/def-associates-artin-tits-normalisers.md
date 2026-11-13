@@ -2,7 +2,7 @@
 id: def-associates-artin-tits-normalisers
 kind: definition
 title: Associates of a parabolic subset
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

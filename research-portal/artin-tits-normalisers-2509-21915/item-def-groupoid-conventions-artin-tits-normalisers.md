@@ -1,6 +1,6 @@
 ---
 title: Connected small groupoids and vertex groups
-status: draft
+status: published
 research_item: def-groupoid-conventions-artin-tits-normalisers
 dependency_level: 1
 sources:

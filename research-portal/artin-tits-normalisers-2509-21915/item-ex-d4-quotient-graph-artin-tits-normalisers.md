@@ -1,6 +1,6 @@
 ---
 title: D4 Brink–Howlett generating graph
-status: draft
+status: published
 research_item: ex-d4-quotient-graph-artin-tits-normalisers
 dependency_level: 19
 sources:

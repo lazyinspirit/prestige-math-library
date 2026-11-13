@@ -2,7 +2,7 @@
 id: rem-same-chambers-artin-tits-normalisers
 kind: remark
 title: Interior restriction preserves chambers and adjacency
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

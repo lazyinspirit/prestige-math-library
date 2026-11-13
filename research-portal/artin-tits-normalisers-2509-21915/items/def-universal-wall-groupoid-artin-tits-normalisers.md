@@ -2,7 +2,7 @@
 id: def-universal-wall-groupoid-artin-tits-normalisers
 kind: definition
 title: Universal wall groupoid on relative chambers
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

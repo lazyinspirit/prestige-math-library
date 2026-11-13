@@ -1,6 +1,6 @@
 ---
 title: Path presentations, congruences and formal inverses
-status: draft
+status: published
 research_item: def-path-localisation-interface-artin-tits-prerequisites
 dependency_level: 1
 ---

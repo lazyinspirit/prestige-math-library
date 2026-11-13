@@ -2,7 +2,7 @@
 id: prop-relative-cover-artin-tits-normalisers
 kind: proposition
 title: Relative free action, normal cover and exact sequence
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

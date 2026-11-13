@@ -2,7 +2,7 @@
 id: def-classical-complement-artin-tits-normalisers
 kind: definition
 title: Classical complexified hyperplane complement
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

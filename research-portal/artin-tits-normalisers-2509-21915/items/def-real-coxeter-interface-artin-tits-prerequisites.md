@@ -2,7 +2,7 @@
 id: def-real-coxeter-interface-artin-tits-prerequisites
 kind: definition
 title: Real Coxeter representation and contragredient notation
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

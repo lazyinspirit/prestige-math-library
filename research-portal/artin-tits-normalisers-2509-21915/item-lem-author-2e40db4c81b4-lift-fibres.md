@@ -1,6 +1,6 @@
 ---
 title: Unique lifts, endpoint fibres and characteristic subgroups
-status: draft
+status: published
 research_item: lem-author-2e40db4c81b4-lift-fibres
 dependency_level: 1
 sources:

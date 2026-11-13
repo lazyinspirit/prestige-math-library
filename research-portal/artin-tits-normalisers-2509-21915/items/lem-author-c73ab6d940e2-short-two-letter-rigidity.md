@@ -2,7 +2,7 @@
 id: lem-author-c73ab6d940e2-short-two-letter-rigidity
 kind: lemma
 title: Rigidity of two-letter words below braid length
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

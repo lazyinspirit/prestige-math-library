@@ -1,6 +1,6 @@
 ---
 title: Support of positive Artin words and longest lifts
-status: draft
+status: published
 research_item: lem-author-c81e5a0d2026-positive-support
 dependency_level: 5
 ---

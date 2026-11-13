@@ -2,7 +2,7 @@
 id: lem-author-f758f7dd29a6-monoid-reduced-lifts
 kind: lemma
 title: Reduced Coxeter lifts in the presented positive monoid
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

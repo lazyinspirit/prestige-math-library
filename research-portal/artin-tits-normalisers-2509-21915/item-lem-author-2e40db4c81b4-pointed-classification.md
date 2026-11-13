@@ -1,6 +1,6 @@
 ---
 title: Pointed classification of connected groupoid coverings
-status: draft
+status: published
 research_item: lem-author-2e40db4c81b4-pointed-classification
 dependency_level: 3
 sources:

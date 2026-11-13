@@ -1,6 +1,6 @@
 ---
 title: Subset and vertex-complement notation
-status: draft
+status: published
 research_item: def-set-notation-artin-tits-normalisers
 dependency_level: 2
 sources:

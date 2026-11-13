@@ -2,7 +2,7 @@
 id: def-arrangement-groupoids-artin-tits-normalisers
 kind: definition
 title: Positive arrangement category and its groupoid completion
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

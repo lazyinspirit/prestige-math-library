@@ -2,7 +2,7 @@
 id: lem-author-5f10a31d9e26-finite-ade-complement-identification
 kind: lemma
 title: The flop restriction complement is the finite ADE relative complement
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

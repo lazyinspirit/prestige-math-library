@@ -2,7 +2,7 @@
 id: lem-nonnegative-inverse-interface-artin-tits-prerequisites
 kind: lemma
 title: Nonnegative inverse matrices preserve extremal basis rays
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

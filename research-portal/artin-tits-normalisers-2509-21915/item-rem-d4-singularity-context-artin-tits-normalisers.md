@@ -1,6 +1,6 @@
 ---
 title: cD4 geometric occurrence and core-coset context
-status: draft
+status: published
 research_item: rem-d4-singularity-context-artin-tits-normalisers
 dependency_level: 10
 sources:

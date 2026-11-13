@@ -2,7 +2,7 @@
 id: lem-author-7bd202611130-word-normalisation
 kind: lemma
 title: Every finite generator path reduces to a standard expression
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

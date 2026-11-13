@@ -1,6 +1,6 @@
 ---
 title: Component roots intersect the complementary parabolic exactly
-status: draft
+status: published
 research_item: lem-author-73bcf419a602-component-root-intersection
 dependency_level: 8
 ---

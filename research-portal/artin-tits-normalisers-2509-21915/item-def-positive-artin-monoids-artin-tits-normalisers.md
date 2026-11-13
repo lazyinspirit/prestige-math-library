@@ -1,6 +1,6 @@
 ---
 title: Positive Artin and parabolic monoids
-status: draft
+status: published
 research_item: def-positive-artin-monoids-artin-tits-normalisers
 dependency_level: 8
 sources:

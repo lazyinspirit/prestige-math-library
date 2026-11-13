@@ -1,6 +1,6 @@
 ---
 title: Finite outside roots give a finite complementary parabolic
-status: draft
+status: published
 research_item: lem-author-73bcf419a602-finite-difference-parabolic-action
 dependency_level: 10
 ---

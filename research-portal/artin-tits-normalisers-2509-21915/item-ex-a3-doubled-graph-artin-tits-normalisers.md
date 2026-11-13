@@ -1,6 +1,6 @@
 ---
 title: A3 doubled adjacency graph
-status: draft
+status: published
 research_item: ex-a3-doubled-graph-artin-tits-normalisers
 dependency_level: 18
 sources:

@@ -1,6 +1,6 @@
 ---
 title: Connected propagation spans the component
-status: draft
+status: published
 research_item: lem-author-73bcf419a602-connected-orbit-span
 dependency_level: 9
 ---

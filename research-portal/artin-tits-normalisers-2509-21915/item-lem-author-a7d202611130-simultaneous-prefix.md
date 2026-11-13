@@ -1,6 +1,6 @@
 ---
 title: Simultaneous elementary prefixes force the relative longest prefix
-status: draft
+status: published
 research_item: lem-author-a7d202611130-simultaneous-prefix
 dependency_level: 13
 sources:

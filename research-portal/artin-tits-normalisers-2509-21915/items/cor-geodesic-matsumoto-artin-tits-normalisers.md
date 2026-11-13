@@ -2,7 +2,7 @@
 id: cor-geodesic-matsumoto-artin-tits-normalisers
 kind: corollary
 title: Geodesics differ by codimension-two relations
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

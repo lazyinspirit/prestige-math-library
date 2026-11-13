@@ -1,6 +1,6 @@
 ---
 title: Every finite generator path reduces to a standard expression
-status: draft
+status: published
 research_item: lem-author-7bd202611130-word-normalisation
 dependency_level: 22
 sources:

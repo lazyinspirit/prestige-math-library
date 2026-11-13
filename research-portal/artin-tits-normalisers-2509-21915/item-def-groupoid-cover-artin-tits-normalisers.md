@@ -1,6 +1,6 @@
 ---
 title: Groupoid coverings, universal and normal covers
-status: draft
+status: published
 research_item: def-groupoid-cover-artin-tits-normalisers
 dependency_level: 7
 sources:

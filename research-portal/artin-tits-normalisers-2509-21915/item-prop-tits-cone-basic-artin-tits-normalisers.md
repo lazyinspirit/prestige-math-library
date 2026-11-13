@@ -1,6 +1,6 @@
 ---
 title: Basic Tits-cone properties
-status: draft
+status: published
 research_item: prop-tits-cone-basic-artin-tits-normalisers
 dependency_level: 3
 sources:

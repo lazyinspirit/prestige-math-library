@@ -1,6 +1,6 @@
 ---
 title: Distinct roots can define the same relative hyperplane
-status: draft
+status: published
 research_item: rem-relative-root-identifications-artin-tits-normalisers
 dependency_level: 9
 sources:

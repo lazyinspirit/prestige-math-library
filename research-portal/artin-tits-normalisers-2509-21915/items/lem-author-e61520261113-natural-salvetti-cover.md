@@ -2,7 +2,7 @@
 id: lem-author-e61520261113-natural-salvetti-cover
 kind: lemma
 title: Natural finite Salvetti good covers
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

@@ -2,7 +2,7 @@
 id: lem-author-9b7c42e8f103-open-j-chambers
 kind: lemma
 title: Full-dimensional J-chambers lie in the relative interior
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

@@ -2,7 +2,7 @@
 id: lem-author-b19d43a8e520-bh-parallel-root-classes
 kind: lemma
 title: Parallel classes of roots and finite inversion sets
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

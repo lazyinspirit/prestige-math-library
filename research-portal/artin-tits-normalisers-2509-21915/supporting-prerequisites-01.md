@@ -2,7 +2,7 @@
 title: Supporting prerequisites · 01 — Derived category of an abelian category
 description: Presents 21 supporting prerequisites, covering published library
   prerequisites and dependency levels 0–22.
-status: draft
+status: published
 dependency_level: 22
 item_count: 21
 ---

@@ -2,7 +2,7 @@
 id: lem-author-5a1e77100001-facet-incidence
 kind: lemma
 title: Facet incidence and localized chamber signs
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

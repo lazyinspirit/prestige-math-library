@@ -2,7 +2,7 @@
 id: lem-author-c81e5a0d2026-ribbon-endpoints
 kind: lemma
 title: Elementary ribbons have explicitly determined endpoints
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

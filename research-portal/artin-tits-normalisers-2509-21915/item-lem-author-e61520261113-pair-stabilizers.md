@@ -1,6 +1,6 @@
 ---
 title: Free complement actions have trivial incident-pair stabilizers
-status: draft
+status: published
 research_item: lem-author-e61520261113-pair-stabilizers
 dependency_level: 9
 ---

@@ -2,7 +2,7 @@
 id: rem-empty-j-presentation-artin-tits-normalisers
 kind: remark
 title: The ordinary Coxeter presentation is the empty-J case
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

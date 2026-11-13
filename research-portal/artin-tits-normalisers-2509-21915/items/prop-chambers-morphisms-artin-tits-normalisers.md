@@ -2,7 +2,7 @@
 id: prop-chambers-morphisms-artin-tits-normalisers
 kind: proposition
 title: Correspondence between chamber labels and Brink–Howlett morphisms
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

@@ -1,6 +1,6 @@
 ---
 title: Groupoid completion and Garside groupoids
-status: draft
+status: published
 research_item: def-author-18fc5d9b80f3-garside-groupoid
 dependency_level: 2
 ---

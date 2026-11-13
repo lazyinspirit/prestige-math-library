@@ -1,6 +1,6 @@
 ---
 title: Two ribbon-lcm expressions and presentation
-status: draft
+status: published
 research_item: prop-ribbon-lcm-relations-artin-tits-normalisers
 dependency_level: 13
 sources:

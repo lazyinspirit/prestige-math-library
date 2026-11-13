@@ -1,6 +1,6 @@
 ---
 title: Parallel classes of roots and finite inversion sets
-status: draft
+status: published
 research_item: lem-author-b19d43a8e520-bh-parallel-root-classes
 dependency_level: 13
 sources:

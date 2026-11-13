@@ -1,6 +1,6 @@
 ---
 title: Algebraic chamber-label set
-status: draft
+status: published
 research_item: def-chamber-labels-artin-tits-normalisers
 dependency_level: 8
 sources:

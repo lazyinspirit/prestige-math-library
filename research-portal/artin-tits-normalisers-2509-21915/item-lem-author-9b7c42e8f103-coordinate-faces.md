@@ -1,6 +1,6 @@
 ---
 title: Coordinate faces span their annihilator subspaces
-status: draft
+status: published
 research_item: lem-author-9b7c42e8f103-coordinate-faces
 dependency_level: 1
 ---

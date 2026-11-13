@@ -1,6 +1,6 @@
 ---
 title: The Salvetti order complex and its finite CW case
-status: draft
+status: published
 research_item: lem-author-5a1e77100001-order-complex-model
 dependency_level: 5
 ---

@@ -2,7 +2,7 @@
 id: prop-ribbon-lcm-relations-artin-tits-normalisers
 kind: proposition
 title: Two ribbon-lcm expressions and presentation
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

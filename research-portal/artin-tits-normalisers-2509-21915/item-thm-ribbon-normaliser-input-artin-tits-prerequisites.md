@@ -1,6 +1,6 @@
 ---
 title: Independent spherical ribbon splitting input
-status: draft
+status: published
 research_item: thm-ribbon-normaliser-input-artin-tits-prerequisites
 dependency_level: 8
 sources:

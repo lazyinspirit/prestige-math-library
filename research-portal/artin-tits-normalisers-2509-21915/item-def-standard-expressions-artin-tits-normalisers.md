@@ -1,6 +1,6 @@
 ---
 title: Standard expressions and their lengths
-status: draft
+status: published
 research_item: def-standard-expressions-artin-tits-normalisers
 dependency_level: 11
 sources:

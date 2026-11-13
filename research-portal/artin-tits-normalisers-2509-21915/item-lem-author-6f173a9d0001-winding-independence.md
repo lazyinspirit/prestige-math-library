@@ -1,6 +1,6 @@
 ---
 title: Independent meridian classes detected by individual winding maps
-status: draft
+status: published
 research_item: lem-author-6f173a9d0001-winding-independence
 dependency_level: 4
 sources:

@@ -1,6 +1,6 @@
 ---
 title: The flop restriction complement is the finite ADE relative complement
-status: draft
+status: published
 research_item: lem-author-5f10a31d9e26-finite-ade-complement-identification
 dependency_level: 10
 ---

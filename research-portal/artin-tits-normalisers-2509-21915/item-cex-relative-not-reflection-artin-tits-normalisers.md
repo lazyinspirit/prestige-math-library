@@ -1,6 +1,6 @@
 ---
 title: A relative arrangement need not be a reflection arrangement
-status: draft
+status: published
 research_item: cex-relative-not-reflection-artin-tits-normalisers
 dependency_level: 10
 sources:

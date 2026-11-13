@@ -2,7 +2,7 @@
 id: def-author-5a1e77100001-salvetti-poset
 kind: definition
 title: The incident facet and chamber poset
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

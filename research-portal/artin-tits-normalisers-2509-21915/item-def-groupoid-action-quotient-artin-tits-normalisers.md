@@ -1,6 +1,6 @@
 ---
 title: Free actions and quotient groupoids
-status: draft
+status: published
 research_item: def-groupoid-action-quotient-artin-tits-normalisers
 dependency_level: 8
 sources:

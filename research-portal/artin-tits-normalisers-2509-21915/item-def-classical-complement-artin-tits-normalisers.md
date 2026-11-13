@@ -1,6 +1,6 @@
 ---
 title: Classical complexified hyperplane complement
-status: draft
+status: published
 research_item: def-classical-complement-artin-tits-normalisers
 dependency_level: 4
 sources:

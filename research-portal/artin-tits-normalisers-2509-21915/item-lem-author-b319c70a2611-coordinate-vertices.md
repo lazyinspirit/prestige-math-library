@@ -1,6 +1,6 @@
 ---
 title: Coordinate vertices inside a relative open ball
-status: draft
+status: published
 research_item: lem-author-b319c70a2611-coordinate-vertices
 dependency_level: 1
 ---

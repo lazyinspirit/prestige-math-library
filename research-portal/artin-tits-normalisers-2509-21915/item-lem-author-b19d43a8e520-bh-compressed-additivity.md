@@ -1,6 +1,6 @@
 ---
 title: Compressed inversion count is additive for Coxeter-reduced composites
-status: draft
+status: published
 research_item: lem-author-b19d43a8e520-bh-compressed-additivity
 dependency_level: 14
 sources:

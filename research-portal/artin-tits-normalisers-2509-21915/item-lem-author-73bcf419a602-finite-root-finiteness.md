@@ -1,6 +1,6 @@
 ---
 title: Finite roots and finite Coxeter groups at finite rank
-status: draft
+status: published
 research_item: lem-author-73bcf419a602-finite-root-finiteness
 dependency_level: 8
 ---

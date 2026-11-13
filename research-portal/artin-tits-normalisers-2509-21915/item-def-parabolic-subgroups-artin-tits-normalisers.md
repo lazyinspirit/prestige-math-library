@@ -1,6 +1,6 @@
 ---
 title: Standard parabolic subgroups and parabolic roots
-status: draft
+status: published
 research_item: def-parabolic-subgroups-artin-tits-normalisers
 dependency_level: 7
 sources:

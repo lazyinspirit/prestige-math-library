@@ -2,7 +2,7 @@
 id: lem-author-c81e5a0d2026-vertex-splitting
 kind: lemma
 title: Unique conjugator factorization restricts to a normalizer splitting
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

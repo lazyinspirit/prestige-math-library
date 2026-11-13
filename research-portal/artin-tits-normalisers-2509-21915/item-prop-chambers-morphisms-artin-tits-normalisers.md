@@ -1,6 +1,6 @@
 ---
 title: Correspondence between chamber labels and Brink–Howlett morphisms
-status: draft
+status: published
 research_item: prop-chambers-morphisms-artin-tits-normalisers
 dependency_level: 16
 sources:

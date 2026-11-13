@@ -2,7 +2,7 @@
 id: lem-author-a7d202611130-elementary-root-prefix
 kind: lemma
 title: Elementary inversions detect the two initial prefixes
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

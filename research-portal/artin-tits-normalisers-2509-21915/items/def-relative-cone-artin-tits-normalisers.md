@@ -2,7 +2,7 @@
 id: def-relative-cone-artin-tits-normalisers
 kind: definition
 title: Tits cone intersections, relative roots and arrangements
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

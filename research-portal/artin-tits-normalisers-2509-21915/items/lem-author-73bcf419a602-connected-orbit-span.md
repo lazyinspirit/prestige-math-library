@@ -2,7 +2,7 @@
 id: lem-author-73bcf419a602-connected-orbit-span
 kind: lemma
 title: Connected propagation spans the component
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

@@ -1,6 +1,6 @@
 ---
 title: Four colour orbits of eight D4 chambers
-status: draft
+status: published
 research_item: ex-d4-normaliser-orbits-artin-tits-normalisers
 dependency_level: 18
 sources:

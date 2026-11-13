@@ -1,6 +1,6 @@
 ---
 title: Two-generator minimal common left multiple
-status: draft
+status: published
 research_item: lem-two-generator-minimal-artin-tits-normalisers
 dependency_level: 18
 sources:

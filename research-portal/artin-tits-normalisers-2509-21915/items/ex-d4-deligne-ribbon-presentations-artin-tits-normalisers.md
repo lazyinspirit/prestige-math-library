@@ -2,7 +2,7 @@
 id: ex-d4-deligne-ribbon-presentations-artin-tits-normalisers
 kind: example
 title: D4 Deligne and ribbon graphs without quadratic relations
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

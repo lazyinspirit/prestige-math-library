@@ -1,6 +1,6 @@
 ---
 title: Independent groupoid covering and universal-cover input
-status: draft
+status: published
 research_item: thm-groupoid-cover-input-artin-tits-prerequisites
 dependency_level: 6
 sources:

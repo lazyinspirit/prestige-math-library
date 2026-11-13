@@ -2,7 +2,7 @@
 id: lem-finite-wall-path-artin-tits-normalisers
 kind: lemma
 title: Finite wall-crossing connectivity
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

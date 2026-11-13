@@ -2,7 +2,7 @@
 id: rem-spherical-garside-artin-tits-normalisers
 kind: remark
 title: Garside divisibility and lcm assertions for A+
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

@@ -1,6 +1,6 @@
 ---
 title: Independent spherical Artin Garside input
-status: draft
+status: published
 research_item: thm-spherical-artin-garside-input-artin-tits-prerequisites
 dependency_level: 4
 sources:

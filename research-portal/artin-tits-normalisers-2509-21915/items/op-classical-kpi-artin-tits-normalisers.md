@@ -2,7 +2,7 @@
 id: op-classical-kpi-artin-tits-normalisers
 kind: open-problem
 title: Classical K(pi,1) conjecture
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

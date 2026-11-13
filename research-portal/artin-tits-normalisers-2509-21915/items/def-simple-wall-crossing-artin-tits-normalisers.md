@@ -2,7 +2,7 @@
 id: def-simple-wall-crossing-artin-tits-normalisers
 kind: definition
 title: Simple wall-crossing elements and maps
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

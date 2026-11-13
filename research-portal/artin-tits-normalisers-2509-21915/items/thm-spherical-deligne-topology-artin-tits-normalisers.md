@@ -2,7 +2,7 @@
 id: thm-spherical-deligne-topology-artin-tits-normalisers
 kind: theorem
 title: Spherical relative arrangements and Deligne topology
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

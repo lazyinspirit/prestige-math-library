@@ -2,7 +2,7 @@
 id: lem-author-e61520261113-disjoint-cover-translates
 kind: lemma
 title: Disjoint translates of invariant Salvetti cover members
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

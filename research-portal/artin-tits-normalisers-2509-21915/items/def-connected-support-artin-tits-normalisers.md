@@ -2,7 +2,7 @@
 id: def-connected-support-artin-tits-normalisers
 kind: definition
 title: Connected component notation [I,a]
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

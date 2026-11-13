@@ -2,7 +2,7 @@
 id: lem-author-e61520261113-pair-stabilizers
 kind: lemma
 title: Free complement actions have trivial incident-pair stabilizers
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

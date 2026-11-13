@@ -1,6 +1,6 @@
 ---
 title: Brink–Howlett generators and invariance of standard length
-status: draft
+status: published
 research_item: cor-brink-howlett-generators-length-artin-tits-normalisers
 dependency_level: 16
 sources:

@@ -1,6 +1,6 @@
 ---
 title: Divisibility and atomicity in a category
-status: draft
+status: published
 research_item: def-author-18fc5d9b80f3-category-divisibility
 dependency_level: 0
 ---

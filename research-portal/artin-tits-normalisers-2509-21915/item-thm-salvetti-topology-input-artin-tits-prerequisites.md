@@ -1,6 +1,6 @@
 ---
 title: Independent Salvetti homotopy-model input
-status: draft
+status: published
 research_item: thm-salvetti-topology-input-artin-tits-prerequisites
 dependency_level: 7
 sources:

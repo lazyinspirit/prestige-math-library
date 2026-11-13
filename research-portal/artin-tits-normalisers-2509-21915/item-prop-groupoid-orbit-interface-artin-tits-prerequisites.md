@@ -1,6 +1,6 @@
 ---
 title: Free object actions give orbit coverings
-status: draft
+status: published
 research_item: prop-groupoid-orbit-interface-artin-tits-prerequisites
 dependency_level: 7
 ---

@@ -1,6 +1,6 @@
 ---
 title: Deligne asphericity used for the relative complement
-status: draft
+status: published
 research_item: thm-finite-simplicial-asphericity-artin-tits-normalisers
 dependency_level: 19
 sources:

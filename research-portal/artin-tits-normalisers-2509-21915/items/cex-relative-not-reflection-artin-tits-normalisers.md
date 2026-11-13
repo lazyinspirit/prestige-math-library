@@ -2,7 +2,7 @@
 id: cex-relative-not-reflection-artin-tits-normalisers
 kind: counterexample
 title: A relative arrangement need not be a reflection arrangement
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

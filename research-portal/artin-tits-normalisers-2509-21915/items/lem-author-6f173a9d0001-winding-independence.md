@@ -2,7 +2,7 @@
 id: lem-author-6f173a9d0001-winding-independence
 kind: lemma
 title: Independent meridian classes detected by individual winding maps
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

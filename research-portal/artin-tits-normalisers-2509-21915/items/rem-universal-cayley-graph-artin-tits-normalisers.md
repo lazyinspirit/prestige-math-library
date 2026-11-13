@@ -2,7 +2,7 @@
 id: rem-universal-cayley-graph-artin-tits-normalisers
 kind: remark
 title: Universal wall graph as a groupoid Cayley graph
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

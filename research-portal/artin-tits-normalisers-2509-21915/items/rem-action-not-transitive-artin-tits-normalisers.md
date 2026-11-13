@@ -2,7 +2,7 @@
 id: rem-action-not-transitive-artin-tits-normalisers
 kind: remark
 title: The relative normaliser action need not be chamber-transitive
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

@@ -2,7 +2,7 @@
 id: lem-wall-is-morphism-artin-tits-normalisers
 kind: lemma
 title: Wall-crossing elements are Brink–Howlett morphisms
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

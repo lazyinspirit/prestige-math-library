@@ -2,7 +2,7 @@
 id: lem-author-a7d202611130-finite-relative-longest
 kind: lemma
 title: Finite relative longest element without spherical ambient rank
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

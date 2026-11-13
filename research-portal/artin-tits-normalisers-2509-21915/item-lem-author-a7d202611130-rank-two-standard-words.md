@@ -1,6 +1,6 @@
 ---
 title: Exactly two standard words in the finite corank-two residue
-status: draft
+status: published
 research_item: lem-author-a7d202611130-rank-two-standard-words
 dependency_level: 17
 sources:

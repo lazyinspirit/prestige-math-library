@@ -1,6 +1,6 @@
 ---
 title: Coxeter-system, roots, length and weak-order conventions
-status: draft
+status: published
 research_item: def-coxeter-data-artin-tits-normalisers
 dependency_level: 1
 sources:

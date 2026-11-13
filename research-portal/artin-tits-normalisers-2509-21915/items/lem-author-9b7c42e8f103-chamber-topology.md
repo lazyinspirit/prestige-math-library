@@ -2,7 +2,7 @@
 id: lem-author-9b7c42e8f103-chamber-topology
 kind: lemma
 title: The full-cone and interior arrangements have identical chambers
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

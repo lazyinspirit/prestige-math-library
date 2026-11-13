@@ -1,6 +1,6 @@
 ---
 title: Facet incidence and localized chamber signs
-status: draft
+status: published
 research_item: lem-author-5a1e77100001-facet-incidence
 dependency_level: 3
 ---

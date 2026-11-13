@@ -1,6 +1,6 @@
 ---
 title: Normal Deligne–ribbon cover and its deck group
-status: draft
+status: published
 research_item: cor-deligne-normal-cover-artin-tits-normalisers
 dependency_level: 23
 sources:

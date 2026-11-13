@@ -2,7 +2,7 @@
 id: def-topological-path-assignment-artin-tits-normalisers
 kind: definition
 title: Equivariant chamber-point and path assignment
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

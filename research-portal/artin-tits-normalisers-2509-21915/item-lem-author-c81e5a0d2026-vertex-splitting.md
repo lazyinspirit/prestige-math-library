@@ -1,6 +1,6 @@
 ---
 title: Unique conjugator factorization restricts to a normalizer splitting
-status: draft
+status: published
 research_item: lem-author-c81e5a0d2026-vertex-splitting
 dependency_level: 1
 ---

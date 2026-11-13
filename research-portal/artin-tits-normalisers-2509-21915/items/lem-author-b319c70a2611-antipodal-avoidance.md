@@ -2,7 +2,7 @@
 id: lem-author-b319c70a2611-antipodal-avoidance
 kind: lemma
 title: Antipodal generic points in a central relative ball
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

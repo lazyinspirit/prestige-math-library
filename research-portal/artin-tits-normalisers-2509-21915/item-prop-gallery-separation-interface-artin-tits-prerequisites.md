@@ -1,6 +1,6 @@
 ---
 title: Finite galleries and separating hyperplanes
-status: draft
+status: published
 research_item: prop-gallery-separation-interface-artin-tits-prerequisites
 dependency_level: 1
 ---

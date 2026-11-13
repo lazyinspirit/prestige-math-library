@@ -2,7 +2,7 @@
 id: prop-author-5f10a31d9e26-slice-restriction-contract
 kind: proposition
 title: Generic slicing identifies flop stability walls with restricted ADE walls
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

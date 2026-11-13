@@ -1,6 +1,6 @@
 ---
 title: Well-defined Deligne-to-ribbon functor and geodesic images
-status: draft
+status: published
 research_item: lem-deligne-ribbon-functor-artin-tits-normalisers
 dependency_level: 20
 sources:

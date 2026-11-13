@@ -2,7 +2,7 @@
 id: lem-wall-length-halfspace-artin-tits-normalisers
 kind: lemma
 title: Length additivity and the base-chamber half-space
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

@@ -1,6 +1,6 @@
 ---
 title: Opposition as conjugation by a longest Artin lift
-status: draft
+status: published
 research_item: lem-author-c81e5a0d2026-longest-conjugation
 dependency_level: 5
 ---

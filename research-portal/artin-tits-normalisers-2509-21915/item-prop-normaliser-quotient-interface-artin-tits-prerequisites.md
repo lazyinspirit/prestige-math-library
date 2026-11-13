@@ -1,6 +1,6 @@
 ---
 title: Normalizer quotients, kernels and conditional surjectivity
-status: draft
+status: published
 research_item: prop-normaliser-quotient-interface-artin-tits-prerequisites
 dependency_level: 0
 ---

@@ -2,7 +2,7 @@
 id: prop-normaliser-quotient-interface-artin-tits-prerequisites
 kind: proposition
 title: Normalizer quotients, kernels and conditional surjectivity
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

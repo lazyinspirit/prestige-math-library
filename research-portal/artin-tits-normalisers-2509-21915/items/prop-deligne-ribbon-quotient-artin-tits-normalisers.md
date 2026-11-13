@@ -2,7 +2,7 @@
 id: prop-deligne-ribbon-quotient-artin-tits-normalisers
 kind: proposition
 title: Reduced ribbon groupoid is the Deligne orbit quotient
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

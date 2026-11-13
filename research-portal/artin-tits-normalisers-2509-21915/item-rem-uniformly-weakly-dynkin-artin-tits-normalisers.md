@@ -1,6 +1,6 @@
 ---
 title: Reported uniformly weakly Dynkin extension
-status: draft
+status: published
 research_item: rem-uniformly-weakly-dynkin-artin-tits-normalisers
 dependency_level: 23
 sources:

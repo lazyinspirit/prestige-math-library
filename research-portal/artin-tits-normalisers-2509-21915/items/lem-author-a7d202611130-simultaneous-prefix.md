@@ -2,7 +2,7 @@
 id: lem-author-a7d202611130-simultaneous-prefix
 kind: lemma
 title: Simultaneous elementary prefixes force the relative longest prefix
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

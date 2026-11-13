@@ -1,6 +1,6 @@
 ---
 title: Two elementary prefixes force a finite rank-two relative root set
-status: draft
+status: published
 research_item: lem-author-7bd202611130-common-prefix-finiteness
 dependency_level: 20
 sources:

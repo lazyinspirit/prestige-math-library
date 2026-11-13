@@ -1,6 +1,6 @@
 ---
 title: Threefold-flop realization of relative arrangements and derived actions
-status: draft
+status: published
 research_item: rem-threefold-flop-applications-artin-tits-normalisers
 dependency_level: 18
 sources:

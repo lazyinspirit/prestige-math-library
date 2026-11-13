@@ -2,7 +2,7 @@
 id: lem-author-d3116e202611-principal-prefix-ideals
 kind: lemma
 title: Bounded prefix ideals and rank-two closure
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

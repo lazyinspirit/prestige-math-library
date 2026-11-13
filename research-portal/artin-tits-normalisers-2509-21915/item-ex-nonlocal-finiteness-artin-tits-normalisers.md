@@ -1,6 +1,6 @@
 ---
 title: Failure of local finiteness on the full cone
-status: draft
+status: published
 research_item: ex-nonlocal-finiteness-artin-tits-normalisers
 dependency_level: 9
 sources:

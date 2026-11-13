@@ -1,6 +1,6 @@
 ---
 title: Reduced-ribbon lcm presentation including the empty subset
-status: draft
+status: published
 research_item: thm-ribbon-lcm-input-artin-tits-prerequisites
 dependency_level: 9
 sources:

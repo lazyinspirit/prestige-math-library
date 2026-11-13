@@ -2,7 +2,7 @@
 id: def-complement-interface-artin-tits-prerequisites
 kind: definition
 title: Complexified complements in an open convex cone
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

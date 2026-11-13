@@ -1,6 +1,6 @@
 ---
 title: The infinite dihedral Tits cone is an open half-plane with its vertex
-status: draft
+status: published
 research_item: lem-author-6f173a9d0001-dihedral-tits-cone
 dependency_level: 2
 ---

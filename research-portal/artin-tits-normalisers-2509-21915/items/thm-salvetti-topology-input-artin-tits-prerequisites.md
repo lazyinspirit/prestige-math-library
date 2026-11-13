@@ -2,7 +2,7 @@
 id: thm-salvetti-topology-input-artin-tits-prerequisites
 kind: theorem
 title: Independent Salvetti homotopy-model input
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

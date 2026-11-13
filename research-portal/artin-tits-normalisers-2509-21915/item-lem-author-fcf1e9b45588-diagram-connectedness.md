@@ -1,6 +1,6 @@
 ---
 title: Irreducible reflection arrangements give connected Coxeter diagrams
-status: draft
+status: published
 research_item: lem-author-fcf1e9b45588-diagram-connectedness
 dependency_level: 4
 ---

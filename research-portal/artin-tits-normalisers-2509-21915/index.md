@@ -1,7 +1,7 @@
 ---
 title: Normalisers of parabolic subgroups of Artin–Tits groups and Tits cone
   intersections
-status: draft
+status: published
 ---
 
 - [Coxeter geometry and relative chambers](coxeter-arrangement-prerequisites) — level 0

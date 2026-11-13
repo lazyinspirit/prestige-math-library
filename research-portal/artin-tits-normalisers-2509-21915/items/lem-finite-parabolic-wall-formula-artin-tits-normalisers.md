@@ -2,7 +2,7 @@
 id: lem-finite-parabolic-wall-formula-artin-tits-normalisers
 kind: lemma
 title: Simplified wall crossing for a finite parabolic
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

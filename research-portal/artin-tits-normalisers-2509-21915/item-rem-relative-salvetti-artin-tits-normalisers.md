@@ -1,6 +1,6 @@
 ---
 title: Relative Salvetti models and the finiteness qualification
-status: draft
+status: published
 research_item: rem-relative-salvetti-artin-tits-normalisers
 dependency_level: 11
 sources:

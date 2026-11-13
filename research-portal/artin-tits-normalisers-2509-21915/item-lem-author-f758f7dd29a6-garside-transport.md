@@ -1,6 +1,6 @@
 ---
 title: Transport of a Garside structure to the presented monoid
-status: draft
+status: published
 research_item: lem-author-f758f7dd29a6-garside-transport
 dependency_level: 3
 ---

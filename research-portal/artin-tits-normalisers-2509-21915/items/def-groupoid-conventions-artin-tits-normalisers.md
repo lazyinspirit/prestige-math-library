@@ -2,7 +2,7 @@
 id: def-groupoid-conventions-artin-tits-normalisers
 kind: definition
 title: Connected small groupoids and vertex groups
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

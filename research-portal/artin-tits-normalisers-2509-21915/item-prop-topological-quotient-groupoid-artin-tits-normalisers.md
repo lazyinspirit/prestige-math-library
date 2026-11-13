@@ -1,6 +1,6 @@
 ---
 title: Fundamental groupoids of free topological quotients
-status: draft
+status: published
 research_item: prop-topological-quotient-groupoid-artin-tits-normalisers
 dependency_level: 9
 sources:

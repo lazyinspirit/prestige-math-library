@@ -1,6 +1,6 @@
 ---
 title: Relative complexified hyperplane complement
-status: draft
+status: published
 research_item: def-relative-complement-artin-tits-normalisers
 dependency_level: 9
 sources:

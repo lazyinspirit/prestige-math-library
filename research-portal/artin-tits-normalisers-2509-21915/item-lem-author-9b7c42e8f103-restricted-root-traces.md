@@ -1,6 +1,6 @@
 ---
 title: The relative root deletion set is the restricted-hyperplane union
-status: draft
+status: published
 research_item: lem-author-9b7c42e8f103-restricted-root-traces
 dependency_level: 1
 ---

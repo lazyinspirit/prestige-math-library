@@ -2,7 +2,7 @@
 id: lem-author-a7d202611130-rank-two-standard-words
 kind: lemma
 title: Exactly two standard words in the finite corank-two residue
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps: &a1

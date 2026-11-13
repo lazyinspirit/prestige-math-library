@@ -1,6 +1,6 @@
 ---
 title: Universal wall groupoid on relative chambers
-status: draft
+status: published
 research_item: def-universal-wall-groupoid-artin-tits-normalisers
 dependency_level: 15
 sources:

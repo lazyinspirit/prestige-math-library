@@ -1,6 +1,6 @@
 ---
 title: Componentwise crossings are inverse elements
-status: draft
+status: published
 research_item: lem-author-4ac39e6f1702-inverse-crossing
 dependency_level: 5
 ---

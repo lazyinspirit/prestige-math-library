@@ -2,7 +2,7 @@
 id: lem-author-6f173a9d0001-finite-cw-obstruction
 kind: lemma
 title: The dihedral product complement admits no finite CW model
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

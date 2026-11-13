@@ -2,7 +2,7 @@
 id: def-parabolic-subgroups-artin-tits-normalisers
 kind: definition
 title: Standard parabolic subgroups and parabolic roots
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

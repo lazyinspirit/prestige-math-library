@@ -2,7 +2,7 @@
 id: def-normaliser-quotients-artin-tits-normalisers
 kind: definition
 title: Normalisers and their quotients
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

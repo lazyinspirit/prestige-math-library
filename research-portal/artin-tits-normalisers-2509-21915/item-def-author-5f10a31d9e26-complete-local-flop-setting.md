@@ -1,6 +1,6 @@
 ---
 title: Complete-local smooth threefold flops and their slice data
-status: draft
+status: published
 research_item: def-author-5f10a31d9e26-complete-local-flop-setting
 dependency_level: 0
 sources:

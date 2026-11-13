@@ -1,6 +1,6 @@
 ---
 title: Finite pair separation yields a finite relative ball
-status: draft
+status: published
 research_item: lem-author-b319c70a2611-finite-relative-ball
 dependency_level: 9
 ---

@@ -2,7 +2,7 @@
 id: rem-wall-root-characterisation-artin-tits-normalisers
 kind: remark
 title: The printed root characterization of a wall-crossing element
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

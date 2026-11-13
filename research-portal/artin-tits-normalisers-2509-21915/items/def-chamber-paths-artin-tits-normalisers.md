@@ -2,7 +2,7 @@
 id: def-chamber-paths-artin-tits-normalisers
 kind: definition
 title: Chamber paths, concatenation and wall words
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

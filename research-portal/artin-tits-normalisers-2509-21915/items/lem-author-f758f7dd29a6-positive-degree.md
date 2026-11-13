@@ -2,7 +2,7 @@
 id: lem-author-f758f7dd29a6-positive-degree
 kind: lemma
 title: Positive degree and atoms of the presented Artin monoid
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

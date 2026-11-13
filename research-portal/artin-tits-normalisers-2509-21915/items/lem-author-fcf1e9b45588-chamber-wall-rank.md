@@ -2,7 +2,7 @@
 id: lem-author-fcf1e9b45588-chamber-wall-rank
 kind: lemma
 title: Chamber walls of an essential finite reflection group give full Coxeter rank
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

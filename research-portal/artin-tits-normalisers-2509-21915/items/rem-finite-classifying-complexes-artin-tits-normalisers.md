@@ -2,7 +2,7 @@
 id: rem-finite-classifying-complexes-artin-tits-normalisers
 kind: remark
 title: Finite CW-models for spherical normaliser quotients
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

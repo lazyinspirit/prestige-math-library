@@ -1,6 +1,6 @@
 ---
 title: Normalisers and their quotients
-status: draft
+status: published
 research_item: def-normaliser-quotients-artin-tits-normalisers
 dependency_level: 8
 sources:

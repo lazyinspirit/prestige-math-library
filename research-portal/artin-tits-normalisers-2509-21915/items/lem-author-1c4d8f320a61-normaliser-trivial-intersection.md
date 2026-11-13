@@ -2,7 +2,7 @@
 id: lem-author-1c4d8f320a61-normaliser-trivial-intersection
 kind: lemma
 title: The root-permuting subgroup intersects the parabolic trivially
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

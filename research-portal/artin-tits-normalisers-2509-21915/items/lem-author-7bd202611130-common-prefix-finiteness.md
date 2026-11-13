@@ -2,7 +2,7 @@
 id: lem-author-7bd202611130-common-prefix-finiteness
 kind: lemma
 title: Two elementary prefixes force a finite rank-two relative root set
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

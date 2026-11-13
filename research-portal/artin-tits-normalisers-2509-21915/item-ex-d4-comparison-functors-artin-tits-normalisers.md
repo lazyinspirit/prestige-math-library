@@ -1,6 +1,6 @@
 ---
 title: Explicit D4 comparison functors
-status: draft
+status: published
 research_item: ex-d4-comparison-functors-artin-tits-normalisers
 dependency_level: 25
 sources:

@@ -2,7 +2,7 @@
 id: lem-author-6f173a9d0001-dihedral-roots
 kind: lemma
 title: Roots of the infinite dihedral geometric representation
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

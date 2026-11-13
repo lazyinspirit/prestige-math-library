@@ -1,6 +1,6 @@
 ---
 title: The relative normaliser action need not be chamber-transitive
-status: draft
+status: published
 research_item: rem-action-not-transitive-artin-tits-normalisers
 dependency_level: 16
 sources:

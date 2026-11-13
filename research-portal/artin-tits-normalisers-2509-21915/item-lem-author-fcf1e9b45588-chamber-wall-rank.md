@@ -1,6 +1,6 @@
 ---
 title: Chamber walls of an essential finite reflection group give full Coxeter rank
-status: draft
+status: published
 research_item: lem-author-fcf1e9b45588-chamber-wall-rank
 dependency_level: 3
 sources:

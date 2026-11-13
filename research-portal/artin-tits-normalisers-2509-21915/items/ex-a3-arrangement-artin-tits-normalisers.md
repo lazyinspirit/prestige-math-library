@@ -2,7 +2,7 @@
 id: ex-a3-arrangement-artin-tits-normalisers
 kind: example
 title: A3 relative arrangement and its six labelled chambers
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

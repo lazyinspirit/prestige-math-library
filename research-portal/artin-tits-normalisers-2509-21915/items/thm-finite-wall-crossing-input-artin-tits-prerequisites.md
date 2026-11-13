@@ -2,7 +2,7 @@
 id: thm-finite-wall-crossing-input-artin-tits-prerequisites
 kind: theorem
 title: Independent finite local wall-crossing formula
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

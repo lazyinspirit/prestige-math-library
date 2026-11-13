@@ -1,6 +1,6 @@
 ---
 title: D4 chamber labels and complete adjacency graph
-status: draft
+status: published
 research_item: ex-d4-labelled-chamber-graph-artin-tits-normalisers
 dependency_level: 17
 sources:

@@ -2,7 +2,7 @@
 id: ex-d4-universal-wall-graph-artin-tits-normalisers
 kind: example
 title: Universal groupoid interpretation of the D4 graph
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

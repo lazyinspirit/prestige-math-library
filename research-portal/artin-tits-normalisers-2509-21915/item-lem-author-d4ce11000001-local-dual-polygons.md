@@ -1,6 +1,6 @@
 ---
 title: The dual face cycles are the D4 atomic polygons
-status: draft
+status: published
 research_item: lem-author-d4ce11000001-local-dual-polygons
 dependency_level: 23
 ---

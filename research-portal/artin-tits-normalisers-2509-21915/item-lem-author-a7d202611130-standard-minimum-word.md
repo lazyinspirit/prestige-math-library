@@ -1,6 +1,6 @@
 ---
 title: Standard expressions are minimum generator words
-status: draft
+status: published
 research_item: lem-author-a7d202611130-standard-minimum-word
 dependency_level: 16
 sources:

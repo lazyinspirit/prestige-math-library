@@ -2,7 +2,7 @@
 id: thm-groupoid-cover-input-artin-tits-prerequisites
 kind: theorem
 title: Independent groupoid covering and universal-cover input
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

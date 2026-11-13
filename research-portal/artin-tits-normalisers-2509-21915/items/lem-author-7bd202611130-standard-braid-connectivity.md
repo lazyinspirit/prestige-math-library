@@ -2,7 +2,7 @@
 id: lem-author-7bd202611130-standard-braid-connectivity
 kind: lemma
 title: Standard expressions are connected by atomic braid moves
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

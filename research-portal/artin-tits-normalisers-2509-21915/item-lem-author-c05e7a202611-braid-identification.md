@@ -1,6 +1,6 @@
 ---
 title: Ko atomic braid relations are exactly the finite BH rank-two relations
-status: draft
+status: published
 research_item: lem-author-c05e7a202611-braid-identification
 dependency_level: 20
 sources:

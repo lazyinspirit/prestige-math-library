@@ -3,7 +3,7 @@ title: Prerequisite omissions and potential defects
 research_report: defects
 description: Original-article findings for Normalisers of parabolic subgroups of
   Artin–Tits groups and Tits cone intersections.
-status: draft
+status: published
 generated_at: "2026-11-13T16:48:12.730Z"
 ---
 

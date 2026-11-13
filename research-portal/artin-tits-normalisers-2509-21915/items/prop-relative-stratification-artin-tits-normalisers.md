@@ -2,7 +2,7 @@
 id: prop-relative-stratification-artin-tits-normalisers
 kind: proposition
 title: Convexity, stratification and faces of the relative cone
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

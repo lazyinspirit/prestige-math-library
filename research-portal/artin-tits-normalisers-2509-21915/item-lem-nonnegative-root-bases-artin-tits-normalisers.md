@@ -1,6 +1,6 @@
 ---
 title: Root bases and nonnegative matrices for chamber labels
-status: draft
+status: published
 research_item: lem-nonnegative-root-bases-artin-tits-normalisers
 dependency_level: 9
 sources:

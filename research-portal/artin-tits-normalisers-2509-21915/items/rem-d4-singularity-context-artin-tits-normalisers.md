@@ -2,7 +2,7 @@
 id: rem-d4-singularity-context-artin-tits-normalisers
 kind: remark
 title: cD4 geometric occurrence and core-coset context
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

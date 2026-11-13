@@ -1,6 +1,6 @@
 ---
 title: The reduced ribbon subgroupoid uses exactly the exterior atoms
-status: draft
+status: published
 research_item: lem-author-c81e5a0d2026-reduced-ribbon-generators
 dependency_level: 7
 sources:

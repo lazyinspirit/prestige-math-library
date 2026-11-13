@@ -1,6 +1,6 @@
 ---
 title: Equivariant chamber-point and path assignment
-status: draft
+status: published
 research_item: def-topological-path-assignment-artin-tits-normalisers
 dependency_level: 18
 sources:

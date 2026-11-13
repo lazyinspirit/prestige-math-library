@@ -1,6 +1,6 @@
 ---
 title: Reflection cardinalities of the three connected finite rank-three types
-status: draft
+status: published
 research_item: lem-author-fcf1e9b45588-rank-three-reflection-cardinalities
 dependency_level: 2
 ---

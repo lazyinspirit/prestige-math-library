@@ -2,7 +2,7 @@
 id: rem-relative-root-identifications-artin-tits-normalisers
 kind: remark
 title: Distinct roots can define the same relative hyperplane
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

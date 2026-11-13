@@ -2,7 +2,7 @@
 id: lem-author-c05e7a202611-core-minimum-dictionary
 kind: lemma
 title: Minimal representatives identify core cosets with root-transport arrows
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

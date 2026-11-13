@@ -2,7 +2,7 @@
 id: lem-relative-local-neighbourhood-artin-tits-normalisers
 kind: lemma
 title: Relative central neighbourhood and antipodal generic points
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

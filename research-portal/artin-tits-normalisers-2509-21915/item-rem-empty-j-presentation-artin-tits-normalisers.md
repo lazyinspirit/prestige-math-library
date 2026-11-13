@@ -1,6 +1,6 @@
 ---
 title: The ordinary Coxeter presentation is the empty-J case
-status: draft
+status: published
 research_item: rem-empty-j-presentation-artin-tits-normalisers
 dependency_level: 25
 sources:

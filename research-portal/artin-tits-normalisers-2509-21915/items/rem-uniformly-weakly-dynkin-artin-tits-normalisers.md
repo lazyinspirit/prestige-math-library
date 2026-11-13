@@ -2,7 +2,7 @@
 id: rem-uniformly-weakly-dynkin-artin-tits-normalisers
 kind: remark
 title: Reported uniformly weakly Dynkin extension
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

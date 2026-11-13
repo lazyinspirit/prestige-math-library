@@ -1,6 +1,6 @@
 ---
 title: D4 grading, region poset and simple-morphism divisibility
-status: draft
+status: published
 research_item: rem-d4-region-poset-artin-tits-normalisers
 dependency_level: 20
 sources:

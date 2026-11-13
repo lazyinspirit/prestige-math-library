@@ -1,6 +1,6 @@
 ---
 title: Common relative facets have one enlarged standard subset
-status: draft
+status: published
 research_item: lem-author-4ac39e6f1702-common-facet
 dependency_level: 10
 ---

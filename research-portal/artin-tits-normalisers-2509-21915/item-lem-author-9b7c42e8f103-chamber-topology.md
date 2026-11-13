@@ -1,6 +1,6 @@
 ---
 title: The full-cone and interior arrangements have identical chambers
-status: draft
+status: published
 research_item: lem-author-9b7c42e8f103-chamber-topology
 dependency_level: 4
 sources:

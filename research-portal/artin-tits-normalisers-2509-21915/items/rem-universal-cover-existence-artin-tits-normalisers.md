@@ -2,7 +2,7 @@
 id: rem-universal-cover-existence-artin-tits-normalisers
 kind: remark
 title: Existence of universal connected groupoid covers
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

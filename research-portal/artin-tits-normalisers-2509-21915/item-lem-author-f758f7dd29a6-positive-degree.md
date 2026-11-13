@@ -1,6 +1,6 @@
 ---
 title: Positive degree and atoms of the presented Artin monoid
-status: draft
+status: published
 research_item: lem-author-f758f7dd29a6-positive-degree
 dependency_level: 0
 ---

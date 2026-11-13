@@ -2,7 +2,7 @@
 id: prop-author-5f10a31d9e26-chamber-flop-nccr-dictionary
 kind: proposition
 title: Chambers label smooth minimal models and their NCCR categories
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

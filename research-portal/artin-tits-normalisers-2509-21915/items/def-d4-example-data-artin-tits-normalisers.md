@@ -2,7 +2,7 @@
 id: def-d4-example-data-artin-tits-normalisers
 kind: definition
 title: D4 diagram and generator conventions
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

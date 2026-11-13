@@ -1,6 +1,6 @@
 ---
 title: Artin–Tits group, pure subgroup and positive lifts
-status: draft
+status: published
 research_item: def-artin-pure-lifts-artin-tits-normalisers
 dependency_level: 6
 sources:

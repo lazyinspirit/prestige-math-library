@@ -2,7 +2,7 @@
 id: prop-root-length-artin-tits-normalisers
 kind: proposition
 title: Root-sign and inversion-length facts
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

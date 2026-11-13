@@ -2,7 +2,7 @@
 id: lem-author-fcf1e9b45588-mirror-reflection-bijection
 kind: lemma
 title: The hyperplanes are in bijection with Coxeter reflections
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

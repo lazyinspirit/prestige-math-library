@@ -2,7 +2,7 @@
 id: lem-finite-root-difference-artin-tits-normalisers
 kind: lemma
 title: Finite root difference forces finite connected parabolic
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

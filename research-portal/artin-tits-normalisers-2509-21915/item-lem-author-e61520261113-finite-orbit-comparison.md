@@ -1,6 +1,6 @@
 ---
 title: Finite equivariant Salvetti and orbit homotopy models
-status: draft
+status: published
 research_item: lem-author-e61520261113-finite-orbit-comparison
 dependency_level: 11
 sources:

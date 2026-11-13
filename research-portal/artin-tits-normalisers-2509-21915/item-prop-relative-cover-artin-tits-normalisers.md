@@ -1,6 +1,6 @@
 ---
 title: Relative free action, normal cover and exact sequence
-status: draft
+status: published
 research_item: prop-relative-cover-artin-tits-normalisers
 dependency_level: 16
 sources:

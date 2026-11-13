@@ -1,6 +1,6 @@
 ---
 title: D4 diagram and generator conventions
-status: draft
+status: published
 research_item: def-d4-example-data-artin-tits-normalisers
 dependency_level: 2
 sources:

@@ -1,6 +1,6 @@
 ---
 title: Interior restriction preserves chambers and adjacency
-status: draft
+status: published
 research_item: rem-same-chambers-artin-tits-normalisers
 dependency_level: 11
 sources:

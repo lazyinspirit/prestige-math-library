@@ -2,7 +2,7 @@
 title: Article items · 11 — Coxeter normaliser semidirect product
 description: Presents 27 items from the article and its immediate prerequisites,
   covering dependency levels 13–17.
-status: draft
+status: published
 dependency_level: 7
 research_article_page: true
 item_count: 27

@@ -1,6 +1,6 @@
 ---
 title: Irreducible rank-three reflection-arrangement counts
-status: draft
+status: published
 research_item: prop-rank-three-reflection-counts-artin-tits-normalisers
 dependency_level: 5
 sources:

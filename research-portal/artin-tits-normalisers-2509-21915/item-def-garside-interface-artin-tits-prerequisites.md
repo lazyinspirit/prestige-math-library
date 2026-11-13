@@ -1,6 +1,6 @@
 ---
 title: Categorical Garside structures and simple arrows
-status: draft
+status: published
 research_item: def-garside-interface-artin-tits-prerequisites
 dependency_level: 1
 sources:

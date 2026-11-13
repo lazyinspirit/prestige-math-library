@@ -2,7 +2,7 @@
 id: lem-author-2e40db4c81b4-universal-cover
 kind: lemma
 title: Universal groupoid covering from the trivial subgroup
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

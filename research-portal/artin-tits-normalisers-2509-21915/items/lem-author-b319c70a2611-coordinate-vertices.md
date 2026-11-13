@@ -2,7 +2,7 @@
 id: lem-author-b319c70a2611-coordinate-vertices
 kind: lemma
 title: Coordinate vertices inside a relative open ball
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

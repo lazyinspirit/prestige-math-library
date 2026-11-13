@@ -2,7 +2,7 @@
 id: prop-chamber-open-set-properties-artin-tits-normalisers
 kind: proposition
 title: Contractibility and intersection components of chamber open sets
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

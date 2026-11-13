@@ -1,6 +1,6 @@
 ---
 title: Deleting relative root hyperplanes removes all cone-boundary points
-status: draft
+status: published
 research_item: lem-author-9b7c42e8f103-interior-complement
 dependency_level: 3
 sources:

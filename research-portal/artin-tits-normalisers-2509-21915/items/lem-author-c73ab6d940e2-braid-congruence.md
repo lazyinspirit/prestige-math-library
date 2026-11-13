@@ -2,7 +2,7 @@
 id: lem-author-c73ab6d940e2-braid-congruence
 kind: lemma
 title: Braid congruence preserves word length and support
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

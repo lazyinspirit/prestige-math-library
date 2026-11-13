@@ -1,6 +1,6 @@
 ---
 title: Flag triangles construct the dual sphere
-status: draft
+status: published
 research_item: lem-author-d4ce11000001-flag-dual-sphere
 dependency_level: 18
 ---

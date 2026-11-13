@@ -1,6 +1,6 @@
 ---
 title: Geodesic chamber paths
-status: draft
+status: published
 research_item: def-geodesic-path-artin-tits-normalisers
 dependency_level: 16
 sources:

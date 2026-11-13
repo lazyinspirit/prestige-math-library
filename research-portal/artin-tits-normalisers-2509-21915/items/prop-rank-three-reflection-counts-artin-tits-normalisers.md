@@ -2,7 +2,7 @@
 id: prop-rank-three-reflection-counts-artin-tits-normalisers
 kind: proposition
 title: Irreducible rank-three reflection-arrangement counts
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

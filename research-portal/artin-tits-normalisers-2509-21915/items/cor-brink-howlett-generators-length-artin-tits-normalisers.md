@@ -2,7 +2,7 @@
 id: cor-brink-howlett-generators-length-artin-tits-normalisers
 kind: corollary
 title: Brink–Howlett generators and invariance of standard length
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

@@ -1,6 +1,6 @@
 ---
 title: Translation to Ko’s atomic cosets and the scope extension
-status: draft
+status: published
 research_item: rem-core-coset-translation-artin-tits-normalisers
 dependency_level: 21
 sources:

@@ -3,7 +3,7 @@ title: Groupoid covers, arrangement topology and ribbons
 description: Connect path groupoids and covering quotients with arrangement
   complements, Salvetti and Deligne models, spherical Garside structures and
   ribbons, preserving each finite or spherical hypothesis.
-status: draft
+status: published
 dependency_level: 1
 ---
 

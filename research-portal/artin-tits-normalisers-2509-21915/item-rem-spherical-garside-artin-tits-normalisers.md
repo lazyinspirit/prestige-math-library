@@ -1,6 +1,6 @@
 ---
 title: Garside divisibility and lcm assertions for A+
-status: draft
+status: published
 research_item: rem-spherical-garside-artin-tits-normalisers
 dependency_level: 10
 sources:

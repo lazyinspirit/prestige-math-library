@@ -1,6 +1,6 @@
 ---
 title: Every normalising element factors through the root-permuting subgroup
-status: draft
+status: published
 research_item: lem-author-1c4d8f320a61-normaliser-factorization
 dependency_level: 12
 ---

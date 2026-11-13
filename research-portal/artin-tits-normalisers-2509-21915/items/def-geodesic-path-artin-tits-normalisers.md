@@ -2,7 +2,7 @@
 id: def-geodesic-path-artin-tits-normalisers
 kind: definition
 title: Geodesic chamber paths
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

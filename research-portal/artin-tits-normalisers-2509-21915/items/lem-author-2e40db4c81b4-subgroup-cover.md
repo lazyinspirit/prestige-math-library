@@ -2,7 +2,7 @@
 id: lem-author-2e40db4c81b4-subgroup-cover
 kind: lemma
 title: Explicit connected cover associated with a vertex subgroup
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

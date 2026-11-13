@@ -1,6 +1,6 @@
 ---
 title: Connected component notation [I,a]
-status: draft
+status: published
 research_item: def-connected-support-artin-tits-normalisers
 dependency_level: 3
 sources:

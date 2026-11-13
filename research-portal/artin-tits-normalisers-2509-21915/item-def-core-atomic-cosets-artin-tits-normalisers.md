@@ -1,6 +1,6 @@
 ---
 title: Core and atomic double cosets
-status: draft
+status: published
 research_item: def-core-atomic-cosets-artin-tits-normalisers
 dependency_level: 9
 sources:

@@ -1,6 +1,6 @@
 ---
 title: Induced normaliser action on arrangement groupoids
-status: draft
+status: published
 research_item: rem-normaliser-deligne-action-artin-tits-normalisers
 dependency_level: 18
 sources:

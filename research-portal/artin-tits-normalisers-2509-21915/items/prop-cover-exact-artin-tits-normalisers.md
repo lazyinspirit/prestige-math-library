@@ -2,7 +2,7 @@
 id: prop-cover-exact-artin-tits-normalisers
 kind: proposition
 title: Vertex-group exact sequence of a normal groupoid cover
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

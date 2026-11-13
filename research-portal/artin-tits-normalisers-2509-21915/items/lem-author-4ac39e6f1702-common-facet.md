@@ -2,7 +2,7 @@
 id: lem-author-4ac39e6f1702-common-facet
 kind: lemma
 title: Common relative facets have one enlarged standard subset
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

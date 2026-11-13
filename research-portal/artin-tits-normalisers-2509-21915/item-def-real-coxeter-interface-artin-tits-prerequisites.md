@@ -1,6 +1,6 @@
 ---
 title: Real Coxeter representation and contragredient notation
-status: draft
+status: published
 research_item: def-real-coxeter-interface-artin-tits-prerequisites
 dependency_level: 0
 ---

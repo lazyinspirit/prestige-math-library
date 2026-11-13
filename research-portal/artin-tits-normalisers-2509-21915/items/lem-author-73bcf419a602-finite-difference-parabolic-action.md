@@ -2,7 +2,7 @@
 id: lem-author-73bcf419a602-finite-difference-parabolic-action
 kind: lemma
 title: Finite outside roots give a finite complementary parabolic
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

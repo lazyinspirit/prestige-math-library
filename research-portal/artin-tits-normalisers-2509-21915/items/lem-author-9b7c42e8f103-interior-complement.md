@@ -2,7 +2,7 @@
 id: lem-author-9b7c42e8f103-interior-complement
 kind: lemma
 title: Deleting relative root hyperplanes removes all cone-boundary points
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

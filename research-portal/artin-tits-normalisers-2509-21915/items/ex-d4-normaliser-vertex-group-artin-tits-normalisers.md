@@ -2,7 +2,7 @@
 id: ex-d4-normaliser-vertex-group-artin-tits-normalisers
 kind: example
 title: Eight-element D4 normaliser quotient vertex group
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

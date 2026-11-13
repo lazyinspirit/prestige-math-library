@@ -1,6 +1,6 @@
 ---
 title: Each normaliser coset has exactly one root-permuting representative
-status: draft
+status: published
 research_item: lem-author-1c4d8f320a61-unique-normaliser-representatives
 dependency_level: 12
 ---

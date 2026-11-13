@@ -2,7 +2,7 @@
 id: thm-ribbon-normaliser-input-artin-tits-prerequisites
 kind: theorem
 title: Independent spherical ribbon splitting input
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

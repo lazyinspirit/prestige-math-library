@@ -1,6 +1,6 @@
 ---
 title: Reduced-word lifts and the prefix-order convention
-status: draft
+status: published
 research_item: prop-positive-lift-interface-artin-tits-prerequisites
 dependency_level: 0
 ---

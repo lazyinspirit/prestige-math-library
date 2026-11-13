@@ -1,6 +1,6 @@
 ---
 title: Sign cells and local finite-arrangement reductions
-status: draft
+status: published
 research_item: prop-sign-chamber-interface-artin-tits-prerequisites
 dependency_level: 1
 ---

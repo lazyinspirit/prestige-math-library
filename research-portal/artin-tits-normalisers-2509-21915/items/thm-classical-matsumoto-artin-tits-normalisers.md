@@ -2,7 +2,7 @@
 id: thm-classical-matsumoto-artin-tits-normalisers
 kind: theorem
 title: Classical Matsumoto assertion recalled in the article
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

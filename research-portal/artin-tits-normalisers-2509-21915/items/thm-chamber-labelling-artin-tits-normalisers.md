@@ -2,7 +2,7 @@
 id: thm-chamber-labelling-artin-tits-normalisers
 kind: theorem
 title: Labelling theorem for relative chambers
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

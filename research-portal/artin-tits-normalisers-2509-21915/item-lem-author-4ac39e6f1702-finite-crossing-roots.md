@@ -1,6 +1,6 @@
 ---
 title: Adjacent relative chambers force a finite crossing component
-status: draft
+status: published
 research_item: lem-author-4ac39e6f1702-finite-crossing-roots
 dependency_level: 12
 ---

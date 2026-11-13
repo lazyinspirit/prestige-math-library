@@ -2,7 +2,7 @@
 id: rem-disjoint-interiors-artin-tits-normalisers
 kind: remark
 title: Relative cones can avoid the interior of the full cone
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

@@ -2,7 +2,7 @@
 id: prop-relative-linear-interface-artin-tits-prerequisites
 kind: proposition
 title: Annihilators, relative hyperplanes and complexification
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

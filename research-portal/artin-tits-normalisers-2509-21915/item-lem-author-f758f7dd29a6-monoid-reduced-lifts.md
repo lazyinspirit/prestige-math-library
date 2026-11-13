@@ -1,6 +1,6 @@
 ---
 title: Reduced Coxeter lifts in the presented positive monoid
-status: draft
+status: published
 research_item: lem-author-f758f7dd29a6-monoid-reduced-lifts
 dependency_level: 1
 ---

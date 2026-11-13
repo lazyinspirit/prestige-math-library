@@ -1,6 +1,6 @@
 ---
 title: Minimal representatives identify core cosets with root-transport arrows
-status: draft
+status: published
 research_item: lem-author-c05e7a202611-core-minimum-dictionary
 dependency_level: 10
 ---

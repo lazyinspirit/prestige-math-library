@@ -1,6 +1,6 @@
 ---
 title: Nonnegative inverse matrices preserve extremal basis rays
-status: draft
+status: published
 research_item: lem-nonnegative-inverse-interface-artin-tits-prerequisites
 dependency_level: 0
 ---

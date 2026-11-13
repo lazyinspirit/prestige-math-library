@@ -2,7 +2,7 @@
 id: lem-two-generator-minimal-artin-tits-normalisers
 kind: lemma
 title: Two-generator minimal common left multiple
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

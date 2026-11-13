@@ -1,6 +1,6 @@
 ---
 title: Segment intersections and the inversion bound
-status: draft
+status: published
 research_item: lem-segment-intersections-artin-tits-normalisers
 dependency_level: 4
 sources:

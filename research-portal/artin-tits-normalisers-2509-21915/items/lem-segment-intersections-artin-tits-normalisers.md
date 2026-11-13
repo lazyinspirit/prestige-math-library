@@ -2,7 +2,7 @@
 id: lem-segment-intersections-artin-tits-normalisers
 kind: lemma
 title: Segment intersections and the inversion bound
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

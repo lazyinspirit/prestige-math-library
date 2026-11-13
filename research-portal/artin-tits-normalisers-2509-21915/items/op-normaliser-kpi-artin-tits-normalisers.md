@@ -2,7 +2,7 @@
 id: op-normaliser-kpi-artin-tits-normalisers
 kind: open-problem
 title: K(pi,1) conjecture for arbitrary normaliser quotients
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

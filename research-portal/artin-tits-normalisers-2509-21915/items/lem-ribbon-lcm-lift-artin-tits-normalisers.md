@@ -2,7 +2,7 @@
 id: lem-ribbon-lcm-lift-artin-tits-normalisers
 kind: lemma
 title: Ribbon lcms lift two-generator Brink–Howlett elements
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

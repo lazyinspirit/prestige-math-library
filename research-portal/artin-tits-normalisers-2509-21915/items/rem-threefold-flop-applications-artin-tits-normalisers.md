@@ -2,7 +2,7 @@
 id: rem-threefold-flop-applications-artin-tits-normalisers
 kind: remark
 title: Threefold-flop realization of relative arrangements and derived actions
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

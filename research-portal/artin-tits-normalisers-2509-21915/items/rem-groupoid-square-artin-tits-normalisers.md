@@ -2,7 +2,7 @@
 id: rem-groupoid-square-artin-tits-normalisers
 kind: remark
 title: Commutative square of arrangement, ribbon and Brink–Howlett groupoids
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

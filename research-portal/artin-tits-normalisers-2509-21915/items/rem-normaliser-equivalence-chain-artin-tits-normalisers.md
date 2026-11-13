@@ -2,7 +2,7 @@
 id: rem-normaliser-equivalence-chain-artin-tits-normalisers
 kind: remark
 title: Explicit equivalence chain for the middle isomorphism
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

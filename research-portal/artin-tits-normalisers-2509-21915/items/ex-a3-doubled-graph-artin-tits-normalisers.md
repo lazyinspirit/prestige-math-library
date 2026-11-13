@@ -2,7 +2,7 @@
 id: ex-a3-doubled-graph-artin-tits-normalisers
 kind: example
 title: A3 doubled adjacency graph
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

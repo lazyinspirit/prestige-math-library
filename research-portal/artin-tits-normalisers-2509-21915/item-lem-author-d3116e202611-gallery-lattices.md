@@ -1,6 +1,6 @@
 ---
 title: Both gallery divisibility orders are lattices
-status: draft
+status: published
 research_item: lem-author-d3116e202611-gallery-lattices
 dependency_level: 4
 ---

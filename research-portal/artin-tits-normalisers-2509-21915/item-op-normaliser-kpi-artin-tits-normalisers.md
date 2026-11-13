@@ -1,6 +1,6 @@
 ---
 title: K(pi,1) conjecture for arbitrary normaliser quotients
-status: draft
+status: published
 research_item: op-normaliser-kpi-artin-tits-normalisers
 dependency_level: 17
 sources:

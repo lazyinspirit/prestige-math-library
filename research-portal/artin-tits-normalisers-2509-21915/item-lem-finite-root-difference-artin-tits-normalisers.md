@@ -1,6 +1,6 @@
 ---
 title: Finite root difference forces finite connected parabolic
-status: draft
+status: published
 research_item: lem-finite-root-difference-artin-tits-normalisers
 dependency_level: 11
 sources:

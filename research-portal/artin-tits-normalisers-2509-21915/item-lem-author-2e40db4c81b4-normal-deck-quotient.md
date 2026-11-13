@@ -1,6 +1,6 @@
 ---
 title: Normal coverings and the convention-correct deck quotient
-status: draft
+status: published
 research_item: lem-author-2e40db4c81b4-normal-deck-quotient
 dependency_level: 4
 sources:

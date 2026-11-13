@@ -2,7 +2,7 @@
 id: lem-nonnegative-root-bases-artin-tits-normalisers
 kind: lemma
 title: Root bases and nonnegative matrices for chamber labels
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

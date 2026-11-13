@@ -1,6 +1,6 @@
 ---
 title: Universal wall graph as a groupoid Cayley graph
-status: draft
+status: published
 research_item: rem-universal-cayley-graph-artin-tits-normalisers
 dependency_level: 18
 sources:

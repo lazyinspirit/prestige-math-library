@@ -2,7 +2,7 @@
 id: lem-author-c05e7a202611-atomic-product-length
 kind: lemma
 title: Atomic reduced compositions and standard products use the same order
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

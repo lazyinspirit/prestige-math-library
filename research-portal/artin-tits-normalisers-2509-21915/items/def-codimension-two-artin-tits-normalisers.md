@@ -2,7 +2,7 @@
 id: def-codimension-two-artin-tits-normalisers
 kind: definition
 title: Codimension-two relations
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

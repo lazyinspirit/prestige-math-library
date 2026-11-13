@@ -1,6 +1,6 @@
 ---
 title: Stabilizer of a fundamental parabolic face
-status: draft
+status: published
 research_item: prop-parabolic-face-stabiliser-artin-tits-normalisers
 dependency_level: 8
 sources:

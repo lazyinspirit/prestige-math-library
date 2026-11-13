@@ -2,7 +2,7 @@
 id: lem-author-fcf1e9b45588-invariant-metric-essentiality
 kind: lemma
 title: Invariant metric, product arrangements and essentiality
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

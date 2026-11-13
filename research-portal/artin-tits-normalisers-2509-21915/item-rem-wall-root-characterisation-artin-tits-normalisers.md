@@ -1,6 +1,6 @@
 ---
 title: The printed root characterization of a wall-crossing element
-status: draft
+status: published
 research_item: rem-wall-root-characterisation-artin-tits-normalisers
 dependency_level: 10
 sources:

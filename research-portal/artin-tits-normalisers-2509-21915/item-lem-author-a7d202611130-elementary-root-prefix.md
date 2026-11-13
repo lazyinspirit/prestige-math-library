@@ -1,6 +1,6 @@
 ---
 title: Elementary inversions detect the two initial prefixes
-status: draft
+status: published
 research_item: lem-author-a7d202611130-elementary-root-prefix
 dependency_level: 12
 sources:

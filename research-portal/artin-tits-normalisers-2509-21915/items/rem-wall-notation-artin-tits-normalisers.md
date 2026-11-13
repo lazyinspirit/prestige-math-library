@@ -2,7 +2,7 @@
 id: rem-wall-notation-artin-tits-normalisers
 kind: remark
 title: Wall-crossing notation and Brink–Howlett convention
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

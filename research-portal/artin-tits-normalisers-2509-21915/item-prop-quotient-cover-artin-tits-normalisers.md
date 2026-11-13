@@ -1,6 +1,6 @@
 ---
 title: Quotient groupoids give normal covers
-status: draft
+status: published
 research_item: prop-quotient-cover-artin-tits-normalisers
 dependency_level: 9
 sources:

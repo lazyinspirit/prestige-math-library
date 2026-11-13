@@ -2,7 +2,7 @@
 id: def-brink-howlett-artin-tits-normalisers
 kind: definition
 title: Brink–Howlett groupoid
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

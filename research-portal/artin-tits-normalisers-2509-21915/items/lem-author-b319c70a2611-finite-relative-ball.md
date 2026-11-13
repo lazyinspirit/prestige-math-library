@@ -2,7 +2,7 @@
 id: lem-author-b319c70a2611-finite-relative-ball
 kind: lemma
 title: Finite pair separation yields a finite relative ball
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

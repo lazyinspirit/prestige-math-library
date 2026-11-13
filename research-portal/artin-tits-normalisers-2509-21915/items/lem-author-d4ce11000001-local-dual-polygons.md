@@ -2,7 +2,7 @@
 id: lem-author-d4ce11000001-local-dual-polygons
 kind: lemma
 title: The dual face cycles are the D4 atomic polygons
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

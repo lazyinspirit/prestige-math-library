@@ -2,7 +2,7 @@
 id: lem-author-73bcf419a602-finite-root-finiteness
 kind: lemma
 title: Finite roots and finite Coxeter groups at finite rank
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

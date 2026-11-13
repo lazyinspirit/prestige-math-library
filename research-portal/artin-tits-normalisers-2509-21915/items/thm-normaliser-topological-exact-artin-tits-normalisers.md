@@ -2,7 +2,7 @@
 id: thm-normaliser-topological-exact-artin-tits-normalisers
 kind: theorem
 title: Isomorphism of algebraic and topological normaliser sequences
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

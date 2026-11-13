@@ -2,7 +2,7 @@
 id: prop-root-inversion-interface-artin-tits-prerequisites
 kind: proposition
 title: Root signs, inversions and descent translation
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

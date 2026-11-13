@@ -2,7 +2,7 @@
 id: def-arrangement-topology-interface-artin-tits-prerequisites
 kind: definition
 title: Locally finite arrangements and relative face terminology
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

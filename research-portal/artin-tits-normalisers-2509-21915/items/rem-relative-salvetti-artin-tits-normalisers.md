@@ -2,7 +2,7 @@
 id: rem-relative-salvetti-artin-tits-normalisers
 kind: remark
 title: Relative Salvetti models and the finiteness qualification
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

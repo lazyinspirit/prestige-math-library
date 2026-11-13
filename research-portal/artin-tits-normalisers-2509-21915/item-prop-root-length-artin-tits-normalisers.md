@@ -1,6 +1,6 @@
 ---
 title: Root-sign and inversion-length facts
-status: draft
+status: published
 research_item: prop-root-length-artin-tits-normalisers
 dependency_level: 2
 sources:

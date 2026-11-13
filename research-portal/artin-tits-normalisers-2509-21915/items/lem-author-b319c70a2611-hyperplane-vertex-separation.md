@@ -2,7 +2,7 @@
 id: lem-author-b319c70a2611-hyperplane-vertex-separation
 kind: lemma
 title: A hyperplane near the centre separates opposite coordinate vertices
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

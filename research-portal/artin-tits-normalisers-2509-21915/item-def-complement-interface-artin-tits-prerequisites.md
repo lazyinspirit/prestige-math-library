@@ -1,6 +1,6 @@
 ---
 title: Complexified complements in an open convex cone
-status: draft
+status: published
 research_item: def-complement-interface-artin-tits-prerequisites
 dependency_level: 1
 ---

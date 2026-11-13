@@ -2,7 +2,7 @@
 id: lem-author-c81e5a0d2026-reduced-ribbon-generators
 kind: lemma
 title: The reduced ribbon subgroupoid uses exactly the exterior atoms
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

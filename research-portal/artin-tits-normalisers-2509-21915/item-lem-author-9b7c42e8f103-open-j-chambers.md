@@ -1,6 +1,6 @@
 ---
 title: Full-dimensional J-chambers lie in the relative interior
-status: draft
+status: published
 research_item: lem-author-9b7c42e8f103-open-j-chambers
 dependency_level: 2
 sources:

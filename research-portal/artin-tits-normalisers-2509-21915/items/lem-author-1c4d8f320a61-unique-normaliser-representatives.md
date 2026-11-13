@@ -2,7 +2,7 @@
 id: lem-author-1c4d8f320a61-unique-normaliser-representatives
 kind: lemma
 title: Each normaliser coset has exactly one root-permuting representative
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

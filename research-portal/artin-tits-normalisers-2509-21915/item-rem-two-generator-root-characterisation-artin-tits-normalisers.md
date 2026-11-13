@@ -1,6 +1,6 @@
 ---
 title: Root characterization of the inverse two-generator element
-status: draft
+status: published
 research_item: rem-two-generator-root-characterisation-artin-tits-normalisers
 dependency_level: 19
 sources:

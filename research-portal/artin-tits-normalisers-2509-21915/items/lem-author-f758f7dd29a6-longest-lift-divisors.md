@@ -2,7 +2,7 @@
 id: lem-author-f758f7dd29a6-longest-lift-divisors
 kind: lemma
 title: Both-sided divisors of the longest positive lift
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

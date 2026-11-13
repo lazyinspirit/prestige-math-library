@@ -1,6 +1,6 @@
 ---
 title: Normaliser action on labels, orbits and adjacency
-status: draft
+status: published
 research_item: lem-normaliser-chamber-action-artin-tits-normalisers
 dependency_level: 15
 sources:

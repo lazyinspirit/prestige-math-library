@@ -2,7 +2,7 @@
 id: prop-positive-lift-posets-artin-tits-normalisers
 kind: proposition
 title: Divisibility of positive lifts and weak order
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

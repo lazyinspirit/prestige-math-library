@@ -2,7 +2,7 @@
 id: lem-author-2e40db4c81b4-pointed-classification
 kind: lemma
 title: Pointed classification of connected groupoid coverings
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

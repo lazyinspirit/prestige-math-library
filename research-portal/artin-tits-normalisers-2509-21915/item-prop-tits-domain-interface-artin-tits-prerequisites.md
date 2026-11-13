@@ -1,6 +1,6 @@
 ---
 title: Tits cone geometry with its exact interior boundary
-status: draft
+status: published
 research_item: prop-tits-domain-interface-artin-tits-prerequisites
 dependency_level: 0
 ---

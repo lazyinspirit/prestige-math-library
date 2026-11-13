@@ -2,7 +2,7 @@
 id: def-small-groupoid-interface-artin-tits-prerequisites
 kind: definition
 title: Set-sized groupoids, functors and composition conversion
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

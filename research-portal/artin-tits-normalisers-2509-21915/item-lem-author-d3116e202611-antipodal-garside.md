@@ -1,6 +1,6 @@
 ---
 title: Antipodal transformation and finite-type Garside structure
-status: draft
+status: published
 research_item: lem-author-d3116e202611-antipodal-garside
 dependency_level: 5
 sources:

@@ -2,7 +2,7 @@
 id: thm-artin-normaliser-splitting-artin-tits-normalisers
 kind: theorem
 title: Spherical Artin normaliser splitting
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

@@ -2,7 +2,7 @@
 id: def-author-18fc5d9b80f3-category-divisibility
 kind: definition
 title: Divisibility and atomicity in a category
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

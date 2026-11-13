@@ -1,6 +1,6 @@
 ---
 title: Spherical and stereographic pictures of the D4 arrangement
-status: draft
+status: published
 research_item: ex-d4-spherical-picture-artin-tits-normalisers
 dependency_level: 10
 sources:

@@ -2,7 +2,7 @@
 id: lem-deligne-ribbon-functor-artin-tits-normalisers
 kind: lemma
 title: Well-defined Deligne-to-ribbon functor and geodesic images
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

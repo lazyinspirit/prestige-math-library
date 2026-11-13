@@ -2,7 +2,7 @@
 id: lem-author-c05e7a202611-corank-two-top
 kind: lemma
 title: The corank-two atomic coset has relative longest minimum
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

@@ -1,6 +1,6 @@
 ---
 title: Atomic braid relations
-status: draft
+status: published
 research_item: def-atomic-braid-artin-tits-normalisers
 dependency_level: 19
 sources:

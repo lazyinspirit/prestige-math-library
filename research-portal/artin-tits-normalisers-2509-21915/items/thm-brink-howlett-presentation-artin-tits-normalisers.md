@@ -2,7 +2,7 @@
 id: thm-brink-howlett-presentation-artin-tits-normalisers
 kind: theorem
 title: Brink–Howlett presentation by atomic and quadratic relations
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

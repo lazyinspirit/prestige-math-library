@@ -1,6 +1,6 @@
 ---
 title: Rigidity of two-letter words below braid length
-status: draft
+status: published
 research_item: lem-author-c73ab6d940e2-short-two-letter-rigidity
 dependency_level: 6
 ---

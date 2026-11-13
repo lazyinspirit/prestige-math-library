@@ -2,7 +2,7 @@
 id: thm-relative-chamber-labelling-input-artin-tits-prerequisites
 kind: theorem
 title: Independent relative chamber labelling input
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

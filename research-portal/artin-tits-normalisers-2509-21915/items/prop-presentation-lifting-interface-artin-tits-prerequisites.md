@@ -2,7 +2,7 @@
 id: prop-presentation-lifting-interface-artin-tits-prerequisites
 kind: proposition
 title: A criterion for lifting a presented groupoid
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

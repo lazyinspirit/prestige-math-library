@@ -2,7 +2,7 @@
 id: lem-author-7bd202611130-presentation-faithfulness
 kind: lemma
 title: The atomic-quadratic path quotient is faithful
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

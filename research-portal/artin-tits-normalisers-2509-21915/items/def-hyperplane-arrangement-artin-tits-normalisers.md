@@ -2,7 +2,7 @@
 id: def-hyperplane-arrangement-artin-tits-normalisers
 kind: definition
 title: Linear hyperplane arrangements and local finiteness
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

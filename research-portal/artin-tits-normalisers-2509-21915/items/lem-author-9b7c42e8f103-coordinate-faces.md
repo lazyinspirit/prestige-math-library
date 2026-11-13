@@ -2,7 +2,7 @@
 id: lem-author-9b7c42e8f103-coordinate-faces
 kind: lemma
 title: Coordinate faces span their annihilator subspaces
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

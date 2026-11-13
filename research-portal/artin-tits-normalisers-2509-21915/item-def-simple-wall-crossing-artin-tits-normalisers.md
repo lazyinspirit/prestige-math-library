@@ -1,6 +1,6 @@
 ---
 title: Simple wall-crossing elements and maps
-status: draft
+status: published
 research_item: def-simple-wall-crossing-artin-tits-normalisers
 dependency_level: 9
 sources:

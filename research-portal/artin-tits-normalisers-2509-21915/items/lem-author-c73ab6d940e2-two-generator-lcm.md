@@ -2,7 +2,7 @@
 id: lem-author-c73ab6d940e2-two-generator-lcm
 kind: lemma
 title: The two-generator braid element is the lcm
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

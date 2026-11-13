@@ -2,7 +2,7 @@
 id: def-coxeter-arrangement-artin-tits-normalisers
 kind: definition
 title: Reflecting hyperplanes, fundamental chamber and Tits cone
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

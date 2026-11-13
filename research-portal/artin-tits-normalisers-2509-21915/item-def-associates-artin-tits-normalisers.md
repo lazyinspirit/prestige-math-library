@@ -1,6 +1,6 @@
 ---
 title: Associates of a parabolic subset
-status: draft
+status: published
 research_item: def-associates-artin-tits-normalisers
 dependency_level: 8
 sources:

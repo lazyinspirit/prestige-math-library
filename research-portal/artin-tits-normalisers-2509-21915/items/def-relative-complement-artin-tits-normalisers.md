@@ -2,7 +2,7 @@
 id: def-relative-complement-artin-tits-normalisers
 kind: definition
 title: Relative complexified hyperplane complement
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:

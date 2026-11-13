@@ -2,7 +2,7 @@
 id: lem-standard-geodesic-artin-tits-normalisers
 kind: lemma
 title: Standard expressions correspond to geodesics
-status: draft
+status: published
 domain: mathematics
 origin: pipeline
 deps:
