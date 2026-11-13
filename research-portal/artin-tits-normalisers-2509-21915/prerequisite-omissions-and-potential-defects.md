@@ -4,10 +4,10 @@ research_report: defects
 description: Original-article findings for Normalisers of parabolic subgroups of
   Artin–Tits groups and Tits cone intersections.
 status: draft
-generated_at: 2026-11-13T15:53:28.782Z
+generated_at: "2026-11-13T16:48:12.730Z"
 ---
 
-8 confirmed findings in the original article.
+10 confirmed findings in the original article.
 
 ## pdf-lemma35-boundary-inferences · confirmed
 
@@ -19,13 +19,31 @@ https://arxiv.org/abs/2509.21915; PDF p. 8, Lemma 3.5 proof, sign equivalence an
 
 The closed-chamber induction does not justify nonemptiness of its set $I$. A nontrivial $w$ with $g\in w\overline C$ need not place $g$ outside $\overline C$. The displayed set $I$ can therefore be empty. Separation finiteness itself is not refuted.
 
-The rendered induction allows arbitrary closed-chamber representatives. The earlier $f=g$ example misses the $f\ne g$ branch; distinct endpoints repair that test. Its separate sign objection does not apply to already selected crossing roots.
+The PDF induction uses an arbitrary closed-chamber representative w. Its asserted nonempty I fails for the distinct endpoints below. The earlier $f=g$=0 test misses this branch; the sign equivalence is valid for the roots already selected to cross the open segment.
 
 **Correction:** Use only $g(\alpha)<0\Rightarrow w^{-1}\alpha\in\Phi^-$. Every separating hyperplane then contributes an inversion of $w^{-1}$, directly giving the finite bound without induction.
 
 **Counterexample:** Rank one, $W=\{1,s\}$, $w=s$, $\alpha=\alpha_s$, $f(\alpha_s)=1$, $g=0$.
 
 Both endpoints belong to the Tits cone, $f\in\overline C$, $g\in s\overline C$, $f\ne g$, and $w\ne1$, so the nontrivial induction branch is admissible. Nevertheless $g\in\overline C$ and $I=\{i:g(\alpha_i)<0\}=\varnothing$, contradicting its asserted nonemptiness. The example does not involve a hyperplane crossing the open segment, and does not refute the preceding sign equivalence restricted to already selected crossing roots. It refutes only the nonemptiness inference, not separation finiteness.
+
+## pdf-prop36-ambient-ball-inference · confirmed
+
+**Tags:** over strong conclusions; missing proof steps
+
+https://arxiv.org/abs/2509.21915; PDF p.9, Proposition 3.6 proof, second paragraph, ambient neighbourhood and ball assertion (PDF p. 9).
+
+> We can thus consider a small enough open ball B centred at u
+
+The claimed ambient ball excluding root hyperplanes not through u need not exist. An interior point of the relative cone can be an ambient boundary point with other root hyperplanes accumulating nearby. This invalidates the chosen ambient neighbourhood, not the proposition’s relative local-finiteness conclusion.
+
+The rendered proof explicitly requires B∩Cone, rather than B∩Θ_J. The admissible sequence below contradicts precisely that stronger inference.
+
+**Correction:** Prove a relative-ball statement instead: choose finitely many opposite coordinate vertices near u inside the relative cone. Any proper restricted hyperplane meeting a smaller ball separates one vertex pair, giving finiteness by the inversion-set separation bound. Shrink past those not through u.
+
+**Counterexample:** Rank three with m₁₂=∞, m₁₃=m₂₃=3; J={1,2}, E=Θ_J and u=(0,0,1) in dual simple-root coordinates.
+
+The canonical form has B₁₂=−1 and B₁₃=B₂₃=−1/2. E is the third coordinate line; its positive ray lies in the fundamental closed chamber, so u∈Cone(J)° as required. On the dual, s₁=[[-1,0,0],[2,1,0],[1,0,1]], s₂=[[1,2,0],[0,−1,0],[0,1,1]] both fix u. Put $w_n=(s₁s₂)^n$ and $p=(1,1,0)∈C̄∩H_{α₃}$. Multiplication and induction give $w_np=(1−4n,1+4n,4n²)$. For n≥1, $x_n=w_np/(4n²)$ belongs to Cone and to $H_{w_nα₃}$. Equivariance gives $u(w_nα₃)=(w_n⁻¹u)(α₃)=1$, so this hyperplane misses u. But $x_n→u$. Thus every ambient B∩Cone meets such a hyperplane. The $x_n$ are outside E; they do not contradict relative local finiteness. In fact on E every proper linear hyperplane is {0}, absent near u. The polynomial identity was checked coefficientwise, not inferred from a finite numerical sample.
 
 ## pdf-wall-root-characterisation · confirmed
 
@@ -63,6 +81,20 @@ The original quantifiers do not exclude equal indices; rendered p.19 supplies th
 
 $I$ is an associate of $J$ and $a,b\in I^c$, as required. Here $A^+=\langle\sigma_a\rangle^+$, the sole elementary ribbon is $\sigma_a$, and $\sigma_a\vee\sigma_a=\sigma_a$. A product of elementary ribbons equals it only when its factor count is one. Hence there is exactly one expression, not precisely two; $v_{a,b,I}$ from Lemma 4.15 is not defined for these equal indices.
 
+## pdf-prop46-left-descent-typo · confirmed
+
+**Tags:** typos
+
+https://arxiv.org/abs/2509.21915; PDF p.16, Proposition 4.6(1) proof, paragraph beginning “We claim that for any j” (PDF p. 16).
+
+> contradicting length-minimality.
+
+The displayed descent uses $ys_j$ where $s_jy$ is required. Negativity of $y⁻¹α_j$ detects left descent of $y$. The proof has minimality in $W_Jy$, so the corrected left product gives its intended contradiction.
+
+The formula was checked on the rendered page against the surrounding $W_Jy$ minimality and the root-length criterion. This is an indexing-side typo, not a counterexample to Proposition 4.6.
+
+**Correction:** Replace $ℓ(ys_j)<ℓ(y)$ by $ℓ(s_jy)<ℓ(y)$.
+
 ## pdf-unrestricted-finite-cw · confirmed
 
 **Tags:** over strong conclusions
@@ -73,7 +105,7 @@ https://arxiv.org/abs/2509.21915; PDF p. 13, Remark 3.27; general scope fixed in
 
 Local finiteness does not imply the finite-CW assertion in Remark 3.27. Section 3 is not restricted to spherical type. The infinite-dihedral example has infinitely many independent first-homology classes.
 
-Rendered p.13 says finite without a new standing hypothesis. The preceding spherical conditional only identifies a special-case space; §2.2 restricts spherical type to Sections 5–6.
+The original Remark 3.27 asserts finite CW type. Its preceding spherical sentence is conditional, while p.4 limits the spherical standing assumption to Sections 5–6. The example uses precisely the product complement (3.26).
 
 **Correction:** Keep the Salvetti homotopy model in general; assert its finiteness for a finite relative arrangement, in particular in spherical type.
 
@@ -109,7 +141,7 @@ https://arxiv.org/abs/2509.21915; PDF p. 30, §7.2.1, second displayed braid imm
 
 The second displayed braid has $tv\cdot ts\cdot v$ instead of $tv\cdot st\cdot v$. Its middle arrow is not composable, and the printed labels are unequal in $W$. The lower path in (7.2) already gives the corrected word.
 
-The rendered formula and arrows were read directly, including Figure 4 and both paths in (7.2); no AI-generated expression supplies the attribution.
+Read the printed second equality, Figure 4 directions and both paths in (7.2). Their labels independently establish the source typo; exact integer root matrices verify the unequal printed words and corrected equality.
 
 **Correction:** Replace $s\cdot tv\cdot st=tv\cdot ts\cdot v$ by $s\cdot tv\cdot st=tv\cdot st\cdot v$.
 
@@ -125,9 +157,9 @@ https://arxiv.org/abs/2509.21915; PDF p. 11, Proposition 3.17, first sentence (P
 
 > Then there exists a unique
 
-Enlarged-subset equality alone does not uniquely specify the wall indices. The first sentence asserts uniqueness from the subset equality; the following common-wall condition supplies the intended unique indices.
+The first sentence gives an equality-only uniqueness formulation that needs the common-wall qualification. Read together, the subsequent clauses describe the intended unique wall indices. The subset equality by itself does not characterize them.
 
-The equality-only first sentence is present in the PDF; the example establishes a wording ambiguity, not failure of the intended common-wall theorem.
+The literal first sentence and following common-wall clause were both checked. This is a wording defect only; the example does not refute the proposition interpreted with all its wall conditions.
 
 **Correction:** State uniqueness for the indices describing the specified common wall, then list the subset equality among their properties.
 
@@ -145,6 +177,6 @@ https://arxiv.org/abs/2509.21915; PDF p. 6, Lemma 2.8 proof, omitted surjectivit
 
 Lemma 2.8 proves the induced map and kernel but omits its surjectivity argument. Surjectivity of $A\to W$ does not by itself imply surjectivity on normalisers. The printed proof stops after the kernel equality.
 
-Both original proof paragraphs were read. Neither lifts an arbitrary Coxeter-normaliser class. Corollary 4.8 supplies the independent complement; positive-lift multiplication then fills the omission. The current authored item already contains this argument.
+Read both original proof paragraphs: they construct the induced map and identify its kernel, but do not lift an arbitrary normaliser class. Minimal representatives and positive lifts supply the omitted step; the current authored item includes it.
 
-**Correction:** For a quotient class choose its minimal Coxeter representative $d$, which permutes $J$. From $sd=dt$ with both products length-additive obtain $\sigma_s\sigma_d=\sigma_d\sigma_t$; thus $\sigma_d$ normalises $A_J$ and lifts the class.
+**Correction:** For a quotient class choose its minimal Coxeter representative $d$, which permutes $J$. From $sd=dt$ with both products length-additive obtain $σ_sσ_d=σ_dσ_t$; thus $σ_d$ normalises $A_J$ and lifts the class.
