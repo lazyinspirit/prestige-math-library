@@ -1,0 +1,112 @@
+---
+id: lem-se-localized-boundary-normal-trace
+kind: lemma
+domain: mathematics
+title: Localized multiplier estimate for the exterior Dirichlet normal trace
+status: draft
+deps:
+  - lem-se-exterior-dirichlet-realization
+  - def-se-foundation-integer-sobolev-notation
+  - def-se-foundation-time-function-spaces
+  - physics:lem-nrqm-autonomous-dynamics-flow-calculus
+  - math:lem-spectral-form-domain-and-core-of-a-semibounded-operator
+  - math:thm-spectral-theorem-for-unbounded-self-adjoint-operators
+  - math:thm-sobolev-gauss-green-formula-on-c-one-domains
+  - math:thm-sharp-trace-theorem-for-w-one-p
+  - math:thm-smooth-up-to-the-boundary-density-on-smooth-domains
+  - math:lem-finite-ambient-partitions-for-euclidean-boundary-integration
+  - math:def-bounded-c-one-domain-boundary-charts-and-outward-normal
+  - math:def-axiom-of-choice
+  - math:def-surface-integral-on-a-compact-c-one-hypersurface
+  - math:lem-surface-integral-is-independent-of-c-one-boundary-charts
+  - math:def-completed-product-measure
+  - math:thm-tonelli-and-fubini-for-completed-product-measures
+  - math:thm-complex-holder-minkowski-and-the-quotient-norm
+  - math:thm-complex-lp-completeness-and-almost-everywhere-subsequences
+  - math:thm-heine-cantor-metric
+  - math:thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable
+  - math:thm-sections-of-product-measurable-functions-are-measurable
+dependency_roles:
+  lem-se-exterior-dirichlet-realization: mathematical-premise
+  def-se-foundation-integer-sobolev-notation: mathematical-premise
+  def-se-foundation-time-function-spaces: mathematical-premise
+  physics:lem-nrqm-autonomous-dynamics-flow-calculus: mathematical-premise
+  math:lem-spectral-form-domain-and-core-of-a-semibounded-operator: mathematical-premise
+  math:thm-spectral-theorem-for-unbounded-self-adjoint-operators: mathematical-premise
+  math:thm-sobolev-gauss-green-formula-on-c-one-domains: mathematical-premise
+  math:thm-sharp-trace-theorem-for-w-one-p: mathematical-premise
+  math:thm-smooth-up-to-the-boundary-density-on-smooth-domains: mathematical-premise
+  math:lem-finite-ambient-partitions-for-euclidean-boundary-integration: mathematical-premise
+  math:def-bounded-c-one-domain-boundary-charts-and-outward-normal: mathematical-premise
+  math:def-axiom-of-choice: mathematical-premise
+  math:def-surface-integral-on-a-compact-c-one-hypersurface: mathematical-premise
+  math:lem-surface-integral-is-independent-of-c-one-boundary-charts: mathematical-premise
+  math:def-completed-product-measure: mathematical-premise
+  math:thm-tonelli-and-fubini-for-completed-product-measures: mathematical-premise
+  math:thm-complex-holder-minkowski-and-the-quotient-norm: mathematical-premise
+  math:thm-complex-lp-completeness-and-almost-everywhere-subsequences: mathematical-premise
+  math:thm-heine-cantor-metric: mathematical-premise
+  math:thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable: mathematical-premise
+  math:thm-sections-of-product-measurable-functions-are-measurable: mathematical-premise
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+proof_strategy: direct
+dependency_level: 4
+---
+
+## Statement
+
+Assume the Axiom of Choice. Let $\Omega=\mathbb R^n\setminus\Theta$, $n\ge2$, be an open exterior domain with compact smooth boundary, where $\Theta$ is compact, and let $T>0$. Let $\Delta_D$ be the nonpositive self-adjoint Dirichlet Laplacian of [[lem-se-exterior-dirichlet-realization]]. For $v_0\in H^1_0(\Omega)$ put $v(t)=e^{it\Delta_D}v_0$. There is a unique normal trace $\partial_\nu v\in L^2((0,T)\times\partial\Omega)$ obtained as the limit of the normal derivative traces of spectral approximants to $v_0$, and it satisfies $\|\partial_\nu v\|_{L^2((0,T)\times\partial\Omega)}\le C_{\Omega,T}\|v_0\|_{H^1(\Omega)}$. Here $\nu$ is the outward unit normal of $\Omega$, and surface measure is used on $\partial\Omega$.
+
+There is a real smooth vector field $Q$ supported in an arbitrarily prescribed bounded neighborhood of $\partial\Omega$ and equal to $\nu$ on the boundary. For sufficiently regular solutions, the multiplier identity in the proof contains the boundary term $\frac12\int_0^T\int_{\partial\Omega}(Q\cdot\nu)|\partial_\nu v|^2\,dS\,dt$; its other terms are bounded by a constant depending on $Q$ and $T$ times $\|v_0\|_{H^1}^2$. Neither non-trapping nor star-shapedness is assumed.
+
+## Facts & Assumptions
+
+[F1] [[lem-se-exterior-dirichlet-realization]] gives $A=I-\Delta_D\ge I$, $D(A)=H^2(\Omega)\cap H^1_0(\Omega)$ and $D(A^{1/2})=H^1_0(\Omega)$ with $\|A^{1/2}u\|_2=\|u\|_{H^1}$. Sobolev spaces and the closure defining $H^1_0$ are as in [[def-se-foundation-integer-sobolev-notation]].
+
+[F2] The mathematical self-adjoint flow calculus of [[physics:lem-nrqm-autonomous-dynamics-flow-calculus]], the spectral theorem [[math:thm-spectral-theorem-for-unbounded-self-adjoint-operators]], and the form-domain identity and core of [[math:lem-spectral-form-domain-and-core-of-a-semibounded-operator]] apply under [[math:def-axiom-of-choice]]. They give spectral truncations converging in the form norm and unitary flow commuting with spectral functions; the same calculus preserves the form norm.
+
+[F3] On a bounded smooth truncation, [[math:thm-sobolev-gauss-green-formula-on-c-one-domains]] gives coordinate integration by parts for $H^1$ factors, and [[math:thm-sharp-trace-theorem-for-w-one-p]] gives their bounded $L^2$ boundary traces. [[math:thm-smooth-up-to-the-boundary-density-on-smooth-domains|Ambient smooth restrictions are dense on bounded $C^k$ domains]] supplies approximation in $H^2$ by smooth restrictions. The normal is the graph normal of [[math:def-bounded-c-one-domain-boundary-charts-and-outward-normal]].
+
+[F4] [[math:lem-finite-ambient-partitions-for-euclidean-boundary-integration]] gives a finite smooth ambient partition near the compact boundary. The time and norm conventions are those of [[def-se-foundation-time-function-spaces]]; the boundary product uses surface measure and Lebesgue time measure.
+
+[F5] Put $S=\partial\Omega$. The surface integral of [[math:def-surface-integral-on-a-compact-c-one-hypersurface]] defines a finite Borel measure $\sigma=dS$ on $S$ by [[math:lem-surface-integral-is-independent-of-c-one-boundary-charts]]. With Lebesgue measure $\lambda=dt$ on $(0,T)$, set $P=\overline{\lambda\times\sigma}$ as in [[math:def-completed-product-measure]]. Both factors are finite, hence sigma-finite. Here $H=L^2(S,\sigma;\mathbb C)$ and $K=L^2((0,T)\times S,P;\mathbb C)$ are scalar almost-everywhere quotient spaces; the boundary spacetime notation in the Statement means $K$.
+
+[F6] [[math:thm-tonelli-and-fubini-for-completed-product-measures]] identifies the $P$ integral of a nonnegative measurable function with its iterated integrals, with section measurability outside null sets for the completed factors. [[math:thm-complex-holder-minkowski-and-the-quotient-norm]] supplies complex quotient norms, the triangle inequality and Cauchy–Schwarz on these measure spaces. [[math:thm-complex-lp-completeness-and-almost-everywhere-subsequences|Complex $L^p$ completeness and almost-everywhere subsequences]] gives completeness and almost-everywhere convergent subsequences of norm-convergent sequences on every measure space, including $H$ and $K$. The assumed AC supplies their countable-choice hypotheses and the countable selections of representatives below.
+
+[F7] The compact time interval and norm-continuity convention are those of [[def-se-foundation-time-function-spaces]]. [[math:thm-heine-cantor-metric]] gives uniform continuity for a continuous map from this compact interval into the norm metric of $H$. Applied to real and imaginary parts, [[math:thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable]] gives measurable convergence sets and measurable limits; [[math:thm-sections-of-product-measurable-functions-are-measurable]] gives measurable sections of functions measurable for the uncompleted product sigma-algebra.
+
+## Proof
+
+[F1] [[lem-se-exterior-dirichlet-realization]] gives $A=I-\Delta_D\ge I$, $D(A)=H^2(\Omega)\cap H^1_0(\Omega)$ and $D(A^{1/2})=H^1_0(\Omega)$ with $\|A^{1/2}u\|_2=\|u\|_{H^1}$. Sobolev spaces and the closure defining $H^1_0$ are as in [[def-se-foundation-integer-sobolev-notation]].
+
+[F2] The mathematical self-adjoint flow calculus of [[physics:lem-nrqm-autonomous-dynamics-flow-calculus]], the spectral theorem [[math:thm-spectral-theorem-for-unbounded-self-adjoint-operators]], and the form-domain identity and core of [[math:lem-spectral-form-domain-and-core-of-a-semibounded-operator]] apply under [[math:def-axiom-of-choice]]. They give spectral truncations converging in the form norm and unitary flow commuting with spectral functions; the same calculus preserves the form norm.
+
+[F3] On a bounded smooth truncation, [[math:thm-sobolev-gauss-green-formula-on-c-one-domains]] gives coordinate integration by parts for $H^1$ factors, and [[math:thm-sharp-trace-theorem-for-w-one-p]] gives their bounded $L^2$ boundary traces. [[math:thm-smooth-up-to-the-boundary-density-on-smooth-domains|Ambient smooth restrictions are dense on bounded $C^k$ domains]] supplies approximation in $H^2$ by smooth restrictions. The normal is the graph normal of [[math:def-bounded-c-one-domain-boundary-charts-and-outward-normal]].
+
+[F4] [[math:lem-finite-ambient-partitions-for-euclidean-boundary-integration]] gives a finite smooth ambient partition near the compact boundary. The time and norm conventions are those of [[def-se-foundation-time-function-spaces]]; the boundary product uses surface measure and Lebesgue time measure.
+
+
+
+**Given:** The domain, time and initial datum in the Statement.
+
+**Goal:** Construct the normal trace, prove its estimate, and exhibit the multiplier boundary term.
+
+1.1 In each smooth boundary graph chart the outward unit normal is the normalized smooth graph normal, extended off the graph by making it independent of the normal chart coordinate. A finite ambient partition subordinate to these charts, multiplied by a smooth cutoff supported in the prescribed neighborhood and equal to one near the compact boundary, gives a real smooth compactly supported field $Q$ with $Q=\nu$ on $\partial\Omega$. Choose a large ball whose sphere is disjoint from both the obstacle and the support of $Q$; its intersection $D$ with $\Omega$ is a bounded smooth domain. [given, F3, F4, construct]
+
+1.2 Let $E$ be the spectral measure of $A$ and set $v_{0,N}=E([1,N])v_0$, $v_N(t)=e^{it\Delta_D}v_{0,N}$. Spectral truncation gives $v_{0,N}\to v_0$ in the form norm. Each $v_N$ is continuously differentiable in time with values in $D(A)$ equipped with its graph norm, since its spectral support is bounded; in particular $v_N\in C^1([0,T];H^2(\Omega))$ and $\partial_t v_N=i\Delta v_N$. Its $H^1$ norm is constant and equals $\|v_{0,N}\|_{H^1}$. The first-derivative traces therefore depend continuously on time in boundary $L^2$. [F1, F2, F3]
+
+1.3 We construct a product representative for any $h\in C([0,T];H)$. By uniform continuity choose, for each integer $m\ge1$, a finite interval partition and an $H$-valued step map $p_m$, taking values of $h$ at partition endpoints, with $\sup_{t\in[0,T]}\|p_m(t)-h(t)\|_H\le2^{-m}$. AC selects measurable complex representatives of the countably many sampled $H$ classes. Using these representatives on the corresponding time intervals gives a function $q_m(t,x)$ measurable for the uncompleted product sigma-algebra. Each $q_m$ belongs to $K$, and Tonelli gives $\|q_m-q_l\|_K^2=\int_0^T\|p_m(t)-p_l(t)\|_H^2dt\le T(2^{-m}+2^{-l})^2$. Thus completeness gives a limit in $K$, and the subsequence assertion in [F6] gives indices $m_k$ for which these measurable representatives $q_{m_k}$ converge $P$-almost everywhere to a representative of that limit. Predetermined representatives are allowed here: their countably many null disagreement sets with the representatives supplied by [F6] can be removed. [F5, F6, F7, construct]
+
+2.1 If $u\in H^2(D)$ has zero trace on the obstacle boundary, the traces of its first derivatives satisfy $T\nabla u=\nu\,\partial_\nu u$ there, where $\partial_\nu u=\nu\cdot T\nabla u\in L^2$. Indeed, approximate $u$ in $H^2$ by smooth restrictions. In a graph chart the tangential derivative of each approximating boundary restriction is the corresponding tangential combination of first derivatives. The trace theorem passes both sides to the limit in distributions, and the limiting boundary restriction is zero; hence all tangential components vanish. The trace theorem also makes this normal derivative the limit of the classical normal derivatives of those smooth restrictions. The closure definition of $H^1_0(\Omega)$ and local trace continuity give zero obstacle-boundary trace for every $u\in H^2(\Omega)\cap H^1_0(\Omega)$. [F1, F3, step 1.1]
+
+2.2 For one such solution write $w=v_N$, $M(t)=\operatorname{Im}\int_\Omega\overline w\,Q\cdot\nabla w\,dx$ and $B(t)=\int_{\partial\Omega}(Q\cdot\nu)|\partial_\nu w|^2\,dS$. Differentiation in $H^2$, followed by coordinate Sobolev integration by parts on $D$, gives $M'(t)=-2\operatorname{Re}\int_D\Delta\overline w\,Q\cdot\nabla w\,dx-\operatorname{Re}\int_D(\operatorname{div}Q)\overline w\,\Delta w\,dx$. The boundary term from moving $Q\cdot\nabla$ off $\Delta w$ vanishes because $w$ has zero trace where $Q$ meets the boundary; $Q$ vanishes near the artificial sphere. [F3, step 1.1, step 1.2]
+
+2.3 Let $E$ be the set where $q_{m_k}$ has a finite complex limit. The convergence sets and the finiteness conditions for its real and imaginary parts are measurable for the uncompleted product sigma-algebra by [F7]. Define $g$ as that limit on $E$ and zero elsewhere. It is measurable for that same sigma-algebra, represents the limit in $K$, and has Borel-measurable sections on $S$. Tonelli applied to $\mathbf1_{E^c}$ shows that, for almost every $t$, $q_{m_k}(t,\cdot)\to g(t,\cdot)$ $\sigma$-almost everywhere. For each such $t$, the classes of these sections are $p_{m_k}(t)\to h(t)$ in $H$; the subsequence assertion in [F6], now on $S$, gives a further almost-everywhere convergent subsequence with limit class $h(t)$. Uniqueness of a pointwise limit therefore makes $g(t,\cdot)$ a representative of $h(t)$. A final application of Tonelli gives $\|g\|_K^2=\int_0^T\|h(t)\|_H^2dt$. Any two such product representatives agree in $K$, since their difference has zero section norm almost everywhere and Tonelli gives zero product norm. This also gives the norm identity for differences of two continuous curves. Apply the construction to $h_N(t)=\nu\cdot T\nabla v_N(t)$: the bounded derivative trace maps and multiplication by the smooth bounded normal make it a continuous $H$-valued curve by step 1.2. Denote its product representative by $g_N$ and identify it with $\partial_\nu v_N$ in $K$. [F3, F5, F6, F7, step 1.2, step 1.3]
+
+3.1 Integrate the two displayed integrals by parts. On the obstacle boundary, step 2.1 gives $T\nabla w=\nu\partial_\nu w$; consequently the boundary contribution from the first integral is $-2B(t)+B(t)=-B(t)$, and the second integral has no boundary contribution involving $w$. Thus $M'(t)=-B(t)+2\operatorname{Re}\int_D\sum_{j,k}(\partial_jQ_k)(\partial_j\overline w)(\partial_kw)\,dx+\operatorname{Re}\int_D\overline w\,\nabla(\operatorname{div}Q)\cdot\nabla w\,dx$. The cancellation of the two volume terms containing $(\operatorname{div}Q)|\nabla w|^2$ follows directly from the product rule. All integrations are legitimate for the indicated $H^1$ factors, and no boundary term occurs at the artificial sphere. [F3, step 1.1, step 2.1, step 2.2, algebra]
+
+4.1 Integrating step 3.1 in time and dividing by two displays the asserted multiplier boundary term. Cauchy–Schwarz and boundedness of $Q$, $DQ$ and $D^2Q$ bound $|M(t)|$ and the volume integrals by $C_Q\|w(t)\|_{H^1}^2$. Since $Q=\nu$ on the boundary, $B(t)=\|\partial_\nu w(t)\|_H^2$. Step 2.3 and Tonelli identify $\int_0^T B(t)dt=\|g_N\|_K^2$, so $\|\partial_\nu v_N\|_{L^2((0,T)\times\partial\Omega)}\le C_{\Omega,T}\|v_{0,N}\|_{H^1}$. The same estimate applies to differences of spectral approximants. [F6, step 1.1, step 1.2, step 2.3, step 3.1]
+
+5.1 The difference estimate and form-norm convergence make the normal traces Cauchy in the complete boundary spacetime $L^2$ space. Here the space is $K$ from [F5], its completeness is supplied by [F6], and step 2.3 identifies the difference norms with the time integrals estimated in step 4.1. Their limit defines $\partial_\nu v$ and obeys the stated bound. The same difference estimate proves independence of the particular form-norm convergent spectral truncation sequence; it also shows consistency with the $H^2$ normal trace for initial data in $D(A)$, because spectral truncation then converges in the graph norm and the boundary trace is continuous in $H^2$. No geometrical sign condition was used. [F1, F2, F3, F5, F6, step 1.2, step 2.3, step 4.1] ∎
