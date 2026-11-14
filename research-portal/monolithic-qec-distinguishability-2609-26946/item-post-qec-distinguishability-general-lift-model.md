@@ -1,6 +1,6 @@
 ---
 title: General bounded diagonal lift for fast-checking analysis
-status: draft
+status: published
 research_item: post-qec-distinguishability-general-lift-model
 dependency_level: 15
 sources:

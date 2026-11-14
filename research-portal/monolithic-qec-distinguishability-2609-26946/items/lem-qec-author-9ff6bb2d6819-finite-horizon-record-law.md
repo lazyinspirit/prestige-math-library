@@ -3,7 +3,7 @@ id: lem-qec-author-9ff6bb2d6819-finite-horizon-record-law
 kind: lemma
 domain: mathematics
 title: Normalized record measure and absence of explosion
-status: draft
+status: published
 origin: session
 deps:
   - lem-qec-author-9ff6bb2d6819-no-jump-survival

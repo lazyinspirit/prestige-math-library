@@ -1,6 +1,6 @@
 ---
 title: Aydin–Barg fidelity time curves and complete-information-loss plateau
-status: draft
+status: published
 research_item: texp-qec-distinguishability-aydin-barg-time-curves
 dependency_level: 16
 sources:

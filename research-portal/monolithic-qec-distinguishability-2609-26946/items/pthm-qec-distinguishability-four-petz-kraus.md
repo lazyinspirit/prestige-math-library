@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-four-petz-kraus
 kind: physics-theorem
 domain: physics
 title: Explicit four-level transpose decoder
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-distinguishability-transpose-recovery

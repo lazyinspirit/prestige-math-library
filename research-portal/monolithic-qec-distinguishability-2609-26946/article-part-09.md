@@ -2,7 +2,7 @@
 title: Article items · 09 — Exact state evolution from a four-level codeword
 description: Presents 29 items from the article and its immediate prerequisites,
   covering dependency levels 2–4.
-status: draft
+status: published
 dependency_level: 4
 research_article_page: true
 item_count: 29

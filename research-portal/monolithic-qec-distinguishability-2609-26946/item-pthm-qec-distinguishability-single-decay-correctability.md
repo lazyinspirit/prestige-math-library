@@ -1,6 +1,6 @@
 ---
 title: Fast-interval decay approaches a correctable coherent error
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-single-decay-correctability
 dependency_level: 19
 sources:

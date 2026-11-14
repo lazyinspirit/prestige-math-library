@@ -1,6 +1,6 @@
 ---
 title: Changing the lift to rotational-energy scaling
-status: draft
+status: published
 research_item: texp-qec-distinguishability-alternative-lift-comparison
 dependency_level: 17
 sources:

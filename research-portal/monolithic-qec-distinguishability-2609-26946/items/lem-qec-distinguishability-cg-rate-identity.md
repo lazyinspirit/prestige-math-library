@@ -3,7 +3,7 @@ id: lem-qec-distinguishability-cg-rate-identity
 kind: lemma
 domain: mathematics
 title: Clebsch–Gordan total-rate identity
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-distinguishability-angular-basis

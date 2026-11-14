@@ -3,7 +3,7 @@ id: def-qec-prereq-passive-subsystem-contract
 kind: definition
 domain: mathematics
 title: Passive subspace and subsystem protection interface
-status: draft
+status: published
 origin: session
 deps:
   - math:def-qc-tensor-register-and-permutation

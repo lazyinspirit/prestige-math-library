@@ -3,7 +3,7 @@ id: lem-qec-prereq-qubit-transpose-phase-rule
 kind: lemma
 domain: mathematics
 title: Transpose recovery for a flagged coherence channel
-status: draft
+status: published
 origin: session
 deps:
   - thm-qec-prereq-transpose-support-completion

@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-minimal-fidelity-closed
 kind: physics-theorem
 domain: physics
 title: Minimal-code closed fidelity and checking time
-status: draft
+status: published
 origin: session
 deps:
   - pthm-qec-distinguishability-minimal-code-errors

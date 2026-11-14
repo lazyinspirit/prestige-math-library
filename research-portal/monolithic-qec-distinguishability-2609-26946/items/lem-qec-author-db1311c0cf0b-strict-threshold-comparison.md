@@ -3,7 +3,7 @@ id: lem-qec-author-db1311c0cf0b-strict-threshold-comparison
 kind: lemma
 domain: mathematics
 title: Strict first-threshold comparison from the cascade fidelity margin
-status: draft
+status: published
 origin: session
 deps:
   - lem-qec-author-db1311c0cf0b-orthogonal-decay-sector-fidelity

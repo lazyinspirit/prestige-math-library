@@ -1,6 +1,6 @@
 ---
 title: Haar-average fidelity versus entanglement fidelity
-status: draft
+status: published
 research_item: thm-qec-distinguishability-haar-fidelity
 dependency_level: 4
 sources:

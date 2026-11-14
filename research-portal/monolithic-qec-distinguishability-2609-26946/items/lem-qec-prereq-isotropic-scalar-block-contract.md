@@ -3,7 +3,7 @@ id: lem-qec-prereq-isotropic-scalar-block-contract
 kind: lemma
 domain: mathematics
 title: Rotational scalars on multiplicity-resolved spin blocks
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-spin-tensor-cg-conventions

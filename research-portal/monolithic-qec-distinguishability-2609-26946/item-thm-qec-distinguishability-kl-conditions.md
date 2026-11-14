@@ -1,6 +1,6 @@
 ---
 title: Knill–Laflamme criterion
-status: draft
+status: published
 research_item: thm-qec-distinguishability-kl-conditions
 dependency_level: 1
 sources:

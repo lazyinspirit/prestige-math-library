@@ -1,6 +1,6 @@
 ---
 title: Finite spin blocks, spherical tensors and Clebsch–Gordan phases
-status: draft
+status: published
 research_item: def-qec-prereq-spin-tensor-cg-conventions
 dependency_level: 0
 ---

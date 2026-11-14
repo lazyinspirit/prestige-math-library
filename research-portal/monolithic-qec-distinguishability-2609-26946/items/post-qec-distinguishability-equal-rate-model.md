@@ -3,7 +3,7 @@ id: post-qec-distinguishability-equal-rate-model
 kind: postulate
 domain: physics
 title: Equal-rate rigid-rotor benchmark parameters
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-distinguishability-angular-basis

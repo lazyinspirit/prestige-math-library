@@ -1,6 +1,6 @@
 ---
 title: Off-diagonal correlators vanish in an isotropic photon bath
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-isotropic-bath
 dependency_level: 12
 sources:

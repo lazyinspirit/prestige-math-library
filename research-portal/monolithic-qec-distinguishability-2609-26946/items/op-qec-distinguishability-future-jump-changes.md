@@ -3,7 +3,7 @@ id: op-qec-distinguishability-future-jump-changes
 kind: open-problem
 domain: physics
 title: Degeneracy lifting that also modifies jump operators
-status: draft
+status: published
 origin: session
 deps:
   - def-author-aca80080aca0-regular-lift-coupling-family

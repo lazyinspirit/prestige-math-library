@@ -1,6 +1,6 @@
 ---
 title: Checking-time comparison under the Jm lift
-status: draft
+status: published
 research_item: texp-qec-distinguishability-code-check-comparison
 dependency_level: 16
 sources:

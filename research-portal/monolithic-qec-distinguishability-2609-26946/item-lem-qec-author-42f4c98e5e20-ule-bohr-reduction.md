@@ -1,6 +1,6 @@
 ---
 title: Static Bohr-frequency evaluation of the jump integral
-status: draft
+status: published
 research_item: lem-qec-author-42f4c98e5e20-ule-bohr-reduction
 dependency_level: 3
 ---

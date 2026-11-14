@@ -1,6 +1,6 @@
 ---
 title: Distinct complex exponentials have full interval Gram rank
-status: draft
+status: published
 research_item: lem-author-e8d79981fdee-distinct-exponential-profiles
 dependency_level: 1
 ---

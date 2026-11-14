@@ -1,6 +1,6 @@
 ---
 title: Independent transpose Gram fidelity formula
-status: draft
+status: published
 research_item: thm-qec-prereq-transpose-gram-fidelity
 dependency_level: 2
 sources:

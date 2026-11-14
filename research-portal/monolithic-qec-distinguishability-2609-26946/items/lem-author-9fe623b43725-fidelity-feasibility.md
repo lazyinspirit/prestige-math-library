@@ -3,7 +3,7 @@ id: lem-author-9fe623b43725-fidelity-feasibility
 kind: lemma
 domain: mathematics
 title: Feasibility and range of transpose entanglement fidelity
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-entanglement-fidelity

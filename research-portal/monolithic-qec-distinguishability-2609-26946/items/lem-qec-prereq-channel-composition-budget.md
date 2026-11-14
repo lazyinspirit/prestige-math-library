@@ -3,7 +3,7 @@ id: lem-qec-prereq-channel-composition-budget
 kind: lemma
 domain: mathematics
 title: Telescoping error budget for repeated finite channels
-status: draft
+status: published
 origin: session
 deps:
   - math:def-qc-quantum-channel

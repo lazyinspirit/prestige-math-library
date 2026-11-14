@@ -1,6 +1,6 @@
 ---
 title: Modified-operator distance and residual composition
-status: draft
+status: published
 research_item: lem-qec-author-4e9f1886ce3e-ule-residual-composition
 dependency_level: 4
 ---

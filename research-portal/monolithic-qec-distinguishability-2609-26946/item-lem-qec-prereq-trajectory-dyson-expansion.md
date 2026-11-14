@@ -1,6 +1,6 @@
 ---
 title: Finite no-jump and ordered-jump expansion
-status: draft
+status: published
 research_item: lem-qec-prereq-trajectory-dyson-expansion
 dependency_level: 1
 ---

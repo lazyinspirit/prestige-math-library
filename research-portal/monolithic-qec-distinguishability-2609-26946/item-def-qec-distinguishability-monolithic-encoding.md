@@ -1,6 +1,6 @@
 ---
 title: Monolithic encoding and degenerate error processes
-status: draft
+status: published
 research_item: def-qec-distinguishability-monolithic-encoding
 dependency_level: 1
 sources:

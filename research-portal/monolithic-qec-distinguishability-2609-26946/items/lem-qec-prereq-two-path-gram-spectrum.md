@@ -3,7 +3,7 @@ id: lem-qec-prereq-two-path-gram-spectrum
 kind: lemma
 domain: mathematics
 title: Two-path coherence Gram spectrum and Kraus weights
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-finite-operator-conventions

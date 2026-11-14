@@ -1,6 +1,6 @@
 ---
 title: Degenerate four-level amplitude-damping form
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-four-kraus-degenerate
 dependency_level: 4
 sources:

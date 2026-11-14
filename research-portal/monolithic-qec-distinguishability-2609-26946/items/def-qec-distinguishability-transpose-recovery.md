@@ -3,7 +3,7 @@ id: def-qec-distinguishability-transpose-recovery
 kind: definition
 domain: mathematics
 title: Transpose (Petz) recovery on a code
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-finite-operator-conventions

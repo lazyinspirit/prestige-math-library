@@ -1,6 +1,6 @@
 ---
 title: Finite diagonal lift and its relative frequency window
-status: draft
+status: published
 research_item: lem-qec-author-252014cb5616-lift-frequency-window
 dependency_level: 2
 ---

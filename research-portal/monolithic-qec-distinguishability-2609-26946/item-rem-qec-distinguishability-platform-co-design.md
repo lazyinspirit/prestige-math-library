@@ -1,6 +1,6 @@
 ---
 title: Checking speed, lift control, and code must be chosen jointly
-status: draft
+status: published
 research_item: rem-qec-distinguishability-platform-co-design
 dependency_level: 17
 sources:

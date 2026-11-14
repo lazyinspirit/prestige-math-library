@@ -1,6 +1,6 @@
 ---
 title: Angular-momentum emitter, photon bath, and dipole approximation
-status: draft
+status: published
 research_item: post-qec-distinguishability-atomic-system
 dependency_level: 2
 sources:

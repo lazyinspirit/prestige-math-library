@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-isotropic-bath
 kind: physics-theorem
 domain: physics
 title: Off-diagonal correlators vanish in an isotropic photon bath
-status: draft
+status: published
 origin: session
 deps:
   - pthm-qec-distinguishability-thermal-time-correlator

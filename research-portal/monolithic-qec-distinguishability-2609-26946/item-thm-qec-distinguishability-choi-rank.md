@@ -1,6 +1,6 @@
 ---
 title: Kraus rank equals Choi rank
-status: draft
+status: published
 research_item: thm-qec-distinguishability-choi-rank
 dependency_level: 3
 sources:

@@ -1,6 +1,6 @@
 ---
 title: Jump histories, distinguishability, and limits of Kraus rank
-status: draft
+status: published
 research_item: rem-qec-distinguishability-rank-mechanism
 dependency_level: 17
 sources:

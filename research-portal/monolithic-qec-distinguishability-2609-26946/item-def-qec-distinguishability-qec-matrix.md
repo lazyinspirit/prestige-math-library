@@ -1,6 +1,6 @@
 ---
 title: QEC matrix and logical partial trace
-status: draft
+status: published
 research_item: def-qec-distinguishability-qec-matrix
 dependency_level: 2
 sources:

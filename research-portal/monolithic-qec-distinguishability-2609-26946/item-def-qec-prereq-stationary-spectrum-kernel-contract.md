@@ -1,6 +1,6 @@
 ---
 title: Stationary correlation spectra and ULE kernel regularity
-status: draft
+status: published
 research_item: def-qec-prereq-stationary-spectrum-kernel-contract
 dependency_level: 0
 sources:

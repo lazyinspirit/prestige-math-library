@@ -3,7 +3,7 @@ id: def-qec-prereq-restricted-logical-channel
 kind: definition
 domain: mathematics
 title: Code restriction and decoded channel types
-status: draft
+status: published
 origin: session
 deps:
   - math:def-qc-quantum-code-isometry-and-code-projector

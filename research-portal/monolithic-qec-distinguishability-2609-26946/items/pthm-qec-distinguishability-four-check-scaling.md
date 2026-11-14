@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-four-check-scaling
 kind: physics-theorem
 domain: physics
 title: Four-level high-fidelity checking time
-status: draft
+status: published
 origin: session
 deps:
   - post-qec-distinguishability-four-level-model

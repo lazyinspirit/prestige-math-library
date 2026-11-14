@@ -1,6 +1,6 @@
 ---
 title: Fault-tolerant overhead and monolithic inner codes
-status: draft
+status: published
 research_item: rem-qec-distinguishability-architecture-background
 dependency_level: 2
 sources:

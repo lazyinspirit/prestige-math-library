@@ -1,6 +1,6 @@
 ---
 title: Optimal phase-corrected four-level recovery
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-four-optimal-decoder
 dependency_level: 5
 sources:

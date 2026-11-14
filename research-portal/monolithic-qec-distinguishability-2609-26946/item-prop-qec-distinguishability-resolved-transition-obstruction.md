@@ -1,6 +1,6 @@
 ---
 title: Resolved rank-one transition obstructs exact correction
-status: draft
+status: published
 research_item: prop-qec-distinguishability-resolved-transition-obstruction
 dependency_level: 2
 sources:

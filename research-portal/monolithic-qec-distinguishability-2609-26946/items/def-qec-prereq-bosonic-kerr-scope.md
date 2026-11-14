@@ -3,7 +3,7 @@ id: def-qec-prereq-bosonic-kerr-scope
 kind: definition
 domain: physics
 title: Bosonic loss, Kerr shifts and finite-code comparison scope
-status: draft
+status: published
 origin: session
 deps:
   - physics:def-qft-fock-and-test-spaces

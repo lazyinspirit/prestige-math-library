@@ -3,7 +3,7 @@ id: rem-qec-distinguishability-benchmark-novelty
 kind: remark
 domain: physics
 title: Proposed platform-independent benchmark and qualified novelty claim
-status: draft
+status: published
 origin: session
 deps:
   - pthm-qec-distinguishability-atomic-jumps

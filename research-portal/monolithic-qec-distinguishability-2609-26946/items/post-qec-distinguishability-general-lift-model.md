@@ -3,7 +3,7 @@ id: post-qec-distinguishability-general-lift-model
 kind: postulate
 domain: physics
 title: General bounded diagonal lift for fast-checking analysis
-status: draft
+status: published
 origin: session
 deps:
   - post-qec-distinguishability-equal-rate-model

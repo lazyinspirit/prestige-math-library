@@ -3,7 +3,7 @@ id: def-qec-prereq-continuous-monitoring-interface
 kind: definition
 domain: physics
 title: Continuous monitoring versus pulsed syndrome protocols
-status: draft
+status: published
 origin: session
 deps:
   - math:def-qc-instrument-and-conditional-state

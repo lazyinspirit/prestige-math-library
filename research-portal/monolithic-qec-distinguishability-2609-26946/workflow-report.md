@@ -1,7 +1,7 @@
 ---
 title: "Research workflow: Monolithic Quantum Error Correction in the Presence
   of Distinguishability"
-status: draft
+status: published
 ---
 
 219 draft items on 4 pages.

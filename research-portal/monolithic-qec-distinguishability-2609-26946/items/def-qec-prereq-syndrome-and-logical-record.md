@@ -3,7 +3,7 @@ id: def-qec-prereq-syndrome-and-logical-record
 kind: definition
 domain: mathematics
 title: Syndrome flags and logical-state-independent environmental records
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-complementary-error-record

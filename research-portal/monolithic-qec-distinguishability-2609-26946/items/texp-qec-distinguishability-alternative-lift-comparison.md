@@ -3,7 +3,7 @@ id: texp-qec-distinguishability-alternative-lift-comparison
 kind: thought-experiment
 domain: physics
 title: Changing the lift to rotational-energy scaling
-status: draft
+status: published
 origin: session
 deps:
   - post-qec-distinguishability-atomic-lift

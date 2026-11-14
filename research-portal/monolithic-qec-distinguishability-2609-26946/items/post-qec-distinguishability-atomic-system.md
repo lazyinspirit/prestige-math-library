@@ -3,7 +3,7 @@ id: post-qec-distinguishability-atomic-system
 kind: postulate
 domain: physics
 title: Angular-momentum emitter, photon bath, and dipole approximation
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-distinguishability-angular-basis

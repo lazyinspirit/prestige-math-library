@@ -1,6 +1,6 @@
 ---
 title: Jump-time dephasing vanishes with the checking interval
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-calibrated-decay-residual
 dependency_level: 21
 sources:

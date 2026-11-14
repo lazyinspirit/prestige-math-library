@@ -3,7 +3,7 @@ id: lem-qec-author-db1311c0cf0b-one-decay-transpose-bound
 kind: lemma
 domain: mathematics
 title: A uniform transpose-fidelity bound for the one-decay channel
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-distinguishability-transpose-recovery

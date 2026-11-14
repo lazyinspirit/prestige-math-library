@@ -3,7 +3,7 @@ id: def-qec-prereq-stationary-spectrum-kernel-contract
 kind: definition
 domain: mathematics
 title: Stationary correlation spectra and ULE kernel regularity
-status: draft
+status: published
 origin: session
 deps:
   - math:thm-complex-spectral-theorem-for-normal-endomorphisms

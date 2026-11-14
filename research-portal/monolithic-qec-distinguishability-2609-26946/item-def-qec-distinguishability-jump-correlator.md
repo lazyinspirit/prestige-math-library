@@ -1,6 +1,6 @@
 ---
 title: Jump correlators and bath-memory parameters
-status: draft
+status: published
 research_item: def-qec-distinguishability-jump-correlator
 dependency_level: 7
 sources:

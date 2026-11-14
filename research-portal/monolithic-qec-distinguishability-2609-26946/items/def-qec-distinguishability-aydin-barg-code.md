@@ -3,7 +3,7 @@ id: def-qec-distinguishability-aydin-barg-code
 kind: definition
 domain: physics
 title: J equals four Aydin–Barg encoding
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-distinguishability-angular-basis

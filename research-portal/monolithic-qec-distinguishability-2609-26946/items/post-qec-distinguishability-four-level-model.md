@@ -3,7 +3,7 @@ id: post-qec-distinguishability-four-level-model
 kind: postulate
 domain: physics
 title: Four-level spontaneous-decay model
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-finite-operator-conventions

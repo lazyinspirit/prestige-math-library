@@ -3,7 +3,7 @@ id: rem-qec-distinguishability-code-comparison-interpretation
 kind: remark
 domain: physics
 title: Spacing interpretation and rate-normalization qualification
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-distinguishability-transpose-recovery

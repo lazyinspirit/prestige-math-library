@@ -1,6 +1,6 @@
 ---
 title: Passive subspace and subsystem protection interface
-status: draft
+status: published
 research_item: def-qec-prereq-passive-subsystem-contract
 dependency_level: 0
 sources:

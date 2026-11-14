@@ -3,7 +3,7 @@ id: lem-author-ef1b96c593db-thermal-cutoff-removal
 kind: lemma
 domain: mathematics
 title: Thermal frequency cutoffs may be removed under the envelope
-status: draft
+status: published
 origin: session
 deps:
   - lem-author-ef1b96c593db-thermal-integrable-envelope

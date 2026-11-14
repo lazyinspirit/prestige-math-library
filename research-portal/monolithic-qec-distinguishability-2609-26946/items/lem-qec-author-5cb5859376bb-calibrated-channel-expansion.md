@@ -3,7 +3,7 @@ id: lem-qec-author-5cb5859376bb-calibrated-channel-expansion
 kind: lemma
 domain: mathematics
 title: Uniform expansion of calibrated finite channels and null branches
-status: draft
+status: published
 origin: session
 deps:
   - lem-qec-author-5cb5859376bb-amplified-trace-sandwich

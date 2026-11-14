@@ -1,6 +1,6 @@
 ---
 title: J equals two detection encoding
-status: draft
+status: published
 research_item: def-qec-distinguishability-detection-code
 dependency_level: 2
 sources:

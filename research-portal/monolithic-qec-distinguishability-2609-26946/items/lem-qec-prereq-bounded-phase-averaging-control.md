@@ -3,7 +3,7 @@ id: lem-qec-prereq-bounded-phase-averaging-control
 kind: lemma
 domain: mathematics
 title: Bounded phase spread and calibrated jump-time residual
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-diagonal-lift-phase-data

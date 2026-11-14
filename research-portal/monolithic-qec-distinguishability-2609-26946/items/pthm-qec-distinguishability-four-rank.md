@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-four-rank
 kind: physics-theorem
 domain: physics
 title: Onset of the third four-level Kraus operator
-status: draft
+status: published
 origin: session
 deps:
   - post-qec-distinguishability-four-level-model

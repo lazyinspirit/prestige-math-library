@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-four-kraus-degenerate
 kind: physics-theorem
 domain: physics
 title: Degenerate four-level amplitude-damping form
-status: draft
+status: published
 origin: session
 deps:
   - pthm-qec-distinguishability-four-kraus

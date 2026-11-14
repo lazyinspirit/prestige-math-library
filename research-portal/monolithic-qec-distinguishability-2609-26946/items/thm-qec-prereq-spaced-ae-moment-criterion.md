@@ -3,7 +3,7 @@ id: thm-qec-prereq-spaced-ae-moment-criterion
 kind: theorem
 domain: mathematics
 title: Spaced-support moment criterion for order-one AE correction
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-ae-error-span-contract

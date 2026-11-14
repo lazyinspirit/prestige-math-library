@@ -3,7 +3,7 @@ id: lem-qec-author-252014cb5616-single-block-energy-independence
 kind: lemma
 domain: mathematics
 title: Energy-scale independence on the block-diagonal input algebra
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-finite-gksl-channel-interface

@@ -1,6 +1,6 @@
 ---
 title: Rank-one transition errors in the benchmark
-status: draft
+status: published
 research_item: def-qec-distinguishability-rank-one-transitions
 dependency_level: 14
 sources:

@@ -1,6 +1,6 @@
 ---
 title: Mass and first moment of the ULE scalar envelope
-status: draft
+status: published
 research_item: lem-qec-author-4e9f1886ce3e-ule-envelope-moments
 dependency_level: 2
 ---

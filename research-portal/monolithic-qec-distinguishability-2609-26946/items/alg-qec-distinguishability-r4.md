@@ -3,7 +3,7 @@ id: alg-qec-distinguishability-r4
 kind: algorithm
 domain: physics
 title: Four-level syndrome recovery
-status: draft
+status: published
 origin: session
 deps:
   - post-qec-distinguishability-four-level-model

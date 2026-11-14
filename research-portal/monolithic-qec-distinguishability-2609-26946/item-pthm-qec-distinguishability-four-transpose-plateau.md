@@ -1,6 +1,6 @@
 ---
 title: Long-time four-level transpose plateau
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-four-transpose-plateau
 dependency_level: 5
 sources:

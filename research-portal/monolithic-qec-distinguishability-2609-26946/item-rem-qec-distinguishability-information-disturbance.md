@@ -1,6 +1,6 @@
 ---
 title: Logical information leakage versus erasure flags
-status: draft
+status: published
 research_item: rem-qec-distinguishability-information-disturbance
 dependency_level: 3
 sources:

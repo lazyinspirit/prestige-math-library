@@ -1,6 +1,6 @@
 ---
 title: Jump-record instruments and conditional intensity
-status: draft
+status: published
 research_item: lem-qec-author-9ff6bb2d6819-record-hazard-compensator
 dependency_level: 5
 sources:

@@ -1,6 +1,6 @@
 ---
 title: A uniform transpose-fidelity bound for the one-decay channel
-status: draft
+status: published
 research_item: lem-qec-author-db1311c0cf0b-one-decay-transpose-bound
 dependency_level: 3
 ---

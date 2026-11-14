@@ -1,6 +1,6 @@
 ---
 title: ULE jump construction under independent bath hypotheses
-status: draft
+status: published
 research_item: pthm-qec-prereq-ule-jump-and-lamb-contract
 dependency_level: 4
 sources:

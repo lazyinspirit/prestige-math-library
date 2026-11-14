@@ -1,6 +1,6 @@
 ---
 title: Aydin–Barg rank-one correction and lower host angular momentum
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-aydin-barg-correction
 dependency_level: 15
 sources:

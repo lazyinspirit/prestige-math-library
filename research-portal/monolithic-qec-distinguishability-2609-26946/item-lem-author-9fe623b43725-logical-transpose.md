@@ -1,6 +1,6 @@
 ---
 title: Logical Kraus operators of the completed transpose decoder
-status: draft
+status: published
 research_item: lem-author-9fe623b43725-logical-transpose
 dependency_level: 2
 ---

@@ -1,6 +1,6 @@
 ---
 title: Well-defined augmented syndrome and first-order rotation correction
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-augmented-jz-linear-correction
 dependency_level: 19
 sources:

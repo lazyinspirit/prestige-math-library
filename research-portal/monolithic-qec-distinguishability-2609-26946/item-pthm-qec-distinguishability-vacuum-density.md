@@ -1,6 +1,6 @@
 ---
 title: Vacuum limit and cubic free-space spectral density
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-vacuum-density
 dependency_level: 12
 sources:

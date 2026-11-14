@@ -3,7 +3,7 @@ id: def-qec-distinguishability-interaction-picture
 kind: definition
 domain: mathematics
 title: Time-local interaction-picture convention
-status: draft
+status: published
 origin: session
 deps:
   - physics:thm-nrqm-controlled-dynamics-norm-dyson-series-and-uniqueness

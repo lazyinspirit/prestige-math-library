@@ -1,6 +1,6 @@
 ---
 title: Calibrated recovery cycles and accumulated-error contract
-status: draft
+status: published
 research_item: def-qec-prereq-calibrated-cycle-contract
 dependency_level: 2
 ---

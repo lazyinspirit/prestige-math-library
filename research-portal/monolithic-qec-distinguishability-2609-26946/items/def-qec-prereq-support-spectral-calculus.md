@@ -3,7 +3,7 @@ id: def-qec-prereq-support-spectral-calculus
 kind: definition
 domain: mathematics
 title: Finite support square roots and generalized inverses
-status: draft
+status: published
 origin: session
 deps:
   - math:thm-complex-spectral-theorem-for-normal-endomorphisms

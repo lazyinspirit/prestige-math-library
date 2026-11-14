@@ -1,6 +1,6 @@
 ---
 title: Exact versus thresholded Kraus rank protocol
-status: draft
+status: published
 research_item: def-qec-prereq-spectral-threshold-protocol
 dependency_level: 2
 ---

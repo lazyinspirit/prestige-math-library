@@ -1,6 +1,6 @@
 ---
 title: A radial transverse wave-vector integral has the isotropic factor
-status: draft
+status: published
 research_item: lem-author-ef1b96c593db-radial-transverse-integral
 dependency_level: 1
 ---

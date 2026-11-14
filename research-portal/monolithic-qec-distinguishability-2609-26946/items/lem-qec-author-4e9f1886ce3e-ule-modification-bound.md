@@ -3,7 +3,7 @@ id: lem-qec-author-4e9f1886ce3e-ule-modification-bound
 kind: lemma
 domain: mathematics
 title: Bounded quadrant modification and generator norms
-status: draft
+status: published
 origin: session
 deps:
   - lem-qec-author-4e9f1886ce3e-ule-envelope-moments

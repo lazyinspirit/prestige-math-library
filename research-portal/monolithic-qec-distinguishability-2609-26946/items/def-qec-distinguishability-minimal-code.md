@@ -3,7 +3,7 @@ id: def-qec-distinguishability-minimal-code
 kind: definition
 domain: physics
 title: Minimal single-manifold encoding
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-distinguishability-angular-basis

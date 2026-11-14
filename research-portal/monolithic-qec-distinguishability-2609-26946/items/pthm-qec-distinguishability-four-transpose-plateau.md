@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-four-transpose-plateau
 kind: physics-theorem
 domain: physics
 title: Long-time four-level transpose plateau
-status: draft
+status: published
 origin: session
 deps:
   - post-qec-distinguishability-four-level-model

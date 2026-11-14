@@ -3,7 +3,7 @@ id: lem-qec-author-4e9f1886ce3e-remote-preparation-limit
 kind: lemma
 domain: mathematics
 title: Finite-preparation residual budget and its remote-boundary limit
-status: draft
+status: published
 origin: session
 deps:
   - math:def-matrix-space

@@ -1,6 +1,6 @@
 ---
 title: Finite signed-code KL product test
-status: draft
+status: published
 research_item: lem-qec-prereq-signed-ae-code-product-test
 dependency_level: 3
 sources:

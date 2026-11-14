@@ -1,6 +1,6 @@
 ---
 title: Cubic transpose-fidelity loss
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-four-transpose-cubic
 dependency_level: 6
 sources:

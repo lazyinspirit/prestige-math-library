@@ -3,7 +3,7 @@ id: prop-qec-distinguishability-resolved-transition-obstruction
 kind: proposition
 domain: mathematics
 title: Resolved rank-one transition obstructs exact correction
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-finite-operator-conventions

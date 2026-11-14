@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-ule-static
 kind: physics-theorem
 domain: physics
 title: Static ULE formulas and principal-value kernel
-status: draft
+status: published
 origin: session
 deps:
   - pthm-qec-prereq-ule-jump-and-lamb-contract

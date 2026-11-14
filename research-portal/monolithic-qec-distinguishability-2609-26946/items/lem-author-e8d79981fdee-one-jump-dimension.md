@@ -3,7 +3,7 @@ id: lem-author-e8d79981fdee-one-jump-dimension
 kind: lemma
 domain: mathematics
 title: One-jump span in the nine-dimensional lowering model
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-finite-operator-conventions

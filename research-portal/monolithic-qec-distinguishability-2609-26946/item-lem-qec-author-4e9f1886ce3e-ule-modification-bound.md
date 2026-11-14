@@ -1,6 +1,6 @@
 ---
 title: Bounded quadrant modification and generator norms
-status: draft
+status: published
 research_item: lem-qec-author-4e9f1886ce3e-ule-modification-bound
 dependency_level: 3
 ---

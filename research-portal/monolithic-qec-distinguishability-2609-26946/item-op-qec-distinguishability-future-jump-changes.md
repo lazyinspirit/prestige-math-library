@@ -1,6 +1,6 @@
 ---
 title: Degeneracy lifting that also modifies jump operators
-status: draft
+status: published
 research_item: op-qec-distinguishability-future-jump-changes
 dependency_level: 3
 sources:

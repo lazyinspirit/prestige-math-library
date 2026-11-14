@@ -3,7 +3,7 @@ id: lem-author-179395ddbb85-low-rank-spin-polynomials
 kind: lemma
 domain: mathematics
 title: Low-rank tensor families are spin polynomials
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-spin-tensor-cg-conventions

@@ -1,6 +1,6 @@
 ---
 title: Equal-rate rigid-rotor benchmark parameters
-status: draft
+status: published
 research_item: post-qec-distinguishability-equal-rate-model
 dependency_level: 14
 sources:

@@ -3,7 +3,7 @@ id: lem-qec-author-5cb5859376bb-code-syndrome-decoder
 kind: lemma
 domain: mathematics
 title: A Knill–Laflamme decoder retaining the code syndrome
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-restricted-logical-channel

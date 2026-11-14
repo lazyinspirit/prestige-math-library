@@ -1,6 +1,6 @@
 ---
 title: Exact four-level Kraus operators
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-four-kraus
 dependency_level: 3
 sources:

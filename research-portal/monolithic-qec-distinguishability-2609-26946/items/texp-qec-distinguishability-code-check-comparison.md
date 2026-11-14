@@ -3,7 +3,7 @@ id: texp-qec-distinguishability-code-check-comparison
 kind: thought-experiment
 domain: physics
 title: Checking-time comparison under the Jm lift
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-distinguishability-checking-time

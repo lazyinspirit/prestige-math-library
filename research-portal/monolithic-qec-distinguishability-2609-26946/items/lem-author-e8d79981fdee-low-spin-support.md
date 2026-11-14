@@ -3,7 +3,7 @@ id: lem-author-e8d79981fdee-low-spin-support
 kind: lemma
 domain: mathematics
 title: Nonvanishing downward coefficients for spin one and two
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-finite-operator-conventions

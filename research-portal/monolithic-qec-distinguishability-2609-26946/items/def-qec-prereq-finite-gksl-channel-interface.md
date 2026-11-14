@@ -3,7 +3,7 @@ id: def-qec-prereq-finite-gksl-channel-interface
 kind: definition
 domain: mathematics
 title: Finite GKSL evolution and the QEC channel interface
-status: draft
+status: published
 origin: session
 deps:
   - physics:def-qsm-dt-gksl-definition

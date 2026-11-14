@@ -3,7 +3,7 @@ id: lem-qec-author-db1311c0cf0b-spin-two-downward-populations
 kind: lemma
 domain: mathematics
 title: Spin-two downward coefficients and detection-code output populations
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-spin-tensor-cg-conventions

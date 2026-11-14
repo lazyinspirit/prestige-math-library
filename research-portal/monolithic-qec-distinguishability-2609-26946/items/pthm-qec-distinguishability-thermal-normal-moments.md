@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-thermal-normal-moments
 kind: physics-theorem
 domain: physics
 title: Thermal contractions and absorption contribution
-status: draft
+status: published
 origin: session
 deps:
   - pthm-qec-distinguishability-thermal-correlator-expansion

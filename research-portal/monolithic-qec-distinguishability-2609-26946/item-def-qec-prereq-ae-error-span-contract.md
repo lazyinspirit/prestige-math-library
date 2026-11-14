@@ -1,6 +1,6 @@
 ---
 title: Order-one absorption–emission tensor error span
-status: draft
+status: published
 research_item: def-qec-prereq-ae-error-span-contract
 dependency_level: 1
 sources:

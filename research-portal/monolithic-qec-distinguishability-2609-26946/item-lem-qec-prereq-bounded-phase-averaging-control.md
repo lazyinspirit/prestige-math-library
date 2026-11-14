@@ -1,6 +1,6 @@
 ---
 title: Bounded phase spread and calibrated jump-time residual
-status: draft
+status: published
 research_item: lem-qec-prereq-bounded-phase-averaging-control
 dependency_level: 2
 ---

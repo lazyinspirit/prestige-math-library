@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-transition-shifts
 kind: physics-theorem
 domain: physics
 title: Source-dependent versus uniform Zeeman shifts
-status: draft
+status: published
 origin: session
 deps:
   - post-qec-distinguishability-atomic-lift

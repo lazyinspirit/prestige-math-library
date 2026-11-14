@@ -3,7 +3,7 @@ title: Article items · 12 — Long-time atomic channel and source-resolving Kra
   operators
 description: Presents 29 items from the article and its immediate prerequisites,
   covering dependency levels 15–21.
-status: draft
+status: published
 dependency_level: 7
 research_article_page: true
 item_count: 29

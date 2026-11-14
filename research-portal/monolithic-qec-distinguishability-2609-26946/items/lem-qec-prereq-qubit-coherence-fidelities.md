@@ -3,7 +3,7 @@ id: lem-qec-prereq-qubit-coherence-fidelities
 kind: lemma
 domain: mathematics
 title: Qubit coherence channels and fidelity functionals
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-finite-operator-conventions

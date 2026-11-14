@@ -3,7 +3,7 @@ id: def-qec-distinguishability-spherical-components
 kind: definition
 domain: mathematics
 title: Spherical vector components and transition-frequency convention
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-finite-operator-conventions

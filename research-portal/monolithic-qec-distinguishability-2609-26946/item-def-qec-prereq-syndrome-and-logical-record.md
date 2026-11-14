@@ -1,6 +1,6 @@
 ---
 title: Syndrome flags and logical-state-independent environmental records
-status: draft
+status: published
 research_item: def-qec-prereq-syndrome-and-logical-record
 dependency_level: 1
 ---

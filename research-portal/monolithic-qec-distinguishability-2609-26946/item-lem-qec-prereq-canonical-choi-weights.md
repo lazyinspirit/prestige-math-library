@@ -1,6 +1,6 @@
 ---
 title: Canonical Choi eigenvectors, Kraus rank and branch weights
-status: draft
+status: published
 research_item: lem-qec-prereq-canonical-choi-weights
 dependency_level: 1
 ---

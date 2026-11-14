@@ -1,6 +1,6 @@
 ---
 title: A scalar normalization survives a two-point functional
-status: draft
+status: published
 research_item: lem-author-ef1b96c593db-correlation-scalar-normalization
 dependency_level: 0
 ---

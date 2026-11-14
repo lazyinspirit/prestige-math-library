@@ -3,7 +3,7 @@ id: rem-qec-distinguishability-architecture-background
 kind: remark
 domain: physics
 title: Fault-tolerant overhead and monolithic inner codes
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-distinguishability-monolithic-encoding

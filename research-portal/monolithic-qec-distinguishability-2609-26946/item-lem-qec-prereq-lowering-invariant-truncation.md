@@ -1,6 +1,6 @@
 ---
 title: Invariant finite truncation for lowering generators
-status: draft
+status: published
 research_item: lem-qec-prereq-lowering-invariant-truncation
 dependency_level: 1
 ---

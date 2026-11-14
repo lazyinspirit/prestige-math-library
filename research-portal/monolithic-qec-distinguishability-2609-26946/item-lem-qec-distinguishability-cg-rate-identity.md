@@ -1,6 +1,6 @@
 ---
 title: Clebsch–Gordan total-rate identity
-status: draft
+status: published
 research_item: lem-qec-distinguishability-cg-rate-identity
 dependency_level: 2
 sources:

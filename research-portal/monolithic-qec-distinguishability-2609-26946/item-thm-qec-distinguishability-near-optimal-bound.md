@@ -1,6 +1,6 @@
 ---
 title: Factor-two guarantee for transpose recovery
-status: draft
+status: published
 research_item: thm-qec-distinguishability-near-optimal-bound
 dependency_level: 6
 sources:

@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-leakage-timescale
 kind: physics-theorem
 domain: physics
 title: Gradual which-path leakage and inverse splitting timescale
-status: draft
+status: published
 origin: session
 deps:
   - post-qec-distinguishability-four-level-model

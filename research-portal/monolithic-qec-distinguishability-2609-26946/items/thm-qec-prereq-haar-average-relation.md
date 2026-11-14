@@ -3,7 +3,7 @@ id: thm-qec-prereq-haar-average-relation
 kind: theorem
 domain: mathematics
 title: Haar-average versus entanglement fidelity
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-entanglement-fidelity

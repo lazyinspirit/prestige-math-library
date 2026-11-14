@@ -1,6 +1,6 @@
 ---
 title: Regularized transverse photon dipole bath model
-status: draft
+status: published
 research_item: post-qec-prereq-regularized-photon-dipole-model
 dependency_level: 0
 sources:

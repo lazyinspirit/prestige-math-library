@@ -1,6 +1,6 @@
 ---
 title: Commutator and spontaneous-plus-stimulated emission contribution
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-thermal-antinormal-moments
 dependency_level: 9
 sources:

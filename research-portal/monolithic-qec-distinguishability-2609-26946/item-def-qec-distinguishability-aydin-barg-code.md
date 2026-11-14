@@ -1,6 +1,6 @@
 ---
 title: J equals four Aydin–Barg encoding
-status: draft
+status: published
 research_item: def-qec-distinguishability-aydin-barg-code
 dependency_level: 5
 sources:

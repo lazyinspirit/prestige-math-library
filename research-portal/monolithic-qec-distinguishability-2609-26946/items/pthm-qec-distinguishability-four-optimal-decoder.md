@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-four-optimal-decoder
 kind: physics-theorem
 domain: physics
 title: Optimal phase-corrected four-level recovery
-status: draft
+status: published
 origin: session
 deps:
   - post-qec-distinguishability-four-level-model

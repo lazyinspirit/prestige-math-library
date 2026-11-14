@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-aydin-barg-correction
 kind: physics-theorem
 domain: physics
 title: Aydin–Barg rank-one correction and lower host angular momentum
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-distinguishability-aydin-barg-code

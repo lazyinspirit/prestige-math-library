@@ -3,7 +3,7 @@ id: def-qec-distinguishability-qec-matrix
 kind: definition
 domain: mathematics
 title: QEC matrix and logical partial trace
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-finite-operator-conventions

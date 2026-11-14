@@ -1,6 +1,6 @@
 ---
 title: Minimal-code decay detection without correction
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-minimal-code-errors
 dependency_level: 16
 sources:

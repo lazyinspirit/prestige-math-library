@@ -3,7 +3,7 @@ id: thm-qec-distinguishability-haar-fidelity
 kind: theorem
 domain: mathematics
 title: Haar-average fidelity versus entanglement fidelity
-status: draft
+status: published
 origin: session
 deps:
   - thm-qec-distinguishability-transpose-fidelity

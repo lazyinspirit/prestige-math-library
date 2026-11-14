@@ -1,6 +1,6 @@
 ---
 title: Rotation covariance and operator-weight sectors
-status: draft
+status: published
 research_item: lem-qec-prereq-rotation-covariance-sectors
 dependency_level: 1
 ---

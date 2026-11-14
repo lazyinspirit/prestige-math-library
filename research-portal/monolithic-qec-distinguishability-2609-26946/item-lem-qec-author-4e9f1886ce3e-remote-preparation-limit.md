@@ -1,6 +1,6 @@
 ---
 title: Finite-preparation residual budget and its remote-boundary limit
-status: draft
+status: published
 research_item: lem-qec-author-4e9f1886ce3e-remote-preparation-limit
 dependency_level: 0
 ---

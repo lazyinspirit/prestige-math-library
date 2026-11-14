@@ -1,6 +1,6 @@
 ---
 title: Onset of the third four-level Kraus operator
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-four-rank
 dependency_level: 5
 sources:

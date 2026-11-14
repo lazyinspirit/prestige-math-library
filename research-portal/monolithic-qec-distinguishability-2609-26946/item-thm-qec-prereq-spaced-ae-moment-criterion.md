@@ -1,6 +1,6 @@
 ---
 title: Spaced-support moment criterion for order-one AE correction
-status: draft
+status: published
 research_item: thm-qec-prereq-spaced-ae-moment-criterion
 dependency_level: 2
 sources:

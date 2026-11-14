@@ -3,7 +3,7 @@ id: lem-qec-prereq-signed-ae-code-product-test
 kind: lemma
 domain: mathematics
 title: Finite signed-code KL product test
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-ae-error-span-contract

@@ -3,7 +3,7 @@ id: lem-qec-author-42f4c98e5e20-ule-correlation-moment
 kind: lemma
 domain: mathematics
 title: A first-moment bound for the bath correlation convolution
-status: draft
+status: published
 origin: session
 deps:
   - lem-qec-author-42f4c98e5e20-ule-normalization

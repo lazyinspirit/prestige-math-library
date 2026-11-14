@@ -3,7 +3,7 @@ id: lem-qec-author-4e9f1886ce3e-ule-envelope-moments
 kind: lemma
 domain: mathematics
 title: Mass and first moment of the ULE scalar envelope
-status: draft
+status: published
 origin: session
 deps:
   - lem-qec-author-42f4c98e5e20-ule-normalization

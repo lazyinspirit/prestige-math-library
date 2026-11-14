@@ -3,7 +3,7 @@ id: post-qec-distinguishability-ule-coupling
 kind: postulate
 domain: physics
 title: ULE system–bath coupling and short bath memory
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-stationary-spectrum-kernel-contract

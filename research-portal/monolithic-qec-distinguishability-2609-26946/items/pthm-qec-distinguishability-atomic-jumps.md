@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-atomic-jumps
 kind: physics-theorem
 domain: physics
 title: Canonical angular-momentum downward jumps
-status: draft
+status: published
 origin: session
 deps:
   - post-qec-distinguishability-atomic-system

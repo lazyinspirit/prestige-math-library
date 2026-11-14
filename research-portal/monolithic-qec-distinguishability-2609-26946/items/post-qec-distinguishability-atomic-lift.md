@@ -3,7 +3,7 @@ id: post-qec-distinguishability-atomic-lift
 kind: postulate
 domain: physics
 title: Phenomenological angular-momentum degeneracy lift
-status: draft
+status: published
 origin: session
 deps:
   - post-qec-distinguishability-atomic-system

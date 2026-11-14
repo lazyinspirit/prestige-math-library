@@ -1,6 +1,6 @@
 ---
 title: Two-path coherence Gram spectrum and Kraus weights
-status: draft
+status: published
 research_item: lem-qec-prereq-two-path-gram-spectrum
 dependency_level: 2
 ---

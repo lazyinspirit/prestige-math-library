@@ -1,6 +1,6 @@
 ---
 title: Real coefficient arrays for the signed spin-four isometry
-status: draft
+status: published
 research_item: lem-author-11a9fe6cf386-signed-spin-four-coefficients
 dependency_level: 1
 ---

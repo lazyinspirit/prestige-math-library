@@ -1,6 +1,6 @@
 ---
 title: Detection-code short-time checking law
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-detection-fidelity-asymptotic
 dependency_level: 18
 sources:

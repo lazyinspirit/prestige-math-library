@@ -3,7 +3,7 @@ id: rem-qec-distinguishability-lifting-background
 kind: remark
 domain: physics
 title: Frequency shifts, which-path records, and passive protection
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-distinguishability-monolithic-encoding

@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-decayed-coherence
 kind: physics-theorem
 domain: physics
 title: Conditional decoded state and decay coherence
-status: draft
+status: published
 origin: session
 deps:
   - post-qec-distinguishability-four-level-model

@@ -1,6 +1,6 @@
 ---
 title: Support-normalized transpose recovery and completion
-status: draft
+status: published
 research_item: thm-qec-prereq-transpose-support-completion
 dependency_level: 1
 ---

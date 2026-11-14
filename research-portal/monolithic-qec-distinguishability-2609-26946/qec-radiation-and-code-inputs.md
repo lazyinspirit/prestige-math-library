@@ -5,7 +5,7 @@ description: Supply the regulated photon model, thermal moments, spectral
   dipole identities. Use the same spin conventions for absorption-emission code
   criteria, and specify the bosonic, inner/outer encoding and
   continuous-monitoring interfaces needed for platform comparisons.
-status: draft
+status: published
 dependency_level: 1
 ---
 

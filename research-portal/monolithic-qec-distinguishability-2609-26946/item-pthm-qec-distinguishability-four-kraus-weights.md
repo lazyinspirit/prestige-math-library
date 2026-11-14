@@ -1,6 +1,6 @@
 ---
 title: Decay Kraus weights and photon overlap
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-four-kraus-weights
 dependency_level: 4
 sources:

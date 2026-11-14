@@ -3,7 +3,7 @@ id: lem-author-179395ddbb85-two-code-cubic-moments
 kind: lemma
 domain: mathematics
 title: The selected spin-four and spin-five codes have nontrivial cubic moments
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-spin-tensor-cg-conventions

@@ -3,7 +3,7 @@ id: thm-qec-distinguishability-wigner-eckart
 kind: theorem
 domain: mathematics
 title: Rank-one angular matrix elements
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-distinguishability-angular-basis

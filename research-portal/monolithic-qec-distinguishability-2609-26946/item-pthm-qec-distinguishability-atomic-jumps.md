@@ -1,6 +1,6 @@
 ---
 title: Canonical angular-momentum downward jumps
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-atomic-jumps
 dependency_level: 13
 sources:

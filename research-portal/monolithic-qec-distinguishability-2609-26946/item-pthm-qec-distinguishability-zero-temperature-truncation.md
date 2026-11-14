@@ -1,6 +1,6 @@
 ---
 title: Invariant finite angular-momentum cutoff
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-zero-temperature-truncation
 dependency_level: 14
 sources:

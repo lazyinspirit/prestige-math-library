@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-four-transpose-exact
 kind: physics-theorem
 domain: physics
 title: Exact four-level transpose fidelity
-status: draft
+status: published
 origin: session
 deps:
   - post-qec-distinguishability-four-level-model

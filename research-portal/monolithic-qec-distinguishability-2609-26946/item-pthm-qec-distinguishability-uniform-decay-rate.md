@@ -1,6 +1,6 @@
 ---
 title: Normalized jumps give a scalar total decay operator
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-uniform-decay-rate
 dependency_level: 15
 sources:

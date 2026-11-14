@@ -3,7 +3,7 @@ id: def-qec-prereq-ae-error-span-contract
 kind: definition
 domain: mathematics
 title: Order-one absorption–emission tensor error span
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-spin-tensor-cg-conventions

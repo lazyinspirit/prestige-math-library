@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-calibrated-decay-residual
 kind: physics-theorem
 domain: physics
 title: Jump-time dephasing vanishes with the checking interval
-status: draft
+status: published
 origin: session
 deps:
   - post-qec-distinguishability-general-lift-model

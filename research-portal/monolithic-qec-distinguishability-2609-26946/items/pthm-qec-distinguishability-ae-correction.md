@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-ae-correction
 kind: physics-theorem
 domain: physics
 title: Æ rank-one correction with separated error spaces
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-distinguishability-ae-code

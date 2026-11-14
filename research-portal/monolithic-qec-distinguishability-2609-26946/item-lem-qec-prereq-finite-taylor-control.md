@@ -1,6 +1,6 @@
 ---
 title: Finite exponential and smooth quotient remainder control
-status: draft
+status: published
 research_item: lem-qec-prereq-finite-taylor-control
 dependency_level: 0
 ---

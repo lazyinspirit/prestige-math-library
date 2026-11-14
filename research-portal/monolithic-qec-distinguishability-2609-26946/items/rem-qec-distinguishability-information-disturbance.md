@@ -3,7 +3,7 @@ id: rem-qec-distinguishability-information-disturbance
 kind: remark
 domain: physics
 title: Logical information leakage versus erasure flags
-status: draft
+status: published
 origin: session
 deps:
   - prop-qec-distinguishability-environment-kl

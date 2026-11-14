@@ -1,6 +1,6 @@
 ---
 title: Phenomenological angular-momentum degeneracy lift
-status: draft
+status: published
 research_item: post-qec-distinguishability-atomic-lift
 dependency_level: 3
 sources:

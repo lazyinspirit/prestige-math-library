@@ -1,6 +1,6 @@
 ---
 title: Cubic short-time loss and recoverable limits
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-r4-cubic
 dependency_level: 5
 sources:

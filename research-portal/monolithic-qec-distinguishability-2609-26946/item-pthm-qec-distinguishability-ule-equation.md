@@ -1,6 +1,6 @@
 ---
 title: Universal Lindblad equation with correction
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-ule-equation
 dependency_level: 6
 sources:

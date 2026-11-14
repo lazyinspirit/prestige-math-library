@@ -3,7 +3,7 @@ id: lem-qec-author-db1311c0cf0b-orthogonal-decay-sector-fidelity
 kind: lemma
 domain: mathematics
 title: Orthogonal decay sectors yield a strict fidelity margin
-status: draft
+status: published
 origin: session
 deps:
   - lem-qec-author-db1311c0cf0b-two-step-cascade-channel

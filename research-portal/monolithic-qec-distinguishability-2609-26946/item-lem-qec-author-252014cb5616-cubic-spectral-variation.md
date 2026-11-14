@@ -1,6 +1,6 @@
 ---
 title: Relative variation of a cubic spectral jump factor
-status: draft
+status: published
 research_item: lem-qec-author-252014cb5616-cubic-spectral-variation
 dependency_level: 1
 ---

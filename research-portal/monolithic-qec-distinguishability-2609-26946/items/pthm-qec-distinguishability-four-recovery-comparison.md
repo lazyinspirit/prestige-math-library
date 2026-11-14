@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-four-recovery-comparison
 kind: physics-theorem
 domain: physics
 title: Four-level fidelity measures for the unrotated decoder
-status: draft
+status: published
 origin: session
 deps:
   - post-qec-distinguishability-four-level-model

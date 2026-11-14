@@ -1,6 +1,6 @@
 ---
 title: Spherical vector components and transition-frequency convention
-status: draft
+status: published
 research_item: def-qec-distinguishability-spherical-components
 dependency_level: 2
 sources:

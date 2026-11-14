@@ -1,6 +1,6 @@
 ---
 title: Feasibility and range of transpose entanglement fidelity
-status: draft
+status: published
 research_item: lem-author-9fe623b43725-fidelity-feasibility
 dependency_level: 3
 ---

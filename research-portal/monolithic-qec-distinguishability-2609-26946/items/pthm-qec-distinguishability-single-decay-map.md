@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-single-decay-map
 kind: physics-theorem
 domain: physics
 title: Matrix elements of the fast detected-decay state
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-finite-operator-conventions

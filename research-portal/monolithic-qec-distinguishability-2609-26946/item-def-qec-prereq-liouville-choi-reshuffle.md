@@ -1,6 +1,6 @@
 ---
 title: Liouville matrix and Choi reshuffling conventions
-status: draft
+status: published
 research_item: def-qec-prereq-liouville-choi-reshuffle
 dependency_level: 0
 ---

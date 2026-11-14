@@ -3,7 +3,7 @@ id: lem-author-e8d79981fdee-integrated-trajectory-support
 kind: lemma
 domain: mathematics
 title: Support of an integrated finite trajectory family
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-finite-operator-conventions

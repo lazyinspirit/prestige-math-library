@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-ule-error-bound
 kind: physics-theorem
 domain: physics
 title: ULE correction bound and validity condition
-status: draft
+status: published
 origin: session
 deps:
   - pthm-qec-distinguishability-ule-equation

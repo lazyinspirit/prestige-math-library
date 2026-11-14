@@ -1,6 +1,6 @@
 ---
 title: Long-time atomic channel and source-resolving Kraus operators
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-ground-replacer
 dependency_level: 15
 sources:

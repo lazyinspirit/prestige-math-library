@@ -1,6 +1,6 @@
 ---
 title: Interaction-picture ULE jumps and Lamb shift
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-ule-time-dependent
 dependency_level: 8
 sources:

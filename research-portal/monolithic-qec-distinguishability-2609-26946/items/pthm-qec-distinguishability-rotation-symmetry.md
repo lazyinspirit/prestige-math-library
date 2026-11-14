@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-rotation-symmetry
 kind: physics-theorem
 domain: physics
 title: Weak rotational symmetry and decoupled operator sectors
-status: draft
+status: published
 origin: session
 deps:
   - post-qec-distinguishability-equal-rate-model

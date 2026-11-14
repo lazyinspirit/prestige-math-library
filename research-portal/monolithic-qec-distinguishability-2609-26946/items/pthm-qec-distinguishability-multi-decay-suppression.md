@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-multi-decay-suppression
 kind: physics-theorem
 domain: physics
 title: Multiple decays vanish over fixed total time with fast checks
-status: draft
+status: published
 origin: session
 deps:
   - lem-qec-author-9ff6bb2d6819-no-jump-survival

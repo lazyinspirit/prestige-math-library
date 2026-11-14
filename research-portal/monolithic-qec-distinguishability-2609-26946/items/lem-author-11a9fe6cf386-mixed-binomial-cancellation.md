@@ -3,7 +3,7 @@ id: lem-author-11a9fe6cf386-mixed-binomial-cancellation
 kind: lemma
 domain: mathematics
 title: Signed mixed binomial sums cancel at order one
-status: draft
+status: published
 origin: session
 deps:
   - lem-author-11a9fe6cf386-signed-spin-four-coefficients

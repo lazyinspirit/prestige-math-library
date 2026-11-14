@@ -1,6 +1,6 @@
 ---
 title: Thermal contractions and absorption contribution
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-thermal-normal-moments
 dependency_level: 8
 sources:

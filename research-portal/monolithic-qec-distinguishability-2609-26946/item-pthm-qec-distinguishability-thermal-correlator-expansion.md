@@ -1,6 +1,6 @@
 ---
 title: Photon-number expansion of the diagonal bath correlator
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-thermal-correlator-expansion
 dependency_level: 7
 sources:

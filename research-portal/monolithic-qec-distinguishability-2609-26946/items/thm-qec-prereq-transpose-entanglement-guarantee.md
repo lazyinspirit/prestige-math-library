@@ -3,7 +3,7 @@ id: thm-qec-prereq-transpose-entanglement-guarantee
 kind: theorem
 domain: mathematics
 title: Near-optimality for maximally mixed entanglement fidelity
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-entanglement-fidelity

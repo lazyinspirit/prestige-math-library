@@ -1,6 +1,6 @@
 ---
 title: Minimal-code closed fidelity and checking time
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-minimal-fidelity-closed
 dependency_level: 17
 sources:

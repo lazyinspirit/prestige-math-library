@@ -3,7 +3,7 @@ id: thm-qec-prereq-transpose-support-completion
 kind: theorem
 domain: mathematics
 title: Support-normalized transpose recovery and completion
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-restricted-logical-channel

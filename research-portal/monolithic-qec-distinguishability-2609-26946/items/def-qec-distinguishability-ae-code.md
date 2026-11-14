@@ -3,7 +3,7 @@ id: def-qec-distinguishability-ae-code
 kind: definition
 domain: physics
 title: J equals five absorption-emission code
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-distinguishability-angular-basis

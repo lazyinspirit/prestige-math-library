@@ -1,6 +1,6 @@
 ---
 title: Continuously monitored and dissipatively stabilized encodings
-status: draft
+status: published
 research_item: op-qec-distinguishability-future-continuous-stabilized
 dependency_level: 4
 sources:

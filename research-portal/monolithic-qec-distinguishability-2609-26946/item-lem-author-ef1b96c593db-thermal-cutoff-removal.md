@@ -1,6 +1,6 @@
 ---
 title: Thermal frequency cutoffs may be removed under the envelope
-status: draft
+status: published
 research_item: lem-author-ef1b96c593db-thermal-cutoff-removal
 dependency_level: 1
 ---

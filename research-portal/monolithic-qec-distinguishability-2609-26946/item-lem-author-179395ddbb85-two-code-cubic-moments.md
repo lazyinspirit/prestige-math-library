@@ -1,6 +1,6 @@
 ---
 title: The selected spin-four and spin-five codes have nontrivial cubic moments
-status: draft
+status: published
 research_item: lem-author-179395ddbb85-two-code-cubic-moments
 dependency_level: 1
 ---

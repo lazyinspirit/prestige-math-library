@@ -3,7 +3,7 @@ id: lem-qec-prereq-rotation-covariance-sectors
 kind: lemma
 domain: mathematics
 title: Rotation covariance and operator-weight sectors
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-finite-gksl-channel-interface

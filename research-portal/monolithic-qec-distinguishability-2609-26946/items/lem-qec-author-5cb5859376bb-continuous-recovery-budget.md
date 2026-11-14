@@ -3,7 +3,7 @@ id: lem-qec-author-5cb5859376bb-continuous-recovery-budget
 kind: lemma
 domain: mathematics
 title: Fixed-time convergence of calibrated recovery cycles
-status: draft
+status: published
 origin: session
 deps:
   - lem-qec-author-5cb5859376bb-unconditional-cycle-branches

@@ -1,6 +1,6 @@
 ---
 title: Inner and outer codes and resource-overhead data
-status: draft
+status: published
 research_item: def-qec-prereq-inner-outer-resource-interface
 dependency_level: 1
 ---

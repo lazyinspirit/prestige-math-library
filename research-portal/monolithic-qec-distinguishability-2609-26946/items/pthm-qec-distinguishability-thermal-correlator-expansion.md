@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-thermal-correlator-expansion
 kind: physics-theorem
 domain: physics
 title: Photon-number expansion of the diagonal bath correlator
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-distinguishability-bath-correlator

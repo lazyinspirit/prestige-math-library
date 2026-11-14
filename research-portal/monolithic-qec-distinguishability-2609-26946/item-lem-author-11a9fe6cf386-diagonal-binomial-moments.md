@@ -1,6 +1,6 @@
 ---
 title: Signed diagonal binomial moments agree at order one
-status: draft
+status: published
 research_item: lem-author-11a9fe6cf386-diagonal-binomial-moments
 dependency_level: 2
 ---

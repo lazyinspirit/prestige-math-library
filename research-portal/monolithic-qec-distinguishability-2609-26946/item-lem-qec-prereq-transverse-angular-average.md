@@ -1,6 +1,6 @@
 ---
 title: Transverse projector and isotropic angular contraction
-status: draft
+status: published
 research_item: lem-qec-prereq-transverse-angular-average
 dependency_level: 0
 ---

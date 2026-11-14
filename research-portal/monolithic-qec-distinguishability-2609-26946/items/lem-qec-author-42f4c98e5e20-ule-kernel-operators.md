@@ -3,7 +3,7 @@ id: lem-qec-author-42f4c98e5e20-ule-kernel-operators
 kind: lemma
 domain: mathematics
 title: Convergent jump integrals and Hermitian Lamb operators
-status: draft
+status: published
 origin: session
 deps:
   - lem-qec-author-42f4c98e5e20-ule-normalization

@@ -3,7 +3,7 @@ id: lem-qec-author-5cb5859376bb-unconditional-cycle-branches
 kind: lemma
 domain: mathematics
 title: Complete recovered-cycle bound with weighted trajectory branches
-status: draft
+status: published
 origin: session
 deps:
   - lem-qec-author-5cb5859376bb-amplified-trace-sandwich

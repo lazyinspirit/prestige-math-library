@@ -1,6 +1,6 @@
 ---
 title: Canonical weight as maximally mixed branch probability
-status: draft
+status: published
 research_item: prop-qec-distinguishability-branch-weight-probability
 dependency_level: 4
 sources:

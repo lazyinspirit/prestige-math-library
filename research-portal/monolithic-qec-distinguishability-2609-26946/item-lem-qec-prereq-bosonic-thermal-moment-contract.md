@@ -1,6 +1,6 @@
 ---
 title: Finite-mode bosonic Gibbs occupations and moments
-status: draft
+status: published
 research_item: lem-qec-prereq-bosonic-thermal-moment-contract
 dependency_level: 0
 ---

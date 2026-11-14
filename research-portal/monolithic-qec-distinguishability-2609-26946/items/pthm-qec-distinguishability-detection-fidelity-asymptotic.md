@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-detection-fidelity-asymptotic
 kind: physics-theorem
 domain: physics
 title: Detection-code short-time checking law
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-distinguishability-detection-code

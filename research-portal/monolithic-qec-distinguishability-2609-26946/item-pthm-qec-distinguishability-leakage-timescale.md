@@ -1,6 +1,6 @@
 ---
 title: Gradual which-path leakage and inverse splitting timescale
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-leakage-timescale
 dependency_level: 8
 sources:

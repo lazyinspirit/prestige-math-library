@@ -2,7 +2,7 @@
 title: Article items · 07 — Monolithic encoding and degenerate error processes
 description: Presents 28 items from the article and its immediate prerequisites,
   covering dependency level 1.
-status: draft
+status: published
 dependency_level: 2
 research_article_page: true
 item_count: 28

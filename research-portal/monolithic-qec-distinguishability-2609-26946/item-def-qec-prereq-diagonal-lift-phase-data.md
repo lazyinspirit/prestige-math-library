@@ -1,6 +1,6 @@
 ---
 title: Calibrated diagonal lifts and transition phase differences
-status: draft
+status: published
 research_item: def-qec-prereq-diagonal-lift-phase-data
 dependency_level: 1
 ---

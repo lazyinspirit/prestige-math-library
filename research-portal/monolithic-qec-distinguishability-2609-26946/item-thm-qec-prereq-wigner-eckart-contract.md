@@ -1,6 +1,6 @@
 ---
 title: Wigner–Eckart with explicit magnetic-label contract
-status: draft
+status: published
 research_item: thm-qec-prereq-wigner-eckart-contract
 dependency_level: 1
 sources:

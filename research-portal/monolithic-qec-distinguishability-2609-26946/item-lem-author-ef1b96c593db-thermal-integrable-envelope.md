@@ -1,6 +1,6 @@
 ---
 title: An absolute thermal envelope controls radial correlations
-status: draft
+status: published
 research_item: lem-author-ef1b96c593db-thermal-integrable-envelope
 dependency_level: 0
 ---

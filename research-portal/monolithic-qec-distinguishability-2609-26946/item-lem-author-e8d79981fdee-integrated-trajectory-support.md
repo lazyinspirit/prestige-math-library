@@ -1,6 +1,6 @@
 ---
 title: Support of an integrated finite trajectory family
-status: draft
+status: published
 research_item: lem-author-e8d79981fdee-integrated-trajectory-support
 dependency_level: 1
 ---

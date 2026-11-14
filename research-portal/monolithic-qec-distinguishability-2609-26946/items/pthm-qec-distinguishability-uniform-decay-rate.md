@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-uniform-decay-rate
 kind: physics-theorem
 domain: physics
 title: Normalized jumps give a scalar total decay operator
-status: draft
+status: published
 origin: session
 deps:
   - post-qec-distinguishability-equal-rate-model

@@ -1,6 +1,6 @@
 ---
 title: Branch-averaged decoded state fidelity
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-r4-fidelity
 dependency_level: 4
 sources:

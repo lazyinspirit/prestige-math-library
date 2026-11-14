@@ -3,7 +3,7 @@ id: lem-author-11a9fe6cf386-signed-spin-four-coefficients
 kind: lemma
 domain: mathematics
 title: Real coefficient arrays for the signed spin-four isometry
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-spin-tensor-cg-conventions

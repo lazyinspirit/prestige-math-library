@@ -3,7 +3,7 @@ id: def-qec-prereq-liouville-choi-reshuffle
 kind: definition
 domain: mathematics
 title: Liouville matrix and Choi reshuffling conventions
-status: draft
+status: published
 origin: session
 deps:
   - math:def-qc-choi-matrix

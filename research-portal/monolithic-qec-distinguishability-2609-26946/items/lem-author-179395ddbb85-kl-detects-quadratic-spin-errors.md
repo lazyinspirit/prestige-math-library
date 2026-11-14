@@ -3,7 +3,7 @@ id: lem-author-179395ddbb85-kl-detects-quadratic-spin-errors
 kind: lemma
 domain: mathematics
 title: Pair-product correction detects quadratic spin errors
-status: draft
+status: published
 origin: session
 deps:
   - lem-author-179395ddbb85-low-rank-spin-polynomials

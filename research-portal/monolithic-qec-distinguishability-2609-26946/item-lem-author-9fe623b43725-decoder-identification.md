@@ -1,6 +1,6 @@
 ---
 title: Equivalence of logical and code-supported physical decoding
-status: draft
+status: published
 research_item: lem-author-9fe623b43725-decoder-identification
 dependency_level: 4
 ---

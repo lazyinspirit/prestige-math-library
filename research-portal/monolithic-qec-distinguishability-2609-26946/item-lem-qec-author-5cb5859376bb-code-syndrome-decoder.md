@@ -1,6 +1,6 @@
 ---
 title: A Knill–Laflamme decoder retaining the code syndrome
-status: draft
+status: published
 research_item: lem-qec-author-5cb5859376bb-code-syndrome-decoder
 dependency_level: 1
 ---

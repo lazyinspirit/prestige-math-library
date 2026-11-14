@@ -1,6 +1,6 @@
 ---
 title: Three spherical emission channels
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-spherical-jumps
 dependency_level: 13
 sources:

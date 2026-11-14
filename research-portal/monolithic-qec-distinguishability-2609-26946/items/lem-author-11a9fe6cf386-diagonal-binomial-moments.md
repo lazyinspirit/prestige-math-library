@@ -3,7 +3,7 @@ id: lem-author-11a9fe6cf386-diagonal-binomial-moments
 kind: lemma
 domain: mathematics
 title: Signed diagonal binomial moments agree at order one
-status: draft
+status: published
 origin: session
 deps:
   - lem-author-11a9fe6cf386-signed-spin-four-coefficients

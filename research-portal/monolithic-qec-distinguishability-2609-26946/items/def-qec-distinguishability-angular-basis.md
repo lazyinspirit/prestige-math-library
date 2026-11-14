@@ -3,7 +3,7 @@ id: def-qec-distinguishability-angular-basis
 kind: definition
 domain: mathematics
 title: Angular-momentum basis and tensor labels
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-finite-operator-conventions

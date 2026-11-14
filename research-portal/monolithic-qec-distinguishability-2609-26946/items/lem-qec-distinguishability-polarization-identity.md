@@ -3,7 +3,7 @@ id: lem-qec-distinguishability-polarization-identity
 kind: lemma
 domain: mathematics
 title: Transverse-polarization completeness and angular average
-status: draft
+status: published
 origin: session
 deps:
   - lem-qec-prereq-transverse-angular-average

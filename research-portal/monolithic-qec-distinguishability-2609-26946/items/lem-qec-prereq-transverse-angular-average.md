@@ -3,7 +3,7 @@ id: lem-qec-prereq-transverse-angular-average
 kind: lemma
 domain: mathematics
 title: Transverse projector and isotropic angular contraction
-status: draft
+status: published
 origin: session
 deps:
   - math:def-orthogonal-projection

@@ -1,6 +1,6 @@
 ---
 title: Dimensionless dipole and ULE coupling identification
-status: draft
+status: published
 research_item: post-qec-distinguishability-dipole-coupling
 dependency_level: 6
 sources:

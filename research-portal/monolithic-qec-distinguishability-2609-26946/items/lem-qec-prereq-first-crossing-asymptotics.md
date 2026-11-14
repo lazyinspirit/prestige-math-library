@@ -3,7 +3,7 @@ id: lem-qec-prereq-first-crossing-asymptotics
 kind: lemma
 domain: mathematics
 title: Local inversion of a fidelity first crossing
-status: draft
+status: published
 origin: session
 deps:
   - math:def-infimum

@@ -3,7 +3,7 @@ id: lem-qec-prereq-bounded-intensity-two-jumps
 kind: lemma
 domain: mathematics
 title: Two-jump probability from a bounded hazard
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-finite-gksl-channel-interface

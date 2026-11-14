@@ -1,6 +1,6 @@
 ---
 title: Reference-uniform trace-norm sandwich estimates
-status: draft
+status: published
 research_item: lem-qec-author-5cb5859376bb-amplified-trace-sandwich
 dependency_level: 0
 ---

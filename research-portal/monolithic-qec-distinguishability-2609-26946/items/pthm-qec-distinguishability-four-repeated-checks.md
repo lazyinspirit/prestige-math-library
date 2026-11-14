@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-four-repeated-checks
 kind: physics-theorem
 domain: physics
 title: Repeated four-level recovery and fixed-time error bound
-status: draft
+status: published
 origin: session
 deps:
   - post-qec-distinguishability-four-level-model

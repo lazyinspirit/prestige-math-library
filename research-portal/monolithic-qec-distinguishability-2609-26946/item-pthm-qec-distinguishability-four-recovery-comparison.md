@@ -1,6 +1,6 @@
 ---
 title: Four-level fidelity measures for the unrotated decoder
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-four-recovery-comparison
 dependency_level: 5
 sources:

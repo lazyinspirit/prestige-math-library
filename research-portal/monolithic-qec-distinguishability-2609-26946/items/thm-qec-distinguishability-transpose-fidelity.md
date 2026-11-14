@@ -3,7 +3,7 @@ id: thm-qec-distinguishability-transpose-fidelity
 kind: theorem
 domain: mathematics
 title: Transpose fidelity from the QEC matrix
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-distinguishability-qec-matrix

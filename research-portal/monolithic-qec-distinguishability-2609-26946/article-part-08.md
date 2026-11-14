@@ -2,7 +2,7 @@
 title: Article items · 08 — Knill–Laflamme criterion
 description: Presents 28 items from the article and its immediate prerequisites,
   covering dependency levels 1–2.
-status: draft
+status: published
 dependency_level: 3
 research_article_page: true
 item_count: 28

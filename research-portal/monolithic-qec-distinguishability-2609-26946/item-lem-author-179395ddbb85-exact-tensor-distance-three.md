@@ -1,6 +1,6 @@
 ---
 title: Both selected codes have exact tensor-rank distance three
-status: draft
+status: published
 research_item: lem-author-179395ddbb85-exact-tensor-distance-three
 dependency_level: 4
 ---

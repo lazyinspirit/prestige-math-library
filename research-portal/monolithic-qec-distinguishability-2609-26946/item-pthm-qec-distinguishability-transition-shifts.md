@@ -1,6 +1,6 @@
 ---
 title: Source-dependent versus uniform Zeeman shifts
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-transition-shifts
 dependency_level: 4
 sources:

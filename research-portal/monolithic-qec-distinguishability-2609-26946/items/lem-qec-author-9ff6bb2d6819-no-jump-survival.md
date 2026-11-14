@@ -3,7 +3,7 @@ id: lem-qec-author-9ff6bb2d6819-no-jump-survival
 kind: lemma
 domain: mathematics
 title: Finite no-jump propagator and survival identity
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-finite-gksl-channel-interface

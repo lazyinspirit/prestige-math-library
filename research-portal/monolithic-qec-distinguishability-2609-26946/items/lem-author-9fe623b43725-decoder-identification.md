@@ -3,7 +3,7 @@ id: lem-author-9fe623b43725-decoder-identification
 kind: lemma
 domain: mathematics
 title: Equivalence of logical and code-supported physical decoding
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-restricted-logical-channel

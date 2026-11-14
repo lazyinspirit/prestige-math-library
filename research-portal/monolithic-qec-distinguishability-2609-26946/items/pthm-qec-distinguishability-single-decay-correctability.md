@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-single-decay-correctability
 kind: physics-theorem
 domain: physics
 title: Fast-interval decay approaches a correctable coherent error
-status: draft
+status: published
 origin: session
 deps:
   - pthm-qec-distinguishability-single-decay-map

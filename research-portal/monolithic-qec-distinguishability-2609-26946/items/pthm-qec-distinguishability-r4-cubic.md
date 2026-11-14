@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-r4-cubic
 kind: physics-theorem
 domain: physics
 title: Cubic short-time loss and recoverable limits
-status: draft
+status: published
 origin: session
 deps:
   - post-qec-distinguishability-four-level-model

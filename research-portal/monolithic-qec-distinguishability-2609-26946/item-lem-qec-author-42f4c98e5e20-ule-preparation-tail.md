@@ -1,6 +1,6 @@
 ---
 title: Quantitative preparation-tail and waiting-time condition
-status: draft
+status: published
 research_item: lem-qec-author-42f4c98e5e20-ule-preparation-tail
 dependency_level: 3
 ---

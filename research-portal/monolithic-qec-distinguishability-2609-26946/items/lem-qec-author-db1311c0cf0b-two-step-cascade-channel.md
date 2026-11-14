@@ -3,7 +3,7 @@ id: lem-qec-author-db1311c0cf0b-two-step-cascade-channel
 kind: lemma
 domain: mathematics
 title: Exact two-step equal-rate cascade restricted to the detection isometry
-status: draft
+status: published
 origin: session
 deps:
   - lem-qec-author-db1311c0cf0b-spin-two-downward-populations

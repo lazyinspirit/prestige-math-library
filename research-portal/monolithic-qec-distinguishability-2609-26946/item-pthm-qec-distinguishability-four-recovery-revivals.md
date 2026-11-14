@@ -1,6 +1,6 @@
 ---
 title: Transient later-time advantage of the unrotated decoder
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-four-recovery-revivals
 dependency_level: 6
 sources:

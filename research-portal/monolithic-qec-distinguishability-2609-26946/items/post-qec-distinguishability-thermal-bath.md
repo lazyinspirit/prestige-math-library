@@ -3,7 +3,7 @@ id: post-qec-distinguishability-thermal-bath
 kind: postulate
 domain: physics
 title: Thermal photon bath and partition function
-status: draft
+status: published
 origin: session
 deps:
   - post-qec-distinguishability-photon-field

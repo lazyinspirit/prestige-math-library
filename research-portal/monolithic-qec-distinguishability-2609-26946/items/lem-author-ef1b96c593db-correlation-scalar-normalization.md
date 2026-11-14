@@ -3,7 +3,7 @@ id: lem-author-ef1b96c593db-correlation-scalar-normalization
 kind: lemma
 domain: mathematics
 title: A scalar normalization survives a two-point functional
-status: draft
+status: published
 origin: session
 deps:
   - math:def-linear-map

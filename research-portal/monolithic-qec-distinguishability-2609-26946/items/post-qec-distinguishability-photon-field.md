@@ -3,7 +3,7 @@ id: post-qec-distinguishability-photon-field
 kind: postulate
 domain: physics
 title: Photon modes and field normalization
-status: draft
+status: published
 origin: session
 deps:
   - post-qec-distinguishability-atomic-system

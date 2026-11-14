@@ -1,6 +1,6 @@
 ---
 title: Transpose (Petz) recovery on a code
-status: draft
+status: published
 research_item: def-qec-distinguishability-transpose-recovery
 dependency_level: 2
 sources:

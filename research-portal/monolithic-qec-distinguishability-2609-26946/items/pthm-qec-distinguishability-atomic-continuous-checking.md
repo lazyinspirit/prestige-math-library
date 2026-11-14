@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-atomic-continuous-checking
 kind: physics-theorem
 domain: physics
 title: Calibrated fast checks restore ideal rank-one correction
-status: draft
+status: published
 origin: session
 deps:
   - post-qec-distinguishability-general-lift-model

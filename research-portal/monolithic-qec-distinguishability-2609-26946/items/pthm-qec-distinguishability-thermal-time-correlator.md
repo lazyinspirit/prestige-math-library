@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-thermal-time-correlator
 kind: physics-theorem
 domain: physics
 title: Isotropic thermal bath time correlator
-status: draft
+status: published
 origin: session
 deps:
   - pthm-qec-distinguishability-thermal-normal-moments

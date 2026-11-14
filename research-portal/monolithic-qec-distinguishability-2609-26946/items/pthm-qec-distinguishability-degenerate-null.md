@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-degenerate-null
 kind: physics-theorem
 domain: physics
 title: Degenerate no-decay state is preserved
-status: draft
+status: published
 origin: session
 deps:
   - pthm-qec-distinguishability-null-projection

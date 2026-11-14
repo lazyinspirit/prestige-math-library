@@ -3,7 +3,7 @@ id: rem-qec-distinguishability-bosonic-implications
 kind: remark
 domain: physics
 title: Bosonic anharmonicity and finite-energy GKP tradeoff
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-bosonic-kerr-scope

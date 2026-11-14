@@ -1,6 +1,6 @@
 ---
 title: Frequency shifts, which-path records, and passive protection
-status: draft
+status: published
 research_item: rem-qec-distinguishability-lifting-background
 dependency_level: 5
 sources:

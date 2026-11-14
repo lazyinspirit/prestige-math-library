@@ -3,7 +3,7 @@ id: prop-qec-distinguishability-environment-kl
 kind: proposition
 domain: mathematics
 title: Environment-state independence under KL
-status: draft
+status: published
 origin: session
 deps:
   - thm-qec-distinguishability-kl-conditions

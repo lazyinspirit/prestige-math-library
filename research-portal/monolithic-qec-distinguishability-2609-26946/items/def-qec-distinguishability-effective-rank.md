@@ -3,7 +3,7 @@ id: def-qec-distinguishability-effective-rank
 kind: definition
 domain: mathematics
 title: Effective Kraus rank and branch weight
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-distinguishability-kraus-rank

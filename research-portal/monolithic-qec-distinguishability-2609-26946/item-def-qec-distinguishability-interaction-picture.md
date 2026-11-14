@@ -1,6 +1,6 @@
 ---
 title: Time-local interaction-picture convention
-status: draft
+status: published
 research_item: def-qec-distinguishability-interaction-picture
 dependency_level: 0
 sources:

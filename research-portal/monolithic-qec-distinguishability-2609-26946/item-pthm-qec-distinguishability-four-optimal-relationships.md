@@ -1,6 +1,6 @@
 ---
 title: Exact fidelity–Kraus-weight identities and short-time bound saturation
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-four-optimal-relationships
 dependency_level: 7
 sources:

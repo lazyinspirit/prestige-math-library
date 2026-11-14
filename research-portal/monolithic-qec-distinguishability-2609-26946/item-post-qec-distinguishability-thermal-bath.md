@@ -1,6 +1,6 @@
 ---
 title: Thermal photon bath and partition function
-status: draft
+status: published
 research_item: post-qec-distinguishability-thermal-bath
 dependency_level: 4
 sources:

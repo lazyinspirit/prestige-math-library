@@ -3,7 +3,7 @@ id: lem-qec-prereq-dipole-strength-sum-contract
 kind: lemma
 domain: mathematics
 title: Downward dipole coefficient normalization contract
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-spin-tensor-cg-conventions

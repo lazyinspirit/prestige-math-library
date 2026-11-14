@@ -3,7 +3,7 @@ id: def-qec-prereq-diagonal-lift-phase-data
 kind: definition
 domain: mathematics
 title: Calibrated diagonal lifts and transition phase differences
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-finite-operator-conventions

@@ -1,6 +1,6 @@
 ---
 title: Exact state evolution from a four-level codeword
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-four-level-evolution
 dependency_level: 2
 sources:

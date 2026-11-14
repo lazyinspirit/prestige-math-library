@@ -1,6 +1,6 @@
 ---
 title: Matrix elements of the fast detected-decay state
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-single-decay-map
 dependency_level: 18
 sources:

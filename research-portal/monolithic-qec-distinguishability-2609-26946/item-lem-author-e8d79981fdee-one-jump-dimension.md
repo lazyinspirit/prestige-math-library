@@ -1,6 +1,6 @@
 ---
 title: One-jump span in the nine-dimensional lowering model
-status: draft
+status: published
 research_item: lem-author-e8d79981fdee-one-jump-dimension
 dependency_level: 3
 ---

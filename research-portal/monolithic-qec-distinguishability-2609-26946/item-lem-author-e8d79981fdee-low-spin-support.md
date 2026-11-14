@@ -1,6 +1,6 @@
 ---
 title: Nonvanishing downward coefficients for spin one and two
-status: draft
+status: published
 research_item: lem-author-e8d79981fdee-low-spin-support
 dependency_level: 2
 ---

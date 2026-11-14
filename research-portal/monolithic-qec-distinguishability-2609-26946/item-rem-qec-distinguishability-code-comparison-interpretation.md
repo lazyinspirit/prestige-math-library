@@ -1,6 +1,6 @@
 ---
 title: Spacing interpretation and rate-normalization qualification
-status: draft
+status: published
 research_item: rem-qec-distinguishability-code-comparison-interpretation
 dependency_level: 17
 sources:

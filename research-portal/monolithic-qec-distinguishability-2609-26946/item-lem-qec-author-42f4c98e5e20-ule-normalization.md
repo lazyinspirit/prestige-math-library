@@ -1,6 +1,6 @@
 ---
 title: ULE kernel adjoint symmetry and rate identities
-status: draft
+status: published
 research_item: lem-qec-author-42f4c98e5e20-ule-normalization
 dependency_level: 1
 ---

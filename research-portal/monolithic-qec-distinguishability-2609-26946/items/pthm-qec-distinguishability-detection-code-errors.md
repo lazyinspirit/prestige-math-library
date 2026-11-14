@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-detection-code-errors
 kind: physics-theorem
 domain: physics
 title: Detection-code errors retain partial logical information
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-distinguishability-detection-code

@@ -1,6 +1,6 @@
 ---
 title: Convergent jump integrals and Hermitian Lamb operators
-status: draft
+status: published
 research_item: lem-qec-author-42f4c98e5e20-ule-kernel-operators
 dependency_level: 2
 ---

@@ -3,7 +3,7 @@ id: lem-qec-author-252014cb5616-weighted-shift-amplitude-bound
 kind: lemma
 domain: mathematics
 title: Coefficient variation controls a weighted-shift operator
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-finite-operator-conventions

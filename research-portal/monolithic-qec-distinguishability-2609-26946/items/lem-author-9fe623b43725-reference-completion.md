@@ -3,7 +3,7 @@ id: lem-author-9fe623b43725-reference-completion
 kind: lemma
 domain: mathematics
 title: Completion independence with an entangled reference
-status: draft
+status: published
 origin: session
 deps:
   - thm-qec-prereq-transpose-support-completion

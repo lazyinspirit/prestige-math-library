@@ -3,7 +3,7 @@ id: lem-qec-author-9ff6bb2d6819-record-ensemble-gksl
 kind: lemma
 domain: mathematics
 title: Finite jump-record ensemble equals the GKSL channel
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-finite-gksl-channel-interface

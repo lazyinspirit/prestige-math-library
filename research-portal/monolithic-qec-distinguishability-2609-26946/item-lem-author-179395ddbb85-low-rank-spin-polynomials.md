@@ -1,6 +1,6 @@
 ---
 title: Low-rank tensor families are spin polynomials
-status: draft
+status: published
 research_item: lem-author-179395ddbb85-low-rank-spin-polynomials
 dependency_level: 2
 ---

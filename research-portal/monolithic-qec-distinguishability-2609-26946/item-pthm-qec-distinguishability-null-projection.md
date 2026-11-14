@@ -1,6 +1,6 @@
 ---
 title: Null-syndrome state and first-order expansion
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-null-projection
 dependency_level: 18
 sources:

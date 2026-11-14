@@ -3,7 +3,7 @@ id: lem-qec-prereq-rank-one-kl-dimension
 kind: lemma
 domain: mathematics
 title: Dimensional boundary of a rank-one KL obstruction
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-restricted-logical-channel

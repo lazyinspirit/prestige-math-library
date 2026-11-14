@@ -3,7 +3,7 @@ id: thm-qec-distinguishability-kl-conditions
 kind: theorem
 domain: mathematics
 title: Knill–Laflamme criterion
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-finite-operator-conventions

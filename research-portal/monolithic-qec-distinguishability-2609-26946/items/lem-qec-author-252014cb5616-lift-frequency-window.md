@@ -3,7 +3,7 @@ id: lem-qec-author-252014cb5616-lift-frequency-window
 kind: lemma
 domain: mathematics
 title: Finite diagonal lift and its relative frequency window
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-spin-tensor-cg-conventions

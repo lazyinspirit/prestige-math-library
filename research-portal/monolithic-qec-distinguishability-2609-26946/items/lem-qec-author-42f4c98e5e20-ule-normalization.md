@@ -3,7 +3,7 @@ id: lem-qec-author-42f4c98e5e20-ule-normalization
 kind: lemma
 domain: mathematics
 title: ULE kernel adjoint symmetry and rate identities
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-stationary-spectrum-kernel-contract

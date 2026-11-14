@@ -1,6 +1,6 @@
 ---
 title: ULE system–bath coupling and short bath memory
-status: draft
+status: published
 research_item: post-qec-distinguishability-ule-coupling
 dependency_level: 5
 sources:

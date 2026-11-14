@@ -1,6 +1,6 @@
 ---
 title: Two orthogonal Pauli alternatives bound recovery fidelity
-status: draft
+status: published
 research_item: lem-qec-prereq-qubit-pauli-recovery-ceiling
 dependency_level: 1
 ---

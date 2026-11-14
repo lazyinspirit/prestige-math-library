@@ -1,6 +1,6 @@
 ---
 title: Weak rotational symmetry and decoupled operator sectors
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-rotation-symmetry
 dependency_level: 15
 sources:

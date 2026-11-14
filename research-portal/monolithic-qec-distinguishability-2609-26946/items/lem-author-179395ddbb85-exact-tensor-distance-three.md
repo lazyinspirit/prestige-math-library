@@ -3,7 +3,7 @@ id: lem-author-179395ddbb85-exact-tensor-distance-three
 kind: lemma
 domain: mathematics
 title: Both selected codes have exact tensor-rank distance three
-status: draft
+status: published
 origin: session
 deps:
   - lem-author-179395ddbb85-low-rank-spin-polynomials

@@ -3,7 +3,7 @@ id: thm-qec-distinguishability-choi-rank
 kind: theorem
 domain: mathematics
 title: Kraus rank equals Choi rank
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-distinguishability-kraus-rank

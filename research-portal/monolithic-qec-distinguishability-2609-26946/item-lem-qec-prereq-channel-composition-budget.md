@@ -1,6 +1,6 @@
 ---
 title: Telescoping error budget for repeated finite channels
-status: draft
+status: published
 research_item: lem-qec-prereq-channel-composition-budget
 dependency_level: 0
 ---

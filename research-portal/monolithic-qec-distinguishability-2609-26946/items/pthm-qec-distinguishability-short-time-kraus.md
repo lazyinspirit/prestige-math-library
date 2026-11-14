@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-short-time-kraus
 kind: physics-theorem
 domain: physics
 title: First-order fast-check channel
-status: draft
+status: published
 origin: session
 deps:
   - post-qec-distinguishability-general-lift-model

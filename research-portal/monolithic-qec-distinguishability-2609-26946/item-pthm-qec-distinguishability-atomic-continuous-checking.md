@@ -1,6 +1,6 @@
 ---
 title: Calibrated fast checks restore ideal rank-one correction
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-atomic-continuous-checking
 dependency_level: 16
 sources:

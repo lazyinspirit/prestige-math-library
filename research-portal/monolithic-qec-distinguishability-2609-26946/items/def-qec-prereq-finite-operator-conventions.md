@@ -3,7 +3,7 @@ id: def-qec-prereq-finite-operator-conventions
 kind: definition
 domain: mathematics
 title: Finite operator and ket conventions
-status: draft
+status: published
 origin: session
 deps:
   - math:def-inner-product-space

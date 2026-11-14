@@ -3,7 +3,7 @@ id: rem-qec-distinguishability-platform-co-design
 kind: remark
 domain: physics
 title: Checking speed, lift control, and code must be chosen jointly
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-distinguishability-checking-time

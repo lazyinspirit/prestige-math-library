@@ -1,6 +1,6 @@
 ---
 title: Environment-state independence under KL
-status: draft
+status: published
 research_item: prop-qec-distinguishability-environment-kl
 dependency_level: 2
 sources:

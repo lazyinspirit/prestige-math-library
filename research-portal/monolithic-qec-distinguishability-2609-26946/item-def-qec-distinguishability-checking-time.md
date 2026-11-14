@@ -1,6 +1,6 @@
 ---
 title: Operational checking time
-status: draft
+status: published
 research_item: def-qec-distinguishability-checking-time
 dependency_level: 3
 sources:

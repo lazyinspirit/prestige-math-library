@@ -1,6 +1,6 @@
 ---
 title: Monolithic Quantum Error Correction in the Presence of Distinguishability
-status: draft
+status: published
 ---
 
 - [Quantum channels and recovery](qec-recovery-mathematics) — level 0

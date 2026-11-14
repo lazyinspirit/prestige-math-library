@@ -3,7 +3,7 @@ id: rem-qec-distinguishability-rank-mechanism
 kind: remark
 domain: physics
 title: Jump histories, distinguishability, and limits of Kraus rank
-status: draft
+status: published
 origin: session
 deps:
   - post-qec-distinguishability-atomic-lift

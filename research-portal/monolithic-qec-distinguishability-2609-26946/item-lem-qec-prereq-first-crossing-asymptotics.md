@@ -1,6 +1,6 @@
 ---
 title: Local inversion of a fidelity first crossing
-status: draft
+status: published
 research_item: lem-qec-prereq-first-crossing-asymptotics
 dependency_level: 0
 ---

@@ -1,6 +1,6 @@
 ---
 title: Orthogonal decay sectors yield a strict fidelity margin
-status: draft
+status: published
 research_item: lem-qec-author-db1311c0cf0b-orthogonal-decay-sector-fidelity
 dependency_level: 4
 ---

@@ -3,7 +3,7 @@ id: def-qec-prereq-spectral-threshold-protocol
 kind: definition
 domain: mathematics
 title: Exact versus thresholded Kraus rank protocol
-status: draft
+status: published
 origin: session
 deps:
   - lem-qec-prereq-canonical-choi-weights

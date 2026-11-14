@@ -1,6 +1,6 @@
 ---
 title: Marked waiting law from finite no-jump evolution
-status: draft
+status: published
 research_item: lem-qec-author-9ff6bb2d6819-marked-waiting-kernel
 dependency_level: 2
 sources:

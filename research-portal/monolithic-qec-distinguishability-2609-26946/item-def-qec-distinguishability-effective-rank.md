@@ -1,6 +1,6 @@
 ---
 title: Effective Kraus rank and branch weight
-status: draft
+status: published
 research_item: def-qec-distinguishability-effective-rank
 dependency_level: 3
 sources:

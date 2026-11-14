@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-thermal-spectral-density
 kind: physics-theorem
 domain: physics
 title: Thermal bath spectral density and frequency signs
-status: draft
+status: published
 origin: session
 deps:
   - pthm-qec-distinguishability-thermal-time-correlator

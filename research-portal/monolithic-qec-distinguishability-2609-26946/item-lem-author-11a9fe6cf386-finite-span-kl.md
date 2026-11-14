@@ -1,6 +1,6 @@
 ---
 title: Finite spanning-list compression and channel qualification
-status: draft
+status: published
 research_item: lem-author-11a9fe6cf386-finite-span-kl
 dependency_level: 2
 ---

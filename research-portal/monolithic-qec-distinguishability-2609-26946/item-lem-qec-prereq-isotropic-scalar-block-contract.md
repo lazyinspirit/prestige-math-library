@@ -1,6 +1,6 @@
 ---
 title: Rotational scalars on multiplicity-resolved spin blocks
-status: draft
+status: published
 research_item: lem-qec-prereq-isotropic-scalar-block-contract
 dependency_level: 1
 ---

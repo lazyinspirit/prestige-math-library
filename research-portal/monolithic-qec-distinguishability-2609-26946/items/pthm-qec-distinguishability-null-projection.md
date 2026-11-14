@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-null-projection
 kind: physics-theorem
 domain: physics
 title: Null-syndrome state and first-order expansion
-status: draft
+status: published
 origin: session
 deps:
   - alg-qec-distinguishability-syndrome-measurement

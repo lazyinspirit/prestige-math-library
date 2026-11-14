@@ -1,6 +1,6 @@
 ---
 title: A first-moment bound for the bath correlation convolution
-status: draft
+status: published
 research_item: lem-qec-author-42f4c98e5e20-ule-correlation-moment
 dependency_level: 2
 ---

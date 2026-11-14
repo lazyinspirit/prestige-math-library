@@ -1,6 +1,6 @@
 ---
 title: Four-level spontaneous-decay model
-status: draft
+status: published
 research_item: post-qec-distinguishability-four-level-model
 dependency_level: 1
 sources:

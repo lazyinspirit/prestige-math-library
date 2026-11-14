@@ -3,7 +3,7 @@ id: texp-qec-distinguishability-aydin-barg-time-curves
 kind: thought-experiment
 domain: physics
 title: Aydin–Barg fidelity time curves and complete-information-loss plateau
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-distinguishability-aydin-barg-code

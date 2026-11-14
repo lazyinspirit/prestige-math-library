@@ -2,7 +2,7 @@
 title: Article items · 11 — Universal Lindblad equation with correction
 description: Presents 28 items from the article and its immediate prerequisites,
   covering dependency levels 6–15.
-status: draft
+status: published
 dependency_level: 6
 research_article_page: true
 item_count: 28

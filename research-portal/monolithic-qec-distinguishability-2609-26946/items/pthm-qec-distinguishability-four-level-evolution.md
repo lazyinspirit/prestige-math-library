@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-four-level-evolution
 kind: physics-theorem
 domain: physics
 title: Exact state evolution from a four-level codeword
-status: draft
+status: published
 origin: session
 deps:
   - post-qec-distinguishability-four-level-model

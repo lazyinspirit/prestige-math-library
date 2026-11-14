@@ -3,7 +3,7 @@ id: post-qec-distinguishability-dipole-coupling
 kind: postulate
 domain: physics
 title: Dimensionless dipole and ULE coupling identification
-status: draft
+status: published
 origin: session
 deps:
   - post-qec-distinguishability-photon-field

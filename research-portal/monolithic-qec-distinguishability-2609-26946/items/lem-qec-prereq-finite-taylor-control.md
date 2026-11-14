@@ -3,7 +3,7 @@ id: lem-qec-prereq-finite-taylor-control
 kind: lemma
 domain: mathematics
 title: Finite exponential and smooth quotient remainder control
-status: draft
+status: published
 origin: session
 deps:
   - math:lem-exponential-series-of-a-bounded-operator

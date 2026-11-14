@@ -3,7 +3,7 @@ id: def-qec-prereq-spin-tensor-cg-conventions
 kind: definition
 domain: mathematics
 title: Finite spin blocks, spherical tensors and Clebsch–Gordan phases
-status: draft
+status: published
 origin: session
 deps:
   - physics:prop-nrqm-orbital-and-spin-finite-spin-matrices

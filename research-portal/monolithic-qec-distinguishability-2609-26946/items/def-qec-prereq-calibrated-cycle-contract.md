@@ -3,7 +3,7 @@ id: def-qec-prereq-calibrated-cycle-contract
 kind: definition
 domain: mathematics
 title: Calibrated recovery cycles and accumulated-error contract
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-restricted-logical-channel

@@ -1,6 +1,6 @@
 ---
 title: Signed mixed binomial sums cancel at order one
-status: draft
+status: published
 research_item: lem-author-11a9fe6cf386-mixed-binomial-cancellation
 dependency_level: 2
 ---

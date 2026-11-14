@@ -1,6 +1,6 @@
 ---
 title: Repeated four-level recovery and fixed-time error bound
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-four-repeated-checks
 dependency_level: 7
 sources:

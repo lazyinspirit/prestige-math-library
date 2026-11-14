@@ -1,6 +1,6 @@
 ---
 title: Bosonic anharmonicity and finite-energy GKP tradeoff
-status: draft
+status: published
 research_item: rem-qec-distinguishability-bosonic-implications
 dependency_level: 3
 sources:

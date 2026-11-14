@@ -1,6 +1,6 @@
 ---
 title: Accumulated error of the uncalibrated augmented checks
-status: draft
+status: published
 research_item: op-qec-distinguishability-uncalibrated-higher-order
 dependency_level: 20
 sources:

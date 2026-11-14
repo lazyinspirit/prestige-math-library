@@ -3,7 +3,7 @@ id: def-author-aca80080aca0-regular-lift-coupling-family
 kind: definition
 domain: mathematics
 title: An affine family of lifts and couplings
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-finite-operator-conventions

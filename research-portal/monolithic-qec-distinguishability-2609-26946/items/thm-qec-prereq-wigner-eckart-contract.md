@@ -3,7 +3,7 @@ id: thm-qec-prereq-wigner-eckart-contract
 kind: theorem
 domain: mathematics
 title: Wigner–Eckart with explicit magnetic-label contract
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-spin-tensor-cg-conventions

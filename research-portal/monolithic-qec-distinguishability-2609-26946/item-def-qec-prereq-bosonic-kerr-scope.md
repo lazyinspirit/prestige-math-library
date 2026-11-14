@@ -1,6 +1,6 @@
 ---
 title: Bosonic loss, Kerr shifts and finite-code comparison scope
-status: draft
+status: published
 research_item: def-qec-prereq-bosonic-kerr-scope
 dependency_level: 0
 sources:

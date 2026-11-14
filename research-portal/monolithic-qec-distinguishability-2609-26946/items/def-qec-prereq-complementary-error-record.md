@@ -3,7 +3,7 @@ id: def-qec-prereq-complementary-error-record
 kind: definition
 domain: mathematics
 title: Complementary error records in a Kraus basis
-status: draft
+status: published
 origin: session
 deps:
   - math:def-it-quantum-channel-complement-and-coherent-information

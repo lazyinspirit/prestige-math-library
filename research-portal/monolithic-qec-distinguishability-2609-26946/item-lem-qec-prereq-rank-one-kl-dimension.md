@@ -1,6 +1,6 @@
 ---
 title: Dimensional boundary of a rank-one KL obstruction
-status: draft
+status: published
 research_item: lem-qec-prereq-rank-one-kl-dimension
 dependency_level: 1
 ---

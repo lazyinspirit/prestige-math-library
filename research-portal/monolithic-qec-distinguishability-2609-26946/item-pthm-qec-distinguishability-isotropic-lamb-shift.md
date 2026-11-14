@@ -1,6 +1,6 @@
 ---
 title: Isotropic Lamb shift preserves magnetic degeneracy
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-isotropic-lamb-shift
 dependency_level: 13
 sources:

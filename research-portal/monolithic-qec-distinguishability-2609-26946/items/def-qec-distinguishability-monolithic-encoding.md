@@ -3,7 +3,7 @@ id: def-qec-distinguishability-monolithic-encoding
 kind: definition
 domain: physics
 title: Monolithic encoding and degenerate error processes
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-finite-operator-conventions

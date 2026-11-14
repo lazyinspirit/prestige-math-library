@@ -1,6 +1,6 @@
 ---
 title: Exact and thresholded Kraus ranks for J at most two
-status: draft
+status: published
 research_item: texp-qec-distinguishability-atomic-rank-prediction
 dependency_level: 16
 sources:

@@ -1,6 +1,6 @@
 ---
 title: Zero-lift checking-time fits versus physical decay rate
-status: draft
+status: published
 research_item: texp-qec-distinguishability-checking-rate-fits
 dependency_level: 16
 sources:

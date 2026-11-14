@@ -3,7 +3,7 @@ id: lem-author-11a9fe6cf386-finite-span-kl
 kind: lemma
 domain: mathematics
 title: Finite spanning-list compression and channel qualification
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-ae-error-span-contract

@@ -1,6 +1,6 @@
 ---
 title: Recovery optimization on orthogonal flagged branches
-status: draft
+status: published
 research_item: lem-qec-prereq-orthogonal-flag-decoding
 dependency_level: 1
 ---

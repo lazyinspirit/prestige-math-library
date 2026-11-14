@@ -3,7 +3,7 @@ id: lem-qec-author-4e9f1886ce3e-ule-residual-composition
 kind: lemma
 domain: mathematics
 title: Modified-operator distance and residual composition
-status: draft
+status: published
 origin: session
 deps:
   - lem-qec-author-4e9f1886ce3e-remote-preparation-limit

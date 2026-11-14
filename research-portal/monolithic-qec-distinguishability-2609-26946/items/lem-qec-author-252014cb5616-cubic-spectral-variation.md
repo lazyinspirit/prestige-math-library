@@ -3,7 +3,7 @@ id: lem-qec-author-252014cb5616-cubic-spectral-variation
 kind: lemma
 domain: mathematics
 title: Relative variation of a cubic spectral jump factor
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-stationary-spectrum-kernel-contract

@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-four-kraus-weights
 kind: physics-theorem
 domain: physics
 title: Decay Kraus weights and photon overlap
-status: draft
+status: published
 origin: session
 deps:
   - post-qec-distinguishability-four-level-model

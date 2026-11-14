@@ -1,6 +1,6 @@
 ---
 title: QEC matrix as an error-vector Gram operator
-status: draft
+status: published
 research_item: lem-qec-prereq-qec-gram-factorization
 dependency_level: 1
 ---

@@ -3,7 +3,7 @@ id: texp-qec-distinguishability-checking-rate-fits
 kind: thought-experiment
 domain: physics
 title: Zero-lift checking-time fits versus physical decay rate
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-distinguishability-checking-time

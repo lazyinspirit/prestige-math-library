@@ -3,7 +3,7 @@ id: lem-qec-author-9ff6bb2d6819-marked-waiting-kernel
 kind: lemma
 domain: mathematics
 title: Marked waiting law from finite no-jump evolution
-status: draft
+status: published
 origin: session
 deps:
   - lem-qec-author-9ff6bb2d6819-no-jump-survival

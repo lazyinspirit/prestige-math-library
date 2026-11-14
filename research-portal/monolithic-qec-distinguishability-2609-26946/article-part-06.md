@@ -3,7 +3,7 @@ title: Article items · 06 — Square-summable orthogonal families have
   norm-convergent finite sums
 description: Presents 29 items from the article and its immediate prerequisites,
   covering published library prerequisites and dependency levels 0–1.
-status: draft
+status: published
 dependency_level: 1
 research_article_page: true
 item_count: 29

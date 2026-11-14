@@ -1,6 +1,6 @@
 ---
 title: Conditional jump-time phases form a positive Gram matrix
-status: draft
+status: published
 research_item: lem-qec-prereq-jump-time-phase-gram
 dependency_level: 1
 ---

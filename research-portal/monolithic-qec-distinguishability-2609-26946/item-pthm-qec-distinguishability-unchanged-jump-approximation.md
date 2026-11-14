@@ -1,6 +1,6 @@
 ---
 title: Small-lift amplitude approximation and energy-scale scope
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-unchanged-jump-approximation
 dependency_level: 14
 sources:

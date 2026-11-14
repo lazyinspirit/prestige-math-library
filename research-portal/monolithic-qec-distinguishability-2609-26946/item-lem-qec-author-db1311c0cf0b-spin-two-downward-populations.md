@@ -1,6 +1,6 @@
 ---
 title: Spin-two downward coefficients and detection-code output populations
-status: draft
+status: published
 research_item: lem-qec-author-db1311c0cf0b-spin-two-downward-populations
 dependency_level: 2
 ---

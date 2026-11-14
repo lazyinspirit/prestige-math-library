@@ -3,7 +3,7 @@ id: op-qec-distinguishability-future-continuous-stabilized
 kind: open-problem
 domain: physics
 title: Continuously monitored and dissipatively stabilized encodings
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-distinguishability-checking-time

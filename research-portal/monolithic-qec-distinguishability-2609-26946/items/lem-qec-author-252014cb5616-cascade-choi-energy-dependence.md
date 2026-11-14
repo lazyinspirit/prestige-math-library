@@ -3,7 +3,7 @@ id: lem-qec-author-252014cb5616-cascade-choi-energy-dependence
 kind: lemma
 domain: mathematics
 title: Cross-block coherences can change Choi weights in a finite cascade
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-spin-tensor-cg-conventions

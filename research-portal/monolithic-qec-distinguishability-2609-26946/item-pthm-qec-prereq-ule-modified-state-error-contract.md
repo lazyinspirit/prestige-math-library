@@ -1,6 +1,6 @@
 ---
 title: ULE residual bound and the modified-state distinction
-status: draft
+status: published
 research_item: pthm-qec-prereq-ule-modified-state-error-contract
 dependency_level: 5
 sources:

@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-spherical-jumps
 kind: physics-theorem
 domain: physics
 title: Three spherical emission channels
-status: draft
+status: published
 origin: session
 deps:
   - pthm-qec-distinguishability-ule-static

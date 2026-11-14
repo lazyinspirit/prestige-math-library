@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-four-optimal-relationships
 kind: physics-theorem
 domain: physics
 title: Exact fidelity–Kraus-weight identities and short-time bound saturation
-status: draft
+status: published
 origin: session
 deps:
   - post-qec-distinguishability-four-level-model

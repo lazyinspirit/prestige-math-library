@@ -3,7 +3,7 @@ id: thm-qec-distinguishability-near-optimal-bound
 kind: theorem
 domain: mathematics
 title: Factor-two guarantee for transpose recovery
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-distinguishability-transpose-recovery

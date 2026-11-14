@@ -3,7 +3,7 @@ id: def-qec-prereq-inner-outer-resource-interface
 kind: definition
 domain: physics
 title: Inner and outer codes and resource-overhead data
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-restricted-logical-channel

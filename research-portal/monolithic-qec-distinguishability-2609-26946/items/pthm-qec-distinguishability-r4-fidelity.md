@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-r4-fidelity
 kind: physics-theorem
 domain: physics
 title: Branch-averaged decoded state fidelity
-status: draft
+status: published
 origin: session
 deps:
   - post-qec-distinguishability-four-level-model

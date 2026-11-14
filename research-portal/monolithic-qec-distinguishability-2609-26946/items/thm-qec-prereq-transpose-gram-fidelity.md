@@ -3,7 +3,7 @@ id: thm-qec-prereq-transpose-gram-fidelity
 kind: theorem
 domain: mathematics
 title: Independent transpose Gram fidelity formula
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-finite-operator-conventions

@@ -3,7 +3,7 @@ id: lem-author-e8d79981fdee-two-jump-dimension
 kind: lemma
 domain: mathematics
 title: Two-jump and total trajectory dimensions in the lowering model
-status: draft
+status: published
 origin: session
 deps:
   - lem-author-e8d79981fdee-one-jump-dimension

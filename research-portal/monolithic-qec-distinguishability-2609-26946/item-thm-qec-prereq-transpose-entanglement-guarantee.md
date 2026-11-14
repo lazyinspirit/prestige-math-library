@@ -1,6 +1,6 @@
 ---
 title: Near-optimality for maximally mixed entanglement fidelity
-status: draft
+status: published
 research_item: thm-qec-prereq-transpose-entanglement-guarantee
 dependency_level: 5
 sources:

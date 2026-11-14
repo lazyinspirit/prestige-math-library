@@ -3,7 +3,7 @@ id: def-qec-distinguishability-bath-correlator
 kind: definition
 domain: physics
 title: Bath correlation matrix and Fourier convention
-status: draft
+status: published
 origin: session
 deps:
   - post-qec-distinguishability-ule-coupling

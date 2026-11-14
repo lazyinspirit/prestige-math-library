@@ -1,6 +1,6 @@
 ---
 title: Strict first-threshold comparison from the cascade fidelity margin
-status: draft
+status: published
 research_item: lem-qec-author-db1311c0cf0b-strict-threshold-comparison
 dependency_level: 5
 ---

@@ -1,6 +1,6 @@
 ---
 title: Fixed-time convergence of calibrated recovery cycles
-status: draft
+status: published
 research_item: lem-qec-author-5cb5859376bb-continuous-recovery-budget
 dependency_level: 3
 ---

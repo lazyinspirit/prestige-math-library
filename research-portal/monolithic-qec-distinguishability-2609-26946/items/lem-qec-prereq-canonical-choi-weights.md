@@ -3,7 +3,7 @@ id: lem-qec-prereq-canonical-choi-weights
 kind: lemma
 domain: mathematics
 title: Canonical Choi eigenvectors, Kraus rank and branch weights
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-support-spectral-calculus

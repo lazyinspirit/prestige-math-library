@@ -3,7 +3,7 @@ id: alg-qec-distinguishability-syndrome-measurement
 kind: algorithm
 domain: physics
 title: Projective code-manifold syndrome check
-status: draft
+status: published
 origin: session
 deps:
   - pthm-qec-distinguishability-short-time-kraus

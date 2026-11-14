@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-vacuum-density
 kind: physics-theorem
 domain: physics
 title: Vacuum limit and cubic free-space spectral density
-status: draft
+status: published
 origin: session
 deps:
   - pthm-qec-distinguishability-thermal-spectral-density

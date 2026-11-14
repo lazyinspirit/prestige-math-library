@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-four-recovery-revivals
 kind: physics-theorem
 domain: physics
 title: Transient later-time advantage of the unrotated decoder
-status: draft
+status: published
 origin: session
 deps:
   - post-qec-distinguishability-four-level-model

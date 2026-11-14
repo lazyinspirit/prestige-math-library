@@ -1,6 +1,6 @@
 ---
 title: Photon modes and field normalization
-status: draft
+status: published
 research_item: post-qec-distinguishability-photon-field
 dependency_level: 3
 sources:

@@ -1,6 +1,6 @@
 ---
 title: Bath correlation matrix and Fourier convention
-status: draft
+status: published
 research_item: def-qec-distinguishability-bath-correlator
 dependency_level: 6
 sources:

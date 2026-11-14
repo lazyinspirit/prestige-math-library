@@ -1,6 +1,6 @@
 ---
 title: Continuous monitoring versus pulsed syndrome protocols
-status: draft
+status: published
 research_item: def-qec-prereq-continuous-monitoring-interface
 dependency_level: 0
 sources:

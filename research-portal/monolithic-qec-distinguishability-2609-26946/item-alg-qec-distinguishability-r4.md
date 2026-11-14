@@ -1,6 +1,6 @@
 ---
 title: Four-level syndrome recovery
-status: draft
+status: published
 research_item: alg-qec-distinguishability-r4
 dependency_level: 2
 sources:

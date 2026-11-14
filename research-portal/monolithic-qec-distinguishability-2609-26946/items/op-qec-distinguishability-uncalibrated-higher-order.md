@@ -3,7 +3,7 @@ id: op-qec-distinguishability-uncalibrated-higher-order
 kind: open-problem
 domain: physics
 title: Accumulated error of the uncalibrated augmented checks
-status: draft
+status: published
 origin: session
 deps:
   - post-qec-distinguishability-general-lift-model

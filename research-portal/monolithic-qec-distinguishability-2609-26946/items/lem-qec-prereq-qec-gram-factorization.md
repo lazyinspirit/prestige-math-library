@@ -3,7 +3,7 @@ id: lem-qec-prereq-qec-gram-factorization
 kind: lemma
 domain: mathematics
 title: QEC matrix as an error-vector Gram operator
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-finite-operator-conventions

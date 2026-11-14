@@ -1,6 +1,6 @@
 ---
 title: Minimal single-manifold encoding
-status: draft
+status: published
 research_item: def-qec-distinguishability-minimal-code
 dependency_level: 2
 sources:

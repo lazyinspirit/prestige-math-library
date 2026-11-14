@@ -1,6 +1,6 @@
 ---
 title: Finite jump-record ensemble equals the GKSL channel
-status: draft
+status: published
 research_item: lem-qec-author-9ff6bb2d6819-record-ensemble-gksl
 dependency_level: 4
 sources:

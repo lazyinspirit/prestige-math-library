@@ -1,6 +1,6 @@
 ---
 title: Multiple decays vanish over fixed total time with fast checks
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-multi-decay-suppression
 dependency_level: 18
 sources:

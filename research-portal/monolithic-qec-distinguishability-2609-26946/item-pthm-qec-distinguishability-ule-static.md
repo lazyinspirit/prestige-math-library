@@ -1,6 +1,6 @@
 ---
 title: Static ULE formulas and principal-value kernel
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-ule-static
 dependency_level: 5
 sources:

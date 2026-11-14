@@ -3,7 +3,7 @@ id: post-qec-prereq-regularized-photon-dipole-model
 kind: postulate
 domain: physics
 title: Regularized transverse photon dipole bath model
-status: draft
+status: published
 origin: session
 deps:
   - physics:def-nrqm-photons-framework-radiation-sector-and-quantum-assignments

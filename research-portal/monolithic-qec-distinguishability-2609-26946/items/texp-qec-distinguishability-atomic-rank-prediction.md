@@ -3,7 +3,7 @@ id: texp-qec-distinguishability-atomic-rank-prediction
 kind: thought-experiment
 domain: physics
 title: Exact and thresholded Kraus ranks for J at most two
-status: draft
+status: published
 origin: session
 deps:
   - post-qec-distinguishability-equal-rate-model

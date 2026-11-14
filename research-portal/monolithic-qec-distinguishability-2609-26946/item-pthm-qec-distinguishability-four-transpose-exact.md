@@ -1,6 +1,6 @@
 ---
 title: Exact four-level transpose fidelity
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-four-transpose-exact
 dependency_level: 4
 sources:

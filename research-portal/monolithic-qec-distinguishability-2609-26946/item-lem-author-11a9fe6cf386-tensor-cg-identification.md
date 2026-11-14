@@ -1,6 +1,6 @@
 ---
 title: Tensor-family components equal coherent Clebsch–Gordan transition maps
-status: draft
+status: published
 research_item: lem-author-11a9fe6cf386-tensor-cg-identification
 dependency_level: 1
 ---

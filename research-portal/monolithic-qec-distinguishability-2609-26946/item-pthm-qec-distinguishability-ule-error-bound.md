@@ -1,6 +1,6 @@
 ---
 title: ULE correction bound and validity condition
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-ule-error-bound
 dependency_level: 8
 sources:

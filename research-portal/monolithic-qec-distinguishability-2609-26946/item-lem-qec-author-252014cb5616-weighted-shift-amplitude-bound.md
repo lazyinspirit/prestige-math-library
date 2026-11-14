@@ -1,6 +1,6 @@
 ---
 title: Coefficient variation controls a weighted-shift operator
-status: draft
+status: published
 research_item: lem-qec-author-252014cb5616-weighted-shift-amplitude-bound
 dependency_level: 1
 ---

@@ -3,7 +3,7 @@ id: lem-author-11a9fe6cf386-tensor-cg-identification
 kind: lemma
 domain: mathematics
 title: Tensor-family components equal coherent Clebsch–Gordan transition maps
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-spin-tensor-cg-conventions

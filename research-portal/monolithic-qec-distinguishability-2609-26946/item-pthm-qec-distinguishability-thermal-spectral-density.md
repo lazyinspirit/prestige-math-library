@@ -1,6 +1,6 @@
 ---
 title: Thermal bath spectral density and frequency signs
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-thermal-spectral-density
 dependency_level: 11
 sources:

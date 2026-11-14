@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-ule-equation
 kind: physics-theorem
 domain: physics
 title: Universal Lindblad equation with correction
-status: draft
+status: published
 origin: session
 deps:
   - post-qec-distinguishability-ule-coupling

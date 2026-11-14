@@ -1,6 +1,6 @@
 ---
 title: Proposed augmented Jz syndrome check for an uncalibrated lift
-status: draft
+status: published
 research_item: alg-qec-distinguishability-augmented-jz-check
 dependency_level: 18
 sources:

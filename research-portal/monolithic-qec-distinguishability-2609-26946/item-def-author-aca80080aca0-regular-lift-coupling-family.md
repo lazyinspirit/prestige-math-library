@@ -1,6 +1,6 @@
 ---
 title: An affine family of lifts and couplings
-status: draft
+status: published
 research_item: def-author-aca80080aca0-regular-lift-coupling-family
 dependency_level: 2
 ---

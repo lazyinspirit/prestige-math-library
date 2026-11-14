@@ -1,6 +1,6 @@
 ---
 title: Pauli-complementary qubit recovery fidelity inequality
-status: draft
+status: published
 research_item: prop-qec-distinguishability-qubit-recovery-inequality
 dependency_level: 2
 sources:

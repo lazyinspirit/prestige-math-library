@@ -1,6 +1,6 @@
 ---
 title: Explicit four-level transpose decoder
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-four-petz-kraus
 dependency_level: 4
 sources:

@@ -1,6 +1,6 @@
 ---
 title: Exact two-step equal-rate cascade restricted to the detection isometry
-status: draft
+status: published
 research_item: lem-qec-author-db1311c0cf0b-two-step-cascade-channel
 dependency_level: 3
 ---

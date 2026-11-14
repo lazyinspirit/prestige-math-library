@@ -1,6 +1,6 @@
 ---
 title: The selected codes have magnetic-support gaps two and three
-status: draft
+status: published
 research_item: lem-author-179395ddbb85-two-code-support-gaps
 dependency_level: 2
 ---

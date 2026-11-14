@@ -3,7 +3,7 @@ id: lem-qec-prereq-bosonic-thermal-moment-contract
 kind: lemma
 domain: mathematics
 title: Finite-mode bosonic Gibbs occupations and moments
-status: draft
+status: published
 origin: session
 deps:
   - physics:def-qft-fock-and-test-spaces

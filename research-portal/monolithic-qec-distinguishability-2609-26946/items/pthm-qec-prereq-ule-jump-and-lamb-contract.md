@@ -3,7 +3,7 @@ id: pthm-qec-prereq-ule-jump-and-lamb-contract
 kind: physics-theorem
 domain: physics
 title: ULE jump construction under independent bath hypotheses
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-stationary-spectrum-kernel-contract

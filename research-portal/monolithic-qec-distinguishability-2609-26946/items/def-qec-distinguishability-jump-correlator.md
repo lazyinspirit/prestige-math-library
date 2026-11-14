@@ -3,7 +3,7 @@ id: def-qec-distinguishability-jump-correlator
 kind: definition
 domain: physics
 title: Jump correlators and bath-memory parameters
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-distinguishability-bath-correlator

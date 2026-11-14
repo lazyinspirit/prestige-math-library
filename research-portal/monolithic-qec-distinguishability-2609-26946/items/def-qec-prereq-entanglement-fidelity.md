@@ -3,7 +3,7 @@ id: def-qec-prereq-entanglement-fidelity
 kind: definition
 domain: mathematics
 title: Entanglement fidelity on a finite logical space
-status: draft
+status: published
 origin: session
 deps:
   - math:def-qc-quantum-channel

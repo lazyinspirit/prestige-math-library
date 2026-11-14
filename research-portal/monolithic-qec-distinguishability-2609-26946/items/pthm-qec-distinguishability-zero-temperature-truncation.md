@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-zero-temperature-truncation
 kind: physics-theorem
 domain: physics
 title: Invariant finite angular-momentum cutoff
-status: draft
+status: published
 origin: session
 deps:
   - post-qec-distinguishability-atomic-system

@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-unchanged-jump-approximation
 kind: physics-theorem
 domain: physics
 title: Small-lift amplitude approximation and energy-scale scope
-status: draft
+status: published
 origin: session
 deps:
   - post-qec-distinguishability-atomic-lift

@@ -1,6 +1,6 @@
 ---
 title: Transverse-polarization completeness and angular average
-status: draft
+status: published
 research_item: lem-qec-distinguishability-polarization-identity
 dependency_level: 1
 sources:

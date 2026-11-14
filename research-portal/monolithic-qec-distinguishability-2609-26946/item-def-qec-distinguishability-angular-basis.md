@@ -1,6 +1,6 @@
 ---
 title: Angular-momentum basis and tensor labels
-status: draft
+status: published
 research_item: def-qec-distinguishability-angular-basis
 dependency_level: 1
 sources:

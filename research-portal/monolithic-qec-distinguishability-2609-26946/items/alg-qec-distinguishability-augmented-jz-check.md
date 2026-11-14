@@ -3,7 +3,7 @@ id: alg-qec-distinguishability-augmented-jz-check
 kind: algorithm
 domain: physics
 title: Proposed augmented Jz syndrome check for an uncalibrated lift
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-distinguishability-ae-code

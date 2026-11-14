@@ -3,7 +3,7 @@ id: lem-qec-prereq-absorbing-ground-limit
 kind: lemma
 domain: mathematics
 title: Finite absorbing lowering dynamics and replacement limit
-status: draft
+status: published
 origin: session
 deps:
   - lem-qec-prereq-lowering-invariant-truncation

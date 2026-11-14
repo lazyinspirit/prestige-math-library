@@ -3,7 +3,7 @@ id: lem-author-ef1b96c593db-shell-cell-quadrature
 kind: lemma
 domain: mathematics
 title: Finite-cell sums converge on a compact frequency shell
-status: draft
+status: published
 origin: session
 deps:
   - math:thm-dominated-convergence

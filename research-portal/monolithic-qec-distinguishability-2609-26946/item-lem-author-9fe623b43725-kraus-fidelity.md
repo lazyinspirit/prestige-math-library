@@ -1,6 +1,6 @@
 ---
 title: Kraus trace formula for maximally mixed entanglement fidelity
-status: draft
+status: published
 research_item: lem-author-9fe623b43725-kraus-fidelity
 dependency_level: 1
 ---

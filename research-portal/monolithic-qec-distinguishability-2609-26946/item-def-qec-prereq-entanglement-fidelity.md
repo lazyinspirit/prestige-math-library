@@ -1,6 +1,6 @@
 ---
 title: Entanglement fidelity on a finite logical space
-status: draft
+status: published
 research_item: def-qec-prereq-entanglement-fidelity
 dependency_level: 0
 sources:

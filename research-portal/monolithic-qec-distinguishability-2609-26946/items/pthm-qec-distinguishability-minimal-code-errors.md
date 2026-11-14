@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-minimal-code-errors
 kind: physics-theorem
 domain: physics
 title: Minimal-code decay detection without correction
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-distinguishability-minimal-code

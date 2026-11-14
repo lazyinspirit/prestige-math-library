@@ -1,6 +1,6 @@
 ---
 title: Finite GKSL evolution and the QEC channel interface
-status: draft
+status: published
 research_item: def-qec-prereq-finite-gksl-channel-interface
 dependency_level: 0
 ---

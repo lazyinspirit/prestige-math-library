@@ -1,6 +1,6 @@
 ---
 title: Isotropic thermal bath time correlator
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-thermal-time-correlator
 dependency_level: 10
 sources:

@@ -5,7 +5,7 @@ description: Develop finite-code channels, complementary and syndrome records,
   bounds. Include passive-subsystem and rank-one correctability interfaces so
   the article can compare recoverable logical information with environmental
   error records.
-status: draft
+status: published
 dependency_level: 0
 ---
 

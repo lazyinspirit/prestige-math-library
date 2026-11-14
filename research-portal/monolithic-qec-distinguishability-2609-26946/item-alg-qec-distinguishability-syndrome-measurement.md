@@ -1,6 +1,6 @@
 ---
 title: Projective code-manifold syndrome check
-status: draft
+status: published
 research_item: alg-qec-distinguishability-syndrome-measurement
 dependency_level: 17
 sources:

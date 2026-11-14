@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-ule-time-dependent
 kind: physics-theorem
 domain: physics
 title: Interaction-picture ULE jumps and Lamb shift
-status: draft
+status: published
 origin: session
 deps:
   - pthm-qec-prereq-ule-jump-and-lamb-contract

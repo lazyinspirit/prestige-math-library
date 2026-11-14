@@ -1,6 +1,6 @@
 ---
 title: Cross-block coherences can change Choi weights in a finite cascade
-status: draft
+status: published
 research_item: lem-qec-author-252014cb5616-cascade-choi-energy-dependence
 dependency_level: 3
 ---

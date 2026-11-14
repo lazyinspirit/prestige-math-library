@@ -3,7 +3,7 @@ id: lem-qec-author-42f4c98e5e20-ule-bohr-reduction
 kind: lemma
 domain: mathematics
 title: Static Bohr-frequency evaluation of the jump integral
-status: draft
+status: published
 origin: session
 deps:
   - lem-qec-author-42f4c98e5e20-ule-normalization

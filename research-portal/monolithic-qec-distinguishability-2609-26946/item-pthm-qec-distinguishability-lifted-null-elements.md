@@ -1,6 +1,6 @@
 ---
 title: Lifted null-branch matrix elements and normalization
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-lifted-null-elements
 dependency_level: 19
 sources:

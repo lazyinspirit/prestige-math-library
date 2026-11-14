@@ -1,6 +1,6 @@
 ---
 title: Conditional decoded state and decay coherence
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-decayed-coherence
 dependency_level: 3
 sources:

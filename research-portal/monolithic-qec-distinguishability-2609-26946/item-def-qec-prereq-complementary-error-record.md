@@ -1,6 +1,6 @@
 ---
 title: Complementary error records in a Kraus basis
-status: draft
+status: published
 research_item: def-qec-prereq-complementary-error-record
 dependency_level: 0
 ---

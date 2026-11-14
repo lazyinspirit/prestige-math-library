@@ -1,6 +1,6 @@
 ---
 title: Normalized record measure and absence of explosion
-status: draft
+status: published
 research_item: lem-qec-author-9ff6bb2d6819-finite-horizon-record-law
 dependency_level: 3
 sources:

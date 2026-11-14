@@ -3,7 +3,7 @@ id: def-qec-distinguishability-kraus-rank
 kind: definition
 domain: mathematics
 title: Kraus rank and Choi representation
-status: draft
+status: published
 origin: session
 deps:
   - math:def-hilbert-schmidt-operator

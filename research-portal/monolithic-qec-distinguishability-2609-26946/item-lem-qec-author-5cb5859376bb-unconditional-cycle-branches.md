@@ -1,6 +1,6 @@
 ---
 title: Complete recovered-cycle bound with weighted trajectory branches
-status: draft
+status: published
 research_item: lem-qec-author-5cb5859376bb-unconditional-cycle-branches
 dependency_level: 2
 ---

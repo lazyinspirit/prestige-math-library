@@ -1,6 +1,6 @@
 ---
 title: Detection-code errors retain partial logical information
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-detection-code-errors
 dependency_level: 17
 sources:

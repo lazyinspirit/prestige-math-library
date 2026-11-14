@@ -1,6 +1,6 @@
 ---
 title: Finite absorbing lowering dynamics and replacement limit
-status: draft
+status: published
 research_item: lem-qec-prereq-absorbing-ground-limit
 dependency_level: 2
 ---

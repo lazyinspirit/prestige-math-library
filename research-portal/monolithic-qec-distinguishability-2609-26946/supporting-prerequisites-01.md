@@ -3,7 +3,7 @@ title: Supporting prerequisites · 01 — Simple counting-process intensity and
   compensator contract
 description: Presents 18 supporting prerequisites, covering published library
   prerequisites and dependency levels 0–2.
-status: draft
+status: published
 dependency_level: 2
 item_count: 18
 ---

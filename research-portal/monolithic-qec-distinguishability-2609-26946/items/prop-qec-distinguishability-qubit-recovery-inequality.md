@@ -3,7 +3,7 @@ id: prop-qec-distinguishability-qubit-recovery-inequality
 kind: proposition
 domain: mathematics
 title: Pauli-complementary qubit recovery fidelity inequality
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-finite-operator-conventions

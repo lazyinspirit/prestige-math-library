@@ -1,6 +1,6 @@
 ---
 title: J equals five absorption-emission code
-status: draft
+status: published
 research_item: def-qec-distinguishability-ae-code
 dependency_level: 3
 sources:

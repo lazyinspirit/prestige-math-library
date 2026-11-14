@@ -3,7 +3,7 @@ id: alg-qec-distinguishability-numerical-method
 kind: algorithm
 domain: physics
 title: Lindbladian exponentiation and Choi Kraus extraction
-status: draft
+status: published
 origin: session
 deps:
   - post-qec-distinguishability-equal-rate-model

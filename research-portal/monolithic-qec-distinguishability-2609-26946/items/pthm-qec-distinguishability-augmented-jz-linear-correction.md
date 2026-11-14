@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-augmented-jz-linear-correction
 kind: physics-theorem
 domain: physics
 title: Well-defined augmented syndrome and first-order rotation correction
-status: draft
+status: published
 origin: session
 deps:
   - alg-qec-distinguishability-augmented-jz-check

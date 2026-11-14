@@ -3,7 +3,7 @@ id: def-qec-distinguishability-rank-one-transitions
 kind: definition
 domain: physics
 title: Rank-one transition errors in the benchmark
-status: draft
+status: published
 origin: session
 deps:
   - pthm-qec-distinguishability-atomic-jumps

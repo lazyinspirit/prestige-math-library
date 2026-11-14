@@ -1,6 +1,6 @@
 ---
 title: Finite-cell sums converge on a compact frequency shell
-status: draft
+status: published
 research_item: lem-author-ef1b96c593db-shell-cell-quadrature
 dependency_level: 0
 ---

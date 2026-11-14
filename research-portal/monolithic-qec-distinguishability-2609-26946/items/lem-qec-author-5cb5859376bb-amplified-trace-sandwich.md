@@ -3,7 +3,7 @@ id: lem-qec-author-5cb5859376bb-amplified-trace-sandwich
 kind: lemma
 domain: mathematics
 title: Reference-uniform trace-norm sandwich estimates
-status: draft
+status: published
 origin: session
 deps:
   - math:thm-singular-value-decomposition

@@ -1,6 +1,6 @@
 ---
 title: Two-jump and total trajectory dimensions in the lowering model
-status: draft
+status: published
 research_item: lem-author-e8d79981fdee-two-jump-dimension
 dependency_level: 4
 ---

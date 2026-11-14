@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-four-kraus
 kind: physics-theorem
 domain: physics
 title: Exact four-level Kraus operators
-status: draft
+status: published
 origin: session
 deps:
   - post-qec-distinguishability-four-level-model

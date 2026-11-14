@@ -3,7 +3,7 @@ id: lem-author-ef1b96c593db-thermal-integrable-envelope
 kind: lemma
 domain: mathematics
 title: An absolute thermal envelope controls radial correlations
-status: draft
+status: published
 origin: session
 deps:
   - math:def-integrable-real-and-complex-functions-and-their-integrals

@@ -3,7 +3,7 @@ title: Prerequisite omissions and potential defects
 research_report: defects
 description: Original-article findings for Monolithic Quantum Error Correction
   in the Presence of Distinguishability.
-status: draft
+status: published
 generated_at: 2026-11-14T02:51:09.342Z
 ---
 

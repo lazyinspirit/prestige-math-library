@@ -1,6 +1,6 @@
 ---
 title: Finite no-jump propagator and survival identity
-status: draft
+status: published
 research_item: lem-qec-author-9ff6bb2d6819-no-jump-survival
 dependency_level: 1
 sources:

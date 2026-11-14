@@ -3,7 +3,7 @@ title: Article items · 01 — A $C^1$ diffeomorphism satisfies the
   change-of-variables formula for $L^1$ functions
 description: Presents 28 items from the article and its immediate prerequisites,
   covering published library prerequisites.
-status: draft
+status: published
 dependency_level: 0
 research_article_page: true
 item_count: 28

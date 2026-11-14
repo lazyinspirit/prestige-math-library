@@ -1,6 +1,6 @@
 ---
 title: Downward dipole coefficient normalization contract
-status: draft
+status: published
 research_item: lem-qec-prereq-dipole-strength-sum-contract
 dependency_level: 1
 ---

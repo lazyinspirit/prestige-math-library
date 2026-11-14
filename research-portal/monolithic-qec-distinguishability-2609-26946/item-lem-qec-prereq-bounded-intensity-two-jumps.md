@@ -1,6 +1,6 @@
 ---
 title: Two-jump probability from a bounded hazard
-status: draft
+status: published
 research_item: lem-qec-prereq-bounded-intensity-two-jumps
 dependency_level: 6
 sources:

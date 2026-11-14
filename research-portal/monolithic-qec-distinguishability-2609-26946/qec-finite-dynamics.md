@@ -4,7 +4,7 @@ description: Connect finite GKSL dynamics and jump-time Gram matrices to phase
   averaging, asymptotic checking times, repeated-cycle error budgets, invariant
   truncations and numerical Choi calculations. Place calibrated-cycle data
   beside the dynamical and channel-composition inputs it uses.
-status: draft
+status: published
 dependency_level: 1
 ---
 

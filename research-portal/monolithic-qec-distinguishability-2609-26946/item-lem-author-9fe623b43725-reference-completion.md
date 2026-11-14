@@ -1,6 +1,6 @@
 ---
 title: Completion independence with an entangled reference
-status: draft
+status: published
 research_item: lem-author-9fe623b43725-reference-completion
 dependency_level: 2
 ---

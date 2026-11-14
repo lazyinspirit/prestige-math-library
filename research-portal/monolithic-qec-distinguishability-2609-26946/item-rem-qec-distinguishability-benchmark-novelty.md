@@ -1,6 +1,6 @@
 ---
 title: Proposed platform-independent benchmark and qualified novelty claim
-status: draft
+status: published
 research_item: rem-qec-distinguishability-benchmark-novelty
 dependency_level: 14
 sources:

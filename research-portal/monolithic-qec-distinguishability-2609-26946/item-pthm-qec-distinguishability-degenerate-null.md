@@ -1,6 +1,6 @@
 ---
 title: Degenerate no-decay state is preserved
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-degenerate-null
 dependency_level: 19
 sources:

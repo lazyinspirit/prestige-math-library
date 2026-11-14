@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-four-transpose-cubic
 kind: physics-theorem
 domain: physics
 title: Cubic transpose-fidelity loss
-status: draft
+status: published
 origin: session
 deps:
   - post-qec-distinguishability-four-level-model

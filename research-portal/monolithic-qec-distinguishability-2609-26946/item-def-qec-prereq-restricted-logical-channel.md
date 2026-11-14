@@ -1,6 +1,6 @@
 ---
 title: Code restriction and decoded channel types
-status: draft
+status: published
 research_item: def-qec-prereq-restricted-logical-channel
 dependency_level: 0
 ---

@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-ground-replacer
 kind: physics-theorem
 domain: physics
 title: Long-time atomic channel and source-resolving Kraus operators
-status: draft
+status: published
 origin: session
 deps:
   - pthm-qec-distinguishability-atomic-jumps

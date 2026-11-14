@@ -1,6 +1,6 @@
 ---
 title: Finite operator and ket conventions
-status: draft
+status: published
 research_item: def-qec-prereq-finite-operator-conventions
 dependency_level: 0
 ---

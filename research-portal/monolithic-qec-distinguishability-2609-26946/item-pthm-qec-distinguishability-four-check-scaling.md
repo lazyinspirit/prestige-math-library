@@ -1,6 +1,6 @@
 ---
 title: Four-level high-fidelity checking time
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-four-check-scaling
 dependency_level: 7
 sources:

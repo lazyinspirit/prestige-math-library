@@ -3,7 +3,7 @@ id: lem-author-ef1b96c593db-radial-transverse-integral
 kind: lemma
 domain: mathematics
 title: A radial transverse wave-vector integral has the isotropic factor
-status: draft
+status: published
 origin: session
 deps:
   - math:thm-polar-coordinates-formula-for-lebesgue-measure

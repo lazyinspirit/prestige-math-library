@@ -1,6 +1,6 @@
 ---
 title: Transpose recovery for a flagged coherence channel
-status: draft
+status: published
 research_item: lem-qec-prereq-qubit-transpose-phase-rule
 dependency_level: 2
 ---

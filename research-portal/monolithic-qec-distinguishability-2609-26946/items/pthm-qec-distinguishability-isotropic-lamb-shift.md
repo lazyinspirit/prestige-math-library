@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-isotropic-lamb-shift
 kind: physics-theorem
 domain: physics
 title: Isotropic Lamb shift preserves magnetic degeneracy
-status: draft
+status: published
 origin: session
 deps:
   - pthm-qec-distinguishability-ule-static

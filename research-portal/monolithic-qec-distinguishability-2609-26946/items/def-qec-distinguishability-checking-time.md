@@ -3,7 +3,7 @@ id: def-qec-distinguishability-checking-time
 kind: definition
 domain: physics
 title: Operational checking time
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-distinguishability-transpose-recovery

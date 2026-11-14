@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-lifted-null-elements
 kind: physics-theorem
 domain: physics
 title: Lifted null-branch matrix elements and normalization
-status: draft
+status: published
 origin: session
 deps:
   - pthm-qec-distinguishability-null-projection

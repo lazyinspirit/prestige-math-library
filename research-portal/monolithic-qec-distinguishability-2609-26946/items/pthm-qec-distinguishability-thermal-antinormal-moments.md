@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-thermal-antinormal-moments
 kind: physics-theorem
 domain: physics
 title: Commutator and spontaneous-plus-stimulated emission contribution
-status: draft
+status: published
 origin: session
 deps:
   - pthm-qec-distinguishability-thermal-correlator-expansion

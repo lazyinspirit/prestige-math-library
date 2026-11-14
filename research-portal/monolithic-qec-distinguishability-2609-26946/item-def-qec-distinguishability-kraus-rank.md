@@ -1,6 +1,6 @@
 ---
 title: Kraus rank and Choi representation
-status: draft
+status: published
 research_item: def-qec-distinguishability-kraus-rank
 dependency_level: 2
 sources:

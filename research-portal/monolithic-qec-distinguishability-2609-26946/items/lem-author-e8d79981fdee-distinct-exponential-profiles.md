@@ -3,7 +3,7 @@ id: lem-author-e8d79981fdee-distinct-exponential-profiles
 kind: lemma
 domain: mathematics
 title: Distinct complex exponentials have full interval Gram rank
-status: draft
+status: published
 origin: session
 deps:
   - math:lem-exponential-series-of-a-bounded-operator

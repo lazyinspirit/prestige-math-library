@@ -3,7 +3,7 @@ id: lem-qec-prereq-orthogonal-flag-decoding
 kind: lemma
 domain: mathematics
 title: Recovery optimization on orthogonal flagged branches
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-restricted-logical-channel

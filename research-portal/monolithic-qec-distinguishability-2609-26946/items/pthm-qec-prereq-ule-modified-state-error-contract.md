@@ -3,7 +3,7 @@ id: pthm-qec-prereq-ule-modified-state-error-contract
 kind: physics-theorem
 domain: physics
 title: ULE residual bound and the modified-state distinction
-status: draft
+status: published
 origin: session
 deps:
   - pthm-qec-prereq-ule-jump-and-lamb-contract

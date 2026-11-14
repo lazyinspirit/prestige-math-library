@@ -1,6 +1,6 @@
 ---
 title: Finite support square roots and generalized inverses
-status: draft
+status: published
 research_item: def-qec-prereq-support-spectral-calculus
 dependency_level: 0
 ---

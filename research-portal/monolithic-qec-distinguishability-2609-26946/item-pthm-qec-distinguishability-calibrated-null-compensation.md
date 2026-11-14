@@ -1,6 +1,6 @@
 ---
 title: No-jump phase tracking without decay-rate suppression
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-calibrated-null-compensation
 dependency_level: 20
 sources:

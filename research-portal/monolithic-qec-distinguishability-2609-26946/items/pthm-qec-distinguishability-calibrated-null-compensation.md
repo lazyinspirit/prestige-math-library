@@ -3,7 +3,7 @@ id: pthm-qec-distinguishability-calibrated-null-compensation
 kind: physics-theorem
 domain: physics
 title: No-jump phase tracking without decay-rate suppression
-status: draft
+status: published
 origin: session
 deps:
   - post-qec-distinguishability-general-lift-model

@@ -1,6 +1,6 @@
 ---
 title: Transpose fidelity from the QEC matrix
-status: draft
+status: published
 research_item: thm-qec-distinguishability-transpose-fidelity
 dependency_level: 3
 sources:

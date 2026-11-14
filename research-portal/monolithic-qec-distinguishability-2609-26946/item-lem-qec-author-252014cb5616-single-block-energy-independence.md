@@ -1,6 +1,6 @@
 ---
 title: Energy-scale independence on the block-diagonal input algebra
-status: draft
+status: published
 research_item: lem-qec-author-252014cb5616-single-block-energy-independence
 dependency_level: 1
 ---

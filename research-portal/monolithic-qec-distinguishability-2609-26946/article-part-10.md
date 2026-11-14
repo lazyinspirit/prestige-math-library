@@ -2,7 +2,7 @@
 title: Article items · 10 — Thermal photon bath and partition function
 description: Presents 28 items from the article and its immediate prerequisites,
   covering dependency levels 4–6.
-status: draft
+status: published
 dependency_level: 5
 research_article_page: true
 item_count: 28

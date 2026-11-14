@@ -3,7 +3,7 @@ id: prop-qec-distinguishability-branch-weight-probability
 kind: proposition
 domain: mathematics
 title: Canonical weight as maximally mixed branch probability
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-distinguishability-effective-rank

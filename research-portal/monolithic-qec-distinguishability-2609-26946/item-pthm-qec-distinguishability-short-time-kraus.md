@@ -1,6 +1,6 @@
 ---
 title: First-order fast-check channel
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-short-time-kraus
 dependency_level: 16
 sources:

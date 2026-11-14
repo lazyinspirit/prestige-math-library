@@ -3,7 +3,7 @@ title: Open questions and potential solutions
 research_report: open-questions
 description: Insights, fruitful questions and potential solutions arising from
   Monolithic Quantum Error Correction in the Presence of Distinguishability.
-status: draft
+status: published
 generated_at: 2026-11-14T02:51:09.342Z
 ---
 

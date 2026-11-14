@@ -3,7 +3,7 @@ id: lem-qec-prereq-lowering-invariant-truncation
 kind: lemma
 domain: mathematics
 title: Invariant finite truncation for lowering generators
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-finite-gksl-channel-interface

@@ -1,6 +1,6 @@
 ---
 title: Uniform expansion of calibrated finite channels and null branches
-status: draft
+status: published
 research_item: lem-qec-author-5cb5859376bb-calibrated-channel-expansion
 dependency_level: 1
 ---

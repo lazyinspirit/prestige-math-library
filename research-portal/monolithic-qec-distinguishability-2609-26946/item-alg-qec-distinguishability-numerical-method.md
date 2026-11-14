@@ -1,6 +1,6 @@
 ---
 title: Lindbladian exponentiation and Choi Kraus extraction
-status: draft
+status: published
 research_item: alg-qec-distinguishability-numerical-method
 dependency_level: 15
 sources:

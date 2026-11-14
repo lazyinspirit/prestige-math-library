@@ -3,7 +3,7 @@ id: lem-qec-author-9ff6bb2d6819-record-hazard-compensator
 kind: lemma
 domain: mathematics
 title: Jump-record instruments and conditional intensity
-status: draft
+status: published
 origin: session
 deps:
   - lem-qec-author-9ff6bb2d6819-marked-waiting-kernel

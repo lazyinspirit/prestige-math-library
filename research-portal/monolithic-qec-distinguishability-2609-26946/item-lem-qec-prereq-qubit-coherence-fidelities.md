@@ -1,6 +1,6 @@
 ---
 title: Qubit coherence channels and fidelity functionals
-status: draft
+status: published
 research_item: lem-qec-prereq-qubit-coherence-fidelities
 dependency_level: 1
 ---

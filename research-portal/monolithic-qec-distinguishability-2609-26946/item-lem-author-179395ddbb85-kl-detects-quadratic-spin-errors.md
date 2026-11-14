@@ -1,6 +1,6 @@
 ---
 title: Pair-product correction detects quadratic spin errors
-status: draft
+status: published
 research_item: lem-author-179395ddbb85-kl-detects-quadratic-spin-errors
 dependency_level: 3
 ---

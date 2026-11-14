@@ -3,7 +3,7 @@ id: lem-qec-prereq-trajectory-dyson-expansion
 kind: lemma
 domain: mathematics
 title: Finite no-jump and ordered-jump expansion
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-finite-gksl-channel-interface

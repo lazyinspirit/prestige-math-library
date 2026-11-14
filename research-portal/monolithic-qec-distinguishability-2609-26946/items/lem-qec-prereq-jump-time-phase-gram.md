@@ -3,7 +3,7 @@ id: lem-qec-prereq-jump-time-phase-gram
 kind: lemma
 domain: mathematics
 title: Conditional jump-time phases form a positive Gram matrix
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-finite-operator-conventions

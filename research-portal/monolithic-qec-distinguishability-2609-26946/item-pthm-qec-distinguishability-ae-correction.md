@@ -1,6 +1,6 @@
 ---
 title: Æ rank-one correction with separated error spaces
-status: draft
+status: published
 research_item: pthm-qec-distinguishability-ae-correction
 dependency_level: 15
 sources:

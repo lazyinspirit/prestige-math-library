@@ -1,6 +1,6 @@
 ---
 title: Derivative of the quadrant modification
-status: draft
+status: published
 research_item: lem-qec-author-4e9f1886ce3e-ule-modification-derivative
 dependency_level: 4
 ---

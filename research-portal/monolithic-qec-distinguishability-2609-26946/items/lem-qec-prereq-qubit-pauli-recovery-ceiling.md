@@ -3,7 +3,7 @@ id: lem-qec-prereq-qubit-pauli-recovery-ceiling
 kind: lemma
 domain: mathematics
 title: Two orthogonal Pauli alternatives bound recovery fidelity
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-prereq-finite-operator-conventions

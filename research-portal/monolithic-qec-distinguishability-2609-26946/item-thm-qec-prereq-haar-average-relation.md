@@ -1,6 +1,6 @@
 ---
 title: Haar-average versus entanglement fidelity
-status: draft
+status: published
 research_item: thm-qec-prereq-haar-average-relation
 dependency_level: 1
 ---

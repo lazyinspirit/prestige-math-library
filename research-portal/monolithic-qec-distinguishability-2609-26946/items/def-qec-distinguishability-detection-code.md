@@ -3,7 +3,7 @@ id: def-qec-distinguishability-detection-code
 kind: definition
 domain: physics
 title: J equals two detection encoding
-status: draft
+status: published
 origin: session
 deps:
   - def-qec-distinguishability-angular-basis
