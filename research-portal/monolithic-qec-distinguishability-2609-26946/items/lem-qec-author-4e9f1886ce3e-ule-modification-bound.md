@@ -1,0 +1,177 @@
+---
+id: lem-qec-author-4e9f1886ce3e-ule-modification-bound
+kind: lemma
+domain: mathematics
+title: Bounded quadrant modification and generator norms
+status: draft
+origin: session
+deps:
+  - lem-qec-author-4e9f1886ce3e-ule-envelope-moments
+  - math:def-operator-norm
+  - math:lem-operator-norm-is-a-norm
+  - math:cor-finite-dimensional-normed-spaces-are-banach
+  - math:def-strongly-measurable-banach-valued-function
+  - math:def-bochner-integrable-function
+  - math:thm-bochner-integrability-criterion
+  - math:lem-bochner-integral-norm-inequality
+  - math:thm-tonelli-theorem-for-sigma-finite-product-spaces
+  - math:thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces
+  - math:thm-lebesgue-outer-measure-and-measurability-are-translation-invariant
+  - math:def-lebesgue-outer-measure
+  - math:def-lebesgue-measure-and-the-lebesgue-sigma-algebra
+  - math:thm-sections-of-product-measurable-functions-are-measurable
+  - math:def-countable-choice
+  - math:thm-lebesgue-measure-is-a-complete-measure
+  - math:def-nonnegative-lebesgue-integral
+  - math:def-integral-of-a-nonnegative-simple-function
+  - math:prop-order-and-scalar-rules-for-the-nonnegative-integral
+  - math:cor-additivity-of-the-nonnegative-lebesgue-integral
+  - math:thm-linearity-of-the-lebesgue-integral-on-l-one
+  - math:thm-integral-triangle-inequality
+  - math:cor-inner-product-induces-a-norm
+  - math:def-product-sigma-algebra-and-finite-product-sigma-algebras
+  - math:def-borel-sigma-algebra
+  - math:def-measurable-function-between-measurable-spaces
+  - math:def-product-measure-on-sigma-finite-spaces
+  - math:thm-borel-products-of-euclidean-spaces-are-euclidean-borel
+  - math:thm-arithmetic-and-lattice-operations-preserve-measurability
+dependency_roles:
+  lem-qec-author-4e9f1886ce3e-ule-envelope-moments: mathematical-premise
+  math:def-operator-norm: mathematical-premise
+  math:lem-operator-norm-is-a-norm: mathematical-premise
+  math:cor-finite-dimensional-normed-spaces-are-banach: mathematical-premise
+  math:def-strongly-measurable-banach-valued-function: mathematical-premise
+  math:def-bochner-integrable-function: mathematical-premise
+  math:thm-bochner-integrability-criterion: mathematical-premise
+  math:lem-bochner-integral-norm-inequality: mathematical-premise
+  math:thm-tonelli-theorem-for-sigma-finite-product-spaces: mathematical-premise
+  math:thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces: mathematical-premise
+  math:thm-lebesgue-outer-measure-and-measurability-are-translation-invariant: mathematical-premise
+  math:def-lebesgue-outer-measure: mathematical-premise
+  math:def-lebesgue-measure-and-the-lebesgue-sigma-algebra: mathematical-premise
+  math:thm-sections-of-product-measurable-functions-are-measurable: mathematical-premise
+  math:def-countable-choice: mathematical-premise
+  math:thm-lebesgue-measure-is-a-complete-measure: mathematical-premise
+  math:def-nonnegative-lebesgue-integral: mathematical-premise
+  math:def-integral-of-a-nonnegative-simple-function: mathematical-premise
+  math:prop-order-and-scalar-rules-for-the-nonnegative-integral: mathematical-premise
+  math:cor-additivity-of-the-nonnegative-lebesgue-integral: mathematical-premise
+  math:thm-linearity-of-the-lebesgue-integral-on-l-one: mathematical-premise
+  math:thm-integral-triangle-inequality: mathematical-premise
+  math:cor-inner-product-induces-a-norm: mathematical-premise
+  math:def-product-sigma-algebra-and-finite-product-sigma-algebras: mathematical-premise
+  math:def-borel-sigma-algebra: mathematical-premise
+  math:def-measurable-function-between-measurable-spaces: mathematical-premise
+  math:def-product-measure-on-sigma-finite-spaces: mathematical-premise
+  math:thm-borel-products-of-euclidean-spaces-are-euclidean-borel: mathematical-premise
+  math:thm-arithmetic-and-lattice-operations-preserve-measurability: mathematical-premise
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+proof_strategy: direct
+formulation_deps:
+  - lem-qec-author-4e9f1886ce3e-ule-envelope-moments
+  - math:def-countable-choice
+  - math:def-operator-norm
+  - math:lem-operator-norm-is-a-norm
+  - math:cor-inner-product-induces-a-norm
+  - math:cor-finite-dimensional-normed-spaces-are-banach
+  - math:def-strongly-measurable-banach-valued-function
+  - math:def-bochner-integrable-function
+  - math:def-lebesgue-outer-measure
+  - math:def-lebesgue-measure-and-the-lebesgue-sigma-algebra
+  - math:thm-lebesgue-measure-is-a-complete-measure
+  - math:def-nonnegative-lebesgue-integral
+  - math:def-integral-of-a-nonnegative-simple-function
+  - math:thm-sections-of-product-measurable-functions-are-measurable
+  - math:def-product-sigma-algebra-and-finite-product-sigma-algebras
+  - math:def-borel-sigma-algebra
+  - math:def-measurable-function-between-measurable-spaces
+argument_deps:
+  - lem-qec-author-4e9f1886ce3e-ule-envelope-moments
+  - math:def-operator-norm
+  - math:lem-operator-norm-is-a-norm
+  - math:cor-finite-dimensional-normed-spaces-are-banach
+  - math:def-strongly-measurable-banach-valued-function
+  - math:def-bochner-integrable-function
+  - math:thm-bochner-integrability-criterion
+  - math:lem-bochner-integral-norm-inequality
+  - math:thm-tonelli-theorem-for-sigma-finite-product-spaces
+  - math:thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces
+  - math:thm-lebesgue-outer-measure-and-measurability-are-translation-invariant
+  - math:def-lebesgue-outer-measure
+  - math:def-lebesgue-measure-and-the-lebesgue-sigma-algebra
+  - math:thm-sections-of-product-measurable-functions-are-measurable
+  - math:def-countable-choice
+  - math:thm-lebesgue-measure-is-a-complete-measure
+  - math:def-nonnegative-lebesgue-integral
+  - math:def-integral-of-a-nonnegative-simple-function
+  - math:prop-order-and-scalar-rules-for-the-nonnegative-integral
+  - math:cor-additivity-of-the-nonnegative-lebesgue-integral
+  - math:thm-linearity-of-the-lebesgue-integral-on-l-one
+  - math:thm-integral-triangle-inequality
+  - math:cor-inner-product-induces-a-norm
+  - math:def-product-sigma-algebra-and-finite-product-sigma-algebras
+  - math:def-borel-sigma-algebra
+  - math:def-measurable-function-between-measurable-spaces
+  - math:def-product-measure-on-sigma-finite-spaces
+  - math:thm-borel-products-of-euclidean-spaces-are-euclidean-borel
+  - math:thm-arithmetic-and-lattice-operations-preserve-measurability
+dependency_level: 3
+---
+
+## Statement
+
+Assume the Axiom of Countable Choice. Let $V=\mathbb C^{d\times d}$ for a positive integer $d$, with spectral norm $\|X\|_{\rm sp}=\sup_{\|z\|_2\leq1}\|Xz\|_2$, where $\|z\|_2=(\sum_j|z_j|^2)^{1/2}$. Give the space $E$ of complex-linear maps $T:V\to V$ the induced norm $\|T\|=\sup_{\|X\|_{\rm sp}\leq1}\|T(X)\|_{\rm sp}$. Let $q:\mathbb R\to[0,\infty)$ be the measurable scalar envelope, with $\int_{\mathbb R}q(v)dv=\Gamma/2<\infty$ and $\int_{\mathbb R}|v|q(v)dv\leq\Gamma\tau<\infty$. All scalar integrals use Lebesgue measure $\lambda$ on its sigma-algebra $\mathcal L$; all $E$-valued integrals are Bochner integrals, equivalently entrywise integrals in the matrix-unit coordinates of $E$.
+
+Require $\mathcal G:\mathbb R^2\to E$ to be measurable from $\mathcal L\otimes\mathcal L$ to the norm-Borel sigma-algebra of $E$, with $\|\mathcal G(s,u)\|\leq q(s-u)$ for every $s,u$. In particular every fixed-time section is measurable. For every real $t$, define $B(t)=\int_{\mathbb R}\mathcal G(t,u)du$, $L(t)=\int_{\mathbb R}\mathcal G(s,t)ds$ and $M(t)=\int_t^\infty ds\int_{-\infty}^t du\,[\mathcal G(s,u)-\mathcal G(u,s)]$. These integrals converge absolutely in induced norm, and $\|B(t)\|,\|L(t)\|\leq\Gamma/2$ and $\|M(t)\|\leq\Gamma\tau$.
+
+
+
+## Facts & Assumptions
+
+[F1] The mass and first-moment bounds on the nonnegative measurable envelope are hypotheses of this lemma. Under its additional kernel and rate hypotheses and Countable Choice, the ULE envelope construction supplies an instance of these bounds; no such kernel representation is required for the present conditional estimate. [[lem-qec-author-4e9f1886ce3e-ule-envelope-moments]]
+
+[F2] For bounded linear maps between normed spaces the operator norm is the supremum over the unit ball, and is a norm. We use this twice: for matrices acting on Euclidean vectors and for maps acting on spectrally normed matrices. [[math:def-operator-norm]] [[math:lem-operator-norm-is-a-norm]]
+
+[F3] A real or complex normed space with a specified finite ordered basis is Banach. [[math:cor-finite-dimensional-normed-spaces-are-banach]]
+
+[F4] Strong measurability means almost-everywhere pointwise norm approximation by measurable finite-valued simple functions. A strongly measurable Banach-valued function is Bochner integrable exactly when its norm has finite integral; its integral is the norm limit of the integrals of an integrable-simple approximation. [[math:def-strongly-measurable-banach-valued-function]] [[math:def-bochner-integrable-function]] [[math:thm-bochner-integrability-criterion]]
+
+[F5] For a Bochner-integrable function, the norm of its integral over a measurable set is at most the integral of its norm over that set. [[math:lem-bochner-integral-norm-inequality]]
+
+[F6] Every real-valued product-measurable function has measurable sections at every parameter. On sigma-finite measure spaces, Tonelli equates the product and both iterated integrals of any nonnegative product-measurable function, without assuming finiteness first. Fubini equates the integrals of a complex product-integrable function, with integrable sections almost everywhere and measurable integrable section-integral representatives. [[math:thm-tonelli-theorem-for-sigma-finite-product-spaces]] [[math:thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]] [[math:thm-sections-of-product-measurable-functions-are-measurable]]
+
+[F7] Translation preserves Lebesgue measurability and measure. Lebesgue outer measure is the infimum of elementary covering costs, and Lebesgue measurability is its Caratheodory criterion. These definitions also permit the elementary reflection argument below. [[math:thm-lebesgue-outer-measure-and-measurability-are-translation-invariant]] [[math:def-lebesgue-outer-measure]] [[math:def-lebesgue-measure-and-the-lebesgue-sigma-algebra]]
+
+[A1] Assume the Axiom of Countable Choice: every sequence of nonempty sets admits a choice function. It supplies the hypothesis of the Lebesgue-measure theorem in F8 and of the ULE envelope construction when that instance is used. [[math:def-countable-choice]]
+
+[F8] Under Countable Choice, the Caratheodory family $\mathcal L(\mathbb R)$ is a sigma-algebra and the restriction $\lambda$ of Lebesgue outer measure is a complete measure extending elementary interval length. In particular every bounded interval has its usual finite length. [[math:thm-lebesgue-measure-is-a-complete-measure]]
+
+[F9] The nonnegative integral is the supremum of the integrals of nonnegative simple minorants. For a simple function $s=\sum_jc_j\mathbf1_{A_j}$ with disjoint measurable $A_j$ and $c_j\geq0$, its integral is $\sum_jc_j\mu(A_j)$. Nonnegative integrals are monotone, positively homogeneous and additive, allowing infinite values; the zero function has integral zero. [[math:def-nonnegative-lebesgue-integral]] [[math:def-integral-of-a-nonnegative-simple-function]] [[math:prop-order-and-scalar-rules-for-the-nonnegative-integral]] [[math:cor-additivity-of-the-nonnegative-lebesgue-integral]]
+
+[F10] Scalar integration is complex-linear on integrable functions, and $|\int h\,d\mu|\leq\int|h|\,d\mu$ for every integrable scalar $h$. [[math:thm-linearity-of-the-lebesgue-integral-on-l-one]] [[math:thm-integral-triangle-inequality]]
+
+[F11] The length induced by a real or complex inner product is a norm. [[math:cor-inner-product-induces-a-norm]]
+
+
+[F12] The product sigma-algebra $\mathcal L\otimes\mathcal L$ is generated by measurable rectangles. The norm-Borel sigma-algebra of $E$ is generated by its norm-open sets. A map between measurable spaces is measurable when the inverse image of every measurable target set is measurable. [[math:def-product-sigma-algebra-and-finite-product-sigma-algebras]] [[math:def-borel-sigma-algebra]] [[math:def-measurable-function-between-measurable-spaces]]
+
+[F13] For sigma-finite measure spaces, their product measure on the product sigma-algebra assigns a measurable set the integral of its section measures, in either order. Here the factors are $(\mathbb R,\mathcal L,\lambda)$; the bounded intervals $[-m,m]$ give sigma-finiteness. The product integrals below use $\lambda\times\lambda$ on $\mathcal L\otimes\mathcal L$. [[math:def-product-measure-on-sigma-finite-spaces]]
+
+[F14] For positive integers $m,n$, under the Euclidean identification $\mathbb R^{m+n}=\mathbb R^m\times\mathbb R^n$, one has $\mathcal B(\mathbb R^m)\otimes\mathcal B(\mathbb R^n)=\mathcal B(\mathbb R^{m+n})$. We use $m=n=1$. [[math:thm-borel-products-of-euclidean-spaces-are-euclidean-borel]]
+
+[F15] On a measurable space, real scalar multiples, maxima, minima, absolute values and positive and negative parts of measurable real or extended-real functions are measurable. A pointwise sum is measurable when it is defined everywhere. Products are measurable with the total function-product convention assigning zero when either factor is zero; on finite-valued functions these are ordinary products. [[math:thm-arithmetic-and-lattice-operations-preserve-measurability]]
+
+
+## Proof
+
+**Given:** Countable Choice, the measurable dominated map kernel and finite envelope moments in the Statement. **Goal:** Establish the absolute convergence and bounds at every fixed time.
+
+1.1 Under [A1], [F8] makes $(\mathbb R,\mathcal L,\lambda)$ a complete measure space with the usual interval lengths. The coordinate pairing $\langle z,w\rangle=\sum_jz_j\overline{w_j}$ is linear in its first variable and conjugate symmetric by finite sum algebra, and its diagonal is $\sum_j|z_j|^2$, which is nonnegative and vanishes exactly at zero. Its induced length is the displayed Euclidean norm by [F11]. The spaces $V$ and $E$ have their ordered matrix-unit bases. For a matrix unit $e_{ij}$, $\|e_{ij}\|_{\rm sp}=1$ and $|X_{ij}|\leq\|X\|_{\rm sp}$, so $\|T(X)\|_{\rm sp}\leq\sum_{ij}|X_{ij}|\|T(e_{ij})\|_{\rm sp}\leq(\sum_{ij}\|T(e_{ij})\|_{\rm sp})\|X\|_{\rm sp}$. Matrices themselves are bounded on Euclidean space by their finite entry sums. Thus the norms in the Statement are finite operator norms, and [F2] and [F3] make $E$ a finite-dimensional Banach space. Its coordinates $T\mapsto (T(e_{ij}))_{kl}$ are continuous, since their absolute values are at most $\|T\|$. For a continuous real coordinate functional $h$ on $E$, the family of Borel target sets whose inverse images under $h$ are norm-Borel is a sigma-algebra containing every open set; hence $h$ is Borel measurable by [F12]. The inverse-image identity for a composition therefore makes every real and imaginary coordinate of $\mathcal G$ product-measurable. The coordinate bounds just proved and the finite-basis estimate $\|\sum_a c_aH_a\|\leq\sum_a|c_a|\|H_a\|$ from [F2] identify the norm topology of $E$ with its finite real coordinate topology. Every norm-open set is therefore a union of the countably many rational coordinate boxes it contains. Its inverse image under a map with measurable coordinates is a countable union of finite intersections of coordinate preimages. Thus every such map into $E$ is norm-Borel measurable. The swap $S(s,u)=(u,s)$ is measurable because the preimage of a measurable rectangle is the rectangle with its two factors reversed, and these rectangles generate the product sigma-algebra in [F12]. Thus $\mathcal G\circ S$ also has measurable coordinates. The finite coordinate sums, differences, products and positive and negative parts used here and below are measurable by [F15]. Apply the section theorem in [F6] to the real and imaginary coordinates of the product-measurable kernel to obtain measurability of each section coordinate at every parameter. For any map into $E$ with measurable coordinates, round every real and imaginary coordinate to a grid of mesh $1/n$ on the coordinate box $[-n,n]$, and set the approximant to zero outside that box. These are measurable finite-valued simple functions; at each point the coordinates eventually lie in the box and converge, hence converge in norm by the finite basis bound $\|\sum_a c_a H_a\|\leq\sum_a|c_a|\|H_a\|$. This proves strong measurability of $\mathcal G$, its transposed kernel and all their fixed-time sections, without a separate measurability theorem for Banach-valued maps. Coordinate integration agrees with Bochner integration: for simple functions it is the same finite sum, and for an integrable-simple approximation each coordinate's integral error is bounded by the integral of the norm error. [given, F2, F3, F4, F6, A1, F8, F9, F10, F11, F12, F15]
+
+2.1 Besides translation from [F7], reflection preserves Lebesgue measure on the line. Indeed, reflect a half-open interval covering to intervals of the same lengths, and enlarge the reflected intervals to half-open intervals with total extra length less than any prescribed $\varepsilon>0$ (use extra lengths at most $\varepsilon 2^{-j-1}$ in an enumeration of all component intervals). The elementary-cover definition then gives $\lambda^*(-A)\leq\lambda^*(A)+\varepsilon$ for every set with finite outer measure; reflecting twice gives equality, also covering the infinite case. Substituting $-C$ for the test set $C$ in the Caratheodory criterion proves that reflection preserves measurable sets and their measure. Therefore translations and reflection preserve integrals of nonnegative measurable functions: their inverse images preserve indicator integrals, then finite nonnegative simple integrals, and finally the supremum defining the nonnegative integral. Consequently, for every $t$, $\int_{\mathbb R}q(t-u)du=\int_{\mathbb R}q(s-t)ds=\int_{\mathbb R}q=\Gamma/2$. The sections in $B(t),L(t)$ are strongly measurable by step 1.1, so [F4] gives their Bochner integrability, and [F5] gives both asserted marginal bounds. [given, F1, F4, F5, F7, step 1.1, A1, F8, F9]
+
+3.1 For any nonnegative Lebesgue-measurable $f$ and fixed $s>t$, the one-dimensional substitution $v=s-u$ justified in step 2.1 gives $\int_{-\infty}^t f(s-u)du=\int_{s-t}^\infty f(v)dv$. The coordinate pullback $(s,v)\mapsto f(v)$ is product-measurable: the inverse image of a Borel target set $B$ is the measurable rectangle $\mathbb R\times f^{-1}(B)$. Lebesgue measurability contains the one-dimensional Borel sigma-algebra: by [F8] it contains elementary intervals and is a sigma-algebra; every open subset of the line is the countable union of the rational half-open intervals contained in it. Consequently [F12] and [F14] give $\mathcal B(\mathbb R^2)=\mathcal B(\mathbb R)\otimes\mathcal B(\mathbb R)\subseteq\mathcal L\otimes\mathcal L$. The region $D_t=\{(s,v):t<s<t+v\}$ is open and hence product-measurable. Its indicator is measurable because its target preimages are among $\varnothing,D_t,D_t^c,\mathbb R^2$. By [F15], $(s,v)\mapsto\mathbf1_{D_t}(s,v)f(v)$ is nonnegative and product-measurable, with value zero outside $D_t$ also if $f(v)$ is infinite. The two real-line Lebesgue spaces are sigma-finite, as they are covered by the finite-measure intervals $[-m,m]$. Tonelli therefore yields $\int_t^\infty ds\int_{-\infty}^t du\,f(s-u)=\int_0^\infty dv\int_t^{t+v}ds\,f(v)=\int_0^\infty vf(v)dv$. This identity permits infinite values and was obtained without presupposing finiteness or a two-dimensional change of variables. [given, F6, step 2.1, F8, F9, F12, F13, F14, F15]
+
+4.1 Reflection from step 2.1 and the sum rule in [F15] make $f(v)=q(v)+q(-v)$ measurable. The coordinate differences of $A(s,u)=\mathcal G(s,u)-\mathcal G(u,s)$ are measurable by step 1.1 and [F15]. The norm is continuous, since $|\|T\|-\|U\||\leq\|T-U\|$ follows from [F2]. Using the same continuous-map inverse-image argument as in step 1.1, its composition with $A$ is product-measurable. Multiplication by the quadrant indicator and the coordinate positive and negative parts preserve measurability by [F15]. Put $A(s,u)=\mathcal G(s,u)-\mathcal G(u,s)$ and $f(v)=q(v)+q(-v)$. Then $\|A(s,u)\|\leq f(s-u)$, and the identity in step 3.1 gives $\int_t^\infty ds\int_{-\infty}^t du\,\|A(s,u)\|\leq\int_0^\infty v(q(v)+q(-v))dv=\int_{\mathbb R}|v|q(v)dv\leq\Gamma\tau$. The scalar norm of $A$ restricted to the quadrant is product-measurable, so Tonelli identifies this finite iterated integral with its product integral. Each fixed-$s$ inner section is integrable, since its norm integral is bounded by $\int_{\mathbb R}(q(s-u)+q(u-s))du=\Gamma$. By step 1.1 and [F4], the inner sections and the product kernel are Bochner integrable. Each coordinate has absolute value at most $\|A\|$. Its real and imaginary positive and negative parts are nonnegative product-measurable; Tonelli makes their section integrals measurable. All are finite for every $s$ by the section bound, so their differences give measurable coordinates of the actual inner-integral map at every $s$. Scalar Fubini applies to these integrable coordinates and identifies their product and iterated integrals. Step 1.1 gives its strong measurability; [F5] bounds its norm by the inner norm integral, and the finite estimate above and [F4] give its outer Bochner integrability. Applying [F5] once more gives $\|M(t)\|\leq\Gamma\tau$. Coordinate Fubini also identifies this iterated integral with the quadrant product integral. Together with step 2.1, this proves all the absolute-convergence and norm claims for every $t$. [given, F1, F4, F5, F6, step 1.1, step 2.1, step 3.1, F9, F10, F12, F13, F2, F15] ∎
